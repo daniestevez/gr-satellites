@@ -107,4 +107,4 @@ gr-satellites/sat_3cat2.py --recstart="2016-01-01 00:00" --callsign=N0CALL --lat
 
 * `sat_3cat2` 
   [3CAT-2](https://nanosatlab.upc.edu/en/missions-and-projects/3cat-2),
-  which transmits 9k6 BPSK telemetry in the 2m band.
+  which transmits 9k6 AX.25 BPSK telemetry in the 2m band.
