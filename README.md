@@ -97,7 +97,7 @@ box on the upper part of the flowgrah if using the `.grc` file with
 `gnuradio-companion`.
 
 It is also **very important** that the decoder and the recording streamer are
-started simultaneously. This can be achieved by somethin like
+started simultaneously. This can be achieved by something like
 ```bash
 gr-frontends/wav_48kHz.py -f recording.wav & \
 gr-satellites/sat_3cat2.py --recstart="2016-01-01 00:00" --callsign=N0CALL --latitude=0.000 --longitude=0.000
