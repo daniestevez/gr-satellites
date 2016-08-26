@@ -36,7 +36,7 @@ The following GNUradio out-of-tree modules are only required for the decoder of
 one particular satellite. You may install only the ones you're interested in.
 
   * [gr-ax100](https://github.com/daniestevez/gr-ax100) GOMX-3 decoder and
-  * telemetry parser
+    telemetry parser
   * [gr-aausat](https://github.com/daniestevez/gr-aausat) AAUSAT-4 decoder and
     telemetry parser
   * [gr-3cat2](https://github.com/daniestevez/gr-3cat2) 3CAT-2 telemetry parser
