@@ -17,6 +17,30 @@ correct timestamps for the packets when uploading them to the telemetry
 server. It also simplifies Doppler correction of the recording with Gpredict if
 the recording was not Doppler corrected.
 
+## Required GNUradio OOT modules
+
+The following GNUradio out-of-tree modules are required in several of the
+decoders. You should probably install all of them.
+
+  * [gr-kiss](https://github.com/daniestevez/gr-kiss) Tools for AX.25 and KISS
+  * [gr-synctags](https://github.com/daniestevez/gr-synctags) Tools for dealing
+     with GNUradio synctags easily
+  * [gr-csp](https://github.com/daniestevez/gr-csp) Tools for CSP protocol
+
+You also need to install Phil Karn's KA9Q `libfec` for some of the satellites
+that use Reed-Solomon or convolutional codes (other include their own
+decoder). A fork that builds in modern linux systems can be found
+[here](https://github.com/daniestevez/libfec).
+
+The following GNUradio out-of-tree modules are only required for the decoder of
+one particular satellite. You may install only the ones you're interested in.
+
+  * [gr-ax100](https://github.com/daniestevez/gr-ax100) GOMX-3 decoder and
+  * telemetry parser
+  * [gr-aausat](https://github.com/daniestevez/gr-aausat) AAUSAT-4 decoder and
+    telemetry parser
+  * [gr-3cat2](https://github.com/daniestevez/gr-3cat2) 3CAT-2 telemetry parser
+
 ## Usage
 
 The signal is fed to the decoders using a UDP stream. The format used is the
@@ -63,8 +87,7 @@ It is also **very important** that the decoder and the recording streamer are
 started simultaneously. This can be achieved by somethin like
 ```bash
 gr-frontends/wav_48kHz.py -f recording.wav & \
-gr-satellites/sat_3cat2.py --recstart="2016-01-01 00:00" --callsign=N0CALL
---latitude=0.000 --longitude=0.000
+gr-satellites/sat_3cat2.py --recstart="2016-01-01 00:00" --callsign=N0CALL --latitude=0.000 --longitude=0.000
 ```
 
 ## Satellites supported
