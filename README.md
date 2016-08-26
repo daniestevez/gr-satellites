@@ -41,6 +41,19 @@ one particular satellite. You may install only the ones you're interested in.
     telemetry parser
   * [gr-3cat2](https://github.com/daniestevez/gr-3cat2) 3CAT-2 telemetry parser
 
+## Installing GNUradio OOT modules
+
+This is the usual procedure to build and install an OOT module:
+
+```bash
+mkdir build
+cd build
+cmake ..
+make
+sudo make install
+sudo ldconfig
+```
+
 ## Usage
 
 The signal is fed to the decoders using a UDP stream. The format used is the
