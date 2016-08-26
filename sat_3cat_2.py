@@ -4,7 +4,7 @@
 # Title: 3CAT-2 decoder
 # Author: Daniel Estevez
 # Description: Decodes 9k6 AX.25 BPSK telemetry from 3CAT-2
-# Generated: Fri Aug 26 19:04:53 2016
+# Generated: Fri Aug 26 23:13:36 2016
 ##################################################
 
 from gnuradio import analog
@@ -17,6 +17,7 @@ from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
 import kiss
+import sat3cat2
 import sids
 
 class sat_3cat_2(gr.top_block):
@@ -48,6 +49,7 @@ class sat_3cat_2(gr.top_block):
         # Blocks
         ##################################################
         self.sids_submit_0 = sids.submit("http://tlm.pe0sat.nl/tlmdb/frame_db.php", 41732, callsign, longitude, latitude, recstart)
+        self.sat3cat2_telemetry_parser_0 = sat3cat2.telemetry_parser()
         self.low_pass_filter_0 = filter.fir_filter_ccf(1, firdes.low_pass(
         	1, 48000, 10000, 1000, firdes.WIN_HAMMING, 6.76))
         self.kiss_pdu_to_kiss_0 = kiss.pdu_to_kiss()
@@ -63,7 +65,6 @@ class sat_3cat_2(gr.top_block):
         self.blocks_socket_pdu_0 = blocks.socket_pdu("TCP_SERVER", "", "52001", 10000, True)
         self.blocks_short_to_float_0 = blocks.short_to_float(1, 1/32767.0)
         self.blocks_multiply_xx_0 = blocks.multiply_vcc(1)
-        self.blocks_message_debug_0 = blocks.message_debug()
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
         self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, -bfo, 1, 0)
         self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024, 2)
@@ -71,8 +72,8 @@ class sat_3cat_2(gr.top_block):
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.kiss_hdlc_deframer_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
         self.msg_connect((self.kiss_hdlc_deframer_0, 'out'), (self.kiss_pdu_to_kiss_0, 'in'))    
+        self.msg_connect((self.kiss_hdlc_deframer_0, 'out'), (self.sat3cat2_telemetry_parser_0, 'in'))    
         self.msg_connect((self.kiss_hdlc_deframer_0, 'out'), (self.sids_submit_0, 'in'))    
         self.msg_connect((self.kiss_pdu_to_kiss_0, 'out'), (self.blocks_socket_pdu_0, 'pdus'))    
         self.connect((self.analog_feedforward_agc_cc_0, 0), (self.digital_fll_band_edge_cc_0, 0))    
