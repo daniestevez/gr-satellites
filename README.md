@@ -24,8 +24,13 @@ the recording was not Doppler corrected.
     transmits 9k6 AX.25 BPSK telemetry in the 2m band.
   * `aausat_4`
     [AAUSAT-4](http://www.space.aau.dk/aausat4/), which transmits 2k4 or 9k6 GFSK
-    telemetry in the 70cm band. It uses the CPS protocol and FEC with a r=2, k=7
+    telemetry in the 70cm band. It uses the CSP protocol and FEC with a r=2, k=7
     convolutional code and a (255,223) Reed-Solomon code.
+  * `gomx_3`
+    [GOMX-3](https://directory.eoportal.org/web/eoportal/satellite-missions/g/gomx-3),
+    which transmits 19k2 GFSK telemetry in the 70cm band. It uses the CSP
+    protocol and fect with a (255,223) Reed-Solomon code. The beacons include
+    information from ADS-B beacons transmitted by terrestrial aircraft.
 
 ## Required GNUradio OOT modules
 
@@ -112,3 +117,17 @@ started simultaneously. This can be achieved by something like
 gr-frontends/wav_48kHz.py -f recording.wav & \
 gr-satellites/sat_3cat2.py --recstart="2016-01-01 00:00" --callsign=N0CALL --latitude=0.000 --longitude=0.000
 ```
+
+## Receiving FSK and sideband inversion
+
+We are all used to the two SSB modes: USB (which is sideband-preserving) and LSB
+(which is sideband-inverting). When receiving FM (or FSK), there is the same
+concept. An FM receiver can be sideband-preserving or sideband-inverting. This
+makes no difference when receiving analog FM (both sound the same) or AX.25
+(which uses a differential protocol).
+
+However, some satellites which use FSK (AAUSAT-4 and GOMX-3, for instance) need
+a sideband-preserving FM receiver. If your receiver is sideband-inverting, you
+can use set `--invert=-1` while running the `.py` file or edit the corresponding
+parameter in the `.grc` file to invert the signal again in the decoder and
+recover the original signal with the correct sidebands.
