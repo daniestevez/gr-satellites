@@ -5,7 +5,7 @@
 # Title: 3CAT-2 decoder
 # Author: Daniel Estevez
 # Description: Decodes 9k6 AX.25 BPSK telemetry from 3CAT-2
-# Generated: Sat Aug 27 15:20:13 2016
+# Generated: Sat Aug 27 22:18:03 2016
 ##################################################
 
 from gnuradio import analog
@@ -24,7 +24,7 @@ import sids
 
 class sat_3cat_2(gr.top_block):
 
-    def __init__(self, bfo=10000, callsign="", ip="::", latitude=0, longitude=0, port=7355, recstart=""):
+    def __init__(self, bfo=12000, callsign="", ip="::", latitude=0, longitude=0, port=7355, recstart=""):
         gr.top_block.__init__(self, "3CAT-2 decoder")
 
         ##################################################
@@ -54,23 +54,19 @@ class sat_3cat_2(gr.top_block):
         ##################################################
         self.sids_submit_0 = sids.submit("http://tlm.pe0sat.nl/tlmdb/frame_db.php", 41732, callsign, longitude, latitude, recstart)
         self.sat3cat2_telemetry_parser_0 = sat3cat2.telemetry_parser()
-        self.low_pass_filter_0 = filter.fir_filter_ccf(1, firdes.low_pass(
-        	1, 48000, 10000, 1000, firdes.WIN_HAMMING, 6.76))
         self.kiss_pdu_to_kiss_0 = kiss.pdu_to_kiss()
         self.kiss_nrzi_decode_0 = kiss.nrzi_decode()
         self.kiss_hdlc_deframer_0 = kiss.hdlc_deframer(check_fcs=True, max_length=10000)
-        self.hilbert_fc_0 = filter.hilbert_fc(65, firdes.WIN_HAMMING, 6.76)
+        self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_fcf(1, (firdes.low_pass(1, samp_rate, 10000, 1000)), bfo, samp_rate)
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(samp_per_sym, 0.1, (rrc_taps), nfilts, nfilts/2, 1.5, 2)
         self.digital_lms_dd_equalizer_cc_0_0 = digital.lms_dd_equalizer_cc(2, 0.05, 2, variable_constellation_0)
         self.digital_fll_band_edge_cc_0 = digital.fll_band_edge_cc(samp_per_sym, 0.350, 100, 0.010)
         self.digital_costas_loop_cc_0_0_0_0 = digital.costas_loop_cc(0.02, 2, False)
         self.digital_binary_slicer_fb_0 = digital.binary_slicer_fb()
-        self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, port, 1472, True)
+        self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, port, 1472, False)
         self.blocks_socket_pdu_0 = blocks.socket_pdu("TCP_SERVER", "", "52001", 10000, True)
         self.blocks_short_to_float_0 = blocks.short_to_float(1, 32767)
-        self.blocks_multiply_xx_0 = blocks.multiply_vcc(1)
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
-        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, -bfo, 1, 0)
         self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024, 2)
 
         ##################################################
@@ -81,26 +77,23 @@ class sat_3cat_2(gr.top_block):
         self.msg_connect((self.kiss_hdlc_deframer_0, 'out'), (self.sids_submit_0, 'in'))    
         self.msg_connect((self.kiss_pdu_to_kiss_0, 'out'), (self.blocks_socket_pdu_0, 'pdus'))    
         self.connect((self.analog_feedforward_agc_cc_0, 0), (self.digital_fll_band_edge_cc_0, 0))    
-        self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 0))    
         self.connect((self.blocks_complex_to_real_0, 0), (self.digital_binary_slicer_fb_0, 0))    
-        self.connect((self.blocks_multiply_xx_0, 0), (self.low_pass_filter_0, 0))    
-        self.connect((self.blocks_short_to_float_0, 0), (self.hilbert_fc_0, 0))    
+        self.connect((self.blocks_short_to_float_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))    
         self.connect((self.blocks_udp_source_0, 0), (self.blocks_short_to_float_0, 0))    
         self.connect((self.digital_binary_slicer_fb_0, 0), (self.kiss_nrzi_decode_0, 0))    
         self.connect((self.digital_costas_loop_cc_0_0_0_0, 0), (self.digital_lms_dd_equalizer_cc_0_0, 0))    
         self.connect((self.digital_fll_band_edge_cc_0, 0), (self.digital_pfb_clock_sync_xxx_0, 0))    
         self.connect((self.digital_lms_dd_equalizer_cc_0_0, 0), (self.blocks_complex_to_real_0, 0))    
         self.connect((self.digital_pfb_clock_sync_xxx_0, 0), (self.digital_costas_loop_cc_0_0_0_0, 0))    
-        self.connect((self.hilbert_fc_0, 0), (self.blocks_multiply_xx_0, 1))    
+        self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.analog_feedforward_agc_cc_0, 0))    
         self.connect((self.kiss_nrzi_decode_0, 0), (self.kiss_hdlc_deframer_0, 0))    
-        self.connect((self.low_pass_filter_0, 0), (self.analog_feedforward_agc_cc_0, 0))    
 
     def get_bfo(self):
         return self.bfo
 
     def set_bfo(self, bfo):
         self.bfo = bfo
-        self.analog_sig_source_x_0.set_frequency(-self.bfo)
+        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.bfo)
 
     def get_callsign(self):
         return self.callsign
@@ -163,7 +156,7 @@ class sat_3cat_2(gr.top_block):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
+        self.freq_xlating_fir_filter_xxx_0.set_taps((firdes.low_pass(1, self.samp_rate, 10000, 1000)))
 
     def get_rrc_taps(self):
         return self.rrc_taps
@@ -177,7 +170,7 @@ def argument_parser():
     description = 'Decodes 9k6 AX.25 BPSK telemetry from 3CAT-2'
     parser = OptionParser(usage="%prog: [options]", option_class=eng_option, description=description)
     parser.add_option(
-        "", "--bfo", dest="bfo", type="eng_float", default=eng_notation.num_to_str(10000),
+        "", "--bfo", dest="bfo", type="eng_float", default=eng_notation.num_to_str(12000),
         help="Set carrier frequency of the BPSK signal [default=%default]")
     parser.add_option(
         "", "--callsign", dest="callsign", type="string", default="",

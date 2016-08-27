@@ -5,7 +5,7 @@
 # Title: GOMX-3 decoder
 # Author: Daniel Estevez
 # Description: GOMX-3 decoder
-# Generated: Sat Aug 27 17:15:03 2016
+# Generated: Sat Aug 27 22:19:19 2016
 ##################################################
 
 from gnuradio import blocks
@@ -55,7 +55,7 @@ class gomx_3(gr.top_block):
         self.digital_binary_slicer_fb_0 = digital.binary_slicer_fb()
         self.csp_check_crc_0 = csp.check_crc(False, False)
         self.blocks_unpacked_to_packed_xx_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
-        self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, 7355, 1472, True)
+        self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, 7355, 1472, False)
         self.blocks_tagged_stream_to_pdu_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, "packet_len")
         self.blocks_tagged_stream_multiply_length_0 = blocks.tagged_stream_multiply_length(gr.sizeof_char*1, "packet_len", 1/8.0)
         self.blocks_short_to_float_0 = blocks.short_to_float(1, invert*32767.0)

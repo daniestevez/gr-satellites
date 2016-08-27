@@ -504,7 +504,7 @@
     </param>
     <param>
       <key>eof</key>
-      <value>True</value>
+      <value>False</value>
     </param>
     <param>
       <key>type</key>
