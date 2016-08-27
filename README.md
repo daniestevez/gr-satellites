@@ -17,6 +17,28 @@ correct timestamps for the packets when uploading them to the telemetry
 server. It also simplifies Doppler correction of the recording with Gpredict if
 the recording was not Doppler corrected.
 
+## Usage
+
+The signal is fed to the decoders using a UDP stream. The format used is the
+same that [gqrx](http://gqrx.dk/doc/streaming-audio-over-udp) uses. Therefore,
+you can use gqrx to feed the signal to the decoders. You will have to set the
+proper frequency, mode and bandpass in gqrx for the satellite you want to
+receive.
+
+It is also possible to use the frontend streamers from
+[gr-frontends](https://github.com/daniestevez/gr-frontends). This allow to
+stream from different SDR hardware without using a GUI SDR program. It is
+possible to perform Doppler correction with Gpredict. There are also frontend
+streamers to use a conventional receiver connected via soundcard and recordings
+(audio WAV and IQ).
+
+Each satellite has its own decoder. You can open the `.grc` file with
+`gnuradio-companion` and edit the parameters (they are on the upper part of the
+flowgraph). You can also run the `.py` script and specify the parameters on the
+command line. Use the -h flag to get help on how to specify the parameters. The
+decoder will printing each telemetry packet in the terminal as soon as it
+receives it.
+
 ## Satellites supported
 
   * `sat_3cat2`
@@ -71,28 +93,6 @@ make
 sudo make install
 sudo ldconfig
 ```
-
-## Usage
-
-The signal is fed to the decoders using a UDP stream. The format used is the
-same that [gqrx](http://gqrx.dk/doc/streaming-audio-over-udp) uses. Therefore,
-you can use gqrx to feed the signal to the decoders. You will have to set the
-proper frequency, mode and bandpass in gqrx for the satellite you want to
-receive.
-
-It is also possible to use the frontend streamers from
-[gr-frontends](https://github.com/daniestevez/gr-frontends). This allow to
-stream from different SDR hardware without using a GUI SDR program. It is
-possible to perform Doppler correction with Gpredict. There are also frontend
-streamers to use a conventional receiver connected via soundcard and recordings
-(audio WAV and IQ).
-
-Each satellite has its own decoder. You can open the `.grc` file with
-`gnuradio-companion` and edit the parameters (they are on the upper part of the
-flowgraph). You can also run the `.py` script and specify the parameters on the
-command line. Use the -h flag to get help on how to specify the parameters. The
-decoder will printing each telemetry packet in the terminal as soon as it
-receives it.
 
 ## Submitting telemetry
 
