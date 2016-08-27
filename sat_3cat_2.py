@@ -1,10 +1,11 @@
 #!/usr/bin/env python2
+# -*- coding: utf-8 -*-
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: 3CAT-2 decoder
 # Author: Daniel Estevez
 # Description: Decodes 9k6 AX.25 BPSK telemetry from 3CAT-2
-# Generated: Fri Aug 26 23:13:36 2016
+# Generated: Sat Aug 27 15:18:11 2016
 ##################################################
 
 from gnuradio import analog
@@ -20,9 +21,10 @@ import kiss
 import sat3cat2
 import sids
 
+
 class sat_3cat_2(gr.top_block):
 
-    def __init__(self, ip="localhost", port=7355, bfo=10000, recstart="", longitude=0, latitude=0, callsign=""):
+    def __init__(self, ip="::", port=7355, bfo=10000, recstart="", longitude=0, latitude=0, callsign=""):
         gr.top_block.__init__(self, "3CAT-2 decoder")
 
         ##################################################
@@ -41,7 +43,9 @@ class sat_3cat_2(gr.top_block):
         ##################################################
         self.samp_per_sym = samp_per_sym = 5
         self.nfilts = nfilts = 16
+        
         self.variable_constellation_0 = variable_constellation_0 = digital.constellation_calcdist(([-1, 1]), ([0, 1]), 2, 1).base()
+        
         self.samp_rate = samp_rate = 48000
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(samp_per_sym), 0.35, 11*samp_per_sym*nfilts)
 
@@ -90,7 +94,6 @@ class sat_3cat_2(gr.top_block):
         self.connect((self.hilbert_fc_0, 0), (self.blocks_multiply_xx_0, 1))    
         self.connect((self.kiss_nrzi_decode_0, 0), (self.kiss_hdlc_deframer_0, 0))    
         self.connect((self.low_pass_filter_0, 0), (self.analog_feedforward_agc_cc_0, 0))    
-
 
     def get_ip(self):
         return self.ip
@@ -167,26 +170,44 @@ class sat_3cat_2(gr.top_block):
 
     def set_rrc_taps(self, rrc_taps):
         self.rrc_taps = rrc_taps
-        self.digital_pfb_clock_sync_xxx_0.set_taps((self.rrc_taps))
+        self.digital_pfb_clock_sync_xxx_0.update_taps((self.rrc_taps))
+
+
+def argument_parser():
+    description = 'Decodes 9k6 AX.25 BPSK telemetry from 3CAT-2'
+    parser = OptionParser(usage="%prog: [options]", option_class=eng_option, description=description)
+    parser.add_option(
+        "", "--ip", dest="ip", type="string", default="::",
+        help="Set UDP listen IP [default=%default]")
+    parser.add_option(
+        "", "--port", dest="port", type="intx", default=7355,
+        help="Set UDP port [default=%default]")
+    parser.add_option(
+        "", "--bfo", dest="bfo", type="eng_float", default=eng_notation.num_to_str(10000),
+        help="Set carrier frequency of the BPSK signal [default=%default]")
+    parser.add_option(
+        "", "--recstart", dest="recstart", type="string", default="",
+        help="Set start of recording, if processing a recording (format YYYY-MM-DD HH:MM:SS) [default=%default]")
+    parser.add_option(
+        "", "--longitude", dest="longitude", type="eng_float", default=eng_notation.num_to_str(0),
+        help="Set longitude (format 00.000 or -00.000) [default=%default]")
+    parser.add_option(
+        "", "--latitude", dest="latitude", type="eng_float", default=eng_notation.num_to_str(0),
+        help="Set latitude (format 00.000 or -00.000) [default=%default]")
+    parser.add_option(
+        "", "--callsign", dest="callsign", type="string", default="",
+        help="Set your callsign [default=%default]")
+    return parser
+
+
+def main(top_block_cls=sat_3cat_2, options=None):
+    if options is None:
+        options, _ = argument_parser().parse_args()
+
+    tb = top_block_cls(ip=options.ip, port=options.port, bfo=options.bfo, recstart=options.recstart, longitude=options.longitude, latitude=options.latitude, callsign=options.callsign)
+    tb.start()
+    tb.wait()
 
 
 if __name__ == '__main__':
-    parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
-    parser.add_option("", "--ip", dest="ip", type="string", default="localhost",
-        help="Set UDP listen IP [default=%default]")
-    parser.add_option("", "--port", dest="port", type="intx", default=7355,
-        help="Set UDP port [default=%default]")
-    parser.add_option("", "--bfo", dest="bfo", type="eng_float", default=eng_notation.num_to_str(10000),
-        help="Set carrier frequency of the BPSK signal [default=%default]")
-    parser.add_option("", "--recstart", dest="recstart", type="string", default="",
-        help="Set start of recording, if processing a recording (format YYYY-MM-DD HH:MM:SS) [default=%default]")
-    parser.add_option("", "--longitude", dest="longitude", type="eng_float", default=eng_notation.num_to_str(0),
-        help="Set longitude (format 00.000 or -00.000) [default=%default]")
-    parser.add_option("", "--latitude", dest="latitude", type="eng_float", default=eng_notation.num_to_str(0),
-        help="Set latitude (format 00.000 or -00.000) [default=%default]")
-    parser.add_option("", "--callsign", dest="callsign", type="string", default="",
-        help="Set your callsign [default=%default]")
-    (options, args) = parser.parse_args()
-    tb = sat_3cat_2(ip=options.ip, port=options.port, bfo=options.bfo, recstart=options.recstart, longitude=options.longitude, latitude=options.latitude, callsign=options.callsign)
-    tb.start()
-    tb.wait()
+    main()
