@@ -17,6 +17,16 @@ correct timestamps for the packets when uploading them to the telemetry
 server. It also simplifies Doppler correction of the recording with Gpredict if
 the recording was not Doppler corrected.
 
+## Satellites supported
+
+  * `sat_3cat2`
+    [3CAT-2](https://nanosatlab.upc.edu/en/missions-and-projects/3cat-2), which
+    transmits 9k6 AX.25 BPSK telemetry in the 2m band.
+  * `aausat_4`
+    [AAUSAT-4](http://www.space.aau.dk/aausat4/), which transmits 2k4 or 9k6 GFSK
+    telemetry in the 70cm band. It uses the CPS protocol and FEC with a r=2, k=7
+    convolutional code and a (255,223) Reed-Solomon code.
+
 ## Required GNUradio OOT modules
 
 The following GNUradio out-of-tree modules are required in several of the
@@ -102,9 +112,3 @@ started simultaneously. This can be achieved by something like
 gr-frontends/wav_48kHz.py -f recording.wav & \
 gr-satellites/sat_3cat2.py --recstart="2016-01-01 00:00" --callsign=N0CALL --latitude=0.000 --longitude=0.000
 ```
-
-## Satellites supported
-
-* `sat_3cat2` 
-  [3CAT-2](https://nanosatlab.upc.edu/en/missions-and-projects/3cat-2),
-  which transmits 9k6 AX.25 BPSK telemetry in the 2m band.
