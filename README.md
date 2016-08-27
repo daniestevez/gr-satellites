@@ -21,16 +21,19 @@ the recording was not Doppler corrected.
 
   * `sat_3cat2`
     [3CAT-2](https://nanosatlab.upc.edu/en/missions-and-projects/3cat-2), which
-    transmits 9k6 AX.25 BPSK telemetry in the 2m band.
+    transmits 9k6 AX.25 BPSK telemetry in the 2m band. You must use wide SSB
+    mode to receive this satellite.
   * `aausat_4`
     [AAUSAT-4](http://www.space.aau.dk/aausat4/), which transmits 2k4 or 9k6 GFSK
     telemetry in the 70cm band. It uses the CSP protocol and FEC with a r=2, k=7
-    convolutional code and a (255,223) Reed-Solomon code.
+    convolutional code and a (255,223) Reed-Solomon code. You must use FM mode
+    to receive this satellite.
   * `gomx_3`
     [GOMX-3](https://directory.eoportal.org/web/eoportal/satellite-missions/g/gomx-3),
     which transmits 19k2 GFSK telemetry in the 70cm band. It uses the CSP
     protocol and fect with a (255,223) Reed-Solomon code. The beacons include
-    information from ADS-B beacons transmitted by terrestrial aircraft.
+    information from ADS-B beacons transmitted by terrestrial aircraft. You must
+    use FM mode to receive this satellite.
 
 ## Required GNUradio OOT modules
 
@@ -118,7 +121,30 @@ gr-frontends/wav_48kHz.py -f recording.wav & \
 gr-satellites/sat_3cat2.py --recstart="2016-01-01 00:00" --callsign=N0CALL --latitude=0.000 --longitude=0.000
 ```
 
-## Receiving FSK and sideband inversion
+## Hints for receiving different modes
+
+### Wide SSB
+
+Some modes (9k6 BPSK, for instance) need to be received using SSB mode, but the
+bandwidth of the signal is larger than the usual 3kHz bandwidth of a
+conventional SSB receiver. Therefore, an SDR receiver or a heavily modified
+conventional SSB receiver is needed (a 9k6 BPKS signal is about 15kHz wide).
+
+The decoders for satellites using these kind of *wide SSB* signals expect the
+signal to be centred at an audio frequency of 12kHz. This means that you have to
+dial in USB mode to a frequency 12kHz lower than the nominal frequency of the
+satellite (+/- Doppler). If your SDR program allows this (gqrx does), the best
+idea is to set an SSB audio filter from 0Hz to 24kHz and then tune the signal in
+the middle of the passband. Alternatively, you can use the `--bfo` parameter if
+using the `.py` file or edit the corresponding parameter in the `.grc` file to
+use a frequency different from 12kHz.
+
+If you are using the wide SSB receivers from
+[gr-frontends](https://github.com/daniestevez/gr-frontends) you don't need to do
+anything special, as these receivers already dial in USB mode to a frequency
+12kHz than the nominal and use a 24kHz wide audio filter.
+
+### Receiving FSK and sideband inversion
 
 We are all used to the two SSB modes: USB (which is sideband-preserving) and LSB
 (which is sideband-inverting). When receiving FM (or FSK), there is the same
