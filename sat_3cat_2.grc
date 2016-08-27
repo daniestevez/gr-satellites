@@ -527,7 +527,7 @@
     </param>
     <param>
       <key>scale</key>
-      <value>1/32767.0</value>
+      <value>32767</value>
     </param>
     <param>
       <key>vlen</key>

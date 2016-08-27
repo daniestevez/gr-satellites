@@ -5,7 +5,7 @@
 # Title: 3CAT-2 decoder
 # Author: Daniel Estevez
 # Description: Decodes 9k6 AX.25 BPSK telemetry from 3CAT-2
-# Generated: Sat Aug 27 15:18:11 2016
+# Generated: Sat Aug 27 15:20:13 2016
 ##################################################
 
 from gnuradio import analog
@@ -24,19 +24,19 @@ import sids
 
 class sat_3cat_2(gr.top_block):
 
-    def __init__(self, ip="::", port=7355, bfo=10000, recstart="", longitude=0, latitude=0, callsign=""):
+    def __init__(self, bfo=10000, callsign="", ip="::", latitude=0, longitude=0, port=7355, recstart=""):
         gr.top_block.__init__(self, "3CAT-2 decoder")
 
         ##################################################
         # Parameters
         ##################################################
-        self.ip = ip
-        self.port = port
         self.bfo = bfo
-        self.recstart = recstart
-        self.longitude = longitude
-        self.latitude = latitude
         self.callsign = callsign
+        self.ip = ip
+        self.latitude = latitude
+        self.longitude = longitude
+        self.port = port
+        self.recstart = recstart
 
         ##################################################
         # Variables
@@ -67,7 +67,7 @@ class sat_3cat_2(gr.top_block):
         self.digital_binary_slicer_fb_0 = digital.binary_slicer_fb()
         self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, port, 1472, True)
         self.blocks_socket_pdu_0 = blocks.socket_pdu("TCP_SERVER", "", "52001", 10000, True)
-        self.blocks_short_to_float_0 = blocks.short_to_float(1, 1/32767.0)
+        self.blocks_short_to_float_0 = blocks.short_to_float(1, 32767)
         self.blocks_multiply_xx_0 = blocks.multiply_vcc(1)
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
         self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, -bfo, 1, 0)
@@ -95,18 +95,6 @@ class sat_3cat_2(gr.top_block):
         self.connect((self.kiss_nrzi_decode_0, 0), (self.kiss_hdlc_deframer_0, 0))    
         self.connect((self.low_pass_filter_0, 0), (self.analog_feedforward_agc_cc_0, 0))    
 
-    def get_ip(self):
-        return self.ip
-
-    def set_ip(self, ip):
-        self.ip = ip
-
-    def get_port(self):
-        return self.port
-
-    def set_port(self, port):
-        self.port = port
-
     def get_bfo(self):
         return self.bfo
 
@@ -114,17 +102,17 @@ class sat_3cat_2(gr.top_block):
         self.bfo = bfo
         self.analog_sig_source_x_0.set_frequency(-self.bfo)
 
-    def get_recstart(self):
-        return self.recstart
+    def get_callsign(self):
+        return self.callsign
 
-    def set_recstart(self, recstart):
-        self.recstart = recstart
+    def set_callsign(self, callsign):
+        self.callsign = callsign
 
-    def get_longitude(self):
-        return self.longitude
+    def get_ip(self):
+        return self.ip
 
-    def set_longitude(self, longitude):
-        self.longitude = longitude
+    def set_ip(self, ip):
+        self.ip = ip
 
     def get_latitude(self):
         return self.latitude
@@ -132,11 +120,23 @@ class sat_3cat_2(gr.top_block):
     def set_latitude(self, latitude):
         self.latitude = latitude
 
-    def get_callsign(self):
-        return self.callsign
+    def get_longitude(self):
+        return self.longitude
 
-    def set_callsign(self, callsign):
-        self.callsign = callsign
+    def set_longitude(self, longitude):
+        self.longitude = longitude
+
+    def get_port(self):
+        return self.port
+
+    def set_port(self, port):
+        self.port = port
+
+    def get_recstart(self):
+        return self.recstart
+
+    def set_recstart(self, recstart):
+        self.recstart = recstart
 
     def get_samp_per_sym(self):
         return self.samp_per_sym
@@ -177,26 +177,26 @@ def argument_parser():
     description = 'Decodes 9k6 AX.25 BPSK telemetry from 3CAT-2'
     parser = OptionParser(usage="%prog: [options]", option_class=eng_option, description=description)
     parser.add_option(
-        "", "--ip", dest="ip", type="string", default="::",
-        help="Set UDP listen IP [default=%default]")
-    parser.add_option(
-        "", "--port", dest="port", type="intx", default=7355,
-        help="Set UDP port [default=%default]")
-    parser.add_option(
         "", "--bfo", dest="bfo", type="eng_float", default=eng_notation.num_to_str(10000),
         help="Set carrier frequency of the BPSK signal [default=%default]")
     parser.add_option(
-        "", "--recstart", dest="recstart", type="string", default="",
-        help="Set start of recording, if processing a recording (format YYYY-MM-DD HH:MM:SS) [default=%default]")
+        "", "--callsign", dest="callsign", type="string", default="",
+        help="Set your callsign [default=%default]")
     parser.add_option(
-        "", "--longitude", dest="longitude", type="eng_float", default=eng_notation.num_to_str(0),
-        help="Set longitude (format 00.000 or -00.000) [default=%default]")
+        "", "--ip", dest="ip", type="string", default="::",
+        help="Set UDP listen IP [default=%default]")
     parser.add_option(
         "", "--latitude", dest="latitude", type="eng_float", default=eng_notation.num_to_str(0),
         help="Set latitude (format 00.000 or -00.000) [default=%default]")
     parser.add_option(
-        "", "--callsign", dest="callsign", type="string", default="",
-        help="Set your callsign [default=%default]")
+        "", "--longitude", dest="longitude", type="eng_float", default=eng_notation.num_to_str(0),
+        help="Set longitude (format 00.000 or -00.000) [default=%default]")
+    parser.add_option(
+        "", "--port", dest="port", type="intx", default=7355,
+        help="Set UDP port [default=%default]")
+    parser.add_option(
+        "", "--recstart", dest="recstart", type="string", default="",
+        help="Set start of recording, if processing a recording (format YYYY-MM-DD HH:MM:SS) [default=%default]")
     return parser
 
 
@@ -204,7 +204,7 @@ def main(top_block_cls=sat_3cat_2, options=None):
     if options is None:
         options, _ = argument_parser().parse_args()
 
-    tb = top_block_cls(ip=options.ip, port=options.port, bfo=options.bfo, recstart=options.recstart, longitude=options.longitude, latitude=options.latitude, callsign=options.callsign)
+    tb = top_block_cls(bfo=options.bfo, callsign=options.callsign, ip=options.ip, latitude=options.latitude, longitude=options.longitude, port=options.port, recstart=options.recstart)
     tb.start()
     tb.wait()
 
