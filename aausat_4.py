@@ -5,7 +5,7 @@
 # Title: AAUSAT-4 decoder
 # Author: Daniel Estevez
 # Description: AAUSAT-4 decoder
-# Generated: Sat Aug 27 22:18:53 2016
+# Generated: Sun Aug 28 23:05:33 2016
 ##################################################
 
 from gnuradio import blocks
@@ -40,7 +40,7 @@ class aausat_4(gr.top_block):
         ##################################################
         # Variables
         ##################################################
-        self.threshold = threshold = 4
+        self.threshold = threshold = 8
         self.access_code = access_code = "010011110101101000110100010000110101010101000010"
 
         ##################################################
@@ -62,7 +62,8 @@ class aausat_4(gr.top_block):
         self.blocks_tagged_stream_to_pdu_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, "packet_len")
         self.blocks_tagged_stream_multiply_length_0_0 = blocks.tagged_stream_multiply_length(gr.sizeof_char*1, "packet_len", 1/8.0)
         self.blocks_tagged_stream_multiply_length_0 = blocks.tagged_stream_multiply_length(gr.sizeof_char*1, "packet_len", 1/8.0)
-        self.blocks_short_to_float_0 = blocks.short_to_float(1, invert*32767.0)
+        self.blocks_short_to_float_0 = blocks.short_to_float(1, 32767.0)
+        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((invert*10, ))
         self.aausat_aausat4_fec_0 = aausat.aausat4_fec(False)
         self.aausat_aausat4_beacon_parser_0 = aausat.aausat4_beacon_parser()
 
@@ -73,8 +74,9 @@ class aausat_4(gr.top_block):
         self.msg_connect((self.aausat_aausat4_fec_0, 'out'), (self.sids_submit_0, 'in'))    
         self.msg_connect((self.blocks_tagged_stream_to_pdu_0, 'pdus'), (self.aausat_aausat4_fec_0, 'in'))    
         self.msg_connect((self.blocks_tagged_stream_to_pdu_0_0, 'pdus'), (self.aausat_aausat4_fec_0, 'in'))    
-        self.connect((self.blocks_short_to_float_0, 0), (self.digital_clock_recovery_mm_xx_0, 0))    
-        self.connect((self.blocks_short_to_float_0, 0), (self.digital_clock_recovery_mm_xx_0_0, 0))    
+        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.digital_clock_recovery_mm_xx_0, 0))    
+        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.digital_clock_recovery_mm_xx_0_0, 0))    
+        self.connect((self.blocks_short_to_float_0, 0), (self.blocks_multiply_const_vxx_0, 0))    
         self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.blocks_tagged_stream_to_pdu_0, 0))    
         self.connect((self.blocks_tagged_stream_multiply_length_0_0, 0), (self.blocks_tagged_stream_to_pdu_0_0, 0))    
         self.connect((self.blocks_udp_source_0, 0), (self.blocks_short_to_float_0, 0))    
@@ -100,7 +102,7 @@ class aausat_4(gr.top_block):
 
     def set_invert(self, invert):
         self.invert = invert
-        self.blocks_short_to_float_0.set_scale(self.invert*32767.0)
+        self.blocks_multiply_const_vxx_0.set_k((self.invert*10, ))
 
     def get_ip(self):
         return self.ip

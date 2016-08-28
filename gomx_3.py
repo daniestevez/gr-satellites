@@ -5,7 +5,7 @@
 # Title: GOMX-3 decoder
 # Author: Daniel Estevez
 # Description: GOMX-3 decoder
-# Generated: Sat Aug 27 22:19:19 2016
+# Generated: Sun Aug 28 23:06:19 2016
 ##################################################
 
 from gnuradio import blocks
@@ -58,8 +58,9 @@ class gomx_3(gr.top_block):
         self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, 7355, 1472, False)
         self.blocks_tagged_stream_to_pdu_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, "packet_len")
         self.blocks_tagged_stream_multiply_length_0 = blocks.tagged_stream_multiply_length(gr.sizeof_char*1, "packet_len", 1/8.0)
-        self.blocks_short_to_float_0 = blocks.short_to_float(1, invert*32767.0)
-        self.ax100_gomx3_rs_decode_0 = ax100.gomx3_rs_decode(False)
+        self.blocks_short_to_float_0 = blocks.short_to_float(1, 32767.0)
+        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((invert*10, ))
+        self.ax100_gomx3_rs_decode_0 = ax100.gomx3_rs_decode(True)
         self.ax100_beacon_parser_0 = ax100.beacon_parser()
 
         ##################################################
@@ -69,7 +70,8 @@ class gomx_3(gr.top_block):
         self.msg_connect((self.blocks_tagged_stream_to_pdu_0, 'pdus'), (self.ax100_gomx3_rs_decode_0, 'in'))    
         self.msg_connect((self.csp_check_crc_0, 'ok'), (self.ax100_beacon_parser_0, 'in'))    
         self.msg_connect((self.csp_check_crc_0, 'ok'), (self.sids_submit_0, 'in'))    
-        self.connect((self.blocks_short_to_float_0, 0), (self.digital_clock_recovery_mm_xx_0, 0))    
+        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.digital_clock_recovery_mm_xx_0, 0))    
+        self.connect((self.blocks_short_to_float_0, 0), (self.blocks_multiply_const_vxx_0, 0))    
         self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.blocks_tagged_stream_to_pdu_0, 0))    
         self.connect((self.blocks_udp_source_0, 0), (self.blocks_short_to_float_0, 0))    
         self.connect((self.blocks_unpacked_to_packed_xx_0, 0), (self.blocks_tagged_stream_multiply_length_0, 0))    
@@ -90,7 +92,7 @@ class gomx_3(gr.top_block):
 
     def set_invert(self, invert):
         self.invert = invert
-        self.blocks_short_to_float_0.set_scale(self.invert*32767.0)
+        self.blocks_multiply_const_vxx_0.set_k((self.invert*10, ))
 
     def get_ip(self):
         return self.ip
