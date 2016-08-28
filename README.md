@@ -23,7 +23,8 @@ The signal is fed to the decoders using a UDP stream. The format used is the
 same that [gqrx](http://gqrx.dk/doc/streaming-audio-over-udp) uses. Therefore,
 you can use gqrx to feed the signal to the decoders. You will have to set the
 proper frequency, mode and bandpass in gqrx for the satellite you want to
-receive.
+receive. This is probably the easiest way to start using the decoders from
+gr-satellites. Gqrx supports Doppler correction with Gpredict.
 
 It is also possible to use the frontend streamers from
 [gr-frontends](https://github.com/daniestevez/gr-frontends). This allow to
