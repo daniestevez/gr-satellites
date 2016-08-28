@@ -67,6 +67,8 @@ decoders. You should probably install all of them.
   * [gr-synctags](https://github.com/daniestevez/gr-synctags) Tools for dealing
      with GNUradio synctags easily
   * [gr-csp](https://github.com/daniestevez/gr-csp) Tools for CSP protocol
+  * [gr-sids](https://github.com/daniestevez/gr-sids) Telemetry submission using
+    the SiDS protocol
 
 You also need to install Phil Karn's KA9Q `libfec` for some of the satellites
 that use Reed-Solomon or convolutional codes (other include their own
