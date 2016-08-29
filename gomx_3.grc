@@ -237,7 +237,7 @@
     </param>
     <param>
       <key>verbose</key>
-      <value>True</value>
+      <value>False</value>
     </param>
   </block>
   <block>
