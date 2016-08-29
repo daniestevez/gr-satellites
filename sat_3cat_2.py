@@ -5,7 +5,7 @@
 # Title: 3CAT-2 decoder
 # Author: Daniel Estevez
 # Description: Decodes 9k6 AX.25 BPSK telemetry from 3CAT-2
-# Generated: Mon Aug 29 17:21:48 2016
+# Generated: Mon Aug 29 19:09:53 2016
 ##################################################
 
 from gnuradio import analog
@@ -54,6 +54,8 @@ class sat_3cat_2(gr.top_block):
         ##################################################
         self.sids_submit_0 = sids.submit("http://tlm.pe0sat.nl/tlmdb/frame_db.php", 41732, callsign, longitude, latitude, recstart)
         self.sat3cat2_telemetry_parser_0 = sat3cat2.telemetry_parser()
+        self.low_pass_filter_0 = filter.fir_filter_ccf(1, firdes.low_pass(
+        	1, samp_rate, 7500, 500, firdes.WIN_HAMMING, 6.76))
         self.kiss_pdu_to_kiss_0 = kiss.pdu_to_kiss()
         self.kiss_nrzi_decode_0 = kiss.nrzi_decode()
         self.kiss_hdlc_deframer_0 = kiss.hdlc_deframer(check_fcs=True, max_length=10000)
@@ -82,11 +84,12 @@ class sat_3cat_2(gr.top_block):
         self.connect((self.blocks_udp_source_0, 0), (self.blocks_short_to_float_0, 0))    
         self.connect((self.digital_binary_slicer_fb_0, 0), (self.kiss_nrzi_decode_0, 0))    
         self.connect((self.digital_costas_loop_cc_0_0_0_0, 0), (self.digital_lms_dd_equalizer_cc_0_0, 0))    
-        self.connect((self.digital_fll_band_edge_cc_0, 0), (self.digital_pfb_clock_sync_xxx_0, 0))    
+        self.connect((self.digital_fll_band_edge_cc_0, 0), (self.low_pass_filter_0, 0))    
         self.connect((self.digital_lms_dd_equalizer_cc_0_0, 0), (self.blocks_complex_to_real_0, 0))    
         self.connect((self.digital_pfb_clock_sync_xxx_0, 0), (self.digital_costas_loop_cc_0_0_0_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.analog_feedforward_agc_cc_0, 0))    
         self.connect((self.kiss_nrzi_decode_0, 0), (self.kiss_hdlc_deframer_0, 0))    
+        self.connect((self.low_pass_filter_0, 0), (self.digital_pfb_clock_sync_xxx_0, 0))    
 
     def get_bfo(self):
         return self.bfo
@@ -156,6 +159,7 @@ class sat_3cat_2(gr.top_block):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
+        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 7500, 500, firdes.WIN_HAMMING, 6.76))
         self.freq_xlating_fir_filter_xxx_0.set_taps((firdes.low_pass(1, self.samp_rate, 10000, 1000)))
 
     def get_rrc_taps(self):
