@@ -280,7 +280,7 @@
     </param>
     <param>
       <key>num_samples</key>
-      <value>1024</value>
+      <value>1024*4</value>
     </param>
     <param>
       <key>reference</key>
@@ -656,7 +656,7 @@
     </param>
     <param>
       <key>w</key>
-      <value>0.02</value>
+      <value>0.04</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -711,7 +711,7 @@
     </param>
     <param>
       <key>w</key>
-      <value>0.010</value>
+      <value>0.020</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -766,7 +766,7 @@
     </param>
     <param>
       <key>mu</key>
-      <value>0.05</value>
+      <value>0.03</value>
     </param>
     <param>
       <key>id</key>
