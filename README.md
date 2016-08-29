@@ -160,3 +160,15 @@ a sideband-preserving FM receiver. If your receiver is sideband-inverting, you
 can use set `--invert=-1` while running the `.py` file or edit the corresponding
 parameter in the `.grc` file to invert the signal again in the decoder and
 recover the original signal with the correct sidebands.
+
+## Other hints
+
+To run the decoder and save the output to a file, it is possible to do something
+like
+
+```bash
+python2 -u aausat_4.py | tee /tmp/aausat4.log
+```
+
+This will both print the beacons in real time and also save all the output to
+the text file `/tmp/aausat4.log`.
