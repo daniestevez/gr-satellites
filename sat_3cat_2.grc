@@ -440,7 +440,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(208, 888)</value>
+      <value>(792, 912)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -963,6 +963,53 @@
     </param>
   </block>
   <block>
+    <key>kiss_check_address</key>
+    <param>
+      <key>address</key>
+      <value>3CAT2</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>direction</key>
+      <value>"from"</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(64, 768)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>kiss_check_address_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>kiss_hdlc_deframer</key>
     <param>
       <key>alias</key>
@@ -1068,7 +1115,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(48, 920)</value>
+      <value>(600, 944)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1201,7 +1248,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>type</key>
@@ -1354,7 +1401,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1016, 656)</value>
+      <value>(1080, 768)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1385,7 +1432,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(928, 761)</value>
+      <value>(968, 816)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1481,20 +1528,26 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>kiss_hdlc_deframer_0</source_block_id>
+    <source_block_id>kiss_check_address_0</source_block_id>
     <sink_block_id>kiss_pdu_to_kiss_0</sink_block_id>
-    <source_key>out</source_key>
+    <source_key>ok</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
-    <source_block_id>kiss_hdlc_deframer_0</source_block_id>
+    <source_block_id>kiss_check_address_0</source_block_id>
     <sink_block_id>sat3cat2_telemetry_parser_0</sink_block_id>
-    <source_key>out</source_key>
+    <source_key>ok</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>kiss_check_address_0</source_block_id>
+    <sink_block_id>sids_submit_0</sink_block_id>
+    <source_key>ok</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>kiss_hdlc_deframer_0</source_block_id>
-    <sink_block_id>sids_submit_0</sink_block_id>
+    <sink_block_id>kiss_check_address_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>

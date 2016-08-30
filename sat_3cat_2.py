@@ -5,7 +5,7 @@
 # Title: 3CAT-2 decoder
 # Author: Daniel Estevez
 # Description: Decodes 9k6 AX.25 BPSK telemetry from 3CAT-2
-# Generated: Mon Aug 29 19:09:53 2016
+# Generated: Tue Aug 30 16:36:01 2016
 ##################################################
 
 from gnuradio import analog
@@ -59,6 +59,7 @@ class sat_3cat_2(gr.top_block):
         self.kiss_pdu_to_kiss_0 = kiss.pdu_to_kiss()
         self.kiss_nrzi_decode_0 = kiss.nrzi_decode()
         self.kiss_hdlc_deframer_0 = kiss.hdlc_deframer(check_fcs=True, max_length=10000)
+        self.kiss_check_address_0 = kiss.check_address("3CAT2", "from")
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_fcf(1, (firdes.low_pass(1, samp_rate, 10000, 1000)), bfo, samp_rate)
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(samp_per_sym, 0.1, (rrc_taps), nfilts, nfilts/2, 1.5, 2)
         self.digital_lms_dd_equalizer_cc_0_0 = digital.lms_dd_equalizer_cc(2, 0.03, 2, variable_constellation_0)
@@ -74,9 +75,10 @@ class sat_3cat_2(gr.top_block):
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.kiss_hdlc_deframer_0, 'out'), (self.kiss_pdu_to_kiss_0, 'in'))    
-        self.msg_connect((self.kiss_hdlc_deframer_0, 'out'), (self.sat3cat2_telemetry_parser_0, 'in'))    
-        self.msg_connect((self.kiss_hdlc_deframer_0, 'out'), (self.sids_submit_0, 'in'))    
+        self.msg_connect((self.kiss_check_address_0, 'ok'), (self.kiss_pdu_to_kiss_0, 'in'))    
+        self.msg_connect((self.kiss_check_address_0, 'ok'), (self.sat3cat2_telemetry_parser_0, 'in'))    
+        self.msg_connect((self.kiss_check_address_0, 'ok'), (self.sids_submit_0, 'in'))    
+        self.msg_connect((self.kiss_hdlc_deframer_0, 'out'), (self.kiss_check_address_0, 'in'))    
         self.msg_connect((self.kiss_pdu_to_kiss_0, 'out'), (self.blocks_socket_pdu_0, 'pdus'))    
         self.connect((self.analog_feedforward_agc_cc_0, 0), (self.digital_fll_band_edge_cc_0, 0))    
         self.connect((self.blocks_complex_to_real_0, 0), (self.digital_binary_slicer_fb_0, 0))    
