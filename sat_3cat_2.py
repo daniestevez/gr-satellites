@@ -5,7 +5,7 @@
 # Title: 3CAT-2 decoder
 # Author: Daniel Estevez
 # Description: Decodes 9k6 AX.25 BPSK telemetry from 3CAT-2
-# Generated: Tue Aug 30 16:36:01 2016
+# Generated: Tue Aug 30 23:57:57 2016
 ##################################################
 
 from gnuradio import analog

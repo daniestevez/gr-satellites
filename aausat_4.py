@@ -5,7 +5,7 @@
 # Title: AAUSAT-4 decoder
 # Author: Daniel Estevez
 # Description: AAUSAT-4 decoder
-# Generated: Sun Aug 28 23:05:33 2016
+# Generated: Tue Aug 30 23:59:02 2016
 ##################################################
 
 from gnuradio import blocks
@@ -57,7 +57,7 @@ class aausat_4(gr.top_block):
         self.digital_binary_slicer_fb_0 = digital.binary_slicer_fb()
         self.blocks_unpacked_to_packed_xx_0_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
         self.blocks_unpacked_to_packed_xx_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
-        self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, 7355, 1472, False)
+        self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, port, 1472, False)
         self.blocks_tagged_stream_to_pdu_0_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, "packet_len")
         self.blocks_tagged_stream_to_pdu_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, "packet_len")
         self.blocks_tagged_stream_multiply_length_0_0 = blocks.tagged_stream_multiply_length(gr.sizeof_char*1, "packet_len", 1/8.0)
