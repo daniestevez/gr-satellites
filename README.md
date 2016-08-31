@@ -48,15 +48,34 @@ receives it.
     mode to receive this satellite.
   * `aausat_4`
     [AAUSAT-4](http://www.space.aau.dk/aausat4/), which transmits 2k4 or 9k6 GFSK
-    telemetry in the 70cm band. It uses the CSP protocol and FEC with a r=2, k=7
+    telemetry in the 70cm band. It uses the CSP protocol and FEC with a r=1/2, k=7
     convolutional code and a (255,223) Reed-Solomon code. You must use FM mode
     to receive this satellite.
   * `gomx_3`
     [GOMX-3](https://directory.eoportal.org/web/eoportal/satellite-missions/g/gomx-3),
     which transmits 19k2 GFSK telemetry in the 70cm band. It uses the CSP
-    protocol and fect with a (255,223) Reed-Solomon code. The beacons include
+    protocol and FEC with a (255,223) Reed-Solomon code. The beacons include
     information from ADS-B beacons transmitted by terrestrial aircraft. You must
     use FM mode to receive this satellite.
+  * `lilacsat2`
+    [LilacSat-2](http://lilacsat.hit.edu.cn/?page_id=257), which transmits 9k6
+    BPSK, 4k8 GFSK and FM subaudio telemetry in the 70cm band. It uses FEC with
+    a r=1/2, k=7 convolutional code and a (255,223) Reed-Solomon code. The
+    decoders for this satellite are organized a bit different from
+    the decoders for other satellites, because LilacSat-2 transmits in several
+    different frequencies using several different modes. You can use `lilacsat2`
+    as a usual single-frequency single-mode decoder. You can use gqrx or one of
+    the frontends from gr-frontends to feed an UDP audio stream  to `lilacsat2`.
+    However, you can decode only one frequency and mode using this method. You
+    should tune to 437.200MHz in wide SSB mode to receive 9k6 BPSK telemetry, to
+    437.200MHz in FM mode to receive FM subaudio telemetry and to 437.225MHz in
+    FM mode to receive 4k8 GFSK telemetry. `lilacsat2` will recognise the
+    telemetry format automatically. To receive all the frequencies and modes at
+    the same time, you need to use an SDR receiver. The receivers
+    `lilacsat_fcdpp` and `lilacsat_rtlsdr` can be used with a FUNcube Dongle
+    Pro+ and an RTL-SDR respectively. These are complete receivers and
+    decoders. They submit telemetry to the PE0SAT server and can use Doppler
+    correction with Gpredict, in the same way as the frontends from gr-frontends.
 
 ## Required GNUradio OOT modules
 
@@ -78,11 +97,14 @@ decoder). A fork that builds in modern linux systems can be found
 The following GNUradio out-of-tree modules are only required for the decoder of
 one particular satellite. You may install only the ones you're interested in.
 
-  * [gr-ax100](https://github.com/daniestevez/gr-ax100) GOMX-3 decoder and
-    telemetry parser
+  * [gr-3cat2](https://github.com/daniestevez/gr-3cat2) 3CAT-2 telemetry parser
   * [gr-aausat](https://github.com/daniestevez/gr-aausat) AAUSAT-4 decoder and
     telemetry parser
-  * [gr-3cat2](https://github.com/daniestevez/gr-3cat2) 3CAT-2 telemetry parser
+  * [gr-ax100](https://github.com/daniestevez/gr-ax100) GOMX-3 decoder and
+    telemetry parser
+  * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) LilacSat-2 decoder
+
+
 
 ## Installing GNUradio OOT modules
 
