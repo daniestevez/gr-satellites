@@ -51,6 +51,11 @@ receives it.
     telemetry in the 70cm band. It uses the CSP protocol and FEC with a r=1/2, k=7
     convolutional code and a (255,223) Reed-Solomon code. You must use FM mode
     to receive this satellite.
+  * `beesat`
+    [BESAT-1,-2 and -4](http://space.skyrocket.de/doc_sdat/beesat.htm), which
+    transmit 4k8 FSK telemetry in the 70cm band. They use the Mobitex-NX
+    protocol, which includes FEC with a (12,8,3) linear code and CRC-16CCITT for
+    error detection. You must use FM mode to receive these satellites.
   * `gomx_3`
     [GOMX-3](https://directory.eoportal.org/web/eoportal/satellite-missions/g/gomx-3),
     which transmits 19k2 GFSK telemetry in the 70cm band. It uses the CSP
@@ -102,6 +107,7 @@ one particular satellite. You may install only the ones you're interested in.
     telemetry parser
   * [gr-ax100](https://github.com/daniestevez/gr-ax100) GOMX-3 decoder and
     telemetry parser
+  * [beesat-sdr](https://github.com/daniestevez/beesat-sdr) BEESAT decoder and TNC
   * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) LilacSat-2 decoder
 
 
