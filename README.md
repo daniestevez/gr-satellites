@@ -56,12 +56,19 @@ receives it.
     transmit 4k8 FSK telemetry in the 70cm band. They use the Mobitex-NX
     protocol, which includes FEC with a (12,8,3) linear code and CRC-16CCITT for
     error detection. You must use FM mode to receive these satellites.
+  * `gomx_1`
+    [GOMX-1](https://directory.eoportal.org/web/eoportal/satellite-missions/g/gomx-1),
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses the CSP
+    protocol and FEC with a (255,223) Reed-Solomon code. It also uses a CCSDS
+    scrambler. The beacons include information from ADS-B beacons transmitted by
+    terrestrial aircraft. You must use FM mode to receive this satellite.
   * `gomx_3`
     [GOMX-3](https://directory.eoportal.org/web/eoportal/satellite-missions/g/gomx-3),
     which transmits 19k2 GFSK telemetry in the 70cm band. It uses the CSP
-    protocol and FEC with a (255,223) Reed-Solomon code. The beacons include
-    information from ADS-B beacons transmitted by terrestrial aircraft. You must
-    use FM mode to receive this satellite.
+    protocol and FEC with a (255,223) Reed-Solomon code. It also uses a G3RUH
+    scrambler. The beacons include information from ADS-B beacons transmitted by
+    terrestrial aircraft. Note that GOMX-3 will decay during October 2016. You
+    must use FM mode to receive this satellite.
   * `lilacsat2`
     [LilacSat-2](http://lilacsat.hit.edu.cn/?page_id=257), which transmits 9k6
     BPSK, 4k8 GFSK and FM subaudio telemetry in the 70cm band. It uses FEC with
@@ -105,8 +112,8 @@ one particular satellite. You may install only the ones you're interested in.
   * [gr-3cat2](https://github.com/daniestevez/gr-3cat2) 3CAT-2 telemetry parser
   * [gr-aausat](https://github.com/daniestevez/gr-aausat) AAUSAT-4 decoder and
     telemetry parser
-  * [gr-ax100](https://github.com/daniestevez/gr-ax100) GOMX-3 decoder and
-    telemetry parser
+  * [gr-ax100](https://github.com/daniestevez/gr-ax100) GOMX-1 and GOMX-3 decoders and
+    telemetry parsers
   * [beesat-sdr](https://github.com/daniestevez/beesat-sdr) BEESAT decoder and TNC
   * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) LilacSat-2 decoder
 
