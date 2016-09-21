@@ -87,7 +87,9 @@ receives it.
     `lilacsat_fcdpp` and `lilacsat_rtlsdr` can be used with a FUNcube Dongle
     Pro+ and an RTL-SDR respectively. These are complete receivers and
     decoders. They submit telemetry to the PE0SAT server and can use Doppler
-    correction with Gpredict, in the same way as the frontends from gr-frontends.
+    correction with Gpredict, in the same way as the frontends from
+    gr-frontends. When using Doppler correction with Gpredict, you have to set
+    437.200MHz as the downlink frequency in Gpredict.
 
 ## Required GNUradio OOT modules
 
