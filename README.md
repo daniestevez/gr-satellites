@@ -51,6 +51,20 @@ receives it.
     telemetry in the 70cm band. It uses the CSP protocol and FEC with a r=1/2, k=7
     convolutional code and a (255,223) Reed-Solomon code. You must use FM mode
     to receive this satellite.
+  * `aisat`
+    [AISAT](https://directory.eoportal.org/web/eoportal/satellite-missions/a/aisat),
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses the CSP
+    protocol and FEC with a (255,223) Reed-Solomon code. It also uses a CCSDS
+    scrambler. There is no telemetry parser yet, as the beacon format is
+    unknown. This satellite has an AIS receiver on board. You must use FM mode
+    to receive this satellite.
+  * `athenoxat-1`
+    [ATHENOXAT-1](http://space.skyrocket.de/doc_sdat/athenoxat-1.htm),
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses the CSP
+    protocol and FEC with a (255,223) Reed-Solomon code. It also uses a CCSDS
+    scrambler. There is no telemetry parser yet, as the beacon format is
+    unknown. This satellite is on a low inclination orbit, so it can only be
+    received near the equator. You must use FM mode to receive this satellite.
   * `beesat`
     [BESAT-1,-2 and -4](http://space.skyrocket.de/doc_sdat/beesat.htm), which
     transmit 4k8 FSK telemetry in the 70cm band. They use the Mobitex-NX

@@ -22,7 +22,7 @@
     </param>
     <param>
       <key>description</key>
-      <value>GOMX-1 decoder</value>
+      <value>ATHENOXAT-1 decoder</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -46,7 +46,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>gomx_1</value>
+      <value>athenoxat_1</value>
     </param>
     <param>
       <key>max_nouts</key>
@@ -78,7 +78,7 @@
     </param>
     <param>
       <key>title</key>
-      <value>GOMX-1 decoder</value>
+      <value>ATHENOXAT-1 decoder</value>
     </param>
   </block>
   <block>
@@ -199,37 +199,6 @@
     </param>
   </block>
   <block>
-    <key>ax100_gomx1_beacon_parser</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(768, 720)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>ax100_gomx1_beacon_parser_0</value>
-    </param>
-  </block>
-  <block>
     <key>ax100_gomx1_decode</key>
     <param>
       <key>alias</key>
@@ -309,6 +278,37 @@
     <param>
       <key>minoutbuf</key>
       <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_message_debug</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(808, 664)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_message_debug_0</value>
     </param>
   </block>
   <block>
@@ -1127,7 +1127,7 @@
     </param>
     <param>
       <key>noradID</key>
-      <value>39430</value>
+      <value>41168</value>
     </param>
     <param>
       <key>source</key>
@@ -1205,9 +1205,9 @@
   </connection>
   <connection>
     <source_block_id>ax100_gomx1_decode_0</source_block_id>
-    <sink_block_id>ax100_gomx1_beacon_parser_0</sink_block_id>
+    <sink_block_id>blocks_message_debug_0</sink_block_id>
     <source_key>out</source_key>
-    <sink_key>in</sink_key>
+    <sink_key>print_pdu</sink_key>
   </connection>
   <connection>
     <source_block_id>ax100_gomx1_decode_0</source_block_id>

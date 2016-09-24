@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 ##################################################
 # GNU Radio Python Flow Graph
-# Title: GOMX-1 decoder
+# Title: ATHENOXAT-1 decoder
 # Author: Daniel Estevez
-# Description: GOMX-1 decoder
-# Generated: Sat Sep 24 15:49:23 2016
+# Description: ATHENOXAT-1 decoder
+# Generated: Sat Sep 24 15:49:55 2016
 ##################################################
 
 from gnuradio import analog
@@ -23,10 +23,10 @@ import sids
 import synctags
 
 
-class gomx_1(gr.top_block):
+class athenoxat_1(gr.top_block):
 
     def __init__(self, callsign="", ip="::", latitude=0, longitude=0, port=7355, recstart=""):
-        gr.top_block.__init__(self, "GOMX-1 decoder")
+        gr.top_block.__init__(self, "ATHENOXAT-1 decoder")
 
         ##################################################
         # Parameters
@@ -48,7 +48,7 @@ class gomx_1(gr.top_block):
         # Blocks
         ##################################################
         self.synctags_fixedlen_tagger_0 = synctags.fixedlen_tagger("syncword", "packet_len", (255+3)*8, numpy.byte)
-        self.sids_submit_0 = sids.submit("http://tlm.pe0sat.nl/tlmdb/frame_db.php", 39430, callsign, longitude, latitude, recstart)
+        self.sids_submit_0 = sids.submit("http://tlm.pe0sat.nl/tlmdb/frame_db.php", 41168, callsign, longitude, latitude, recstart)
         self.hilbert_fc_0 = filter.hilbert_fc(65, firdes.WIN_HAMMING, 6.76)
         self.digital_gmsk_demod_0 = digital.gmsk_demod(
         	samples_per_symbol=10,
@@ -66,15 +66,15 @@ class gomx_1(gr.top_block):
         self.blocks_tagged_stream_multiply_length_0 = blocks.tagged_stream_multiply_length(gr.sizeof_char*1, "packet_len", 1/8.0)
         self.blocks_short_to_float_0 = blocks.short_to_float(1, 32767.0)
         self.blocks_multiply_xx_0 = blocks.multiply_vcc(1)
+        self.blocks_message_debug_0 = blocks.message_debug()
         self.blocks_conjugate_cc_0 = blocks.conjugate_cc()
         self.ax100_gomx1_decode_0 = ax100.gomx1_decode(False)
-        self.ax100_gomx1_beacon_parser_0 = ax100.gomx1_beacon_parser()
         self.analog_sig_source_x_0 = analog.sig_source_c(48000, analog.GR_COS_WAVE, -3600, 1, 0)
 
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.ax100_gomx1_decode_0, 'out'), (self.ax100_gomx1_beacon_parser_0, 'in'))    
+        self.msg_connect((self.ax100_gomx1_decode_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
         self.msg_connect((self.ax100_gomx1_decode_0, 'out'), (self.sids_submit_0, 'in'))    
         self.msg_connect((self.blocks_tagged_stream_to_pdu_0, 'pdus'), (self.ax100_gomx1_decode_0, 'in'))    
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 0))    
@@ -139,7 +139,7 @@ class gomx_1(gr.top_block):
 
 
 def argument_parser():
-    description = 'GOMX-1 decoder'
+    description = 'ATHENOXAT-1 decoder'
     parser = OptionParser(usage="%prog: [options]", option_class=eng_option, description=description)
     parser.add_option(
         "", "--callsign", dest="callsign", type="string", default="",
@@ -162,7 +162,7 @@ def argument_parser():
     return parser
 
 
-def main(top_block_cls=gomx_1, options=None):
+def main(top_block_cls=athenoxat_1, options=None):
     if options is None:
         options, _ = argument_parser().parse_args()
 
