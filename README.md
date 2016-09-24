@@ -175,6 +175,26 @@ gr-frontends/wav_48kHz.py -f recording.wav & \
 gr-satellites/sat_3cat2.py --recstart="2016-01-01 00:00" --callsign=N0CALL --latitude=0.000 --longitude=0.000
 ```
 
+## KISS submitter
+
+There are many satellites that use standard packet radio AX.25 and can be
+received with any software TNC such as
+[Direwolf](https://github.com/wb2osz/direwolf). gr-satellites includes
+`kiss_submitter` to perform telemetry submission when using a software TNC.
+
+`kiss_submitter` connects to the software TNC as a KISS TCP client. The frames
+received by the software TNC will be submitted by `kiss_submitter`. To use
+`kiss_submitter`, you must specify your callsign and coordinates as when
+submitting telemetry using any of the decoders. You also need to specify the
+NORAD ID of the satellite you are receiving. This can be done by setting using
+`--norad` if using the `.py` script or with the parameter if using the `.grc`
+file. It is very important that you set the NORAD ID correctly. You can search
+the NORAD ID in [celestrak](http://celestrak.com/satcat/search.asp).
+
+You must start the software TNC first and the run the `.py` script or the `.grc`
+file for `kiss_submitter`.
+
+
 ## Hints for receiving different modes
 
 ### Wide SSB
