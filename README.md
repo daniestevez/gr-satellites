@@ -139,8 +139,9 @@ one particular satellite. You may install only the ones you're interested in.
   * [gr-3cat2](https://github.com/daniestevez/gr-3cat2) 3CAT-2 telemetry parser
   * [gr-aausat](https://github.com/daniestevez/gr-aausat) AAUSAT-4 decoder and
     telemetry parser
-  * [gr-ax100](https://github.com/daniestevez/gr-ax100) GOMX-1 and GOMX-3 decoders and
-    telemetry parsers
+  * [gr-ax100](https://github.com/daniestevez/gr-ax100) Decoders and telemetry
+    parsers for satellites using GomSpace radios: AISAT, ATHENOXAT-1, GOMX-1,
+    GOMX-3, TW-1A, TW-1B, TW1-C
   * [beesat-sdr](https://github.com/daniestevez/beesat-sdr) BEESAT decoder and TNC
   * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) LilacSat-2 decoder
 
