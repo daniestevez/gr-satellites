@@ -104,6 +104,17 @@ receives it.
     correction with Gpredict, in the same way as the frontends from
     gr-frontends. When using Doppler correction with Gpredict, you have to set
     437.200MHz as the downlink frequency in Gpredict.
+  * `tw_1a`, `tw_1b`, `tw_1c`
+    [TW-1A](http://space.skyrocket.de/doc_sdat/shangkeda-2.htm),
+    [TW-1B](http://space.skyrocket.de/doc_sdat/njust-2.htm),
+    [TW-1C](http://space.skyrocket.de/doc_sdat/njfa-1.htm), which transmit 4k8
+    GFSK telemetry in the 70cm band. They use the CSP protocol and FEC with a
+    (255,223) Reed-Solomon code. They also use a G3RUH scrambler. The
+    transceiver is the GomSpace NanoCom AX100, the same transceiver used in
+    GOMX-3. There is no beacon parser yet, as the beacon format is unknown.
+    The only difference between the 3 receivers is that the NORAD ID is set for
+    the correct satellite when doing telemetry submission. You must use FM mode
+    to receive these satellites.
 
 ## Required GNUradio OOT modules
 
