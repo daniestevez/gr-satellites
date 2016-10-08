@@ -5,7 +5,7 @@
 # Title: GOMX-3 decoder
 # Author: Daniel Estevez
 # Description: GOMX-3 decoder
-# Generated: Tue Aug 30 23:58:44 2016
+# Generated: Sat Oct  8 16:54:25 2016
 ##################################################
 
 from gnuradio import blocks
@@ -47,16 +47,24 @@ class gomx_3(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
+        self.synctags_fixedlen_tagger_0_0 = synctags.fixedlen_tagger("syncword", "packet_len", 2048, numpy.byte)
         self.synctags_fixedlen_tagger_0 = synctags.fixedlen_tagger("syncword", "packet_len", 2048, numpy.byte)
         self.sids_submit_0 = sids.submit("http://tlm.pe0sat.nl/tlmdb/frame_db.php", 40949, callsign, longitude, latitude, recstart)
+        self.digital_descrambler_bb_0_0 = digital.descrambler_bb(0x21, 0x00, 16)
         self.digital_descrambler_bb_0 = digital.descrambler_bb(0x21, 0x00, 16)
+        self.digital_correlate_access_code_tag_bb_0_0 = digital.correlate_access_code_tag_bb(access_code, threshold, "syncword")
         self.digital_correlate_access_code_tag_bb_0 = digital.correlate_access_code_tag_bb(access_code, threshold, "syncword")
+        self.digital_clock_recovery_mm_xx_0_0 = digital.clock_recovery_mm_ff(10, 0.25*0.175*0.175, 0.1, 0.175, 0.005)
         self.digital_clock_recovery_mm_xx_0 = digital.clock_recovery_mm_ff(2.5, 0.25*0.175*0.175, 0.1, 0.175, 0.005)
+        self.digital_binary_slicer_fb_0_0 = digital.binary_slicer_fb()
         self.digital_binary_slicer_fb_0 = digital.binary_slicer_fb()
         self.csp_check_crc_0 = csp.check_crc(False, False)
+        self.blocks_unpacked_to_packed_xx_0_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
         self.blocks_unpacked_to_packed_xx_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
         self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, port, 1472, False)
+        self.blocks_tagged_stream_to_pdu_0_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, "packet_len")
         self.blocks_tagged_stream_to_pdu_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, "packet_len")
+        self.blocks_tagged_stream_multiply_length_0_0 = blocks.tagged_stream_multiply_length(gr.sizeof_char*1, "packet_len", 1/8.0)
         self.blocks_tagged_stream_multiply_length_0 = blocks.tagged_stream_multiply_length(gr.sizeof_char*1, "packet_len", 1/8.0)
         self.blocks_short_to_float_0 = blocks.short_to_float(1, 32767.0)
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((invert*10, ))
@@ -68,18 +76,27 @@ class gomx_3(gr.top_block):
         ##################################################
         self.msg_connect((self.ax100_gomx3_rs_decode_0, 'out'), (self.csp_check_crc_0, 'in'))    
         self.msg_connect((self.blocks_tagged_stream_to_pdu_0, 'pdus'), (self.ax100_gomx3_rs_decode_0, 'in'))    
+        self.msg_connect((self.blocks_tagged_stream_to_pdu_0_0, 'pdus'), (self.ax100_gomx3_rs_decode_0, 'in'))    
         self.msg_connect((self.csp_check_crc_0, 'ok'), (self.ax100_beacon_parser_0, 'in'))    
         self.msg_connect((self.csp_check_crc_0, 'ok'), (self.sids_submit_0, 'in'))    
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.digital_clock_recovery_mm_xx_0, 0))    
+        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.digital_clock_recovery_mm_xx_0_0, 0))    
         self.connect((self.blocks_short_to_float_0, 0), (self.blocks_multiply_const_vxx_0, 0))    
         self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.blocks_tagged_stream_to_pdu_0, 0))    
+        self.connect((self.blocks_tagged_stream_multiply_length_0_0, 0), (self.blocks_tagged_stream_to_pdu_0_0, 0))    
         self.connect((self.blocks_udp_source_0, 0), (self.blocks_short_to_float_0, 0))    
         self.connect((self.blocks_unpacked_to_packed_xx_0, 0), (self.blocks_tagged_stream_multiply_length_0, 0))    
+        self.connect((self.blocks_unpacked_to_packed_xx_0_0, 0), (self.blocks_tagged_stream_multiply_length_0_0, 0))    
         self.connect((self.digital_binary_slicer_fb_0, 0), (self.digital_descrambler_bb_0, 0))    
+        self.connect((self.digital_binary_slicer_fb_0_0, 0), (self.digital_descrambler_bb_0_0, 0))    
         self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.digital_binary_slicer_fb_0, 0))    
+        self.connect((self.digital_clock_recovery_mm_xx_0_0, 0), (self.digital_binary_slicer_fb_0_0, 0))    
         self.connect((self.digital_correlate_access_code_tag_bb_0, 0), (self.synctags_fixedlen_tagger_0, 0))    
+        self.connect((self.digital_correlate_access_code_tag_bb_0_0, 0), (self.synctags_fixedlen_tagger_0_0, 0))    
         self.connect((self.digital_descrambler_bb_0, 0), (self.digital_correlate_access_code_tag_bb_0, 0))    
+        self.connect((self.digital_descrambler_bb_0_0, 0), (self.digital_correlate_access_code_tag_bb_0_0, 0))    
         self.connect((self.synctags_fixedlen_tagger_0, 0), (self.blocks_unpacked_to_packed_xx_0, 0))    
+        self.connect((self.synctags_fixedlen_tagger_0_0, 0), (self.blocks_unpacked_to_packed_xx_0_0, 0))    
 
     def get_callsign(self):
         return self.callsign
