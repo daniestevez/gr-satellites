@@ -70,6 +70,13 @@ receives it.
     transmit 4k8 FSK telemetry in the 70cm band. They use the Mobitex-NX
     protocol, which includes FEC with a (12,8,3) linear code and CRC-16CCITT for
     error detection. You must use FM mode to receive these satellites.
+  * `galassia`
+    [GALASSIA](https://eoportal.org/web/eoportal/satellite-missions/content/-/article/galass-1),
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses the CSP
+    protocol and FEC with a (255,223) Reed-Solomon code. It also uses a CCSDS
+    scrambler. There is no telemetry parser yet, as the beacon format is
+    unknown. This satellite is on a low inclination orbit, so it can only be
+    received near the equator. You must use FM mode to receive this satellite.
   * `gomx_1`
     [GOMX-1](https://directory.eoportal.org/web/eoportal/satellite-missions/g/gomx-1),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses the CSP
