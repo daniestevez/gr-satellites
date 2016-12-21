@@ -70,6 +70,14 @@ receives it.
     transmit 4k8 FSK telemetry in the 70cm band. They use the Mobitex-NX
     protocol, which includes FEC with a (12,8,3) linear code and CRC-16CCITT for
     error detection. You must use FM mode to receive these satellites.
+  * `by701`
+    [BY70-1](http://space.skyrocket.de/doc_sdat/by70-1.htm), which transmits 9k6
+    BPSK telemetry in the 70cm band. It uses FEC with an r=1/2, k=7
+    convolutional code and a (255,223) Reed-Solomon code (the same as the
+    LilacSat-2 9k6 BPSK telemetry). You must use wide SSB mode to receive this
+    satellite. This satellite has not launched yet. It is scheduled to launch on
+    26 December 2016. Telemetry submission is not enabled, as there is no
+    NORAD ID assigned yet.
   * `galassia`
     [GALASSIA](https://eoportal.org/web/eoportal/satellite-missions/content/-/article/galass-1),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses the CSP
@@ -93,7 +101,7 @@ receives it.
   * `lilacsat2`
     [LilacSat-2](http://lilacsat.hit.edu.cn/?page_id=257), which transmits 9k6
     BPSK, 4k8 GFSK and FM subaudio telemetry in the 70cm band. It uses FEC with
-    a r=1/2, k=7 convolutional code and a (255,223) Reed-Solomon code. The
+    an r=1/2, k=7 convolutional code and a (255,223) Reed-Solomon code. The
     decoders for this satellite are organized a bit different from
     the decoders for other satellites, because LilacSat-2 transmits in several
     different frequencies using several different modes. You can use `lilacsat2`
