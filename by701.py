@@ -5,7 +5,7 @@
 # Title: BY70-1 decoder
 # Author: Daniel Estevez
 # Description: BY70-1 decoder
-# Generated: Wed Dec 21 11:08:49 2016
+# Generated: Wed Dec 28 21:45:04 2016
 ##################################################
 
 from gnuradio import analog
@@ -17,6 +17,7 @@ from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
+import csp
 import lilacsat
 
 
@@ -60,7 +61,9 @@ class by701(gr.top_block):
         ##################################################
         self.lilacsat_vitfilt27_fb_0_0 = lilacsat.vitfilt27_fb()
         self.lilacsat_vitfilt27_fb_0 = lilacsat.vitfilt27_fb()
+        self.lilacsat_telemetry_parser_0 = lilacsat.telemetry_parser()
         self.lilacsat_kiss_decode_pdu_0_0 = lilacsat.kiss_decode_pdu()
+        self.lilacsat_image_decoder_0 = lilacsat.image_decoder('/tmp', True)
         self.lilacsat_fec_decode_b_0_0_0_0 = lilacsat.fec_decode_b(114, True, False, False)
         self.lilacsat_fec_decode_b_0_0_0 = lilacsat.fec_decode_b(114, True, False, False)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_fcf(1, (firdes.low_pass(1, samp_rate, 10000, 1000)), bfo, samp_rate)
@@ -68,11 +71,11 @@ class by701(gr.top_block):
         self.digital_lms_dd_equalizer_cc_0_0 = digital.lms_dd_equalizer_cc(2, 0.3, 2, variable_constellation_0)
         self.digital_fll_band_edge_cc_0 = digital.fll_band_edge_cc(sps, 0.350, 100, 0.1)
         self.digital_costas_loop_cc_0_0 = digital.costas_loop_cc(0.4, 2, False)
+        self.csp_swap_header_0 = csp.swap_header()
         self.blocks_unpack_k_bits_bb_0_0_0_0 = blocks.unpack_k_bits_bb(8)
         self.blocks_unpack_k_bits_bb_0_0_0 = blocks.unpack_k_bits_bb(8)
         self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, port, 1472, False)
         self.blocks_short_to_float_0 = blocks.short_to_float(1, 32767)
-        self.blocks_message_debug_0 = blocks.message_debug()
         self.blocks_delay_0_0 = blocks.delay(gr.sizeof_float*1, 1)
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
         self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024, 2)
@@ -80,9 +83,11 @@ class by701(gr.top_block):
         ##################################################
         # Connections
         ##################################################
+        self.msg_connect((self.csp_swap_header_0, 'out'), (self.lilacsat_image_decoder_0, 'in'))    
+        self.msg_connect((self.csp_swap_header_0, 'out'), (self.lilacsat_telemetry_parser_0, 'in'))    
         self.msg_connect((self.lilacsat_fec_decode_b_0_0_0, 'out'), (self.lilacsat_kiss_decode_pdu_0_0, 'in'))    
         self.msg_connect((self.lilacsat_fec_decode_b_0_0_0_0, 'out'), (self.lilacsat_kiss_decode_pdu_0_0, 'in'))    
-        self.msg_connect((self.lilacsat_kiss_decode_pdu_0_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
+        self.msg_connect((self.lilacsat_kiss_decode_pdu_0_0, 'out'), (self.csp_swap_header_0, 'in'))    
         self.connect((self.analog_feedforward_agc_cc_0, 0), (self.digital_fll_band_edge_cc_0, 0))    
         self.connect((self.blocks_complex_to_real_0, 0), (self.blocks_delay_0_0, 0))    
         self.connect((self.blocks_complex_to_real_0, 0), (self.lilacsat_vitfilt27_fb_0, 0))    

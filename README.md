@@ -75,9 +75,12 @@ receives it.
     BPSK telemetry in the 70cm band. It uses FEC with an r=1/2, k=7
     convolutional code and a (255,223) Reed-Solomon code (the same as the
     LilacSat-2 9k6 BPSK telemetry). You must use wide SSB mode to receive this
-    satellite. This satellite has not launched yet. It is scheduled to launch on
-    26 December 2016. Telemetry submission is not enabled, as there is no
-    NORAD ID assigned yet.
+    satellite. It has an optical camera on board and it transmits JPEG images
+    together with the telemetry. `by701` includes a complete telemetry decoder
+    and image receive software. Telemetry submission is not enabled, as there is no
+    NORAD ID assigned yet. This satellite launched on 28 December 2016 into a 520x220km
+    orbit. The perigee is too low because of a problem in the launch. The orbit will
+    only last a couple months.
   * `galassia`
     [GALASSIA](https://eoportal.org/web/eoportal/satellite-missions/content/-/article/galass-1),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses the CSP
