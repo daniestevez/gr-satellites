@@ -983,7 +983,7 @@
     </param>
     <param>
       <key>w</key>
-      <value>0.1</value>
+      <value>0.01</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1038,7 +1038,7 @@
     </param>
     <param>
       <key>mu</key>
-      <value>0.3</value>
+      <value>0.05</value>
     </param>
     <param>
       <key>id</key>
@@ -1101,7 +1101,7 @@
     </param>
     <param>
       <key>loop_bw</key>
-      <value>0.100</value>
+      <value>0.05</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1109,7 +1109,7 @@
     </param>
     <param>
       <key>max_dev</key>
-      <value>1.5</value>
+      <value>0.05</value>
     </param>
     <param>
       <key>minoutbuf</key>
