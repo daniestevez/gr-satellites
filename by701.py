@@ -5,7 +5,7 @@
 # Title: BY70-1 decoder
 # Author: Daniel Estevez
 # Description: BY70-1 decoder
-# Generated: Thu Dec 29 10:37:43 2016
+# Generated: Fri Dec 30 17:57:29 2016
 ##################################################
 
 from gnuradio import analog
@@ -70,7 +70,7 @@ class by701(gr.top_block):
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(sps, 0.05, (rrc_taps), nfilts, nfilts/2, 0.05, 2)
         self.digital_lms_dd_equalizer_cc_0_0 = digital.lms_dd_equalizer_cc(2, 0.05, 2, variable_constellation_0)
         self.digital_fll_band_edge_cc_0 = digital.fll_band_edge_cc(sps, 0.350, 100, 0.01)
-        self.digital_costas_loop_cc_0_0 = digital.costas_loop_cc(0.4, 2, False)
+        self.digital_costas_loop_cc_0_0 = digital.costas_loop_cc(0.1, 2, False)
         self.csp_swap_header_0 = csp.swap_header()
         self.blocks_unpack_k_bits_bb_0_0_0_0 = blocks.unpack_k_bits_bb(8)
         self.blocks_unpack_k_bits_bb_0_0_0 = blocks.unpack_k_bits_bb(8)

@@ -928,7 +928,7 @@
     </param>
     <param>
       <key>w</key>
-      <value>0.4</value>
+      <value>0.1</value>
     </param>
     <param>
       <key>maxoutbuf</key>
