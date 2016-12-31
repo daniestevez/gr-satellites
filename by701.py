@@ -5,7 +5,7 @@
 # Title: BY70-1 decoder
 # Author: Daniel Estevez
 # Description: BY70-1 decoder
-# Generated: Fri Dec 30 17:57:29 2016
+# Generated: Sat Dec 31 15:26:23 2016
 ##################################################
 
 from gnuradio import analog
@@ -19,6 +19,7 @@ from gnuradio.filter import firdes
 from optparse import OptionParser
 import csp
 import lilacsat
+import sids
 
 
 class by701(gr.top_block):
@@ -59,6 +60,7 @@ class by701(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
+        self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 41909, callsign, longitude, latitude, recstart)
         self.lilacsat_vitfilt27_fb_0_0 = lilacsat.vitfilt27_fb()
         self.lilacsat_vitfilt27_fb_0 = lilacsat.vitfilt27_fb()
         self.lilacsat_telemetry_parser_0 = lilacsat.telemetry_parser()
@@ -88,6 +90,7 @@ class by701(gr.top_block):
         self.msg_connect((self.lilacsat_fec_decode_b_0_0_0, 'out'), (self.lilacsat_kiss_decode_pdu_0_0, 'in'))    
         self.msg_connect((self.lilacsat_fec_decode_b_0_0_0_0, 'out'), (self.lilacsat_kiss_decode_pdu_0_0, 'in'))    
         self.msg_connect((self.lilacsat_kiss_decode_pdu_0_0, 'out'), (self.csp_swap_header_0, 'in'))    
+        self.msg_connect((self.lilacsat_kiss_decode_pdu_0_0, 'out'), (self.sids_submit_0, 'in'))    
         self.connect((self.analog_feedforward_agc_cc_0, 0), (self.digital_fll_band_edge_cc_0, 0))    
         self.connect((self.blocks_complex_to_real_0, 0), (self.blocks_delay_0_0, 0))    
         self.connect((self.blocks_complex_to_real_0, 0), (self.lilacsat_vitfilt27_fb_0, 0))    

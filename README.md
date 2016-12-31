@@ -77,8 +77,7 @@ receives it.
     LilacSat-2 9k6 BPSK telemetry). You must use wide SSB mode to receive this
     satellite. It has an optical camera on board and it transmits JPEG images
     together with the telemetry. `by701` includes a complete telemetry decoder
-    and image receive software. Telemetry submission is not enabled, as there is no
-    NORAD ID assigned yet. This satellite launched on 28 December 2016 into a 520x220km
+    and image receive software. This satellite launched on 28 December 2016 into a 520x220km
     orbit. The perigee is too low because of a problem in the launch. The orbit will
     only last a couple months.
   * `galassia`
