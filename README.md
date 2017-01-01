@@ -48,7 +48,7 @@ receives it.
     mode to receive this satellite.
   * `aausat_4`
     [AAUSAT-4](http://www.space.aau.dk/aausat4/), which transmits 2k4 or 9k6 GFSK
-    telemetry in the 70cm band. It uses the CSP protocol and FEC with a r=1/2, k=7
+    telemetry in the 70cm band. It uses the CSP protocol and FEC with an r=1/2, k=7
     convolutional code and a (255,223) Reed-Solomon code. You must use FM mode
     to receive this satellite.
   * `aisat`
@@ -100,6 +100,12 @@ receives it.
     scrambler. The beacons include information from ADS-B beacons transmitted by
     terrestrial aircraft. Note that GOMX-3 will decay during October 2016. You
     must use FM mode to receive this satellite.
+  * `ks_1q`
+    [KS-1Q](http://space.skyrocket.de/doc_sdat/cas-2t.htm), which transmits 20k
+    FSK telemetry in the 70cm band. It uses KISS framed CSP packets and FEC with
+    an r=1/2, k=7 convolutional code and a (255,223) Reed-Solomon code (the
+    protocol is very similar to LilacSat-2). It also uses a CCSDS scrambler.
+    You must use FM mode to receive this satellite.
   * `lilacsat2`
     [LilacSat-2](http://lilacsat.hit.edu.cn/?page_id=257), which transmits 9k6
     BPSK, 4k8 GFSK and FM subaudio telemetry in the 70cm band. It uses FEC with
@@ -160,6 +166,7 @@ one particular satellite. You may install only the ones you're interested in.
     parsers for satellites using GomSpace radios: AISAT, ATHENOXAT-1, GOMX-1,
     GOMX-3, TW-1A, TW-1B, TW1-C
   * [beesat-sdr](https://github.com/daniestevez/beesat-sdr) BEESAT decoder and TNC
+  * [gr-ks1q](https://github.com/daniestevez/gr-ks1q) KS-1Q decoder
   * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) LilacSat-2 decoder
 
 
