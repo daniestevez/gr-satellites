@@ -185,7 +185,10 @@ This is the list of hierarchical flowgraphs in gr-satellites:
   * `ccsds_descrambler.grc` CCSDS additive descrambler (using unpacked PDUs)
   * `hit_viterbi.grc` Viterbi decoder with Harbin Institute of Technology convention
      (POLYB, ~POLYA). Output is unpacked bits.
-  * `sync_to_pdu.grc` Find a syncword and extract a PDU of fixed length
+  * `sync_to_pdu.grc` Find a syncword and extract a PDU of fixed length containing
+     unpacked bits
+  * `sync_to_pdu_packed.grc` Find a syncword and extract a PDU of fixed length containing
+     packed bytes
 
 ## Installing GNUradio OOT modules
 
