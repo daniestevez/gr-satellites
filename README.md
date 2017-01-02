@@ -171,7 +171,21 @@ one particular satellite. You may install only the ones you're interested in.
   * [gr-ks1q](https://github.com/daniestevez/gr-ks1q) KS-1Q decoder
   * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) LilacSat-2 decoder
 
+## Hierarchichal flowgraphs
 
+Some of the decoders use hierarchichal flowgraphs. These are GNU Radio flowgraphs
+that can be used as a block in another flowgraph. To use these hierarchical flowgraph
+blocks, you must open each hierarchical flowgraph with `gnuradio-companion` and press
+the "Generate" button (next to the "Play" button). The Python code and XML description
+of the block will then be generated and saved within your GNU Radio installation. Consider
+this step as part of installing gr-satellites.
+
+This is the list of hierarchical flowgraphs in gr-satellites:
+
+  * `hit_fec_decoder_differential.grc` FEC decoder for Harbin Institute of Technology
+     satellites (differential coding version)
+  * `hit_fec_decoder_nondifferential.grc` FEC decoder for Harbin Institute of Technology
+     satellites (non-differential coding version)
 
 ## Installing GNUradio OOT modules
 

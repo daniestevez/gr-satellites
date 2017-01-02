@@ -5,26 +5,27 @@
 # Title: BY70-1 decoder
 # Author: Daniel Estevez
 # Description: BY70-1 decoder
-# Generated: Mon Jan  2 19:25:19 2017
+# Generated: Mon Jan  2 22:00:16 2017
 ##################################################
+
+import os
+import sys
+sys.path.append(os.environ.get('GRC_HIER_PATH', os.path.expanduser('~/.grc_gnuradio')))
 
 from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import digital
 from gnuradio import eng_notation
-from gnuradio import fec
 from gnuradio import filter
 from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
+from hit_fec_decode_differential import hit_fec_decode_differential  # grc-generated hier_block
 from optparse import OptionParser
 import csp
 import kiss
-import libfec
 import lilacsat
-import numpy
 import sids
-import synctags
 
 
 class by701(gr.top_block):
@@ -66,94 +67,46 @@ class by701(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
-        self.synctags_fixedlen_tagger_0_0_0_0 = synctags.fixedlen_tagger('syncword', 'packet_len', (114+32)*8, numpy.byte)
-        self.synctags_fixedlen_tagger_0_0_0 = synctags.fixedlen_tagger('syncword', 'packet_len', (114+32)*8, numpy.byte)
         self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 41909, callsign, longitude, latitude, recstart)
         self.lilacsat_telemetry_parser_0 = lilacsat.telemetry_parser()
         self.lilacsat_image_decoder_0 = lilacsat.image_decoder('/tmp', True)
-        self.libfec_decode_rs_0 = libfec.decode_rs(True, 0)
         self.kiss_kiss_to_pdu_0 = kiss.kiss_to_pdu(False)
+        self.hit_fec_decode_differential_0 = hit_fec_decode_differential(
+            threshold=4,
+            verbose=True,
+            basis=0,
+            packlen=114,
+        )
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_fcf(1, (firdes.low_pass(1, samp_rate, 10000, 1000)), bfo, samp_rate)
-        self.fec_decode_ccsds_27_fb_0_0_0_0 = fec.decode_ccsds_27_fb()
-        self.fec_decode_ccsds_27_fb_0_0_0 = fec.decode_ccsds_27_fb()
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(sps, 0.05, (rrc_taps), nfilts, nfilts/2, 0.05, 2)
         self.digital_lms_dd_equalizer_cc_0_0 = digital.lms_dd_equalizer_cc(2, 0.05, 2, variable_constellation_0)
         self.digital_fll_band_edge_cc_0 = digital.fll_band_edge_cc(sps, 0.350, 100, 0.01)
-        self.digital_diff_decoder_bb_0_0 = digital.diff_decoder_bb(2)
-        self.digital_diff_decoder_bb_0 = digital.diff_decoder_bb(2)
         self.digital_costas_loop_cc_0_0 = digital.costas_loop_cc(0.1, 2, False)
-        self.digital_correlate_access_code_tag_bb_0_0_0_0 = digital.correlate_access_code_tag_bb('00011010110011111111110000011101', threshold, 'syncword')
-        self.digital_correlate_access_code_tag_bb_0_0_0 = digital.correlate_access_code_tag_bb('00011010110011111111110000011101', threshold, 'syncword')
-        self.digital_additive_scrambler_bb_0_0_0 = digital.additive_scrambler_bb(0xA9 + 0*10101001, 0x7F, 7, count=0, bits_per_byte=1, reset_tag_key="packet_len")
-        self.digital_additive_scrambler_bb_0_0 = digital.additive_scrambler_bb(0xA9 + 0*10101001, 0x7F, 7, count=0, bits_per_byte=1, reset_tag_key="packet_len")
         self.csp_swap_header_0 = csp.swap_header()
-        self.blocks_unpacked_to_packed_xx_0_0_0_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
-        self.blocks_unpacked_to_packed_xx_0_0_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
         self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, port, 1472, False)
-        self.blocks_tagged_stream_to_pdu_0_0_0_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, 'packet_len')
-        self.blocks_tagged_stream_to_pdu_0_0_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, 'packet_len')
-        self.blocks_tagged_stream_multiply_length_0_0_0_0 = blocks.tagged_stream_multiply_length(gr.sizeof_char*1, 'packet_len', 1/8.0)
-        self.blocks_tagged_stream_multiply_length_0_0_0 = blocks.tagged_stream_multiply_length(gr.sizeof_char*1, 'packet_len', 1/8.0)
         self.blocks_short_to_float_0 = blocks.short_to_float(1, 32767)
         self.blocks_pdu_to_tagged_stream_0 = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
-        self.blocks_packed_to_unpacked_xx_0_0_0_0 = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
-        self.blocks_packed_to_unpacked_xx_0_0_0 = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
-        self.blocks_multiply_const_vxx_0_0_0_0 = blocks.multiply_const_vff((-1, ))
-        self.blocks_multiply_const_vxx_0_0_0 = blocks.multiply_const_vff((-1, ))
-        self.blocks_interleave_0_0_0_0 = blocks.interleave(gr.sizeof_float*1, 1)
-        self.blocks_interleave_0_0_0 = blocks.interleave(gr.sizeof_float*1, 1)
-        self.blocks_delay_0 = blocks.delay(gr.sizeof_float*1, 1)
-        self.blocks_deinterleave_0_0_0_0 = blocks.deinterleave(gr.sizeof_float*1, 1)
-        self.blocks_deinterleave_0_0_0 = blocks.deinterleave(gr.sizeof_float*1, 1)
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
         self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024, 2)
 
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.blocks_tagged_stream_to_pdu_0_0_0, 'pdus'), (self.libfec_decode_rs_0, 'in'))    
-        self.msg_connect((self.blocks_tagged_stream_to_pdu_0_0_0_0, 'pdus'), (self.libfec_decode_rs_0, 'in'))    
         self.msg_connect((self.csp_swap_header_0, 'out'), (self.lilacsat_image_decoder_0, 'in'))    
         self.msg_connect((self.csp_swap_header_0, 'out'), (self.lilacsat_telemetry_parser_0, 'in'))    
+        self.msg_connect((self.hit_fec_decode_differential_0, 'out'), (self.blocks_pdu_to_tagged_stream_0, 'pdus'))    
+        self.msg_connect((self.hit_fec_decode_differential_0, 'out'), (self.sids_submit_0, 'in'))    
         self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.csp_swap_header_0, 'in'))    
-        self.msg_connect((self.libfec_decode_rs_0, 'out'), (self.blocks_pdu_to_tagged_stream_0, 'pdus'))    
-        self.msg_connect((self.libfec_decode_rs_0, 'out'), (self.sids_submit_0, 'in'))    
         self.connect((self.analog_feedforward_agc_cc_0, 0), (self.digital_fll_band_edge_cc_0, 0))    
-        self.connect((self.blocks_complex_to_real_0, 0), (self.blocks_deinterleave_0_0_0, 0))    
-        self.connect((self.blocks_complex_to_real_0, 0), (self.blocks_delay_0, 0))    
-        self.connect((self.blocks_deinterleave_0_0_0, 0), (self.blocks_interleave_0_0_0, 1))    
-        self.connect((self.blocks_deinterleave_0_0_0, 1), (self.blocks_multiply_const_vxx_0_0_0, 0))    
-        self.connect((self.blocks_deinterleave_0_0_0_0, 0), (self.blocks_interleave_0_0_0_0, 1))    
-        self.connect((self.blocks_deinterleave_0_0_0_0, 1), (self.blocks_multiply_const_vxx_0_0_0_0, 0))    
-        self.connect((self.blocks_delay_0, 0), (self.blocks_deinterleave_0_0_0_0, 0))    
-        self.connect((self.blocks_interleave_0_0_0, 0), (self.fec_decode_ccsds_27_fb_0_0_0, 0))    
-        self.connect((self.blocks_interleave_0_0_0_0, 0), (self.fec_decode_ccsds_27_fb_0_0_0_0, 0))    
-        self.connect((self.blocks_multiply_const_vxx_0_0_0, 0), (self.blocks_interleave_0_0_0, 0))    
-        self.connect((self.blocks_multiply_const_vxx_0_0_0_0, 0), (self.blocks_interleave_0_0_0_0, 0))    
-        self.connect((self.blocks_packed_to_unpacked_xx_0_0_0, 0), (self.digital_diff_decoder_bb_0, 0))    
-        self.connect((self.blocks_packed_to_unpacked_xx_0_0_0_0, 0), (self.digital_diff_decoder_bb_0_0, 0))    
+        self.connect((self.blocks_complex_to_real_0, 0), (self.hit_fec_decode_differential_0, 0))    
         self.connect((self.blocks_pdu_to_tagged_stream_0, 0), (self.kiss_kiss_to_pdu_0, 0))    
         self.connect((self.blocks_short_to_float_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))    
-        self.connect((self.blocks_tagged_stream_multiply_length_0_0_0, 0), (self.blocks_tagged_stream_to_pdu_0_0_0, 0))    
-        self.connect((self.blocks_tagged_stream_multiply_length_0_0_0_0, 0), (self.blocks_tagged_stream_to_pdu_0_0_0_0, 0))    
         self.connect((self.blocks_udp_source_0, 0), (self.blocks_short_to_float_0, 0))    
-        self.connect((self.blocks_unpacked_to_packed_xx_0_0_0, 0), (self.blocks_tagged_stream_multiply_length_0_0_0, 0))    
-        self.connect((self.blocks_unpacked_to_packed_xx_0_0_0_0, 0), (self.blocks_tagged_stream_multiply_length_0_0_0_0, 0))    
-        self.connect((self.digital_additive_scrambler_bb_0_0, 0), (self.blocks_unpacked_to_packed_xx_0_0_0, 0))    
-        self.connect((self.digital_additive_scrambler_bb_0_0_0, 0), (self.blocks_unpacked_to_packed_xx_0_0_0_0, 0))    
-        self.connect((self.digital_correlate_access_code_tag_bb_0_0_0, 0), (self.synctags_fixedlen_tagger_0_0_0, 0))    
-        self.connect((self.digital_correlate_access_code_tag_bb_0_0_0_0, 0), (self.synctags_fixedlen_tagger_0_0_0_0, 0))    
         self.connect((self.digital_costas_loop_cc_0_0, 0), (self.digital_lms_dd_equalizer_cc_0_0, 0))    
-        self.connect((self.digital_diff_decoder_bb_0, 0), (self.digital_correlate_access_code_tag_bb_0_0_0, 0))    
-        self.connect((self.digital_diff_decoder_bb_0_0, 0), (self.digital_correlate_access_code_tag_bb_0_0_0_0, 0))    
         self.connect((self.digital_fll_band_edge_cc_0, 0), (self.digital_pfb_clock_sync_xxx_0, 0))    
         self.connect((self.digital_lms_dd_equalizer_cc_0_0, 0), (self.blocks_complex_to_real_0, 0))    
         self.connect((self.digital_pfb_clock_sync_xxx_0, 0), (self.digital_costas_loop_cc_0_0, 0))    
-        self.connect((self.fec_decode_ccsds_27_fb_0_0_0, 0), (self.blocks_packed_to_unpacked_xx_0_0_0, 0))    
-        self.connect((self.fec_decode_ccsds_27_fb_0_0_0_0, 0), (self.blocks_packed_to_unpacked_xx_0_0_0_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.analog_feedforward_agc_cc_0, 0))    
-        self.connect((self.synctags_fixedlen_tagger_0_0_0, 0), (self.digital_additive_scrambler_bb_0_0, 0))    
-        self.connect((self.synctags_fixedlen_tagger_0_0_0_0, 0), (self.digital_additive_scrambler_bb_0_0_0, 0))    
 
     def get_bfo(self):
         return self.bfo

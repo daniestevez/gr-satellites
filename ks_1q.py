@@ -5,25 +5,26 @@
 # Title: KS-1Q decoder
 # Author: Daniel Estevez
 # Description: KS-1Q decoder
-# Generated: Mon Jan  2 13:50:46 2017
+# Generated: Mon Jan  2 22:02:42 2017
 ##################################################
+
+import os
+import sys
+sys.path.append(os.environ.get('GRC_HIER_PATH', os.path.expanduser('~/.grc_gnuradio')))
 
 from gnuradio import blocks
 from gnuradio import digital
 from gnuradio import eng_notation
-from gnuradio import fec
 from gnuradio import filter
 from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
+from hit_fec_decode_nondifferential import hit_fec_decode_nondifferential  # grc-generated hier_block
 from optparse import OptionParser
 import csp
 import kiss
 import ks1q
-import libfec
-import numpy
 import sids
-import synctags
 
 
 class ks_1q(gr.top_block):
@@ -50,85 +51,41 @@ class ks_1q(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
-        self.synctags_fixedlen_tagger_0_0_0 = synctags.fixedlen_tagger('syncword', 'packet_len', 255*8, numpy.byte)
-        self.synctags_fixedlen_tagger_0_0 = synctags.fixedlen_tagger('syncword', 'packet_len', 255*8, numpy.byte)
         self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 41845, callsign, longitude, latitude, recstart)
         self.low_pass_filter_0 = filter.fir_filter_fff(1, firdes.low_pass(
         	1, 48000, 11e3, 2e3, firdes.WIN_HAMMING, 6.76))
-        self.libfec_decode_rs_0 = libfec.decode_rs(False, 1)
         self.ks1q_header_remover_0 = ks1q.header_remover(True)
-        self.kiss_kiss_to_pdu_0_0 = kiss.kiss_to_pdu()
-        self.fec_decode_ccsds_27_fb_0_0_0 = fec.decode_ccsds_27_fb()
-        self.fec_decode_ccsds_27_fb_0_0 = fec.decode_ccsds_27_fb()
-        self.digital_correlate_access_code_tag_bb_0_0_0 = digital.correlate_access_code_tag_bb('00011010110011111111110000011101', threshold, 'syncword')
-        self.digital_correlate_access_code_tag_bb_0_0 = digital.correlate_access_code_tag_bb('00011010110011111111110000011101', threshold, 'syncword')
+        self.kiss_kiss_to_pdu_0_0 = kiss.kiss_to_pdu(True)
+        self.hit_fec_decode_nondifferential_0 = hit_fec_decode_nondifferential(
+            basis=1,
+            packlen=223,
+            threshold=4,
+            verbose=True,
+        )
         self.digital_clock_recovery_mm_xx_0 = digital.clock_recovery_mm_ff(2.4, 0.25*0.175*0.175, 0.5, 0.175, 0.005)
-        self.digital_additive_scrambler_bb_0_0 = digital.additive_scrambler_bb(0xA9 + 0*10101001, 0x7F, 7, count=0, bits_per_byte=1, reset_tag_key="packet_len")
-        self.digital_additive_scrambler_bb_0 = digital.additive_scrambler_bb(0xA9 + 0*10101001, 0x7F, 7, count=0, bits_per_byte=1, reset_tag_key="packet_len")
         self.csp_swap_header_0_0 = csp.swap_header()
         self.csp_check_crc_0_0 = csp.check_crc(False, False, True)
-        self.blocks_unpacked_to_packed_xx_0_0_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
-        self.blocks_unpacked_to_packed_xx_0_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
         self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, port, 1472, False)
-        self.blocks_tagged_stream_to_pdu_0_0_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, 'packet_len')
-        self.blocks_tagged_stream_to_pdu_0_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, 'packet_len')
-        self.blocks_tagged_stream_multiply_length_0_0_0 = blocks.tagged_stream_multiply_length(gr.sizeof_char*1, 'packet_len', 1/8.0)
-        self.blocks_tagged_stream_multiply_length_0_0 = blocks.tagged_stream_multiply_length(gr.sizeof_char*1, 'packet_len', 1/8.0)
         self.blocks_short_to_float_0 = blocks.short_to_float(1, 32767.0)
         self.blocks_pdu_to_tagged_stream_0 = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
-        self.blocks_packed_to_unpacked_xx_0_0_0 = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
-        self.blocks_packed_to_unpacked_xx_0_0 = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
-        self.blocks_multiply_const_vxx_0_0_0 = blocks.multiply_const_vff((-1, ))
-        self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vff((-1, ))
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((invert*10, ))
         self.blocks_message_debug_0_0 = blocks.message_debug()
-        self.blocks_interleave_0_0_0 = blocks.interleave(gr.sizeof_float*1, 1)
-        self.blocks_interleave_0_0 = blocks.interleave(gr.sizeof_float*1, 1)
-        self.blocks_delay_0 = blocks.delay(gr.sizeof_float*1, 1)
-        self.blocks_deinterleave_0_0_0 = blocks.deinterleave(gr.sizeof_float*1, 1)
-        self.blocks_deinterleave_0_0 = blocks.deinterleave(gr.sizeof_float*1, 1)
 
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.blocks_tagged_stream_to_pdu_0_0, 'pdus'), (self.libfec_decode_rs_0, 'in'))    
-        self.msg_connect((self.blocks_tagged_stream_to_pdu_0_0_0, 'pdus'), (self.libfec_decode_rs_0, 'in'))    
         self.msg_connect((self.csp_check_crc_0_0, 'ok'), (self.csp_swap_header_0_0, 'in'))    
         self.msg_connect((self.csp_swap_header_0_0, 'out'), (self.blocks_message_debug_0_0, 'print_pdu'))    
+        self.msg_connect((self.hit_fec_decode_nondifferential_0, 'out'), (self.ks1q_header_remover_0, 'in'))    
+        self.msg_connect((self.hit_fec_decode_nondifferential_0, 'out'), (self.sids_submit_0, 'in'))    
         self.msg_connect((self.kiss_kiss_to_pdu_0_0, 'out'), (self.csp_check_crc_0_0, 'in'))    
         self.msg_connect((self.ks1q_header_remover_0, 'out'), (self.blocks_pdu_to_tagged_stream_0, 'pdus'))    
-        self.msg_connect((self.libfec_decode_rs_0, 'out'), (self.ks1q_header_remover_0, 'in'))    
-        self.msg_connect((self.libfec_decode_rs_0, 'out'), (self.sids_submit_0, 'in'))    
-        self.connect((self.blocks_deinterleave_0_0, 0), (self.blocks_interleave_0_0, 1))    
-        self.connect((self.blocks_deinterleave_0_0, 1), (self.blocks_multiply_const_vxx_0_0, 0))    
-        self.connect((self.blocks_deinterleave_0_0_0, 0), (self.blocks_interleave_0_0_0, 1))    
-        self.connect((self.blocks_deinterleave_0_0_0, 1), (self.blocks_multiply_const_vxx_0_0_0, 0))    
-        self.connect((self.blocks_delay_0, 0), (self.blocks_deinterleave_0_0, 0))    
-        self.connect((self.blocks_interleave_0_0, 0), (self.fec_decode_ccsds_27_fb_0_0, 0))    
-        self.connect((self.blocks_interleave_0_0_0, 0), (self.fec_decode_ccsds_27_fb_0_0_0, 0))    
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.low_pass_filter_0, 0))    
-        self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.blocks_interleave_0_0, 0))    
-        self.connect((self.blocks_multiply_const_vxx_0_0_0, 0), (self.blocks_interleave_0_0_0, 0))    
-        self.connect((self.blocks_packed_to_unpacked_xx_0_0, 0), (self.digital_correlate_access_code_tag_bb_0_0, 0))    
-        self.connect((self.blocks_packed_to_unpacked_xx_0_0_0, 0), (self.digital_correlate_access_code_tag_bb_0_0_0, 0))    
         self.connect((self.blocks_pdu_to_tagged_stream_0, 0), (self.kiss_kiss_to_pdu_0_0, 0))    
         self.connect((self.blocks_short_to_float_0, 0), (self.blocks_multiply_const_vxx_0, 0))    
-        self.connect((self.blocks_tagged_stream_multiply_length_0_0, 0), (self.blocks_tagged_stream_to_pdu_0_0, 0))    
-        self.connect((self.blocks_tagged_stream_multiply_length_0_0_0, 0), (self.blocks_tagged_stream_to_pdu_0_0_0, 0))    
         self.connect((self.blocks_udp_source_0, 0), (self.blocks_short_to_float_0, 0))    
-        self.connect((self.blocks_unpacked_to_packed_xx_0_0, 0), (self.blocks_tagged_stream_multiply_length_0_0, 0))    
-        self.connect((self.blocks_unpacked_to_packed_xx_0_0_0, 0), (self.blocks_tagged_stream_multiply_length_0_0_0, 0))    
-        self.connect((self.digital_additive_scrambler_bb_0, 0), (self.blocks_unpacked_to_packed_xx_0_0, 0))    
-        self.connect((self.digital_additive_scrambler_bb_0_0, 0), (self.blocks_unpacked_to_packed_xx_0_0_0, 0))    
-        self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.blocks_deinterleave_0_0_0, 0))    
-        self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.blocks_delay_0, 0))    
-        self.connect((self.digital_correlate_access_code_tag_bb_0_0, 0), (self.synctags_fixedlen_tagger_0_0, 0))    
-        self.connect((self.digital_correlate_access_code_tag_bb_0_0_0, 0), (self.synctags_fixedlen_tagger_0_0_0, 0))    
-        self.connect((self.fec_decode_ccsds_27_fb_0_0, 0), (self.blocks_packed_to_unpacked_xx_0_0, 0))    
-        self.connect((self.fec_decode_ccsds_27_fb_0_0_0, 0), (self.blocks_packed_to_unpacked_xx_0_0_0, 0))    
+        self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.hit_fec_decode_nondifferential_0, 0))    
         self.connect((self.low_pass_filter_0, 0), (self.digital_clock_recovery_mm_xx_0, 0))    
-        self.connect((self.synctags_fixedlen_tagger_0_0, 0), (self.digital_additive_scrambler_bb_0, 0))    
-        self.connect((self.synctags_fixedlen_tagger_0_0_0, 0), (self.digital_additive_scrambler_bb_0_0, 0))    
 
     def get_callsign(self):
         return self.callsign
