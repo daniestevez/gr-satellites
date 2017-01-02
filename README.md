@@ -182,10 +182,10 @@ this step as part of installing gr-satellites.
 
 This is the list of hierarchical flowgraphs in gr-satellites:
 
-  * `hit_fec_decoder_differential.grc` FEC decoder for Harbin Institute of Technology
-     satellites (differential coding version)
-  * `hit_fec_decoder_nondifferential.grc` FEC decoder for Harbin Institute of Technology
-     satellites (non-differential coding version)
+  * `ccsds_descrambler.grc` CCSDS additive descrambler (using unpacked PDUs)
+  * `hit_viterbi.grc` Viterbi decoder with Harbin Institute of Technology convention
+     (POLYB, ~POLYA). Output is unpacked bits.
+  * `sync_to_pdu.grc` Find a syncword and extract a PDU of fixed length
 
 ## Installing GNUradio OOT modules
 

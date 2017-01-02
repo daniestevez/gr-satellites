@@ -5,13 +5,14 @@
 # Title: KS-1Q decoder
 # Author: Daniel Estevez
 # Description: KS-1Q decoder
-# Generated: Mon Jan  2 22:02:42 2017
+# Generated: Mon Jan  2 22:40:44 2017
 ##################################################
 
 import os
 import sys
 sys.path.append(os.environ.get('GRC_HIER_PATH', os.path.expanduser('~/.grc_gnuradio')))
 
+from ccsds_descrambler import ccsds_descrambler  # grc-generated hier_block
 from gnuradio import blocks
 from gnuradio import digital
 from gnuradio import eng_notation
@@ -19,11 +20,13 @@ from gnuradio import filter
 from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
-from hit_fec_decode_nondifferential import hit_fec_decode_nondifferential  # grc-generated hier_block
+from hit_fec_decode_differential import hit_fec_decode_differential  # grc-generated hier_block
 from optparse import OptionParser
+from sync_to_pdu import sync_to_pdu  # grc-generated hier_block
 import csp
 import kiss
 import ks1q
+import libfec
 import sids
 
 
@@ -51,40 +54,56 @@ class ks_1q(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
+        self.sync_to_pdu_0_0 = sync_to_pdu(
+            packlen=255*8,
+            threshold=threshold,
+            sync="00011010110011111111110000011101",
+        )
+        self.sync_to_pdu_0 = sync_to_pdu(
+            packlen=255*8,
+            threshold=threshold,
+            sync="00011010110011111111110000011101",
+        )
         self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 41845, callsign, longitude, latitude, recstart)
         self.low_pass_filter_0 = filter.fir_filter_fff(1, firdes.low_pass(
         	1, 48000, 11e3, 2e3, firdes.WIN_HAMMING, 6.76))
+        self.libfec_decode_rs_0 = libfec.decode_rs(True, 1)
         self.ks1q_header_remover_0 = ks1q.header_remover(True)
         self.kiss_kiss_to_pdu_0_0 = kiss.kiss_to_pdu(True)
-        self.hit_fec_decode_nondifferential_0 = hit_fec_decode_nondifferential(
-            basis=1,
-            packlen=223,
-            threshold=4,
-            verbose=True,
-        )
+        self.hit_fec_decode_differential_0_0 = hit_fec_decode_differential()
+        self.hit_fec_decode_differential_0 = hit_fec_decode_differential()
         self.digital_clock_recovery_mm_xx_0 = digital.clock_recovery_mm_ff(2.4, 0.25*0.175*0.175, 0.5, 0.175, 0.005)
         self.csp_swap_header_0_0 = csp.swap_header()
         self.csp_check_crc_0_0 = csp.check_crc(False, False, True)
+        self.ccsds_descrambler_0 = ccsds_descrambler()
         self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, port, 1472, False)
         self.blocks_short_to_float_0 = blocks.short_to_float(1, 32767.0)
         self.blocks_pdu_to_tagged_stream_0 = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((invert*10, ))
         self.blocks_message_debug_0_0 = blocks.message_debug()
+        self.blocks_delay_0 = blocks.delay(gr.sizeof_float*1, 1)
 
         ##################################################
         # Connections
         ##################################################
+        self.msg_connect((self.ccsds_descrambler_0, 'out'), (self.libfec_decode_rs_0, 'in'))    
         self.msg_connect((self.csp_check_crc_0_0, 'ok'), (self.csp_swap_header_0_0, 'in'))    
         self.msg_connect((self.csp_swap_header_0_0, 'out'), (self.blocks_message_debug_0_0, 'print_pdu'))    
-        self.msg_connect((self.hit_fec_decode_nondifferential_0, 'out'), (self.ks1q_header_remover_0, 'in'))    
-        self.msg_connect((self.hit_fec_decode_nondifferential_0, 'out'), (self.sids_submit_0, 'in'))    
         self.msg_connect((self.kiss_kiss_to_pdu_0_0, 'out'), (self.csp_check_crc_0_0, 'in'))    
         self.msg_connect((self.ks1q_header_remover_0, 'out'), (self.blocks_pdu_to_tagged_stream_0, 'pdus'))    
+        self.msg_connect((self.libfec_decode_rs_0, 'out'), (self.ks1q_header_remover_0, 'in'))    
+        self.msg_connect((self.libfec_decode_rs_0, 'out'), (self.sids_submit_0, 'in'))    
+        self.msg_connect((self.sync_to_pdu_0, 'out'), (self.ccsds_descrambler_0, 'in'))    
+        self.msg_connect((self.sync_to_pdu_0_0, 'out'), (self.ccsds_descrambler_0, 'in'))    
+        self.connect((self.blocks_delay_0, 0), (self.hit_fec_decode_differential_0_0, 0))    
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.low_pass_filter_0, 0))    
         self.connect((self.blocks_pdu_to_tagged_stream_0, 0), (self.kiss_kiss_to_pdu_0_0, 0))    
         self.connect((self.blocks_short_to_float_0, 0), (self.blocks_multiply_const_vxx_0, 0))    
         self.connect((self.blocks_udp_source_0, 0), (self.blocks_short_to_float_0, 0))    
-        self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.hit_fec_decode_nondifferential_0, 0))    
+        self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.blocks_delay_0, 0))    
+        self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.hit_fec_decode_differential_0, 0))    
+        self.connect((self.hit_fec_decode_differential_0, 0), (self.sync_to_pdu_0, 0))    
+        self.connect((self.hit_fec_decode_differential_0_0, 0), (self.sync_to_pdu_0_0, 0))    
         self.connect((self.low_pass_filter_0, 0), (self.digital_clock_recovery_mm_xx_0, 0))    
 
     def get_callsign(self):
@@ -135,6 +154,8 @@ class ks_1q(gr.top_block):
 
     def set_threshold(self, threshold):
         self.threshold = threshold
+        self.sync_to_pdu_0_0.set_threshold(self.threshold)
+        self.sync_to_pdu_0.set_threshold(self.threshold)
 
 
 def argument_parser():
