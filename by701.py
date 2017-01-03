@@ -5,7 +5,7 @@
 # Title: BY70-1 decoder
 # Author: Daniel Estevez
 # Description: BY70-1 decoder
-# Generated: Mon Jan  2 22:31:06 2017
+# Generated: Tue Jan  3 12:14:14 2017
 ##################################################
 
 import os
@@ -72,13 +72,13 @@ class by701(gr.top_block):
         ##################################################
         self.sync_to_pdu_0_0 = sync_to_pdu(
             packlen=(114+32)*8,
-            threshold=threshold,
             sync="00011010110011111111110000011101",
+            threshold=threshold,
         )
         self.sync_to_pdu_0 = sync_to_pdu(
             packlen=(114+32)*8,
-            threshold=threshold,
             sync="00011010110011111111110000011101",
+            threshold=threshold,
         )
         self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 41909, callsign, longitude, latitude, recstart)
         self.lilacsat_telemetry_parser_0 = lilacsat.telemetry_parser()
@@ -101,7 +101,7 @@ class by701(gr.top_block):
         self.blocks_pdu_to_tagged_stream_0 = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
         self.blocks_delay_0 = blocks.delay(gr.sizeof_float*1, 1)
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
-        self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024, 2)
+        self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024, 1)
 
         ##################################################
         # Connections
