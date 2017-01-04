@@ -5,9 +5,14 @@
 # Title: LilacSat-2 decoder for RTL-SDR device
 # Author: Daniel Estevez
 # Description: LilacSat-2 decoder for RTL-SDR device
-# Generated: Wed Aug 31 15:25:14 2016
+# Generated: Wed Jan  4 10:51:15 2017
 ##################################################
 
+import os
+import sys
+sys.path.append(os.environ.get('GRC_HIER_PATH', os.path.expanduser('~/.grc_gnuradio')))
+
+from ccsds_descrambler import ccsds_descrambler  # grc-generated hier_block
 from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import digital
@@ -16,9 +21,13 @@ from gnuradio import filter
 from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
+from hit_fec_decode_differential import hit_fec_decode_differential  # grc-generated hier_block
 from optparse import OptionParser
+from sync_to_pdu import sync_to_pdu  # grc-generated hier_block
 import gpredict
-import lilacsat
+import kiss
+import libfec
+import math
 import osmosdr
 import sids
 import time
@@ -26,7 +35,7 @@ import time
 
 class lilacsat2_rtlsdr(gr.top_block):
 
-    def __init__(self, bb_gain=20, callsign="", freq_corr=0, gpredict_port=4532, if_gain=20, latitude=0, longitude=0, rf_gain=40):
+    def __init__(self, bb_gain=20, callsign='', freq_corr=0, gpredict_port=4532, if_gain=20, latitude=0, longitude=0, rf_gain=40):
         gr.top_block.__init__(self, "LilacSat-2 decoder for RTL-SDR device")
 
         ##################################################
@@ -54,6 +63,7 @@ class lilacsat2_rtlsdr(gr.top_block):
         
         self.variable_constellation_0 = variable_constellation_0 = digital.constellation_calcdist(([-1, 1]), ([0, 1]), 2, 1).base()
         
+        self.threshold = threshold = 4
         self.sub_rrc_taps = sub_rrc_taps = firdes.root_raised_cosine(sub_nfilts, sub_nfilts, 1.0/float(sub_sps), sub_alpha, 11*sub_sps*sub_nfilts)
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), alpha, 11*sps*nfilts)
         self.rf_samp_rate = rf_samp_rate = 2.4e6
@@ -65,8 +75,33 @@ class lilacsat2_rtlsdr(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
-        self.sids_submit_0 = sids.submit("http://tlm.pe0sat.nl/tlmdb/frame_db.php", 40908, callsign, longitude, latitude, "")
-        self.osmosdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + "rtl" )
+        self.sync_to_pdu_0_1_0 = sync_to_pdu(
+            packlen=(114+32)*8,
+            sync="00011010110011111111110000011101",
+            threshold=threshold,
+        )
+        self.sync_to_pdu_0_1 = sync_to_pdu(
+            packlen=(114+32)*8,
+            sync="00011010110011111111110000011101",
+            threshold=threshold,
+        )
+        self.sync_to_pdu_0_0_0 = sync_to_pdu(
+            packlen=(114+32)*8,
+            sync="00011010110011111111110000011101",
+            threshold=threshold,
+        )
+        self.sync_to_pdu_0_0 = sync_to_pdu(
+            packlen=(114+32)*8,
+            sync="00011010110011111111110000011101",
+            threshold=threshold,
+        )
+        self.sync_to_pdu_0 = sync_to_pdu(
+            packlen=(114+32)*8,
+            sync="00011010110011111111110000011101",
+            threshold=threshold,
+        )
+        self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 40908, callsign, longitude, latitude, '')
+        self.osmosdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + 'rtl' )
         self.osmosdr_source_0.set_sample_rate(rf_samp_rate)
         self.osmosdr_source_0.set_center_freq(freq-offset, 0)
         self.osmosdr_source_0.set_freq_corr(freq_corr, 0)
@@ -76,93 +111,104 @@ class lilacsat2_rtlsdr(gr.top_block):
         self.osmosdr_source_0.set_gain(rf_gain, 0)
         self.osmosdr_source_0.set_if_gain(if_gain, 0)
         self.osmosdr_source_0.set_bb_gain(bb_gain, 0)
-        self.osmosdr_source_0.set_antenna("", 0)
+        self.osmosdr_source_0.set_antenna('', 0)
         self.osmosdr_source_0.set_bandwidth(0, 0)
           
         self.low_pass_filter_3_0_0 = filter.fir_filter_ccf(1, firdes.low_pass(
         	1, if_samp_rate, 8e3, 2e3, firdes.WIN_HAMMING, 6.76))
-        self.lilacsat_vitfilt27_fb_0_0 = lilacsat.vitfilt27_fb()
-        self.lilacsat_vitfilt27_fb_0 = lilacsat.vitfilt27_fb()
-        self.lilacsat_kiss_decode_pdu_0_1 = lilacsat.kiss_decode_pdu()
-        self.lilacsat_kiss_decode_pdu_0_0 = lilacsat.kiss_decode_pdu()
-        self.lilacsat_kiss_decode_pdu_0 = lilacsat.kiss_decode_pdu()
-        self.lilacsat_fec_decode_b_0_0_2 = lilacsat.fec_decode_b(114, False, False, False)
-        self.lilacsat_fec_decode_b_0_0_0_0 = lilacsat.fec_decode_b(114, True, False, False)
-        self.lilacsat_fec_decode_b_0_0_0 = lilacsat.fec_decode_b(114, True, False, False)
-        self.lilacsat_fec_decode_b_0_0 = lilacsat.fec_decode_b(114, False, True, False)
-        self.lilacsat_fec_decode_b_0 = lilacsat.fec_decode_b(114, False, True, False)
+        self.low_pass_filter_0 = filter.fir_filter_fff(1, firdes.low_pass(
+        	1, af_samp_rate, 200, 50, firdes.WIN_HAMMING, 6.76))
+        self.libfec_decode_rs_0_0_0 = libfec.decode_rs(True, 0)
+        self.libfec_decode_rs_0_0 = libfec.decode_rs(True, 0)
+        self.libfec_decode_rs_0 = libfec.decode_rs(True, 0)
+        self.kiss_kiss_to_pdu_0_1 = kiss.kiss_to_pdu(False)
+        self.kiss_kiss_to_pdu_0_0 = kiss.kiss_to_pdu(False)
+        self.kiss_kiss_to_pdu_0 = kiss.kiss_to_pdu(False)
+        self.hit_fec_decode_differential_0_1 = hit_fec_decode_differential()
+        self.hit_fec_decode_differential_0_0_0 = hit_fec_decode_differential()
+        self.hit_fec_decode_differential_0_0 = hit_fec_decode_differential()
+        self.hit_fec_decode_differential_0 = hit_fec_decode_differential()
         self.gpredict_doppler_0 = gpredict.doppler(self.set_doppler_freq, "localhost", 4532, False)
         self.freq_xlating_fir_filter_xxx_0_0 = filter.freq_xlating_fir_filter_ccc(int(rf_samp_rate/if_samp_rate), (filter.firdes.low_pass(1,rf_samp_rate,10000,2000)), doppler_freq - freq + offset, rf_samp_rate)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(int(rf_samp_rate/if_samp_rate), (filter.firdes.low_pass(1,rf_samp_rate,5000,2000)), doppler_freq - freq + offset + 25e3, rf_samp_rate)
-        self.digital_pfb_clock_sync_xxx_0_0 = digital.pfb_clock_sync_fff(32, 0.0628, (sub_rrc_taps), sub_nfilts, sub_nfilts/2, 0.01, 1)
-        self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(sps, 0.05, (rrc_taps), nfilts, nfilts/2, 0.05, 2)
-        self.digital_lms_dd_equalizer_cc_0_0 = digital.lms_dd_equalizer_cc(2, 0.05, 2, variable_constellation_0)
-        self.digital_gfsk_demod_0 = digital.gfsk_demod(
-        	samples_per_symbol=10,
-        	sensitivity=2.0,
-        	gain_mu=0.175,
-        	mu=0.5,
-        	omega_relative_limit=0.005,
-        	freq_error=0.0,
-        	verbose=False,
-        	log=False,
-        )
-        self.digital_fll_band_edge_cc_0 = digital.fll_band_edge_cc(sps, 0.350, 100, 0.01)
-        self.digital_costas_loop_cc_0_0 = digital.costas_loop_cc(0.02, 2, False)
+        self.digital_pfb_clock_sync_xxx_0_0 = digital.pfb_clock_sync_fff(sub_sps, 0.0628, (sub_rrc_taps), sub_nfilts, sub_nfilts/2, 0.01, 1)
+        self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(sps, 0.100, (rrc_taps), nfilts, nfilts/2, 1.5, 2)
+        self.digital_lms_dd_equalizer_cc_0_0 = digital.lms_dd_equalizer_cc(2, 0.3, 2, variable_constellation_0)
+        self.digital_fll_band_edge_cc_0 = digital.fll_band_edge_cc(sps, 0.350, 100, 0.1)
+        self.digital_diff_decoder_bb_0_0 = digital.diff_decoder_bb(2)
+        self.digital_diff_decoder_bb_0 = digital.diff_decoder_bb(2)
+        self.digital_costas_loop_cc_0_0 = digital.costas_loop_cc(0.4, 2, False)
+        self.digital_clock_recovery_mm_xx_0 = digital.clock_recovery_mm_ff(10, 0.25*0.175*0.175, 0.5, 0.175, 0.005)
+        self.digital_binary_slicer_fb_1 = digital.binary_slicer_fb()
         self.dc_blocker_xx_0 = filter.dc_blocker_ff(1024, True)
-        self.blocks_unpack_k_bits_bb_0_0_0_0 = blocks.unpack_k_bits_bb(8)
-        self.blocks_unpack_k_bits_bb_0_0_0 = blocks.unpack_k_bits_bb(8)
-        self.blocks_threshold_ff_0 = blocks.threshold_ff(0, 0, 0)
+        self.ccsds_descrambler_0_0_0 = ccsds_descrambler()
+        self.ccsds_descrambler_0_0 = ccsds_descrambler()
+        self.ccsds_descrambler_0 = ccsds_descrambler()
+        self.blocks_pdu_to_tagged_stream_0_1 = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
+        self.blocks_pdu_to_tagged_stream_0_0 = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
+        self.blocks_pdu_to_tagged_stream_0 = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
         self.blocks_message_debug_0 = blocks.message_debug()
-        self.blocks_float_to_char_0 = blocks.float_to_char(1, 1)
+        self.blocks_delay_0_0_0 = blocks.delay(gr.sizeof_float*1, 1)
         self.blocks_delay_0_0 = blocks.delay(gr.sizeof_float*1, 1)
-        self.blocks_delay_0 = blocks.delay(gr.sizeof_char*1, 1)
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
+        self.analog_quadrature_demod_cf_0 = analog.quadrature_demod_cf(0.5)
         self.analog_nbfm_rx_0 = analog.nbfm_rx(
         	audio_rate=af_samp_rate,
         	quad_rate=if_samp_rate,
         	tau=75e-6,
         	max_dev=3.5e3,
           )
-        self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024, 2)
+        self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024, 1)
 
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.lilacsat_fec_decode_b_0, 'out'), (self.lilacsat_kiss_decode_pdu_0, 'in'))    
-        self.msg_connect((self.lilacsat_fec_decode_b_0_0, 'out'), (self.lilacsat_kiss_decode_pdu_0, 'in'))    
-        self.msg_connect((self.lilacsat_fec_decode_b_0_0_0, 'out'), (self.lilacsat_kiss_decode_pdu_0_0, 'in'))    
-        self.msg_connect((self.lilacsat_fec_decode_b_0_0_0_0, 'out'), (self.lilacsat_kiss_decode_pdu_0_0, 'in'))    
-        self.msg_connect((self.lilacsat_fec_decode_b_0_0_2, 'out'), (self.lilacsat_kiss_decode_pdu_0_1, 'in'))    
-        self.msg_connect((self.lilacsat_kiss_decode_pdu_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
-        self.msg_connect((self.lilacsat_kiss_decode_pdu_0, 'out'), (self.sids_submit_0, 'in'))    
-        self.msg_connect((self.lilacsat_kiss_decode_pdu_0_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
-        self.msg_connect((self.lilacsat_kiss_decode_pdu_0_0, 'out'), (self.sids_submit_0, 'in'))    
-        self.msg_connect((self.lilacsat_kiss_decode_pdu_0_1, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
-        self.msg_connect((self.lilacsat_kiss_decode_pdu_0_1, 'out'), (self.sids_submit_0, 'in'))    
+        self.msg_connect((self.ccsds_descrambler_0, 'out'), (self.libfec_decode_rs_0, 'in'))    
+        self.msg_connect((self.ccsds_descrambler_0_0, 'out'), (self.libfec_decode_rs_0_0, 'in'))    
+        self.msg_connect((self.ccsds_descrambler_0_0_0, 'out'), (self.libfec_decode_rs_0_0_0, 'in'))    
+        self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
+        self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.sids_submit_0, 'in'))    
+        self.msg_connect((self.kiss_kiss_to_pdu_0_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
+        self.msg_connect((self.kiss_kiss_to_pdu_0_0, 'out'), (self.sids_submit_0, 'in'))    
+        self.msg_connect((self.kiss_kiss_to_pdu_0_1, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
+        self.msg_connect((self.kiss_kiss_to_pdu_0_1, 'out'), (self.sids_submit_0, 'in'))    
+        self.msg_connect((self.libfec_decode_rs_0, 'out'), (self.blocks_pdu_to_tagged_stream_0, 'pdus'))    
+        self.msg_connect((self.libfec_decode_rs_0_0, 'out'), (self.blocks_pdu_to_tagged_stream_0_0, 'pdus'))    
+        self.msg_connect((self.libfec_decode_rs_0_0_0, 'out'), (self.blocks_pdu_to_tagged_stream_0_1, 'pdus'))    
+        self.msg_connect((self.sync_to_pdu_0, 'out'), (self.ccsds_descrambler_0, 'in'))    
+        self.msg_connect((self.sync_to_pdu_0_0, 'out'), (self.ccsds_descrambler_0_0, 'in'))    
+        self.msg_connect((self.sync_to_pdu_0_0_0, 'out'), (self.ccsds_descrambler_0_0_0, 'in'))    
+        self.msg_connect((self.sync_to_pdu_0_1, 'out'), (self.ccsds_descrambler_0_0, 'in'))    
+        self.msg_connect((self.sync_to_pdu_0_1_0, 'out'), (self.ccsds_descrambler_0_0_0, 'in'))    
         self.connect((self.analog_feedforward_agc_cc_0, 0), (self.digital_fll_band_edge_cc_0, 0))    
-        self.connect((self.analog_nbfm_rx_0, 0), (self.dc_blocker_xx_0, 0))    
+        self.connect((self.analog_nbfm_rx_0, 0), (self.low_pass_filter_0, 0))    
+        self.connect((self.analog_quadrature_demod_cf_0, 0), (self.digital_clock_recovery_mm_xx_0, 0))    
         self.connect((self.blocks_complex_to_real_0, 0), (self.blocks_delay_0_0, 0))    
-        self.connect((self.blocks_complex_to_real_0, 0), (self.lilacsat_vitfilt27_fb_0, 0))    
-        self.connect((self.blocks_delay_0, 0), (self.lilacsat_fec_decode_b_0_0, 0))    
-        self.connect((self.blocks_delay_0_0, 0), (self.lilacsat_vitfilt27_fb_0_0, 0))    
-        self.connect((self.blocks_float_to_char_0, 0), (self.lilacsat_fec_decode_b_0_0_2, 0))    
-        self.connect((self.blocks_threshold_ff_0, 0), (self.blocks_float_to_char_0, 0))    
-        self.connect((self.blocks_unpack_k_bits_bb_0_0_0, 0), (self.lilacsat_fec_decode_b_0_0_0_0, 0))    
-        self.connect((self.blocks_unpack_k_bits_bb_0_0_0_0, 0), (self.lilacsat_fec_decode_b_0_0_0, 0))    
+        self.connect((self.blocks_complex_to_real_0, 0), (self.hit_fec_decode_differential_0, 0))    
+        self.connect((self.blocks_delay_0_0, 0), (self.hit_fec_decode_differential_0_0, 0))    
+        self.connect((self.blocks_delay_0_0_0, 0), (self.hit_fec_decode_differential_0_0_0, 0))    
+        self.connect((self.blocks_pdu_to_tagged_stream_0, 0), (self.kiss_kiss_to_pdu_0, 0))    
+        self.connect((self.blocks_pdu_to_tagged_stream_0_0, 0), (self.kiss_kiss_to_pdu_0_0, 0))    
+        self.connect((self.blocks_pdu_to_tagged_stream_0_1, 0), (self.kiss_kiss_to_pdu_0_1, 0))    
         self.connect((self.dc_blocker_xx_0, 0), (self.digital_pfb_clock_sync_xxx_0_0, 0))    
+        self.connect((self.digital_binary_slicer_fb_1, 0), (self.sync_to_pdu_0, 0))    
+        self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.blocks_delay_0_0_0, 0))    
+        self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.hit_fec_decode_differential_0_1, 0))    
         self.connect((self.digital_costas_loop_cc_0_0, 0), (self.digital_lms_dd_equalizer_cc_0_0, 0))    
+        self.connect((self.digital_diff_decoder_bb_0, 0), (self.sync_to_pdu_0_1, 0))    
+        self.connect((self.digital_diff_decoder_bb_0_0, 0), (self.sync_to_pdu_0_0, 0))    
         self.connect((self.digital_fll_band_edge_cc_0, 0), (self.digital_pfb_clock_sync_xxx_0, 0))    
-        self.connect((self.digital_gfsk_demod_0, 0), (self.blocks_delay_0, 0))    
-        self.connect((self.digital_gfsk_demod_0, 0), (self.lilacsat_fec_decode_b_0, 0))    
         self.connect((self.digital_lms_dd_equalizer_cc_0_0, 0), (self.blocks_complex_to_real_0, 0))    
         self.connect((self.digital_pfb_clock_sync_xxx_0, 0), (self.digital_costas_loop_cc_0_0, 0))    
-        self.connect((self.digital_pfb_clock_sync_xxx_0_0, 0), (self.blocks_threshold_ff_0, 0))    
-        self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.digital_gfsk_demod_0, 0))    
+        self.connect((self.digital_pfb_clock_sync_xxx_0_0, 0), (self.digital_binary_slicer_fb_1, 0))    
+        self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.analog_quadrature_demod_cf_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.analog_feedforward_agc_cc_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.low_pass_filter_3_0_0, 0))    
-        self.connect((self.lilacsat_vitfilt27_fb_0, 0), (self.blocks_unpack_k_bits_bb_0_0_0, 0))    
-        self.connect((self.lilacsat_vitfilt27_fb_0_0, 0), (self.blocks_unpack_k_bits_bb_0_0_0_0, 0))    
+        self.connect((self.hit_fec_decode_differential_0, 0), (self.digital_diff_decoder_bb_0, 0))    
+        self.connect((self.hit_fec_decode_differential_0_0, 0), (self.digital_diff_decoder_bb_0_0, 0))    
+        self.connect((self.hit_fec_decode_differential_0_0_0, 0), (self.sync_to_pdu_0_0_0, 0))    
+        self.connect((self.hit_fec_decode_differential_0_1, 0), (self.sync_to_pdu_0_1_0, 0))    
+        self.connect((self.low_pass_filter_0, 0), (self.dc_blocker_xx_0, 0))    
         self.connect((self.low_pass_filter_3_0_0, 0), (self.analog_nbfm_rx_0, 0))    
         self.connect((self.osmosdr_source_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))    
         self.connect((self.osmosdr_source_0, 0), (self.freq_xlating_fir_filter_xxx_0_0, 0))    
@@ -277,6 +323,17 @@ class lilacsat2_rtlsdr(gr.top_block):
     def set_variable_constellation_0(self, variable_constellation_0):
         self.variable_constellation_0 = variable_constellation_0
 
+    def get_threshold(self):
+        return self.threshold
+
+    def set_threshold(self, threshold):
+        self.threshold = threshold
+        self.sync_to_pdu_0_1_0.set_threshold(self.threshold)
+        self.sync_to_pdu_0_1.set_threshold(self.threshold)
+        self.sync_to_pdu_0_0_0.set_threshold(self.threshold)
+        self.sync_to_pdu_0_0.set_threshold(self.threshold)
+        self.sync_to_pdu_0.set_threshold(self.threshold)
+
     def get_sub_rrc_taps(self):
         return self.sub_rrc_taps
 
@@ -329,6 +386,7 @@ class lilacsat2_rtlsdr(gr.top_block):
 
     def set_af_samp_rate(self, af_samp_rate):
         self.af_samp_rate = af_samp_rate
+        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.af_samp_rate, 200, 50, firdes.WIN_HAMMING, 6.76))
 
 
 def argument_parser():
@@ -338,7 +396,7 @@ def argument_parser():
         "", "--bb-gain", dest="bb_gain", type="eng_float", default=eng_notation.num_to_str(20),
         help="Set baseband gain [default=%default]")
     parser.add_option(
-        "", "--callsign", dest="callsign", type="string", default="",
+        "", "--callsign", dest="callsign", type="string", default='',
         help="Set your callsign [default=%default]")
     parser.add_option(
         "", "--freq-corr", dest="freq_corr", type="eng_float", default=eng_notation.num_to_str(0),

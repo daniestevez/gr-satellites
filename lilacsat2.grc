@@ -309,7 +309,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(952, 516)</value>
+      <value>(96, 428)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -336,7 +336,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(736, 516)</value>
+      <value>(200, 364)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -363,7 +363,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(552, 516)</value>
+      <value>(16, 364)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -390,7 +390,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(840, 516)</value>
+      <value>(16, 428)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -403,6 +403,33 @@
     <param>
       <key>value</key>
       <value>32</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(376, 124)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>threshold</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>4</value>
     </param>
   </block>
   <block>
@@ -551,7 +578,7 @@
     </param>
     <param>
       <key>reference</key>
-      <value>2</value>
+      <value>1</value>
     </param>
   </block>
   <block>
@@ -617,7 +644,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(88, 1280)</value>
+      <value>(48, 1280)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -664,62 +691,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(528, 692)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_delay_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>num_ports</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_delay</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>delay</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(280, 1316)</value>
+      <value>(104, 1356)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -751,7 +723,7 @@
     </param>
   </block>
   <block>
-    <key>blocks_float_to_char</key>
+    <key>blocks_delay</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -765,12 +737,16 @@
       <value></value>
     </param>
     <param>
+      <key>delay</key>
+      <value>1</value>
+    </param>
+    <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(752, 452)</value>
+      <value>(672, 668)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -778,7 +754,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>blocks_float_to_char_0</value>
+      <value>blocks_delay_0_0_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -789,8 +765,12 @@
       <value>0</value>
     </param>
     <param>
-      <key>scale</key>
+      <key>num_ports</key>
       <value>1</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
     </param>
     <param>
       <key>vlen</key>
@@ -852,7 +832,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(40, 492)</value>
+      <value>(400, 292)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -877,6 +857,147 @@
     <param>
       <key>vlen</key>
       <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_pdu_to_tagged_stream</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(824, 492)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_pdu_to_tagged_stream_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>tag</key>
+      <value>packet_len</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_pdu_to_tagged_stream</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(304, 1460)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_pdu_to_tagged_stream_0_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>tag</key>
+      <value>packet_len</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_pdu_to_tagged_stream</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(832, 748)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_pdu_to_tagged_stream_0_1</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>tag</key>
+      <value>packet_len</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -924,57 +1045,6 @@
     <param>
       <key>vlen</key>
       <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_threshold_ff</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(744, 348)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>high</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_threshold_ff_0</value>
-    </param>
-    <param>
-      <key>init</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>low</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
     </param>
   </block>
   <block>
@@ -1041,92 +1111,6 @@
     </param>
   </block>
   <block>
-    <key>blocks_unpack_k_bits_bb</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(544, 1236)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_unpack_k_bits_bb_0_0_0</value>
-    </param>
-    <param>
-      <key>k</key>
-      <value>8</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_unpack_k_bits_bb</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(544, 1316)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_unpack_k_bits_bb_0_0_0_0</value>
-    </param>
-    <param>
-      <key>k</key>
-      <value>8</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>parameter</key>
     <param>
       <key>alias</key>
@@ -1170,6 +1154,123 @@
     </param>
   </block>
   <block>
+    <key>ccsds_descrambler</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1000, 408)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>ccsds_descrambler_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>ccsds_descrambler</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(936, 1320)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>ccsds_descrambler_0_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>ccsds_descrambler</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(408, 752)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>ccsds_descrambler_0_0_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>dc_blocker_xx</key>
     <param>
       <key>alias</key>
@@ -1189,7 +1290,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(320, 372)</value>
+      <value>(760, 284)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1236,11 +1337,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>True</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(368, 640)</value>
+      <value>(592, 408)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1248,7 +1349,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>digital_binary_slicer_fb_0</value>
+      <value>digital_binary_slicer_fb_1</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1279,7 +1380,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(152, 608)</value>
+      <value>(440, 560)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1371,6 +1472,92 @@
     <param>
       <key>use_snr</key>
       <value>False</value>
+    </param>
+  </block>
+  <block>
+    <key>digital_diff_decoder_bb</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(440, 1276)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>digital_diff_decoder_bb_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>modulus</key>
+      <value>2</value>
+    </param>
+  </block>
+  <block>
+    <key>digital_diff_decoder_bb</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(440, 1356)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>digital_diff_decoder_bb_0_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>modulus</key>
+      <value>2</value>
     </param>
   </block>
   <block>
@@ -1582,7 +1769,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(480, 336)</value>
+      <value>(920, 248)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1689,6 +1876,162 @@
     </param>
   </block>
   <block>
+    <key>hit_fec_decode_differential</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(240, 1280)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>hit_fec_decode_differential_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>hit_fec_decode_differential</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(240, 1360)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>hit_fec_decode_differential_0_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>hit_fec_decode_differential</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(784, 672)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>hit_fec_decode_differential_0_0_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>hit_fec_decode_differential</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(784, 592)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>hit_fec_decode_differential_0_1</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>parameter</key>
     <param>
       <key>alias</key>
@@ -1728,7 +2071,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>-1</value>
+      <value>1</value>
     </param>
   </block>
   <block>
@@ -1775,6 +2118,135 @@
     </param>
   </block>
   <block>
+    <key>kiss_kiss_to_pdu</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>control_byte</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1072, 492)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>kiss_kiss_to_pdu_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>kiss_kiss_to_pdu</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>control_byte</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(544, 1460)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>kiss_kiss_to_pdu_0_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>kiss_kiss_to_pdu</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>control_byte</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1072, 748)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>kiss_kiss_to_pdu_0_1</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>parameter</key>
     <param>
       <key>alias</key>
@@ -1818,7 +2290,11 @@
     </param>
   </block>
   <block>
-    <key>lilacsat_fec_decode_b</key>
+    <key>libfec_decode_rs</key>
+    <param>
+      <key>basis</key>
+      <value>0</value>
+    </param>
     <param>
       <key>alias</key>
       <value></value>
@@ -1836,12 +2312,8 @@
       <value>True</value>
     </param>
     <param>
-      <key>frame_len</key>
-      <value>114</value>
-    </param>
-    <param>
       <key>_coordinate</key>
-      <value>(648, 588)</value>
+      <value>(592, 484)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1849,7 +2321,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>lilacsat_fec_decode_b_0</value>
+      <value>libfec_decode_rs_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1860,130 +2332,16 @@
       <value>0</value>
     </param>
     <param>
-      <key>pass_all</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>using_convolutional_code</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>using_m</key>
-      <value>False</value>
-    </param>
-  </block>
-  <block>
-    <key>lilacsat_fec_decode_b</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>frame_len</key>
-      <value>114</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(648, 676)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>lilacsat_fec_decode_b_0_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>pass_all</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>using_convolutional_code</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>using_m</key>
-      <value>False</value>
-    </param>
-  </block>
-  <block>
-    <key>lilacsat_fec_decode_b</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>frame_len</key>
-      <value>114</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(704, 1300)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>lilacsat_fec_decode_b_0_0_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>pass_all</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>using_convolutional_code</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>using_m</key>
+      <key>verbose</key>
       <value>True</value>
     </param>
   </block>
   <block>
-    <key>lilacsat_fec_decode_b</key>
+    <key>libfec_decode_rs</key>
+    <param>
+      <key>basis</key>
+      <value>0</value>
+    </param>
     <param>
       <key>alias</key>
       <value></value>
@@ -2001,12 +2359,8 @@
       <value>True</value>
     </param>
     <param>
-      <key>frame_len</key>
-      <value>114</value>
-    </param>
-    <param>
       <key>_coordinate</key>
-      <value>(704, 1220)</value>
+      <value>(72, 1452)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2014,7 +2368,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>lilacsat_fec_decode_b_0_0_0_0</value>
+      <value>libfec_decode_rs_0_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -2025,75 +2379,16 @@
       <value>0</value>
     </param>
     <param>
-      <key>pass_all</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>using_convolutional_code</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>using_m</key>
+      <key>verbose</key>
       <value>True</value>
     </param>
   </block>
   <block>
-    <key>lilacsat_fec_decode_b</key>
+    <key>libfec_decode_rs</key>
     <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>frame_len</key>
-      <value>114</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(912, 436)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
+      <key>basis</key>
       <value>0</value>
     </param>
-    <param>
-      <key>id</key>
-      <value>lilacsat_fec_decode_b_0_0_2</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>pass_all</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>using_convolutional_code</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>using_m</key>
-      <value>False</value>
-    </param>
-  </block>
-  <block>
-    <key>lilacsat_kiss_decode_pdu</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -2112,7 +2407,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(904, 656)</value>
+      <value>(608, 740)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2120,7 +2415,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>lilacsat_kiss_decode_pdu_0</value>
+      <value>libfec_decode_rs_0_0_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -2130,161 +2425,9 @@
       <key>minoutbuf</key>
       <value>0</value>
     </param>
-  </block>
-  <block>
-    <key>lilacsat_kiss_decode_pdu</key>
     <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
+      <key>verbose</key>
       <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(952, 1280)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>lilacsat_kiss_decode_pdu_0_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>lilacsat_kiss_decode_pdu</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1104, 368)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>lilacsat_kiss_decode_pdu_0_1</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>lilacsat_vitfilt27_fb</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(400, 1240)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>lilacsat_vitfilt27_fb_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>lilacsat_vitfilt27_fb</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(400, 1320)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>lilacsat_vitfilt27_fb_0_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
     </param>
   </block>
   <block>
@@ -2350,7 +2493,7 @@
     </param>
     <param>
       <key>cutoff_freq</key>
-      <value>3000</value>
+      <value>200</value>
     </param>
     <param>
       <key>decim</key>
@@ -2358,7 +2501,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>type</key>
@@ -2366,7 +2509,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(200, 440)</value>
+      <value>(568, 248)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2398,7 +2541,7 @@
     </param>
     <param>
       <key>width</key>
-      <value>1000</value>
+      <value>50</value>
     </param>
     <param>
       <key>win</key>
@@ -2507,7 +2650,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -2546,6 +2689,261 @@
       <value>http://tlm.pe0sat.nl/tlmdb/frame_db.php</value>
     </param>
   </block>
+  <block>
+    <key>sync_to_pdu</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(744, 388)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>sync_to_pdu_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>packlen</key>
+      <value>(114+32)*8</value>
+    </param>
+    <param>
+      <key>threshold</key>
+      <value>threshold</value>
+    </param>
+    <param>
+      <key>sync</key>
+      <value>"00011010110011111111110000011101"</value>
+    </param>
+  </block>
+  <block>
+    <key>sync_to_pdu</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(648, 1340)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>sync_to_pdu_0_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>packlen</key>
+      <value>(114+32)*8</value>
+    </param>
+    <param>
+      <key>threshold</key>
+      <value>threshold</value>
+    </param>
+    <param>
+      <key>sync</key>
+      <value>"00011010110011111111110000011101"</value>
+    </param>
+  </block>
+  <block>
+    <key>sync_to_pdu</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(976, 652)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>sync_to_pdu_0_0_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>packlen</key>
+      <value>(114+32)*8</value>
+    </param>
+    <param>
+      <key>threshold</key>
+      <value>threshold</value>
+    </param>
+    <param>
+      <key>sync</key>
+      <value>"00011010110011111111110000011101"</value>
+    </param>
+  </block>
+  <block>
+    <key>sync_to_pdu</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(648, 1260)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>sync_to_pdu_0_1</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>packlen</key>
+      <value>(114+32)*8</value>
+    </param>
+    <param>
+      <key>threshold</key>
+      <value>threshold</value>
+    </param>
+    <param>
+      <key>sync</key>
+      <value>"00011010110011111111110000011101"</value>
+    </param>
+  </block>
+  <block>
+    <key>sync_to_pdu</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(976, 572)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>sync_to_pdu_0_1_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>packlen</key>
+      <value>(114+32)*8</value>
+    </param>
+    <param>
+      <key>threshold</key>
+      <value>threshold</value>
+    </param>
+    <param>
+      <key>sync</key>
+      <value>"00011010110011111111110000011101"</value>
+    </param>
+  </block>
   <connection>
     <source_block_id>analog_feedforward_agc_cc_0</source_block_id>
     <sink_block_id>digital_fll_band_edge_cc_0</sink_block_id>
@@ -2560,25 +2958,19 @@
   </connection>
   <connection>
     <source_block_id>blocks_complex_to_real_0</source_block_id>
-    <sink_block_id>lilacsat_vitfilt27_fb_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_delay_0</source_block_id>
-    <sink_block_id>lilacsat_fec_decode_b_0_0</sink_block_id>
+    <sink_block_id>hit_fec_decode_differential_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_delay_0_0</source_block_id>
-    <sink_block_id>lilacsat_vitfilt27_fb_0_0</sink_block_id>
+    <sink_block_id>hit_fec_decode_differential_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_float_to_char_0</source_block_id>
-    <sink_block_id>lilacsat_fec_decode_b_0_0_2</sink_block_id>
+    <source_block_id>blocks_delay_0_0_0</source_block_id>
+    <sink_block_id>hit_fec_decode_differential_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -2595,6 +2987,24 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>blocks_pdu_to_tagged_stream_0</source_block_id>
+    <sink_block_id>kiss_kiss_to_pdu_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_pdu_to_tagged_stream_0_0</source_block_id>
+    <sink_block_id>kiss_kiss_to_pdu_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_pdu_to_tagged_stream_0_1</source_block_id>
+    <sink_block_id>kiss_kiss_to_pdu_0_1</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>blocks_short_to_float_0</source_block_id>
     <sink_block_id>blocks_multiply_const_vxx_0_0</sink_block_id>
     <source_key>0</source_key>
@@ -2607,28 +3017,28 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_threshold_ff_0</source_block_id>
-    <sink_block_id>blocks_float_to_char_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_udp_source_0</source_block_id>
     <sink_block_id>blocks_short_to_float_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_unpack_k_bits_bb_0_0_0</source_block_id>
-    <sink_block_id>lilacsat_fec_decode_b_0_0_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
+    <source_block_id>ccsds_descrambler_0</source_block_id>
+    <sink_block_id>libfec_decode_rs_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_unpack_k_bits_bb_0_0_0_0</source_block_id>
-    <sink_block_id>lilacsat_fec_decode_b_0_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
+    <source_block_id>ccsds_descrambler_0_0</source_block_id>
+    <sink_block_id>libfec_decode_rs_0_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>ccsds_descrambler_0_0_0</source_block_id>
+    <sink_block_id>libfec_decode_rs_0_0_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>dc_blocker_xx_0</source_block_id>
@@ -2637,26 +3047,38 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>digital_binary_slicer_fb_0</source_block_id>
-    <sink_block_id>blocks_delay_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>digital_binary_slicer_fb_0</source_block_id>
-    <sink_block_id>lilacsat_fec_decode_b_0</sink_block_id>
+    <source_block_id>digital_binary_slicer_fb_1</source_block_id>
+    <sink_block_id>sync_to_pdu_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>digital_clock_recovery_mm_xx_0</source_block_id>
-    <sink_block_id>digital_binary_slicer_fb_0</sink_block_id>
+    <sink_block_id>blocks_delay_0_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>digital_clock_recovery_mm_xx_0</source_block_id>
+    <sink_block_id>hit_fec_decode_differential_0_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>digital_costas_loop_cc_0_0</source_block_id>
     <sink_block_id>digital_lms_dd_equalizer_cc_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>digital_diff_decoder_bb_0</source_block_id>
+    <sink_block_id>sync_to_pdu_0_1</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>digital_diff_decoder_bb_0_0</source_block_id>
+    <sink_block_id>sync_to_pdu_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -2680,7 +3102,7 @@
   </connection>
   <connection>
     <source_block_id>digital_pfb_clock_sync_xxx_0_0</source_block_id>
-    <sink_block_id>blocks_threshold_ff_0</sink_block_id>
+    <sink_block_id>digital_binary_slicer_fb_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -2691,87 +3113,117 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>lilacsat_fec_decode_b_0</source_block_id>
-    <sink_block_id>lilacsat_kiss_decode_pdu_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>lilacsat_fec_decode_b_0_0</source_block_id>
-    <sink_block_id>lilacsat_kiss_decode_pdu_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>lilacsat_fec_decode_b_0_0_0</source_block_id>
-    <sink_block_id>lilacsat_kiss_decode_pdu_0_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>lilacsat_fec_decode_b_0_0_0_0</source_block_id>
-    <sink_block_id>lilacsat_kiss_decode_pdu_0_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>lilacsat_fec_decode_b_0_0_2</source_block_id>
-    <sink_block_id>lilacsat_kiss_decode_pdu_0_1</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>lilacsat_kiss_decode_pdu_0</source_block_id>
-    <sink_block_id>blocks_message_debug_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>print_pdu</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>lilacsat_kiss_decode_pdu_0</source_block_id>
-    <sink_block_id>sids_submit_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>lilacsat_kiss_decode_pdu_0_0</source_block_id>
-    <sink_block_id>blocks_message_debug_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>print_pdu</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>lilacsat_kiss_decode_pdu_0_0</source_block_id>
-    <sink_block_id>sids_submit_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>lilacsat_kiss_decode_pdu_0_1</source_block_id>
-    <sink_block_id>blocks_message_debug_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>print_pdu</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>lilacsat_kiss_decode_pdu_0_1</source_block_id>
-    <sink_block_id>sids_submit_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>lilacsat_vitfilt27_fb_0</source_block_id>
-    <sink_block_id>blocks_unpack_k_bits_bb_0_0_0</sink_block_id>
+    <source_block_id>hit_fec_decode_differential_0</source_block_id>
+    <sink_block_id>digital_diff_decoder_bb_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>lilacsat_vitfilt27_fb_0_0</source_block_id>
-    <sink_block_id>blocks_unpack_k_bits_bb_0_0_0_0</sink_block_id>
+    <source_block_id>hit_fec_decode_differential_0_0</source_block_id>
+    <sink_block_id>digital_diff_decoder_bb_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>hit_fec_decode_differential_0_0_0</source_block_id>
+    <sink_block_id>sync_to_pdu_0_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>hit_fec_decode_differential_0_1</source_block_id>
+    <sink_block_id>sync_to_pdu_0_1_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>kiss_kiss_to_pdu_0</source_block_id>
+    <sink_block_id>blocks_message_debug_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>print_pdu</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>kiss_kiss_to_pdu_0</source_block_id>
+    <sink_block_id>sids_submit_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>kiss_kiss_to_pdu_0_0</source_block_id>
+    <sink_block_id>blocks_message_debug_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>print_pdu</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>kiss_kiss_to_pdu_0_0</source_block_id>
+    <sink_block_id>sids_submit_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>kiss_kiss_to_pdu_0_1</source_block_id>
+    <sink_block_id>blocks_message_debug_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>print_pdu</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>kiss_kiss_to_pdu_0_1</source_block_id>
+    <sink_block_id>sids_submit_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>libfec_decode_rs_0</source_block_id>
+    <sink_block_id>blocks_pdu_to_tagged_stream_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>pdus</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>libfec_decode_rs_0_0</source_block_id>
+    <sink_block_id>blocks_pdu_to_tagged_stream_0_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>pdus</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>libfec_decode_rs_0_0_0</source_block_id>
+    <sink_block_id>blocks_pdu_to_tagged_stream_0_1</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>pdus</sink_key>
   </connection>
   <connection>
     <source_block_id>low_pass_filter_0</source_block_id>
     <sink_block_id>dc_blocker_xx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>sync_to_pdu_0</source_block_id>
+    <sink_block_id>ccsds_descrambler_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>sync_to_pdu_0_0</source_block_id>
+    <sink_block_id>ccsds_descrambler_0_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>sync_to_pdu_0_0_0</source_block_id>
+    <sink_block_id>ccsds_descrambler_0_0_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>sync_to_pdu_0_1</source_block_id>
+    <sink_block_id>ccsds_descrambler_0_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>sync_to_pdu_0_1_0</source_block_id>
+    <sink_block_id>ccsds_descrambler_0_0_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
   </connection>
 </flow_graph>
