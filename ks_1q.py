@@ -5,7 +5,7 @@
 # Title: KS-1Q decoder
 # Author: Daniel Estevez
 # Description: KS-1Q decoder
-# Generated: Mon Jan  2 22:40:44 2017
+# Generated: Wed Jan  4 11:12:19 2017
 ##################################################
 
 import os
@@ -13,6 +13,7 @@ import sys
 sys.path.append(os.environ.get('GRC_HIER_PATH', os.path.expanduser('~/.grc_gnuradio')))
 
 from ccsds_descrambler import ccsds_descrambler  # grc-generated hier_block
+from ccsds_viterbi import ccsds_viterbi  # grc-generated hier_block
 from gnuradio import blocks
 from gnuradio import digital
 from gnuradio import eng_notation
@@ -20,7 +21,6 @@ from gnuradio import filter
 from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
-from hit_fec_decode_differential import hit_fec_decode_differential  # grc-generated hier_block
 from optparse import OptionParser
 from sync_to_pdu import sync_to_pdu  # grc-generated hier_block
 import csp
@@ -56,13 +56,13 @@ class ks_1q(gr.top_block):
         ##################################################
         self.sync_to_pdu_0_0 = sync_to_pdu(
             packlen=255*8,
-            threshold=threshold,
             sync="00011010110011111111110000011101",
+            threshold=threshold,
         )
         self.sync_to_pdu_0 = sync_to_pdu(
             packlen=255*8,
-            threshold=threshold,
             sync="00011010110011111111110000011101",
+            threshold=threshold,
         )
         self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 41845, callsign, longitude, latitude, recstart)
         self.low_pass_filter_0 = filter.fir_filter_fff(1, firdes.low_pass(
@@ -70,11 +70,11 @@ class ks_1q(gr.top_block):
         self.libfec_decode_rs_0 = libfec.decode_rs(True, 1)
         self.ks1q_header_remover_0 = ks1q.header_remover(True)
         self.kiss_kiss_to_pdu_0_0 = kiss.kiss_to_pdu(True)
-        self.hit_fec_decode_differential_0_0 = hit_fec_decode_differential()
-        self.hit_fec_decode_differential_0 = hit_fec_decode_differential()
         self.digital_clock_recovery_mm_xx_0 = digital.clock_recovery_mm_ff(2.4, 0.25*0.175*0.175, 0.5, 0.175, 0.005)
         self.csp_swap_header_0_0 = csp.swap_header()
         self.csp_check_crc_0_0 = csp.check_crc(False, False, True)
+        self.ccsds_viterbi_0_0 = ccsds_viterbi()
+        self.ccsds_viterbi_0 = ccsds_viterbi()
         self.ccsds_descrambler_0 = ccsds_descrambler()
         self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, port, 1472, False)
         self.blocks_short_to_float_0 = blocks.short_to_float(1, 32767.0)
@@ -95,15 +95,15 @@ class ks_1q(gr.top_block):
         self.msg_connect((self.libfec_decode_rs_0, 'out'), (self.sids_submit_0, 'in'))    
         self.msg_connect((self.sync_to_pdu_0, 'out'), (self.ccsds_descrambler_0, 'in'))    
         self.msg_connect((self.sync_to_pdu_0_0, 'out'), (self.ccsds_descrambler_0, 'in'))    
-        self.connect((self.blocks_delay_0, 0), (self.hit_fec_decode_differential_0_0, 0))    
+        self.connect((self.blocks_delay_0, 0), (self.ccsds_viterbi_0_0, 0))    
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.low_pass_filter_0, 0))    
         self.connect((self.blocks_pdu_to_tagged_stream_0, 0), (self.kiss_kiss_to_pdu_0_0, 0))    
         self.connect((self.blocks_short_to_float_0, 0), (self.blocks_multiply_const_vxx_0, 0))    
         self.connect((self.blocks_udp_source_0, 0), (self.blocks_short_to_float_0, 0))    
+        self.connect((self.ccsds_viterbi_0, 0), (self.sync_to_pdu_0, 0))    
+        self.connect((self.ccsds_viterbi_0_0, 0), (self.sync_to_pdu_0_0, 0))    
         self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.blocks_delay_0, 0))    
-        self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.hit_fec_decode_differential_0, 0))    
-        self.connect((self.hit_fec_decode_differential_0, 0), (self.sync_to_pdu_0, 0))    
-        self.connect((self.hit_fec_decode_differential_0_0, 0), (self.sync_to_pdu_0_0, 0))    
+        self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.ccsds_viterbi_0, 0))    
         self.connect((self.low_pass_filter_0, 0), (self.digital_clock_recovery_mm_xx_0, 0))    
 
     def get_callsign(self):

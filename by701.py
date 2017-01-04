@@ -5,7 +5,7 @@
 # Title: BY70-1 decoder
 # Author: Daniel Estevez
 # Description: BY70-1 decoder
-# Generated: Tue Jan  3 12:14:14 2017
+# Generated: Wed Jan  4 11:12:21 2017
 ##################################################
 
 import os
@@ -13,6 +13,7 @@ import sys
 sys.path.append(os.environ.get('GRC_HIER_PATH', os.path.expanduser('~/.grc_gnuradio')))
 
 from ccsds_descrambler import ccsds_descrambler  # grc-generated hier_block
+from ccsds_viterbi import ccsds_viterbi  # grc-generated hier_block
 from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import digital
@@ -21,7 +22,6 @@ from gnuradio import filter
 from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
-from hit_fec_decode_differential import hit_fec_decode_differential  # grc-generated hier_block
 from optparse import OptionParser
 from sync_to_pdu import sync_to_pdu  # grc-generated hier_block
 import csp
@@ -85,8 +85,6 @@ class by701(gr.top_block):
         self.lilacsat_image_decoder_0 = lilacsat.image_decoder('/tmp', True)
         self.libfec_decode_rs_0 = libfec.decode_rs(True, 0)
         self.kiss_kiss_to_pdu_0 = kiss.kiss_to_pdu(False)
-        self.hit_fec_decode_differential_0_0 = hit_fec_decode_differential()
-        self.hit_fec_decode_differential_0 = hit_fec_decode_differential()
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_fcf(1, (firdes.low_pass(1, samp_rate, 10000, 1000)), bfo, samp_rate)
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(sps, 0.05, (rrc_taps), nfilts, nfilts/2, 0.05, 2)
         self.digital_lms_dd_equalizer_cc_0_0 = digital.lms_dd_equalizer_cc(2, 0.05, 2, variable_constellation_0)
@@ -95,6 +93,8 @@ class by701(gr.top_block):
         self.digital_diff_decoder_bb_0 = digital.diff_decoder_bb(2)
         self.digital_costas_loop_cc_0_0 = digital.costas_loop_cc(0.1, 2, False)
         self.csp_swap_header_0 = csp.swap_header()
+        self.ccsds_viterbi_0_0 = ccsds_viterbi()
+        self.ccsds_viterbi_0 = ccsds_viterbi()
         self.ccsds_descrambler_0 = ccsds_descrambler()
         self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, port, 1472, False)
         self.blocks_short_to_float_0 = blocks.short_to_float(1, 32767)
@@ -116,11 +116,13 @@ class by701(gr.top_block):
         self.msg_connect((self.sync_to_pdu_0_0, 'out'), (self.ccsds_descrambler_0, 'in'))    
         self.connect((self.analog_feedforward_agc_cc_0, 0), (self.digital_fll_band_edge_cc_0, 0))    
         self.connect((self.blocks_complex_to_real_0, 0), (self.blocks_delay_0, 0))    
-        self.connect((self.blocks_complex_to_real_0, 0), (self.hit_fec_decode_differential_0, 0))    
-        self.connect((self.blocks_delay_0, 0), (self.hit_fec_decode_differential_0_0, 0))    
+        self.connect((self.blocks_complex_to_real_0, 0), (self.ccsds_viterbi_0, 0))    
+        self.connect((self.blocks_delay_0, 0), (self.ccsds_viterbi_0_0, 0))    
         self.connect((self.blocks_pdu_to_tagged_stream_0, 0), (self.kiss_kiss_to_pdu_0, 0))    
         self.connect((self.blocks_short_to_float_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))    
         self.connect((self.blocks_udp_source_0, 0), (self.blocks_short_to_float_0, 0))    
+        self.connect((self.ccsds_viterbi_0, 0), (self.digital_diff_decoder_bb_0, 0))    
+        self.connect((self.ccsds_viterbi_0_0, 0), (self.digital_diff_decoder_bb_0_0, 0))    
         self.connect((self.digital_costas_loop_cc_0_0, 0), (self.digital_lms_dd_equalizer_cc_0_0, 0))    
         self.connect((self.digital_diff_decoder_bb_0, 0), (self.sync_to_pdu_0, 0))    
         self.connect((self.digital_diff_decoder_bb_0_0, 0), (self.sync_to_pdu_0_0, 0))    
@@ -128,8 +130,6 @@ class by701(gr.top_block):
         self.connect((self.digital_lms_dd_equalizer_cc_0_0, 0), (self.blocks_complex_to_real_0, 0))    
         self.connect((self.digital_pfb_clock_sync_xxx_0, 0), (self.digital_costas_loop_cc_0_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.analog_feedforward_agc_cc_0, 0))    
-        self.connect((self.hit_fec_decode_differential_0, 0), (self.digital_diff_decoder_bb_0, 0))    
-        self.connect((self.hit_fec_decode_differential_0_0, 0), (self.digital_diff_decoder_bb_0_0, 0))    
 
     def get_bfo(self):
         return self.bfo

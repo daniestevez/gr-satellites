@@ -22,7 +22,7 @@
     </param>
     <param>
       <key>description</key>
-      <value>Viterbi decoder with HIT convention (POLYB, ~POLYA) (output is unpacked)</value>
+      <value>Viterbi27 decoder with convention (POLYB, ~POLYA) (output is unpacked)</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -46,7 +46,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>hit_fec_decode_differential</value>
+      <value>ccsds_viterbi</value>
     </param>
     <param>
       <key>max_nouts</key>
@@ -78,7 +78,7 @@
     </param>
     <param>
       <key>title</key>
-      <value>HIT viterbi decoder</value>
+      <value>CCSDS/NASA-GSFC Viterbi decoder</value>
     </param>
   </block>
   <block>

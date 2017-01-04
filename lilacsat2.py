@@ -5,7 +5,7 @@
 # Title: LilacSat-2 decoder
 # Author: Daniel Estevez
 # Description: LilacSat-2 decoder
-# Generated: Tue Jan  3 20:03:16 2017
+# Generated: Wed Jan  4 11:12:26 2017
 ##################################################
 
 import os
@@ -13,6 +13,7 @@ import sys
 sys.path.append(os.environ.get('GRC_HIER_PATH', os.path.expanduser('~/.grc_gnuradio')))
 
 from ccsds_descrambler import ccsds_descrambler  # grc-generated hier_block
+from ccsds_viterbi import ccsds_viterbi  # grc-generated hier_block
 from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import digital
@@ -21,7 +22,6 @@ from gnuradio import filter
 from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
-from hit_fec_decode_differential import hit_fec_decode_differential  # grc-generated hier_block
 from optparse import OptionParser
 from sync_to_pdu import sync_to_pdu  # grc-generated hier_block
 import kiss
@@ -106,10 +106,6 @@ class lilacsat2(gr.top_block):
         self.kiss_kiss_to_pdu_0_1 = kiss.kiss_to_pdu(False)
         self.kiss_kiss_to_pdu_0_0 = kiss.kiss_to_pdu(False)
         self.kiss_kiss_to_pdu_0 = kiss.kiss_to_pdu(False)
-        self.hit_fec_decode_differential_0_1 = hit_fec_decode_differential()
-        self.hit_fec_decode_differential_0_0_0 = hit_fec_decode_differential()
-        self.hit_fec_decode_differential_0_0 = hit_fec_decode_differential()
-        self.hit_fec_decode_differential_0 = hit_fec_decode_differential()
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_fcf(1, (firdes.low_pass(1, samp_rate, 10000, 1000)), bfo, samp_rate)
         self.digital_pfb_clock_sync_xxx_0_0 = digital.pfb_clock_sync_fff(sub_sps, 0.0628, (sub_rrc_taps), sub_nfilts, sub_nfilts/2, 0.01, 1)
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(sps, 0.100, (rrc_taps), nfilts, nfilts/2, 1.5, 2)
@@ -121,6 +117,10 @@ class lilacsat2(gr.top_block):
         self.digital_clock_recovery_mm_xx_0 = digital.clock_recovery_mm_ff(10, 0.25*0.175*0.175, 0.5, 0.175, 0.005)
         self.digital_binary_slicer_fb_1 = digital.binary_slicer_fb()
         self.dc_blocker_xx_0 = filter.dc_blocker_ff(1024, True)
+        self.ccsds_viterbi_0_1 = ccsds_viterbi()
+        self.ccsds_viterbi_0_0_0 = ccsds_viterbi()
+        self.ccsds_viterbi_0_0 = ccsds_viterbi()
+        self.ccsds_viterbi_0 = ccsds_viterbi()
         self.ccsds_descrambler_0_0_0 = ccsds_descrambler()
         self.ccsds_descrambler_0_0 = ccsds_descrambler()
         self.ccsds_descrambler_0 = ccsds_descrambler()
@@ -158,9 +158,9 @@ class lilacsat2(gr.top_block):
         self.msg_connect((self.sync_to_pdu_0_1_0, 'out'), (self.ccsds_descrambler_0_0_0, 'in'))    
         self.connect((self.analog_feedforward_agc_cc_0, 0), (self.digital_fll_band_edge_cc_0, 0))    
         self.connect((self.blocks_complex_to_real_0, 0), (self.blocks_delay_0_0, 0))    
-        self.connect((self.blocks_complex_to_real_0, 0), (self.hit_fec_decode_differential_0, 0))    
-        self.connect((self.blocks_delay_0_0, 0), (self.hit_fec_decode_differential_0_0, 0))    
-        self.connect((self.blocks_delay_0_0_0, 0), (self.hit_fec_decode_differential_0_0_0, 0))    
+        self.connect((self.blocks_complex_to_real_0, 0), (self.ccsds_viterbi_0_1, 0))    
+        self.connect((self.blocks_delay_0_0, 0), (self.ccsds_viterbi_0_0_0, 0))    
+        self.connect((self.blocks_delay_0_0_0, 0), (self.ccsds_viterbi_0_0, 0))    
         self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.digital_clock_recovery_mm_xx_0, 0))    
         self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.low_pass_filter_0, 0))    
         self.connect((self.blocks_pdu_to_tagged_stream_0, 0), (self.kiss_kiss_to_pdu_0, 0))    
@@ -169,10 +169,14 @@ class lilacsat2(gr.top_block):
         self.connect((self.blocks_short_to_float_0, 0), (self.blocks_multiply_const_vxx_0_0, 0))    
         self.connect((self.blocks_short_to_float_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))    
         self.connect((self.blocks_udp_source_0, 0), (self.blocks_short_to_float_0, 0))    
+        self.connect((self.ccsds_viterbi_0, 0), (self.sync_to_pdu_0_1_0, 0))    
+        self.connect((self.ccsds_viterbi_0_0, 0), (self.sync_to_pdu_0_0_0, 0))    
+        self.connect((self.ccsds_viterbi_0_0_0, 0), (self.digital_diff_decoder_bb_0_0, 0))    
+        self.connect((self.ccsds_viterbi_0_1, 0), (self.digital_diff_decoder_bb_0, 0))    
         self.connect((self.dc_blocker_xx_0, 0), (self.digital_pfb_clock_sync_xxx_0_0, 0))    
         self.connect((self.digital_binary_slicer_fb_1, 0), (self.sync_to_pdu_0, 0))    
         self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.blocks_delay_0_0_0, 0))    
-        self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.hit_fec_decode_differential_0_1, 0))    
+        self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.ccsds_viterbi_0, 0))    
         self.connect((self.digital_costas_loop_cc_0_0, 0), (self.digital_lms_dd_equalizer_cc_0_0, 0))    
         self.connect((self.digital_diff_decoder_bb_0, 0), (self.sync_to_pdu_0_1, 0))    
         self.connect((self.digital_diff_decoder_bb_0_0, 0), (self.sync_to_pdu_0_0, 0))    
@@ -181,10 +185,6 @@ class lilacsat2(gr.top_block):
         self.connect((self.digital_pfb_clock_sync_xxx_0, 0), (self.digital_costas_loop_cc_0_0, 0))    
         self.connect((self.digital_pfb_clock_sync_xxx_0_0, 0), (self.digital_binary_slicer_fb_1, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.analog_feedforward_agc_cc_0, 0))    
-        self.connect((self.hit_fec_decode_differential_0, 0), (self.digital_diff_decoder_bb_0, 0))    
-        self.connect((self.hit_fec_decode_differential_0_0, 0), (self.digital_diff_decoder_bb_0_0, 0))    
-        self.connect((self.hit_fec_decode_differential_0_0_0, 0), (self.sync_to_pdu_0_0_0, 0))    
-        self.connect((self.hit_fec_decode_differential_0_1, 0), (self.sync_to_pdu_0_1_0, 0))    
         self.connect((self.low_pass_filter_0, 0), (self.dc_blocker_xx_0, 0))    
 
     def get_bfo(self):

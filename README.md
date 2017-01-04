@@ -183,7 +183,7 @@ this step as part of installing gr-satellites.
 This is the list of hierarchical flowgraphs in gr-satellites:
 
   * `ccsds_descrambler.grc` CCSDS additive descrambler (using unpacked PDUs)
-  * `hit_viterbi.grc` Viterbi decoder with Harbin Institute of Technology convention
+  * `ccsds_viterbi.grc` Viterbi decoder with CCSS/NASA-GSFC convention
      (POLYB, ~POLYA). Output is unpacked bits.
   * `sync_to_pdu.grc` Find a syncword and extract a PDU of fixed length containing
      unpacked bits
