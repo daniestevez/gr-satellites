@@ -634,7 +634,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1024, 1272)</value>
+      <value>(1024, 1312)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1602,6 +1602,37 @@
     </param>
   </block>
   <block>
+    <key>lilacsat_camera_telemetry_parser</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1024, 1264)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>lilacsat_camera_telemetry_parser_0</value>
+    </param>
+  </block>
+  <block>
     <key>lilacsat_image_decoder</key>
     <param>
       <key>alias</key>
@@ -1656,7 +1687,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -2022,6 +2053,12 @@
     <sink_block_id>blocks_message_debug_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>print_pdu</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>csp_swap_header_0</source_block_id>
+    <sink_block_id>lilacsat_camera_telemetry_parser_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>csp_swap_header_0</source_block_id>

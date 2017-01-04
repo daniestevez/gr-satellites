@@ -5,7 +5,7 @@
 # Title: BY70-1 decoder
 # Author: Daniel Estevez
 # Description: BY70-1 decoder
-# Generated: Wed Jan  4 11:12:21 2017
+# Generated: Wed Jan  4 16:45:50 2017
 ##################################################
 
 import os
@@ -81,8 +81,8 @@ class by701(gr.top_block):
             threshold=threshold,
         )
         self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 41909, callsign, longitude, latitude, recstart)
-        self.lilacsat_telemetry_parser_0 = lilacsat.telemetry_parser()
         self.lilacsat_image_decoder_0 = lilacsat.image_decoder('/tmp', True)
+        self.lilacsat_camera_telemetry_parser_0 = lilacsat.camera_telemetry_parser()
         self.libfec_decode_rs_0 = libfec.decode_rs(True, 0)
         self.kiss_kiss_to_pdu_0 = kiss.kiss_to_pdu(False)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_fcf(1, (firdes.low_pass(1, samp_rate, 10000, 1000)), bfo, samp_rate)
@@ -107,8 +107,8 @@ class by701(gr.top_block):
         # Connections
         ##################################################
         self.msg_connect((self.ccsds_descrambler_0, 'out'), (self.libfec_decode_rs_0, 'in'))    
+        self.msg_connect((self.csp_swap_header_0, 'out'), (self.lilacsat_camera_telemetry_parser_0, 'in'))    
         self.msg_connect((self.csp_swap_header_0, 'out'), (self.lilacsat_image_decoder_0, 'in'))    
-        self.msg_connect((self.csp_swap_header_0, 'out'), (self.lilacsat_telemetry_parser_0, 'in'))    
         self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.csp_swap_header_0, 'in'))    
         self.msg_connect((self.libfec_decode_rs_0, 'out'), (self.blocks_pdu_to_tagged_stream_0, 'pdus'))    
         self.msg_connect((self.libfec_decode_rs_0, 'out'), (self.sids_submit_0, 'in'))    
