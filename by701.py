@@ -5,7 +5,7 @@
 # Title: BY70-1 decoder
 # Author: Daniel Estevez
 # Description: BY70-1 decoder
-# Generated: Wed Jan  4 16:45:50 2017
+# Generated: Wed Jan  4 22:30:48 2017
 ##################################################
 
 import os
@@ -33,7 +33,7 @@ import sids
 
 class by701(gr.top_block):
 
-    def __init__(self, bfo=12000, callsign='', invert=-1, ip='::', latitude=0, longitude=0, port=7355, recstart=''):
+    def __init__(self, bfo=12000, callsign='', ip='::', latitude=0, longitude=0, port=7355, recstart=''):
         gr.top_block.__init__(self, "BY70-1 decoder")
 
         ##################################################
@@ -41,7 +41,6 @@ class by701(gr.top_block):
         ##################################################
         self.bfo = bfo
         self.callsign = callsign
-        self.invert = invert
         self.ip = ip
         self.latitude = latitude
         self.longitude = longitude
@@ -143,12 +142,6 @@ class by701(gr.top_block):
 
     def set_callsign(self, callsign):
         self.callsign = callsign
-
-    def get_invert(self):
-        return self.invert
-
-    def set_invert(self, invert):
-        self.invert = invert
 
     def get_ip(self):
         return self.ip
@@ -266,9 +259,6 @@ def argument_parser():
         "", "--callsign", dest="callsign", type="string", default='',
         help="Set your callsign [default=%default]")
     parser.add_option(
-        "-i", "--invert", dest="invert", type="intx", default=-1,
-        help="Set invert the waveform (-1 to invert) [default=%default]")
-    parser.add_option(
         "", "--ip", dest="ip", type="string", default='::',
         help="Set UDP listen IP [default=%default]")
     parser.add_option(
@@ -290,7 +280,7 @@ def main(top_block_cls=by701, options=None):
     if options is None:
         options, _ = argument_parser().parse_args()
 
-    tb = top_block_cls(bfo=options.bfo, callsign=options.callsign, invert=options.invert, ip=options.ip, latitude=options.latitude, longitude=options.longitude, port=options.port, recstart=options.recstart)
+    tb = top_block_cls(bfo=options.bfo, callsign=options.callsign, ip=options.ip, latitude=options.latitude, longitude=options.longitude, port=options.port, recstart=options.recstart)
     tb.start()
     tb.wait()
 
