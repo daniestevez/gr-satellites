@@ -5,7 +5,7 @@
 # Title: BY70-1 decoder
 # Author: Daniel Estevez
 # Description: BY70-1 decoder
-# Generated: Wed Jan  4 22:30:48 2017
+# Generated: Thu Jan  5 15:30:34 2017
 ##################################################
 
 import os
@@ -60,7 +60,7 @@ class by701(gr.top_block):
         
         self.variable_constellation_0 = variable_constellation_0 = digital.constellation_calcdist(([-1, 1]), ([0, 1]), 2, 1).base()
         
-        self.threshold = threshold = 4
+        self.threshold = threshold = 3
         self.samp_rate = samp_rate = 48000
         self.rrc_taps_0 = rrc_taps_0 = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(samp_per_sym), 0.35, 11*samp_per_sym*nfilts)
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), alpha, 11*sps*nfilts)
@@ -100,7 +100,7 @@ class by701(gr.top_block):
         self.blocks_pdu_to_tagged_stream_0 = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
         self.blocks_delay_0 = blocks.delay(gr.sizeof_float*1, 1)
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
-        self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024, 1)
+        self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(480, 2)
 
         ##################################################
         # Connections
