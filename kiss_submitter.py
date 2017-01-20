@@ -5,7 +5,7 @@
 # Title: KISS client telemetry submitter
 # Author: Daniel Estevez
 # Description: KISS client telemetry submitter
-# Generated: Sat Sep 24 22:30:19 2016
+# Generated: Fri Jan 20 11:22:32 2017
 ##################################################
 
 from gnuradio import blocks
@@ -20,7 +20,7 @@ import sids
 
 class kiss_submitter(gr.top_block):
 
-    def __init__(self, callsign="", host="localhost", latitude=0, longitude=0, norad=0, port="8001", recstart=""):
+    def __init__(self, callsign='', host='localhost', latitude=0, longitude=0, norad=0, port='8001', recstart=''):
         gr.top_block.__init__(self, "KISS client telemetry submitter")
 
         ##################################################
@@ -37,15 +37,17 @@ class kiss_submitter(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
-        self.sids_submit_0 = sids.submit("http://tlm.pe0sat.nl/tlmdb/frame_db.php", norad, callsign, longitude, latitude, recstart)
-        self.kiss_kiss_to_pdu_0 = kiss.kiss_to_pdu()
+        self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', norad, callsign, longitude, latitude, recstart)
+        self.kiss_kiss_to_pdu_0 = kiss.kiss_to_pdu(True)
         self.blocks_socket_pdu_0 = blocks.socket_pdu("TCP_CLIENT", host, port, 10000, False)
+        self.blocks_pdu_to_tagged_stream_0 = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
 
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.blocks_socket_pdu_0, 'pdus'), (self.kiss_kiss_to_pdu_0, 'in'))    
+        self.msg_connect((self.blocks_socket_pdu_0, 'pdus'), (self.blocks_pdu_to_tagged_stream_0, 'pdus'))    
         self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.sids_submit_0, 'in'))    
+        self.connect((self.blocks_pdu_to_tagged_stream_0, 0), (self.kiss_kiss_to_pdu_0, 0))    
 
     def get_callsign(self):
         return self.callsign
@@ -94,10 +96,10 @@ def argument_parser():
     description = 'KISS client telemetry submitter'
     parser = OptionParser(usage="%prog: [options]", option_class=eng_option, description=description)
     parser.add_option(
-        "", "--callsign", dest="callsign", type="string", default="",
+        "", "--callsign", dest="callsign", type="string", default='',
         help="Set your callsign [default=%default]")
     parser.add_option(
-        "", "--host", dest="host", type="string", default="localhost",
+        "", "--host", dest="host", type="string", default='localhost',
         help="Set Host [default=%default]")
     parser.add_option(
         "", "--latitude", dest="latitude", type="eng_float", default=eng_notation.num_to_str(0),
@@ -109,10 +111,10 @@ def argument_parser():
         "", "--norad", dest="norad", type="intx", default=0,
         help="Set NORAD ID [default=%default]")
     parser.add_option(
-        "-p", "--port", dest="port", type="string", default="8001",
+        "-p", "--port", dest="port", type="string", default='8001',
         help="Set Port [default=%default]")
     parser.add_option(
-        "", "--recstart", dest="recstart", type="string", default="",
+        "", "--recstart", dest="recstart", type="string", default='',
         help="Set start of recording, if processing a recording (format YYYY-MM-DD HH:MM:SS) [default=%default]")
     return parser
 

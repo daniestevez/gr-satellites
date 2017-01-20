@@ -82,6 +82,53 @@
     </param>
   </block>
   <block>
+    <key>blocks_pdu_to_tagged_stream</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(264, 356)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_pdu_to_tagged_stream_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>tag</key>
+      <value>packet_len</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_socket_pdu</key>
     <param>
       <key>alias</key>
@@ -101,7 +148,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(136, 336)</value>
+      <value>(96, 336)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -245,8 +292,12 @@
       <value>True</value>
     </param>
     <param>
+      <key>control_byte</key>
+      <value>True</value>
+    </param>
+    <param>
       <key>_coordinate</key>
-      <value>(424, 360)</value>
+      <value>(504, 356)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -536,10 +587,16 @@
     </param>
   </block>
   <connection>
-    <source_block_id>blocks_socket_pdu_0</source_block_id>
+    <source_block_id>blocks_pdu_to_tagged_stream_0</source_block_id>
     <sink_block_id>kiss_kiss_to_pdu_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_socket_pdu_0</source_block_id>
+    <sink_block_id>blocks_pdu_to_tagged_stream_0</sink_block_id>
     <source_key>pdus</source_key>
-    <sink_key>in</sink_key>
+    <sink_key>pdus</sink_key>
   </connection>
   <connection>
     <source_block_id>kiss_kiss_to_pdu_0</source_block_id>
