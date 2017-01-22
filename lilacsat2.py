@@ -5,7 +5,7 @@
 # Title: LilacSat-2 decoder
 # Author: Daniel Estevez
 # Description: LilacSat-2 decoder
-# Generated: Wed Jan  4 11:12:26 2017
+# Generated: Sun Jan 22 10:54:55 2017
 ##################################################
 
 import os
@@ -134,7 +134,7 @@ class lilacsat2(gr.top_block):
         self.blocks_delay_0_0_0 = blocks.delay(gr.sizeof_float*1, 1)
         self.blocks_delay_0_0 = blocks.delay(gr.sizeof_float*1, 1)
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
-        self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024, 1)
+        self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024, 2)
 
         ##################################################
         # Connections

@@ -5,7 +5,7 @@
 # Title: LilacSat-2 decoder for RTL-SDR device
 # Author: Daniel Estevez
 # Description: LilacSat-2 decoder for RTL-SDR device
-# Generated: Wed Jan  4 11:12:24 2017
+# Generated: Sun Jan 22 10:54:38 2017
 ##################################################
 
 import os
@@ -158,7 +158,7 @@ class lilacsat2_rtlsdr(gr.top_block):
         	tau=75e-6,
         	max_dev=3.5e3,
           )
-        self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024, 1)
+        self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024, 2)
 
         ##################################################
         # Connections

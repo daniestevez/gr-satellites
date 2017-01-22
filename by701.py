@@ -5,7 +5,7 @@
 # Title: BY70-1 decoder
 # Author: Daniel Estevez
 # Description: BY70-1 decoder
-# Generated: Thu Jan  5 15:30:34 2017
+# Generated: Sun Jan 22 10:51:44 2017
 ##################################################
 
 import os
@@ -109,8 +109,8 @@ class by701(gr.top_block):
         self.msg_connect((self.csp_swap_header_0, 'out'), (self.lilacsat_camera_telemetry_parser_0, 'in'))    
         self.msg_connect((self.csp_swap_header_0, 'out'), (self.lilacsat_image_decoder_0, 'in'))    
         self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.csp_swap_header_0, 'in'))    
+        self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.sids_submit_0, 'in'))    
         self.msg_connect((self.libfec_decode_rs_0, 'out'), (self.blocks_pdu_to_tagged_stream_0, 'pdus'))    
-        self.msg_connect((self.libfec_decode_rs_0, 'out'), (self.sids_submit_0, 'in'))    
         self.msg_connect((self.sync_to_pdu_0, 'out'), (self.ccsds_descrambler_0, 'in'))    
         self.msg_connect((self.sync_to_pdu_0_0, 'out'), (self.ccsds_descrambler_0, 'in'))    
         self.connect((self.analog_feedforward_agc_cc_0, 0), (self.digital_fll_band_edge_cc_0, 0))    

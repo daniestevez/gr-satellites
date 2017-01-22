@@ -249,6 +249,16 @@ the NORAD ID in [celestrak](http://celestrak.com/satcat/search.asp).
 You must start the software TNC first and the run the `.py` script or the `.grc`
 file for `kiss_submitter`.
 
+## Submitting telemetry to HIT severs (LilacSat, BY70-1, etc.)
+
+It is also possible to use the flowgraphs in gr-satellites to submit telemetry
+to the Harbin Institute of Technology servers using `proxy_publish.py` in
+`gr-lilacsat/examples/proxy_publish`. To enable this, you must open the
+flowgraphs in `gnuradio-companion` and enable the "Socket PDU" block (usually on
+the lower right corner of the flowgraph). This block is disabled by default
+because when it is enabled the flowgraph won't run unless `proxy_publish.py` is
+running. Also see [this information](http://lilacsat.hit.edu.cn/?p=559) about
+how to set the proper ports in `proxy_publish.py`.
 
 ## Hints for receiving different modes
 

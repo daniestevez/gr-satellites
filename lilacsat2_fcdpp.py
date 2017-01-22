@@ -5,7 +5,7 @@
 # Title: LilacSat-2 decoder for FUNcube Dongle Pro+
 # Author: Daniel Estevez
 # Description: LilacSat-2 decoder for FUNcube Dongle Pro+
-# Generated: Wed Jan  4 11:12:28 2017
+# Generated: Sun Jan 22 10:54:45 2017
 ##################################################
 
 import os
@@ -147,7 +147,7 @@ class lilacsat2_fcdpp(gr.top_block):
         	tau=75e-6,
         	max_dev=3.5e3,
           )
-        self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024, 1)
+        self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024, 2)
 
         ##################################################
         # Connections
