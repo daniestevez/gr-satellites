@@ -5,8 +5,12 @@
 # Title: ATHENOXAT-1 decoder
 # Author: Daniel Estevez
 # Description: ATHENOXAT-1 decoder
-# Generated: Tue Nov  1 10:09:21 2016
+# Generated: Mon Jan 23 17:38:28 2017
 ##################################################
+
+import os
+import sys
+sys.path.append(os.environ.get('GRC_HIER_PATH', os.path.expanduser('~/.grc_gnuradio')))
 
 from gnuradio import analog
 from gnuradio import blocks
@@ -17,10 +21,9 @@ from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
+from sync_to_pdu_packed import sync_to_pdu_packed  # grc-generated hier_block
 import ax100
-import numpy
 import sids
-import synctags
 
 
 class athenoxat_1(gr.top_block):
@@ -47,8 +50,13 @@ class athenoxat_1(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
-        self.synctags_fixedlen_tagger_0 = synctags.fixedlen_tagger('syncword', 'packet_len', (255+3)*8, numpy.byte)
+        self.sync_to_pdu_packed_0 = sync_to_pdu_packed(
+            packlen=255+3,
+            sync=access_code,
+            threshold=threshold,
+        )
         self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 41168, callsign, longitude, latitude, recstart)
+        self.sids_print_timestamp_0 = sids.print_timestamp('%Y-%m-%d %H:%M:%S')
         self.low_pass_filter_0 = filter.fir_filter_ccf(1, firdes.low_pass(
         	1, 48000, 2600, 1000, firdes.WIN_HAMMING, 6.76))
         self.hilbert_fc_0 = filter.hilbert_fc(65, firdes.WIN_HAMMING, 6.76)
@@ -61,11 +69,7 @@ class athenoxat_1(gr.top_block):
         	verbose=False,
         	log=False,
         )
-        self.digital_correlate_access_code_tag_bb_0 = digital.correlate_access_code_tag_bb(access_code, threshold, 'syncword')
-        self.blocks_unpacked_to_packed_xx_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
         self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, port, 1472, False)
-        self.blocks_tagged_stream_to_pdu_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, 'packet_len')
-        self.blocks_tagged_stream_multiply_length_0 = blocks.tagged_stream_multiply_length(gr.sizeof_char*1, 'packet_len', 1/8.0)
         self.blocks_short_to_float_0 = blocks.short_to_float(1, 32767.0)
         self.blocks_multiply_xx_0 = blocks.multiply_vcc(1)
         self.blocks_message_debug_0 = blocks.message_debug()
@@ -76,21 +80,18 @@ class athenoxat_1(gr.top_block):
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.ax100_gomx1_decode_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
+        self.msg_connect((self.ax100_gomx1_decode_0, 'out'), (self.sids_print_timestamp_0, 'in'))    
         self.msg_connect((self.ax100_gomx1_decode_0, 'out'), (self.sids_submit_0, 'in'))    
-        self.msg_connect((self.blocks_tagged_stream_to_pdu_0, 'pdus'), (self.ax100_gomx1_decode_0, 'in'))    
+        self.msg_connect((self.sids_print_timestamp_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
+        self.msg_connect((self.sync_to_pdu_packed_0, 'out'), (self.ax100_gomx1_decode_0, 'in'))    
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 0))    
         self.connect((self.blocks_conjugate_cc_0, 0), (self.low_pass_filter_0, 0))    
         self.connect((self.blocks_multiply_xx_0, 0), (self.blocks_conjugate_cc_0, 0))    
         self.connect((self.blocks_short_to_float_0, 0), (self.hilbert_fc_0, 0))    
-        self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.blocks_tagged_stream_to_pdu_0, 0))    
         self.connect((self.blocks_udp_source_0, 0), (self.blocks_short_to_float_0, 0))    
-        self.connect((self.blocks_unpacked_to_packed_xx_0, 0), (self.blocks_tagged_stream_multiply_length_0, 0))    
-        self.connect((self.digital_correlate_access_code_tag_bb_0, 0), (self.synctags_fixedlen_tagger_0, 0))    
-        self.connect((self.digital_gmsk_demod_0, 0), (self.digital_correlate_access_code_tag_bb_0, 0))    
+        self.connect((self.digital_gmsk_demod_0, 0), (self.sync_to_pdu_packed_0, 0))    
         self.connect((self.hilbert_fc_0, 0), (self.blocks_multiply_xx_0, 1))    
         self.connect((self.low_pass_filter_0, 0), (self.digital_gmsk_demod_0, 0))    
-        self.connect((self.synctags_fixedlen_tagger_0, 0), (self.blocks_unpacked_to_packed_xx_0, 0))    
 
     def get_callsign(self):
         return self.callsign
@@ -133,12 +134,14 @@ class athenoxat_1(gr.top_block):
 
     def set_threshold(self, threshold):
         self.threshold = threshold
+        self.sync_to_pdu_packed_0.set_threshold(self.threshold)
 
     def get_access_code(self):
         return self.access_code
 
     def set_access_code(self, access_code):
         self.access_code = access_code
+        self.sync_to_pdu_packed_0.set_sync(self.access_code)
 
 
 def argument_parser():

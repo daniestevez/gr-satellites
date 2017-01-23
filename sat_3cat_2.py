@@ -5,7 +5,7 @@
 # Title: 3CAT-2 decoder
 # Author: Daniel Estevez
 # Description: Decodes 9k6 AX.25 BPSK telemetry from 3CAT-2
-# Generated: Tue Aug 30 23:57:57 2016
+# Generated: Mon Jan 23 17:33:34 2017
 ##################################################
 
 from gnuradio import analog
@@ -24,7 +24,7 @@ import sids
 
 class sat_3cat_2(gr.top_block):
 
-    def __init__(self, bfo=12000, callsign="", ip="::", latitude=0, longitude=0, port=7355, recstart=""):
+    def __init__(self, bfo=12000, callsign='', ip='::', latitude=0, longitude=0, port=7355, recstart=''):
         gr.top_block.__init__(self, "3CAT-2 decoder")
 
         ##################################################
@@ -52,14 +52,15 @@ class sat_3cat_2(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
-        self.sids_submit_0 = sids.submit("http://tlm.pe0sat.nl/tlmdb/frame_db.php", 41732, callsign, longitude, latitude, recstart)
+        self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 41732, callsign, longitude, latitude, recstart)
+        self.sids_print_timestamp_0 = sids.print_timestamp('%Y-%m-%d %H:%M:%S')
         self.sat3cat2_telemetry_parser_0 = sat3cat2.telemetry_parser()
         self.low_pass_filter_0 = filter.fir_filter_ccf(1, firdes.low_pass(
         	1, samp_rate, 7500, 500, firdes.WIN_HAMMING, 6.76))
         self.kiss_pdu_to_kiss_0 = kiss.pdu_to_kiss()
         self.kiss_nrzi_decode_0 = kiss.nrzi_decode()
         self.kiss_hdlc_deframer_0 = kiss.hdlc_deframer(check_fcs=True, max_length=10000)
-        self.kiss_check_address_0 = kiss.check_address("3CAT2", "from")
+        self.kiss_check_address_0 = kiss.check_address('3CAT2', "from")
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_fcf(1, (firdes.low_pass(1, samp_rate, 10000, 1000)), bfo, samp_rate)
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(samp_per_sym, 0.1, (rrc_taps), nfilts, nfilts/2, 1.5, 2)
         self.digital_lms_dd_equalizer_cc_0_0 = digital.lms_dd_equalizer_cc(2, 0.03, 2, variable_constellation_0)
@@ -67,7 +68,7 @@ class sat_3cat_2(gr.top_block):
         self.digital_costas_loop_cc_0_0_0_0 = digital.costas_loop_cc(0.04, 2, False)
         self.digital_binary_slicer_fb_0 = digital.binary_slicer_fb()
         self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_short*1, ip, port, 1472, False)
-        self.blocks_socket_pdu_0 = blocks.socket_pdu("TCP_SERVER", "", "52001", 10000, True)
+        self.blocks_socket_pdu_0 = blocks.socket_pdu("TCP_SERVER", '', '52001', 10000, True)
         self.blocks_short_to_float_0 = blocks.short_to_float(1, 32767)
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
         self.analog_feedforward_agc_cc_0 = analog.feedforward_agc_cc(1024*4, 2)
@@ -75,11 +76,12 @@ class sat_3cat_2(gr.top_block):
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.kiss_check_address_0, 'ok'), (self.kiss_pdu_to_kiss_0, 'in'))    
-        self.msg_connect((self.kiss_check_address_0, 'ok'), (self.sat3cat2_telemetry_parser_0, 'in'))    
-        self.msg_connect((self.kiss_check_address_0, 'ok'), (self.sids_submit_0, 'in'))    
+        self.msg_connect((self.kiss_check_address_0, 'ok'), (self.sids_print_timestamp_0, 'in'))    
         self.msg_connect((self.kiss_hdlc_deframer_0, 'out'), (self.kiss_check_address_0, 'in'))    
         self.msg_connect((self.kiss_pdu_to_kiss_0, 'out'), (self.blocks_socket_pdu_0, 'pdus'))    
+        self.msg_connect((self.sids_print_timestamp_0, 'out'), (self.kiss_pdu_to_kiss_0, 'in'))    
+        self.msg_connect((self.sids_print_timestamp_0, 'out'), (self.sat3cat2_telemetry_parser_0, 'in'))    
+        self.msg_connect((self.sids_print_timestamp_0, 'out'), (self.sids_submit_0, 'in'))    
         self.connect((self.analog_feedforward_agc_cc_0, 0), (self.digital_fll_band_edge_cc_0, 0))    
         self.connect((self.blocks_complex_to_real_0, 0), (self.digital_binary_slicer_fb_0, 0))    
         self.connect((self.blocks_short_to_float_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))    
@@ -179,10 +181,10 @@ def argument_parser():
         "", "--bfo", dest="bfo", type="eng_float", default=eng_notation.num_to_str(12000),
         help="Set carrier frequency of the BPSK signal [default=%default]")
     parser.add_option(
-        "", "--callsign", dest="callsign", type="string", default="",
+        "", "--callsign", dest="callsign", type="string", default='',
         help="Set your callsign [default=%default]")
     parser.add_option(
-        "", "--ip", dest="ip", type="string", default="::",
+        "", "--ip", dest="ip", type="string", default='::',
         help="Set UDP listen IP [default=%default]")
     parser.add_option(
         "", "--latitude", dest="latitude", type="eng_float", default=eng_notation.num_to_str(0),
@@ -194,7 +196,7 @@ def argument_parser():
         "", "--port", dest="port", type="intx", default=7355,
         help="Set UDP port [default=%default]")
     parser.add_option(
-        "", "--recstart", dest="recstart", type="string", default="",
+        "", "--recstart", dest="recstart", type="string", default='',
         help="Set start of recording, if processing a recording (format YYYY-MM-DD HH:MM:SS) [default=%default]")
     return parser
 

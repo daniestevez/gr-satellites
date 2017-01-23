@@ -5,7 +5,7 @@
 # Title: BEESAT decoder
 # Author: Daniel Estevez
 # Description: BEESAT decoder
-# Generated: Thu Sep 15 16:12:36 2016
+# Generated: Mon Jan 23 17:38:31 2017
 ##################################################
 
 from gnuradio import blocks
@@ -22,7 +22,7 @@ import tnc_nx
 
 class beesat(gr.top_block):
 
-    def __init__(self, callsign="", invert=1, ip="::", latitude=0, longitude=0, port=7355, recstart=""):
+    def __init__(self, callsign='', invert=1, ip='::', latitude=0, longitude=0, port=7355, recstart=''):
         gr.top_block.__init__(self, "BEESAT decoder")
 
         ##################################################
@@ -41,9 +41,10 @@ class beesat(gr.top_block):
         ##################################################
         self.tnc_nx_nx_decoder_1_0 = tnc_nx.nx_decoder()
         self.tnc_nx_beesat_classifier_0 = tnc_nx.beesat_classifier()
-        self.sids_submit_0_0_0 = sids.submit("http://tlm.pe0sat.nl/tlmdb/frame_db.php", 41619, callsign, longitude, latitude, recstart)
-        self.sids_submit_0_0 = sids.submit("http://tlm.pe0sat.nl/tlmdb/frame_db.php", 39136, callsign, longitude, latitude, recstart)
-        self.sids_submit_0 = sids.submit("http://tlm.pe0sat.nl/tlmdb/frame_db.php", 35933, callsign, longitude, latitude, recstart)
+        self.sids_submit_0_0_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 41619, callsign, longitude, latitude, recstart)
+        self.sids_submit_0_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 39136, callsign, longitude, latitude, recstart)
+        self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 35933, callsign, longitude, latitude, recstart)
+        self.sids_print_timestamp_0 = sids.print_timestamp('%Y-%m-%d %H:%M:%S')
         self.low_pass_filter_0 = filter.interp_fir_filter_fff(1, firdes.low_pass(
         	1, 48000, 3000, 100, firdes.WIN_HAMMING, 6.76))
         self.digital_clock_recovery_mm_xx_0_0 = digital.clock_recovery_mm_ff(10*(1+0.0), 0.25*0.175*0.175, 0.5, 0.175, 0.005)
@@ -56,10 +57,11 @@ class beesat(gr.top_block):
         ##################################################
         # Connections
         ##################################################
+        self.msg_connect((self.sids_print_timestamp_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
         self.msg_connect((self.tnc_nx_beesat_classifier_0, 'BEESAT-1'), (self.sids_submit_0, 'in'))    
         self.msg_connect((self.tnc_nx_beesat_classifier_0, 'BEESAT-2'), (self.sids_submit_0_0, 'in'))    
         self.msg_connect((self.tnc_nx_beesat_classifier_0, 'BEESAT-4'), (self.sids_submit_0_0_0, 'in'))    
-        self.msg_connect((self.tnc_nx_nx_decoder_1_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
+        self.msg_connect((self.tnc_nx_nx_decoder_1_0, 'out'), (self.sids_print_timestamp_0, 'in'))    
         self.msg_connect((self.tnc_nx_nx_decoder_1_0, 'out'), (self.tnc_nx_beesat_classifier_0, 'in'))    
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.low_pass_filter_0, 0))    
         self.connect((self.blocks_short_to_float_0, 0), (self.blocks_multiply_const_vxx_0, 0))    
@@ -116,13 +118,13 @@ def argument_parser():
     description = 'BEESAT decoder'
     parser = OptionParser(usage="%prog: [options]", option_class=eng_option, description=description)
     parser.add_option(
-        "", "--callsign", dest="callsign", type="string", default="",
+        "", "--callsign", dest="callsign", type="string", default='',
         help="Set your callsign [default=%default]")
     parser.add_option(
         "-i", "--invert", dest="invert", type="intx", default=1,
         help="Set invert the waveform (-1 to invert) [default=%default]")
     parser.add_option(
-        "", "--ip", dest="ip", type="string", default="::",
+        "", "--ip", dest="ip", type="string", default='::',
         help="Set UDP listen IP [default=%default]")
     parser.add_option(
         "", "--latitude", dest="latitude", type="eng_float", default=eng_notation.num_to_str(0),
@@ -134,7 +136,7 @@ def argument_parser():
         "", "--port", dest="port", type="intx", default=7355,
         help="Set UDP port [default=%default]")
     parser.add_option(
-        "", "--recstart", dest="recstart", type="string", default="",
+        "", "--recstart", dest="recstart", type="string", default='',
         help="Set start of recording, if processing a recording (format YYYY-MM-DD HH:MM:SS) [default=%default]")
     return parser
 

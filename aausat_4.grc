@@ -155,7 +155,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(312, 896)</value>
+      <value>(592, 880)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -969,6 +969,49 @@
     </param>
   </block>
   <block>
+    <key>sids_print_timestamp</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>fmt</key>
+      <value>%Y-%m-%d %H:%M:%S</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(312, 876)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>sids_print_timestamp_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>sids_submit</key>
     <param>
       <key>alias</key>
@@ -1127,13 +1170,13 @@
   </block>
   <connection>
     <source_block_id>aausat_aausat4_fec_0</source_block_id>
-    <sink_block_id>aausat_aausat4_beacon_parser_0</sink_block_id>
+    <sink_block_id>csp_print_header_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>aausat_aausat4_fec_0</source_block_id>
-    <sink_block_id>csp_print_header_0</sink_block_id>
+    <sink_block_id>sids_print_timestamp_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
@@ -1190,6 +1233,12 @@
     <sink_block_id>digital_binary_slicer_fb_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>sids_print_timestamp_0</source_block_id>
+    <sink_block_id>aausat_aausat4_beacon_parser_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>sync_to_pdu_packed_0</source_block_id>

@@ -5,7 +5,7 @@
 # Title: BY70-1 decoder
 # Author: Daniel Estevez
 # Description: BY70-1 decoder
-# Generated: Sun Jan 22 10:51:44 2017
+# Generated: Mon Jan 23 17:30:51 2017
 ##################################################
 
 import os
@@ -80,6 +80,7 @@ class by701(gr.top_block):
             threshold=threshold,
         )
         self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 41909, callsign, longitude, latitude, recstart)
+        self.sids_print_timestamp_0 = sids.print_timestamp('%Y-%m-%d %H:%M:%S')
         self.lilacsat_image_decoder_0 = lilacsat.image_decoder('/tmp', True)
         self.lilacsat_camera_telemetry_parser_0 = lilacsat.camera_telemetry_parser()
         self.libfec_decode_rs_0 = libfec.decode_rs(True, 0)
@@ -108,9 +109,10 @@ class by701(gr.top_block):
         self.msg_connect((self.ccsds_descrambler_0, 'out'), (self.libfec_decode_rs_0, 'in'))    
         self.msg_connect((self.csp_swap_header_0, 'out'), (self.lilacsat_camera_telemetry_parser_0, 'in'))    
         self.msg_connect((self.csp_swap_header_0, 'out'), (self.lilacsat_image_decoder_0, 'in'))    
-        self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.csp_swap_header_0, 'in'))    
+        self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.sids_print_timestamp_0, 'in'))    
         self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.sids_submit_0, 'in'))    
         self.msg_connect((self.libfec_decode_rs_0, 'out'), (self.blocks_pdu_to_tagged_stream_0, 'pdus'))    
+        self.msg_connect((self.sids_print_timestamp_0, 'out'), (self.csp_swap_header_0, 'in'))    
         self.msg_connect((self.sync_to_pdu_0, 'out'), (self.ccsds_descrambler_0, 'in'))    
         self.msg_connect((self.sync_to_pdu_0_0, 'out'), (self.ccsds_descrambler_0, 'in'))    
         self.connect((self.analog_feedforward_agc_cc_0, 0), (self.digital_fll_band_edge_cc_0, 0))    

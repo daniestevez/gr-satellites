@@ -958,6 +958,49 @@
     </param>
   </block>
   <block>
+    <key>sids_print_timestamp</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>fmt</key>
+      <value>%Y-%m-%d %H:%M:%S</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(368, 860)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>sids_print_timestamp_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>sids_submit</key>
     <param>
       <key>alias</key>
@@ -1065,9 +1108,9 @@
   </block>
   <connection>
     <source_block_id>ax100_gomx3_rs_decode_0</source_block_id>
-    <sink_block_id>blocks_message_debug_0</sink_block_id>
+    <sink_block_id>sids_print_timestamp_0</sink_block_id>
     <source_key>out</source_key>
-    <sink_key>print_pdu</sink_key>
+    <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>ax100_gomx3_rs_decode_0</source_block_id>
@@ -1116,6 +1159,12 @@
     <sink_block_id>digital_clock_recovery_mm_xx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>sids_print_timestamp_0</source_block_id>
+    <sink_block_id>blocks_message_debug_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>print_pdu</sink_key>
   </connection>
   <connection>
     <source_block_id>sync_to_pdu_packed_0</source_block_id>

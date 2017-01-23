@@ -5,7 +5,7 @@
 # Title: LilacSat-2 decoder for FUNcube Dongle Pro+
 # Author: Daniel Estevez
 # Description: LilacSat-2 decoder for FUNcube Dongle Pro+
-# Generated: Sun Jan 22 10:54:45 2017
+# Generated: Mon Jan 23 17:37:08 2017
 ##################################################
 
 import os
@@ -96,6 +96,7 @@ class lilacsat2_fcdpp(gr.top_block):
             threshold=threshold,
         )
         self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 40908, callsign, longitude, latitude, '')
+        self.sids_print_timestamp_0 = sids.print_timestamp('%Y-%m-%d %H:%M:%S')
         self.low_pass_filter_3_0_0 = filter.fir_filter_ccf(1, firdes.low_pass(
         	1, if_samp_rate, 8e3, 2e3, firdes.WIN_HAMMING, 6.76))
         self.low_pass_filter_0 = filter.fir_filter_fff(1, firdes.low_pass(
@@ -155,15 +156,16 @@ class lilacsat2_fcdpp(gr.top_block):
         self.msg_connect((self.ccsds_descrambler_0, 'out'), (self.libfec_decode_rs_0, 'in'))    
         self.msg_connect((self.ccsds_descrambler_0_0, 'out'), (self.libfec_decode_rs_0_0, 'in'))    
         self.msg_connect((self.ccsds_descrambler_0_0_0, 'out'), (self.libfec_decode_rs_0_0_0, 'in'))    
-        self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
+        self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.sids_print_timestamp_0, 'in'))    
         self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.sids_submit_0, 'in'))    
-        self.msg_connect((self.kiss_kiss_to_pdu_0_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
+        self.msg_connect((self.kiss_kiss_to_pdu_0_0, 'out'), (self.sids_print_timestamp_0, 'in'))    
         self.msg_connect((self.kiss_kiss_to_pdu_0_0, 'out'), (self.sids_submit_0, 'in'))    
-        self.msg_connect((self.kiss_kiss_to_pdu_0_1, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
+        self.msg_connect((self.kiss_kiss_to_pdu_0_1, 'out'), (self.sids_print_timestamp_0, 'in'))    
         self.msg_connect((self.kiss_kiss_to_pdu_0_1, 'out'), (self.sids_submit_0, 'in'))    
         self.msg_connect((self.libfec_decode_rs_0, 'out'), (self.blocks_pdu_to_tagged_stream_0, 'pdus'))    
         self.msg_connect((self.libfec_decode_rs_0_0, 'out'), (self.blocks_pdu_to_tagged_stream_0_0, 'pdus'))    
         self.msg_connect((self.libfec_decode_rs_0_0_0, 'out'), (self.blocks_pdu_to_tagged_stream_0_1, 'pdus'))    
+        self.msg_connect((self.sids_print_timestamp_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
         self.msg_connect((self.sync_to_pdu_0, 'out'), (self.ccsds_descrambler_0, 'in'))    
         self.msg_connect((self.sync_to_pdu_0_0, 'out'), (self.ccsds_descrambler_0_0, 'in'))    
         self.msg_connect((self.sync_to_pdu_0_0_0, 'out'), (self.ccsds_descrambler_0_0_0, 'in'))    

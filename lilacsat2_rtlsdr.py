@@ -5,7 +5,7 @@
 # Title: LilacSat-2 decoder for RTL-SDR device
 # Author: Daniel Estevez
 # Description: LilacSat-2 decoder for RTL-SDR device
-# Generated: Sun Jan 22 10:54:38 2017
+# Generated: Mon Jan 23 17:35:37 2017
 ##################################################
 
 import os
@@ -101,6 +101,7 @@ class lilacsat2_rtlsdr(gr.top_block):
             threshold=threshold,
         )
         self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 40908, callsign, longitude, latitude, '')
+        self.sids_print_timestamp_0 = sids.print_timestamp('%Y-%m-%d %H:%M:%S')
         self.osmosdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + 'rtl' )
         self.osmosdr_source_0.set_sample_rate(rf_samp_rate)
         self.osmosdr_source_0.set_center_freq(freq-offset, 0)
@@ -166,15 +167,16 @@ class lilacsat2_rtlsdr(gr.top_block):
         self.msg_connect((self.ccsds_descrambler_0, 'out'), (self.libfec_decode_rs_0, 'in'))    
         self.msg_connect((self.ccsds_descrambler_0_0, 'out'), (self.libfec_decode_rs_0_0, 'in'))    
         self.msg_connect((self.ccsds_descrambler_0_0_0, 'out'), (self.libfec_decode_rs_0_0_0, 'in'))    
-        self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
+        self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.sids_print_timestamp_0, 'in'))    
         self.msg_connect((self.kiss_kiss_to_pdu_0, 'out'), (self.sids_submit_0, 'in'))    
-        self.msg_connect((self.kiss_kiss_to_pdu_0_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
+        self.msg_connect((self.kiss_kiss_to_pdu_0_0, 'out'), (self.sids_print_timestamp_0, 'in'))    
         self.msg_connect((self.kiss_kiss_to_pdu_0_0, 'out'), (self.sids_submit_0, 'in'))    
-        self.msg_connect((self.kiss_kiss_to_pdu_0_1, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
+        self.msg_connect((self.kiss_kiss_to_pdu_0_1, 'out'), (self.sids_print_timestamp_0, 'in'))    
         self.msg_connect((self.kiss_kiss_to_pdu_0_1, 'out'), (self.sids_submit_0, 'in'))    
         self.msg_connect((self.libfec_decode_rs_0, 'out'), (self.blocks_pdu_to_tagged_stream_0, 'pdus'))    
         self.msg_connect((self.libfec_decode_rs_0_0, 'out'), (self.blocks_pdu_to_tagged_stream_0_0, 'pdus'))    
         self.msg_connect((self.libfec_decode_rs_0_0_0, 'out'), (self.blocks_pdu_to_tagged_stream_0_1, 'pdus'))    
+        self.msg_connect((self.sids_print_timestamp_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
         self.msg_connect((self.sync_to_pdu_0, 'out'), (self.ccsds_descrambler_0, 'in'))    
         self.msg_connect((self.sync_to_pdu_0_0, 'out'), (self.ccsds_descrambler_0_0, 'in'))    
         self.msg_connect((self.sync_to_pdu_0_0_0, 'out'), (self.ccsds_descrambler_0_0_0, 'in'))    
