@@ -51,6 +51,12 @@ receives it.
     telemetry in the 70cm band. It uses the CSP protocol and FEC with an r=1/2, k=7
     convolutional code and a (255,223) Reed-Solomon code. You must use FM mode
     to receive this satellite.
+  * `ao73`
+    [AO-73 (FUNcube)](https://funcube.org.uk/), which transmits 1k2 BPSK
+    telemetry in the 2m band. It uses the AO-40 FEC protocol, which includes
+    block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
+    two interleaved (160,128) Reed-Solomon codes. You must use SSB mode to
+    receive this satellite.
   * `aisat`
     [AISAT](https://directory.eoportal.org/web/eoportal/satellite-missions/a/aisat),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses the CSP
@@ -138,6 +144,13 @@ receives it.
     The only difference between the 3 receivers is that the NORAD ID is set for
     the correct satellite when doing telemetry submission. You must use FM mode
     to receive these satellites.
+  * `ukube1`
+    [UKube-1 (FUNcube-2)](https://amsat-uk.org/satellites/communications/ukube-1/),
+    which transmits 1k2 BPSK
+    telemetry in the 2m band. It uses the AO-40 FEC protocol, which includes
+    block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
+    two interleaved (160,128) Reed-Solomon codes. You must use SSB mode to
+    receive this satellite.
 
 ## Required GNUradio OOT modules
 
@@ -164,6 +177,8 @@ one particular satellite. You may install only the ones you're interested in.
   * [gr-3cat2](https://github.com/daniestevez/gr-3cat2) 3CAT-2 telemetry parser
   * [gr-aausat](https://github.com/daniestevez/gr-aausat) AAUSAT-4 decoder and
     telemetry parser
+  * [gr-ao40](https://github.com/daniestevez/gr-ao40) AO-40 FEC decoder, used
+    in the FUNcube satellites
   * [gr-ax100](https://github.com/daniestevez/gr-ax100) Decoders and telemetry
     parsers for satellites using GomSpace radios: AISAT, ATHENOXAT-1, GOMX-1,
     GOMX-3, TW-1A, TW-1B, TW1-C
