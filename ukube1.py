@@ -5,7 +5,7 @@
 # Title: UKUBE-1 decoder
 # Author: Daniel Estevez
 # Description: UKUBE-1 decoder
-# Generated: Sat Feb 11 15:58:10 2017
+# Generated: Sun Feb 12 13:36:49 2017
 ##################################################
 
 import os
@@ -22,6 +22,7 @@ from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
+import ao40
 import sids
 
 
@@ -58,6 +59,7 @@ class ukube1(gr.top_block):
         ##################################################
         self.sids_submit_0 = sids.submit('http://tlm.pe0sat.nl/tlmdb/frame_db.php', 40074, callsign, longitude, latitude, recstart)
         self.sids_print_timestamp_0 = sids.print_timestamp('%Y-%m-%d %H:%M:%S')
+        self.funcube_telemetry_parser_0 = ao40.funcube_telemetry_parser()
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_fcf(5, (firdes.low_pass(1, samp_rate, 1300, 500)), bfo, samp_rate)
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(sps, 0.1, (rrc_taps), nfilts, nfilts/2, 0.05, 1)
         self.digital_fll_band_edge_cc_0 = digital.fll_band_edge_cc(sps, 0.350, 100, 0.01)
@@ -66,7 +68,6 @@ class ukube1(gr.top_block):
         self.blocks_short_to_float_0 = blocks.short_to_float(1, 32767)
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((-1, ))
         self.blocks_multiply_conjugate_cc_0 = blocks.multiply_conjugate_cc(1)
-        self.blocks_message_debug_0 = blocks.message_debug()
         self.blocks_delay_0 = blocks.delay(gr.sizeof_gr_complex*1, 1)
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
         self.ao40_fec_decoder_0 = ao40_fec_decoder()
@@ -77,7 +78,7 @@ class ukube1(gr.top_block):
         ##################################################
         self.msg_connect((self.ao40_fec_decoder_0, 'out'), (self.sids_print_timestamp_0, 'in'))    
         self.msg_connect((self.ao40_fec_decoder_0, 'out'), (self.sids_submit_0, 'in'))    
-        self.msg_connect((self.sids_print_timestamp_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))    
+        self.msg_connect((self.sids_print_timestamp_0, 'out'), (self.funcube_telemetry_parser_0, 'in'))    
         self.connect((self.analog_feedforward_agc_cc_0, 0), (self.digital_fll_band_edge_cc_0, 0))    
         self.connect((self.blocks_complex_to_real_0, 0), (self.blocks_multiply_const_vxx_0, 0))    
         self.connect((self.blocks_delay_0, 0), (self.blocks_multiply_conjugate_cc_0, 1))    
