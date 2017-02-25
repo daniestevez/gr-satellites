@@ -133,6 +133,13 @@ receives it.
     correction with Gpredict, in the same way as the frontends from
     gr-frontends. When using Doppler correction with Gpredict, you have to set
     437.200MHz as the downlink frequency in Gpredict.
+  * `nayif1`
+    [Nayif-1](https://amsat-uk.org/satellites/communications/nayif-1/),
+    which transmits 1k2 BPSK
+    telemetry in the 2m band. It uses the AO-40 FEC protocol, which includes
+    block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
+    two interleaved (160,128) Reed-Solomon codes. You must use SSB mode to
+    receive this satellite.    
   * `tw_1a`, `tw_1b`, `tw_1c`
     [TW-1A](http://space.skyrocket.de/doc_sdat/shangkeda-2.htm),
     [TW-1B](http://space.skyrocket.de/doc_sdat/njust-2.htm),
