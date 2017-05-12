@@ -352,7 +352,7 @@
     </param>
   </block>
   <block>
-    <key>synctags_fixedlen_tagger</key>
+    <key>satellites_fixedlen_tagger</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -379,7 +379,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>synctags_fixedlen_tagger_0_0_0</value>
+      <value>satellites_fixedlen_tagger_0_0_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -457,7 +457,7 @@
   </connection>
   <connection>
     <source_block_id>digital_correlate_access_code_tag_bb_0_0_0</source_block_id>
-    <sink_block_id>synctags_fixedlen_tagger_0_0_0</sink_block_id>
+    <sink_block_id>satellites_fixedlen_tagger_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -468,7 +468,7 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>synctags_fixedlen_tagger_0_0_0</source_block_id>
+    <source_block_id>satellites_fixedlen_tagger_0_0_0</source_block_id>
     <sink_block_id>blocks_tagged_stream_to_pdu_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
