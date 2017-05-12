@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<block>
+  <name>AO-40 synchronize frame</name>
+  <key>satellites_ao40_syncframe</key>
+  <category>[Satellites]/Packet</category>
+  <import>import satellites</import>
+  <make>satellites.ao40_syncframe($threshold)</make>
+
+  <param>
+    <name>Threshold</name>
+    <key>threshold</key>
+    <value>0</value>
+    <type>int</type>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

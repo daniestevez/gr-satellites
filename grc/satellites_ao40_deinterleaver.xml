@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<block>
+  <name>AO-40 deinterleaver</name>
+  <key>satellites_ao40_deinterleaver</key>
+  <category>[Satellites]/Coding</category>
+  <import>import satellites</import>
+  <make>satellites.ao40_deinterleaver()</make>
+ 
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

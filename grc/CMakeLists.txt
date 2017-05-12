@@ -33,5 +33,9 @@ install(FILES
     satellites_submit.xml
     satellites_print_timestamp.xml
     satellites_sat3cat2_telemetry_parser.xml
+    satellites_ao40_syncframe.xml
+    satellites_ao40_deinterleaver.xml
+    satellites_ao40_rs_decoder.xml
+    satellites_funcube_telemetry_parser.xml 
     DESTINATION share/gnuradio/grc/blocks
 )

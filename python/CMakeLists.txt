@@ -50,6 +50,8 @@ GR_PYTHON_INSTALL(
     submit.py
     print_timestamp.py
     sat3cat2_telemetry_parser.py
+    funcube_telemetry.py
+    funcube_telemetry_parser.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

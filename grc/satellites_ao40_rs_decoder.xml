@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<block>
+  <name>AO-40 interleaved Reed-Solomon decoders</name>
+  <key>satellites_ao40_rs_decoder</key>
+  <category>[Satellites]/FEC</category>
+  <import>import satellites</import>
+  <make>satellites.ao40_rs_decoder($verbose)</make>
+  <param>
+    <name>Verbose</name>
+    <key>verbose</key>
+    <type>bool</type>
+     <option>
+       <name>Yes</name>
+       <key>True</key>
+     </option>
+     <option>
+       <name>No</name>
+       <key>False</key>
+     </option>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

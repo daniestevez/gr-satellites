@@ -53,3 +53,5 @@ from print_timestamp import print_timestamp
 
 from sat3cat2_telemetry_parser import sat3cat2_telemetry_parser
 
+from funcube_telemetry_parser import funcube_telemetry_parser
+

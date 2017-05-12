@@ -27,6 +27,9 @@ link_directories(${Boost_LIBRARY_DIRS})
 
 list(APPEND satellites_sources
     decode_rs_impl.cc
+    ao40_syncframe_impl.cc
+    ao40_deinterleaver_impl.cc
+    ao40_rs_decoder_impl.cc
 )
 
 set(satellites_sources "${satellites_sources}" PARENT_SCOPE)
