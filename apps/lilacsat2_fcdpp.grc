@@ -2372,7 +2372,7 @@
     </param>
   </block>
   <block>
-    <key>libfec_decode_rs</key>
+    <key>satellites_decode_rs</key>
     <param>
       <key>basis</key>
       <value>0</value>
@@ -2403,7 +2403,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>libfec_decode_rs_0</value>
+      <value>satellites_decode_rs_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -2419,7 +2419,7 @@
     </param>
   </block>
   <block>
-    <key>libfec_decode_rs</key>
+    <key>satellites_decode_rs</key>
     <param>
       <key>basis</key>
       <value>0</value>
@@ -2450,7 +2450,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>libfec_decode_rs_0_0</value>
+      <value>satellites_decode_rs_0_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -2466,7 +2466,7 @@
     </param>
   </block>
   <block>
-    <key>libfec_decode_rs</key>
+    <key>satellites_decode_rs</key>
     <param>
       <key>basis</key>
       <value>0</value>
@@ -2497,7 +2497,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>libfec_decode_rs_0_0_0</value>
+      <value>satellites_decode_rs_0_0_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -3275,19 +3275,19 @@
   </connection>
   <connection>
     <source_block_id>ccsds_descrambler_0</source_block_id>
-    <sink_block_id>libfec_decode_rs_0</sink_block_id>
+    <sink_block_id>satellites_decode_rs_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>ccsds_descrambler_0_0</source_block_id>
-    <sink_block_id>libfec_decode_rs_0_0</sink_block_id>
+    <sink_block_id>satellites_decode_rs_0_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>ccsds_descrambler_0_0_0</source_block_id>
-    <sink_block_id>libfec_decode_rs_0_0_0</sink_block_id>
+    <sink_block_id>satellites_decode_rs_0_0_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
@@ -3466,19 +3466,19 @@
     <sink_key>in</sink_key>
   </connection>
   <connection>
-    <source_block_id>libfec_decode_rs_0</source_block_id>
+    <source_block_id>satellites_decode_rs_0</source_block_id>
     <sink_block_id>blocks_pdu_to_tagged_stream_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>pdus</sink_key>
   </connection>
   <connection>
-    <source_block_id>libfec_decode_rs_0_0</source_block_id>
+    <source_block_id>satellites_decode_rs_0_0</source_block_id>
     <sink_block_id>blocks_pdu_to_tagged_stream_0_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>pdus</sink_key>
   </connection>
   <connection>
-    <source_block_id>libfec_decode_rs_0_0_0</source_block_id>
+    <source_block_id>satellites_decode_rs_0_0_0</source_block_id>
     <sink_block_id>blocks_pdu_to_tagged_stream_0_1</sink_block_id>
     <source_key>out</source_key>
     <sink_key>pdus</sink_key>
