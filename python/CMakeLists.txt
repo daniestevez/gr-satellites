@@ -40,6 +40,7 @@ GR_PYTHON_INSTALL(
     nrzi_decode.py
     hdlc_deframer.py
     check_address.py
+    fixedlen_tagger.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

@@ -41,3 +41,4 @@ from nrzi_decode import nrzi_decode
 from hdlc_deframer import hdlc_deframer
 from check_address import check_address
 
+from fixedlen_tagger import fixedlen_tagger
