@@ -32,5 +32,6 @@ install(FILES
     satellites_swap_header.xml
     satellites_submit.xml
     satellites_print_timestamp.xml
+    satellites_sat3cat2_telemetry_parser.xml
     DESTINATION share/gnuradio/grc/blocks
 )
