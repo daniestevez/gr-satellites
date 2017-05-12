@@ -991,7 +991,7 @@
     </param>
   </block>
   <block>
-    <key>csp_swap_header</key>
+    <key>satellites_swap_header</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -1018,7 +1018,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>csp_swap_header_0</value>
+      <value>satellites_swap_header_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -2151,19 +2151,19 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>csp_swap_header_0</source_block_id>
+    <source_block_id>satellites_swap_header_0</source_block_id>
     <sink_block_id>lilacsat_camera_telemetry_parser_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
-    <source_block_id>csp_swap_header_0</source_block_id>
+    <source_block_id>satellites_swap_header_0</source_block_id>
     <sink_block_id>lilacsat_image_decoder_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
-    <source_block_id>csp_swap_header_0</source_block_id>
+    <source_block_id>satellites_swap_header_0</source_block_id>
     <sink_block_id>lilacsat_telemetry_parser_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
@@ -2242,7 +2242,7 @@
   </connection>
   <connection>
     <source_block_id>sids_print_timestamp_0</source_block_id>
-    <sink_block_id>csp_swap_header_0</sink_block_id>
+    <sink_block_id>satellites_swap_header_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>

@@ -414,7 +414,7 @@
     </param>
   </block>
   <block>
-    <key>csp_print_header</key>
+    <key>satellites_print_header</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -441,7 +441,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>csp_print_header_0</value>
+      <value>satellites_print_header_0</value>
     </param>
   </block>
   <block>
@@ -1170,7 +1170,7 @@
   </block>
   <connection>
     <source_block_id>aausat_aausat4_fec_0</source_block_id>
-    <sink_block_id>csp_print_header_0</sink_block_id>
+    <sink_block_id>satellites_print_header_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>

@@ -563,7 +563,7 @@
     </param>
   </block>
   <block>
-    <key>csp_check_crc</key>
+    <key>satellites_check_crc</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -594,7 +594,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>csp_check_crc_0_0</value>
+      <value>satellites_check_crc_0_0</value>
     </param>
     <param>
       <key>include_header</key>
@@ -614,7 +614,7 @@
     </param>
   </block>
   <block>
-    <key>csp_print_header</key>
+    <key>satellites_print_header</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -641,11 +641,11 @@
     </param>
     <param>
       <key>id</key>
-      <value>csp_print_header_0_0</value>
+      <value>satellites_print_header_0_0</value>
     </param>
   </block>
   <block>
-    <key>csp_swap_header</key>
+    <key>satellites_swap_header</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -672,7 +672,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>csp_swap_header_0_0</value>
+      <value>satellites_swap_header_0_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1492,13 +1492,13 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>csp_check_crc_0_0</source_block_id>
-    <sink_block_id>csp_swap_header_0_0</sink_block_id>
+    <source_block_id>satellites_check_crc_0_0</source_block_id>
+    <sink_block_id>satellites_swap_header_0_0</sink_block_id>
     <source_key>ok</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
-    <source_block_id>csp_swap_header_0_0</source_block_id>
+    <source_block_id>satellites_swap_header_0_0</source_block_id>
     <sink_block_id>sids_print_timestamp_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
@@ -1517,7 +1517,7 @@
   </connection>
   <connection>
     <source_block_id>satellites_kiss_to_pdu_0_0</source_block_id>
-    <sink_block_id>csp_check_crc_0_0</sink_block_id>
+    <sink_block_id>satellites_check_crc_0_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
@@ -1553,7 +1553,7 @@
   </connection>
   <connection>
     <source_block_id>sids_print_timestamp_0</source_block_id>
-    <sink_block_id>csp_print_header_0_0</sink_block_id>
+    <sink_block_id>satellites_print_header_0_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
