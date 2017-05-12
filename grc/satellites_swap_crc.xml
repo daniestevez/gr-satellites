@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<block>
+  <name>Swap CRC endianness</name>
+  <key>satellites_swap_crc</key>
+  <category>[Satellites]/CSP</category>
+  <import>import satellites</import>
+  <make>satellites.swap_crc()</make>
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

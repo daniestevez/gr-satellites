@@ -26,5 +26,9 @@ install(FILES
     satellites_hdlc_deframer.xml
     satellites_check_address.xml
     satellites_fixedlen_tagger.xml
+    satellites_print_header.xml
+    satellites_check_crc.xml
+    satellites_swap_crc.xml
+    satellites_swap_header.xml
     DESTINATION share/gnuradio/grc/blocks
 )

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<block>
+  <name>Print CSP Header</name>
+  <key>satellites_print_header</key>
+  <category>[Satellites]/CSP</category>
+  <import>import satellites</import>
+  <make>satellites.print_header()</make>
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+</block>

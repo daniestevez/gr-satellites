@@ -41,6 +41,12 @@ GR_PYTHON_INSTALL(
     hdlc_deframer.py
     check_address.py
     fixedlen_tagger.py
+    csp_header.py
+    print_header.py
+    crc32c.py
+    check_crc.py
+    swap_crc.py
+    swap_header.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
