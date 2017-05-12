@@ -18,5 +18,12 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
+    satellites_kiss_to_pdu.xml
+    satellites_pdu_to_kiss.xml
+    satellites_hdlc_framer.xml
+    satellites_nrzi_encode.xml
+    satellites_nrzi_decode.xml
+    satellites_hdlc_deframer.xml
+    satellites_check_address.xml
     DESTINATION share/gnuradio/grc/blocks
 )

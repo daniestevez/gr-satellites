@@ -32,3 +32,12 @@ except ImportError:
 
 # import any pure python here
 #
+
+from kiss_to_pdu import kiss_to_pdu
+from pdu_to_kiss import pdu_to_kiss
+from hdlc_framer import hdlc_framer
+from nrzi_encode import nrzi_encode
+from nrzi_decode import nrzi_decode
+from hdlc_deframer import hdlc_deframer
+from check_address import check_address
+

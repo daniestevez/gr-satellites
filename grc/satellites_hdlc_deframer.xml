@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<block>
+  <name>HDLC Deframer</name>
+  <key>satellites_hdlc_deframer</key>
+  <category>[Satellites]/AX.25</category>
+  <import>import satellites</import>
+  <make>satellites.hdlc_deframer(check_fcs=$check_fcs, max_length=$max_length)</make>
+  <param>
+    <name>Check FCS</name>
+    <key>check_fcs</key>
+    <value>True</value>
+    <type>bool</type>
+    <option>
+      <name>True</name>
+      <key>True</key>
+    </option>
+    <option>
+      <name>False</name>
+      <key>False</key>
+    </option>
+  </param>
+  <param>
+    <name>Maximum frame length (bytes)</name>
+    <key>max_length</key>
+    <value>10000</value>
+    <type>int</type>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>
