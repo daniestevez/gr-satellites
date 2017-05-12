@@ -2861,7 +2861,7 @@
     </param>
   </block>
   <block>
-    <key>sids_print_timestamp</key>
+    <key>satellites_print_timestamp</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -2892,7 +2892,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>sids_print_timestamp_0</value>
+      <value>satellites_print_timestamp_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -2904,7 +2904,7 @@
     </param>
   </block>
   <block>
-    <key>sids_submit</key>
+    <key>satellites_submit</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -2931,7 +2931,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>sids_submit_0</value>
+      <value>satellites_submit_0</value>
     </param>
     <param>
       <key>latitude</key>
@@ -3419,13 +3419,13 @@
   </connection>
   <connection>
     <source_block_id>satellites_kiss_to_pdu_0</source_block_id>
-    <sink_block_id>sids_print_timestamp_0</sink_block_id>
+    <sink_block_id>satellites_print_timestamp_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>satellites_kiss_to_pdu_0</source_block_id>
-    <sink_block_id>sids_submit_0</sink_block_id>
+    <sink_block_id>satellites_submit_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
@@ -3437,13 +3437,13 @@
   </connection>
   <connection>
     <source_block_id>satellites_kiss_to_pdu_0_0</source_block_id>
-    <sink_block_id>sids_print_timestamp_0</sink_block_id>
+    <sink_block_id>satellites_print_timestamp_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>satellites_kiss_to_pdu_0_0</source_block_id>
-    <sink_block_id>sids_submit_0</sink_block_id>
+    <sink_block_id>satellites_submit_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
@@ -3455,13 +3455,13 @@
   </connection>
   <connection>
     <source_block_id>satellites_kiss_to_pdu_0_1</source_block_id>
-    <sink_block_id>sids_print_timestamp_0</sink_block_id>
+    <sink_block_id>satellites_print_timestamp_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>satellites_kiss_to_pdu_0_1</source_block_id>
-    <sink_block_id>sids_submit_0</sink_block_id>
+    <sink_block_id>satellites_submit_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
@@ -3496,7 +3496,7 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>sids_print_timestamp_0</source_block_id>
+    <source_block_id>satellites_print_timestamp_0</source_block_id>
     <sink_block_id>blocks_message_debug_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>print_pdu</sink_key>
