@@ -315,7 +315,7 @@
     </param>
   </block>
   <block>
-    <key>ao40_fec_decoder</key>
+    <key>satellites_ao40_fec_decoder</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -342,7 +342,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>ao40_fec_decoder_0</value>
+      <value>satellites_ao40_fec_decoder_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1001,7 +1001,7 @@
     </param>
   </block>
   <block>
-    <key>funcube_telemetry_parser</key>
+    <key>satellites_funcube_telemetry_parser</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -1028,7 +1028,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>funcube_telemetry_parser_0</value>
+      <value>satellites_funcube_telemetry_parser_0</value>
     </param>
   </block>
   <block>
@@ -1351,13 +1351,13 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>ao40_fec_decoder_0</source_block_id>
+    <source_block_id>satellites_ao40_fec_decoder_0</source_block_id>
     <sink_block_id>satellites_print_timestamp_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
-    <source_block_id>ao40_fec_decoder_0</source_block_id>
+    <source_block_id>satellites_ao40_fec_decoder_0</source_block_id>
     <sink_block_id>satellites_submit_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
@@ -1400,7 +1400,7 @@
   </connection>
   <connection>
     <source_block_id>digital_binary_slicer_fb_0</source_block_id>
-    <sink_block_id>ao40_fec_decoder_0</sink_block_id>
+    <sink_block_id>satellites_ao40_fec_decoder_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -1436,7 +1436,7 @@
   </connection>
   <connection>
     <source_block_id>satellites_print_timestamp_0</source_block_id>
-    <sink_block_id>funcube_telemetry_parser_0</sink_block_id>
+    <sink_block_id>satellites_funcube_telemetry_parser_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
