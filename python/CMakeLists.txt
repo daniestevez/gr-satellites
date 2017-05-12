@@ -47,6 +47,8 @@ GR_PYTHON_INSTALL(
     check_crc.py
     swap_crc.py
     swap_header.py
+    submit.py
+    print_timestamp.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

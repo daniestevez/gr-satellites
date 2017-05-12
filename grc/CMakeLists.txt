@@ -30,5 +30,7 @@ install(FILES
     satellites_check_crc.xml
     satellites_swap_crc.xml
     satellites_swap_header.xml
+    satellites_submit.xml
+    satellites_print_timestamp.xml
     DESTINATION share/gnuradio/grc/blocks
 )
