@@ -22,5 +22,6 @@
 ########################################################################
 install(FILES
     api.h
+    decode_rs.h
     DESTINATION include/satellites
 )

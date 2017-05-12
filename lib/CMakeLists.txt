@@ -26,6 +26,7 @@ include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
 list(APPEND satellites_sources
+    decode_rs_impl.cc
 )
 
 set(satellites_sources "${satellites_sources}" PARENT_SCOPE)
@@ -35,7 +36,7 @@ if(NOT satellites_sources)
 endif(NOT satellites_sources)
 
 add_library(gnuradio-satellites SHARED ${satellites_sources})
-target_link_libraries(gnuradio-satellites ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES})
+target_link_libraries(gnuradio-satellites fec ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES})
 set_target_properties(gnuradio-satellites PROPERTIES DEFINE_SYMBOL "gnuradio_satellites_EXPORTS")
 
 if(APPLE)
@@ -53,26 +54,26 @@ GR_LIBRARY_FOO(gnuradio-satellites RUNTIME_COMPONENT "satellites_runtime" DEVEL_
 ########################################################################
 # Build and register unit test
 ########################################################################
-include(GrTest)
-
-include_directories(${CPPUNIT_INCLUDE_DIRS})
-
-list(APPEND test_satellites_sources
-    ${CMAKE_CURRENT_SOURCE_DIR}/test_satellites.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/qa_satellites.cc
-)
-
-add_executable(test-satellites ${test_satellites_sources})
-
-target_link_libraries(
-  test-satellites
-  ${GNURADIO_RUNTIME_LIBRARIES}
-  ${Boost_LIBRARIES}
-  ${CPPUNIT_LIBRARIES}
-  gnuradio-satellites
-)
-
-GR_ADD_TEST(test_satellites test-satellites)
+#include(GrTest)
+#
+#include_directories(${CPPUNIT_INCLUDE_DIRS})
+#
+#list(APPEND test_satellites_sources
+#    ${CMAKE_CURRENT_SOURCE_DIR}/test_satellites.cc
+#    ${CMAKE_CURRENT_SOURCE_DIR}/qa_satellites.cc
+#)
+#
+#add_executable(test-satellites ${test_satellites_sources})
+#
+#target_link_libraries(
+#  test-satellites
+#  ${GNURADIO_RUNTIME_LIBRARIES}
+#  ${Boost_LIBRARIES}
+#  ${CPPUNIT_LIBRARIES}
+#  gnuradio-satellites
+#)
+#
+#GR_ADD_TEST(test_satellites test-satellites)
 
 ########################################################################
 # Print summary
