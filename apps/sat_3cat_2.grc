@@ -1382,7 +1382,7 @@
     </param>
   </block>
   <block>
-    <key>sat3cat2_telemetry_parser</key>
+    <key>satellites_sat3cat2_telemetry_parser</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -1409,7 +1409,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>sat3cat2_telemetry_parser_0</value>
+      <value>satellites_sat3cat2_telemetry_parser_0</value>
     </param>
   </block>
   <block>
@@ -1608,7 +1608,7 @@
   </connection>
   <connection>
     <source_block_id>satellites_print_timestamp_0</source_block_id>
-    <sink_block_id>sat3cat2_telemetry_parser_0</sink_block_id>
+    <sink_block_id>satellites_sat3cat2_telemetry_parser_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
