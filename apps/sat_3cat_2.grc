@@ -963,7 +963,7 @@
     </param>
   </block>
   <block>
-    <key>kiss_check_address</key>
+    <key>satellites_check_address</key>
     <param>
       <key>address</key>
       <value>3CAT2</value>
@@ -998,7 +998,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>kiss_check_address_0</value>
+      <value>satellites_check_address_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1010,7 +1010,7 @@
     </param>
   </block>
   <block>
-    <key>kiss_hdlc_deframer</key>
+    <key>satellites_hdlc_deframer</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -1041,7 +1041,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>kiss_hdlc_deframer_0</value>
+      <value>satellites_hdlc_deframer_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1057,7 +1057,7 @@
     </param>
   </block>
   <block>
-    <key>kiss_nrzi_decode</key>
+    <key>satellites_nrzi_decode</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -1084,7 +1084,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>kiss_nrzi_decode_0</value>
+      <value>satellites_nrzi_decode_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1096,7 +1096,7 @@
     </param>
   </block>
   <block>
-    <key>kiss_pdu_to_kiss</key>
+    <key>satellites_pdu_to_kiss</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -1123,7 +1123,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>kiss_pdu_to_kiss_0</value>
+      <value>satellites_pdu_to_kiss_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1536,7 +1536,7 @@
   </connection>
   <connection>
     <source_block_id>digital_binary_slicer_fb_0</source_block_id>
-    <sink_block_id>kiss_nrzi_decode_0</sink_block_id>
+    <sink_block_id>satellites_nrzi_decode_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -1571,25 +1571,25 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>kiss_check_address_0</source_block_id>
+    <source_block_id>satellites_check_address_0</source_block_id>
     <sink_block_id>sids_print_timestamp_0</sink_block_id>
     <source_key>ok</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
-    <source_block_id>kiss_hdlc_deframer_0</source_block_id>
-    <sink_block_id>kiss_check_address_0</sink_block_id>
+    <source_block_id>satellites_hdlc_deframer_0</source_block_id>
+    <sink_block_id>satellites_check_address_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
-    <source_block_id>kiss_nrzi_decode_0</source_block_id>
-    <sink_block_id>kiss_hdlc_deframer_0</sink_block_id>
+    <source_block_id>satellites_nrzi_decode_0</source_block_id>
+    <sink_block_id>satellites_hdlc_deframer_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>kiss_pdu_to_kiss_0</source_block_id>
+    <source_block_id>satellites_pdu_to_kiss_0</source_block_id>
     <sink_block_id>blocks_socket_pdu_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>pdus</sink_key>
@@ -1602,7 +1602,7 @@
   </connection>
   <connection>
     <source_block_id>sids_print_timestamp_0</source_block_id>
-    <sink_block_id>kiss_pdu_to_kiss_0</sink_block_id>
+    <sink_block_id>satellites_pdu_to_kiss_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>

@@ -833,7 +833,7 @@
     </param>
   </block>
   <block>
-    <key>kiss_kiss_to_pdu</key>
+    <key>satellites_kiss_to_pdu</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -864,7 +864,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>kiss_kiss_to_pdu_0_0</value>
+      <value>satellites_kiss_to_pdu_0_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1457,7 +1457,7 @@
   </connection>
   <connection>
     <source_block_id>blocks_pdu_to_tagged_stream_0</source_block_id>
-    <sink_block_id>kiss_kiss_to_pdu_0_0</sink_block_id>
+    <sink_block_id>satellites_kiss_to_pdu_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -1516,7 +1516,7 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>kiss_kiss_to_pdu_0_0</source_block_id>
+    <source_block_id>satellites_kiss_to_pdu_0_0</source_block_id>
     <sink_block_id>csp_check_crc_0_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
