@@ -57,6 +57,7 @@ GR_PYTHON_INSTALL(
     gomx3_beacon_parser.py
     adsb_kml.py
     gomx1_beacon_parser.py
+    ks1q_header_remover.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
