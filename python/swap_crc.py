@@ -51,7 +51,7 @@ class swap_crc(gr.basic_block):
         except ValueError as e:
             return
         if not header.crc:
-            self.message_port_pub(pmt.intern('ok'), msg_pmt)
+            self.message_port_pub(pmt.intern('out'), msg_pmt)
         else:
             if len(packet) < 8: # bytes CSP header, 4 bytes CRC-32C
                 # malformed
