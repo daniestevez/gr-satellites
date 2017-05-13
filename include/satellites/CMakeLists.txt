@@ -26,5 +26,7 @@ install(FILES
     ao40_syncframe.h
     ao40_deinterleaver.h
     ao40_rs_decoder.h
+    ax100_decode.h
+    u482c_decode.h
     DESTINATION include/satellites
 )

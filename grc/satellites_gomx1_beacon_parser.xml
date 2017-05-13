@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<block>
+  <name>GOMX-1 Beacon Parser</name>
+  <key>satellites_gomx1_beacon_parser</key>
+  <category>[Satellites]/GOMspace</category>
+  <import>import satellites</import>
+  <make>satellites.gomx1_beacon_parser()</make>
+   <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+</block>

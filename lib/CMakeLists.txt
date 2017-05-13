@@ -30,6 +30,10 @@ list(APPEND satellites_sources
     ao40_syncframe_impl.cc
     ao40_deinterleaver_impl.cc
     ao40_rs_decoder_impl.cc
+    ax100_decode_impl.cc
+    u482c_decode_impl.cc
+    randomizer.c
+    golay24.c
 )
 
 set(satellites_sources "${satellites_sources}" PARENT_SCOPE)

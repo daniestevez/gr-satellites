@@ -12,6 +12,8 @@
 #include "satellites/ao40_syncframe.h"
 #include "satellites/ao40_deinterleaver.h"
 #include "satellites/ao40_rs_decoder.h"
+#include "satellites/ax100_decode.h"
+#include "satellites/u482c_decode.h"
 %}
 
 %include "satellites/decode_rs.h"
@@ -23,3 +25,7 @@ GR_SWIG_BLOCK_MAGIC2(satellites, ao40_syncframe);
 GR_SWIG_BLOCK_MAGIC2(satellites, ao40_deinterleaver);
 %include "satellites/ao40_rs_decoder.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, ao40_rs_decoder);
+%include "satellites/ax100_decode.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, ax100_decode);
+%include "satellites/u482c_decode.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, u482c_decode);

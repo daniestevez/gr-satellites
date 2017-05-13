@@ -36,6 +36,11 @@ install(FILES
     satellites_ao40_syncframe.xml
     satellites_ao40_deinterleaver.xml
     satellites_ao40_rs_decoder.xml
-    satellites_funcube_telemetry_parser.xml 
+    satellites_funcube_telemetry_parser.xml
+    satellites_gomx3_beacon_parser.xml
+    satellites_adsb_kml.xml
+    satellites_ax100_decode.xml
+    satellites_u482c_decode.xml
+    satellites_gomx1_beacon_parser.xml
     DESTINATION share/gnuradio/grc/blocks
 )
