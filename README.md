@@ -33,12 +33,12 @@ possible to perform Doppler correction with Gpredict. There are also frontend
 streamers to use a conventional receiver connected via soundcard and recordings
 (audio WAV and IQ).
 
-Each satellite has its own decoder. You can open the `.grc` file with
-`gnuradio-companion` and edit the parameters (they are on the upper part of the
-flowgraph). You can also run the `.py` script and specify the parameters on the
-command line. Use the -h flag to get help on how to specify the parameters. The
-decoder will printing each telemetry packet in the terminal as soon as it
-receives it.
+Each satellite has its own decoder in the `apps/` folder. You can open the
+`.grc` file with `gnuradio-companion` and edit the parameters (they are on the
+upper part of the flowgraph). You can also generate and run the corresponding
+`.py` script and specify the parameters on the command line. Use the -h flag to
+get help on how to specify the parameters. The decoder will printing each
+telemetry packet in the terminal as soon as it receives it.
 
 ## Satellites supported
 
@@ -159,39 +159,20 @@ receives it.
     two interleaved (160,128) Reed-Solomon codes. You must use SSB mode to
     receive this satellite.
 
-## Required GNUradio OOT modules
+## Dependencies
 
-The following GNUradio out-of-tree modules are required in several of the
-decoders. You should probably install all of them.
-
-  * [gr-kiss](https://github.com/daniestevez/gr-kiss) Tools for AX.25 and KISS
-  * [gr-synctags](https://github.com/daniestevez/gr-synctags) Tools for dealing
-     with GNUradio synctags easily
-  * [gr-csp](https://github.com/daniestevez/gr-csp) Tools for CSP protocol
-  * [gr-sids](https://github.com/daniestevez/gr-sids) Telemetry submission using
-    the SiDS protocol
-  * [gr-libfec](https://github.com/daniestevez/gr-libfec) FEC decoders using Phil Karn's
-    libfec.
-
-You also need to install Phil Karn's KA9Q `libfec` for some of the satellites
-that use Reed-Solomon or convolutional codes (other include their own
-decoder). A fork that builds in modern linux systems can be found
-[here](https://github.com/daniestevez/libfec).
+  * Phil Karn's KA9Q `libfec`. A fork that builds in modern linux systems can be found
+    [here](https://github.com/daniestevez/libfec).
+  * [construct](https://construct.readthedocs.io/en/latest/), at least version 2.8. This
+    is only used in some of the telemetry parsers.
 
 The following GNUradio out-of-tree modules are only required for the decoder of
 one particular satellite. You may install only the ones you're interested in.
 
-  * [gr-3cat2](https://github.com/daniestevez/gr-3cat2) 3CAT-2 telemetry parser
   * [gr-aausat](https://github.com/daniestevez/gr-aausat) AAUSAT-4 decoder and
     telemetry parser
-  * [gr-ao40](https://github.com/daniestevez/gr-ao40) AO-40 FEC decoder, used
-    in the FUNcube satellites
-  * [gr-ax100](https://github.com/daniestevez/gr-ax100) Decoders and telemetry
-    parsers for satellites using GomSpace radios: AISAT, ATHENOXAT-1, GOMX-1,
-    GOMX-3, TW-1A, TW-1B, TW1-C
   * [beesat-sdr](https://github.com/daniestevez/beesat-sdr) BEESAT decoder and TNC
-  * [gr-ks1q](https://github.com/daniestevez/gr-ks1q) KS-1Q decoder
-  * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) LilacSat-2 decoder
+  * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) LilacSat-2 and LilacSat-1 decoders
 
 ## Hierarchichal flowgraphs
 
@@ -204,6 +185,7 @@ this step as part of installing gr-satellites.
 
 This is the list of hierarchical flowgraphs in gr-satellites:
 
+  * `ao40_fec_decoder.grc` AO-40 FEC decoder
   * `ccsds_descrambler.grc` CCSDS additive descrambler (using unpacked PDUs)
   * `ccsds_viterbi.grc` Viterbi decoder with CCSS/NASA-GSFC convention
      (POLYB, ~POLYA). Output is unpacked bits.
