@@ -136,7 +136,7 @@
     </param>
   </block>
   <block>
-    <key>ax100_adsb_kml</key>
+    <key>satellites_adsb_kml</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -163,11 +163,11 @@
     </param>
     <param>
       <key>id</key>
-      <value>ax100_adsb_kml_0</value>
+      <value>satellites_adsb_kml_0</value>
     </param>
   </block>
   <block>
-    <key>ax100_beacon_parser</key>
+    <key>satellites_gomx3_beacon_parser</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -194,11 +194,11 @@
     </param>
     <param>
       <key>id</key>
-      <value>ax100_beacon_parser_0</value>
+      <value>satellites_gomx3_beacon_parser_0</value>
     </param>
   </block>
   <block>
-    <key>ax100_gomx3_rs_decode</key>
+    <key>satellites_ax100_decode</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -225,7 +225,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>ax100_gomx3_rs_decode_0</value>
+      <value>satellites_ax100_decode_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1322,7 +1322,7 @@
     </param>
   </block>
   <connection>
-    <source_block_id>ax100_gomx3_rs_decode_0</source_block_id>
+    <source_block_id>satellites_ax100_decode_0</source_block_id>
     <sink_block_id>satellites_check_crc_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
@@ -1395,13 +1395,13 @@
   </connection>
   <connection>
     <source_block_id>satellites_print_timestamp_0</source_block_id>
-    <sink_block_id>ax100_adsb_kml_0</sink_block_id>
+    <sink_block_id>satellites_adsb_kml_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>satellites_print_timestamp_0</source_block_id>
-    <sink_block_id>ax100_beacon_parser_0</sink_block_id>
+    <sink_block_id>satellites_gomx3_beacon_parser_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
@@ -1413,13 +1413,13 @@
   </connection>
   <connection>
     <source_block_id>sync_to_pdu_packed_0</source_block_id>
-    <sink_block_id>ax100_gomx3_rs_decode_0</sink_block_id>
+    <sink_block_id>satellites_ax100_decode_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>sync_to_pdu_packed_0_0</source_block_id>
-    <sink_block_id>ax100_gomx3_rs_decode_0</sink_block_id>
+    <sink_block_id>satellites_ax100_decode_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>

@@ -199,7 +199,7 @@
     </param>
   </block>
   <block>
-    <key>ax100_gomx1_beacon_parser</key>
+    <key>satellites_gomx1_beacon_parser</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -226,11 +226,11 @@
     </param>
     <param>
       <key>id</key>
-      <value>ax100_gomx1_beacon_parser_0</value>
+      <value>satellites_gomx1_beacon_parser_0</value>
     </param>
   </block>
   <block>
-    <key>ax100_gomx1_decode</key>
+    <key>satellites_u482c_decode</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -257,7 +257,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>ax100_gomx1_decode_0</value>
+      <value>satellites_u482c_decode_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1110,13 +1110,13 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>ax100_gomx1_decode_0</source_block_id>
+    <source_block_id>satellites_u482c_decode_0</source_block_id>
     <sink_block_id>satellites_print_timestamp_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
-    <source_block_id>ax100_gomx1_decode_0</source_block_id>
+    <source_block_id>satellites_u482c_decode_0</source_block_id>
     <sink_block_id>satellites_submit_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
@@ -1165,13 +1165,13 @@
   </connection>
   <connection>
     <source_block_id>satellites_print_timestamp_0</source_block_id>
-    <sink_block_id>ax100_gomx1_beacon_parser_0</sink_block_id>
+    <sink_block_id>satellites_gomx1_beacon_parser_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>sync_to_pdu_packed_0</source_block_id>
-    <sink_block_id>ax100_gomx1_decode_0</sink_block_id>
+    <sink_block_id>satellites_u482c_decode_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
