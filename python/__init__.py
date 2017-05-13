@@ -58,3 +58,5 @@ from funcube_telemetry_parser import funcube_telemetry_parser
 from gomx3_beacon_parser import gomx3_beacon_parser
 from adsb_kml import adsb_kml
 from gomx1_beacon_parser import gomx1_beacon_parser
+
+from ks1q_header_remover import ks1q_header_remover
