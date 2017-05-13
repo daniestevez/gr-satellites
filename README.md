@@ -17,6 +17,21 @@ correct timestamps for the packets when uploading them to the telemetry
 server. It also simplifies Doppler correction of the recording with Gpredict if
 the recording was not Doppler corrected.
 
+## Dependencies
+
+  * Phil Karn's KA9Q `libfec`. A fork that builds in modern linux systems can be found
+    [here](https://github.com/daniestevez/libfec).
+  * [construct](https://construct.readthedocs.io/en/latest/), at least version 2.8. This
+    is only used in some of the telemetry parsers.
+
+The following GNUradio out-of-tree modules are only required for the decoder of
+one particular satellite. You may install only the ones you're interested in.
+
+  * [gr-aausat](https://github.com/daniestevez/gr-aausat) AAUSAT-4 decoder and
+    telemetry parser
+  * [beesat-sdr](https://github.com/daniestevez/beesat-sdr) BEESAT decoder and TNC
+  * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) LilacSat-2 and LilacSat-1 decoders
+
 ## Usage
 
 The signal is fed to the decoders using a UDP stream. The format used is the
@@ -158,21 +173,6 @@ telemetry packet in the terminal as soon as it receives it.
     block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
     two interleaved (160,128) Reed-Solomon codes. You must use SSB mode to
     receive this satellite.
-
-## Dependencies
-
-  * Phil Karn's KA9Q `libfec`. A fork that builds in modern linux systems can be found
-    [here](https://github.com/daniestevez/libfec).
-  * [construct](https://construct.readthedocs.io/en/latest/), at least version 2.8. This
-    is only used in some of the telemetry parsers.
-
-The following GNUradio out-of-tree modules are only required for the decoder of
-one particular satellite. You may install only the ones you're interested in.
-
-  * [gr-aausat](https://github.com/daniestevez/gr-aausat) AAUSAT-4 decoder and
-    telemetry parser
-  * [beesat-sdr](https://github.com/daniestevez/beesat-sdr) BEESAT decoder and TNC
-  * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) LilacSat-2 and LilacSat-1 decoders
 
 ## Hierarchichal flowgraphs
 
