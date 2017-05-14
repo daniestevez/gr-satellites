@@ -44,5 +44,5 @@ install(FILES
     satellites_gomx1_beacon_parser.xml
     satellites_ks1q_header_remover.xml
     satellites_decode_rs.xml
-    DESTINATION share/gnuradio/grc/blocks
+    satellites_lilacsat1_demux.xml DESTINATION share/gnuradio/grc/blocks
 )
