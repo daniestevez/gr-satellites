@@ -17,9 +17,14 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 
+include(GrMiscUtils)
 include(GrPython)
 
 GR_PYTHON_INSTALL(
     PROGRAMS
     DESTINATION bin
 )
+
+message("Compiling GRC hier blocks...")
+message(${CMAKE_CURRENT_BINARY_DIR})
+GRCC(by701.grc lilacsat2.grc,  ${CMAKE_CURRENT_BINARY_DIR})

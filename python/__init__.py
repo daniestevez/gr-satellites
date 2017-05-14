@@ -62,7 +62,7 @@ from gomx1_beacon_parser import gomx1_beacon_parser
 from ks1q_header_remover import ks1q_header_remover
 from lilacsat1_demux import lilacsat1_demux
 
-from by701_image_decoder import image_decoder
-from by701_telemetry_parser import telemetry_parser
-from by701_camera_telemetry_parser import camera_telemetry_parser
+from by701_image_decoder import by701_image_decoder
+from by701_telemetry_parser import by701_telemetry_parser
+from by701_camera_telemetry_parser import by701_camera_telemetry_parser
 
