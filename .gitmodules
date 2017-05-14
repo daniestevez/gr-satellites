@@ -1,0 +1,3 @@
+[submodule "satellite-recordings"]
+	path = satellite-recordings
+	url = https://github.com/daniestevez/satellite-recordings
