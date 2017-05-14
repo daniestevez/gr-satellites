@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<block>
+  <name>BY70-1 Telemetry Parser</name>
+  <key>satellites_by701_telemetry_parser</key>
+  <category>[Satellites]/Telemetry</category>
+  <import>import satellites</import>
+  <make>satellites.by701_telemetry_parser()</make>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+</block>

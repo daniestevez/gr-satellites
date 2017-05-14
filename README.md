@@ -30,7 +30,12 @@ one particular satellite. You may install only the ones you're interested in.
   * [gr-aausat](https://github.com/daniestevez/gr-aausat) AAUSAT-4 decoder and
     telemetry parser
   * [beesat-sdr](https://github.com/daniestevez/beesat-sdr) BEESAT decoder and TNC
-  * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) LilacSat-2 and LilacSat-1 decoders
+  * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) This only needs to be installed
+  if you want to submit telemetry to HIT. A complete decoder which does not use gr-lilacsat
+  is already included in gr-satellites.
+
+If you want to use the realtime image decoder for BY70-1, you also need to install
+[feh](https://feh.finalrewind.org/).
 
 ## Usage
 
@@ -99,8 +104,8 @@ telemetry packet in the terminal as soon as it receives it.
     satellite. It has an optical camera on board and it transmits JPEG images
     together with the telemetry. `by701` includes a complete telemetry decoder
     and image receive software. This satellite launched on 28 December 2016 into a 520x220km
-    orbit. The perigee is too low because of a problem in the launch. The orbit will
-    only last a couple months.
+    orbit. The perigee is too low because of a problem in the launch. BY70-1 reentered
+    on 18 February 2017. You must use wide SSB mode to receive this satellite.
   * `galassia`
     [GALASSIA](https://eoportal.org/web/eoportal/satellite-missions/content/-/article/galass-1),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses the CSP
@@ -119,7 +124,7 @@ telemetry packet in the terminal as soon as it receives it.
     which transmits 19k2 GFSK telemetry in the 70cm band. It uses the CSP
     protocol and FEC with a (255,223) Reed-Solomon code. It also uses a G3RUH
     scrambler. The beacons include information from ADS-B beacons transmitted by
-    terrestrial aircraft. Note that GOMX-3 will decay during October 2016. You
+    terrestrial aircraft. GOMX-3 reentered on 18 October 2016. You
     must use FM mode to receive this satellite.
   * `ks_1q`
     [KS-1Q](http://space.skyrocket.de/doc_sdat/cas-2t.htm), which transmits 20k
