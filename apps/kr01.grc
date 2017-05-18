@@ -374,37 +374,6 @@
     </param>
   </block>
   <block>
-    <key>blocks_message_debug</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1104, 704)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_message_debug_0</value>
-    </param>
-  </block>
-  <block>
     <key>blocks_short_to_float</key>
     <param>
       <key>alias</key>
@@ -1311,6 +1280,37 @@
     </param>
   </block>
   <block>
+    <key>satellites_kr01_telemetry_parser</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(968, 768)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>satellites_kr01_telemetry_parser_0</value>
+    </param>
+  </block>
+  <block>
     <key>satellites_nrzi_decode</key>
     <param>
       <key>alias</key>
@@ -1578,9 +1578,9 @@
   </connection>
   <connection>
     <source_block_id>satellites_print_timestamp_0</source_block_id>
-    <sink_block_id>blocks_message_debug_0</sink_block_id>
+    <sink_block_id>satellites_kr01_telemetry_parser_0</sink_block_id>
     <source_key>out</source_key>
-    <sink_key>print_pdu</sink_key>
+    <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>satellites_print_timestamp_0</source_block_id>

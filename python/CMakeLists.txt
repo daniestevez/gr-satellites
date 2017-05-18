@@ -63,6 +63,8 @@ GR_PYTHON_INSTALL(
     by701_telemetry_parser.py
     by701_camera_telemetry_parser.py
     by701_telemetry.py
+    kr01_telemetry.py
+    kr01_telemetry_parser.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

@@ -66,3 +66,4 @@ from by701_image_decoder import by701_image_decoder
 from by701_telemetry_parser import by701_telemetry_parser
 from by701_camera_telemetry_parser import by701_camera_telemetry_parser
 
+from kr01_telemetry_parser import kr01_telemetry_parser
