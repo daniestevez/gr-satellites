@@ -22,8 +22,8 @@
 from construct import *
 
 Mode = Enum(Int8ub,\
-            Safe = 0,\
-            Nominal = 1)
+            Otherwise = 0,\
+            MissionMode = 1)
 
 class BatVoltageAdapter(Adapter):
     def _encode(self, obj, context):
@@ -56,12 +56,13 @@ Temp = TempAdapter(Int8ub)
 SpacecraftMode = Enum(Int8ub,\
                       GndDebug = 0,\
                       Initial = 1,\
-                      Standby = 2,\
+                      Commissioning = 2,\
                       Mission = 3,\
                       Comm = 4,\
                       Powersafe = 17,\
                       Detumble = 18,\
-                      Debug = 19)
+                      Debug = 19,\
+                      Standby = 32)
 
 Beacon = Struct(
         'mode' / Mode,
