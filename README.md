@@ -126,6 +126,10 @@ telemetry packet in the terminal as soon as it receives it.
     scrambler. The beacons include information from ADS-B beacons transmitted by
     terrestrial aircraft. GOMX-3 reentered on 18 October 2016. You
     must use FM mode to receive this satellite.
+ * `il01`
+    [QB50 IL01 (DUCHIFAT-2)](http://www.h-space-lab.org/php/hoopoe-en.php),
+    which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
+    scrambler. You must use wide SSB mode to receive this satellite.
   * `kr01`
     [QB50 KR01 (LINK)](http://space.skyrocket.de/doc_sdat/link.htm),
     which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
