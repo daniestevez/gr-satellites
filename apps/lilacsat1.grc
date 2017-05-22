@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<?grc format='1' created='3.7.11'?>
+<?grc format='1' created='3.7.12'?>
 <flow_graph>
   <timestamp>Tue Aug  4 09:55:54 2015</timestamp>
   <block>
@@ -506,6 +506,10 @@
     <param>
       <key>short_id</key>
       <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
     </param>
     <param>
       <key>type</key>
@@ -1108,6 +1112,10 @@
       <value></value>
     </param>
     <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
       <key>type</key>
       <value>string</value>
     </param>
@@ -1321,21 +1329,13 @@
     </param>
   </block>
   <block>
-    <key>digital_correlate_access_code_tag_bb</key>
-    <param>
-      <key>access_code</key>
-      <value>"00011010110011111111110000011101"</value>
-    </param>
+    <key>digital_correlate_access_code_tag_xx</key>
     <param>
       <key>alias</key>
       <value></value>
     </param>
     <param>
       <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
       <value></value>
     </param>
     <param>
@@ -1355,6 +1355,14 @@
       <value>digital_correlate_access_code_tag_bb_0_0_0_0</value>
     </param>
     <param>
+      <key>access_code</key>
+      <value>"00011010110011111111110000011101"</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
       <key>maxoutbuf</key>
       <value>0</value>
     </param>
@@ -1372,21 +1380,13 @@
     </param>
   </block>
   <block>
-    <key>digital_correlate_access_code_tag_bb</key>
-    <param>
-      <key>access_code</key>
-      <value>"00011010110011111111110000011101"</value>
-    </param>
+    <key>digital_correlate_access_code_tag_xx</key>
     <param>
       <key>alias</key>
       <value></value>
     </param>
     <param>
       <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
       <value></value>
     </param>
     <param>
@@ -1404,6 +1404,14 @@
     <param>
       <key>id</key>
       <value>digital_correlate_access_code_tag_bb_0_0_0_0_0</value>
+    </param>
+    <param>
+      <key>access_code</key>
+      <value>"00011010110011111111110000011101"</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1838,6 +1846,10 @@
       <value></value>
     </param>
     <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
       <key>type</key>
       <value>string</value>
     </param>
@@ -1879,6 +1891,10 @@
     <param>
       <key>short_id</key>
       <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
     </param>
     <param>
       <key>type</key>
@@ -1967,6 +1983,10 @@
       <value></value>
     </param>
     <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
       <key>type</key>
       <value>eng_float</value>
     </param>
@@ -2041,6 +2061,10 @@
       <value></value>
     </param>
     <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
       <key>type</key>
       <value>intx</value>
     </param>
@@ -2082,6 +2106,10 @@
     <param>
       <key>short_id</key>
       <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
     </param>
     <param>
       <key>type</key>

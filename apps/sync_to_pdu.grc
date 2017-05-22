@@ -129,7 +129,7 @@
     </param>
   </block>
   <block>
-    <key>digital_correlate_access_code_tag_bb</key>
+    <key>digital_correlate_access_code_tag_xx</key>
     <param>
       <key>access_code</key>
       <value>sync</value>
