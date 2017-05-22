@@ -24,7 +24,7 @@ from gnuradio import gr
 import pmt
 import array
 
-from csp.csp_header import CSP
+from csp_header import CSP
 import gomx3_beacon
 
 class adsb_kml(gr.basic_block):
