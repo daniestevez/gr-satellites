@@ -280,7 +280,7 @@
     </param>
     <param>
       <key>num_samples</key>
-      <value>1024*4</value>
+      <value>1024</value>
     </param>
     <param>
       <key>reference</key>
@@ -687,7 +687,7 @@
     </param>
     <param>
       <key>w</key>
-      <value>0.04</value>
+      <value>0.1</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -722,7 +722,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>2</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -793,7 +793,7 @@
     </param>
     <param>
       <key>w</key>
-      <value>0.020</value>
+      <value>0.010</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -848,7 +848,7 @@
     </param>
     <param>
       <key>mu</key>
-      <value>0.03</value>
+      <value>0.05</value>
     </param>
     <param>
       <key>id</key>
@@ -911,7 +911,7 @@
     </param>
     <param>
       <key>loop_bw</key>
-      <value>0.1</value>
+      <value>0.05</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -919,7 +919,7 @@
     </param>
     <param>
       <key>max_dev</key>
-      <value>1.5</value>
+      <value>0.05</value>
     </param>
     <param>
       <key>minoutbuf</key>
@@ -1315,7 +1315,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1648,6 +1648,12 @@
   <connection>
     <source_block_id>satellites_hdlc_deframer_0</source_block_id>
     <sink_block_id>satellites_pdu_to_kiss_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>satellites_hdlc_deframer_0</source_block_id>
+    <sink_block_id>satellites_print_timestamp_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>

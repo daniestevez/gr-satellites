@@ -1254,7 +1254,7 @@
     </param>
     <param>
       <key>seed</key>
-      <value>0x7F</value>
+      <value>0xFF</value>
     </param>
   </block>
   <block>
@@ -1317,7 +1317,7 @@
     </param>
     <param>
       <key>seed</key>
-      <value>0x7F</value>
+      <value>0xFF</value>
     </param>
   </block>
   <block>

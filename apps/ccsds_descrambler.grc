@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<?grc format='1' created='3.7.10'?>
+<?grc format='1' created='3.7.11'?>
 <flow_graph>
   <timestamp>Mon Jan  2 21:16:18 2017</timestamp>
   <block>
@@ -345,7 +345,7 @@
     </param>
     <param>
       <key>seed</key>
-      <value>0x7F</value>
+      <value>0xFF</value>
     </param>
   </block>
   <block>
