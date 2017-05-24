@@ -19,10 +19,28 @@ the recording was not Doppler corrected.
 
 ## Dependencies
 
+gr-satellites requires the git version of GNU Radio. A stable release may be
+used, but note the following:
+
+  * The "Correlate Access Code - Tag" block has changed slightly in the git
+    version (it now allows floats as well as bytes). The new block is
+    incompatible with the older one, so the flowgraphs using "Correlate Access
+    Code - Tag" will complain of missing blocks when using a stable release of
+    GNU Radio. It is possible to replace the "Correlate Access Code - Tag" block
+    by hand with the older version and the flowgraphs should then
+    work. Especially, you have to look at the hierarchical blocks
+    `sync_to_pdu.grc` and `sync_to_pdu_packed.grc` in gr-satellites.
+  * There is a bug in the "Additive scrambler" block. The bug fix is only in the
+    git version of GNU Radio. If using a stable release of GNU Radio, do not
+    expect this block to work. However, the "Additive scrambler" is only used to
+    decode CCSDS scrambling. Decoders using G3RUH scrambling or no scrambler
+    should work fine.
+
+Required dependencies:
+
   * Phil Karn's KA9Q `libfec`. A fork that builds in modern linux systems can be found
     [here](https://github.com/daniestevez/libfec).
-  * [construct](https://construct.readthedocs.io/en/latest/), at least version 2.8. This
-    is only used in some of the telemetry parsers.
+  * [construct](https://construct.readthedocs.io/en/latest/), at least version 2.8.
 
 The following GNUradio out-of-tree modules are only required for the decoder of
 one particular satellite. You may install only the ones you're interested in.
