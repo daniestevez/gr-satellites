@@ -58,7 +58,6 @@ GR_PYTHON_INSTALL(
     adsb_kml.py
     gomx1_beacon_parser.py
     ks1q_header_remover.py
-    lilacsat1_demux.py
     by701_image_decoder.py
     by701_telemetry_parser.py
     by701_camera_telemetry_parser.py

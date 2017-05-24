@@ -34,6 +34,7 @@ list(APPEND satellites_sources
     u482c_decode_impl.cc
     randomizer.c
     golay24.c
+    lilacsat1_demux_impl.cc
 )
 
 set(satellites_sources "${satellites_sources}" PARENT_SCOPE)

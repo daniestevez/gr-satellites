@@ -28,5 +28,6 @@ install(FILES
     ao40_rs_decoder.h
     ax100_decode.h
     u482c_decode.h
+    lilacsat1_demux.h
     DESTINATION include/satellites
 )

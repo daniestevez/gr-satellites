@@ -14,6 +14,7 @@
 #include "satellites/ao40_rs_decoder.h"
 #include "satellites/ax100_decode.h"
 #include "satellites/u482c_decode.h"
+#include "satellites/lilacsat1_demux.h"
 %}
 
 %include "satellites/decode_rs.h"
@@ -29,3 +30,5 @@ GR_SWIG_BLOCK_MAGIC2(satellites, ao40_rs_decoder);
 GR_SWIG_BLOCK_MAGIC2(satellites, ax100_decode);
 %include "satellites/u482c_decode.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, u482c_decode);
+%include "satellites/lilacsat1_demux.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, lilacsat1_demux);
