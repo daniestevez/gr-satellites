@@ -55,6 +55,15 @@ one particular satellite. You may install only the ones you're interested in.
 If you want to use the realtime image decoder for BY70-1, you also need to install
 [feh](https://feh.finalrewind.org/).
 
+## Hierarchichal flowgraphs
+
+Some of the decoders use hierarchichal flowgraphs. These are placed in the
+folder `apps/hierarchical`. The hierarchical flowgraphs must be compiled and
+installed before using any of the flowgraphs which include them.
+
+To compile and install the hierarchical flowgraphs, the script
+`compile_hierarchical.sh` in the root folder can be used.
+
 ## Usage
 
 The signal is fed to the decoders using a UDP stream. The format used is the
@@ -205,26 +214,6 @@ telemetry packet in the terminal as soon as it receives it.
     block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
     two interleaved (160,128) Reed-Solomon codes. You must use SSB mode to
     receive this satellite.
-
-## Hierarchichal flowgraphs
-
-Some of the decoders use hierarchichal flowgraphs. These are GNU Radio flowgraphs
-that can be used as a block in another flowgraph. To use these hierarchical flowgraph
-blocks, you must open each hierarchical flowgraph with `gnuradio-companion` and press
-the "Generate" button (next to the "Play" button). The Python code and XML description
-of the block will then be generated and saved within your GNU Radio installation. Consider
-this step as part of installing gr-satellites.
-
-This is the list of hierarchical flowgraphs in gr-satellites:
-
-  * `ao40_fec_decoder.grc` AO-40 FEC decoder
-  * `ccsds_descrambler.grc` CCSDS additive descrambler (using unpacked PDUs)
-  * `ccsds_viterbi.grc` Viterbi decoder with CCSS/NASA-GSFC convention
-     (POLYB, ~POLYA). Output is unpacked bits.
-  * `sync_to_pdu.grc` Find a syncword and extract a PDU of fixed length containing
-     unpacked bits
-  * `sync_to_pdu_packed.grc` Find a syncword and extract a PDU of fixed length containing
-     packed bytes
 
 ## Installing GNUradio OOT modules
 
