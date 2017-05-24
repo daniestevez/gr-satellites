@@ -638,7 +638,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(760, 1576)</value>
+      <value>(968, 1264)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -877,7 +877,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(720, 1144)</value>
+      <value>(968, 1144)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1331,11 +1331,19 @@
   <block>
     <key>digital_correlate_access_code_tag_xx</key>
     <param>
+      <key>access_code</key>
+      <value>"00011010110011111111110000011101"</value>
+    </param>
+    <param>
       <key>alias</key>
       <value></value>
     </param>
     <param>
       <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
       <value></value>
     </param>
     <param>
@@ -1355,12 +1363,8 @@
       <value>digital_correlate_access_code_tag_bb_0_0_0_0</value>
     </param>
     <param>
-      <key>access_code</key>
-      <value>"00011010110011111111110000011101"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
+      <key>type</key>
+      <value>byte</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1382,11 +1386,19 @@
   <block>
     <key>digital_correlate_access_code_tag_xx</key>
     <param>
+      <key>access_code</key>
+      <value>"00011010110011111111110000011101"</value>
+    </param>
+    <param>
       <key>alias</key>
       <value></value>
     </param>
     <param>
       <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
       <value></value>
     </param>
     <param>
@@ -1406,12 +1418,8 @@
       <value>digital_correlate_access_code_tag_bb_0_0_0_0_0</value>
     </param>
     <param>
-      <key>access_code</key>
-      <value>"00011010110011111111110000011101"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
+      <key>type</key>
+      <value>byte</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -2121,57 +2129,6 @@
     </param>
   </block>
   <block>
-    <key>satellites_check_crc</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>force</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(176, 1484)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>satellites_check_crc_0</value>
-    </param>
-    <param>
-      <key>include_header</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>verbose</key>
-      <value>False</value>
-    </param>
-  </block>
-  <block>
     <key>satellites_kiss_to_pdu</key>
     <param>
       <key>alias</key>
@@ -2301,37 +2258,6 @@
     </param>
   </block>
   <block>
-    <key>satellites_print_header</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(544, 1656)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>satellites_print_header_0</value>
-    </param>
-  </block>
-  <block>
     <key>satellites_print_timestamp</key>
     <param>
       <key>alias</key>
@@ -2347,7 +2273,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>fmt</key>
@@ -2355,7 +2281,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(552, 1452)</value>
+      <value>(40, 1324)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2427,45 +2353,6 @@
     <param>
       <key>url</key>
       <value>http://tlm.pe0sat.nl/tlmdb/frame_db.php</value>
-    </param>
-  </block>
-  <block>
-    <key>satellites_swap_header</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(168, 1360)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>satellites_swap_header_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
     </param>
   </block>
   <connection>
@@ -2613,20 +2500,8 @@
     <sink_key>pdus</sink_key>
   </connection>
   <connection>
-    <source_block_id>satellites_check_crc_0</source_block_id>
-    <sink_block_id>blocks_message_debug_0</sink_block_id>
-    <source_key>ok</source_key>
-    <sink_key>print_pdu</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>satellites_check_crc_0</source_block_id>
-    <sink_block_id>satellites_print_header_0</sink_block_id>
-    <source_key>ok</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
     <source_block_id>satellites_kiss_to_pdu_1</source_block_id>
-    <sink_block_id>satellites_swap_header_0</sink_block_id>
+    <sink_block_id>satellites_print_timestamp_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
@@ -2655,9 +2530,9 @@
     <sink_key>pdus</sink_key>
   </connection>
   <connection>
-    <source_block_id>satellites_swap_header_0</source_block_id>
-    <sink_block_id>satellites_check_crc_0</sink_block_id>
+    <source_block_id>satellites_print_timestamp_0</source_block_id>
+    <sink_block_id>blocks_message_debug_0</sink_block_id>
     <source_key>out</source_key>
-    <sink_key>in</sink_key>
+    <sink_key>print_pdu</sink_key>
   </connection>
 </flow_graph>
