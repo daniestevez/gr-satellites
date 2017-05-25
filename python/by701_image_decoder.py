@@ -63,6 +63,10 @@ class by701_image_decoder(gr.basic_block):
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
+        # check packet len
+        if len(packet) <= 15+8:
+            return
+        
         csp = CSP(packet[:4])
 
         # destination 6 is used for JPEG chunks
