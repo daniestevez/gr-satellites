@@ -49,5 +49,6 @@ install(FILES
     satellites_by701_telemetry_parser.xml
     satellites_by701_camera_telemetry_parser.xml
     satellites_kr01_telemetry_parser.xml
+    satellites_check_ao40_uncoded_crc.xml
     DESTINATION share/gnuradio/grc/blocks
 )

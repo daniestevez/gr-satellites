@@ -64,6 +64,8 @@ GR_PYTHON_INSTALL(
     by701_telemetry.py
     kr01_telemetry.py
     kr01_telemetry_parser.py
+    ao40_uncoded_crc.py
+    check_ao40_uncoded_crc.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

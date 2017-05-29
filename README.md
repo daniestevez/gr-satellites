@@ -98,6 +98,13 @@ telemetry packet in the terminal as soon as it receives it.
     telemetry in the 70cm band. It uses the CSP protocol and FEC with an r=1/2, k=7
     convolutional code and a (255,223) Reed-Solomon code. You must use FM mode
     to receive this satellite.
+  * `ao40_uncoded`
+    [AO-40](https://en.wikipedia.org/wiki/OSCAR_40), which transmitted 400bps BPSK
+    telemetry in several bands. This decoder is for the uncoded telemetry, which
+    did not use any forward error correction. The specifications of the telemetry
+    can be found [in this document](http://www.amsat-dl.org/p3d/tlmspec.txt). AO-40
+    is no longer functional, but it is of high historic interest. You must use SSB
+    mode to receive this satellite.
   * `ao73`
     [AO-73 (FUNcube)](https://funcube.org.uk/), which transmits 1k2 BPSK
     telemetry in the 2m band. It uses the AO-40 FEC protocol, which includes
