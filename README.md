@@ -140,6 +140,12 @@ telemetry packet in the terminal as soon as it receives it.
     and image receive software. This satellite launched on 28 December 2016 into a 520x220km
     orbit. The perigee is too low because of a problem in the launch. BY70-1 reentered
     on 18 February 2017. You must use wide SSB mode to receive this satellite.
+  * `ca03`
+    [QB50 CA03 (Ex-Alta 1)](https://albertasat.ca/amateur-radio-information/),
+    which transmits 4k8 GFSK telemetry in the 70cm band. It uses the CSP protocol
+    and FEC with a (255,223) Reed-Solomon code. It also uses a G3RUH scrambler. The
+    transceiver is the GomSpace NanoCom AX100, the same transceiver used in
+    GOMX-3. You must use FM mode to receive this satellite.
   * `galassia`
     [GALASSIA](https://eoportal.org/web/eoportal/satellite-missions/content/-/article/galass-1),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses the CSP
