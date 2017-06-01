@@ -171,8 +171,56 @@ Hk_AVR = Struct(Const(b'\x1c\xa3'),\
                 'reset_flag' / Int8ul,\
                 'reset_count' / Int32ul )
 
+Type_aaa1 = Struct(Const(b'\xaa\xa1'),\
+                   'ttc_payload_mode'/ Int8ul,\
+                   'ttc_tx_mode' / Int8ul,\
+                   'ttc_i_vbat_tx' / Int8ul,\
+                   'ttc_t_pa' / Int8sl,\
+                   'ttc_adf7021_lock' / Int8ul,\
+                   'ttc_n_tc' / Int32ul,\
+                   'ttc_rssi_fm_tc' / Int8ul,\
+                   'eps_bat_vol_average' / Int8ul,\
+                   'eps_bat_cur' / Int8sl,\
+                   'eps_5v_cur' / Int8ul,\
+                   'esp_3v3_cur' / Int8ul,\
+                   'eps_5v_dcdc_temp' / Int16sl,\
+                   'eps_bat_temp' / Int16sl,\
+                   'eps_reserved' / Byte[2],\
+                   'adcs_q1' / Int16sl,\
+                   'adcs_q2' / Int16sl,\
+                   'adcs_q3' / Int16sl,\
+                   'adcs_w1' / Int16sl,\
+                   'adcs_w2' / Int16sl,\
+                   'adcs_w3' / Int16sl,\
+                   'adcs_mode' / Int16sl,\
+                   'adcs_long' / Int16sl,\
+                   'adcs_lat' / Int16sl,\
+                   'adcs_height' / Int16sl,\
+                   'adcs_reserved' / Byte[5],\
+                   'obc_gps_power_state' / Int8ul,\
+                   'obc_eps_low_state' / Int8ul,\
+                   'obc_year' / Int16ul,\
+                   'obc_month' / Int8ul,\
+                   'obc_day' / Int8ul,\
+                   'obc_hour' / Int8ul,\
+                   'obc_minute' / Int8ul,\
+                   'obc_second' / Int8ul,\
+                   'obc_reserved' / Byte,\
+                   'inms_script_en' / Int8ul,\
+                   'inms_power_on' / Int8ul,\
+                   'inms_script_no' / Int8ul,\
+                   'inms_script_seq' / Int8ul,\
+                   'inms_script_execed' / Int8ul,\
+                   'inms_script_checksum_ok' / Int8ul,\
+                   'inms_slot_not_empty' / Int8ul,\
+                   'inms_reserved' / Byte[2])
+                   
+                   
+                   
+                   
+                
 def beacon_parse(data):
-    for beacon in [Hk_STM32, Cfg, Hk_AVR]:
+    for beacon in [Hk_STM32, Cfg, Hk_AVR, Type_aaa1]:
         try:
             return beacon.parse(data)
         except Exception:
