@@ -97,7 +97,8 @@ class CTCSSCountAdapter(Adapter):
     def _decode(self, obj, context):
         return obj / 0.04
 CTCSSCount = CTCSSCountAdapter(Int32ul)
-             
+
+# COM STM32 Housekeeping Packet             
 Hk_STM32 = Struct(Const(b'\x1c\xa1'),\
                   'config' / Int8ul,\
                   'flag_direct_ins' / Int8ul,\
@@ -133,6 +134,7 @@ Hk_STM32 = Struct(Const(b'\x1c\xa1'),\
                   'ctcss_count' / CTCSSCount,\
                   'ctcss_det' / Float32l)
 
+# COM STM32 Config Packet
 Cfg = Struct(Const(b'\x1c\xa2'),\
              'gain_tx_HI' / Int16sl,\
              'gain_tx_LO' / Int16sl,\
@@ -157,6 +159,7 @@ Cfg = Struct(Const(b'\x1c\xa2'),\
              'cam_delay' / Int32ul,\
              'crc' / Int32ul)
 
+# COM AVR Housekeeping Packet
 Hk_AVR = Struct(Const(b'\x1c\xa3'),\
                 'adf7021_ld' / Int8ul,\
                 'err_flag' / Int8ul,\
@@ -171,7 +174,8 @@ Hk_AVR = Struct(Const(b'\x1c\xa3'),\
                 'reset_flag' / Int8ul,\
                 'reset_count' / Int32ul )
 
-Type_aaa1 = Struct(Const(b'\xaa\xa1'),\
+# LilacSat-1 Generic Telemetry Data
+LilacSat1Tlm = Struct(Const(b'\xaa\xa1'),\
                    'ttc_payload_mode'/ Int8ul,\
                    'ttc_tx_mode' / Int8ul,\
                    'ttc_i_vbat_tx' / Int8ul,\
@@ -214,13 +218,282 @@ Type_aaa1 = Struct(Const(b'\xaa\xa1'),\
                    'inms_script_checksum_ok' / Int8ul,\
                    'inms_slot_not_empty' / Int8ul,\
                    'inms_reserved' / Byte[2])
-                   
-                   
-                   
-                   
-                
+
+# OBC Housekeeping Parameters
+Hk_OBC = Struct(Const(b'\x1a\xa1'),\
+                'com_iic1_bus_status' / Int8ul,\
+                'eps_iic1_bus_status' / Int8ul,\
+                'gps_power_status' / Int8ul,\
+                'battery_low_indicator' / Int8ul,\
+                'gps_lock_status' / Int8ul,\
+                'onboard_time_source' / Int8ul,\
+                'time_onboard_year' / Int16ul,\
+                'time_onboard_month' / Int8ul,\
+                'time_onboard_day' / Int8ul,\
+                'time_onboard_hour' / Int8ul,\
+                'time_onboard_min' / Int8ul,\
+                'time_onboard_sec' / Int8ul,\
+                'delayed_command_count' / Int8ul,\
+                'interface_board_3v3_current_a' / Int16ul,\
+                'interface_board_5v_current_b' / Int16ul,\
+                'obc_board_3v3_current_tsc103' / Int16ul,\
+                'obc_board_5v_current_ina219' / Int16ul,\
+                'obc_board_5v_voltage_ina219' / Int16ul,\
+                Padding(2),\
+                'csp_sent_packet' / Int32ul,\
+                'csp_received_packet' / Int32ul,\
+                'received_command_count' / Int32ul,\
+                'obc_power_on_time' / Int32ul,\
+                'obc_reset_count' / Int16ul,\
+                'obc_log_file_index' / Int16ul,\
+                'com_log_file_index' / Int16ul,\
+                'eps_log_file_index' / Int16ul,\
+                'com_log_2_file_index' / Int16ul,\
+                'inms_enable_status_script_power'  / Int8ul,\
+                'inms_running_status_script_no_seq_no' / Int8ul,\
+                'adcs_log_file_index' / Int16ul,\
+                'inms_temperature_sensing_point' / Float32l,\
+                'stm32_temperature' / Int16ul,\
+                'current_storage_card_telemetry_ftp' / Int8ul,\
+                'gps_leap_second_correction' / Int8sl,\
+                'inms_file_index' / Int32ul)
+
+class MagnetometerAdapter(Adapter):
+    def _encode(self, obj, context):
+        return int(obj / 4.0)
+    def _decode(self, obj, context):
+        return obj * 4.0
+Magnetometer = MagnetometerAdapter(Int16sl)
+
+class GyroscopeAdapter(Adapter):
+    def _encode(self, obj, context):
+        return int(obj * 32768.0 / 57.2958)
+    def _decode(self, obj, context):
+        return obj / 32768.0 * 57.2958
+Gyroscope = GyroscopeAdapter(Int16sl)
+
+class TempADISAdapter(Adapter):
+    def _encode(self, obj, context):
+        return int(obj / 0.0739)
+    def _decode(self, obj, context):
+        return obj * 0.0739
+TempADIS = TempADISAdapter(Int16sl)
+
+class FineSunAdapter(Adapter):
+    def _encode(self, obj, context):
+        return int(obj * 16384.0)
+    def _decode(self, obj, context):
+        return obj / 16384.0
+FineSun = FineSunAdapter(Int16sl)
+
+class CoarseSunAdapter(Adapter):
+    def _encode(self, obj, context):
+        return int(obj * 32.0)
+    def _decode(self, obj, context):
+        return obj / 32.0
+CoarseSun = CoarseSunAdapter(Int16sl)
+
+class LatitudeAdapter(Adapter):
+    def _encode(self, obj, context):
+        return int(obj * 360.0)
+    def _decode(self, obj, context):
+        return obj / 360.0
+Latitude = LatitudeAdapter(Int16sl)
+
+class LongitudeAdapter(Adapter):
+    def _encode(self, obj, context):
+        return int(obj * 180.0)
+    def _decode(self, obj, context):
+        return obj / 180.0
+Longitude = LongitudeAdapter(Int16sl)
+
+class AltitudeAdapter(Adapter):
+    def _encode(self, obj, context):
+        return int(obj / 20.0)
+    def _decode(self, obj, context):
+        return obj * 20.0
+Altitude = AltitudeAdapter(Int16sl)
+
+# ADCS Parameters (OBC)
+ADCS_Par = Struct(Const(b'\x1a\xa2'),\
+                  'magnetometer_hmc5883l' / Magnetometer[3],\
+                  'magnetometer_hmc1043l' / Magnetometer[3],\
+                  'gyroscope_mpu3300' / Gyroscope[3],\
+                  'gyroscope_mpu3300_temperature' / Int16sl,\
+                  'gyroscope_adis16448' / Gyroscope[3],\
+                  'temperature_adis16448' / TempADIS,\
+                  'magnetometer_adis16448' / Magnetometer[3],\
+                  'fine_sun_sensor' / FineSun[3],\
+                  'coarse_sun_sensor' / CoarseSun[5],\
+                  'magnetometer_mix' / Float32l,\
+                  'modeflag_2' / Int32ul,\
+                  'modeflag_1' / Int16ul,\
+                  'flywheel_speed' / Int16sl,\
+                  'adcs_interruption_counting' / Int16ul,\
+                  'kf_quaternions' / FineSun[3],\
+                  'gyroscope_quaternions' / FineSun[3],\
+                  'coarse_sun_sensor_temperature' / Int16sl[5],\
+                  'latitude' / Latitude ,\
+                  'longitude' / Longitude,\
+                  'altitude' / Altitude,\
+                  'fine_sun_sensor_temperature' / Int16sl)
+
+# Orbit Paramaters (OBC)
+Orbit_Par = Struct(Const(b'\x1a\xa8'),\
+                   'year' / Int8ul,\
+                   'month' / Int8ul,\
+                   'day' / Int8ul,\
+                   'hour' / Int8ul,\
+                   'minute' / Int8ul,\
+                   'second' / Int8ul,\
+                   'position' / Float64l[3],\
+                   'velocity' / Float64l[3],\
+                   'oev_a' / Float64l,\
+                   'oev_e' / Float64l,\
+                   'oev_i' / Float64l,\
+                   'oev_omega' / Float64l,\
+                   'oev_w' / Float64l,\
+                   'oev_theta' / Float64l)
+
+# OBC Variable Threshold Parameter
+OBC_Threshold = Struct(Const(b'\x1a\xa9'),\
+                       'eps_batter_low_voltage_threshold' / Int16ul,\
+                       'eps_overcurrent_threshold' / Int16ul,\
+                       'eps_critical_battery_low_voltage_threshold' / Int16ul,\
+                       'eps_critical_overcurrent_threshold' / Int16ul,\
+                       'eps_overcurrent_hysteresis' / Int16ul,\
+                       'gps_time_error_threshold' / Int16ul,\
+                       'gps_position_malfunction_threshold' / Int16ul[3],\
+                       'gps_velocity_malfunction_threshold' / Int16ul[3])
+
+# Orbit Parameter (OBC)
+Orbital_Par = Struct(Const(b'\x1a\xaa'),\
+                     'packet_header' / Int16ul,\
+                     'frame_header' / Int8ul,\
+                     'frame_length' / Int8ul,\
+                     'gps_bd_lock_status' / Int8ul,\
+                     'week_of_year' / Int16ul,\
+                     'second_of_week' / Float64l,\
+                     'gps_satellite_in_use_obs' / Int8ul,\
+                     'gps_satellite_in_use_pdop' / Int16ul,\
+                     'xyz' / Float64l[3],\
+                     'v' / Float64l[3],\
+                     'gps_clock_error' / Float32l,\
+                     'gps_clock_drift' / Float32l,\
+                     'bd_clock_error' / Float32l,\
+                     'bd_clock_drift' / Float32l,\
+                     'checksum' / Int8ul)
+
+class CurrentVoltageAdapter(Adapter):
+    def _encode(self, obj, context):
+        return int(obj * 1000.0)
+    def _decode(self, obj, context):
+        return obj / 1000.0
+CurrentVoltage = CurrentVoltageAdapter(Int16sl)
+
+class TempAdapter(Adapter):
+    def _encode(self, obj, context):
+        return int(obj * 16.0)
+    def _decode(self, obj, context):
+        return obj / 16.0
+Temp = TempAdapter(Int16sl)
+
+EPS_Status = BitStruct('reboot_enable_2_status' / Flag,\
+                       Padding(1),\
+                       'reboot_enable_1_status' / Flag,\
+                       Padding(1),\
+                       'antenna_2_deploy_status' / Flag,\
+                       Padding(1),\
+                       'antenna_1_deploy_status' / Flag,\
+                       Padding(1),\
+                       'antenna_deploy_disable_control' / Flag,\
+                       Padding(7))
+
+# EPS Housekeeping Parameter
+Hk_EPS = Struct(Const(b'\x1e\xa1'),\
+                'mppt_output_current' / CurrentVoltage[5],\
+                'battery_output_current' / CurrentVoltage[3],\
+                '5v_output_current' / CurrentVoltage,\
+                '3v3_output_current' / CurrentVoltage,\
+                'main_bus_output_current' / CurrentVoltage,\
+                'antenna_deployment_current' / CurrentVoltage,\
+                'mppt_output_voltage' / CurrentVoltage[5],\
+                'battery_output_voltage' / CurrentVoltage[3],\
+                '5v_output_voltage' / CurrentVoltage,\
+                '3v3_output_voltage' / CurrentVoltage,\
+                'main_bus_output_voltage' / CurrentVoltage,\
+                'antenna_deployment_voltage' / CurrentVoltage,\
+                'mptt_temperature' / Temp,\
+                'battery_charger_temperature' / Temp,\
+                'battery_temperature' / Temp,\
+                'main_bus_diode_temperature' / Temp,\
+                '5v_regulator_temperature' / Temp,\
+                '3v3_regulator_temperature' / Temp,\
+                '5v_ocp_temperature' / Temp,\
+                '3v3_ocp_temperature' / Temp,\
+                'status' / EPS_Status,\
+                'power_on_time' / CurrentVoltageAdapter(Int32ul),\
+                'iic_sent_packet_count' / Int16ul,\
+                'iic_received_packet_count' / Int16ul,\
+                'output_reboot_wdt_in_minute' / Int16ul,\
+                'eps_reboot_wdt_in_minute' / Int16ul,\
+                'eps_reboot_count' / Int16ul)
+
+# EPS Onboard Parameters
+EPS_Onboard = Struct(Const(b'\x1e\xa2'),\
+                     'onboard_software_version' / Int8ul[3],\
+                     'onboard_software_compile_date' / Int8ul[4],\
+                     Padding(1),\
+                     'first_poweron_flag' / Int8ul,\
+                     Padding(3),\
+                     'output_reboot_wdt_enabled' / Int8ul,\
+                     'output_reboot_timer_hr' / Int8ul,\
+                     Padding(2),\
+                     'eps_reboot_wdt_enabled' / Int8ul,\
+                     'eps_reboot_timer_hr' / Int8ul,\
+                     Padding(2),\
+                     'auto_send_hk_data_enabled' / Int8ul,\
+                     'auto_send_hk_data_period_sec' / Int8ul,\
+                     Padding(2),\
+                     'antenna_deployed' / Int8ul)
+
+# EPS Reboot Log
+EPS_Reboot = Struct(Const(b'\x1e\xa3'),\
+                    'onboard_software_version' / Int8ul[3],\
+                    'onboard_software_compile_date' / Int8ul[4],\
+                    Padding(1),\
+                    'last_output_reboot_source' / Int8ul,\
+                    'last_output_reboot_timer' / Int8ul[4],\
+                    Padding(3),\
+                    'last_eps_reboot_source' / Int8ul,\
+                    'last_eps_reboot_timer' / Int8ul[4],\
+                    Padding(3),\
+                    'current_onboard_reboot_timer' / Int8ul[4],\
+                    Padding(4),\
+                    'eps_reboot_count' / Int8ul[4])
+
+# EPS Command Log
+Command = Struct('cmd' / Int8ul[5],\
+                 'source' / Int8ul,\
+                 'received_time' / Int8ul[4])
+    
+
+EPS_Command = Struct(Const(b'\x1e\xa4'),\
+                     'cmds' / Command[4])
+
+Error = Struct('code' / Int8ul,\
+               'time' / Int8ul[4])
+
+# EPS Error Log
+EPS_Error = Struct(Const(b'\x1e\xa5'),\
+                   'critical_error' / Error[4],\
+                   'error' / Error[4])
+                     
+
 def beacon_parse(data):
-    for beacon in [Hk_STM32, Cfg, Hk_AVR, Type_aaa1]:
+    for beacon in [Hk_STM32, Cfg, Hk_AVR, LilacSat1Tlm, Hk_OBC, ADCS_Par, Orbit_Par,\
+                   OBC_Threshold, Orbital_Par, Hk_EPS, EPS_Onboard, EPS_Reboot, EPS_Command,\
+                   EPS_Error]:
         try:
             return beacon.parse(data)
         except Exception:
