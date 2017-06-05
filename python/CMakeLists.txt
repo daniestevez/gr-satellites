@@ -66,6 +66,7 @@ GR_PYTHON_INSTALL(
     kr01_telemetry_parser.py
     ao40_uncoded_crc.py
     check_ao40_uncoded_crc.py
+    lilacsat1_gps_kml.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

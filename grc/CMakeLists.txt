@@ -50,5 +50,6 @@ install(FILES
     satellites_by701_camera_telemetry_parser.xml
     satellites_kr01_telemetry_parser.xml
     satellites_check_ao40_uncoded_crc.xml
+    satellites_lilacsat1_gps_kml.xml
     DESTINATION share/gnuradio/grc/blocks
 )
