@@ -168,9 +168,9 @@ telemetry packet in the terminal as soon as it receives it.
     must use FM mode to receive this satellite.
   * `gr01`
     [QB50 GR01 (DUTHSat)](http://www.duthsat.gr/),
-    which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
-    scrambler. Currently it transmits 1k2 telemetry, so you must use SSB mode
-    to receive this satellite.
+    which transmits 1k2 or 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
+    scrambler. For 1k2 telemetry you must use SSB mode, while for 9k6 telemetry you
+    must use wide SSB mode.
   * `il01`
     [QB50 IL01 (DUCHIFAT-2)](http://www.h-space-lab.org/php/hoopoe-en.php),
     which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
