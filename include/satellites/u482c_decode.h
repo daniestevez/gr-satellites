@@ -46,7 +46,7 @@ namespace gr {
        * class. satellites::u482c_decode::make is the public interface for
        * creating new instances.
        */
-      static sptr make(bool verbose);
+      static sptr make(bool verbose, int viterbi, int scrambler, int rs);
     };
 
   } // namespace satellites

@@ -35,9 +35,11 @@ namespace gr {
      private:
       bool d_verbose;
       char d_ccsds_sequence[RS_LEN];
+      void *d_vp;
+      int d_viterbi, d_scrambler, d_rs;
       
      public:
-      u482c_decode_impl(bool verbose);
+      u482c_decode_impl(bool verbose, int viterbi, int scrambler, int rs);
       ~u482c_decode_impl();
 
       // Where all the action really happens
