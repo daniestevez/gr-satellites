@@ -113,18 +113,25 @@ telemetry packet in the terminal as soon as it receives it.
     receive this satellite.
   * `aisat`
     [AISAT](https://directory.eoportal.org/web/eoportal/satellite-missions/a/aisat),
-    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses the CSP
-    protocol and FEC with a (255,223) Reed-Solomon code. It also uses a CCSDS
-    scrambler. There is no telemetry parser yet, as the beacon format is
-    unknown. This satellite has an AIS receiver on board. You must use FM mode
-    to receive this satellite.
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a Nanocom
+    U482C transceiver with the CSP protocol and FEC with a (255,223)
+    Reed-Solomon code. It also uses a CCSDS scrambler. There is no telemetry
+    parser yet, as the beacon format is unknown. This satellite has an AIS
+    receiver on board. You must use FM mode to receive this satellite.
   * `athenoxat-1`
     [ATHENOXAT-1](http://space.skyrocket.de/doc_sdat/athenoxat-1.htm),
-    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses the CSP
-    protocol and FEC with a (255,223) Reed-Solomon code. It also uses a CCSDS
-    scrambler. There is no telemetry parser yet, as the beacon format is
-    unknown. This satellite is on a low inclination orbit, so it can only be
-    received near the equator. You must use FM mode to receive this satellite.
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a Nanocom
+    U482C transceiver, with the CSP protocol and FEC with a (255,223)
+    Reed-Solomon code. It also uses a CCSDS scrambler. There is no telemetry
+    parser yet, as the beacon format is unknown. This satellite is on a low
+    inclination orbit, so it can only be received near the equator. You must
+    use FM mode to receive this satellite.
+  * `au03`
+    [QB50 AU03 (i-INSPIRE II)](http://sydney.edu.au/inspire-cubesat/project/index.shtml),
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a Nanocom
+    U482C transceiver, with the CSP protocol and FEC with an r=1/2, k=7
+    convolutional code and a (255,223) Reed-Solomon code. It also uses a CCSDS
+    scrambler. You must use FM mode to receive this satellite.
   * `beesat`
     [BESAT-1,-2 and -4](http://space.skyrocket.de/doc_sdat/beesat.htm), which
     transmit 4k8 FSK telemetry in the 70cm band. They use the Mobitex-NX
@@ -148,17 +155,19 @@ telemetry packet in the terminal as soon as it receives it.
     GOMX-3. You must use FM mode to receive this satellite.
   * `galassia`
     [GALASSIA](https://eoportal.org/web/eoportal/satellite-missions/content/-/article/galass-1),
-    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses the CSP
-    protocol and FEC with a (255,223) Reed-Solomon code. It also uses a CCSDS
-    scrambler. There is no telemetry parser yet, as the beacon format is
-    unknown. This satellite is on a low inclination orbit, so it can only be
-    received near the equator. You must use FM mode to receive this satellite.
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a Nanocom
+    U482C transceiver with the the CSP protocol and FEC with a (255,223)
+    Reed-Solomon code. It also uses a CCSDS scrambler. There is no telemetry
+    parser yet, as the beacon format is unknown. This satellite is on a low
+    inclination orbit, so it can only be received near the equator. You must
+    use FM mode to receive this satellite.
   * `gomx_1`
     [GOMX-1](https://directory.eoportal.org/web/eoportal/satellite-missions/g/gomx-1),
-    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses the CSP
-    protocol and FEC with a (255,223) Reed-Solomon code. It also uses a CCSDS
-    scrambler. The beacons include information from ADS-B beacons transmitted by
-    terrestrial aircraft. You must use FM mode to receive this satellite.
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a Nanocom
+    U482C transceiver with the CSP protocol and FEC with a (255,223)
+    Reed-Solomon code. It also uses a CCSDS scrambler. The beacons
+    include information from ADS-B beacons transmitted by terrestrial
+    aircraft. You must use FM mode to receive this satellite.
   * `gomx_3`
     [GOMX-3](https://directory.eoportal.org/web/eoportal/satellite-missions/g/gomx-3),
     which transmits 19k2 GFSK telemetry in the 70cm band. It uses the CSP
