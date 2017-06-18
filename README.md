@@ -126,6 +126,12 @@ telemetry packet in the terminal as soon as it receives it.
     parser yet, as the beacon format is unknown. This satellite is on a low
     inclination orbit, so it can only be received near the equator. You must
     use FM mode to receive this satellite.
+  * `au02`
+    [QB50 AU02 (UNSW-EC0)](http://www.acser.unsw.edu.au/QB50),
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a Nanocom
+    U482C transceiver, with the CSP protocol and FEC with an r=1/2, k=7
+    convolutional code and a (255,223) Reed-Solomon code. It also uses a CCSDS
+    scrambler. You must use FM mode to receive this satellite.
   * `au03`
     [QB50 AU03 (i-INSPIRE II)](http://sydney.edu.au/inspire-cubesat/project/index.shtml),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a Nanocom
