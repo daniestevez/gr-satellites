@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<block>
+  <name>QB50 AU03 Telemetry Parser</name>
+  <key>satellites_AU03_telemetry_parser</key>
+  <category>[Satellites]/Telemetry</category>
+  <import>import satellites</import>
+  <make>satellites.au03_telemetry_parser()</make>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+</block>
