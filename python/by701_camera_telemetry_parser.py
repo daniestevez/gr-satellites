@@ -48,7 +48,7 @@ class by701_camera_telemetry_parser(gr.basic_block):
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
-        if len(packet) < 4:
+        if len(packet) <= 8:
             return
         csp = CSP(packet[:4])
 
