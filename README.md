@@ -118,6 +118,12 @@ telemetry packet in the terminal as soon as it receives it.
     Reed-Solomon code. It also uses a CCSDS scrambler. There is no telemetry
     parser yet, as the beacon format is unknown. This satellite has an AIS
     receiver on board. You must use FM mode to receive this satellite.
+  * `at03`
+    [QB50 AT03 (PEGASUS)](https://spacedatacenter.at/pegasus/),
+    which transmits 9k6 GFSK telemetry in the 70cm band. It uses the TT-64
+    protocol, which includes a CRC16-ARC and FEC with a (64,48) Reed-Solomon
+    code. Reed-Solomon decoding is not implemented yet. You must use FM mode to
+    receive this satellite.
   * `athenoxat-1`
     [ATHENOXAT-1](http://space.skyrocket.de/doc_sdat/athenoxat-1.htm),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a Nanocom
