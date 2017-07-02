@@ -1,7 +1,7 @@
 # gr-satellites
-GNUradio decoders for different satellites.
+GNU Radio decoders for several Amateur satellites.
 
-This repository is a collection of GNUradio decoders for the telemetry of
+This repository is a collection of GNU Radio decoders for the telemetry of
 several satellites. The decoders don't need a graphical interface to run, so
 they can be used in an embedded or remote computer. The decoders are designed to
 run in real time and print the telemetry packets to the terminal as they are
