@@ -15,6 +15,7 @@
 #include "satellites/ax100_decode.h"
 #include "satellites/u482c_decode.h"
 #include "satellites/lilacsat1_demux.h"
+#include "satellites/varlen_packet_tagger.h"
 %}
 
 %include "satellites/decode_rs.h"
@@ -32,3 +33,5 @@ GR_SWIG_BLOCK_MAGIC2(satellites, ax100_decode);
 GR_SWIG_BLOCK_MAGIC2(satellites, u482c_decode);
 %include "satellites/lilacsat1_demux.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, lilacsat1_demux);
+%include "satellites/varlen_packet_tagger.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, varlen_packet_tagger);

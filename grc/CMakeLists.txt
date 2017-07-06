@@ -53,5 +53,6 @@ install(FILES
     satellites_lilacsat1_gps_kml.xml
     satellites_au03_telemetry_parser.xml
     satellites_check_tt64_crc.xml
+    satellites_varlen_packet_tagger.xml
     DESTINATION share/gnuradio/grc/blocks
 )
