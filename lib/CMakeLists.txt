@@ -35,6 +35,7 @@ list(APPEND satellites_sources
     randomizer.c
     golay24.c
     lilacsat1_demux_impl.cc
+    varlen_packet_tagger_impl.cc
     viterbi.c
 )
 
