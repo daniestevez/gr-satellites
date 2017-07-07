@@ -4,7 +4,7 @@
   <key>satellites_varlen_packet_tagger</key>
   <category>[Satellites]/Packet</category>
   <import>import satellites</import>
-  <make>satellites.varlen_packet_tagger($syncword_tag, $packetlen_tag, $length_field_size, $mtu, $endianness, $use_golay, $verbose)</make>
+  <make>satellites.varlen_packet_tagger($syncword_tag, $packetlen_tag, $length_field_size, $mtu, $endianness, $use_golay)</make>
   <param>
     <name>Syncword Tag</name>
     <key>syncword_tag</key>
@@ -57,21 +57,6 @@
       <key>True</key>
     </option>
   </param>
-  <param>
-    <name>Verbose Debug</name>
-    <key>verbose</key>
-    <value>True</value>
-    <type>bool</type>
-    <option>
-      <name>False</name>
-      <key>False</key>
-    </option>
-    <option>
-      <name>True</name>
-      <key>True</key>
-    </option>
-  </param>
-
 
   <sink>
     <name>in</name>
