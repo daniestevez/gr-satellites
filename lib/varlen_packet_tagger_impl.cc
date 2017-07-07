@@ -1,5 +1,19 @@
 /* -*- c++ -*- */
-/* TODO: add copyright info
+/*
+ * Copyright 2017 Glenn Richardson <glenn@spacequest.com> 
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
 #ifdef HAVE_CONFIG_H
@@ -19,15 +33,13 @@ extern "C" {
 namespace gr {
   namespace satellites {
 
-#define VERBOSE 0
-
     varlen_packet_tagger::sptr
     varlen_packet_tagger::make(const std::string &sync_key,
                                const std::string &packet_key,
                                int length_field_size,
                                int max_packet_size,
                                endianness_t endianness,
-                               bool use_golay, bool verbose)
+                               bool use_golay)
     {
       return gnuradio::get_initial_sptr
         (new varlen_packet_tagger_impl(sync_key,
@@ -35,7 +47,7 @@ namespace gr {
                                         length_field_size,
                                         max_packet_size,
                                         endianness,
-                                        use_golay, verbose));
+                                        use_golay));
     }
 
     varlen_packet_tagger_impl::varlen_packet_tagger_impl(
@@ -44,25 +56,22 @@ namespace gr {
         int length_field_size,
         int max_packet_size,
         endianness_t endianness,
-        bool use_golay,
-        bool verbose) : gr::block("varlen_packet_tagger",
+        bool use_golay) : gr::block("varlen_packet_tagger",
                         io_signature::make(1, 1, sizeof(char)),
                         io_signature::make(1, 1, sizeof(char))),
       d_header_length(length_field_size),
       d_mtu(max_packet_size),
       d_endianness(endianness),
       d_use_golay(use_golay),
-      d_have_sync(false),
-      d_verbose(verbose)
+      d_have_sync(false)
     {
       d_sync_tag = pmt::string_to_symbol(sync_key);
       d_packet_tag = pmt::string_to_symbol(packet_key);
 
       set_tag_propagation_policy(TPP_DONT);
 
-      if (d_verbose) {
-        std::cerr << alias() << "Header Bit Size: " << d_header_length << " MTU: " << d_mtu << std::endl;
-      }
+      if (d_use_golay)
+          d_header_length = 24;
     }
 
 
@@ -102,34 +111,21 @@ namespace gr {
       int golay_res;
 
       if (d_have_sync) {
-        if (d_header_length > ninput_items[0])
-          return 0; // not enough data yet
+        if (d_header_length > ninput_items[0]) {
+          // not enough data yet
+          return 0;
+        }
         
         if (d_use_golay) {
-          d_header_length = 24; // always 24 bits long (12 is length)
-          golay_field = bits2len(in); // copy bits
-          if (d_verbose) {
-            d_header_length = 12; // for debugging
-            packet_len = 8 * bits2len(&in[12]);
-            d_header_length = 24; // always 24 bits long (12 is length)
-            std::cerr << "Varlen packet decoder" << std::endl;
-            std::cerr << "\tHeader:     " << boost::format("0x%06x\n") % (0xFFFFFF & golay_field);
-            std::cerr << "\tRaw Length: " << std::dec << packet_len << std::endl;
-          }
+          golay_field = bits2len(in);
           golay_res = decode_golay24(&golay_field);
           if (golay_res >= 0) {
-            if (d_verbose) {
-              std::cerr << "\tGolay decode successful." << std::endl;
-              std::cerr << "\tErrors:     " << std::hex << golay_res << std::endl;
-              std::cerr << "\tCorrected:  " << boost::format("0x%06x\n") % (0xFFFFFF & golay_field);
-              std::cerr << "\tLength:     " << std::dec << 8 * (0xFFF & golay_field) << std::endl;
-            }
             packet_len = 8 * (0xFFF & golay_field);
-
           } else {
-            if (d_verbose) {
-             std::cerr << "\tGolay failed: " << std::hex << golay_res << std::endl;
-            }
+            GR_LOG_WARN(d_debug_logger, "Golay decode failed.");
+            d_have_sync = false;
+            consume_each(1); // skip ahead
+            return 0;
           }          
 
         } else { 
@@ -137,7 +133,9 @@ namespace gr {
         }
 
         if (packet_len > d_mtu) {
-          //std::cerr << "Packet too large!" << d_mtu << std::endl;
+          GR_LOG_WARN(d_debug_logger,
+                      boost::format("Packet length %d > mtu %d.") \
+                                    % packet_len % d_mtu );
           d_have_sync = false;
           consume_each(1); // skip ahead
           return 0;
@@ -146,22 +144,30 @@ namespace gr {
         if ((ninput_items[0] >= packet_len + d_header_length) &&
             (noutput_items >= packet_len)) {
 
+          if (d_use_golay) {
+            GR_LOG_DEBUG(d_debug_logger,
+                         boost::format("Header: 0x%06x, Len: %d") \
+                                       % (0xFFFFFF & golay_field) % (0xFFF & packet_len) );
+            if (golay_res >= 0 ) {
+              GR_LOG_DEBUG(d_debug_logger,
+                           boost::format("Golay decoded. Errors: %d, Length: %d") \
+                                         % golay_res % packet_len);
+            }
+          }
+        
           memcpy(out, &in[d_header_length], packet_len);
-          //std::cerr << "Adding tag " << packet_len << " offset " << nitems_written(0);
           add_item_tag(0, nitems_written(0),
                        d_packet_tag,
                        pmt::from_long(packet_len),
                        alias_pmt());
           d_have_sync = false;
+
+          // consuming only the header allows for
+          // ... multiple syncs per 'packet', 
+          // ... in case the sync was incorrectly tagged
           consume_each(d_header_length);
-          // consume the packet too?
-          // ... not consuming everything allows for multiple syncs per 'packet'
           return packet_len;
-        } /*else {
-          std::cerr << "we have data to send!";
-          std::cerr << "pl: " << packet_len << " input-items " << ninput_items[0] << std::endl;
-          std::cerr << "outputs: " << noutput_items << std::endl;
-        }*/
+        } 
 
       } else {
         // find the next sync tag, drop all other data
@@ -174,8 +180,8 @@ namespace gr {
         } else {
           consume_each(ninput_items[0]);
         }
-        return 0;
       }
+      return 0;
     }
 
   } /* namespace satellites */

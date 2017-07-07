@@ -1,5 +1,20 @@
 /* -*- c++ -*- */
-/* copyright info here */
+/*
+ * Copyright 2017 Glenn Richardson <glenn@spacequest.com> 
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ */
 
 #ifndef INCLUDED_VARLEN_PACKET_TAGGER_IMPL_H
 #define INCLUDED_VARLEN_PACKET_TAGGER_IMPL_H
@@ -23,7 +38,6 @@ namespace gr {
       pmt::pmt_t d_packet_tag; // packet_len tag for output stream
 
       bool d_have_sync; // interal state
-      bool d_verbose;
 
       int bits2len(const unsigned char *in);
 
@@ -33,7 +47,7 @@ namespace gr {
                                   int length_field_size,
                                   int max_packet_size,
                                   endianness_t endianness,
-                                  bool use_golay, bool verbose);
+                                  bool use_golay);
       ~varlen_packet_tagger_impl();
 
       int general_work(int noutput_items,
