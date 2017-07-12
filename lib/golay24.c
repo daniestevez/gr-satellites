@@ -34,6 +34,21 @@ static const uint32_t H[N] = { 0x8008ed, 0x4001db, 0x2003b5, 0x100769,
 
 #define B(i) (H[i] & 0xfff)
 
+int encode_golay24(uint32_t *data) {
+  register uint32_t r = (*data) & 0xfff;
+  register uint32_t s;
+  register int i;
+
+  s = 0;
+  for (i=0; i < N; i++) {
+    s <<= 1;
+    s |= __builtin_parity(H[i] & r);
+  }
+
+  *data = ((0xFFF & s) << N) | r;
+  return 0;
+}
+
 int decode_golay24(uint32_t *data) {
   register uint32_t r = *data;
   register uint16_t s; /* syndrome */

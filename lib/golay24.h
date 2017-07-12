@@ -26,5 +26,6 @@
 #include <stdint.h>
 
 int decode_golay24(uint32_t *data);
+int encode_golay24(uint32_t *data);
 
 #endif

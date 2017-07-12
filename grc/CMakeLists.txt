@@ -54,5 +54,6 @@ install(FILES
     satellites_au03_telemetry_parser.xml
     satellites_check_tt64_crc.xml
     satellites_varlen_packet_tagger.xml
+    satellites_varlen_packet_framer.xml
     DESTINATION share/gnuradio/grc/blocks
 )
