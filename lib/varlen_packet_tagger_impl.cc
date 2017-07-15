@@ -67,6 +67,7 @@ namespace gr {
     {
       d_sync_tag = pmt::string_to_symbol(sync_key);
       d_packet_tag = pmt::string_to_symbol(packet_key);
+      d_ninput_items_required = d_header_length + 1;
 
       set_tag_propagation_policy(TPP_DONT);
 
@@ -94,6 +95,14 @@ namespace gr {
         }
       }
       return ret;
+    }
+
+    void
+    varlen_packet_tagger_impl::forecast(int noutput_items, gr_vector_int &ninput_items_required)
+    {
+      unsigned ninputs = ninput_items_required.size();
+      for(unsigned i = 0; i < ninputs; i++)
+        ninput_items_required[i] = d_ninput_items_required;
     }
 
     int
@@ -141,8 +150,15 @@ namespace gr {
           return 0;
         }
         
-        if ((ninput_items[0] >= packet_len + d_header_length) &&
-            (noutput_items >= packet_len)) {
+        d_ninput_items_required = d_header_length + packet_len;
+
+        if (noutput_items < packet_len) {
+          set_min_noutput_items(packet_len);
+          return 0;
+        }
+        set_min_noutput_items(1);
+
+        if (ninput_items[0] >= packet_len + d_header_length) {
 
           if (d_use_golay) {
             GR_LOG_DEBUG(d_debug_logger,
@@ -166,6 +182,7 @@ namespace gr {
           // ... multiple syncs per 'packet', 
           // ... in case the sync was incorrectly tagged
           consume_each(d_header_length);
+          d_ninput_items_required = d_header_length + 1;
           return packet_len;
         } 
 
