@@ -38,6 +38,7 @@ namespace gr {
       pmt::pmt_t d_packet_tag; // packet_len tag for output stream
 
       bool d_have_sync; // interal state
+      int d_ninput_items_required; // forecast
 
       int bits2len(const unsigned char *in);
 
@@ -49,6 +50,8 @@ namespace gr {
                                   endianness_t endianness,
                                   bool use_golay);
       ~varlen_packet_tagger_impl();
+
+      void forecast(int noutput_items, gr_vector_int &ninput_itens_required);
 
       int general_work(int noutput_items,
                        gr_vector_int &ninput_items,

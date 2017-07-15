@@ -22,6 +22,7 @@
 
 #include <gnuradio/io_signature.h>
 #include <cstdio>
+#include <ctime>
 #include <iostream>
 #include "varlen_packet_framer_impl.h"
 
@@ -59,7 +60,8 @@ namespace gr {
       d_header_length(length_field_size),
       d_endianness(endianness),
       d_use_golay(use_golay),
-      d_sync_word(sync_word)
+      d_sync_word(sync_word),
+      d_ninput_items_required(1)
     {
       d_packet_tag = pmt::string_to_symbol(packet_key);
 
@@ -74,11 +76,25 @@ namespace gr {
       
       if (d_use_golay)
           d_header_length = 24;
+
+#ifdef VLPF_DEBUG_TIMING
+      d_last_debug1 = std::time(NULL);
+      d_last_debug2 = std::time(NULL);
+      d_start_time = std::time(NULL);
+#endif
     }
 
 
     varlen_packet_framer_impl::~varlen_packet_framer_impl()
     {
+    }
+
+    void
+    varlen_packet_framer_impl::forecast(int noutput_items, gr_vector_int &ninput_items_required)
+    {
+      unsigned ninputs = ninput_items_required.size();
+      for(unsigned i = 0; i < ninputs; i++)
+        ninput_items_required[i] = d_ninput_items_required;
     }
 
     int
@@ -103,9 +119,23 @@ namespace gr {
         // check for packet size
         packet_len = to_uint64(tags[0].value);
 
-        if ((ninput_items[0] >= tags[0].offset - nitems_read(0) + packet_len) &&
-            (noutput_items >= packet_len + d_header_length + asm_len)) {
+        if (noutput_items < packet_len + d_header_length + asm_len) {
+          set_min_noutput_items(packet_len + d_header_length + asm_len);
+#ifdef VLPF_DEBUG_TIMING
+          if (std::time(NULL) - d_last_debug1 > 1) {
+            std::cout << (std::time(NULL) - d_start_time) 
+                      << "nouput:" << noutput_items 
+                      << " req:" << (packet_len+d_header_length + asm_len) 
+                      << std::endl;
+            d_last_debug1 = std::time(NULL);
+          }
+#endif
+          return 0;
+        }
+        set_min_noutput_items(1);
 
+        d_ninput_items_required = tags[0].offset - nitems_read(0) + packet_len;
+        if (ninput_items[0] >= d_ninput_items_required) {
           // copy the option sync word
           if (asm_len > 0) {
             memcpy(out, (const void *) &d_sync_word[0], asm_len);
@@ -137,13 +167,35 @@ namespace gr {
               alias_pmt());
           consume_each(packet_len);
 
+#ifdef VLPF_DEBUG_TIMING
+          std::cout << (std::time(NULL) - d_start_time) 
+                    << ":\tASM Framed @ " << nitems_written(0) 
+                    << " len " << packet_len 
+                    << std::endl;
+          std::cout << "\tread: " << nitems_read(0)
+                    << "\tini:  " << ninput_items[0]
+                    << "\touti: " << noutput_items
+                    << std::endl;
+#endif
+          GR_LOG_DEBUG(d_debug_logger,
+                       boost::format("%d byte packet output @ %ld") \
+                       % packet_len % nitems_written(0))
+          d_ninput_items_required = 1;//d_header_length + asm_len + 1; // abs min
           return packet_len + d_header_length + asm_len;
+        }
+        else {
+#ifdef VLPF_DEBUG_TIMING
+          if (std::time(NULL) - d_last_debug2 >= 1) {
+            std::cout << (std::time(NULL) - d_start_time) 
+                      << ":\tASM not enough input:" << ninput_items[0]
+                      << " req:" << d_ninput_items_required << std::endl;
+            d_last_debug2 = std::time(NULL);
+          }
+#endif
         }
       }
       return 0;
     }
-
-
 
 
   } /* namespace satellites */
