@@ -22,6 +22,8 @@
 
 #include <stdint.h>
 
+#include <volk/volk.h>
+
 #include "golay24.h"
 
 #define N 12
@@ -38,6 +40,7 @@ int decode_golay24(uint32_t *data) {
   register uint16_t q; /* modified syndrome */
   register uint32_t e; /* estimated error vector */
   register int i;
+  uint32_t popcount;
 
   // Step 1. s = H*r
   s = 0;
@@ -47,7 +50,8 @@ int decode_golay24(uint32_t *data) {
   }
 
   // Step 2. if w(s) <= 3, then e = (s, 0) and go to step 8
-  if (__builtin_popcount(s) <= 3) {
+  volk_32u_popcnt(&popcount, s);
+  if (popcount <= 3) {
     e = s;
     e <<= N;
     goto step8;
@@ -55,7 +59,8 @@ int decode_golay24(uint32_t *data) {
 
   // Step 3. if w(s + B[i]) <= 2, then e = (s + B[i], e_{i+1}) and go to step 8
   for (i = 0; i < N; i++) {
-    if (__builtin_popcount(s ^ B(i)) <= 2) {
+    volk_32u_popcnt(&popcount, s ^ B(i));
+    if (popcount <= 2) {
       e = s ^ B(i);
       e <<= N;
       e |= 1 << (N - i - 1);
@@ -71,14 +76,16 @@ int decode_golay24(uint32_t *data) {
   }
 
   // Step 5. If w(q) <= 3, then e = (0, q) and go to step 8
-  if (__builtin_popcount(q) <= 3) {
+  volk_32u_popcnt(&popcount, q);
+  if (popcount <= 3) {
     e = q;
     goto step8;
   }
   
   // Step 6. If w(q + B[i]) <= 2, then e = (e_{i+1}, q + B[i]) and got to step 8
   for (i = 0; i < N; i++) {
-    if (__builtin_popcount(q ^ B(i)) <= 2) {
+    volk_32u_popcnt(&popcount, q ^ B(i));
+    if (popcount <= 2) {
       e = 1 << (2*N - i - 1);
       e |= q ^ B(i);
       goto step8;
@@ -92,5 +99,6 @@ int decode_golay24(uint32_t *data) {
   // Step 8. c = r + e
   *data = r ^ e;
 
-  return __builtin_popcount(e);
+  volk_32u_popcnt(&popcount, e);
+  return popcount;
 }
