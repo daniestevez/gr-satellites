@@ -179,7 +179,7 @@ namespace gr {
 #endif
           GR_LOG_DEBUG(d_debug_logger,
                        boost::format("%d byte packet output @ %ld") \
-                       % packet_len % nitems_written(0))
+                       % packet_len % nitems_written(0));
           d_ninput_items_required = 1;//d_header_length + asm_len + 1; // abs min
           return packet_len + d_header_length + asm_len;
         }
