@@ -113,7 +113,7 @@ telemetry packet in the terminal as soon as it receives it.
     receive this satellite.
   * `aisat`
     [AISAT](https://directory.eoportal.org/web/eoportal/satellite-missions/a/aisat),
-    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a Nanocom
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
     U482C transceiver with the CSP protocol and FEC with a (255,223)
     Reed-Solomon code. It also uses a CCSDS scrambler. There is no telemetry
     parser yet, as the beacon format is unknown. This satellite has an AIS
@@ -126,7 +126,7 @@ telemetry packet in the terminal as soon as it receives it.
     receive this satellite.
   * `athenoxat-1`
     [ATHENOXAT-1](http://space.skyrocket.de/doc_sdat/athenoxat-1.htm),
-    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a Nanocom
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
     U482C transceiver, with the CSP protocol and FEC with a (255,223)
     Reed-Solomon code. It also uses a CCSDS scrambler. There is no telemetry
     parser yet, as the beacon format is unknown. This satellite is on a low
@@ -134,13 +134,13 @@ telemetry packet in the terminal as soon as it receives it.
     use FM mode to receive this satellite.
   * `au02`
     [QB50 AU02 (UNSW-EC0)](http://www.acser.unsw.edu.au/QB50),
-    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a Nanocom
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
     U482C transceiver, with the CSP protocol and FEC with an r=1/2, k=7
     convolutional code and a (255,223) Reed-Solomon code. It also uses a CCSDS
     scrambler. You must use FM mode to receive this satellite.
   * `au03`
     [QB50 AU03 (i-INSPIRE II)](http://sydney.edu.au/inspire-cubesat/project/index.shtml),
-    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a Nanocom
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
     U482C transceiver, with the CSP protocol and FEC with an r=1/2, k=7
     convolutional code and a (255,223) Reed-Solomon code. It also uses a CCSDS
     scrambler. You must use FM mode to receive this satellite.
@@ -165,9 +165,17 @@ telemetry packet in the terminal as soon as it receives it.
     and FEC with a (255,223) Reed-Solomon code. It also uses a G3RUH scrambler. The
     transceiver is the GomSpace NanoCom AX100, the same transceiver used in
     GOMX-3. You must use FM mode to receive this satellite.
+  * `dsat`
+    [D-SAT](https://www.dsat.space/), which transmits 4k8 AF GMSK telemetry in
+    the 70cm band. It uses a NanoCom U482C transceiver with the CSP protocol and
+    FEC with a (255,223) Reed-Solomon code. It also uses a CCSDS scrambler. This
+    receiver supports sending frames to the D-SAT groundstation software, which
+    decodes telemetry. See
+    [this post](http://destevez.net/2017/08/d-sat-support-added-to-gr-satellites/)
+    for detailed instructions.
   * `galassia`
     [GALASSIA](https://eoportal.org/web/eoportal/satellite-missions/content/-/article/galass-1),
-    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a Nanocom
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
     U482C transceiver with the the CSP protocol and FEC with a (255,223)
     Reed-Solomon code. It also uses a CCSDS scrambler. There is no telemetry
     parser yet, as the beacon format is unknown. This satellite is on a low
@@ -175,7 +183,7 @@ telemetry packet in the terminal as soon as it receives it.
     use FM mode to receive this satellite.
   * `gomx_1`
     [GOMX-1](https://directory.eoportal.org/web/eoportal/satellite-missions/g/gomx-1),
-    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a Nanocom
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
     U482C transceiver with the CSP protocol and FEC with a (255,223)
     Reed-Solomon code. It also uses a CCSDS scrambler. The beacons
     include information from ADS-B beacons transmitted by terrestrial

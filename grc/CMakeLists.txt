@@ -55,5 +55,6 @@ install(FILES
     satellites_check_tt64_crc.xml
     satellites_varlen_packet_tagger.xml
     satellites_varlen_packet_framer.xml
+    satellites_append_crc32c.xml
     DESTINATION share/gnuradio/grc/blocks
 )

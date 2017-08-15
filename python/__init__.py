@@ -75,4 +75,4 @@ from au03_telemetry_parser import au03_telemetry_parser
 
 from check_tt64_crc import check_tt64_crc
 
-
+from append_crc32c import append_crc32c
