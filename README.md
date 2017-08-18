@@ -172,7 +172,9 @@ telemetry packet in the terminal as soon as it receives it.
     receiver supports sending frames to the D-SAT groundstation software, which
     decodes telemetry. See
     [this post](http://destevez.net/2017/08/d-sat-support-added-to-gr-satellites/)
-    for detailed instructions.
+    for detailed instructions. D-SAT transmits JPEG image from an onboard
+    camera. This decoder includes an image decoder which shows the images in
+    real time using feh.
   * `galassia`
     [GALASSIA](https://eoportal.org/web/eoportal/satellite-missions/content/-/article/galass-1),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
