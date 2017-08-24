@@ -38,6 +38,10 @@ list(APPEND satellites_sources
     varlen_packet_tagger_impl.cc
     varlen_packet_framer_impl.cc
     viterbi.c
+    nusat_decoder_impl.cc
+    rscode/berlekamp.c
+    rscode/galois.c
+    rscode/rs.c
 )
 
 set(satellites_sources "${satellites_sources}" PARENT_SCOPE)

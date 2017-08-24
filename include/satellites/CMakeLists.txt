@@ -31,5 +31,6 @@ install(FILES
     lilacsat1_demux.h
     varlen_packet_tagger.h
     varlen_packet_framer.h
+    nusat_decoder.h
     DESTINATION include/satellites
 )

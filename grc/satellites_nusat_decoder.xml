@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<block>
+  <name>NuSat FEC Decoder</name>
+  <key>satellites_nusat_decoder</key>
+  <category>[Satellites]/FEC</category>
+  <import>import satellites</import>
+  <make>satellites.nusat_decoder()</make>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

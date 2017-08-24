@@ -57,5 +57,6 @@ install(FILES
     satellites_varlen_packet_framer.xml
     satellites_append_crc32c.xml
     satellites_dsat_image_decoder.xml
+    satellites_nusat_decoder.xml
     DESTINATION share/gnuradio/grc/blocks
 )

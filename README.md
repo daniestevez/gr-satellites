@@ -244,7 +244,16 @@ telemetry packet in the terminal as soon as it receives it.
     telemetry in the 2m band. It uses the AO-40 FEC protocol, which includes
     block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
     two interleaved (160,128) Reed-Solomon codes. You must use SSB mode to
-    receive this satellite.    
+    receive this satellite.
+  * `nusat`
+    [ÑuSat-1 and -2](http://space.skyrocket.de/doc_sdat/nusat-1.htm),
+    which transmit 40k FSK telemetry in the 70cm band. They use FEC with a
+    (64, 60) Reed-Solomon code and a CRC-8. Since a sample rate of 48kHz is too
+    low to work with 40k FSK, the flowgraph is prepared to use an IQ recording
+    at 192kHz. Depending on the characteristics of your IQ recording you may
+    need to edit the flowgraph. The Reed-Solomon decoder is taken from the
+    [rscode](http://rscode.sourceforge.net/) library. A sample IQ recording is
+    included in [satellite-recordings](https://github.com/daniestevez/satellite-recordings).
   * `tw_1a`, `tw_1b`, `tw_1c`
     [TW-1A](http://space.skyrocket.de/doc_sdat/shangkeda-2.htm),
     [TW-1B](http://space.skyrocket.de/doc_sdat/njust-2.htm),

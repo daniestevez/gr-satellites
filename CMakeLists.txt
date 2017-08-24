@@ -176,6 +176,12 @@ add_custom_target(uninstall
 )
 
 ########################################################################
+# Use GNU Radio logging
+########################################################################
+include(GrMiscUtils)
+GR_LOGGING()
+
+########################################################################
 # Add subdirectories
 ########################################################################
 add_subdirectory(include/satellites)
@@ -196,3 +202,4 @@ endif(NOT CMAKE_MODULES_DIR)
 install(FILES cmake/Modules/satellitesConfig.cmake
     DESTINATION ${CMAKE_MODULES_DIR}/satellites
 )
+

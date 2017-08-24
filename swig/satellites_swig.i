@@ -17,6 +17,7 @@
 #include "satellites/lilacsat1_demux.h"
 #include "satellites/varlen_packet_tagger.h"
 #include "satellites/varlen_packet_framer.h"
+#include "satellites/nusat_decoder.h"
 %}
 
 %include "satellites/decode_rs.h"
@@ -38,3 +39,5 @@ GR_SWIG_BLOCK_MAGIC2(satellites, lilacsat1_demux);
 GR_SWIG_BLOCK_MAGIC2(satellites, varlen_packet_tagger);
 %include "satellites/varlen_packet_framer.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, varlen_packet_framer);
+%include "satellites/nusat_decoder.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, nusat_decoder);
