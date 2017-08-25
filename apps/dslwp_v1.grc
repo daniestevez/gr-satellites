@@ -132,7 +132,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>4</value>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -317,6 +317,37 @@
     <param>
       <key>id</key>
       <value>blocks_message_debug_0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_message_debug</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1128, 128)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_message_debug_0_0</value>
     </param>
   </block>
   <block>
@@ -789,7 +820,7 @@
     <key>blocks_file_sink</key>
     <param>
       <key>append</key>
-      <value>True</value>
+      <value>False</value>
     </param>
     <param>
       <key>alias</key>
@@ -1012,6 +1043,12 @@
   </connection>
   <connection>
     <source_block_id>satellites_decode_rs_0_0_0</source_block_id>
+    <sink_block_id>blocks_message_debug_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>print_pdu</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>satellites_decode_rs_0_0_0</source_block_id>
     <sink_block_id>lilacsat_dslwp_tm_header_parser_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
@@ -1024,9 +1061,21 @@
   </connection>
   <connection>
     <source_block_id>sync_to_pdu_0_0_0</source_block_id>
+    <sink_block_id>blocks_message_debug_0_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>print_pdu</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>sync_to_pdu_0_0_0</source_block_id>
     <sink_block_id>ccsds_descrambler_0_0_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>sync_to_pdu_0_1_0</source_block_id>
+    <sink_block_id>blocks_message_debug_0_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>print_pdu</sink_key>
   </connection>
   <connection>
     <source_block_id>sync_to_pdu_0_1_0</source_block_id>

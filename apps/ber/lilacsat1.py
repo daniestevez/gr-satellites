@@ -111,7 +111,7 @@ class BERAWGNSimu(gr.top_block):
                      digital.diff_encoder_bb(2),
                      pack)
         self.connect(modulator, channel,
-                     blocks.multiply_const_cc(0.5), # signal amplitude 1 seems very important
+                     blocks.multiply_const_cc(0.1), # we set some amplitude to test the agc # signal amplitude 1 seems very important
                      dut,
                      digital.diff_decoder_bb(2),
                      descrambler)

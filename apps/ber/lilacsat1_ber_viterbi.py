@@ -4,7 +4,7 @@
 # Title: LilacSat-1 decoder
 # Author: Daniel Estevez
 # Description: LilacSat-1 decoder
-# Generated: Tue Jul 18 23:45:01 2017
+# Generated: Sun Aug 20 10:39:10 2017
 ##################################################
 
 import os
@@ -12,12 +12,12 @@ import sys
 sys.path.append(os.environ.get('GRC_HIER_PATH', os.path.expanduser('~/.grc_gnuradio')))
 
 from ccsds_viterbi import ccsds_viterbi  # grc-generated hier_block
-from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import digital
 from gnuradio import filter
 from gnuradio import gr
 from gnuradio.filter import firdes
+from rms_agc import rms_agc  # grc-generated hier_block
 
 
 class lilacsat1_ber_viterbi(gr.hier_block2):
@@ -59,6 +59,10 @@ class lilacsat1_ber_viterbi(gr.hier_block2):
         ##################################################
         # Blocks
         ##################################################
+        self.rms_agc_0 = rms_agc(
+            alpha=1e-2,
+            reference=0.5,
+        )
         self.low_pass_filter_0_0 = filter.fir_filter_ccf(1, firdes.low_pass(
         	1, samp_rate, 10000, 1000, firdes.WIN_HAMMING, 6.76))
         self.low_pass_filter_0 = filter.fir_filter_ccf(1, firdes.low_pass(
@@ -84,7 +88,8 @@ class lilacsat1_ber_viterbi(gr.hier_block2):
         self.connect((self.digital_pfb_clock_sync_xxx_0, 0), (self.digital_costas_loop_cc_0_0, 0))
         self.connect((self, 0), (self.low_pass_filter_0_0, 0))
         self.connect((self.low_pass_filter_0, 0), (self.digital_pfb_clock_sync_xxx_0, 0))
-        self.connect((self.low_pass_filter_0_0, 0), (self.digital_fll_band_edge_cc_0, 0))
+        self.connect((self.low_pass_filter_0_0, 0), (self.rms_agc_0, 0))
+        self.connect((self.rms_agc_0, 0), (self.digital_fll_band_edge_cc_0, 0))
 
     def get_bfo(self):
         return self.bfo

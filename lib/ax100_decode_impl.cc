@@ -22,6 +22,8 @@
 #include "config.h"
 #endif
 
+#include <algorithm>
+
 #include <cstdio>
 
 #include <gnuradio/io_signature.h>
