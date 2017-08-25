@@ -122,7 +122,8 @@ telemetry packet in the terminal as soon as it receives it.
     [QB50 AT03 (PEGASUS)](https://spacedatacenter.at/pegasus/),
     which transmits 9k6 GFSK telemetry in the 70cm band. It uses the TT-64
     protocol, which includes a CRC16-ARC and FEC with a (64,48) Reed-Solomon
-    code. Reed-Solomon decoding is not implemented yet. You must use FM mode to
+    code. Reed-Solomon decoding is done with the
+    [rscode](http://rscode.sourceforge.net/) library. You must use FM mode to
     receive this satellite.
   * `athenoxat-1`
     [ATHENOXAT-1](http://space.skyrocket.de/doc_sdat/athenoxat-1.htm),

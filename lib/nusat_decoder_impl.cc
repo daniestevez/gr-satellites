@@ -22,7 +22,6 @@
 #include "config.h"
 #endif
 
-#include <cstdio>
 #include <algorithm>
 
 #include <gnuradio/logger.h>
@@ -80,7 +79,7 @@ namespace gr {
 	      gr::io_signature::make(0, 0, 0))
     {
       // Initialize Galois tables and polynomial for Reed-Solomon
-      initialize_ecc();
+      initialize_ecc(4);
       
       message_port_register_out(pmt::mp("out"));
       message_port_register_in(pmt::mp("in"));

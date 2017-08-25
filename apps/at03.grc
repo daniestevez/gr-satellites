@@ -155,7 +155,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(960, 544)</value>
+      <value>(1088, 344)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -833,7 +833,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(568, 408)</value>
+      <value>(592, 408)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -880,7 +880,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(304, 420)</value>
+      <value>(824, 404)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -900,6 +900,49 @@
     </param>
   </block>
   <block>
+    <key>satellites_rscode_decoder</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(304, 420)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>satellites_rscode_decoder_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>npar</key>
+      <value>16</value>
+    </param>
+  </block>
+  <block>
     <key>satellites_submit</key>
     <param>
       <key>alias</key>
@@ -915,11 +958,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(960, 368)</value>
+      <value>(936, 580)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -939,7 +982,7 @@
     </param>
     <param>
       <key>noradID</key>
-      <value>39430</value>
+      <value>42784</value>
     </param>
     <param>
       <key>source</key>
@@ -952,6 +995,61 @@
     <param>
       <key>url</key>
       <value>http://tlm.pe0sat.nl/tlmdb/frame_db.php</value>
+    </param>
+  </block>
+  <block>
+    <key>satellites_submit</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value>Telemetry submit block requested by the Pegasus team</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(312, 580)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>satellites_submit_0_0</value>
+    </param>
+    <param>
+      <key>latitude</key>
+      <value>latitude</value>
+    </param>
+    <param>
+      <key>longitude</key>
+      <value>longitude</value>
+    </param>
+    <param>
+      <key>noradID</key>
+      <value>42784</value>
+    </param>
+    <param>
+      <key>source</key>
+      <value>callsign</value>
+    </param>
+    <param>
+      <key>tstamp</key>
+      <value>recstart</value>
+    </param>
+    <param>
+      <key>url</key>
+      <value>http://spacedatacenter.at/sids/report_frame.php</value>
     </param>
   </block>
   <block>
@@ -1037,25 +1135,37 @@
   </connection>
   <connection>
     <source_block_id>satellites_check_tt64_crc_0</source_block_id>
-    <sink_block_id>blocks_message_debug_0</sink_block_id>
-    <source_key>ok</source_key>
-    <sink_key>print_pdu</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>satellites_check_tt64_crc_0</source_block_id>
-    <sink_block_id>satellites_submit_0</sink_block_id>
+    <sink_block_id>satellites_print_timestamp_0</sink_block_id>
     <source_key>ok</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>satellites_print_timestamp_0</source_block_id>
+    <sink_block_id>blocks_message_debug_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>print_pdu</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>satellites_print_timestamp_0</source_block_id>
+    <sink_block_id>satellites_submit_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>satellites_rscode_decoder_0</source_block_id>
     <sink_block_id>satellites_check_tt64_crc_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>sync_to_pdu_packed_0</source_block_id>
-    <sink_block_id>satellites_print_timestamp_0</sink_block_id>
+    <sink_block_id>satellites_rscode_decoder_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>sync_to_pdu_packed_0</source_block_id>
+    <sink_block_id>satellites_submit_0_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>

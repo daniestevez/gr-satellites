@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <block>
-  <name>Reed-Solomon decoder</name>
+  <name>CCSDS Reed-Solomon Decoder</name>
   <key>satellites_decode_rs</key>
   <category>[Satellites]/FEC</category>
   <import>import satellites</import>

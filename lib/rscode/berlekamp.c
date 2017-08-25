@@ -58,6 +58,8 @@ static int NErrors;
 static int ErasureLocs[256];
 static int NErasures;
 
+extern int npar;
+
 /* From  Cain, Clark, "Error-Correction Coding For Digital Communications", pp. 216. */
 void
 Modified_Berlekamp_Massey (void)
@@ -76,32 +78,32 @@ Modified_Berlekamp_Massey (void)
   copy_poly(psi, gamma);	
   k = -1; L = NErasures;
 	
-  for (n = NErasures; n < NPAR; n++) {
+  for (n = NErasures; n < npar; n++) {
 	
     d = compute_discrepancy(psi, synBytes, L, n);
 		
     if (d != 0) {
 		
       /* psi2 = psi - d*D */
-      for (i = 0; i < MAXDEG; i++) psi2[i] = psi[i] ^ gmult(d, D[i]);
+      for (i = 0; i < 2*npar; i++) psi2[i] = psi[i] ^ gmult(d, D[i]);
 		
 		
       if (L < (n-k)) {
 	L2 = n-k;
 	k = n-L;
 	/* D = scale_poly(ginv(d), psi); */
-	for (i = 0; i < MAXDEG; i++) D[i] = gmult(psi[i], ginv(d));
+	for (i = 0; i < 2*npar; i++) D[i] = gmult(psi[i], ginv(d));
 	L = L2;
       }
 			
       /* psi = psi2 */
-      for (i = 0; i < MAXDEG; i++) psi[i] = psi2[i];
+      for (i = 0; i < 2*npar; i++) psi[i] = psi2[i];
     }
 		
     mul_z_poly(D);
   }
 	
-  for(i = 0; i < MAXDEG; i++) Lambda[i] = psi[i];
+  for(i = 0; i < 2*npar; i++) Lambda[i] = psi[i];
   compute_modified_omega();
 
 	
@@ -119,7 +121,7 @@ compute_modified_omega ()
 	
   mult_polys(product, Lambda, synBytes);	
   zero_poly(Omega);
-  for(i = 0; i < NPAR; i++) Omega[i] = product[i];
+  for(i = 0; i < npar; i++) Omega[i] = product[i];
 
 }
 
@@ -130,19 +132,19 @@ mult_polys (int dst[], int p1[], int p2[])
   int i, j;
   int tmp1[MAXDEG*2];
 	
-  for (i=0; i < (MAXDEG*2); i++) dst[i] = 0;
+  for (i=0; i < 4*npar; i++) dst[i] = 0;
 	
-  for (i = 0; i < MAXDEG; i++) {
-    for(j=MAXDEG; j<(MAXDEG*2); j++) tmp1[j]=0;
+  for (i = 0; i < 2*npar; i++) {
+    for(j=MAXDEG; j<4*npar; j++) tmp1[j]=0;
 		
     /* scale tmp1 by p1[i] */
-    for(j=0; j<MAXDEG; j++) tmp1[j]=gmult(p2[j], p1[i]);
+    for(j=0; j<2*npar; j++) tmp1[j]=gmult(p2[j], p1[i]);
     /* and mult (shift) tmp1 right by i */
-    for (j = (MAXDEG*2)-1; j >= i; j--) tmp1[j] = tmp1[j-i];
+    for (j = 4*npar-1; j >= i; j--) tmp1[j] = tmp1[j-i];
     for (j = 0; j < i; j++) tmp1[j] = 0;
 		
     /* add into partial product */
-    for(j=0; j < (MAXDEG*2); j++) dst[j] ^= tmp1[j];
+    for(j=0; j < 4*npar; j++) dst[j] ^= tmp1[j];
   }
 }
 
@@ -172,7 +174,7 @@ void
 compute_next_omega (int d, int A[], int dst[], int src[])
 {
   int i;
-  for ( i = 0; i < MAXDEG;  i++) {
+  for ( i = 0; i < 2*npar;  i++) {
     dst[i] = src[i] ^ gmult(d, A[i]);
   }
 }
@@ -194,26 +196,26 @@ compute_discrepancy (int lambda[], int S[], int L, int n)
 void add_polys (int dst[], int src[]) 
 {
   int i;
-  for (i = 0; i < MAXDEG; i++) dst[i] ^= src[i];
+  for (i = 0; i < 2*npar; i++) dst[i] ^= src[i];
 }
 
 void copy_poly (int dst[], int src[]) 
 {
   int i;
-  for (i = 0; i < MAXDEG; i++) dst[i] = src[i];
+  for (i = 0; i < 2*npar; i++) dst[i] = src[i];
 }
 
 void scale_poly (int k, int poly[]) 
 {	
   int i;
-  for (i = 0; i < MAXDEG; i++) poly[i] = gmult(k, poly[i]);
+  for (i = 0; i < 2*npar; i++) poly[i] = gmult(k, poly[i]);
 }
 
 
 void zero_poly (int poly[]) 
 {
   int i;
-  for (i = 0; i < MAXDEG; i++) poly[i] = 0;
+  for (i = 0; i < 2*npar; i++) poly[i] = 0;
 }
 
 
@@ -221,7 +223,7 @@ void zero_poly (int poly[])
 static void mul_z_poly (int src[])
 {
   int i;
-  for (i = MAXDEG-1; i > 0; i--) src[i] = src[i-1];
+  for (i = 2*npar-1; i > 0; i--) src[i] = src[i-1];
   src[0] = 0;
 }
 
@@ -242,7 +244,7 @@ Find_Roots (void)
   for (r = 1; r < 256; r++) {
     sum = 0;
     /* evaluate lambda at r */
-    for (k = 0; k < NPAR+1; k++) {
+    for (k = 0; k < npar+1; k++) {
       sum ^= gmult(gexp[(k*r)%255], Lambda[k]);
     }
     if (sum == 0) 
@@ -284,7 +286,7 @@ correct_errors_erasures (unsigned char codeword[],
   Find_Roots();
   
 
-  if ((NErrors <= NPAR) && NErrors > 0) { 
+  if ((NErrors <= npar) && NErrors > 0) { 
 
     /* first check for illegal error locs */
     for (r = 0; r < NErrors; r++) {
@@ -300,12 +302,12 @@ correct_errors_erasures (unsigned char codeword[],
       /* evaluate Omega at alpha^(-i) */
 
       num = 0;
-      for (j = 0; j < MAXDEG; j++) 
+      for (j = 0; j < 2*npar; j++) 
 	num ^= gmult(Omega[j], gexp[((255-i)*j)%255]);
       
       /* evaluate Lambda' (derivative) at alpha^(-i) ; all odd powers disappear */
       denom = 0;
-      for (j = 1; j < MAXDEG; j += 2) {
+      for (j = 1; j < 2*npar; j += 2) {
 	denom ^= gmult(Lambda[j], gexp[((255-i)*(j-1)) % 255]);
       }
       

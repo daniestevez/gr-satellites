@@ -42,10 +42,12 @@
 
   ****************************************************************/
 
-#define NPAR 4
+// Modified by Daniel Estevez
+// Now we take a maximum value MAX_NPAR and the NPAR parameter
+// is set at runtime
+#define MAX_NPAR 16
 
 /****************************************************************/
-
 
 
 
@@ -58,7 +60,7 @@ typedef unsigned short BIT16;
 /* **************************************************************** */
 
 /* Maximum degree of various polynomials. */
-#define MAXDEG (NPAR*2)
+#define MAXDEG (MAX_NPAR*2)
 
 /*************************************/
 /* Encoder parity bytes */
@@ -71,7 +73,7 @@ extern int synBytes[MAXDEG];
 extern int DEBUG;
 
 /* Reed Solomon encode/decode routines */
-void initialize_ecc (void);
+void initialize_ecc (int n_par);
 int check_syndrome (void);
 void decode_data (unsigned char data[], int nbytes);
 void encode_data (unsigned char msg[], int nbytes, unsigned char dst[]);

@@ -32,5 +32,6 @@ install(FILES
     varlen_packet_tagger.h
     varlen_packet_framer.h
     nusat_decoder.h
+    rscode_decoder.h
     DESTINATION include/satellites
 )

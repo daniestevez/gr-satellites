@@ -42,6 +42,7 @@ list(APPEND satellites_sources
     rscode/berlekamp.c
     rscode/galois.c
     rscode/rs.c
+    rscode_decoder_impl.cc
 )
 
 set(satellites_sources "${satellites_sources}" PARENT_SCOPE)

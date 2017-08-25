@@ -40,18 +40,27 @@ int genPoly[MAXDEG*2];
 
 int DEBUG = FALSE;
 
+int npar;
+
 static void
 compute_genpoly (int nbytes, int genpoly[]);
 
 /* Initialize lookup tables, polynomials, etc. */
 void
-initialize_ecc ()
+initialize_ecc (int n_par)
 {
+  if (npar > MAX_NPAR) {
+    fprintf(stderr, "Number of parity symbols not suported (%d requested, maximum is %d)\n",
+	    npar, MAX_NPAR);
+    return;
+  }
+  npar = n_par;
+  
   /* Initialize the galois field arithmetic tables */
     init_galois_tables();
 
     /* Compute the encoder generator polynomial */
-    compute_genpoly(NPAR, genPoly);
+    compute_genpoly(npar, genPoly);
 }
 
 void
@@ -63,22 +72,22 @@ zero_fill_from (unsigned char buf[], int from, int to)
 
 /* debugging routines */
 void
-print_parity (void)
+print_parity ()
 { 
   int i;
   printf("Parity Bytes: ");
-  for (i = 0; i < NPAR; i++) 
+  for (i = 0; i < npar; i++) 
     printf("[%d]:%x, ",i,pBytes[i]);
   printf("\n");
 }
 
 
 void
-print_syndrome (void)
+print_syndrome ()
 { 
   int i;
   printf("Syndrome Bytes: ");
-  for (i = 0; i < NPAR; i++) 
+  for (i = 0; i < npar; i++) 
     printf("[%d]:%x, ",i,synBytes[i]);
   printf("\n");
 }
@@ -91,8 +100,8 @@ build_codeword (unsigned char msg[], int nbytes, unsigned char dst[])
 	
   for (i = 0; i < nbytes; i++) dst[i] = msg[i];
 	
-  for (i = 0; i < NPAR; i++) {
-    dst[i+nbytes] = pBytes[NPAR-1-i];
+  for (i = 0; i < npar; i++) {
+    dst[i+nbytes] = pBytes[npar-1-i];
   }
 }
 	
@@ -107,7 +116,7 @@ void
 decode_data(unsigned char data[], int nbytes)
 {
   int i, j, sum;
-  for (j = 0; j < NPAR;  j++) {
+  for (j = 0; j < npar;  j++) {
     sum	= 0;
     for (i = 0; i < nbytes; i++) {
       sum = data[i] ^ gmult(gexp[j+1], sum);
@@ -122,7 +131,7 @@ int
 check_syndrome (void)
 {
  int i, nz = 0;
- for (i =0 ; i < NPAR; i++) {
+ for (i =0 ; i < npar; i++) {
   if (synBytes[i] != 0) {
       nz = 1;
       break;
@@ -181,19 +190,19 @@ compute_genpoly (int nbytes, int genpoly[])
 void
 encode_data (unsigned char msg[], int nbytes, unsigned char dst[])
 {
-  int i, LFSR[NPAR+1],dbyte, j;
+  int i, LFSR[npar+1],dbyte, j;
 	
-  for(i=0; i < NPAR+1; i++) LFSR[i]=0;
+  for(i=0; i < npar+1; i++) LFSR[i]=0;
 
   for (i = 0; i < nbytes; i++) {
-    dbyte = msg[i] ^ LFSR[NPAR-1];
-    for (j = NPAR-1; j > 0; j--) {
+    dbyte = msg[i] ^ LFSR[npar-1];
+    for (j = npar-1; j > 0; j--) {
       LFSR[j] = LFSR[j-1] ^ gmult(genPoly[j], dbyte);
     }
     LFSR[0] = gmult(genPoly[0], dbyte);
   }
 
-  for (i = 0; i < NPAR; i++) 
+  for (i = 0; i < npar; i++) 
     pBytes[i] = LFSR[i];
 	
   build_codeword(msg, nbytes, dst);
