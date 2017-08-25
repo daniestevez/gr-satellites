@@ -22,6 +22,8 @@
 #include "config.h"
 #endif
 
+#include <algorithm>
+
 #include <cstdio>
 
 #include <gnuradio/io_signature.h>
@@ -103,6 +105,7 @@ namespace gr {
     u482c_decode_impl::msg_handler (pmt::pmt_t pmt_msg) {
       pmt::pmt_t msg = pmt::cdr(pmt_msg);
       uint8_t data[HEADER_LEN + RS_LEN];
+      int data_len;
       uint8_t * const packet = data + HEADER_LEN;
       uint8_t tmp;
       int rs_res, viterbi_res, golay_res;
@@ -113,7 +116,8 @@ namespace gr {
       bool doing_rs;
       int i;
 
-      memcpy(data, pmt::uniform_vector_elements(msg, offset), sizeof(data));
+      data_len = std::min(pmt::length(msg), sizeof(data));
+      memcpy(data, pmt::uniform_vector_elements(msg, offset), data_len);
 
       // decode length field
       length_field = (data[0] << 16) | (data[1] << 8) | data[2];

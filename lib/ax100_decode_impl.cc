@@ -84,12 +84,14 @@ namespace gr {
     ax100_decode_impl::msg_handler (pmt::pmt_t pmt_msg) {
       pmt::pmt_t msg = pmt::cdr(pmt_msg);
       uint8_t data[256];
+      int data_len;
       uint8_t tmp;
       int rs_res;
       int frame_len;
       size_t offset(0);
 
-      memcpy(data, pmt::uniform_vector_elements(msg, offset), sizeof(data));
+      data_len = std::min(pmt::length(msg), sizeof(data));
+      memcpy(data, pmt::uniform_vector_elements(msg, offset), data_len);
 
       rs_res = decode_rs_8(data + 1, NULL, 0, 255 - data[0] + 1);
 
