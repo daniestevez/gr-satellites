@@ -877,7 +877,7 @@
     </param>
     <param>
       <key>url</key>
-      <value>http://tlm.pe0sat.nl/tlmdb/frame_db.php</value>
+      <value>https://db.satnogs.org/api/telemetry/</value>
     </param>
   </block>
   <block>
@@ -932,7 +932,7 @@
     </param>
     <param>
       <key>url</key>
-      <value>http://tlm.pe0sat.nl/tlmdb/frame_db.php</value>
+      <value>https://db.satnogs.org/api/telemetry/</value>
     </param>
   </block>
   <block>
@@ -987,7 +987,7 @@
     </param>
     <param>
       <key>url</key>
-      <value>http://tlm.pe0sat.nl/tlmdb/frame_db.php</value>
+      <value>https://db.satnogs.org/api/telemetry/</value>
     </param>
   </block>
   <block>
