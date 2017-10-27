@@ -166,6 +166,11 @@ telemetry packet in the terminal as soon as it receives it.
     and FEC with a (255,223) Reed-Solomon code. It also uses a G3RUH scrambler. The
     transceiver is the GomSpace NanoCom AX100, the same transceiver used in
     GOMX-3. You must use FM mode to receive this satellite.
+  * `cz02`
+    [QB50 CZ02 (VZLUSAT-1)](http://vzlusat1.cz/en/),
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
+    U482C transceiver, with the CSP protocol and a (255,223) Reed-Solomon code.
+    It also uses a CCSDS scrambler. You must use FM mode to receive this satellite.
   * `dsat`
     [D-SAT](https://www.dsat.space/), which transmits 4k8 AF GMSK telemetry in
     the 70cm band. It uses a NanoCom U482C transceiver with the CSP protocol and
