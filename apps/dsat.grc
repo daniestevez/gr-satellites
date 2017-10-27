@@ -1272,7 +1272,7 @@
     </param>
     <param>
       <key>url</key>
-      <value>https://db.satnogs.org/api/telemetry/</value>
+      <value>http://db.satnogs.org/api/telemetry/</value>
     </param>
   </block>
   <block>
