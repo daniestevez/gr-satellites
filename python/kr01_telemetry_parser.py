@@ -45,7 +45,11 @@ class kr01_telemetry_parser(gr.basic_block):
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
-        data = kr01_telemetry.Beacon.parse(packet[0x23:])
+        try:
+            data = kr01_telemetry.Beacon.parse(packet[0x23:])
+        except:
+            print "Could not parse telemetry beacon"
+            return
         print(data)
         
 

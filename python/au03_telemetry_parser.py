@@ -45,7 +45,11 @@ class au03_telemetry_parser(gr.basic_block):
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
-        data = au03_telemetry.Beacon.parse(packet[4:])
+        try:
+            data = au03_telemetry.Beacon.parse(packet[4:])
+        except:
+            print "Could not decode telemetry beacon"
+            return
         print(data)
         
 
