@@ -23,6 +23,7 @@
 install(FILES
     api.h
     decode_rs.h
+    encode_rs.h
     ao40_syncframe.h
     ao40_deinterleaver.h
     ao40_rs_decoder.h
