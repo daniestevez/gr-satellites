@@ -31,11 +31,7 @@ extern "C" {
 #include <fec.h>
 }
 
-#define MAX_FRAME_LEN 255
-#define PARITY_BYTES 32
-
-#define BASIS_CONVENTIONAL 0
-#define BASIS_DUAL 1
+#include "rs.h"
 
 namespace gr {
   namespace satellites {
