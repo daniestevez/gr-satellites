@@ -260,6 +260,11 @@ telemetry packet in the terminal as soon as it receives it.
     need to edit the flowgraph. The Reed-Solomon decoder is taken from the
     [rscode](http://rscode.sourceforge.net/) library. A sample IQ recording is
     included in [satellite-recordings](https://github.com/daniestevez/satellite-recordings).
+  * `picsat`
+    [PicSat](http://picsat.obspm.fr/),
+    which transmits 1k2 or 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
+    scrambler. For 1k2 telemetry you must use SSB mode, while for 9k6 telemetry you
+    must use wide SSB mode.
   * `tw_1a`, `tw_1b`, `tw_1c`
     [TW-1A](http://space.skyrocket.de/doc_sdat/shangkeda-2.htm),
     [TW-1B](http://space.skyrocket.de/doc_sdat/njust-2.htm),
