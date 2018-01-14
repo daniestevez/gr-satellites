@@ -212,6 +212,9 @@ telemetry packet in the terminal as soon as it receives it.
     [QB50 IL01 (DUCHIFAT-2)](http://www.h-space-lab.org/php/hoopoe-en.php),
     which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
     scrambler. You must use wide SSB mode to receive this satellite.
+  * `indus`
+    Mystery satellite transmitting on 435.080MHz using 1k2 FSK AX.25 and the
+    callsign INDUSR-10 (see [here](https://twitter.com/ea4gpz/status/952593838266298368)).
   * `kr01`
     [QB50 KR01 (LINK)](http://space.skyrocket.de/doc_sdat/link.htm),
     which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
