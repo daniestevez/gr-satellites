@@ -72,6 +72,7 @@ GR_PYTHON_INSTALL(
     check_tt64_crc.py
     append_crc32c.py
     dsat_image_decoder.py
+    strip_ax25_header.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

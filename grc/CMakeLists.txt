@@ -60,5 +60,6 @@ install(FILES
     satellites_dsat_image_decoder.xml
     satellites_nusat_decoder.xml
     satellites_rscode_decoder.xml
+    satellites_strip_ax25_header.xml
     DESTINATION share/gnuradio/grc/blocks
 )

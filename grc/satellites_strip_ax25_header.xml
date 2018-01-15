@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<block>
+  <name>Strip AX.25 header</name>
+  <key>satellites_strip_ax25_header</key>
+  <category>[Satellites]/AX.25</category>
+  <import>import satellites</import>
+  <make>satellites.strip_ax25_header()</make>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>
