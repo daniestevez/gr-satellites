@@ -73,12 +73,20 @@
       <value>True</value>
     </param>
     <param>
+      <key>sizing_mode</key>
+      <value>fixed</value>
+    </param>
+    <param>
       <key>thread_safe_setters</key>
       <value></value>
     </param>
     <param>
       <key>title</key>
       <value>PicSat decoder</value>
+    </param>
+    <param>
+      <key>placement</key>
+      <value>(0,0)</value>
     </param>
   </block>
   <block>
@@ -804,7 +812,7 @@
     </param>
     <param>
       <key>w</key>
-      <value>1</value>
+      <value>0.5</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1079,7 +1087,7 @@
     </param>
     <param>
       <key>loop_bw</key>
-      <value>1</value>
+      <value>0.05</value>
     </param>
     <param>
       <key>maxoutbuf</key>
