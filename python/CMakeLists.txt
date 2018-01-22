@@ -73,6 +73,9 @@ GR_PYTHON_INSTALL(
     append_crc32c.py
     dsat_image_decoder.py
     strip_ax25_header.py
+    ccsds_telemetry.py
+    picsat_telemetry.py
+    picsat_telemetry_parser.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
