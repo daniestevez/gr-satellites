@@ -30,7 +30,9 @@ used, but note the following:
     by hand with the older version and the flowgraphs should then
     work. Especially, you have to look at the hierarchical blocks
     `sync_to_pdu.grc` and `sync_to_pdu_packed.grc` in gr-satellites.
-  * There is a bug in the "Additive scrambler" block. The bug fix is only in the
+  * There is a bug in the "Additive scrambler" block. The
+    [bug fix](https://github.com/gnuradio/gnuradio/commit/e3ad82e6d93ea05d3b096673abf609f9e146f578)
+    is only in the
     git version of GNU Radio. If using a stable release of GNU Radio, do not
     expect this block to work. However, the "Additive scrambler" is only used to
     decode CCSDS scrambling. Decoders using G3RUH scrambling or no scrambler
