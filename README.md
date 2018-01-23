@@ -281,6 +281,11 @@ telemetry packet in the terminal as soon as it receives it.
     The only difference between the 3 receivers is that the NORAD ID is set for
     the correct satellite when doing telemetry submission. You must use FM mode
     to receive these satellites.
+  * `ty_2`
+    [TY-2](http://space.skyrocket.de/doc_sdat/xiaoxiang-1.htm), which transmits
+    9k6 GMSK telemetry in the 70cm. Only the syncword is currently known, so
+    this is an experimental and incomplete decoder. You must use FM mode to
+    receive this satellite.
   * `ukube1`
     [UKube-1 (FUNcube-2)](https://amsat-uk.org/satellites/communications/ukube-1/),
     which transmits 1k2 BPSK
