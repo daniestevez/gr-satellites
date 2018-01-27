@@ -126,5 +126,5 @@ Beacon = Struct(Padding(3), Embedded(BeaconA), Embedded(BeaconB), Embedded(Beaco
 
 Packet = Struct(
     'primary_header' / PrimaryHeader,
-    'secondary_header' / SecondaryHeaderTM, # TODO choose between TM and TC
+    'secondary_header' / IfThenElse(lambda c: c.primary_header.packet_type, SecondaryHeaderTC, SecondaryHeaderTM),
     'beacon' / If(lambda c: c.primary_header.payload_flag == 0 and c.primary_header.packet_category == 1, Beacon))
