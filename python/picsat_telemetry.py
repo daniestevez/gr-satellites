@@ -124,7 +124,41 @@ BeaconD = Struct(
 
 Beacon = Struct(Padding(3), Embedded(BeaconA), Embedded(BeaconB), Embedded(BeaconC), Embedded(BeaconD))
 
+PayloadBeaconFlags = BitStruct(
+    'hk_flag' / Flag,
+    'cheatmode_flag' / Flag,
+    'tec_flag' / Flag,
+    'sensors_flag' / Flag,
+    'hv_flag' / Flag,
+    'dac_flag' / Flag,
+    'interrupt_flag' / Flag,
+    'diode_flag' / Flag)
+
+PayloadBeacon = Struct(
+    'message' / String(29),
+    'phot' / Int16ub,
+    'mode' / Int8ub,
+    'acqmode' / Int8ub,
+    Embedded(PayloadBeaconFlags),
+    'proc_freq' / Int8ub,
+    'volt5' / Int16ub,
+    'amp5' / Int16ub,
+    'amp3' / Int16ub,
+    'volthv' / Int16ub,
+    'amphv' / Int16ub,
+    'temps' / Int16sb[4],
+    'vitec' / Int16ub,
+    'temp0' / Int16ub,
+    'errortherm' / Int16ub,
+    'vref' / Int16ub,
+    'pitch' / Int16sb,
+    'roll' / Int16sb,
+    'yaw' / Int16sb)
+
 Packet = Struct(
     'primary_header' / PrimaryHeader,
     'secondary_header' / IfThenElse(lambda c: c.primary_header.packet_type, SecondaryHeaderTC, SecondaryHeaderTM),
-    'beacon' / If(lambda c: c.primary_header.payload_flag == 0 and c.primary_header.packet_category == 1, Beacon))
+    'packet' / Switch(lambda c: (c.primary_header.payload_flag, c.primary_header.packet_category), {
+        (False,1) : Beacon,
+        (True,7) : PayloadBeacon,
+    }, default = Pass))
