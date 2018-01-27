@@ -23,6 +23,8 @@ import numpy
 from gnuradio import gr
 import pmt
 
+import traceback
+
 import picsat_telemetry
 
 class picsat_telemetry_parser(gr.basic_block):
@@ -50,4 +52,5 @@ class picsat_telemetry_parser(gr.basic_block):
             print
         except Exception:
             print "Error decoding telemetry"
+            traceback.print_exc()
             print
