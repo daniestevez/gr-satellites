@@ -27,10 +27,10 @@ from ccsds_telemetry import *
 
 class TimeAdapter(Adapter):
     def _encode(self, obj, context):
-        d = obj - datetime.datetime(2000, 1, 1)
+        d = obj - datetime.datetime(1970, 1, 1)
         return Container(days = d.days, milliseconds = d.seconds * 1000 + d.microseconds / 1000)
     def _decode(self, obj, context):
-        return datetime.datetime(2000, 1, 1) + datetime.timedelta(days=obj.days, seconds=obj.milliseconds/1000, microseconds=(obj.milliseconds%1000)*1000)
+        return datetime.datetime(1970, 1, 1) + datetime.timedelta(days=obj.days, seconds=obj.milliseconds/1000, microseconds=(obj.milliseconds%1000)*1000)
 
 SecondaryHeaderTM = TimeAdapter(Struct('days' / Int16ub, 'milliseconds' / Int32ub))
 
