@@ -319,7 +319,7 @@ WholeOrbitFC1 = BitStruct(
     'systemcurrent' / BitsInteger(16),
 )
 
-Callsign = String(8)
+Callsign = String(8, encoding='utf8')
 
 FC2BatteryCommon = Struct(
     'current' / Octet,
@@ -414,7 +414,7 @@ Frame = Struct(
     'payload' / Switch(lambda c: c.frametype[:2], {
         'WO' : Bytes(200),
         'HR' : HRPayload,
-        'FM' : String(200),
+        'FM' : String(200, encoding='utf8'),
         }),
     )
 
@@ -425,7 +425,7 @@ def WholeOrbit(satid):
         return WholeOrbitFC2
     return Bytes(23)
 
-FitterMessage = String(200)
+FitterMessage = String(200, encoding='utf8')
 
 def beacon_parse(data):
     return Frame.parse(data)

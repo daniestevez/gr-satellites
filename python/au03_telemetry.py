@@ -66,7 +66,7 @@ Curr5 = Curr5Adapter(Int8ub)
                       
 Beacon = Struct(
         'timestamp' / Timestamp,
-        'callsign' / String(6),
+        'callsign' / String(6, encoding='utf8'),
         'flags' / Byte,
         'batt_voltage' / Battery,
         'current_in' / CurrIn,
