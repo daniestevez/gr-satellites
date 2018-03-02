@@ -22,7 +22,7 @@
     </param>
     <param>
       <key>description</key>
-      <value>TY-2 decoder</value>
+      <value>TY-6 decoder</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -46,7 +46,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>ty_2</value>
+      <value>ty_6</value>
     </param>
     <param>
       <key>max_nouts</key>
@@ -82,7 +82,7 @@
     </param>
     <param>
       <key>title</key>
-      <value>TY-2 decoder</value>
+      <value>TY-6 decoder</value>
     </param>
     <param>
       <key>placement</key>
@@ -1013,7 +1013,7 @@
     </param>
     <param>
       <key>noradID</key>
-      <value>43155</value>
+      <value>43157</value>
     </param>
     <param>
       <key>source</key>
