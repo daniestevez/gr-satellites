@@ -75,6 +75,12 @@ proper frequency, mode and bandpass in gqrx for the satellite you want to
 receive. This is probably the easiest way to start using the decoders from
 gr-satellites. Gqrx supports Doppler correction with Gpredict.
 
+*Note:* The exact frequency setting for optimal decoding may need to tuned to
+properly center the signal within the passband.  This is especially true for
+SSB signals. One way to do this is by using this the Radio Control panel within
+Gpredict to make small adjustments while monitoring signals in the gqrx
+passband.
+
 It is also possible to use the frontend streamers from
 [gr-frontends](https://github.com/daniestevez/gr-frontends). This allow to
 stream from different SDR hardware without using a GUI SDR program. It is
@@ -152,7 +158,7 @@ telemetry packet in the terminal as soon as it receives it.
     transmit 4k8 FSK telemetry in the 70cm band. They use the Mobitex-NX
     protocol, which includes FEC with a (12,8,3) linear code and CRC-16CCITT for
     error detection. You must use FM mode to receive these satellites.
-  * `by701`
+  * (inactive) `by701`
     [BY70-1](http://space.skyrocket.de/doc_sdat/by70-1.htm), which transmits 9k6
     BPSK telemetry in the 70cm band. It uses FEC with an r=1/2, k=7
     convolutional code and a (255,223) Reed-Solomon code (the same as the
@@ -198,7 +204,7 @@ telemetry packet in the terminal as soon as it receives it.
     Reed-Solomon code. It also uses a CCSDS scrambler. The beacons
     include information from ADS-B beacons transmitted by terrestrial
     aircraft. You must use FM mode to receive this satellite.
-  * `gomx_3`
+  * (inactive) `gomx_3`
     [GOMX-3](https://directory.eoportal.org/web/eoportal/satellite-missions/g/gomx-3),
     which transmits 19k2 GFSK telemetry in the 70cm band. It uses the CSP
     protocol and FEC with a (255,223) Reed-Solomon code. It also uses a G3RUH
@@ -247,7 +253,8 @@ telemetry packet in the terminal as soon as it receives it.
     Pro+ and an RTL-SDR respectively. These are complete receivers and
     decoders. They submit telemetry to the SatNOGS database and can use Doppler
     correction with Gpredict, in the same way as the frontends from
-    gr-frontends. When using Doppler correction with Gpredict, you have to set
+    gr-frontends. For `lilacsat_fcdpp` and `lilacsat_rtlsdr`,
+    when using Doppler correction with Gpredict, you have to set
     437.200MHz as the downlink frequency in Gpredict.
   * `nayif1`
     [Nayif-1](https://amsat-uk.org/satellites/communications/nayif-1/),
