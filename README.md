@@ -78,13 +78,13 @@ gr-satellites. Gqrx supports Doppler correction with Gpredict.
 *Note:* The exact frequency setting for optimal decoding may need to tuned to
 properly center the signal within the passband.  This is especially true for
 SSB signals. One way to do this is by using this the Radio Control panel within
-Gpredict to make small adjustments while monitoring signals in the gqrx
-passband.
+Gpredict. This allows the user to make small adjustments while monitoring signals
+in the gqrx passband.
 
 It is also possible to use the frontend streamers from
-[gr-frontends](https://github.com/daniestevez/gr-frontends). This allow to
-stream from different SDR hardware without using a GUI SDR program. It is
-possible to perform Doppler correction with Gpredict. There are also frontend
+[gr-frontends](https://github.com/daniestevez/gr-frontends). These allow to
+stream data by UDP from different SDR hardware without using a GUI SDR program. It
+remains to perform Doppler correction with Gpredict. There are also frontend
 streamers to use a conventional receiver connected via soundcard and recordings
 (audio WAV and IQ).
 
@@ -98,16 +98,18 @@ telemetry packet in the terminal as soon as it receives it.
 ## Satellites supported
 
   * `sat_3cat2`
-    [3CAT-2](https://nanosatlab.upc.edu/en/missions-and-projects/3cat-2), which
+    [3CAT-2](https://nanosatlab.upc.edu/en/missions-and-projects/3cat-2) *(inactive)*,
+    which
     transmits 9k6 AX.25 BPSK telemetry in the 2m band. You must use wide SSB
     mode to receive this satellite.
   * `aausat_4`
     [AAUSAT-4](http://www.space.aau.dk/aausat4/), which transmits 2k4 or 9k6 GFSK
     telemetry in the 70cm band. It uses the CSP protocol and FEC with an r=1/2, k=7
     convolutional code and a (255,223) Reed-Solomon code. You must use FM mode
-    to receive this satellite.
+    to receive this satellite (437.425MHz).
   * `ao40_uncoded`
-    [AO-40](https://en.wikipedia.org/wiki/OSCAR_40), which transmitted 400bps BPSK
+    [AO-40](https://en.wikipedia.org/wiki/OSCAR_40) *(inactive)*,
+    which transmitted 400bps BPSK
     telemetry in several bands. This decoder is for the uncoded telemetry, which
     did not use any forward error correction. The specifications of the telemetry
     can be found [in this document](http://www.amsat-dl.org/p3d/tlmspec.txt). AO-40
@@ -118,7 +120,7 @@ telemetry packet in the terminal as soon as it receives it.
     telemetry in the 2m band. It uses the AO-40 FEC protocol, which includes
     block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
     two interleaved (160,128) Reed-Solomon codes. You must use SSB mode to
-    receive this satellite.
+    receive this satellite (145.935MHz).
   * `aisat`
     [AISAT](https://directory.eoportal.org/web/eoportal/satellite-missions/a/aisat),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
@@ -132,7 +134,7 @@ telemetry packet in the terminal as soon as it receives it.
     protocol, which includes a CRC16-ARC and FEC with a (64,48) Reed-Solomon
     code. Reed-Solomon decoding is done with the
     [rscode](http://rscode.sourceforge.net/) library. You must use FM mode to
-    receive this satellite.
+    receive this satellite (436.670MHz).
   * `athenoxat-1`
     [ATHENOXAT-1](http://space.skyrocket.de/doc_sdat/athenoxat-1.htm),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
@@ -140,24 +142,24 @@ telemetry packet in the terminal as soon as it receives it.
     Reed-Solomon code. It also uses a CCSDS scrambler. There is no telemetry
     parser yet, as the beacon format is unknown. This satellite is on a low
     inclination orbit, so it can only be received near the equator. You must
-    use FM mode to receive this satellite.
+    use FM mode to receive this satellite (437.485MHz).
   * `au02`
     [QB50 AU02 (UNSW-EC0)](http://www.acser.unsw.edu.au/QB50),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
     U482C transceiver, with the CSP protocol and FEC with an r=1/2, k=7
     convolutional code and a (255,223) Reed-Solomon code. It also uses a CCSDS
-    scrambler. You must use FM mode to receive this satellite.
+    scrambler. You must use FM mode to receive this satellite (436.525MHz).
   * `au03`
     [QB50 AU03 (i-INSPIRE II)](http://sydney.edu.au/inspire-cubesat/project/index.shtml),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
     U482C transceiver, with the CSP protocol and FEC with an r=1/2, k=7
     convolutional code and a (255,223) Reed-Solomon code. It also uses a CCSDS
-    scrambler. You must use FM mode to receive this satellite.
+    scrambler. You must use FM mode to receive this satellite (436.330MHz).
   * `beesat`
-    [BESAT-1,-2 and -4](http://space.skyrocket.de/doc_sdat/beesat.htm), which
+    [BEESAT-1,-2 and -4](http://space.skyrocket.de/doc_sdat/beesat.htm), which
     transmit 4k8 FSK telemetry in the 70cm band. They use the Mobitex-NX
     protocol, which includes FEC with a (12,8,3) linear code and CRC-16CCITT for
-    error detection. You must use FM mode to receive these satellites.
+    error detection. You must use FM mode to receive these satellites (435.950MHz).
   * (inactive) `by701`
     [BY70-1](http://space.skyrocket.de/doc_sdat/by70-1.htm), which transmits 9k6
     BPSK telemetry in the 70cm band. It uses FEC with an r=1/2, k=7
@@ -173,14 +175,15 @@ telemetry packet in the terminal as soon as it receives it.
     which transmits 4k8 GFSK telemetry in the 70cm band. It uses the CSP protocol
     and FEC with a (255,223) Reed-Solomon code. It also uses a G3RUH scrambler. The
     transceiver is the GomSpace NanoCom AX100, the same transceiver used in
-    GOMX-3. You must use FM mode to receive this satellite.
+    GOMX-3. You must use FM mode to receive this satellite (436.705MHz).
   * `cz02`
     [QB50 CZ02 (VZLUSAT-1)](http://vzlusat1.cz/en/),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
     U482C transceiver, with the CSP protocol and a (255,223) Reed-Solomon code.
-    It also uses a CCSDS scrambler. You must use FM mode to receive this satellite.
+    It also uses a CCSDS scrambler. You must use FM mode to receive this satellite (437.240MHz).
   * `dsat`
-    [D-SAT](https://www.dsat.space/), which transmits 4k8 AF GMSK telemetry in
+    [D-SAT](https://www.dsat.space/) *(inactive)*,
+    which transmits 4k8 AF GMSK telemetry in
     the 70cm band. It uses a NanoCom U482C transceiver with the CSP protocol and
     FEC with a (255,223) Reed-Solomon code. It also uses a CCSDS scrambler. This
     receiver supports sending frames to the D-SAT groundstation software, which
@@ -203,33 +206,36 @@ telemetry packet in the terminal as soon as it receives it.
     U482C transceiver with the CSP protocol and FEC with a (255,223)
     Reed-Solomon code. It also uses a CCSDS scrambler. The beacons
     include information from ADS-B beacons transmitted by terrestrial
-    aircraft. You must use FM mode to receive this satellite.
-  * (inactive) `gomx_3`
-    [GOMX-3](https://directory.eoportal.org/web/eoportal/satellite-missions/g/gomx-3),
+    aircraft. You must use FM mode to receive this satellite (437.255MHz).
+  * `gomx_3`
+    [GOMX-3](https://directory.eoportal.org/web/eoportal/satellite-missions/g/gomx-3)
+    *(inactive)*,
     which transmits 19k2 GFSK telemetry in the 70cm band. It uses the CSP
     protocol and FEC with a (255,223) Reed-Solomon code. It also uses a G3RUH
     scrambler. The beacons include information from ADS-B beacons transmitted by
     terrestrial aircraft. GOMX-3 reentered on 18 October 2016. You
     must use FM mode to receive this satellite.
   * `gr01`
-    [QB50 GR01 (DUTHSat)](http://www.duthsat.gr/),
+    [QB50 GR01 (DUTHSat)](http://www.duthsat.gr/) *(inactive)*,
     which transmits 1k2 or 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
     scrambler. For 1k2 telemetry you must use SSB mode, while for 9k6 telemetry you
     must use wide SSB mode.
   * `il01`
     [QB50 IL01 (DUCHIFAT-2)](http://www.h-space-lab.org/php/hoopoe-en.php),
     which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
-    scrambler. You must use wide SSB mode to receive this satellite.
+    scrambler. You must use wide SSB mode to receive this satellite (437.740MHz).
   * `indus`
     Mystery satellite transmitting on 435.080MHz using 1k2 FSK AX.25 and the
     callsign INDUSR-10 (see [here](https://twitter.com/ea4gpz/status/952593838266298368)).
   * `kr01`
-    [QB50 KR01 (LINK)](http://space.skyrocket.de/doc_sdat/link.htm),
+    [QB50 KR01 (LINK)](http://space.skyrocket.de/doc_sdat/link.htm)
+    *(inactive)*,
     which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
     scrambler. Currently it transmits 1k2 telemetry (safe mode perhaps), so you
     must use SSB mode to receive this satellite.
   * `ks_1q`
-    [KS-1Q](http://space.skyrocket.de/doc_sdat/cas-2t.htm), which transmits 20k
+    [KS-1Q](http://space.skyrocket.de/doc_sdat/cas-2t.htm)
+    *(inactive)*, which transmits 20k
     FSK telemetry in the 70cm band. It uses KISS framed CSP packets and FEC with
     an r=1/2, k=7 convolutional code and a (255,223) Reed-Solomon code (the
     protocol is very similar to LilacSat-2). It also uses a CCSDS scrambler.
@@ -262,21 +268,24 @@ telemetry packet in the terminal as soon as it receives it.
     telemetry in the 2m band. It uses the AO-40 FEC protocol, which includes
     block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
     two interleaved (160,128) Reed-Solomon codes. You must use SSB mode to
-    receive this satellite.
+    receive this satellite (145.940MHz).
   * `nusat`
     [ÑuSat-1 and -2](http://space.skyrocket.de/doc_sdat/nusat-1.htm),
-    which transmit 40k FSK telemetry in the 70cm band. They use FEC with a
+    which transmit 40k FSK telemetry in the 70cm band
+    (ÑuSat-1 on 436.445, ÑuSat-2 on 437.455).
+    They use FEC with a
     (64, 60) Reed-Solomon code and a CRC-8. Since a sample rate of 48kHz is too
     low to work with 40k FSK, the flowgraph is prepared to use an IQ recording
     at 192kHz. Depending on the characteristics of your IQ recording you may
     need to edit the flowgraph. The Reed-Solomon decoder is taken from the
-    [rscode](http://rscode.sourceforge.net/) library. A sample IQ recording is
+    [rscode](http://rscode.sourceforge.net/) library.
+    A sample IQ recording is
     included in [satellite-recordings](https://github.com/daniestevez/satellite-recordings).
   * `picsat`
     [PicSat](http://picsat.obspm.fr/),
     which transmits 1k2 or 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
     scrambler. For 1k2 telemetry you must use SSB mode, while for 9k6 telemetry you
-    must use wide SSB mode.
+    must use wide SSB mode (435.525MHz).
   * `tw_1a`, `tw_1b`, `tw_1c`
     [TW-1A](http://space.skyrocket.de/doc_sdat/shangkeda-2.htm),
     [TW-1B](http://space.skyrocket.de/doc_sdat/njust-2.htm),
@@ -287,7 +296,7 @@ telemetry packet in the terminal as soon as it receives it.
     GOMX-3. There is no beacon parser yet, as the beacon format is unknown.
     The only difference between the 3 receivers is that the NORAD ID is set for
     the correct satellite when doing telemetry submission. You must use FM mode
-    to receive these satellites.
+    to receive these satellites. TW-1A, TW-1C (435.645 MHz), TW-1B (437.645 MHz).
   * `ty_2`, `ty_6`
     [TY-2](http://space.skyrocket.de/doc_sdat/xiaoxiang-1.htm)
     and [TY-6](http://space.skyrocket.de/doc_sdat/ty-6.htm), which transmit
@@ -296,7 +305,7 @@ telemetry packet in the terminal as soon as it receives it.
     Reed-Solomon code. The telemetry format is unknown. The only
     difference between the 2 receivers is that the NORAD ID is set for the
     correct satellite when doing telemetry submission. You must use FM mode to
-    receive these satellites.
+    receive these satellites. TY-2 (435.350 MHz), TY-6 (436.100 MHz).
   
   * `ukube1`
     [UKube-1 (FUNcube-2)](https://amsat-uk.org/satellites/communications/ukube-1/),
@@ -304,7 +313,7 @@ telemetry packet in the terminal as soon as it receives it.
     telemetry in the 2m band. It uses the AO-40 FEC protocol, which includes
     block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
     two interleaved (160,128) Reed-Solomon codes. You must use SSB mode to
-    receive this satellite.
+    receive this satellite (145.915MHz).
 
 ## Installing GNUradio OOT modules
 
