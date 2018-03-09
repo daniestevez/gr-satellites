@@ -26,30 +26,30 @@ Mode = Enum(Int8ub,\
             MissionMode = 1)
 
 class BatVoltageAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int((obj - 3.0) * 20.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj / 20.0 + 3.0
 BatVoltage = BatVoltageAdapter(Int8ub)
 
 class BatCurrentAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int((obj + 1.0) * 127.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj / 127.0 - 1.0
 BatCurrent = BatCurrentAdapter(Int8ub)
 
 class BusCurrentAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj * 40.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj / 40.0
 BusCurrent = BusCurrentAdapter(Int8ub)
 
 class TempAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int((obj + 15.0) * 4.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj / 4.0 - 15.0
 Temp = TempAdapter(Int8ub)
 

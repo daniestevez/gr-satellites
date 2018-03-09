@@ -26,10 +26,10 @@ import datetime
 from ccsds_telemetry import *
 
 class TimeAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         d = obj - datetime.datetime(1970, 1, 1)
         return Container(days = d.days, milliseconds = d.seconds * 1000 + d.microseconds / 1000)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return datetime.datetime(1970, 1, 1) + datetime.timedelta(days=obj.days, seconds=obj.milliseconds/1000, microseconds=(obj.milliseconds%1000)*1000)
 
 SecondaryHeaderTM = TimeAdapter(Struct('days' / Int16ub, 'milliseconds' / Int32ub))
@@ -122,7 +122,7 @@ BeaconD = Struct(
     'sat_mode' / Int8ub,
     'tc_sequence_count' / Int16ub)
 
-Beacon = Struct(Padding(3), Embedded(BeaconA), Embedded(BeaconB), Embedded(BeaconC), Embedded(BeaconD))
+Beacon = Struct(Padding(3), BeaconA, Embedded(BeaconB), BeaconC, Embedded(BeaconD))
 
 PayloadBeaconFlags = BitStruct(
     'hk_flag' / Flag,
@@ -139,7 +139,7 @@ PayloadBeacon = Struct(
     'phot' / Int16ub,
     'mode' / Int8ub,
     'acqmode' / Int8ub,
-    Embedded(PayloadBeaconFlags),
+    PayloadBeaconFlags,
     'proc_freq' / Int8ub,
     'volt5' / Int16ub,
     'amp5' / Int16ub,

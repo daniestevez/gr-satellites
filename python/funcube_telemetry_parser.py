@@ -56,22 +56,22 @@ class funcube_telemetry_parser(gr.basic_block):
 
         data = funcube_telemetry.beacon_parse(packet)
         if data:
-            print 'Frame type {}'.format(data.frametype)
+            print 'Frame type {}'.format(data.header.frametype)
             print '-'*40
             print 'Realtime telemetry:'
             print '-'*40
             print(data.realtime)
             print '-'*40
-            if data.frametype[:2] == 'FM':
-                print 'Fitter Message {}'.format(data.frametype[2])
+            if data.header.frametype[:2] == 'FM':
+                print 'Fitter Message {}'.format(data.header.frametype[2])
                 print '-'*40
                 print(data.payload)
-            if data.frametype[:2] == 'HR':
-                print 'High resolution {}'.format(data.frametype[2])
+            if data.header.frametype[:2] == 'HR':
+                print 'High resolution {}'.format(data.header.frametype[2])
                 print '-'*40
                 print(data.payload)
-            if data.frametype[:2] == 'WO':
-                chunk = int(data.frametype[2:])
+            if data.header.frametype[:2] == 'WO':
+                chunk = int(data.header.frametype[2:])
                 seq = data.realtime.search('seqnumber')
                 remaining = (PAYLOAD_SIZE*chunk) % WHOLEORBIT_SIZE
                 recover = True
@@ -86,7 +86,7 @@ class funcube_telemetry_parser(gr.basic_block):
                 else:
                     wo = data.payload[:-remaining]
                 assert len(wo) % WHOLEORBIT_SIZE == 0
-                wos = funcube_telemetry.WholeOrbit(data.satid)[len(wo) / WHOLEORBIT_SIZE].parse(wo)
+                wos = funcube_telemetry.WholeOrbit(data.header.satid)[len(wo) / WHOLEORBIT_SIZE].parse(wo)
                 self.last_chunk = chunk
                 self.last_wo = data.payload[-remaining:]
                 self.last_seq = seq

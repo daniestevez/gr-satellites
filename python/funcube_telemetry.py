@@ -79,9 +79,9 @@ FrameTypeNayif1 = Enum(BitsInteger(6),\
     FM7 = 23)
 
 class FrameTypeAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return obj.value
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return FrameType(obj)
 
 FrameTypeField = FrameTypeAdapter(BitsInteger(6))
@@ -134,41 +134,41 @@ iMTQ = Struct(
     )
 
 class TempXpAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int((obj-158.239)/-0.2073)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return -0.2073*obj + 158.239
 TempXp = TempXpAdapter(BitsInteger(10))
 class TempXmAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int((obj-159.227)/-0.2083)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return -0.2083*obj + 159.227
 TempXm = TempXmAdapter(BitsInteger(10))
 class TempYpAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int((obj-158.656)/-0.2076)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return -0.2076*obj + 158.656
 TempYp = TempYpAdapter(BitsInteger(10))
 class TempYmAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int((obj-159.045)/-0.2087)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return -0.2087*obj + 159.045
 TempYm = TempYmAdapter(BitsInteger(10))
 
 class V3v3Adapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj/4.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return 4*obj
 V3v3 = V3v3Adapter(BitsInteger(10))
 
 class V5vAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj/6.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return 6*obj
 V5v = V5vAdapter(BitsInteger(10))
 
@@ -193,23 +193,23 @@ ASIB = Struct(
 )
 
 class RFTempAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int((obj-193.672)/-0.857)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return -0.857*obj + 193.672
 RFTemp = RFTempAdapter(Octet)
 
 class RXCurrAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj/0.636)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return 0.636*obj
 RXCurr = RXCurrAdapter(Octet)
 
 class TXCurrAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj/1.272)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return 1.272*obj
 TXCurr = TXCurrAdapter(Octet)
 
@@ -223,16 +223,16 @@ RF = Struct(
     )
 
 class PwrAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int((obj/5e-3)**(1.0/2.0629))
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return 5e-3*obj**2.0629
 Pwr = PwrAdapter(Octet)
 
 class PACurrAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int((obj-2.5435)/0.5496)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return 0.5496*obj + 2.5435
 PACurr = PACurrAdapter(Octet)
 
@@ -280,27 +280,27 @@ HighResolution = BitStruct(
 HRPayload = HighResolution[20]
 
 class TempBlackChassisAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int((obj-75.244)/-0.024)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return -0.024*obj + 75.244
 TempBlackChassis = TempBlackChassisAdapter(BitsInteger(12))
 class TempSilverChassisAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int((obj-74.750)/-0.024)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return -0.024*obj + 74.750
 TempSilverChassis = TempSilverChassisAdapter(BitsInteger(12))
 class TempBlackPanelAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int((obj-75.039)/-0.024)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return -0.024*obj + 75.039
 TempBlackPanel = TempBlackPanelAdapter(BitsInteger(12))
 class TempSilverPanelAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int((obj-75.987)/-0.024)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return -0.024*obj + 75.987
 TempSilverPanel = TempSilverPanelAdapter(BitsInteger(12))
 
@@ -400,10 +400,12 @@ RealTimeNayif1 = BitStruct(
     'sw' / SWFC1,
 )
 
+FitterMessage = String(200, encoding='utf8')
+
 Frame = Struct(
-    Embedded(Header),
-    'extheader' / If(lambda c: c.satid == 'extended', Byte),
-    'realtime' / Switch(lambda c: c.satid, {
+    'header' / Header,
+    'extheader' / If(lambda c: c.header.satid == 'extended', Byte),
+    'realtime' / Switch(lambda c: c.header.satid, {
         'FC1EM' : RealTimeFC1,
         'FC1FM' : RealTimeFC1,
         'FC2' : RealTimeFC2,
@@ -411,10 +413,10 @@ Frame = Struct(
             0x08 : RealTimeNayif1,
             }, default = Bytes(54)),
         }),
-    'payload' / Switch(lambda c: c.frametype[:2], {
+    'payload' / Switch(lambda c: c.header.frametype[:2], {
         'WO' : Bytes(200),
         'HR' : HRPayload,
-        'FM' : String(200, encoding='utf8'),
+        'FM' : FitterMessage,
         }),
     )
 
@@ -424,8 +426,6 @@ def WholeOrbit(satid):
     if satid == 'FC2':
         return WholeOrbitFC2
     return Bytes(23)
-
-FitterMessage = String(200, encoding='utf8')
 
 def beacon_parse(data):
     return Frame.parse(data)

@@ -29,72 +29,72 @@ PayloadMode = BitStruct('open_telecommand' / Flag,\
                      'rest' / Nibble)
 
 class Iv3Adapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj * 10.0) & 0x1fff
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return (obj & 0x1fff) / 10.0
 Iv3 = Iv3Adapter(Int16sl)
 
 class IvbattAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj * 2.5) & 0x1fff
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return (obj & 0x1fff) / 2.5
 Ivbatt = IvbattAdapter(Int16sl)
 
 class VoltageAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj * 2000.0) & 0xfff8
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return (obj & 0xfff8) / 2000.0
 Voltage = VoltageAdapter(Int16sl)
 
 class TSTM32Adapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(4096.0*(2.5*(obj - 25.0) + 760.0)/3000.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return (obj * 3000.0 / 4096.0 - 760.0) / 2.5 + 25.0
 TSTM32 = TSTM32Adapter(Int16sl)
 
 class TPAAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj*16.0) << 3
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return (obj >> 3) / 16.0
 TPA = TPAAdapter(Int16sl)
 
 class DCFMTCAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj*352.7)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj/352.7
 DCFMTC = DCFMTCAdapter(Int16sl)
 
 class DCFMHamAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj*6864.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj/6864.0
 DCFMHam = DCFMHamAdapter(Int16sl)
 
 class RSSIAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(10**((obj + 147.0)/10.0))
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return 10*log10(obj) - 147.0
 RSSI = RSSIAdapter(Int32ul)
 
 class RuntimeAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj * 1000.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj / 1000.0
 Runtime = RuntimeAdapter(Int32ul)
 
 class CTCSSCountAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj / 0.04)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj / 0.04
 CTCSSCount = CTCSSCountAdapter(Int32ul)
 
@@ -259,58 +259,58 @@ Hk_OBC = Struct(Const(b'\x1a\xa1'),\
                 'inms_file_index' / Int32ul)
 
 class MagnetometerAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj / 4.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj * 4.0
 Magnetometer = MagnetometerAdapter(Int16sl)
 
 class GyroscopeAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj * 32768.0 / 57.2958)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj / 32768.0 * 57.2958
 Gyroscope = GyroscopeAdapter(Int16sl)
 
 class TempADISAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj / 0.0739)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj * 0.0739
 TempADIS = TempADISAdapter(Int16sl)
 
 class FineSunAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj * 16384.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj / 16384.0
 FineSun = FineSunAdapter(Int16sl)
 
 class CoarseSunAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj * 32.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj / 32.0
 CoarseSun = CoarseSunAdapter(Int16sl)
 
 class LatitudeAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj * 360.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj / 360.0
 Latitude = LatitudeAdapter(Int16sl)
 
 class LongitudeAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj * 180.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj / 180.0
 Longitude = LongitudeAdapter(Int16sl)
 
 class AltitudeAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj / 20.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj * 20.0
 Altitude = AltitudeAdapter(Int16sl)
 
@@ -385,16 +385,16 @@ Orbital_Par = Struct(Const(b'\x1a\xaa'),\
                      'checksum' / Int8ul)
 
 class CurrentVoltageAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj * 1000.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj / 1000.0
 CurrentVoltage = CurrentVoltageAdapter(Int16sl)
 
 class TempAdapter(Adapter):
-    def _encode(self, obj, context):
+    def _encode(self, obj, context, path = None):
         return int(obj * 16.0)
-    def _decode(self, obj, context):
+    def _decode(self, obj, context, path = None):
         return obj / 16.0
 Temp = TempAdapter(Int16sl)
 
