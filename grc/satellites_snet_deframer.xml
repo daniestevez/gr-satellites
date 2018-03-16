@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<block>
+  <name>S-NET deframer</name>
+  <key>satellites_snet_deframer</key>
+  <category>[Satellites]/FEC</category>
+  <import>import satellites</import>
+  <make>satellites.snet_deframer(verbose=$verbose)</make>
+  <param>
+    <name>Verbose</name>
+    <key>verbose</key>
+    <type>bool</type>
+    <option>
+      <name>Yes</name>
+      <key>True</key>
+    </option>
+    <option>
+      <name>No</name>
+      <key>False</key>
+    </option>
+  </param>
+    
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

@@ -286,6 +286,12 @@ telemetry packet in the terminal as soon as it receives it.
     which transmits 1k2 or 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
     scrambler. For 1k2 telemetry you must use SSB mode, while for 9k6 telemetry you
     must use wide SSB mode (435.525MHz).
+
+  * `snet`
+    [S-NET A,B,C,D](http://www.raumfahrttechnik.tu-berlin.de/menue/forschung/aktuelle_projekte/s-net/),
+    which transmit 1k2 AFSK telemetry in the 70cm band. They use a custom coding
+    with BCH FEC and interleaving. You must use FM mode to receive these
+    satellites (435.950MHz).
   * `tw_1a`, `tw_1b`, `tw_1c`
     [TW-1A](http://space.skyrocket.de/doc_sdat/shangkeda-2.htm),
     [TW-1B](http://space.skyrocket.de/doc_sdat/njust-2.htm),

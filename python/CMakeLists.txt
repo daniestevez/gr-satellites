@@ -76,6 +76,8 @@ GR_PYTHON_INSTALL(
     ccsds_telemetry.py
     picsat_telemetry.py
     picsat_telemetry_parser.py
+    snet_telemetry.py
+    snet_deframer.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

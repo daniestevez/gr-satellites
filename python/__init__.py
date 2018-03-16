@@ -82,3 +82,5 @@ from dsat_image_decoder import dsat_image_decoder
 from strip_ax25_header import strip_ax25_header
 
 from picsat_telemetry_parser import picsat_telemetry_parser
+
+from snet_deframer import snet_deframer
