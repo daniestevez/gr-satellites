@@ -26,6 +26,8 @@ import array
 
 from snet_telemetry import LTUFrameHeader
 
+from bch15 import decode_bch15
+
 class snet_deframer(gr.basic_block):
     """
     docstring for block snet_deframer
@@ -50,7 +52,14 @@ class snet_deframer(gr.basic_block):
         bits = np.array(pmt.u8vector_elements(msg))
 
         ltu = bits[:210].reshape((15,14)).transpose()
-        # TODO decode BCH(15,5,7)
+
+        # decode BCH(15,5,7)
+        if not all((decode_bch15(ltu[j,:]) for j in range(14))):
+            # decode failure
+            if self.verbose:
+                print 'BCH decode failure'
+            return
+        
         ltu = np.fliplr(ltu[:,-5:]).ravel()
         hdr = LTUFrameHeader.parse(np.packbits(ltu))
 
@@ -83,10 +92,13 @@ class snet_deframer(gr.basic_block):
             data_bits_per_codeword = 15 # uncoded
         elif hdr.AiTypeSrc == 1:
             data_bits_per_codeword = 11 # BCH(15,11,3)
+            bch_d = 3
         elif hdr.AiTypeSrc == 2:
             data_bits_per_codeword = 7 # BCH(15,7,5)
+            bch_d = 5
         elif hdr.AiTypeSrc == 3:
             data_bits_per_codeword = 5 # BCH(15,5,7)
+            bch_d = 7
         else:
             if self.verbose:
                 print "Invalid AiTypeSrc"
@@ -98,7 +110,14 @@ class snet_deframer(gr.basic_block):
         blocks = list()
         for k in range(num_blocks):
             block = bits[210+k*16*15:210+(k+1)*16*15].reshape((15,16)).transpose()
-            # TODO decode BCH
+
+            # decode BCH
+            if not all((decode_bch15(block[j,:], d = bch_d) for j in range(16))):
+                # decode failure
+                if self.verbose:
+                        print 'BCH decode failure'
+                return
+            
             blocks.append(block[:,-data_bits_per_codeword:].ravel())
 
         pdu_bytes = np.fliplr(np.concatenate(blocks).reshape((data_bytes_per_block * num_blocks, 8)))

@@ -78,6 +78,7 @@ GR_PYTHON_INSTALL(
     picsat_telemetry_parser.py
     snet_telemetry.py
     snet_deframer.py
+    bch15.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
