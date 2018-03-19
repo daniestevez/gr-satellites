@@ -39,7 +39,7 @@ SecondaryHeaderTC = BitStruct('req_ack_reception' / Flag,
                               'req_exe_reception' / Flag,
                               'telecommand_id' / BitsInteger(10),
                               'emitter_id' / BitsInteger(3),
-                              'signature' / String(16, encoding='utf8'))
+                              'signature' / Bytes(16))
 
 AntStatus = Struct(
     'undeployed' / Flag,
@@ -135,7 +135,7 @@ PayloadBeaconFlags = BitStruct(
     'diode_flag' / Flag)
 
 PayloadBeacon = Struct(
-    'message' / String(29, encoding='utf8'),
+    'message' / Bytes(29),
     'phot' / Int16ub,
     'mode' / Int8ub,
     'acqmode' / Int8ub,

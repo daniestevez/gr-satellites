@@ -319,7 +319,7 @@ WholeOrbitFC1 = BitStruct(
     'systemcurrent' / BitsInteger(16),
 )
 
-Callsign = String(8, encoding='utf8')
+Callsign = Bytes(8)
 
 FC2BatteryCommon = Struct(
     'current' / Octet,
@@ -400,7 +400,7 @@ RealTimeNayif1 = BitStruct(
     'sw' / SWFC1,
 )
 
-FitterMessage = String(200, encoding='utf8')
+FitterMessage = Bytes(200)
 
 Frame = Struct(
     'header' / Header,
