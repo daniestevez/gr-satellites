@@ -20,6 +20,8 @@
 #include "satellites/varlen_packet_framer.h"
 #include "satellites/nusat_decoder.h"
 #include "satellites/rscode_decoder.h"
+#include "satellites/ao40_syncframe_soft.h"
+#include "satellites/ao40_deinterleaver_soft.h"
 %}
 
 %include "satellites/decode_rs.h"
@@ -46,3 +48,7 @@ GR_SWIG_BLOCK_MAGIC2(satellites, varlen_packet_framer);
 GR_SWIG_BLOCK_MAGIC2(satellites, nusat_decoder);
 %include "satellites/rscode_decoder.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, rscode_decoder);
+%include "satellites/ao40_syncframe_soft.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, ao40_syncframe_soft);
+%include "satellites/ao40_deinterleaver_soft.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, ao40_deinterleaver_soft);

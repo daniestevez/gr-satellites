@@ -73,12 +73,20 @@
       <value>True</value>
     </param>
     <param>
+      <key>sizing_mode</key>
+      <value>fixed</value>
+    </param>
+    <param>
       <key>thread_safe_setters</key>
       <value></value>
     </param>
     <param>
       <key>title</key>
       <value>UKUBE-1 decoder</value>
+    </param>
+    <param>
+      <key>placement</key>
+      <value>(0,0)</value>
     </param>
   </block>
   <block>
@@ -498,7 +506,7 @@
     </param>
     <param>
       <key>const</key>
-      <value>-1</value>
+      <value>-4</value>
     </param>
     <param>
       <key>affinity</key>
@@ -692,45 +700,6 @@
     <param>
       <key>value</key>
       <value></value>
-    </param>
-  </block>
-  <block>
-    <key>digital_binary_slicer_fb</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(88, 728)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>digital_binary_slicer_fb_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
     </param>
   </block>
   <block>
@@ -1205,7 +1174,7 @@
     </param>
   </block>
   <block>
-    <key>satellites_ao40_fec_decoder</key>
+    <key>satellites_ao40_fec_decoder_soft</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -1224,7 +1193,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(256, 728)</value>
+      <value>(88, 728)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1232,7 +1201,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>satellites_ao40_fec_decoder_0</value>
+      <value>satellites_ao40_fec_decoder_soft_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1392,7 +1361,7 @@
   </connection>
   <connection>
     <source_block_id>blocks_multiply_const_vxx_0</source_block_id>
-    <sink_block_id>digital_binary_slicer_fb_0</sink_block_id>
+    <sink_block_id>satellites_ao40_fec_decoder_soft_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -1405,12 +1374,6 @@
   <connection>
     <source_block_id>blocks_udp_source_0</source_block_id>
     <sink_block_id>blocks_short_to_float_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>digital_binary_slicer_fb_0</source_block_id>
-    <sink_block_id>satellites_ao40_fec_decoder_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -1445,13 +1408,13 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>satellites_ao40_fec_decoder_0</source_block_id>
+    <source_block_id>satellites_ao40_fec_decoder_soft_0</source_block_id>
     <sink_block_id>satellites_print_timestamp_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
-    <source_block_id>satellites_ao40_fec_decoder_0</source_block_id>
+    <source_block_id>satellites_ao40_fec_decoder_soft_0</source_block_id>
     <sink_block_id>satellites_submit_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>

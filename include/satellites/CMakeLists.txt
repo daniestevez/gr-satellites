@@ -34,5 +34,7 @@ install(FILES
     varlen_packet_framer.h
     nusat_decoder.h
     rscode_decoder.h
+    ao40_syncframe_soft.h
+    ao40_deinterleaver_soft.h
     DESTINATION include/satellites
 )

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<block>
+  <name>AO-40 deinterleaver (soft symbols)</name>
+  <key>satellites_ao40_deinterleaver_soft</key>
+  <category>[Satellites]/Coding</category>
+  <import>import satellites</import>
+  <make>satellites.ao40_deinterleaver_soft()</make>
+ 
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>
