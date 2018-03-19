@@ -312,7 +312,11 @@ telemetry packet in the terminal as soon as it receives it.
     difference between the 2 receivers is that the NORAD ID is set for the
     correct satellite when doing telemetry submission. You must use FM mode to
     receive these satellites. TY-2 (435.350 MHz), TY-6 (436.100 MHz).
-  
+  * `ua01`
+    [QB50 UA01 (PolyITAN-2-SAU)](http://space.skyrocket.de/doc_sdat/polyitan-2-sau.htm),
+    which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
+    scrambler and two stages of NRZI coding.
+    You must use wide SSB mode to receive this satellite (436.600MHz).
   * `ukube1`
     [UKube-1 (FUNcube-2)](https://amsat-uk.org/satellites/communications/ukube-1/),
     which transmits 1k2 BPSK
