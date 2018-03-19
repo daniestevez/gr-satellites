@@ -160,8 +160,8 @@ telemetry packet in the terminal as soon as it receives it.
     transmit 4k8 FSK telemetry in the 70cm band. They use the Mobitex-NX
     protocol, which includes FEC with a (12,8,3) linear code and CRC-16CCITT for
     error detection. You must use FM mode to receive these satellites (435.950MHz).
-  * (inactive) `by701`
-    [BY70-1](http://space.skyrocket.de/doc_sdat/by70-1.htm), which transmits 9k6
+  * `by701`
+    [BY70-1](http://space.skyrocket.de/doc_sdat/by70-1.htm) *(inactive)*, which transmits 9k6
     BPSK telemetry in the 70cm band. It uses FEC with an r=1/2, k=7
     convolutional code and a (255,223) Reed-Solomon code (the same as the
     LilacSat-2 9k6 BPSK telemetry). You must use wide SSB mode to receive this
