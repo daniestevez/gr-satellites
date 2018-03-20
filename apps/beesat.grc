@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<?grc format='1' created='3.7.10'?>
+<?grc format='1' created='3.7.12'?>
 <flow_graph>
   <timestamp>Tue Apr 26 12:26:29 2016</timestamp>
   <block>
@@ -22,7 +22,7 @@
     </param>
     <param>
       <key>description</key>
-      <value>BEESAT decoder</value>
+      <value>BEESAT and TECHNOSAT decoder</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -73,12 +73,20 @@
       <value>True</value>
     </param>
     <param>
+      <key>sizing_mode</key>
+      <value>fixed</value>
+    </param>
+    <param>
       <key>thread_safe_setters</key>
       <value></value>
     </param>
     <param>
       <key>title</key>
-      <value>BEESAT decoder</value>
+      <value>BEESAT and TECHNOSAT decoder</value>
+    </param>
+    <param>
+      <key>placement</key>
+      <value>(0,0)</value>
     </param>
   </block>
   <block>
@@ -308,6 +316,10 @@
       <value></value>
     </param>
     <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
       <key>type</key>
       <value>string</value>
     </param>
@@ -453,6 +465,10 @@
       <value>i</value>
     </param>
     <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
       <key>type</key>
       <value>intx</value>
     </param>
@@ -494,6 +510,10 @@
     <param>
       <key>short_id</key>
       <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
     </param>
     <param>
       <key>type</key>
@@ -539,6 +559,10 @@
       <value></value>
     </param>
     <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
       <key>type</key>
       <value>eng_float</value>
     </param>
@@ -580,6 +604,10 @@
     <param>
       <key>short_id</key>
       <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
     </param>
     <param>
       <key>type</key>
@@ -731,6 +759,10 @@
       <value></value>
     </param>
     <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
       <key>type</key>
       <value>intx</value>
     </param>
@@ -772,6 +804,10 @@
     <param>
       <key>short_id</key>
       <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
     </param>
     <param>
       <key>type</key>
@@ -991,6 +1027,61 @@
     </param>
   </block>
   <block>
+    <key>satellites_submit</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(872, 892)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>satellites_submit_0_0_0_0</value>
+    </param>
+    <param>
+      <key>latitude</key>
+      <value>latitude</value>
+    </param>
+    <param>
+      <key>longitude</key>
+      <value>longitude</value>
+    </param>
+    <param>
+      <key>noradID</key>
+      <value>42829</value>
+    </param>
+    <param>
+      <key>source</key>
+      <value>callsign</value>
+    </param>
+    <param>
+      <key>tstamp</key>
+      <value>recstart</value>
+    </param>
+    <param>
+      <key>url</key>
+      <value>http://db.satnogs.org/api/telemetry/</value>
+    </param>
+  </block>
+  <block>
     <key>tnc_nx_beesat_classifier</key>
     <param>
       <key>alias</key>
@@ -1126,6 +1217,12 @@
     <source_block_id>tnc_nx_beesat_classifier_0</source_block_id>
     <sink_block_id>satellites_submit_0_0_0</sink_block_id>
     <source_key>BEESAT-4</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>tnc_nx_beesat_classifier_0</source_block_id>
+    <sink_block_id>satellites_submit_0_0_0_0</sink_block_id>
+    <source_key>TECHNOSAT</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>

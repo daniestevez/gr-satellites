@@ -84,3 +84,5 @@ from strip_ax25_header import strip_ax25_header
 from picsat_telemetry_parser import picsat_telemetry_parser
 
 from snet_deframer import snet_deframer
+
+from beesat_classifier import beesat_classifier

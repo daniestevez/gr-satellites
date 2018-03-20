@@ -49,7 +49,7 @@ one particular satellite. You may install only the ones you're interested in.
 
   * [gr-aausat](https://github.com/daniestevez/gr-aausat) AAUSAT-4 decoder and
     telemetry parser
-  * [beesat-sdr](https://github.com/daniestevez/beesat-sdr) BEESAT decoder and TNC
+  * [beesat-sdr](https://github.com/daniestevez/beesat-sdr) BEESAT and TECHNOSAT decoder and TNC
   * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) This only needs to be installed
   if you want to submit telemetry to HIT. A complete decoder which does not use gr-lilacsat
   is already included in gr-satellites.
@@ -156,8 +156,9 @@ telemetry packet in the terminal as soon as it receives it.
     convolutional code and a (255,223) Reed-Solomon code. It also uses a CCSDS
     scrambler. You must use FM mode to receive this satellite (436.330MHz).
   * `beesat`
-    [BEESAT-1,-2 and -4](http://space.skyrocket.de/doc_sdat/beesat.htm), which
-    transmit 4k8 FSK telemetry in the 70cm band. They use the Mobitex-NX
+    [BEESAT-1,-2 and -4](http://space.skyrocket.de/doc_sdat/beesat.htm)
+    and [TECHNOSAT](https://directory.eoportal.org/web/eoportal/satellite-missions/t/technosat),
+    which transmit 4k8 FSK telemetry in the 70cm band. They use the Mobitex-NX
     protocol, which includes FEC with a (12,8,3) linear code and CRC-16CCITT for
     error detection. You must use FM mode to receive these satellites (435.950MHz).
   * `by701`
