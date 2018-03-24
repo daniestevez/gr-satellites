@@ -142,6 +142,12 @@ namespace gr {
       // Viterbi decoding
       if ((d_viterbi == ON) || (d_viterbi == AUTO && viterbi_flag)) {
 	rx_len = frame_len / VITERBI_RATE - VITERBI_TAIL;
+	if (rx_len < 0) {
+	  if (d_verbose) {
+	    std::printf("Frame too short for Viterbi decoder.\n");
+	  }
+	  return;
+	}
 	init_viterbi_packed(d_vp, 0);
 	update_viterbi_packed(d_vp, packet, rx_len * 8 + VITERBI_CONSTRAINT - 1);
 	viterbi_res = chainback_viterbi_packed(d_vp, packet, rx_len * 8, 0);
