@@ -19,10 +19,10 @@ the recording was not Doppler corrected.
 
 ## Dependencies
 
-gr-satellites requires the git version of GNU Radio. A stable release may be
-used, but note the following:
+gr-satellites requires the git version or version 3.7.12.0 of GNU Radio.
+An older stable release may be used, but note the following:
 
-  * The "Correlate Access Code - Tag" block has changed slightly in the git
+  * The "Correlate Access Code - Tag" block has changed slightly in the 3.7.12.0
     version (it now allows floats as well as bytes). The new block is
     incompatible with the older one, so the flowgraphs using "Correlate Access
     Code - Tag" will complain of missing blocks when using a stable release of
@@ -32,8 +32,7 @@ used, but note the following:
     `sync_to_pdu.grc` and `sync_to_pdu_packed.grc` in gr-satellites.
   * There is a bug in the "Additive scrambler" block. The
     [bug fix](https://github.com/gnuradio/gnuradio/commit/e3ad82e6d93ea05d3b096673abf609f9e146f578)
-    is only in the
-    git version of GNU Radio. If using a stable release of GNU Radio, do not
+    is only in version 3.7.12.0 of GNU Radio. If using an older release of GNU Radio, do not
     expect this block to work. However, the "Additive scrambler" is only used to
     decode CCSDS scrambling. Decoders using G3RUH scrambling or no scrambler
     should work fine.
