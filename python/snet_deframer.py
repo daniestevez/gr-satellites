@@ -88,9 +88,9 @@ class snet_deframer(gr.basic_block):
             return
         
         codewords_per_block = 16
+        uncoded = False
         if hdr.AiTypeSrc == 0:
-            data_bits_per_codeword = 15 # uncoded
-            bch_d = None
+            uncoded = True
         elif hdr.AiTypeSrc == 1:
             data_bits_per_codeword = 11 # BCH(15,11,3)
             bch_d = 3
@@ -105,24 +105,37 @@ class snet_deframer(gr.basic_block):
                 print "Invalid AiTypeSrc"
             return
 
-        data_bytes_per_block = codewords_per_block * data_bits_per_codeword // 8
-        num_blocks = int(np.ceil(float(hdr.PduLength) / data_bytes_per_block))
+        if uncoded:
+            pdu_bytes = np.fliplr(bits[210:210+hdr.PduLength*8].reshape((hdr.PduLength, 8)))
+        else:
+            data_bytes_per_block = codewords_per_block * data_bits_per_codeword // 8
+            num_blocks = int(np.ceil(float(hdr.PduLength) / data_bytes_per_block))
 
-        blocks = list()
-        for k in range(num_blocks):
-            block = bits[210+k*16*15:210+(k+1)*16*15].reshape((15,16)).transpose()
+            blocks = list()
+            for k in range(num_blocks):
+                block = bits[210+k*16*15:210+(k+1)*16*15].reshape((15,16))
+                if bch_d:
+                    block = block.transpose()
 
-            # decode BCH
-            if bch_d and not all((decode_bch15(block[j,:], d = bch_d) for j in range(16))):
-                # decode failure
-                if self.verbose:
-                        print 'BCH decode failure'
-                return
+                if not bch_d:
+                    print(block)
             
-            blocks.append(block[:,-data_bits_per_codeword:].ravel())
+                # decode BCH
+                if bch_d and not all((decode_bch15(block[j,:], d = bch_d) for j in range(16))):
+                    # decode failure
+                    if self.verbose:
+                        print 'BCH decode failure'
+                    return
+            
+                if bch_d:
+                    blocks.append(block[:,-data_bits_per_codeword:].ravel())
+                else:
+                    blocks.append(block.ravel())
 
-        pdu_bytes = np.fliplr(np.concatenate(blocks).reshape((data_bytes_per_block * num_blocks, 8)))
-        pdu_bytes = pdu_bytes[:hdr.PduLength] # drop 0xDB padding bytes at the end
+            pdu_bytes = np.fliplr(np.concatenate(blocks).reshape((data_bytes_per_block * num_blocks, 8)))
+            pdu_bytes = pdu_bytes[:hdr.PduLength] # drop 0xDB padding bytes at the end
+            if not bch_d:
+                print(pdu_bytes)
 
         # crc13
         crc = 0x1FFF
