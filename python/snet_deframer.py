@@ -90,6 +90,7 @@ class snet_deframer(gr.basic_block):
         codewords_per_block = 16
         if hdr.AiTypeSrc == 0:
             data_bits_per_codeword = 15 # uncoded
+            bch_d = None
         elif hdr.AiTypeSrc == 1:
             data_bits_per_codeword = 11 # BCH(15,11,3)
             bch_d = 3
@@ -112,7 +113,7 @@ class snet_deframer(gr.basic_block):
             block = bits[210+k*16*15:210+(k+1)*16*15].reshape((15,16)).transpose()
 
             # decode BCH
-            if not all((decode_bch15(block[j,:], d = bch_d) for j in range(16))):
+            if bch_d and not all((decode_bch15(block[j,:], d = bch_d) for j in range(16))):
                 # decode failure
                 if self.verbose:
                         print 'BCH decode failure'
