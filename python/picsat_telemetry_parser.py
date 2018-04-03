@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # 
-# Copyright 2019 Daniel Estevez <daniel@destevez.net>
+# Copyright 2018 Daniel Estevez <daniel@destevez.net>
 # 
 # This is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

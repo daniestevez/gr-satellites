@@ -86,3 +86,6 @@ from picsat_telemetry_parser import picsat_telemetry_parser
 from snet_deframer import snet_deframer
 
 from beesat_classifier import beesat_classifier
+
+from snet_telemetry_parser import snet_telemetry_parser
+

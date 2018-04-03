@@ -80,6 +80,8 @@ GR_PYTHON_INSTALL(
     snet_deframer.py
     bch15.py
     beesat_classifier.py
+    snet_telemetry_parser.py
+    adapters.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
