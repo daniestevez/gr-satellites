@@ -44,9 +44,26 @@ class fixedlen_tagger(gr.basic_block):
         self.written = 0
         self.really_written = 0
 
+    def try_to_flush(self, out): # try to send as much items as we have in buffer
+        len_write = min(len(self.data), len(out))
+        out[:len_write] = self.data[:len_write]
+        self.data = self.data[len_write:]
+        self.really_written += len_write
+
+        for tag in self.tags_to_write[:]: # modifying self.tags_to_write during the loop could disturb the loop control, so we copy it
+            if tag < self.really_written:
+                self.tags_to_write.remove(tag)
+                self.add_item_tag(0, tag, self.packetlen_tag, pmt.from_long(self.packet_len))
+
+        return len_write
+
     def general_work(self, input_items, output_items):
         inp = input_items[0]
         out = output_items[0]
+
+        if self.data:
+            # write as much as possible without consuming input
+            return self.try_to_flush(out)
 
         window = list(self.stream) + inp.tolist()
         
@@ -55,8 +72,7 @@ class fixedlen_tagger(gr.basic_block):
             if tag.offset not in self.tags:
                 self.maxtag = max(self.maxtag, tag.offset)
                 self.tags.append(tag.offset)
-        tags = self.tags[:] # modifying self.tags during the loop could disturb the loop control, so we copy it
-        for tag in tags:
+        for tag in self.tags[:]: # modifying self.tags during the loop could disturb the loop control, so we copy it
             if (tag >= self.nitems_read(0) - len(self.stream)) and (tag < self.nitems_read(0) + len(inp) - self.packet_len + 1):
                 self.tags.remove(tag)
                 start = tag - self.nitems_read(0) + len(self.stream)
@@ -66,17 +82,6 @@ class fixedlen_tagger(gr.basic_block):
                 self.written += self.packet_len
 
         self.stream.extend(inp.tolist())
-
-        len_write = min(len(self.data), len(out))
-        out[:len_write] = self.data[:len_write]
-        self.data = self.data[len_write:]
-        self.really_written += len_write
-
-        tags = self.tags_to_write[:] # again, this is to avoid disturbing the loop
-        for tag in tags:
-            if tag < self.really_written:
-                self.tags_to_write.remove(tag)
-                self.add_item_tag(0, tag, self.packetlen_tag, pmt.from_long(self.packet_len))
                 
         self.consume(0, len(inp))
-        return len_write
+        return self.try_to_flush(out)
