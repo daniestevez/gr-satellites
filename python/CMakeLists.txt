@@ -83,6 +83,8 @@ GR_PYTHON_INSTALL(
     snet_telemetry_parser.py
     adapters.py
     snet_classifier.py
+    sat_1kuns_pf_telemetry.py
+    sat_1kuns_pf_telemetry_parser.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

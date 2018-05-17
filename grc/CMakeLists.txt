@@ -68,5 +68,6 @@ install(FILES
     satellites_beesat_classifier.xml
     satellites_snet_telemetry_parser.xml
     satellites_snet_classifier.xml
+    satellites_sat_1kuns_pf_telemetry_parser.xml
     DESTINATION share/gnuradio/grc/blocks
 )

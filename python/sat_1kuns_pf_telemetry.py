@@ -21,17 +21,23 @@
 
 from construct import *
 
-class AffineAdapter(Adapter):
-    def __init__(self, c, a, *args, **kwargs):
-        self.c = c
-        self.a = a
-        return Adapter.__init__(self, *args, **kwargs)
-    def _encode(self, obj, context, path = None):
-        return int(round(obj * self.c + self.a))
-    def _decode(self, obj, context, path = None):
-        return (float(obj) - self.a)/ self.c
+from adapters import *
 
-class LinearAdapter(AffineAdapter):
-    def __init__(self, c, *args, **kwargs):
-        return AffineAdapter.__init__(self, c, 0, *args, **kwargs)
-
+Beacon = Struct(
+        'beacon_counter' / Int16ub,
+        'solar_panel_voltage' / LinearAdapter(1/16.0, Int8ub)[3],
+        'eps_temp' / AffineAdapter(1, 100, Int8ub)[4],
+        'eps_boot_cause' / Int8ub,
+        'eps_batt_mode' / Int8ub,
+        'solar_panel_current' / LinearAdapter(1/10.0, Int8ub),
+        'system_input_current' / LinearAdapter(1/16.0, Int8ub),
+        'battery_voltage' / LinearAdapter(1/34.0, Int8ub),
+        'radio_PA_temp' / AffineAdapter(1, 100, Int8ub),
+        'tx_count' / Int16ub,
+        'rx_count' / Int16ub,
+        'obc_temp' / AffineAdapter(1, 100, Int8ub)[2],
+        'ang_velocity_mag' / Int8ub,
+        'magnetometer' / LinearAdapter(1/6.0, Int8sb)[3],
+        'main_axis_of_rot' / Int8ub
+        )
+	

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<block>
+  <name>1KUNS-PF Telemetry Parser</name>
+  <key>satellites_sat_1kuns_pf_telemetry_parser</key>
+  <category>[Satellites]/Telemetry</category>
+  <import>import satellites</import>
+  <make>satellites.sat_1kuns_pf_telemetry_parser()</make>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+</block>
