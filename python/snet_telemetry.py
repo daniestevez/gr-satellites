@@ -20,8 +20,10 @@
 # 
 
 from construct import *
+import construct
 
 import datetime
+from distutils.version import LooseVersion
 
 from adapters import LinearAdapter
 
@@ -56,7 +58,7 @@ class TimeAdapter(Adapter):
 TimeStamp = TimeAdapter(BitsInteger(32, swapped=True))
     
 SNETFrameHeader = BitStruct(
-    Const(BitsInteger(18), 0b111100110101000000),
+    Const(BitsInteger(18), 0b111100110101000000) if LooseVersion(construct.__version__) < LooseVersion('2.9') else Const(0b111100110101000000, BitsInteger(18)),
     'CRC' / BitsInteger(14),
     'FCIDMajor' / BitsInteger(6),
     'FCIDSub' / BitsInteger(10),
