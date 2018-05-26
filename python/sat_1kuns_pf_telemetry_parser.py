@@ -46,7 +46,10 @@ class sat_1kuns_pf_telemetry_parser(gr.basic_block):
         packet = bytearray(pmt.u8vector_elements(msg))
 
         try:
-            data = sat_1kuns_pf_telemetry.Beacon.parse(packet[4:])
+            if len(packet[4:]) >= 88:
+                data = sat_1kuns_pf_telemetry.WODBeacon.parse(packet[4:])
+            else:
+                data = sat_1kuns_pf_telemetry.Beacon.parse(packet[4:])
         except Exception as e:
             print "Could not decode telemetry beacon"
             print(e)
