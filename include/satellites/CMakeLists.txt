@@ -36,5 +36,6 @@ install(FILES
     rscode_decoder.h
     ao40_syncframe_soft.h
     ao40_deinterleaver_soft.h
+    descrambler308.h
     DESTINATION include/satellites
 )

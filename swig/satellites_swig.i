@@ -22,6 +22,7 @@
 #include "satellites/rscode_decoder.h"
 #include "satellites/ao40_syncframe_soft.h"
 #include "satellites/ao40_deinterleaver_soft.h"
+#include "satellites/descrambler308.h"
 %}
 
 %include "satellites/decode_rs.h"
@@ -52,3 +53,5 @@ GR_SWIG_BLOCK_MAGIC2(satellites, rscode_decoder);
 GR_SWIG_BLOCK_MAGIC2(satellites, ao40_syncframe_soft);
 %include "satellites/ao40_deinterleaver_soft.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, ao40_deinterleaver_soft);
+%include "satellites/descrambler308.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, descrambler308);

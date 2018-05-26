@@ -86,6 +86,8 @@ GR_PYTHON_INSTALL(
     sat_1kuns_pf_telemetry.py
     sat_1kuns_pf_telemetry_parser.py
     sat_1kuns_pf_image_decoder.py
+    k2sat_deframer.py
+    k2sat_image_decoder.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
