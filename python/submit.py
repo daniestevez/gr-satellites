@@ -76,7 +76,12 @@ class submit(gr.basic_block):
         f = urllib.urlopen('{}?{}'.format(self.url, params), data=params)
         reply = f.read()
         if f.getcode() != 200:
-            print "Server error while submitting telemetry:"
+            print "Server error while submitting telemetry"
+            print "Reply:"
             print reply
+            print "URL:", f.geturl()
+            print "HTTP code:", f.getcode()
+            print "Info:"
+            print f.info()
         f.close()
         
