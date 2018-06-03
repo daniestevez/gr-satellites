@@ -53,7 +53,7 @@ one particular satellite. You may install only the ones you're interested in.
   if you want to submit telemetry to HIT. A complete decoder which does not use gr-lilacsat
   is already included in gr-satellites.
 
-If you want to use the realtime image decoder for BY70-1, you also need to install
+If you want to use any of the realtime image decoders, you also need to install
 [feh](https://feh.finalrewind.org/).
 
 ## Hierarchichal flowgraphs
@@ -102,6 +102,9 @@ telemetry packet in the terminal as soon as it receives it.
     1k2 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
     transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
     Reed-Solomon code. You must use FM mode to receive this satellite (437.300 MHz).
+    1KUNS-PF transmits JPEG images from an onboard
+    camera. This decoder includes an image decoder which shows the images in
+    real time using feh.
   * `sat_3cat2`
     [3CAT-2](https://nanosatlab.upc.edu/en/missions-and-projects/3cat-2) *(inactive)*,
     which
@@ -195,7 +198,7 @@ telemetry packet in the terminal as soon as it receives it.
     receiver supports sending frames to the D-SAT groundstation software, which
     decodes telemetry. See
     [this post](http://destevez.net/2017/08/d-sat-support-added-to-gr-satellites/)
-    for detailed instructions. D-SAT transmits JPEG image from an onboard
+    for detailed instructions. D-SAT transmits JPEG images from an onboard
     camera. This decoder includes an image decoder which shows the images in
     real time using feh.
   * `galassia`

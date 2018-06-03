@@ -91,3 +91,4 @@ from snet_telemetry_parser import snet_telemetry_parser
 from snet_classifier import snet_classifier
 
 from sat_1kuns_pf_telemetry_parser import sat_1kuns_pf_telemetry_parser
+from sat_1kuns_pf_image_decoder import sat_1kuns_pf_image_decoder

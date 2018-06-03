@@ -69,5 +69,6 @@ install(FILES
     satellites_snet_telemetry_parser.xml
     satellites_snet_classifier.xml
     satellites_sat_1kuns_pf_telemetry_parser.xml
+    satellites_sat_1kuns_pf_image_decoder.xml
     DESTINATION share/gnuradio/grc/blocks
 )

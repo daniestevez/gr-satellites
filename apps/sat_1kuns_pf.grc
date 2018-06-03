@@ -900,6 +900,45 @@
     </param>
   </block>
   <block>
+    <key>satellites_1kuns_pf_image_decoder</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>display</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(424, 940)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>satellites_1kuns_pf_image_decoder_0</value>
+    </param>
+    <param>
+      <key>path</key>
+      <value>/tmp/</value>
+    </param>
+  </block>
+  <block>
     <key>satellites_print_header</key>
     <param>
       <key>alias</key>
@@ -1206,6 +1245,12 @@
     <sink_block_id>blocks_message_debug_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>print_pdu</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>satellites_print_timestamp_0</source_block_id>
+    <sink_block_id>satellites_1kuns_pf_image_decoder_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>satellites_print_timestamp_0</source_block_id>
