@@ -98,7 +98,7 @@ class by701_image_decoder(gr.basic_block):
           length - self.remaining[image_id] >= 64*10:
             self.displaying.append(image_id)
             try:
-                subprocess.Popen(['feh', '-R 1', filename])
+                subprocess.Popen(['feh', '-F', '-R', '1', filename])
             except Exception:
                 pass
         

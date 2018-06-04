@@ -44,6 +44,7 @@ class sat_1kuns_pf_image_decoder(gr.basic_block):
         self.current_file = -1
         self.expected_block = 0
         self.display = display
+        self.displaying = False
                 
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
@@ -53,34 +54,30 @@ class sat_1kuns_pf_image_decoder(gr.basic_block):
         packet = bytearray(pmt.u8vector_elements(msg))
 
         # check packet len
-        if len(packet) <= 4+3+4:
+        if len(packet) != 138:
             return
 
-        # check packet marker
-        if packet[4] != 0x42 or packet[5] != 0x00:
-            return
-
-        block = packet[6]
-        data = packet[7:-4]
+        block = struct.unpack('>H', packet[4:6])[0]
+        data = packet[6:-4]
 
         if self.current_file == -1:
             if block == 0:
                 # first file received
                 print "Starting image 0"
                 self.current_file = 0
-                filename = os.path.join(self.path, 'img{}.jpg'.format(self.current_file))
-                self.f = open(filename, 'wb', 0)
+                self.filename = os.path.join(self.path, 'img{}.jpg'.format(self.current_file))
+                self.f = open(self.filename, 'wb', 0)
             else:
                 return
-
-        if block == 0:
+        elif block == 0:
             # new file
             print "Image {} finished. Starting image {}".format(self.current_file, self.current_file+1)
             self.f.close()
             self.current_file += 1
             self.expected_block = 0
-            filename = os.path.join(self.path, 'img{}.jpg'.format(self.current_file))
+            self.filename = os.path.join(self.path, 'img{}.jpg'.format(self.current_file))
             self.f = open(filename, 'wb', 0)
+            self.displaying = False
         elif block != self.expected_block:
             # lost block
             print "Lost image block"
@@ -90,8 +87,9 @@ class sat_1kuns_pf_image_decoder(gr.basic_block):
         self.f.write(data)
         self.expected_block += 1
 
-        if self.display:
+        if self.display and not self.displaying and block >= 5:
+            self.displaying = True
             try:
-                subprocess.Popen(['feh', '-F -R 1', filename])
+                subprocess.Popen(['feh', '-F', '-R', '1', self.filename])
             except Exception:
                 pass

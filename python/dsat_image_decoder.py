@@ -111,7 +111,7 @@ class dsat_image_decoder(gr.basic_block):
           self.length - self.remaining[self.current_id] >= 64*10:
             self.displaying.append(self.current_id)
             try:
-                subprocess.Popen(['feh', '-R 1', self.filename])
+                subprocess.Popen(['feh', '-F', '-R', '1', self.filename])
             except Exception:
                 pass
         
