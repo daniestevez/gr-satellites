@@ -45,6 +45,10 @@ class sat_1kuns_pf_telemetry_parser(gr.basic_block):
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
+        if len(packet) == 138:
+            # this is most likely an image packet
+            return 
+        
         try:
             if len(packet[4:]) >= 88:
                 data = sat_1kuns_pf_telemetry.WODBeacon.parse(packet[4:])
