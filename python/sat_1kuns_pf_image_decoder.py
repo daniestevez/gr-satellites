@@ -81,7 +81,7 @@ class sat_1kuns_pf_image_decoder(gr.basic_block):
         elif block != self.expected_block:
             # lost block
             print "Lost image block {}".format(self.expected_block)
-            self.expected_block = block
+            self.expected_block = block + 1
             return
         else:
             print "Received image block {}".format(block)
