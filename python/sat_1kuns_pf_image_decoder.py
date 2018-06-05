@@ -76,13 +76,15 @@ class sat_1kuns_pf_image_decoder(gr.basic_block):
             self.current_file += 1
             self.expected_block = 0
             self.filename = os.path.join(self.path, 'img{}.jpg'.format(self.current_file))
-            self.f = open(filename, 'wb', 0)
+            self.f = open(self.filename, 'wb', 0)
             self.displaying = False
         elif block != self.expected_block:
             # lost block
-            print "Lost image block"
+            print "Lost image block {}".format(self.expected_block)
             self.expected_block = block
             return
+        else:
+            print "Received image block {}".format(block)
 
         self.f.write(data)
         self.expected_block += 1
