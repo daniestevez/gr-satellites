@@ -83,7 +83,7 @@ class k2sat_image_decoder(gr.basic_block):
 
         if self.display and first_header_pointer == 0x00:
             try:
-                subprocess.Popen(['feh', '-F -R 0.1', filename])
+                subprocess.Popen(['feh', '-F', '-R' , '0.1', filename])
             except Exception:
                 pass
         
