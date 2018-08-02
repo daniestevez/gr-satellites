@@ -239,7 +239,7 @@ telemetry packet in the terminal as soon as it receives it.
   * `k2sat_image`
     [K2SAT](http://www.amsatuk.me.uk/iaru/finished_detail.php?serialnum=552),
     which transmits images using QPSK in the 13cm band. See
-    [this post](http://destevez.net/2018/06/k2sat-s-band-image-receiver/).
+    [this post](http://destevez.net/2018/07/k2sat-s-band-image-receiver/).
   * `kr01`
     [QB50 KR01 (LINK)](http://space.skyrocket.de/doc_sdat/link.htm)
     *(inactive)*,
