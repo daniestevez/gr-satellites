@@ -305,6 +305,13 @@ telemetry packet in the terminal as soon as it receives it.
     which transmit 1k2 AFSK telemetry in the 70cm band. They use a custom coding
     with BCH FEC and interleaving. You must use FM mode to receive these
     satellites (435.950MHz).
+  * `tanusha3_pm`
+    [TANUSHA-3](https://swsu.ru/space/),
+    which transmits FM audio, 1k2 AX.25 AFSK telemetry and 1k2 audio frequency
+    phase modulation AX.25 telemetry in the 70cm band. This decoder is for the
+    phase modulation packets. For the AFSK packets you can use any regular
+    packet decoder such as direwolf. You must use FM mode to receive this
+    satellite (437.050MHz).
   * `tw_1a`, `tw_1b`, `tw_1c`
     [TW-1A](http://space.skyrocket.de/doc_sdat/shangkeda-2.htm),
     [TW-1B](http://space.skyrocket.de/doc_sdat/njust-2.htm),
