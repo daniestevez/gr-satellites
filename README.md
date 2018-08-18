@@ -181,7 +181,8 @@ telemetry packet in the terminal as soon as it receives it.
     on 18 February 2017. You must use wide SSB mode to receive this satellite.
   * `ca03`
     [QB50 CA03 (Ex-Alta 1)](https://albertasat.ca/amateur-radio-information/),
-    which transmits 4k8 GFSK telemetry in the 70cm band. It uses the CSP protocol
+    which transmits 4k8 GFSK telemetry in the 70cm band. Occasionaly it has been seen
+    to transmit in 9k6. It uses the CSP protocol
     and FEC with a (255,223) Reed-Solomon code. It also uses a G3RUH scrambler. The
     transceiver is the GomSpace NanoCom AX100, the same transceiver used in
     GOMX-3. You must use FM mode to receive this satellite (436.705MHz).
