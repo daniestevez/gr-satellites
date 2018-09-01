@@ -88,6 +88,10 @@ class by701_image_decoder(gr.basic_block):
             self.files[image_id] = open(filename, 'wb', 0)
             self.remaining[image_id] = length
 
+        # check that index and length make sense
+        if index + len(data) > length:
+            return
+            
         f = self.files[image_id]
         f.seek(index)
         f.write(data)
