@@ -4,7 +4,7 @@
   <key>satellites_dsat_image_decoder</key>
   <category>[Satellites]/Data</category>
   <import>import satellites</import>
-  <make>satellites.dsat_image_decoder($path, $display)</make>
+  <make>satellites.dsat_image_decoder($path, $display, $fullscreen)</make>
   <param>
     <name>Path</name>
     <key>path</key>
@@ -13,6 +13,20 @@
   <param>
     <name>Display</name>
     <key>display</key>
+    <value>True</value>
+    <type>bool</type>
+    <option>
+      <name>Yes</name>
+      <key>True</key>
+    </option>
+    <option>
+      <name>No</name>
+      <key>False</key>
+    </option>
+  </param>
+  <param>
+    <name>Fullscreen</name>
+    <key>fullscreen</key>
     <value>True</value>
     <type>bool</type>
     <option>

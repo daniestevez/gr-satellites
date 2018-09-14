@@ -22,10 +22,10 @@
 import struct
 import os.path
 import binascii
-import subprocess
 from datetime import datetime
 
 from csp_header import CSP
+from feh import FehOpener
 
 import numpy
 from gnuradio import gr
@@ -35,7 +35,7 @@ class dsat_image_decoder(gr.basic_block):
     """
     docstring for block by701_image_decoder
     """
-    def __init__(self, path='/tmp', display=False):
+    def __init__(self, path='/tmp', display=False, fullscreen=True):
         gr.basic_block.__init__(self,
             name="dsat_image_decoder",
             in_sig=[],
@@ -49,6 +49,7 @@ class dsat_image_decoder(gr.basic_block):
         self.display = display
         self.displaying = list()
         self.current_id = None
+        self.feh = FehOpener(fullscreen)
 
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
@@ -111,7 +112,7 @@ class dsat_image_decoder(gr.basic_block):
           self.length - self.remaining[self.current_id] >= 64*10:
             self.displaying.append(self.current_id)
             try:
-                subprocess.Popen(['feh', '-F', '-R', '1', self.filename])
+                self.feh.open(self.filename)
             except Exception:
                 pass
         

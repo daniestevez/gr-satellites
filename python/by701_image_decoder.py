@@ -22,9 +22,9 @@
 import struct
 import os.path
 import binascii
-import subprocess
 
 from csp_header import CSP
+from feh import FehOpener
 
 import numpy
 from gnuradio import gr
@@ -42,7 +42,7 @@ class by701_image_decoder(gr.basic_block):
     """
     docstring for block by701_image_decoder
     """
-    def __init__(self, path='/tmp', display=False):
+    def __init__(self, path='/tmp', display=False, fullscreen = True):
         gr.basic_block.__init__(self,
             name="by701_image_decoder",
             in_sig=[],
@@ -55,6 +55,7 @@ class by701_image_decoder(gr.basic_block):
         self.remaining = dict()
         self.display = display
         self.displaying = list()
+        self.feh = FehOpener(fullscreen)
                 
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
@@ -102,7 +103,7 @@ class by701_image_decoder(gr.basic_block):
           length - self.remaining[image_id] >= 64*10:
             self.displaying.append(image_id)
             try:
-                subprocess.Popen(['feh', '-F', '-R', '1', filename])
+                self.feh.open(filename)
             except Exception:
                 pass
         

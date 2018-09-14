@@ -4,7 +4,7 @@
   <key>satellites_1kuns_pf_image_decoder</key>
   <category>[Satellites]/Data</category>
   <import>import satellites</import>
-  <make>satellites.sat_1kuns_pf_image_decoder($path, $display)</make>
+  <make>satellites.sat_1kuns_pf_image_decoder($path, $display, $fullscreen)</make>
   <param>
     <name>Path</name>
     <key>path</key>
@@ -24,8 +24,20 @@
       <key>False</key>
     </option>
   </param>
-
-
+  <param>
+    <name>Fullscreen</name>
+    <key>fullscreen</key>
+    <value>True</value>
+    <type>bool</type>
+    <option>
+      <name>Yes</name>
+      <key>True</key>
+    </option>
+    <option>
+      <name>No</name>
+      <key>False</key>
+    </option>
+  </param>
   
   <sink>
     <name>in</name>

@@ -22,7 +22,8 @@
 import struct
 import os.path
 import binascii
-import subprocess
+
+from feh import FehOpener
 
 import numpy
 from gnuradio import gr
@@ -32,7 +33,7 @@ class k2sat_image_decoder(gr.basic_block):
     """
     docstring for block k2sat_image_decoder
     """
-    def __init__(self, path='/tmp', display=False):
+    def __init__(self, path='/tmp', display=False, fullscreen = True):
         gr.basic_block.__init__(self,
             name="k2sat_image_decoder",
             in_sig=[],
@@ -44,6 +45,7 @@ class k2sat_image_decoder(gr.basic_block):
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
         self.display = display
         self.next_frame_count = None
+        self.feh = FehOpener(fullscreen, interval = 0.1)
                 
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
@@ -83,7 +85,7 @@ class k2sat_image_decoder(gr.basic_block):
 
         if self.display and first_header_pointer == 0x00:
             try:
-                subprocess.Popen(['feh', '-F', '-R' , '0.1', filename])
+                self.feh.open(filename)
             except Exception:
                 pass
         

@@ -22,7 +22,8 @@
 import struct
 import os.path
 import binascii
-import subprocess
+
+from feh import FehOpener
 
 import numpy
 from gnuradio import gr
@@ -32,7 +33,7 @@ class sat_1kuns_pf_image_decoder(gr.basic_block):
     """
     docstring for block sat_1kuns_pf_image_decoder
     """
-    def __init__(self, path='/tmp', display=False):
+    def __init__(self, path='/tmp', display=False, fullscreen=True):
         gr.basic_block.__init__(self,
             name="sat_1kuns_pf_image_decoder",
             in_sig=[],
@@ -45,6 +46,7 @@ class sat_1kuns_pf_image_decoder(gr.basic_block):
         self.expected_block = 0
         self.display = display
         self.displaying = False
+        self.feh = FehOpener(fullscreen)
                 
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
@@ -89,6 +91,6 @@ class sat_1kuns_pf_image_decoder(gr.basic_block):
         if self.display and not self.displaying and block >= 5:
             self.displaying = True
             try:
-                subprocess.Popen(['feh', '-F', '-R', '1', self.filename])
+                self.feh.open(self.filename)
             except Exception:
                 pass
