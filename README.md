@@ -17,6 +17,25 @@ correct timestamps for the packets when uploading them to the telemetry
 server. It also simplifies Doppler correction of the recording with Gpredict if
 the recording was not Doppler corrected.
 
+## Installation
+
+First you need to install the dependencies (see below).
+
+After this, gr-satellites must be installed as any other GNU Radio out-of-tree
+module. The producedure usually boils down to doing the following:
+
+```bash
+mkdir build
+cd build
+cmake ..
+make
+sudo make install
+sudo ldconfig
+```
+
+Finally, you need to compile the hierarchical flowgraphs include in
+gr-satellites (see below).
+
 ## Dependencies
 
 gr-satellites requires GNU Radio version 3.7.12.0 or new.
@@ -346,19 +365,6 @@ telemetry packet in the terminal as soon as it receives it.
     block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
     two interleaved (160,128) Reed-Solomon codes. You must use SSB mode to
     receive this satellite (145.915MHz).
-
-## Installing GNUradio OOT modules
-
-This is the usual procedure to build and install an OOT module:
-
-```bash
-mkdir build
-cd build
-cmake ..
-make
-sudo make install
-sudo ldconfig
-```
 
 ## Submitting telemetry
 
