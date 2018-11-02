@@ -222,6 +222,10 @@ telemetry packet in the terminal as soon as it receives it.
     for detailed instructions. D-SAT transmits JPEG images from an onboard
     camera. This decoder includes an image decoder which shows the images in
     real time using feh.
+  * `fmn1`
+    [FMN-1](https://space.skyrocket.de/doc_sdat/fengmaniu-1.htm),
+    which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
+    scrambler. You must use wide SSB mode to receive this satellite (435.350MHz).
   * `galassia`
     [GALASSIA](https://eoportal.org/web/eoportal/satellite-missions/content/-/article/galass-1),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
