@@ -324,6 +324,10 @@ telemetry packet in the terminal as soon as it receives it.
     which transmits 1k2 or 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
     scrambler. For 1k2 telemetry you must use SSB mode, while for 9k6 telemetry you
     must use wide SSB mode (435.525MHz).
+  * `shaonian_xing`
+    [Shaonian Xing (MXSat-1)](https://space.skyrocket.de/doc_sdat/shaonian-xing.htm),
+    which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
+    scrambler. You must use wide SSB mode to receive this satellite (436.375MHz).
 
   * `snet`
     [S-NET A,B,C,D](http://www.raumfahrttechnik.tu-berlin.de/menue/forschung/aktuelle_projekte/s-net/),
