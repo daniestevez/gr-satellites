@@ -328,7 +328,6 @@ telemetry packet in the terminal as soon as it receives it.
     [Shaonian Xing (MXSat-1)](https://space.skyrocket.de/doc_sdat/shaonian-xing.htm),
     which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
     scrambler. You must use wide SSB mode to receive this satellite (436.375MHz).
-
   * `snet`
     [S-NET A,B,C,D](http://www.raumfahrttechnik.tu-berlin.de/menue/forschung/aktuelle_projekte/s-net/),
     which transmit 1k2 AFSK telemetry in the 70cm band. They use a custom coding
@@ -373,6 +372,10 @@ telemetry packet in the terminal as soon as it receives it.
     block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
     two interleaved (160,128) Reed-Solomon codes. You must use SSB mode to
     receive this satellite (145.915MHz).
+  * `zhou_enlai`
+    [Zhou Enlai](https://space.skyrocket.de/doc_sdat/zhou_enlai.htm),
+    which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
+    scrambler. You must use wide SSB mode to receive this satellite (437.644MHz).
 
 ## Submitting telemetry
 
