@@ -1682,12 +1682,6 @@
     <sink_key>in</sink_key>
   </connection>
   <connection>
-    <source_block_id>satellites_hdlc_deframer_0</source_block_id>
-    <sink_block_id>satellites_pdu_to_kiss_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
     <source_block_id>satellites_nrzi_decode_0</source_block_id>
     <sink_block_id>digital_descrambler_bb_0</sink_block_id>
     <source_key>0</source_key>
