@@ -351,15 +351,16 @@ telemetry packet in the terminal as soon as it receives it.
     The only difference between the 3 receivers is that the NORAD ID is set for
     the correct satellite when doing telemetry submission. You must use FM mode
     to receive these satellites. TW-1A, TW-1C (435.645 MHz), TW-1B (437.645 MHz).
-  * `ty_2`, `ty_6`
-    [TY-2](http://space.skyrocket.de/doc_sdat/xiaoxiang-1.htm)
+  * `ty_2`, `ty_4`, `ty_6`
+    [TY-2](https://space.skyrocket.de/doc_sdat/ty-2.htm),
+    [TY 4-01](https://space.skyrocket.de/doc_sdat/ty-4-01.htm),
     and [TY-6](http://space.skyrocket.de/doc_sdat/ty-6.htm), which transmit
     9k6 GMSK telemetry in the 70cm band. They use the GomSpace NanoCom AX100
     transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
     Reed-Solomon code. The telemetry format is unknown. The only
     difference between the 2 receivers is that the NORAD ID is set for the
     correct satellite when doing telemetry submission. You must use FM mode to
-    receive these satellites. TY-2 (435.350 MHz), TY-6 (436.100 MHz).
+    receive these satellites. TY-2 (435.350MHz), TY 4-01 (435.925MHz), TY-6 (436.100MHz).
   * `ua01`
     [QB50 UA01 (PolyITAN-2-SAU)](http://space.skyrocket.de/doc_sdat/polyitan-2-sau.htm),
     which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
