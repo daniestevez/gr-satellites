@@ -222,6 +222,12 @@ telemetry packet in the terminal as soon as it receives it.
     for detailed instructions. D-SAT transmits JPEG images from an onboard
     camera. This decoder includes an image decoder which shows the images in
     real time using feh.
+  * `facsat_1`,
+    [FACSAT-1](https://en.wikipedia.org/wiki/FACSAT-1), which transmits
+    9k6 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
+    transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
+    Reed-Solomon code. The telemetry format is unknown. You must use FM mode to
+    receive this satellite (437.350MHz).
   * `fmn1`
     [FMN-1](https://space.skyrocket.de/doc_sdat/fengmaniu-1.htm),
     which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
