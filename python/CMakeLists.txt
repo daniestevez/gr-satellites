@@ -89,6 +89,9 @@ GR_PYTHON_INSTALL(
     k2sat_deframer.py
     k2sat_image_decoder.py
     feh.py
+    cc11xx_packet_crop.py
+    check_cc11xx_crc.py
+    cc11xx_remove_length.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

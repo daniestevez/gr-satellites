@@ -95,3 +95,8 @@ from sat_1kuns_pf_image_decoder import sat_1kuns_pf_image_decoder
 
 from k2sat_deframer import k2sat_deframer
 from k2sat_image_decoder import k2sat_image_decoder
+
+from cc11xx_packet_crop import cc11xx_packet_crop
+from check_cc11xx_crc import check_cc11xx_crc
+from cc11xx_remove_length import cc11xx_remove_length
+

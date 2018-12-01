@@ -260,6 +260,11 @@ telemetry packet in the terminal as soon as it receives it.
     which transmits 1k2 or 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
     scrambler. For 1k2 telemetry you must use SSB mode, while for 9k6 telemetry you
     must use wide SSB mode.
+  * `reaktor_hello_world`
+    [Reaktor Hello World](https://reaktorspace.com/reaktor-hello-world/),
+    which transmits 9k6 GFSK telemetry in the 70cm band. It uses a Texas
+    Intruments CC1125 transceiver with a PN9 scrambler and a CRC-16. You must
+    use FM mode to receive this satellite (437.775MHz).
   * `il01`
     [QB50 IL01 (DUCHIFAT-2)](http://www.h-space-lab.org/php/hoopoe-en.php),
     which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH

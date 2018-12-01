@@ -73,5 +73,8 @@ install(FILES
     satellites_k2sat_deframer.xml
     satellites_k2sat_image_decoder.xml
     satellites_descrambler308.xml
+    satellites_cc11xx_packet_crop.xml
+    satellites_check_cc11xx_crc.xml
+    satellites_cc11xx_remove_length.xml
     DESTINATION share/gnuradio/grc/blocks
 )

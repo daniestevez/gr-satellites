@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<block>
+  <name>CC11xx packet crop</name>
+  <key>satellites_cc11xx_packet_crop</key>
+  <category>[Satellites]/CC11xx</category>
+  <import>import satellites</import>
+  <make>satellites.cc11xx_packet_crop($use_crc16)</make>
+  <param>
+    <name>Use CRC16</name>
+    <key>use_crc16</key>
+    <type>bool</type>
+    <option>
+      <name>Yes</name>
+      <key>True</key>
+    </option>
+    <option>
+      <name>No</name>
+      <key>False</key>
+    </option>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>
