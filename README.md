@@ -267,6 +267,11 @@ telemetry packet in the terminal as soon as it receives it.
   * `indus`
     Mystery satellite transmitting on 435.080MHz using 1k2 FSK AX.25 and the
     callsign INDUSR-10 (see [here](https://twitter.com/ea4gpz/status/952593838266298368)).
+  * `innosat_2`,
+    [INNOSAT-2](https://space.skyrocket.de/doc_sdat/innosat-2.htm), which transmits
+    4k8 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
+    transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
+    Reed-Solomon code. You must use FM mode to receive this satellite (437.450MHz).
   * `k2sat_image`
     [K2SAT](http://www.amsatuk.me.uk/iaru/finished_detail.php?serialnum=552),
     which transmits images using QPSK in the 13cm band. See
