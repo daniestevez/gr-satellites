@@ -994,7 +994,7 @@
     </param>
     <param>
       <key>url</key>
-      <value>http://db.satnogs.org/api/telemetry/</value>
+      <value>https://db.satnogs.org/api/telemetry/</value>
     </param>
   </block>
   <block>
@@ -1049,7 +1049,7 @@
     </param>
     <param>
       <key>url</key>
-      <value>http://spacedatacenter.at/sids/report_frame.php</value>
+      <value>https://spacedatacenter.at/sids/report_frame.php</value>
     </param>
   </block>
   <block>

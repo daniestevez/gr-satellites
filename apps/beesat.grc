@@ -913,7 +913,7 @@
     </param>
     <param>
       <key>url</key>
-      <value>http://db.satnogs.org/api/telemetry/</value>
+      <value>https://db.satnogs.org/api/telemetry/</value>
     </param>
   </block>
   <block>
@@ -968,7 +968,7 @@
     </param>
     <param>
       <key>url</key>
-      <value>http://db.satnogs.org/api/telemetry/</value>
+      <value>https://db.satnogs.org/api/telemetry/</value>
     </param>
   </block>
   <block>
@@ -1023,7 +1023,7 @@
     </param>
     <param>
       <key>url</key>
-      <value>http://db.satnogs.org/api/telemetry/</value>
+      <value>https://db.satnogs.org/api/telemetry/</value>
     </param>
   </block>
   <block>
@@ -1078,7 +1078,7 @@
     </param>
     <param>
       <key>url</key>
-      <value>http://db.satnogs.org/api/telemetry/</value>
+      <value>https://db.satnogs.org/api/telemetry/</value>
     </param>
   </block>
   <block>
