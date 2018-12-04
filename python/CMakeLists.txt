@@ -92,6 +92,8 @@ GR_PYTHON_INSTALL(
     cc11xx_packet_crop.py
     check_cc11xx_crc.py
     cc11xx_remove_length.py
+    sat_3cat_1_telemetry.py
+    sat_3cat_1_telemetry_parser.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

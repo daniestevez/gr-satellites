@@ -22,12 +22,9 @@
 import datetime
 
 from construct import *
+from adapters import UNIXTimestampAdapter
 
-class TimestampAdapter(Adapter):
-    # TODO _encode()
-    def _decode(self, obj, context, path = None):
-        return datetime.datetime.utcfromtimestamp(obj)
-Timestamp = TimestampAdapter(Int32sb)
+Timestamp = UNIXTimestampAdapter(Int32sb)
 
 class BatteryAdapter(Adapter):
     def _encode(self, obj, context, path = None):

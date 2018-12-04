@@ -125,6 +125,12 @@ telemetry packet in the terminal as soon as it receives it.
     1KUNS-PF transmits JPEG images from an onboard
     camera. This decoder includes an image decoder which shows the images in
     real time using feh.
+  * `sat_3cat_1`
+    [3CAT-1](https://nanosatlab.upc.edu/en/missions-and-projects/3cat-1),
+    which transmits 9k6 GFSK telemetry in the 70cm band. It uses a Texas
+    Intruments CC1101 transceiver with a PN9 scrambler, and a (255,223) Reed-Solomon
+    code from the [rscode](http://rscode.sourceforge.net/) library.
+    You must use FM mode to receive this satellite (437.250MHz).
   * `sat_3cat2`
     [3CAT-2](https://nanosatlab.upc.edu/en/missions-and-projects/3cat-2) *(inactive)*,
     which

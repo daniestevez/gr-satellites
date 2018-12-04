@@ -20,6 +20,7 @@
 # 
 
 from construct import *
+import datetime
 
 class AffineAdapter(Adapter):
     def __init__(self, c, a, *args, **kwargs):
@@ -35,3 +36,8 @@ class LinearAdapter(AffineAdapter):
     def __init__(self, c, *args, **kwargs):
         return AffineAdapter.__init__(self, c, 0, *args, **kwargs)
 
+class UNIXTimestampAdapter(Adapter):
+    def _encode(self, obj, context, path = None):
+        return round(obj.timestamp())
+    def _decode(self, obj, context, path = None):
+        return datetime.datetime.utcfromtimestamp(obj)

@@ -100,3 +100,4 @@ from cc11xx_packet_crop import cc11xx_packet_crop
 from check_cc11xx_crc import check_cc11xx_crc
 from cc11xx_remove_length import cc11xx_remove_length
 
+from sat_3cat_1_telemetry_parser import sat_3cat_1_telemetry_parser
