@@ -362,6 +362,13 @@ telemetry packet in the terminal as soon as it receives it.
     which transmit 1k2 AFSK telemetry in the 70cm band. They use a custom coding
     with BCH FEC and interleaving. You must use FM mode to receive these
     satellites (435.950MHz).
+  * `suomi_100`
+    [Suomi 100](http://www.suomi100satelliitti.fi/),
+    which transmits
+    9k6 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
+    transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
+    Reed-Solomon code. You must use FM mode to
+    receive this satellite (437.775MHz).
   * `tanusha3_pm`
     [TANUSHA-3](https://swsu.ru/space/),
     which transmits FM audio, 1k2 AX.25 AFSK telemetry and 1k2 audio frequency
