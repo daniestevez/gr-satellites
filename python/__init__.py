@@ -101,3 +101,5 @@ from check_cc11xx_crc import check_cc11xx_crc
 from cc11xx_remove_length import cc11xx_remove_length
 
 from sat_3cat_1_telemetry_parser import sat_3cat_1_telemetry_parser
+
+from suomi_100_telemetry_parser import suomi_100_telemetry_parser
