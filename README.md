@@ -400,6 +400,17 @@ telemetry packet in the terminal as soon as it receives it.
     which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
     scrambler. You must use wide SSB mode to receive this satellite (437.644MHz).
 
+## Generic decoders
+
+I do not add specific decoders to gr-satellites for satellites using standard
+AFSK or FSK AX.25 packet radio, since there are many satellites using these
+modes and there are already very good decoders for packet radio such as
+[direwolf](https://github.com/wb2osz/direwolf). However, in case someone finds
+it useful, I have added `generic_4k8_fsk_ax25`, `generic_9k6_fsk_ax25` and
+`generic_19k2_fsk_ax25` generic decoders for 4k8, 9k6 and 19k2 FSK AX.25 packet
+radio. For the time being, I do not plan to add a 1k2 AFSK decoder, since it is not
+so easy to implement a good AFSK decoder (a good AGC is a challenge, for instance).
+
 ## Submitting telemetry
 
 To sumbit telemetry to the [SatNOGS database](http://db.satnogs.org/) (or
