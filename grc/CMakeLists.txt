@@ -78,5 +78,6 @@ install(FILES
     satellites_cc11xx_remove_length.xml
     satellites_sat_3cat_1_telemetry_parser.xml
     satellites_suomi_100_telemetry_parser.xml
+    satellites_pwsat2_telemetry_parser.xml
     DESTINATION share/gnuradio/grc/blocks
 )

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<block>
+  <name>PW-Sat2 Telemetry Parser</name>
+  <key>satellites_pwsat2_telemetry_parser</key>
+  <category>[Satellites]/Telemetry</category>
+  <import>import satellites</import>
+  <make>satellites.pwsat2_telemetry_parser($pwsat2_path)</make>
+
+  <param>
+    <name>PW-Sat2 FramePayloadDecoder path</name>
+    <key>pwsat2_path</key>
+    <value></value>
+    <type>string</type>
+  </param>
+ 
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+</block>

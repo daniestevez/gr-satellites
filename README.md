@@ -72,6 +72,9 @@ one particular satellite. You may install only the ones you're interested in.
   * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) This only needs to be installed
   if you want to submit telemetry to HIT. A complete decoder which does not use gr-lilacsat
   is already included in gr-satellites.
+  * [PW-Sat2 FramePayloadDecoder](https://github.com/PW-Sat2/FramePayloadDecoder) This only
+  needs to be installed if you want to parse frames from PW-Sat2. See the instructions
+  [here](https://destevez.net/2018/12/decoding-pw-sat2-with-gr-satellites/).
 
 If you want to use any of the realtime image decoders, you also need to install
 [feh](https://feh.finalrewind.org/).
@@ -358,6 +361,9 @@ telemetry packet in the terminal as soon as it receives it.
     which transmits 1k2, 2k4, 4k8 or 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
     scrambler. Currently the decoder only supports 1k2 or 9k6, since it is not clear
     if the other baudrates will be ever used.
+    Telemetry parsing is supported using the external PW-Sat2 software. See
+    [here](https://destevez.net/2018/12/decoding-pw-sat2-with-gr-satellites/) for the
+    instructions.
     For 1k2 telemetry you must use SSB mode, while for 9k6 telemetry you
     must use wide SSB mode (435.275MHz).
   * `shaonian_xing`
