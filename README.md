@@ -323,7 +323,7 @@ telemetry packet in the terminal as soon as it receives it.
     when using Doppler correction with Gpredict, you have to set
     437.200MHz as the downlink frequency in Gpredict.
   * `nayif1`
-    [Nayif-1](https://amsat-uk.org/satellites/communications/nayif-1/),
+    [Nayif-1 (FUNcube-5)](https://amsat-uk.org/satellites/communications/nayif-1/),
     which transmits 1k2 BPSK
     telemetry in the 2m band. It uses the AO-40 FEC protocol, which includes
     block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
