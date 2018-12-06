@@ -72,7 +72,12 @@ class funcube_telemetry_parser(gr.basic_block):
                 print(data.payload)
             if data.header.frametype[:2] == 'WO':
                 chunk = int(data.header.frametype[2:])
-                seq = data.realtime.search('seqnumber')
+                try:
+                    seq = data.realtime.search('seqnumber')
+                except AttributeError:
+                    print 'Unknown realtime format. Unable to get seqnumber.'
+                    print
+                    return
                 remaining = (PAYLOAD_SIZE*chunk) % WHOLEORBIT_SIZE
                 recover = True
                 if chunk != 0:
