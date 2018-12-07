@@ -363,7 +363,10 @@ telemetry packet in the terminal as soon as it receives it.
     if the other baudrates will be ever used.
     Telemetry parsing is supported using the external PW-Sat2 software. See
     [here](https://destevez.net/2018/12/decoding-pw-sat2-with-gr-satellites/) for the
-    instructions.
+    instructions. Uploading to the [PW-Sat2 Telemetry Server](http://radio.pw-sat.pl/) is
+    also supported. See
+    [here](https://destevez.net/2018/12/uploading-pw-sat2-telemetry-with-gr-satellites/)
+    for the instructions.
     For 1k2 telemetry you must use SSB mode, while for 9k6 telemetry you
     must use wide SSB mode (435.275MHz).
   * `shaonian_xing`

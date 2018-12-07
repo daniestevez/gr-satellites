@@ -97,6 +97,7 @@ GR_PYTHON_INSTALL(
     suomi_100_telemetry.py
     suomi_100_telemetry_parser.py
     pwsat2_telemetry_parser.py
+    pwsat2_submitter.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
