@@ -37,5 +37,6 @@ install(FILES
     ao40_syncframe_soft.h
     ao40_deinterleaver_soft.h
     descrambler308.h
+    decode_rs_general.h
     DESTINATION include/satellites
 )

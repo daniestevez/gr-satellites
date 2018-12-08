@@ -18,10 +18,12 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 
-import numpy
+import numpy as np
 from gnuradio import gr
 import pmt
 import array
+
+from eseo_line_decoder import reflect_bytes
 
 class eseo_packet_crop(gr.basic_block):
     """
@@ -54,4 +56,9 @@ class eseo_packet_crop(gr.basic_block):
         if crop < 0:
             return
 
-        self.message_port_pub(pmt.intern('out'),  pmt.cons(pmt.car(msg_pmt), pmt.init_u8vector(crop, packet)))
+        # reverse byte ordering
+        packet = np.frombuffer(packet[:crop], dtype = 'uint8')
+        packet = np.packbits(reflect_bytes(np.unpackbits(packet)))
+        packet = array.array('B', packet)
+
+        self.message_port_pub(pmt.intern('out'),  pmt.cons(pmt.car(msg_pmt), pmt.init_u8vector(len(packet), packet)))

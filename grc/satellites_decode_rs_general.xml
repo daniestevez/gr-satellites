@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<block>
+  <name>Reed-Solomon Decoder (libfec)</name>
+  <key>satellites_decode_rs_general</key>
+  <category>[Satellites]/FEC</category>
+  <import>import satellites</import>
+  <make>satellites.decode_rs_general($gfpoly, $fcr, $prim, $nroots, $verbose)</make>
+
+  <param>
+    <name>Verbose</name>
+    <key>verbose</key>
+    <type>bool</type>
+     <option>
+       <name>Yes</name>
+       <key>True</key>
+     </option>
+     <option>
+       <name>No</name>
+       <key>False</key>
+     </option>
+  </param>
+
+  <param>
+    <name>Finite field generator polynomial</name>
+    <key>gfpoly</key>
+    <type>int</type>
+  </param>
+
+  <param>
+    <name>First consecutive root (index)</name>
+    <key>fcr</key>
+    <type>int</type>
+  </param>
+    
+  <param>
+    <name>Primitive element (index)</name>
+    <key>prim</key>
+    <type>int</type>
+  </param>
+  
+  <param>
+    <name>Number of roots</name>
+    <key>nroots</key>
+    <type>int</type>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

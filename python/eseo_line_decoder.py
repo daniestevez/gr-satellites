@@ -75,7 +75,6 @@ class eseo_line_decoder(gr.basic_block):
 
         # Decode ESEO "line coding"
         packet = np.unpackbits(packet)
-        packet = reflect_bytes(packet)
         packet = destuff(packet)
         if packet is None:
             return

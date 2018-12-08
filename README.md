@@ -234,8 +234,8 @@ telemetry packet in the terminal as soon as it receives it.
   * `eseo`
     [ESEO](https://www.esa.int/Education/ESEO),
     which transmits 9k6 GFSK telemetry in the 70cm band. It uses a custom protocol
-    vaguely similar to AX.25 and a Reed-Solomon code. Reed-Solomon decoding is not
-    supported yet. You must use FM mode to receive this satellite (437.000MHz).
+    vaguely similar to AX.25 with some form of G3RUH scrambling and a
+    (255,239) Reed-Solomon code. You must use FM mode to receive this satellite (437.000MHz).
   * `facsat_1`,
     [FACSAT-1](https://en.wikipedia.org/wiki/FACSAT-1), which transmits
     9k6 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100

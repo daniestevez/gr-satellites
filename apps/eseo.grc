@@ -190,7 +190,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(512, 704)</value>
+      <value>(512, 776)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -319,7 +319,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(504, 852)</value>
+      <value>(504, 892)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -978,7 +978,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1064, 400)</value>
+      <value>(776, 536)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -995,6 +995,65 @@
     <param>
       <key>minoutbuf</key>
       <value>0</value>
+    </param>
+    <param>
+      <key>verbose</key>
+      <value>True</value>
+    </param>
+  </block>
+  <block>
+    <key>satellites_decode_rs_general</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>gfpoly</key>
+      <value>0x11d</value>
+    </param>
+    <param>
+      <key>fcr</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(296, 516)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>satellites_decode_rs_general_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>nroots</key>
+      <value>16</value>
+    </param>
+    <param>
+      <key>prim</key>
+      <value>1</value>
     </param>
     <param>
       <key>verbose</key>
@@ -1021,7 +1080,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(880, 416)</value>
+      <value>(592, 552)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1056,7 +1115,7 @@
     </param>
     <param>
       <key>drop_rs</key>
-      <value>True</value>
+      <value>False</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -1064,7 +1123,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(664, 412)</value>
+      <value>(64, 548)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1103,7 +1162,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(312, 888)</value>
+      <value>(312, 928)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1146,7 +1205,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(64, 604)</value>
+      <value>(64, 676)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1185,7 +1244,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(512, 564)</value>
+      <value>(512, 636)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1314,6 +1373,12 @@
     <sink_key>in</sink_key>
   </connection>
   <connection>
+    <source_block_id>satellites_decode_rs_general_0</source_block_id>
+    <sink_block_id>satellites_eseo_line_decoder_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
     <source_block_id>satellites_eseo_line_decoder_0</source_block_id>
     <sink_block_id>satellites_check_eseo_crc_0</sink_block_id>
     <source_key>out</source_key>
@@ -1321,7 +1386,7 @@
   </connection>
   <connection>
     <source_block_id>satellites_eseo_packet_crop_0</source_block_id>
-    <sink_block_id>satellites_eseo_line_decoder_0</sink_block_id>
+    <sink_block_id>satellites_decode_rs_general_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
