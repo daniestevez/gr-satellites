@@ -98,7 +98,7 @@ class check_cc11xx_crc(gr.basic_block):
         
         packet_out = packet[:-2]
         msg_out = pmt.cons(pmt.car(msg_pmt), pmt.init_u8vector(len(packet_out), packet_out))
-        if crc16(packet):
+        if crc16(packet) == 0:
             if self.verbose:
                 print "CRC OK"
             self.message_port_pub(pmt.intern('ok'), msg_out)
