@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<block>
+  <name>ESEO Packet Crop</name>
+  <key>satellites_eseo_packet_crop</key>
+  <category>[Satellites]/ESEO</category>
+  <import>import satellites</import>
+  <make>satellites.eseo_packet_crop($drop_rs)</make>
+  <param>
+    <name>Drop Reed-Solomon</name>
+    <key>drop_rs</key>
+    <type>bool</type>
+    <option>
+      <name>Yes</name>
+      <key>True</key>
+    </option>
+    <option>
+      <name>No</name>
+      <key>False</key>
+    </option>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

@@ -80,5 +80,8 @@ install(FILES
     satellites_suomi_100_telemetry_parser.xml
     satellites_pwsat2_telemetry_parser.xml
     satellites_pwsat2_submitter.xml
+    satellites_eseo_packet_crop.xml
+    satellites_eseo_line_decoder.xml
+    satellites_check_eseo_crc.xml
     DESTINATION share/gnuradio/grc/blocks
 )

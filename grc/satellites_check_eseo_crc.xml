@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<block>
+  <name>Check ESEO CRC-16</name>
+  <key>satellites_check_eseo_crc</key>
+  <category>[Satellites]/ESEO</category>
+  <import>import satellites</import>
+  <make>satellites.check_eseo_crc($verbose)</make>
+  <param>
+    <name>Verbose</name>
+    <key>verbose</key>
+    <type>bool</type>
+    <option>
+      <name>Yes</name>
+      <key>True</key>
+    </option>
+    <option>
+      <name>No</name>
+      <key>False</key>
+    </option>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>ok</name>
+    <type>message</type>
+    <optional>1</optional>
+  </source>
+  <source>
+    <name>fail</name>
+    <type>message</type>
+    <optional>1</optional>
+  </source>
+</block>
