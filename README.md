@@ -286,6 +286,10 @@ telemetry packet in the terminal as soon as it receives it.
     4k8 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
     transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
     Reed-Solomon code. You must use FM mode to receive this satellite (437.450MHz).
+  * `itasat1`
+    [ITASAT 1](http://www.itasat.ita.br/),
+    which transmits 1k2 AX.25 BPSK telemetry in the 2m band.
+    You must use SSB mode to receive this satellite (145.860MHz).
   * `jy1sat`
     [JY1-Sat (FUNcube-6)](https://amsat-uk.org/tag/jy1sat/),
     which transmits 1k2 BPSK
