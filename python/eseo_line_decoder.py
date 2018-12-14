@@ -81,6 +81,10 @@ class eseo_line_decoder(gr.basic_block):
         packet = descramble(packet)
         packet = nrzi_decode(packet)
         packet = reflect_bytes(packet)
+        # Remove dummy padding
+        cutbits = packet.size % 8
+        if cutbits:
+            packet = packet[:-cutbits]
         packet = np.packbits(packet)
         
         packet = array.array('B', packet)
