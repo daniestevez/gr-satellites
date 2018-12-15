@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<block>
+  <name>FUNcube Telemetry Forwarder</name>
+  <key>satellites_funcube_submit</key>
+  <category>[Satellites]/Misc</category>
+  <import>import satellites</import>
+  <make>satellites.funcube_submit($url, $site_id, $auth_code)</make>
+  <param>
+    <name>URL</name>
+    <key>url</key>
+    <value>http://data.amsat-uk.org</value>
+    <type>string</type>
+  </param>
+  <param>
+    <name>Site Id</name>
+    <key>site_id</key>
+    <type>string</type>
+  </param>
+  <param>
+    <name>Auth Code</name>
+    <key>auth_code</key>
+    <type>string</type>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+</block>

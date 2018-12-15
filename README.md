@@ -62,6 +62,7 @@ Required dependencies:
   * Phil Karn's KA9Q `libfec`. A fork that builds in modern linux systems can be found
     [here](https://github.com/daniestevez/libfec).
   * [construct](https://construct.readthedocs.io/en/latest/), at least version 2.9.
+  * [requests](https://pypi.org/project/requests/2.7.0/).
 
 The following GNUradio out-of-tree modules are only required for the decoder of
 one particular satellite. You may install only the ones you're interested in.
@@ -450,7 +451,7 @@ it useful, I have added `generic_4k8_fsk_ax25`, `generic_9k6_fsk_ax25` and
 radio. For the time being, I do not plan to add a 1k2 AFSK decoder, since it is not
 so easy to implement a good AFSK decoder (a good AGC is a challenge, for instance).
 
-## Submitting telemetry
+## Submitting telemetry to SatNOGS
 
 To sumbit telemetry to the [SatNOGS database](http://db.satnogs.org/) (or
 another SiDS telemetry server), you have to specify your callsign and
@@ -495,6 +496,15 @@ the NORAD ID in [celestrak](http://celestrak.com/satcat/search.asp).
 
 You must start the software TNC first and the run the `.py` script or the `.grc`
 file for `kiss_submitter`.
+
+## Submitting telemetry to FUNcube
+
+The flowgraphs for the different FUNcube satellites/payloads also support
+submitting telemetry to the FUNcube server. To use this, you need to obtain the
+"Site Id" (your username) and "Auth code" from your account on the FUNcube
+server. These parameters can then be indicated by using the `--site-id` and
+`--auth-code` if using the `.py` script or by editing the boxes in the lower
+right part of the flowgraph if using the `.grc` file.
 
 ## Submitting telemetry to HIT severs (LilacSat, BY70-1, etc.)
 

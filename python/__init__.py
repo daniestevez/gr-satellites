@@ -110,3 +110,5 @@ from pwsat2_submitter import pwsat2_submitter
 from eseo_packet_crop import eseo_packet_crop
 from eseo_line_decoder import eseo_line_decoder
 from check_eseo_crc import check_eseo_crc
+
+from funcube_submit import funcube_submit

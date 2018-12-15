@@ -101,6 +101,7 @@ GR_PYTHON_INSTALL(
     eseo_packet_crop.py
     eseo_line_decoder.py
     check_eseo_crc.py
+    funcube_submit.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
