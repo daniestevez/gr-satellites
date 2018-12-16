@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<block>
+  <name>ESEO Telemetry Parser</name>
+  <key>satellites_eseo_telemetry_parser</key>
+  <category>[Satellites]/Telemetry</category>
+  <import>import satellites</import>
+  <make>satellites.eseo_telemetry_parser()</make>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+</block>

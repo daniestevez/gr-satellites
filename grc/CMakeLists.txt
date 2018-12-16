@@ -85,5 +85,6 @@ install(FILES
     satellites_check_eseo_crc.xml
     satellites_decode_rs_general.xml
     satellites_funcube_submit.xml
+    satellites_eseo_telemetry_parser.xml
     DESTINATION share/gnuradio/grc/blocks
 )
