@@ -4,13 +4,28 @@
   <key>satellites_print_timestamp</key>
   <category>[Satellites]/Misc</category>
   <import>import satellites</import>
-  <make>satellites.print_timestamp($fmt)</make>
+  <make>satellites.print_timestamp($fmt, $count)</make>
 
    <param>
     <name>Format</name>
     <key>fmt</key>
     <value>%Y-%m-%d %H:%M:%S</value>
     <type>string</type>
+   </param>
+
+   <param>
+    <name>Packet counter</name>
+    <key>count</key>
+    <value>True</value>
+    <type>bool</type>
+    <option>
+      <name>Yes</name>
+      <key>True</key>
+    </option>
+    <option>
+      <name>No</name>
+      <key>False</key>
+    </option>
   </param>
   
   <sink>
