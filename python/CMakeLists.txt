@@ -104,6 +104,8 @@ GR_PYTHON_INSTALL(
     funcube_submit.py
     eseo_telemetry.py
     eseo_telemetry_parser.py
+    dstar_one_telemetry.py
+    dstar_one_telemetry_parser.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

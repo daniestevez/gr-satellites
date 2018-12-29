@@ -113,3 +113,5 @@ from check_eseo_crc import check_eseo_crc
 from eseo_telemetry_parser import eseo_telemetry_parser
 
 from funcube_submit import funcube_submit
+
+from dstar_one_telemetry_parser import dstar_one_telemetry_parser
