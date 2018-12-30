@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<block>
+  <name>Reflect bytes</name>
+  <key>satellites_reflect_bytes</key>
+  <category>[Satellites]/Misc</category>
+  <import>import satellites</import>
+  <make>satellites.reflect_bytes()</make>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

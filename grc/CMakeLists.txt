@@ -87,5 +87,7 @@ install(FILES
     satellites_funcube_submit.xml
     satellites_eseo_telemetry_parser.xml
     satellites_dstar_one_telemetry_parser.xml
+    satellites_reflect_bytes.xml
+    satellites_check_astrocast_crc.xml
     DESTINATION share/gnuradio/grc/blocks
 )

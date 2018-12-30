@@ -106,6 +106,8 @@ GR_PYTHON_INSTALL(
     eseo_telemetry_parser.py
     dstar_one_telemetry.py
     dstar_one_telemetry_parser.py
+    reflect_bytes.py
+    check_astrocast_crc.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

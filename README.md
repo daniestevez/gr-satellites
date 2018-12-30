@@ -140,6 +140,12 @@ telemetry packet in the terminal as soon as it receives it.
     which
     transmits 9k6 AX.25 BPSK telemetry in the 2m band. You must use wide SSB
     mode to receive this satellite.
+  * `astrocast`
+    [Astrocast 0.1](https://space.skyrocket.de/doc_sdat/astrocast-0.htm), which
+    transmits 1k2 FSK telemetry in the 70cm band. It uses a (somewhat
+    non-standard) FX.25 protocol with a (255,223) CCSDS Reed-Solomon code. This
+    FX.25 protocol is not compatible with standard AX.25. You must use FM mode
+    to receive this satellite (437.150MHz).
   * `aausat_4`
     [AAUSAT-4](http://www.space.aau.dk/aausat4/), which transmits 2k4 or 9k6 GFSK
     telemetry in the 70cm band. It uses the CSP protocol and FEC with an r=1/2, k=7
