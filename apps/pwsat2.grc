@@ -1888,6 +1888,10 @@
       <key>minoutbuf</key>
       <value>0</value>
     </param>
+    <param>
+      <key>count</key>
+      <value>True</value>
+    </param>
   </block>
   <block>
     <key>satellites_pwsat2_submitter</key>
@@ -2003,7 +2007,7 @@
     </param>
     <param>
       <key>noradID</key>
-      <value>99999</value>
+      <value>43814</value>
     </param>
     <param>
       <key>source</key>

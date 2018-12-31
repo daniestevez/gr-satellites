@@ -1415,6 +1415,10 @@
       <key>minoutbuf</key>
       <value>0</value>
     </param>
+    <param>
+      <key>count</key>
+      <value>True</value>
+    </param>
   </block>
   <block>
     <key>satellites_submit</key>
@@ -1432,7 +1436,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1456,7 +1460,7 @@
     </param>
     <param>
       <key>noradID</key>
-      <value>99999</value>
+      <value>43786</value>
     </param>
     <param>
       <key>source</key>
