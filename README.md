@@ -352,6 +352,12 @@ telemetry packet in the terminal as soon as it receives it.
     gr-frontends. For `lilacsat_fcdpp` and `lilacsat_rtlsdr`,
     when using Doppler correction with Gpredict, you have to set
     437.200MHz as the downlink frequency in Gpredict.
+  * `lume1`
+    [LUME-1](https://space.skyrocket.de/doc_sdat/lume-1.htm),
+    which transmits
+    4k8 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
+    transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
+    Reed-Solomon code. You must use FM mode to receive this satellite (437.060MHz).
   * `nayif1`
     [Nayif-1 (FUNcube-5)](https://amsat-uk.org/satellites/communications/nayif-1/),
     which transmits 1k2 BPSK

@@ -89,5 +89,6 @@ install(FILES
     satellites_dstar_one_telemetry_parser.xml
     satellites_reflect_bytes.xml
     satellites_check_astrocast_crc.xml
+    satellites_lume1_telemetry_parser.xml
     DESTINATION share/gnuradio/grc/blocks
 )

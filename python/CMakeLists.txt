@@ -108,6 +108,10 @@ GR_PYTHON_INSTALL(
     dstar_one_telemetry_parser.py
     reflect_bytes.py
     check_astrocast_crc.py
+    lume1_telemetry_parser.py
+    lume1_telemetry.py
+    ecss_pus.py
+    ccsds_space_packet.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

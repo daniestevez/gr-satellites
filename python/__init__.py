@@ -119,3 +119,5 @@ from dstar_one_telemetry_parser import dstar_one_telemetry_parser
 from reflect_bytes import reflect_bytes
 
 from check_astrocast_crc import check_astrocast_crc
+
+from lume1_telemetry_parser import lume1_telemetry_parser

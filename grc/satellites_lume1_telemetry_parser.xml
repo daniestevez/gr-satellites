@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<block>
+  <name>LUME-1 Telemetry Parser</name>
+  <key>satellites_lume1_telemetry_parser</key>
+  <category>[Satellites]/Telemetry</category>
+  <import>import satellites</import>
+  <make>satellites.lume1_telemetry_parser()</make>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+</block>
