@@ -23,6 +23,8 @@ from construct import *
 import ccsds_space_packet
 import ecss_pus
 
+from adapters import LinearAdapter
+
 TMHeader = BitStruct(
     'version' / BitsInteger(2),
     'sc_id' / BitsInteger(10),
@@ -53,7 +55,7 @@ OBC = Struct(
     'curr_flash' / Int16ub,
     'fs_mounted' / Int8ub,
     'ram_image' / Int8sb,
-    'temp' / Int16sb[2],
+    'temp' / LinearAdapter(10, Int16sb)[2],
     'ticks' / Int32ub,
     'mag' / Float32b[3],
     'memfree' / Int32ub,
@@ -68,7 +70,7 @@ OBC = Struct(
     'gpio_sw' / Int8ub,
     'gpio_pwr' / Int8ub,
     'om_state' / Int8ub,
-    'om_sw_version' / Bytes(28),
+    'om_sw_version' / Bytes(32),
     'op_tr_conn' / Int8ub,
     'op_tr_conn_active' / Int8ub)
 
@@ -97,7 +99,7 @@ EPS = Struct(
     'wdtcspc' / Int8ub[2])
 
 TTC = Struct(
-    'temp_brd' / Int16sb,
+    'temp_brd' / LinearAdapter(10, Int16sb),
     'last_rferr' / Int16sb,
     'last_rssi' / Int16sb,
     'tot_rx_bytes' / Int32ub,
@@ -108,7 +110,7 @@ TTC = Struct(
     'tx_bytes' / Int32ub,
     'tot_tx_count' / Int32ub,
     'tx_count' / Int32ub,
-    'temp_pa' / Int16sb,
+    'temp_pa' / LinearAdapter(10, Int16sb),
     'boot_cause' / Int32ub,
     'bgnd_rssi' / Int16sb,
     'active_conf' / Int8ub,
@@ -125,21 +127,15 @@ GSSBEntry = Struct(
 GSSB =  GSSBEntry[4]
 
 TTCGSSB = Struct(
-    'ttc' / TTC,
-    'gssb' / GSSB)
+    'gssb' / GSSB,
+    'ttc' / TTC)
 
 AOCS = Struct(
-    'boot_cause' / Int32ub,
-    'boot_count' / Int16ub,
-    'cur_gssb' / Int16ub[2],
-    'cur_pwm' / Int16ub,
-    'cur_gps' / Int16ub,
-    'cur_wde' / Int16ub,
-    'gps_pos' / Float32b[3],
-    'gps_valid' / Int8ub,
-    'gps_pos_dev' / Float32b[3],
     'extmag_valid' / Int8ub,
     'extmag' / Float32b[3],
+    'gps_pos_dev' / Float32b[3],
+    'gps_pos' / Float32b[3],
+    'gps_valid' / Int8ub,
     'gyro_valid' / Int8ub,
     'gyro' / Float32b[3],
     'mag' / Float32b[3],
@@ -148,7 +144,13 @@ AOCS = Struct(
     'acs_mode' / Int8sb,
     'ads_mode' / Int8sb,
     'ephem_mode' / Int8sb,
-    'bdot_detumb' / Int8ub)
+    'bdot_detumb' / Int8ub,
+    'boot_cause' / Int32ub,
+    'boot_count' / Int16ub,
+    'cur_gssb' / Int16ub[2],
+    'cur_pwm' / Int16ub,
+    'cur_gps' / Int16ub,
+    'cur_wde' / Int16ub)
 
 Temps = Struct(
     'aocs_suns' / Float32b[5],
@@ -157,12 +159,12 @@ Temps = Struct(
     'aocs_fss' / Float32b[5],
     'not_used2' / Float32b[3],
     'aocs_gyro' / Float32b,
-    'aocs' / Int16sb,
+    'aocs' / LinearAdapter(10, Int16sb)[2],
     'eps' / Int16sb[6],
-    'obc' / Int16sb[2],
-    'ttc_brd' / Int16sb,
-    'ttc_pa' / Int16sb,
-    'obc_gyro' / Float32b)
+    'obc' / LinearAdapter(10, Int16sb)[2],
+    'obc_gyro' / Float32b,
+    'ttc_brd' / LinearAdapter(10, Int16sb),
+    'ttc_pa' / LinearAdapter(10, Int16sb))
 
 payloads = {1 : OBC, 2 : EPS, 3 : TTCGSSB, 4 : AOCS, 5: Temps}
 
