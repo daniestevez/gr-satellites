@@ -49,7 +49,7 @@ namespace gr {
      * The private constructor
      */
     decode_rs_general_impl::decode_rs_general_impl(int gfpoly, int fcr, int prim, int nroots, bool verbose)
-      : gr::block("decode_rs",
+      : gr::block("decode_rs_general",
 		  gr::io_signature::make(0, 0, 0),
 		  gr::io_signature::make(0, 0, 0))
     {
