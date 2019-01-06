@@ -89,8 +89,13 @@ namespace gr {
       int frame_len = pmt::length(msg);
       size_t offset(0);
 
-      assert(frame_len <= MAX_FRAME_LEN);
-
+      if (frame_len <= 32 || frame_len > MAX_FRAME_LEN) {
+      	if (d_verbose) {
+	  std::printf("Reed-Solomon decoder: invalid frame length %d\n", frame_len);
+	  return;
+	}
+      }
+      
       memcpy(data, pmt::uniform_vector_elements(msg, offset), frame_len);
 
       if (d_basis == BASIS_CONVENTIONAL) {
