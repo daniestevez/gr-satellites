@@ -123,7 +123,7 @@ telemetry packet in the terminal as soon as it receives it.
   * `sat_1kuns_pf`
     [1KUNS-PF](https://en.wikipedia.org/wiki/1KUNS-PF),
     which transmits
-    1k2 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
+    1k2 or 9k6 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
     transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
     Reed-Solomon code. You must use FM mode to receive this satellite (437.300 MHz).
     1KUNS-PF transmits JPEG images from an onboard
