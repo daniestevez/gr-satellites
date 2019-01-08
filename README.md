@@ -140,6 +140,12 @@ telemetry packet in the terminal as soon as it receives it.
     which
     transmits 9k6 AX.25 BPSK telemetry in the 2m band. You must use wide SSB
     mode to receive this satellite.
+  * `aistechsat2`
+    [AISTECHSAT-2](https://space.skyrocket.de/doc_sdat/aistechsat-1.htm),
+    which transmits
+    4k8 or 9k6 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
+    transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
+    Reed-Solomon code. You must use FM mode to receive this satellite (436.730MHz).
   * `astrocast`
     [Astrocast 0.1](https://space.skyrocket.de/doc_sdat/astrocast-0.htm), which
     transmits 1k2 FSK telemetry in the 70cm band. It uses a (somewhat
