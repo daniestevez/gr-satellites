@@ -76,6 +76,7 @@ one particular satellite. You may install only the ones you're interested in.
   * [PW-Sat2 FramePayloadDecoder](https://github.com/PW-Sat2/FramePayloadDecoder) This only
   needs to be installed if you want to parse frames from PW-Sat2. See the instructions
   [here](https://destevez.net/2018/12/decoding-pw-sat2-with-gr-satellites/).
+  * [gr-equisat_decoder](https://github.com/BrownSpaceEngineering/gr-equisat_decoder) EQUiSat decoder blocks, telemetry parser, and submitter.
 
 If you want to use any of the realtime image decoders, you also need to install
 [feh](https://feh.finalrewind.org/).
@@ -253,6 +254,14 @@ telemetry packet in the terminal as soon as it receives it.
     error detection.
     The decoder requires the [beesat-sdr](https://github.com/daniestevez/beesat-sdr) OOT module.
     You must use FM mode to receive this satellite (435.700MHz).
+  * `equisat`
+    [EQUiSat](http://brownspace.org/equisat), which transmits 9k6 baud 4FSK
+    telemetry in the 70cm band. It uses a double-interleaving encoding and a
+    (255,223) Reed-Solomon code. 
+    The decoder requires the [gr-equisat_decoder](https://github.com/BrownSpaceEngineering/gr-equisat_decoder) OOT module.
+    You must use FM mode to receive this satellite (435.525MHz).
+    For more info see [brownspace.org/receiving-equisat](http://brownspace.org/receiving-equisat),
+    and see below for how to submit to the telemetry database.
   * `eseo`
     [ESEO](https://www.esa.int/Education/ESEO),
     which transmits 9k6 GFSK telemetry in the 70cm band. It uses a custom protocol
@@ -543,6 +552,21 @@ the lower right corner of the flowgraph). This block is disabled by default
 because when it is enabled the flowgraph won't run unless `proxy_publish.py` is
 running. Also see [this information](http://lilacsat.hit.edu.cn/?p=559) about
 how to set the proper ports in `proxy_publish.py`.
+
+## Submitting telemetry from EQUiSat
+
+The EQUiSat flowgraph also supports submitting telemetry to the Brown Space 
+Engineering data server. To use this, you need to obtain an API key from the
+server. This can be done simply with the following command:
+
+        curl -s -X POST http://api.brownspace.org/equisat/generate-key
+
+The API key returned from this can then be specified using the `--api-key` parameter 
+if using the `.py` script or by editing the box in the upper middle part of the 
+flowgraph if using the `.grc` file.
+
+You can also specify similar submit metadata as the SatNOGS submitter (above), 
+such as your callsign and location. See `python equisat.py --help` for all the options.
 
 ## Hints for receiving different modes
 
