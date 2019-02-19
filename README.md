@@ -410,7 +410,7 @@ telemetry packet in the terminal as soon as it receives it.
     for the instructions.
     For 1k2 telemetry you must use SSB mode, while for 9k6 telemetry you
     must use wide SSB mode (435.275MHz).
-  * `qo-100`
+  * `qo100`
     [QO-100 (Es'hail 2 AMSAT Phase
     4-A)](https://amsat-dl.org/eshail-2-amsat-phase-4-a),
     which transmits a 400baud BPSK beacon in the 3cm band. The beacon is relayed
