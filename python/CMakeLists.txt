@@ -112,6 +112,7 @@ GR_PYTHON_INSTALL(
     lume1_telemetry.py
     ecss_pus.py
     ccsds_space_packet.py
+    qo100_telemetry_print.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

@@ -90,5 +90,6 @@ install(FILES
     satellites_reflect_bytes.xml
     satellites_check_astrocast_crc.xml
     satellites_lume1_telemetry_parser.xml
+    satellites_qo100_telemetry_print.xml
     DESTINATION share/gnuradio/grc/blocks
 )

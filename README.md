@@ -410,6 +410,13 @@ telemetry packet in the terminal as soon as it receives it.
     for the instructions.
     For 1k2 telemetry you must use SSB mode, while for 9k6 telemetry you
     must use wide SSB mode (435.275MHz).
+  * `qo-100`
+    [QO-100 (Es'hail 2 AMSAT Phase
+    4-A)](https://amsat-dl.org/eshail-2-amsat-phase-4-a),
+    which transmits a 400baud BPSK beacon in the 3cm band. The beacon is relayed
+    from the control centre in Qatar via a 13cm/3cm linear transponder on the satellite.
+    The format of the telemetry is the same as that of the AO-40 uncoded
+    beacon. You must use SSB mode to receive this satellite (10489.800MHz).
   * `reaktor_hello_world`
     [Reaktor Hello World](https://reaktorspace.com/reaktor-hello-world/),
     which transmits 9k6 GFSK telemetry in the 70cm band. It uses a Texas
