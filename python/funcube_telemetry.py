@@ -413,11 +413,13 @@ Frame = Struct(
             0x08 : RealTimeNayif1,
             }, default = Bytes(54)),
         }),
-    'payload' / Switch(lambda c: c.header.frametype[:2], {
-        'WO' : Bytes(200),
-        'HR' : HRPayload,
-        'FM' : FitterMessage,
-        }),
+    'payload' / If(type(this.header.frametype) is EnumIntegerString,
+                   Switch(lambda c: c.header.frametype[:2], {
+                    'WO' : Bytes(200),
+                    'HR' : HRPayload,
+                    'FM' : FitterMessage,
+                    })
+                ),
     )
 
 def WholeOrbit(satid):
