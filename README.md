@@ -147,11 +147,13 @@ telemetry packet in the terminal as soon as it receives it.
     4k8 or 9k6 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
     transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
     Reed-Solomon code. You must use FM mode to receive this satellite (436.730MHz).
-  * `astrocast`
+  * `astrocast`, `astrocast_old`
     [Astrocast 0.1](https://space.skyrocket.de/doc_sdat/astrocast-0.htm), which
     transmits 1k2 FSK telemetry in the 70cm band. It uses a (somewhat
-    non-standard) FX.25 protocol with a (255,223) CCSDS Reed-Solomon code. This
-    FX.25 protocol is not compatible with standard AX.25. You must use FM mode
+    non-standard) FX.25 protocol with a (255,223) CCSDS Reed-Solomon code.
+    The `astrocast_old` decoder is for the protocol variant used until 2019-02-13, which
+    wast not completely compatible with AX.25.
+    You must use FM mode
     to receive this satellite (437.150MHz).
   * `aausat_4`
     [AAUSAT-4](http://www.space.aau.dk/aausat4/), which transmits 2k4 or 9k6 GFSK
