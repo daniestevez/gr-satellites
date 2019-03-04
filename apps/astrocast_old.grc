@@ -46,7 +46,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>astrocast</value>
+      <value>astrocast_old</value>
     </param>
     <param>
       <key>max_nouts</key>
