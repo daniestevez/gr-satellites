@@ -38,5 +38,6 @@ install(FILES
     ao40_deinterleaver_soft.h
     descrambler308.h
     decode_rs_general.h
+    decode_rs_interleaved.h
     DESTINATION include/satellites
 )
