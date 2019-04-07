@@ -420,8 +420,9 @@ telemetry packet in the terminal as soon as it receives it.
     4-A)](https://amsat-dl.org/eshail-2-amsat-phase-4-a),
     which transmits a 400baud BPSK beacon in the 3cm band. The beacon is relayed
     from the control centre in Qatar via a 13cm/3cm linear transponder on the satellite.
-    The format of the telemetry is the same as that of the AO-40 uncoded
-    beacon. You must use SSB mode to receive this satellite (10489.800MHz).
+    The format of the telemetry is the same as that of the AO-40
+    beacon. Uncoded and FEC frames are sent alternatively.
+    You must use SSB mode to receive this satellite (10489.800MHz).
   * `reaktor_hello_world`
     [Reaktor Hello World](https://reaktorspace.com/reaktor-hello-world/),
     which transmits 9k6 GFSK telemetry in the 70cm band. It uses a Texas
