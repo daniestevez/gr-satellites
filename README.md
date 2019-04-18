@@ -147,6 +147,15 @@ telemetry packet in the terminal as soon as it receives it.
     4k8 or 9k6 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
     transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
     Reed-Solomon code. You must use FM mode to receive this satellite (436.730MHz).
+  * `aistechsat3`
+    [AISTECHSAT-3](https://space.skyrocket.de/doc_sdat/aistechsat-1.htm),
+    which transmits
+    4k8 or 9k6 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
+    transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
+    Reed-Solomon code. The telemetry format is
+    [documented](https://www.amsat-ea.org/app/download/11302778/Aistechsat-3+TLM+codes%2C+modulation+and+format+v1.0_AMSAT_EA.pdf)
+    but a telemetry decoder has not been implemented yet.
+    You must use FM mode to receive this satellite (436.730MHz).
   * `astrocast`, `astrocast_old`, `astrocast_9k6`
     [Astrocast 0.1](https://space.skyrocket.de/doc_sdat/astrocast-0.htm), which
     transmits 1k2 FSK telemetry in the 70cm band. It uses
