@@ -340,8 +340,9 @@ telemetry packet in the terminal as soon as it receives it.
     which transmits 1k2 BPSK
     telemetry in the 2m band. It uses the AO-40 FEC protocol, which includes
     block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
-    two interleaved (160,128) Reed-Solomon codes. You must use SSB mode to
-    receive this satellite (145.840MHz).
+    two interleaved (160,128) Reed-Solomon codes.
+    Decoding SSDV images is supported. See [this post](https://destevez.net/2019/04/decoding-ssdv-from-jy1sat/).
+    You must use SSB mode to receive this satellite (145.840MHz).
   * `k2sat_image`
     [K2SAT](http://www.amsatuk.me.uk/iaru/finished_detail.php?serialnum=552),
     which transmits images using QPSK in the 13cm band. See
