@@ -388,6 +388,11 @@ telemetry packet in the terminal as soon as it receives it.
     4k8 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
     transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
     Reed-Solomon code. You must use FM mode to receive this satellite (437.060MHz).
+  * `mysat1`
+    [MYSAT 1](https://space.skyrocket.de/doc_sdat/mysat-1.htm),
+    which transmits 1k2 or 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
+    scrambler. For 1k2 telemetry you must use SSB mode, while for 9k6 telemetry you
+    must use wide SSB mode (435.77MHz).
   * `nayif1`
     [Nayif-1 (FUNcube-5)](https://amsat-uk.org/satellites/communications/nayif-1/),
     which transmits 1k2 BPSK
