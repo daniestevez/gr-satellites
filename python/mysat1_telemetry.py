@@ -24,6 +24,9 @@ from adapters import UNIXTimestampAdapter
 
 Timestamp = UNIXTimestampAdapter(Int32ub)
 
+Header = Struct(
+'header' / Int8ub[12])
+
 Callsign = Struct(
     'callsign' /  Int8ub[5])
 
@@ -59,8 +62,8 @@ Solar_Panels = Struct(
     'solar_panels_temp' / Int8ub[6])
 
 OBC_Voltages = Struct(
-'obc_3.3_voltage' / Int8ub,
-'obc_5.0_voltage' / Int8ub)
+'obc_3v3_voltage' / Int8ub,
+'obc_5v0_voltage' / Int8ub)
 
 TRXVU_Voltage = Struct(
 'trxvu_voltage' / Int8ub)
@@ -68,7 +71,7 @@ TRXVU_Voltage = Struct(
 EPS_Batt_Voltage = Struct(
 'eps_batt_voltage' / Int8ub)
 
-OBC_Current = Struc(
+OBC_Current = Struct(
 'obc_5.0_current' / Int16ub)
 
 EPS_Currents = Struct(
@@ -76,9 +79,10 @@ EPS_Currents = Struct(
 'eps_total_system_current' / Int16ub)
 
 Beacon0 = Struct(
+    'header' / Header,
     'callsign' / Callsign,
     'obc' / OBC,
-    'gyro' / Gyro
+    'gyro' / Gyro,
     'timestamp' / Timestamp_Struct,
     'obc_temp' / OBC_Temp,
     'eps_temp' / EPS_Temp,

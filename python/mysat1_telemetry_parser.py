@@ -40,6 +40,7 @@ class mysat1_telemetry_parser(gr.basic_block):
 
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
+        # print (msg)
         if not pmt.is_u8vector(msg):
             print "[ERROR] Received invalid message type. Expected u8vector"
             return
@@ -50,4 +51,18 @@ class mysat1_telemetry_parser(gr.basic_block):
         except:
             print "Could not decode telemetry beacon"
             return
+        data.obc_temp.obc_temp -= 128
+        data.obc_temp.obc_daughter_board_temp -= 128
+        data.eps_temp.eps_board_temp -= 128
+        data.eps_temp.eps_battery_temp -= 128
+        data.ants.ants_temp -= 128
+        data.trxvu_temp.trxvu_temp -= 128
+        data.adcs.adcs_temp -= 128
+        for i in range(len(data.solar_panels.solar_panels_temp)):
+            data.solar_panels.solar_panels_temp[i] -= 128
+        data.obc_voltages.obc_3v3_voltage /= 10.0
+        data.obc_voltages.obc_5v0_voltage /= 10.0
+        data.eps_batt_voltage.eps_batt_voltage /= 10.0
+        data.trxvu_voltage.trxvu_voltage /= 10
         print(data)
+        

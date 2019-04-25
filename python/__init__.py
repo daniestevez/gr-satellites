@@ -104,6 +104,8 @@ from sat_3cat_1_telemetry_parser import sat_3cat_1_telemetry_parser
 
 from suomi_100_telemetry_parser import suomi_100_telemetry_parser
 
+from mysat1_telemetry_parser import mysat1_telemetry_parser
+
 from pwsat2_telemetry_parser import pwsat2_telemetry_parser
 from pwsat2_submitter import pwsat2_submitter
 
