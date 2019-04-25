@@ -24,9 +24,6 @@ from adapters import UNIXTimestampAdapter
 
 Timestamp = UNIXTimestampAdapter(Int32ub)
 
-Header = Struct(
-'header' / Int8ub[12])
-
 Callsign = Struct(
     'callsign' /  Int8ub[5])
 
@@ -79,7 +76,6 @@ EPS_Currents = Struct(
 'eps_total_system_current' / Int16ub)
 
 Beacon0 = Struct(
-    'header' / Header,
     'callsign' / Callsign,
     'obc' / OBC,
     'gyro' / Gyro,

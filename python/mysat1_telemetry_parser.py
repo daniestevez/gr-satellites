@@ -47,7 +47,7 @@ class mysat1_telemetry_parser(gr.basic_block):
         packet = bytearray(pmt.u8vector_elements(msg))
 
         try:
-            data = mysat1_telemetry.Beacon.parse(packet[4:])
+            data = mysat1_telemetry.Beacon.parse(packet[16:])
         except:
             print "Could not decode telemetry beacon"
             return
@@ -63,6 +63,6 @@ class mysat1_telemetry_parser(gr.basic_block):
         data.obc_voltages.obc_3v3_voltage /= 10.0
         data.obc_voltages.obc_5v0_voltage /= 10.0
         data.eps_batt_voltage.eps_batt_voltage /= 10.0
-        data.trxvu_voltage.trxvu_voltage /= 10
+        data.trxvu_voltage.trxvu_voltage /= 10.0
         print(data)
         
