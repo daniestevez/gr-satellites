@@ -20,7 +20,7 @@
 # 
 
 from construct import *
-from adapters import UNIXTimestampAdapter
+from adapters import *
 
 Timestamp = UNIXTimestampAdapter(Int32ub)
 
@@ -39,34 +39,34 @@ Timestamp_Struct = Struct(
     'timestamp' / Timestamp)
 
 OBC_Temp = Struct(
-    'obc_temp' / Int8ub,
-    'obc_daughter_board_temp' / Int8ub)
+    'obc_temp' / AffineAdapter(1, 128, Int8ub),
+    'obc_daughter_board_temp' / AffineAdapter(1, 128, Int8ub))
 
 EPS_Temp = Struct(
-    'eps_battery_temp' / Int8ub,
-    'eps_board_temp' / Int8ub)
+    'eps_battery_temp' / AffineAdapter(1, 128, Int8ub),
+    'eps_board_temp' / AffineAdapter(1, 128, Int8ub))
 
 Ants = Struct(
-    'ants_temp' / Int8ub)
+    'ants_temp' / AffineAdapter(1, 128, Int8ub))
 
 TRXVU_Temp = Struct(
-    'trxvu_temp' / Int8ub)
+    'trxvu_temp' / AffineAdapter(1, 128, Int8ub))
 
 ADCS = Struct(
-    'adcs_temp' / Int8ub)
+    'adcs_temp' / AffineAdapter(1, 128, Int8ub))
 
 Solar_Panels = Struct(
-    'solar_panels_temp' / Int8ub[6])
+    'solar_panels_temp' / AffineAdapter(1, 128, Int8ub)[6])
 
 OBC_Voltages = Struct(
-'obc_3v3_voltage' / Int8ub,
-'obc_5v0_voltage' / Int8ub)
+'obc_3v3_voltage' / LinearAdapter(10.0, Int8ub),
+'obc_5v0_voltage' / LinearAdapter(10.0, Int8ub))
 
 TRXVU_Voltage = Struct(
-'trxvu_voltage' / Int8ub)
+'trxvu_voltage' / LinearAdapter(10.0, Int8ub))
 
 EPS_Batt_Voltage = Struct(
-'eps_batt_voltage' / Int8ub)
+'eps_batt_voltage' / LinearAdapter(10.0, Int8ub))
 
 OBC_Current = Struct(
 'obc_5.0_current' / Int16ub)

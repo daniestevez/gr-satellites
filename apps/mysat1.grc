@@ -459,11 +459,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>True</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1072, 696)</value>
+      <value>(1040, 704)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -612,7 +612,7 @@
     </param>
     <param>
       <key>ipaddr</key>
-      <value></value>
+      <value>ip</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -636,7 +636,7 @@
     </param>
     <param>
       <key>port</key>
-      <value>3000</value>
+      <value>port</value>
     </param>
     <param>
       <key>vlen</key>
@@ -706,7 +706,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(240, 656)</value>
+      <value>(264, 656)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -941,7 +941,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(936, 272)</value>
+      <value>(936, 288)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1629,7 +1629,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(368, 888)</value>
+      <value>(352, 920)</value>
     </param>
     <param>
       <key>_rotation</key>
