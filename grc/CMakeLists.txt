@@ -94,5 +94,6 @@ install(FILES
     satellites_qo100_telemetry_print.xml
     satellites_decode_rs_interleaved.xml
     satellites_swiatowid_packet_crop.xml
+    satellites_check_swiatowid_crc.xml
     DESTINATION share/gnuradio/grc/blocks
 )
