@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<block>
+  <name>Swiatowid packet crop</name>
+  <key>satellites_swiatowid_packet_crop</key>
+  <category>[Satellites]/Packet</category>
+  <import>import satellites</import>
+  <make>satellites.swiatowid_packet_crop()</make>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

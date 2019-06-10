@@ -125,3 +125,5 @@ from check_astrocast_crc import check_astrocast_crc
 from lume1_telemetry_parser import lume1_telemetry_parser
 
 from qo100_telemetry_print import qo100_telemetry_print
+
+from swiatowid_packet_crop import swiatowid_packet_crop
