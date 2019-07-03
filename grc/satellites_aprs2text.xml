@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<block>
+  <name>APRS 2 text</name>
+  <key>satellites_aprs2text</key>
+  <category>[Satellites]/Packet</category>
+  <import>import satellites</import>
+  <make>satellites.aprs2text()</make>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

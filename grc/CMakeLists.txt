@@ -93,5 +93,9 @@ install(FILES
     satellites_lume1_telemetry_parser.xml
     satellites_qo100_telemetry_print.xml
     satellites_decode_rs_interleaved.xml
+    satellites_swiatowid_packet_crop.xml
+    satellites_check_swiatowid_crc.xml
+    satellites_packet_add_timestamp.xml
+    satellites_aprs2text.xml
     DESTINATION share/gnuradio/grc/blocks
 )

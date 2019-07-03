@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<block>
+  <name>Packet add timestamp</name>
+  <key>satellites_packet_add_timestamp</key>
+  <category>[Satellites]/Packet</category>
+  <import>import satellites</import>
+  <make>satellites.packet_add_timestamp($header)</make>
+
+  <param>
+    <name>Header</name>
+    <key>header</key>
+    <type>string</type>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

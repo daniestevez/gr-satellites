@@ -125,3 +125,9 @@ from check_astrocast_crc import check_astrocast_crc
 from lume1_telemetry_parser import lume1_telemetry_parser
 
 from qo100_telemetry_print import qo100_telemetry_print
+
+from swiatowid_packet_crop import swiatowid_packet_crop
+from check_swiatowid_crc import check_swiatowid_crc
+
+from packet_add_timestamp import packet_add_timestamp
+from aprs2text import aprs2text
