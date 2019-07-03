@@ -1,13 +1,20 @@
 # gr-satellites
-GNU Radio decoders for several Amateur satellites.
+GNU Radio decoders for Amateur satellites.
 
-This repository is a collection of GNU Radio decoders for the telemetry of
-several satellites. The decoders don't need a graphical interface to run, so
-they can be used in an embedded or remote computer. The decoders are designed to
-run in real time and print the telemetry packets to the terminal as they are
-received. Optionally, the telemetry packets can be uploaded in real time to the
-[SatNOGS database](http://db.satnogs.org/) or any other telemetry server
-that implements the SiDS (Simple Downlink Sharing Convention) protocol.
+gr-satellites is a GNU Radio out-of-tree module encompassing a collection of
+telemetry decoders that supports many different Amateur satellites. This
+open-source project started in 2015 with the goal of providing telemetry
+decoders for all the satellites that transmit on the Amateur radio bands. It
+suports most popular protocols, such as AX.25, the GOMspace NanoCom U482C and
+AX100 modems, an important part of the CCSDS stack, the AO-40 protocol used in
+the FUNcube satellites, and several ad-hoc protocols used in other satellites.
+
+The decoders don't need a graphical interface to run, so they can be used in an
+embedded or remote computer. They are designed to run in real time and
+print the telemetry packets to the terminal as they are received. Optionally,
+the telemetry packets can be uploaded in real time to the [SatNOGS
+database](http://db.satnogs.org/) or any other telemetry server that implements
+the SiDS (Simple Downlink Sharing Convention) protocol.
 
 It is also possible to use the decoder with a recording (audio WAV or IQ file),
 in case that the telemetry wasn't processed in real time. To do this, one has to
@@ -452,6 +459,13 @@ telemetry packet in the terminal as soon as it receives it.
     which transmit 1k2 AFSK telemetry in the 70cm band. They use a custom coding
     with BCH FEC and interleaving. You must use FM mode to receive these
     satellites (435.950MHz).
+  * `spooqy_1`
+    [SpooQy-1](https://sites.google.com/site/phylej/projects-1/spooqy-1),
+    which transmits
+    9k6 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
+    transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
+    Reed-Solomon code. The telemetry format is unknown. You must use FM mode to
+    receive these satellites (436.200MHz).
   * `suomi_100`
     [Suomi 100](http://www.suomi100satelliitti.fi/),
     which transmits
