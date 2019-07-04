@@ -21,6 +21,10 @@
 
 from construct import *
 
+'''
+Construct for the Primary Header of the CCSDS Space Packet ( CCSDS 133.0-B-1 )
+'''
+
 PrimaryHeader = BitStruct(
     'version' / BitsInteger(3),
     'type' / Flag,
