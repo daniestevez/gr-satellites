@@ -526,8 +526,10 @@ modes and there are already very good decoders for packet radio such as
 [direwolf](https://github.com/wb2osz/direwolf). However, in case someone finds
 it useful, I have added `generic_4k8_fsk_ax25`, `generic_9k6_fsk_ax25` and
 `generic_19k2_fsk_ax25` generic decoders for 4k8, 9k6 and 19k2 FSK AX.25 packet
-radio. For the time being, I do not plan to add a 1k2 AFSK decoder, since it is not
-so easy to implement a good AFSK decoder (a good AGC is a challenge, for instance).
+radio. Additionally, there is `generic_1k2_afsk_ax25` for 1k2 AFSK AX.25 packet
+radio. Note that the performance of the AFSK decoder may not be optimal due to
+improvable aspects in the signal processing (designing a good AGC is a
+challenge, for instance).
 
 ## Submitting telemetry to SatNOGS
 
