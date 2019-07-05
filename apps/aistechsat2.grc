@@ -1217,61 +1217,6 @@
     </param>
   </block>
   <block>
-    <key>satellites_submit</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(592, 796)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>satellites_submit_0</value>
-    </param>
-    <param>
-      <key>latitude</key>
-      <value>latitude</value>
-    </param>
-    <param>
-      <key>longitude</key>
-      <value>longitude</value>
-    </param>
-    <param>
-      <key>noradID</key>
-      <value>43768</value>
-    </param>
-    <param>
-      <key>source</key>
-      <value>callsign</value>
-    </param>
-    <param>
-      <key>tstamp</key>
-      <value>recstart</value>
-    </param>
-    <param>
-      <key>url</key>
-      <value>https://db.satnogs.org/api/telemetry/</value>
-    </param>
-  </block>
-  <block>
     <key>satellites_u482c_decode</key>
     <param>
       <key>alias</key>
@@ -1558,12 +1503,6 @@
   <connection>
     <source_block_id>satellites_print_timestamp_0</source_block_id>
     <sink_block_id>satellites_print_header_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>satellites_print_timestamp_0</source_block_id>
-    <sink_block_id>satellites_submit_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
