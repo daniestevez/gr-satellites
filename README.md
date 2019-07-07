@@ -257,6 +257,12 @@ telemetry packet in the terminal as soon as it receives it.
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
     U482C transceiver, with the CSP protocol and a (255,223) Reed-Solomon code.
     It also uses a CCSDS scrambler. You must use FM mode to receive this satellite (437.240MHz).
+  * `delphini1`
+    [Delphini-1](https://projects.au.dk/ausat/delphini1/),
+    which transmits
+    4k8 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
+    transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
+    Reed-Solomon code. You must use FM mode to receive this satellite (437.500MHz).
   * `dsat`
     [D-SAT](https://www.dsat.space/) *(inactive)*,
     which transmits 4k8 AF GMSK telemetry in
