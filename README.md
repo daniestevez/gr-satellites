@@ -275,6 +275,10 @@ telemetry packet in the terminal as soon as it receives it.
     error detection.
     The decoder requires the [beesat-sdr](https://github.com/daniestevez/beesat-sdr) OOT module.
     You must use FM mode to receive this satellite (435.700MHz).
+  * `entrysat`
+    [EntrySat](https://websites.isae-supaero.fr/entrysat/),
+    which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
+    scrambler. You must use wide SSB mode to receive this satellite (436.950MHz).
   * `equisat`
     [EQUiSat](http://brownspace.org/equisat), which transmits 9k6 baud 4FSK
     telemetry in the 70cm band. It uses a double-interleaving encoding and a
