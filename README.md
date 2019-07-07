@@ -476,6 +476,13 @@ telemetry packet in the terminal as soon as it receives it.
     which transmit 1k2 AFSK telemetry in the 70cm band. They use a custom coding
     with BCH FEC and interleaving. You must use FM mode to receive these
     satellites (435.950MHz).
+  * `sokrat`
+    [Sokrat](https://space.skyrocket.de/doc_sdat/sokrat.htm),
+    which transmits 4k8 FSK telemetry in the 70cm band. It uses the Mobitex
+    protocol, which includes FEC with a (12,8,3) linear code and CRC-16CCITT for
+    error detection.
+    The decoder requires the [beesat-sdr](https://github.com/daniestevez/beesat-sdr) OOT module.
+    You must use FM mode to receive this satellite (436.000MHz).
   * `spooqy_1`
     [SpooQy-1](https://sites.google.com/site/phylej/projects-1/spooqy-1),
     which transmits
