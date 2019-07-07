@@ -40,6 +40,7 @@ class beesat_classifier(gr.basic_block):
         self.message_port_register_out(pmt.intern('BEESAT-1'))
         self.message_port_register_out(pmt.intern('BEESAT-2'))
         self.message_port_register_out(pmt.intern('BEESAT-4'))
+        self.message_port_register_out(pmt.intern('BEESAT-9'))
         self.message_port_register_out(pmt.intern('TECHNOSAT'))
 
     def handle_msg(self, msg_pmt):
@@ -58,6 +59,8 @@ class beesat_classifier(gr.basic_block):
             satellite = 'BEESAT-2'
         elif callsign == 'DP0BEH':
             satellite = 'BEESAT-4'
+        elif callsign == 'DP0BEM':
+            satellite = 'BEESAT-9'
         elif callsign == 'DP0TBA':
             satellite = 'TECHNOSAT'
 

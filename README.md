@@ -235,7 +235,7 @@ telemetry packet in the terminal as soon as it receives it.
     convolutional code and a (255,223) Reed-Solomon code. It also uses a CCSDS
     scrambler. You must use FM mode to receive this satellite (436.330MHz).
   * `beesat`
-    [BEESAT-1,-2 and -4](http://space.skyrocket.de/doc_sdat/beesat.htm)
+    [BEESAT-1,-2,-4 and -9](http://space.skyrocket.de/doc_sdat/beesat.htm)
     and [TECHNOSAT](https://directory.eoportal.org/web/eoportal/satellite-missions/t/technosat),
     which transmit 4k8 FSK telemetry in the 70cm band. They use the Mobitex-NX
     protocol, which includes FEC with a (12,8,3) linear code and CRC-16CCITT for
