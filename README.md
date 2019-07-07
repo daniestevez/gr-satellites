@@ -163,6 +163,13 @@ telemetry packet in the terminal as soon as it receives it.
     [documented](https://www.amsat-ea.org/app/download/11302778/Aistechsat-3+TLM+codes%2C+modulation+and+format+v1.0_AMSAT_EA.pdf)
     but a telemetry decoder has not been implemented yet.
     You must use FM mode to receive this satellite (436.730MHz).
+  * `amgu_1`
+    [AmGU-1](https://space.skyrocket.de/doc_sdat/amgu-1.htm),
+    which transmits 4k8 FSK telemetry in the 70cm band. It uses the Mobitex
+    protocol, which includes FEC with a (12,8,3) linear code and CRC-16CCITT for
+    error detection.
+    The decoder requires the [beesat-sdr](https://github.com/daniestevez/beesat-sdr) OOT module.
+    You must use FM mode to receive this satellite (436.250MHz).
   * `astrocast`, `astrocast_old`, `astrocast_9k6`
     [Astrocast 0.1](https://space.skyrocket.de/doc_sdat/astrocast-0.htm), which
     transmits 1k2 FSK telemetry in the 70cm band. It uses
