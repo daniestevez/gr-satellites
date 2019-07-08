@@ -19,17 +19,19 @@
 # Boston, MA 02110-1301, USA.
 # 
 
-from construct import *
-
 '''
 Construct for the Primary Header of the CCSDS Space Packet ( CCSDS 133.0-B-1 )
 '''
 
-PrimaryHeader = BitStruct(
-    'version' / BitsInteger(3),
-    'type' / Flag,
-    'sec_hdr_flag' / Flag,
-    'apid' / BitsInteger(11),
-    'sequence_flags' / BitsInteger(2),
-    'seq_count' / BitsInteger(14),
-    'data_length' / BitsInteger(16))
+from construct import *
+
+PrimaryHeader = BitStruct('ccsds_version' / BitsInteger(3),
+                          'packet_type' / Flag,
+                          'secondary_header_flag' / Flag,
+                          'process_id' / BitsInteger(4),
+                          'level_flag' / Flag,
+                          'payload_flag' / Flag,
+                          'packet_category' / BitsInteger(5),
+                          'sequence_flag' / BitsInteger(2),
+                          'packet_id' / BitsInteger(14),
+                          'data_length' / BitsInteger(16))
