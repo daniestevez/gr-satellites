@@ -70,6 +70,7 @@ Required dependencies:
     [here](https://github.com/daniestevez/libfec).
   * [construct](https://construct.readthedocs.io/en/latest/), at least version 2.9.
   * [requests](https://pypi.org/project/requests/2.7.0/).
+  * [swig](http://www.swig.org/)
 
 The following GNUradio out-of-tree modules are only required for the decoder of
 one particular satellite. You may install only the ones you're interested in.
