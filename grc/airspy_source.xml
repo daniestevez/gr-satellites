@@ -1,0 +1,292 @@
+<?xml version="1.0"?>
+<block>
+  <name>AirSpy osmocom Source</name>
+  <key>airspy_osmosdr_source</key>
+  <category>Sources</category>
+  <throttle>1</throttle>
+  <import>import osmosdr</import>
+  <import>import time</import>
+  <make>osmosdr.source( args= $args )
+self.$(id).set_sample_rate($sample_rate)
+self.$(id).set_center_freq($freq0, 0)
+self.$(id).set_freq_corr($corr0, 0)
+self.$(id).set_dc_offset_mode($dc_offset_mode0, 0)
+self.$(id).set_iq_balance_mode($iq_balance_mode0, 0)
+self.$(id).set_gain_mode($gain_mode0, 0)
+self.$(id).set_lna_gain($lna_gain0, 0)
+self.$(id).set_mix_gain($mix_gain0, 0)
+self.$(id).set_if_gain($if_gain0, 0)
+self.$(id).set_antenna($ant0, 0)
+self.$(id).set_bandwidth($bw0, 0)
+  </make>
+  <callback>set_sample_rate($sample_rate)</callback>
+  <callback>set_center_freq($freq0, 0)</callback>
+  <callback>set_freq_corr($corr0, 0)</callback>
+  <callback>set_dc_offset_mode($dc_offset_mode0, 0)</callback>
+  <callback>set_iq_balance_mode($iq_balance_mode0, 0)</callback>
+  <callback>set_gain_mode($gain_mode0, 0)</callback>
+  <callback>set_lna_gain($lna_gain0, 0)</callback>
+  <callback>set_mix_gain($mix_gain0, 0)</callback>
+  <callback>set_if_gain($if_gain0, 0)</callback>
+  <callback>set_antenna($ant0, 0)</callback>
+  <callback>set_bandwidth($bw0, 0)</callback>
+  <param>
+    <name>Output Type</name>
+    <key>type</key>
+    <type>enum</type>
+    <option>
+      <name>Complex float32</name>
+      <key>fc32</key>
+      <opt>type:fc32</opt>
+    </option>
+  </param>
+  <param>
+    <name>Device Arguments</name>
+    <key>args</key>
+    <value></value>
+    <type>string</type>
+    <hide>
+      #if $args()
+        none
+      #else
+        part
+      #end if
+    </hide>
+  </param>
+  <param>
+    <name>Sample Rate (sps)</name>
+    <key>sample_rate</key>
+    <value>samp_rate</value>
+    <type>real</type>
+  </param>
+  
+  <param>
+    <name>Ch0: Frequency (Hz)</name>
+    <key>freq0</key>
+    <value>100e6</value>
+    <type>real</type>
+  </param>
+  <param>
+  <name>Ch0: Freq. Corr. (ppm)</name>
+    <key>corr0</key>
+    <value>0</value>
+    <type>real</type>
+  </param>
+  <param>
+    <name>Ch0: DC Offset Mode</name>
+    <key>dc_offset_mode0</key>
+    <value>0</value>
+    <type>int</type>
+    <option>
+      <name>Off</name>
+      <key>0</key>
+    </option>
+    <option>
+      <name>Manual</name>
+      <key>1</key>
+    </option>
+    <option>
+      <name>Automatic</name>
+      <key>2</key>
+    </option>
+  </param>
+  <param>
+    <name>Ch0: IQ Balance Mode</name>
+    <key>iq_balance_mode0</key>
+    <value>0</value>
+    <type>int</type>
+    <option>
+      <name>Off</name>
+      <key>0</key>
+    </option>
+    <option>
+      <name>Manual</name>
+      <key>1</key>
+    </option>
+    <option>
+      <name>Automatic</name>
+      <key>2</key>
+    </option>
+  </param>
+  <param>
+    <name>Ch0: Gain Mode</name>
+    <key>gain_mode0</key>
+    <value>False</value>
+    <type>bool</type>
+    <option>
+      <name>Manual</name>
+      <key>False</key>
+    </option>
+    <option>
+      <name>Automatic</name>
+      <key>True</key>
+    </option>
+  </param>
+  <param>
+    <name>Ch0: LNA Gain (dB)</name>
+    <key>lna_gain0</key>
+    <value>10</value>
+    <type>real</type>
+  </param>
+  <param>
+    <name>Ch0: MIX Gain (dB)</name>
+    <key>mix_gain0</key>
+    <value>10</value>
+    <type>real</type>
+  </param>
+  <param>
+    <name>Ch0: VGA Gain (dB)</name>
+    <key>if_gain0</key>
+    <value>10</value>
+    <type>real</type>
+  </param>
+  <param>
+    <name>Ch0: Antenna</name>
+    <key>ant0</key>
+    <value></value>
+    <type>string</type>
+    <hide>
+      #if not $nchan() > 0
+        all
+      #elif $ant0()
+        none
+      #else
+        part
+      #end if
+    </hide>
+  </param>
+  <param>
+    <name>Ch0: Bandwidth (Hz)</name>
+    <key>bw0</key>
+    <value>0</value>
+    <type>real</type>
+    <hide>
+      #if not $nchan() > 0
+        all
+      #elif $bw0()
+        none
+      #else
+        part
+      #end if
+    </hide>
+  </param>
+
+  <source>
+    <name>out</name>
+    <type>$type.type</type>
+    <nports>$nchan</nports>
+  </source>
+  <doc>
+The osmocom source block:
+
+While primarily being developed for the OsmoSDR hardware, this block as well supports:
+
+ * FUNcube Dongle through libgnuradio-fcd
+ * FUNcube Dongle Pro+ through gr-fcdproplus
+ * sysmocom OsmoSDR Devices through libosmosdr
+ * RTL2832U based DVB-T dongles through librtlsdr
+ * RTL-TCP spectrum server (see librtlsdr project)
+ * MSi2500 based DVB-T dongles through libmirisdr
+ * SDRplay RSP devices through SDRplay library
+ * gnuradio .cfile input through libgnuradio-blocks
+ * RFSPACE SDR-IQ, SDR-IP, NetSDR (incl. X2 option)
+ * AirSpy Wideband Receiver through libairspy
+ * CCCamp 2015 rad1o Badge through libhackrf
+ * Great Scott Gadgets HackRF through libhackrf
+ * Nuand LLC bladeRF through libbladeRF library
+ * Ettus USRP Devices through Ettus UHD library
+ * Fairwaves UmTRX through Fairwaves' fork of UHD
+ * Red Pitaya SDR transceiver (http://bazaar.redpitaya.com)
+ * FreeSRP through libfreesrp library
+
+By using the osmocom source block you can take advantage of a common software api in your application(s) independent of the underlying radio hardware.
+
+Output Type:
+This parameter controls the data type of the stream in gnuradio. Only complex float32 samples are supported at the moment.
+
+Device Arguments:
+The device argument is a comma delimited string used to locate devices on your system. Device arguments for multiple devices may be given by separating them with a space.
+Use the device id or name/serial (if applicable) to specify a certain device or list of devices. If left blank, the first device found will be used.
+
+Examples:
+
+Optional arguments are placed into [] brackets, remove the brackets before using them! Specific variable values are separated with a |, choose one of them. Variable values containing spaces shall be enclosed in '' as demonstrated in examples section below.
+Lines ending with ... mean it's possible to bind devices together by specifying multiple device arguments separated with a space.
+
+  fcd=0[,device=hw:2][,type=2]
+  miri=0[,buffers=32] ...
+  rtl=serial_number ...
+  rtl=0[,rtl_xtal=28.8e6][,tuner_xtal=28.8e6] ...
+  rtl=1[,buffers=32][,buflen=N*512] ...
+  rtl=2[,direct_samp=0|1|2][,offset_tune=0|1][,bias=0|1] ...
+  rtl_tcp=127.0.0.1:1234[,psize=16384][,direct_samp=0|1|2][,offset_tune=0|1][,bias=0|1] ...
+  osmosdr=0[,buffers=32][,buflen=N*512] ...
+  file='/path/to/your file',rate=1e6[,freq=100e6][,repeat=true][,throttle=true] ...
+  netsdr=127.0.0.1[:50000][,nchan=2]
+  sdr-ip=127.0.0.1[:50000]
+  cloudiq=127.0.0.1[:50000]
+  sdr-iq=/dev/ttyUSB0
+  airspy=0[,bias=0|1][,linearity][,sensitivity]
+  redpitaya=192.168.1.100[:1001]
+  freesrp=0[,fx3='path/to/fx3.img',fpga='path/to/fpga.bin',loopback]
+  hackrf=0[,buffers=32][,bias=0|1][,bias_tx=0|1]
+  bladerf=0[,tamer=internal|external|external_1pps][,smb=25e6]
+  uhd[,serial=...][,lo_offset=0][,mcr=52e6][,nchan=2][,subdev='\\'B:0 A:0\\''] ...
+
+Num Channels:
+Selects the total number of channels in this multi-device configuration. Required when specifying multiple device arguments.
+
+Sample Rate:
+The sample rate is the number of samples per second output by this block on each channel.
+
+Frequency:
+The center frequency is the frequency the RF chain is tuned to.
+
+Freq. Corr.:
+The frequency correction factor in parts per million (ppm). Set to 0 if unknown.
+
+DC Offset Mode:
+Controls the behavior of hardware DC offset corrrection.
+  Off: Disable correction algorithm (pass through).
+  Manual: Keep last estimated correction when switched from Automatic to Manual.
+  Automatic: Periodicallly find the best solution to compensate for DC offset.
+
+This functionality is available for USRP devices only.
+
+IQ Balance Mode:
+Controls the behavior of software IQ imbalance corrrection.
+  Off: Disable correction algorithm (pass through).
+  Manual: Keep last estimated correction when switched from Automatic to Manual.
+  Automatic: Periodicallly find the best solution to compensate for image signals.
+
+This functionality depends on http://cgit.osmocom.org/cgit/gr-iqbal/
+
+Gain Mode:
+Chooses between the manual (default) and automatic gain mode where appropriate.
+To allow manual control of RF/IF/BB gain stages, manual gain mode must be configured.
+Currently, only RTL-SDR devices support automatic gain mode.
+
+RF Gain:
+Overall RF gain of the device.
+
+IF Gain:
+Overall intermediate frequency gain of the device.
+This setting is available for RTL-SDR and OsmoSDR devices with E4000 tuners and HackRF in receive and transmit mode. Observations lead to a reasonable gain range from 15 to 30dB.
+
+BB Gain:
+Overall baseband gain of the device.
+This setting is available for HackRF in receive mode. Observations lead to a reasonable gain range from 15 to 30dB.
+
+Antenna:
+For devices with only one antenna, this may be left blank.
+Otherwise, the user should specify one of the possible antenna choices.
+
+Bandwidth:
+Set the bandpass filter on the radio frontend. To use the default (automatic) bandwidth filter setting, this should be zero.
+
+See the OsmoSDR project page for more detailed documentation:
+http://sdr.osmocom.org/trac/wiki/GrOsmoSDR
+http://sdr.osmocom.org/trac/wiki/rtl-sdr
+http://sdr.osmocom.org/trac/
+  </doc>
+</block>

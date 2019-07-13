@@ -97,5 +97,6 @@ install(FILES
     satellites_check_swiatowid_crc.xml
     satellites_packet_add_timestamp.xml
     satellites_aprs2text.xml
+    airspy_source.xml
     DESTINATION share/gnuradio/grc/blocks
 )
