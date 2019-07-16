@@ -413,7 +413,7 @@ Frame = Struct(
             0x08 : RealTimeNayif1,
             }, default = Bytes(54)),
         }),
-    'payload' / If(type(this.header.frametype) is EnumIntegerString,
+    'payload' / If(not isinstance(this.header.frametype, int),
                    Switch(lambda c: c.header.frametype[:2], {
                     'WO' : Bytes(200),
                     'HR' : HRPayload,

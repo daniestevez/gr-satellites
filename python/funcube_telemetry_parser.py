@@ -59,7 +59,7 @@ class funcube_telemetry_parser(gr.basic_block):
         data = funcube_telemetry.beacon_parse(packet)
         if data:
             print 'Frame type {}'.format(data.header.frametype)
-            if not data.header.frametype is construct.EnumIntegerString:
+            if isinstance(data.header.frametype, int):
                 print 'Unknown frame type. Not processing frame.'
                 return
             print '-'*40
