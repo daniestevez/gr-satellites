@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classgr_1_1satellites_1_1rscode__decoder__impl" kind="class" language="C++" prot="public">
+    <compoundname>gr::satellites::rscode_decoder_impl</compoundname>
+    <basecompoundref refid="classgr_1_1satellites_1_1rscode__decoder" prot="public" virt="non-virtual">gr::satellites::rscode_decoder</basecompoundref>
+    <includes refid="rscode__decoder__impl_8h" local="no">rscode_decoder_impl.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1rscode__decoder__impl_1a5770e3e79801faafce2e30abc44ce683" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int gr::satellites::rscode_decoder_impl::d_npar</definition>
+        <argsstring></argsstring>
+        <name>d_npar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode_decoder_impl.h" line="37" column="1" bodyfile="/home/athanasios/gr-satellites/lib/rscode_decoder_impl.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1satellites_1_1rscode__decoder__impl_1ad1cc28f8259b24ae6b3eed3583debbe0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::rscode_decoder_impl::rscode_decoder_impl</definition>
+        <argsstring>(int npar)</argsstring>
+        <name>rscode_decoder_impl</name>
+        <param>
+          <type>int</type>
+          <declname>npar</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode_decoder_impl.h" line="40" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1rscode__decoder__impl_1a031ddcb63a251806e92b3173ef12ed11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::rscode_decoder_impl::~rscode_decoder_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~rscode_decoder_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode_decoder_impl.h" line="41" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1rscode__decoder__impl_1a7e21603e1457f2469b2edfa60c101fe9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::satellites::rscode_decoder_impl::forecast</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items_required)</argsstring>
+        <name>forecast</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items_required</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode_decoder_impl.h" line="44" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1rscode__decoder__impl_1ae31069178eae1a5e52e133e81dbe9062" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::satellites::rscode_decoder_impl::general_work</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>general_work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode_decoder_impl.h" line="46" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1rscode__decoder__impl_1a71415a81e66523a0f40663818254de56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::satellites::rscode_decoder_impl::msg_handler</definition>
+        <argsstring>(pmt::pmt_t pmt_msg)</argsstring>
+        <name>msg_handler</name>
+        <param>
+          <type>pmt::pmt_t</type>
+          <declname>pmt_msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode_decoder_impl.h" line="51" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="150">
+        <label>block</label>
+      </node>
+      <node id="148">
+        <label>gr::satellites::rscode_decoder_impl</label>
+        <link refid="classgr_1_1satellites_1_1rscode__decoder__impl"/>
+        <childnode refid="149" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="149">
+        <label>gr::satellites::rscode_decoder</label>
+        <link refid="classgr_1_1satellites_1_1rscode__decoder"/>
+        <childnode refid="150" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="153">
+        <label>block</label>
+      </node>
+      <node id="151">
+        <label>gr::satellites::rscode_decoder_impl</label>
+        <link refid="classgr_1_1satellites_1_1rscode__decoder__impl"/>
+        <childnode refid="152" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="152">
+        <label>gr::satellites::rscode_decoder</label>
+        <link refid="classgr_1_1satellites_1_1rscode__decoder"/>
+        <childnode refid="153" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/athanasios/gr-satellites/lib/rscode_decoder_impl.h" line="35" column="1" bodyfile="/home/athanasios/gr-satellites/lib/rscode_decoder_impl.h" bodystart="34" bodyend="52"/>
+    <listofallmembers>
+      <member refid="classgr_1_1satellites_1_1rscode__decoder__impl_1a5770e3e79801faafce2e30abc44ce683" prot="private" virt="non-virtual"><scope>gr::satellites::rscode_decoder_impl</scope><name>d_npar</name></member>
+      <member refid="classgr_1_1satellites_1_1rscode__decoder__impl_1a7e21603e1457f2469b2edfa60c101fe9" prot="public" virt="non-virtual"><scope>gr::satellites::rscode_decoder_impl</scope><name>forecast</name></member>
+      <member refid="classgr_1_1satellites_1_1rscode__decoder__impl_1ae31069178eae1a5e52e133e81dbe9062" prot="public" virt="non-virtual"><scope>gr::satellites::rscode_decoder_impl</scope><name>general_work</name></member>
+      <member refid="classgr_1_1satellites_1_1rscode__decoder_1ac5180d89575ad53be9356dec8863d3a3" prot="public" virt="non-virtual"><scope>gr::satellites::rscode_decoder_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1satellites_1_1rscode__decoder__impl_1a71415a81e66523a0f40663818254de56" prot="public" virt="non-virtual"><scope>gr::satellites::rscode_decoder_impl</scope><name>msg_handler</name></member>
+      <member refid="classgr_1_1satellites_1_1rscode__decoder__impl_1ad1cc28f8259b24ae6b3eed3583debbe0" prot="public" virt="non-virtual"><scope>gr::satellites::rscode_decoder_impl</scope><name>rscode_decoder_impl</name></member>
+      <member refid="classgr_1_1satellites_1_1rscode__decoder_1a03178ca66a3a9eb201e3ce0258d4ac08" prot="public" virt="non-virtual"><scope>gr::satellites::rscode_decoder_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1satellites_1_1rscode__decoder__impl_1a031ddcb63a251806e92b3173ef12ed11" prot="public" virt="non-virtual"><scope>gr::satellites::rscode_decoder_impl</scope><name>~rscode_decoder_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

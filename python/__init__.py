@@ -125,3 +125,4 @@ from check_astrocast_crc import check_astrocast_crc
 from lume1_telemetry_parser import lume1_telemetry_parser
 
 from qo100_telemetry_print import qo100_telemetry_print
+from space_packet_parser import space_packet_parser

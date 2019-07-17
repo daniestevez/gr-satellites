@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classgr_1_1satellites_1_1ao40__syncframe__soft__impl" kind="class" language="C++" prot="public">
+    <compoundname>gr::satellites::ao40_syncframe_soft_impl</compoundname>
+    <basecompoundref refid="classgr_1_1satellites_1_1ao40__syncframe__soft" prot="public" virt="non-virtual">gr::satellites::ao40_syncframe_soft</basecompoundref>
+    <includes refid="ao40__syncframe__soft__impl_8h" local="no">ao40_syncframe_soft_impl.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1ao40__syncframe__soft__impl_1ae6919d86e1cdfc9c9dfb3839b9f3328a" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int gr::satellites::ao40_syncframe_soft_impl::d_threshold</definition>
+        <argsstring></argsstring>
+        <name>d_threshold</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ao40_syncframe_soft_impl.h" line="32" column="1" bodyfile="/home/athanasios/gr-satellites/lib/ao40_syncframe_soft_impl.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1ao40__syncframe__soft__impl_1a6b3004477fa7f6404ab34f9e3f227202" prot="private" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t gr::satellites::ao40_syncframe_soft_impl::d_syncword[SYNCLEN]</definition>
+        <argsstring>[SYNCLEN]</argsstring>
+        <name>d_syncword</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ao40_syncframe_soft_impl.h" line="33" column="1" bodyfile="/home/athanasios/gr-satellites/lib/ao40_syncframe_soft_impl.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1satellites_1_1ao40__syncframe__soft__impl_1af9edb9ccbe4df5a7e2c61c915ff2b139" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::ao40_syncframe_soft_impl::ao40_syncframe_soft_impl</definition>
+        <argsstring>(int threshold)</argsstring>
+        <name>ao40_syncframe_soft_impl</name>
+        <param>
+          <type>int</type>
+          <declname>threshold</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ao40_syncframe_soft_impl.h" line="36" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1ao40__syncframe__soft__impl_1a18f7d0405213e1b9ef56dbe2e14c0793" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::ao40_syncframe_soft_impl::~ao40_syncframe_soft_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~ao40_syncframe_soft_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ao40_syncframe_soft_impl.h" line="37" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1ao40__syncframe__soft__impl_1a5e3a9e1f49de35792a61c715142cc7f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::satellites::ao40_syncframe_soft_impl::work</definition>
+        <argsstring>(int noutput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ao40_syncframe_soft_impl.h" line="40" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="50">
+        <label>gr::satellites::ao40_syncframe_soft</label>
+        <link refid="classgr_1_1satellites_1_1ao40__syncframe__soft"/>
+        <childnode refid="51" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>sync_block</label>
+      </node>
+      <node id="49">
+        <label>gr::satellites::ao40_syncframe_soft_impl</label>
+        <link refid="classgr_1_1satellites_1_1ao40__syncframe__soft__impl"/>
+        <childnode refid="50" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="53">
+        <label>gr::satellites::ao40_syncframe_soft</label>
+        <link refid="classgr_1_1satellites_1_1ao40__syncframe__soft"/>
+        <childnode refid="54" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>sync_block</label>
+      </node>
+      <node id="52">
+        <label>gr::satellites::ao40_syncframe_soft_impl</label>
+        <link refid="classgr_1_1satellites_1_1ao40__syncframe__soft__impl"/>
+        <childnode refid="53" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/athanasios/gr-satellites/lib/ao40_syncframe_soft_impl.h" line="30" column="1" bodyfile="/home/athanasios/gr-satellites/lib/ao40_syncframe_soft_impl.h" bodystart="29" bodyend="43"/>
+    <listofallmembers>
+      <member refid="classgr_1_1satellites_1_1ao40__syncframe__soft__impl_1af9edb9ccbe4df5a7e2c61c915ff2b139" prot="public" virt="non-virtual"><scope>gr::satellites::ao40_syncframe_soft_impl</scope><name>ao40_syncframe_soft_impl</name></member>
+      <member refid="classgr_1_1satellites_1_1ao40__syncframe__soft__impl_1a6b3004477fa7f6404ab34f9e3f227202" prot="private" virt="non-virtual"><scope>gr::satellites::ao40_syncframe_soft_impl</scope><name>d_syncword</name></member>
+      <member refid="classgr_1_1satellites_1_1ao40__syncframe__soft__impl_1ae6919d86e1cdfc9c9dfb3839b9f3328a" prot="private" virt="non-virtual"><scope>gr::satellites::ao40_syncframe_soft_impl</scope><name>d_threshold</name></member>
+      <member refid="classgr_1_1satellites_1_1ao40__syncframe__soft_1a595f4b3fb0a36aa0dc48ea6c4cf104a4" prot="public" virt="non-virtual"><scope>gr::satellites::ao40_syncframe_soft_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1satellites_1_1ao40__syncframe__soft_1a7942642e5f2acc8479ef83a0117f2f04" prot="public" virt="non-virtual"><scope>gr::satellites::ao40_syncframe_soft_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1satellites_1_1ao40__syncframe__soft__impl_1a5e3a9e1f49de35792a61c715142cc7f1" prot="public" virt="non-virtual"><scope>gr::satellites::ao40_syncframe_soft_impl</scope><name>work</name></member>
+      <member refid="classgr_1_1satellites_1_1ao40__syncframe__soft__impl_1a18f7d0405213e1b9ef56dbe2e14c0793" prot="public" virt="non-virtual"><scope>gr::satellites::ao40_syncframe_soft_impl</scope><name>~ao40_syncframe_soft_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

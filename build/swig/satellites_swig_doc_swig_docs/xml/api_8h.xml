@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="api_8h" kind="file" language="C++">
+    <compoundname>api.h</compoundname>
+    <includes local="no">gnuradio/attributes.h</includes>
+    <includedby refid="ao40__deinterleaver_8h" local="no">/home/athanasios/gr-satellites/include/satellites/ao40_deinterleaver.h</includedby>
+    <includedby refid="ao40__deinterleaver__soft_8h" local="no">/home/athanasios/gr-satellites/include/satellites/ao40_deinterleaver_soft.h</includedby>
+    <includedby refid="ao40__rs__decoder_8h" local="no">/home/athanasios/gr-satellites/include/satellites/ao40_rs_decoder.h</includedby>
+    <includedby refid="ao40__syncframe_8h" local="no">/home/athanasios/gr-satellites/include/satellites/ao40_syncframe.h</includedby>
+    <includedby refid="ao40__syncframe__soft_8h" local="no">/home/athanasios/gr-satellites/include/satellites/ao40_syncframe_soft.h</includedby>
+    <includedby refid="ax100__decode_8h" local="no">/home/athanasios/gr-satellites/include/satellites/ax100_decode.h</includedby>
+    <includedby refid="decode__rs_8h" local="no">/home/athanasios/gr-satellites/include/satellites/decode_rs.h</includedby>
+    <includedby refid="decode__rs__general_8h" local="no">/home/athanasios/gr-satellites/include/satellites/decode_rs_general.h</includedby>
+    <includedby refid="decode__rs__interleaved_8h" local="no">/home/athanasios/gr-satellites/include/satellites/decode_rs_interleaved.h</includedby>
+    <includedby refid="descrambler308_8h" local="no">/home/athanasios/gr-satellites/include/satellites/descrambler308.h</includedby>
+    <includedby refid="encode__rs_8h" local="no">/home/athanasios/gr-satellites/include/satellites/encode_rs.h</includedby>
+    <includedby refid="lilacsat1__demux_8h" local="no">/home/athanasios/gr-satellites/include/satellites/lilacsat1_demux.h</includedby>
+    <includedby refid="nusat__decoder_8h" local="no">/home/athanasios/gr-satellites/include/satellites/nusat_decoder.h</includedby>
+    <includedby refid="rscode__decoder_8h" local="no">/home/athanasios/gr-satellites/include/satellites/rscode_decoder.h</includedby>
+    <includedby refid="u482c__decode_8h" local="no">/home/athanasios/gr-satellites/include/satellites/u482c_decode.h</includedby>
+    <includedby refid="varlen__packet__framer_8h" local="no">/home/athanasios/gr-satellites/include/satellites/varlen_packet_framer.h</includedby>
+    <includedby refid="varlen__packet__tagger_8h" local="no">/home/athanasios/gr-satellites/include/satellites/varlen_packet_tagger.h</includedby>
+    <incdepgraph>
+      <node id="26">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="25">
+        <label>/home/athanasios/gr-satellites/include/satellites/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="31">
+        <label>/home/athanasios/gr-satellites/include/satellites/ao40_syncframe.h</label>
+        <link refid="ao40__syncframe_8h"/>
+      </node>
+      <node id="43">
+        <label>/home/athanasios/gr-satellites/include/satellites/varlen_packet_framer.h</label>
+        <link refid="varlen__packet__framer_8h"/>
+      </node>
+      <node id="41">
+        <label>/home/athanasios/gr-satellites/include/satellites/rscode_decoder.h</label>
+        <link refid="rscode__decoder_8h"/>
+      </node>
+      <node id="39">
+        <label>/home/athanasios/gr-satellites/include/satellites/lilacsat1_demux.h</label>
+        <link refid="lilacsat1__demux_8h"/>
+      </node>
+      <node id="32">
+        <label>/home/athanasios/gr-satellites/include/satellites/ao40_syncframe_soft.h</label>
+        <link refid="ao40__syncframe__soft_8h"/>
+      </node>
+      <node id="28">
+        <label>/home/athanasios/gr-satellites/include/satellites/ao40_deinterleaver.h</label>
+        <link refid="ao40__deinterleaver_8h"/>
+      </node>
+      <node id="42">
+        <label>/home/athanasios/gr-satellites/include/satellites/u482c_decode.h</label>
+        <link refid="u482c__decode_8h"/>
+      </node>
+      <node id="37">
+        <label>/home/athanasios/gr-satellites/include/satellites/descrambler308.h</label>
+        <link refid="descrambler308_8h"/>
+      </node>
+      <node id="44">
+        <label>/home/athanasios/gr-satellites/include/satellites/varlen_packet_tagger.h</label>
+        <link refid="varlen__packet__tagger_8h"/>
+      </node>
+      <node id="38">
+        <label>/home/athanasios/gr-satellites/include/satellites/encode_rs.h</label>
+        <link refid="encode__rs_8h"/>
+      </node>
+      <node id="29">
+        <label>/home/athanasios/gr-satellites/include/satellites/ao40_deinterleaver_soft.h</label>
+        <link refid="ao40__deinterleaver__soft_8h"/>
+      </node>
+      <node id="34">
+        <label>/home/athanasios/gr-satellites/include/satellites/decode_rs.h</label>
+        <link refid="decode__rs_8h"/>
+      </node>
+      <node id="35">
+        <label>/home/athanasios/gr-satellites/include/satellites/decode_rs_general.h</label>
+        <link refid="decode__rs__general_8h"/>
+      </node>
+      <node id="33">
+        <label>/home/athanasios/gr-satellites/include/satellites/ax100_decode.h</label>
+        <link refid="ax100__decode_8h"/>
+      </node>
+      <node id="27">
+        <label>/home/athanasios/gr-satellites/include/satellites/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>/home/athanasios/gr-satellites/include/satellites/decode_rs_interleaved.h</label>
+        <link refid="decode__rs__interleaved_8h"/>
+      </node>
+      <node id="30">
+        <label>/home/athanasios/gr-satellites/include/satellites/ao40_rs_decoder.h</label>
+        <link refid="ao40__rs__decoder_8h"/>
+      </node>
+      <node id="40">
+        <label>/home/athanasios/gr-satellites/include/satellites/nusat_decoder.h</label>
+        <link refid="nusat__decoder_8h"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="api_8h_1a98c3b6b4e453b850ade1b834402b2538" prot="public" static="no">
+        <name>SATELLITES_API</name>
+        <initializer>__GR_ATTR_IMPORT</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/include/satellites/api.h" line="30" column="12" bodyfile="/home/athanasios/gr-satellites/include/satellites/api.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>2011<sp/>Free<sp/>Software<sp/>Foundation,<sp/>Inc.</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>This<sp/>file<sp/>is<sp/>part<sp/>of<sp/>GNU<sp/>Radio</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>GNU<sp/>Radio<sp/>is<sp/>free<sp/>software;<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or<sp/>modify</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>as<sp/>published<sp/>by</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>the<sp/>Free<sp/>Software<sp/>Foundation;<sp/>either<sp/>version<sp/>3,<sp/>or<sp/>(at<sp/>your<sp/>option)</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/>GNU<sp/>Radio<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/>along<sp/>with<sp/>GNU<sp/>Radio;<sp/>see<sp/>the<sp/>file<sp/>COPYING.<sp/><sp/>If<sp/>not,<sp/>write<sp/>to</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>the<sp/>Free<sp/>Software<sp/>Foundation,<sp/>Inc.,<sp/>51<sp/>Franklin<sp/>Street,</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>Boston,<sp/>MA<sp/>02110-1301,<sp/>USA.</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>INCLUDED_SATELLITES_API_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_SATELLITES_API_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gnuradio/attributes.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>gnuradio_satellites_EXPORTS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>SATELLITES_API<sp/>__GR_ATTR_EXPORT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="api_8h_1a98c3b6b4e453b850ade1b834402b2538" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>SATELLITES_API<sp/>__GR_ATTR_IMPORT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_SATELLITES_API_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/athanasios/gr-satellites/include/satellites/api.h"/>
+  </compounddef>
+</doxygen>

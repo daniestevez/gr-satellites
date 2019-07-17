@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classgr_1_1satellites_1_1u482c__decode" kind="class" language="C++" prot="public">
+    <compoundname>gr::satellites::u482c_decode</compoundname>
+    <basecompoundref prot="public" virt="virtual">block</basecompoundref>
+    <includes refid="u482c__decode_8h" local="no">u482c_decode.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classgr_1_1satellites_1_1u482c__decode_1af24aa9119b04bed38b45e600a9a0c41e" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classgr_1_1satellites_1_1u482c__decode" kindref="compound">u482c_decode</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;u482c_decode&gt; gr::satellites::u482c_decode::sptr</definition>
+        <argsstring></argsstring>
+        <name>sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/include/satellites/u482c_decode.h" line="39" column="1" bodyfile="/home/athanasios/gr-satellites/include/satellites/u482c_decode.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classgr_1_1satellites_1_1u482c__decode_1aa8ac280cc8e0dd3355004c638e8c4133" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgr_1_1satellites_1_1u482c__decode_1af24aa9119b04bed38b45e600a9a0c41e" kindref="member">sptr</ref></type>
+        <definition>static sptr gr::satellites::u482c_decode::make</definition>
+        <argsstring>(bool verbose, int viterbi, int scrambler, int rs)</argsstring>
+        <name>make</name>
+        <param>
+          <type>bool</type>
+          <declname>verbose</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>viterbi</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>scrambler</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>rs</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classgr_1_1satellites_1_1u482c__decode" kindref="compound">satellites::u482c_decode</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>To avoid accidental use of raw pointers, <ref refid="classgr_1_1satellites_1_1u482c__decode" kindref="compound">satellites::u482c_decode</ref>&apos;s constructor is in a private implementation class. <ref refid="classgr_1_1satellites_1_1u482c__decode_1aa8ac280cc8e0dd3355004c638e8c4133" kindref="member">satellites::u482c_decode::make</ref> is the public interface for creating new instances. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/include/satellites/u482c_decode.h" line="49" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>&lt;+description of block+&gt; </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="57">
+        <label>block</label>
+      </node>
+      <node id="56">
+        <label>gr::satellites::u482c_decode</label>
+        <link refid="classgr_1_1satellites_1_1u482c__decode"/>
+        <childnode refid="57" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="59">
+        <label>block</label>
+      </node>
+      <node id="58">
+        <label>gr::satellites::u482c_decode</label>
+        <link refid="classgr_1_1satellites_1_1u482c__decode"/>
+        <childnode refid="59" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/athanasios/gr-satellites/include/satellites/u482c_decode.h" line="37" column="1" bodyfile="/home/athanasios/gr-satellites/include/satellites/u482c_decode.h" bodystart="36" bodyend="50"/>
+    <listofallmembers>
+      <member refid="classgr_1_1satellites_1_1u482c__decode_1aa8ac280cc8e0dd3355004c638e8c4133" prot="public" virt="non-virtual"><scope>gr::satellites::u482c_decode</scope><name>make</name></member>
+      <member refid="classgr_1_1satellites_1_1u482c__decode_1af24aa9119b04bed38b45e600a9a0c41e" prot="public" virt="non-virtual"><scope>gr::satellites::u482c_decode</scope><name>sptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

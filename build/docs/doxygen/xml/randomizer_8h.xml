@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="randomizer_8h" kind="file" language="C++">
+    <compoundname>randomizer.h</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="randomizer_8h_1aabaa21c02c14c84326c9cc87c0c27e06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_generate_sequence</definition>
+        <argsstring>(char *sequence, int length)</argsstring>
+        <name>ccsds_generate_sequence</name>
+        <param>
+          <type>char *</type>
+          <declname>sequence</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/randomizer.h" line="27" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="randomizer_8h_1a278b0faf9760205fef8ef39f428a873f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_xor_sequence</definition>
+        <argsstring>(unsigned char *data, char *sequence, int length)</argsstring>
+        <name>ccsds_xor_sequence</name>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>sequence</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/randomizer.h" line="28" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/athanasios/gr-satellites/lib/randomizer.h"/>
+  </compounddef>
+</doxygen>

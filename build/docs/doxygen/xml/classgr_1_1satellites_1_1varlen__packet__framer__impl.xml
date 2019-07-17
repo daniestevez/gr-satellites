@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classgr_1_1satellites_1_1varlen__packet__framer__impl" kind="class" language="C++" prot="public">
+    <compoundname>gr::satellites::varlen_packet_framer_impl</compoundname>
+    <basecompoundref refid="classgr_1_1satellites_1_1varlen__packet__framer" prot="public" virt="non-virtual">gr::satellites::varlen_packet_framer</basecompoundref>
+    <includes refid="varlen__packet__framer__impl_8h" local="no">varlen_packet_framer_impl.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1varlen__packet__framer__impl_1adbddead324913023b9efc935274c8f5a" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int gr::satellites::varlen_packet_framer_impl::d_header_length</definition>
+        <argsstring></argsstring>
+        <name>d_header_length</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" line="33" column="1" bodyfile="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1varlen__packet__framer__impl_1ad746012ce6fe8c6f754b8c70b7bcb266" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool gr::satellites::varlen_packet_framer_impl::d_use_golay</definition>
+        <argsstring></argsstring>
+        <name>d_use_golay</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" line="34" column="1" bodyfile="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1varlen__packet__framer__impl_1abaa0fac43236673e3b4c870853bf8590" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; uint8_t &gt;</type>
+        <definition>std::vector&lt;uint8_t&gt; gr::satellites::varlen_packet_framer_impl::d_sync_word</definition>
+        <argsstring></argsstring>
+        <name>d_sync_word</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" line="35" column="1" bodyfile="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a9605f184e459b1e58b5055285ceced7b" prot="private" static="no" mutable="no">
+        <type>endianness_t</type>
+        <definition>endianness_t gr::satellites::varlen_packet_framer_impl::d_endianness</definition>
+        <argsstring></argsstring>
+        <name>d_endianness</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" line="36" column="1" bodyfile="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a8956eaa01cd03babd544935542b89464" prot="private" static="no" mutable="no">
+        <type>pmt::pmt_t</type>
+        <definition>pmt::pmt_t gr::satellites::varlen_packet_framer_impl::d_packet_tag</definition>
+        <argsstring></argsstring>
+        <name>d_packet_tag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" line="37" column="1" bodyfile="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a4fe6c1b7bb5c9d52b5605f3a46035524" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int gr::satellites::varlen_packet_framer_impl::d_ninput_items_required</definition>
+        <argsstring></argsstring>
+        <name>d_ninput_items_required</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" line="38" column="1" bodyfile="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a08a0b869e2e01f1378e904de8842bd6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::varlen_packet_framer_impl::varlen_packet_framer_impl</definition>
+        <argsstring>(const std::string &amp;packet_key, int length_field_size, endianness_t endianness, bool use_golay, const std::vector&lt; uint8_t &gt; sync_word)</argsstring>
+        <name>varlen_packet_framer_impl</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>packet_key</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>length_field_size</declname>
+        </param>
+        <param>
+          <type>endianness_t</type>
+          <declname>endianness</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>use_golay</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; uint8_t &gt;</type>
+          <declname>sync_word</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" line="48" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a88eccac66633075969cdb31117062359" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::varlen_packet_framer_impl::~varlen_packet_framer_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~varlen_packet_framer_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" line="54" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a54a660a5f49f2f3e18473d262585e507" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::satellites::varlen_packet_framer_impl::forecast</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items_required)</argsstring>
+        <name>forecast</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items_required</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" line="56" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1varlen__packet__framer__impl_1af58937bf69d65e0913513ebe409656a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::satellites::varlen_packet_framer_impl::general_work</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>general_work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" line="58" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="170">
+        <label>gr::satellites::varlen_packet_framer_impl</label>
+        <link refid="classgr_1_1satellites_1_1varlen__packet__framer__impl"/>
+        <childnode refid="171" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="171">
+        <label>gr::satellites::varlen_packet_framer</label>
+        <link refid="classgr_1_1satellites_1_1varlen__packet__framer"/>
+        <childnode refid="172" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="172">
+        <label>block</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="173">
+        <label>gr::satellites::varlen_packet_framer_impl</label>
+        <link refid="classgr_1_1satellites_1_1varlen__packet__framer__impl"/>
+        <childnode refid="174" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="174">
+        <label>gr::satellites::varlen_packet_framer</label>
+        <link refid="classgr_1_1satellites_1_1varlen__packet__framer"/>
+        <childnode refid="175" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="175">
+        <label>block</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" line="31" column="1" bodyfile="/home/athanasios/gr-satellites/lib/varlen_packet_framer_impl.h" bodystart="29" bodyend="62"/>
+    <listofallmembers>
+      <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a9605f184e459b1e58b5055285ceced7b" prot="private" virt="non-virtual"><scope>gr::satellites::varlen_packet_framer_impl</scope><name>d_endianness</name></member>
+      <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1adbddead324913023b9efc935274c8f5a" prot="private" virt="non-virtual"><scope>gr::satellites::varlen_packet_framer_impl</scope><name>d_header_length</name></member>
+      <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a4fe6c1b7bb5c9d52b5605f3a46035524" prot="private" virt="non-virtual"><scope>gr::satellites::varlen_packet_framer_impl</scope><name>d_ninput_items_required</name></member>
+      <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a8956eaa01cd03babd544935542b89464" prot="private" virt="non-virtual"><scope>gr::satellites::varlen_packet_framer_impl</scope><name>d_packet_tag</name></member>
+      <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1abaa0fac43236673e3b4c870853bf8590" prot="private" virt="non-virtual"><scope>gr::satellites::varlen_packet_framer_impl</scope><name>d_sync_word</name></member>
+      <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1ad746012ce6fe8c6f754b8c70b7bcb266" prot="private" virt="non-virtual"><scope>gr::satellites::varlen_packet_framer_impl</scope><name>d_use_golay</name></member>
+      <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a54a660a5f49f2f3e18473d262585e507" prot="public" virt="non-virtual"><scope>gr::satellites::varlen_packet_framer_impl</scope><name>forecast</name></member>
+      <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1af58937bf69d65e0913513ebe409656a5" prot="public" virt="non-virtual"><scope>gr::satellites::varlen_packet_framer_impl</scope><name>general_work</name></member>
+      <member refid="classgr_1_1satellites_1_1varlen__packet__framer_1acc0bef2c620924ec7c30a3b9964ff5aa" prot="public" virt="non-virtual"><scope>gr::satellites::varlen_packet_framer_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1satellites_1_1varlen__packet__framer_1a00bad6f4c54c8baf53dc93fc282cd105" prot="public" virt="non-virtual"><scope>gr::satellites::varlen_packet_framer_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a08a0b869e2e01f1378e904de8842bd6f" prot="public" virt="non-virtual"><scope>gr::satellites::varlen_packet_framer_impl</scope><name>varlen_packet_framer_impl</name></member>
+      <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a88eccac66633075969cdb31117062359" prot="public" virt="non-virtual"><scope>gr::satellites::varlen_packet_framer_impl</scope><name>~varlen_packet_framer_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

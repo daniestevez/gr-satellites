@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="varlen__packet__tagger__impl_8h" kind="file" language="C++">
+    <compoundname>varlen_packet_tagger_impl.h</compoundname>
+    <includes refid="varlen__packet__tagger_8h" local="no">satellites/varlen_packet_tagger.h</includes>
+    <includes local="no">pmt/pmt.h</includes>
+    <incdepgraph>
+      <node id="266">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="268">
+        <label>gnuradio/endianness.h</label>
+      </node>
+      <node id="264">
+        <label>satellites/varlen_packet_tagger.h</label>
+        <link refid="varlen__packet__tagger_8h"/>
+        <childnode refid="265" relation="include">
+        </childnode>
+        <childnode refid="267" relation="include">
+        </childnode>
+        <childnode refid="268" relation="include">
+        </childnode>
+        <childnode refid="269" relation="include">
+        </childnode>
+      </node>
+      <node id="267">
+        <label>gnuradio/block.h</label>
+      </node>
+      <node id="265">
+        <label>satellites/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="266" relation="include">
+        </childnode>
+      </node>
+      <node id="269">
+        <label>pmt/pmt.h</label>
+      </node>
+      <node id="263">
+        <label>varlen_packet_tagger_impl.h</label>
+        <link refid="varlen__packet__tagger__impl_8h"/>
+        <childnode refid="264" relation="include">
+        </childnode>
+        <childnode refid="269" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classgr_1_1satellites_1_1varlen__packet__tagger__impl" prot="public">gr::satellites::varlen_packet_tagger_impl</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1satellites">gr::satellites</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/athanasios/gr-satellites/lib/varlen_packet_tagger_impl.h"/>
+  </compounddef>
+</doxygen>

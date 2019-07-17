@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="lilacsat1__demux__impl_8h" kind="file" language="C++">
+    <compoundname>lilacsat1_demux_impl.h</compoundname>
+    <includes local="no">string</includes>
+    <includes local="no">pmt/pmt.h</includes>
+    <includes refid="lilacsat1__demux_8h" local="no">satellites/lilacsat1_demux.h</includes>
+    <incdepgraph>
+      <node id="190">
+        <label>gnuradio/sync_block.h</label>
+      </node>
+      <node id="187">
+        <label>satellites/lilacsat1_demux.h</label>
+        <link refid="lilacsat1__demux_8h"/>
+        <childnode refid="185" relation="include">
+        </childnode>
+        <childnode refid="188" relation="include">
+        </childnode>
+        <childnode refid="190" relation="include">
+        </childnode>
+      </node>
+      <node id="185">
+        <label>string</label>
+      </node>
+      <node id="189">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="188">
+        <label>satellites/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="189" relation="include">
+        </childnode>
+      </node>
+      <node id="186">
+        <label>pmt/pmt.h</label>
+      </node>
+      <node id="184">
+        <label>lilacsat1_demux_impl.h</label>
+        <link refid="lilacsat1__demux__impl_8h"/>
+        <childnode refid="185" relation="include">
+        </childnode>
+        <childnode refid="186" relation="include">
+        </childnode>
+        <childnode refid="187" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classgr_1_1satellites_1_1lilacsat1__demux__impl" prot="public">gr::satellites::lilacsat1_demux_impl</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1satellites">gr::satellites</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/athanasios/gr-satellites/lib/lilacsat1_demux_impl.h"/>
+  </compounddef>
+</doxygen>

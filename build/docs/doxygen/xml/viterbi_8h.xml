@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="viterbi_8h" kind="file" language="C++">
+    <compoundname>viterbi.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <incdepgraph>
+      <node id="272">
+        <label>stdint.h</label>
+      </node>
+      <node id="271">
+        <label>viterbi.h</label>
+        <link refid="viterbi_8h"/>
+        <childnode refid="272" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="viterbi_8h_1a5ebf7df1dd26a1694f5e89da649f1443" prot="public" static="no">
+        <name>VITERBI_CONSTRAINT</name>
+        <initializer>7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/viterbi.h" line="12" column="9" bodyfile="/home/athanasios/gr-satellites/lib/viterbi.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="viterbi_8h_1ae65f985e386f37c52c8ea93030d472d2" prot="public" static="no">
+        <name>VITERBI_TAIL</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/viterbi.h" line="13" column="9" bodyfile="/home/athanasios/gr-satellites/lib/viterbi.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="viterbi_8h_1aec143b14698e0d20f52eb6b709d85eba" prot="public" static="no">
+        <name>VITERBI_RATE</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/viterbi.h" line="14" column="9" bodyfile="/home/athanasios/gr-satellites/lib/viterbi.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="viterbi_8h_1ac4de755dd1e3f60b5cbf8743e9259d63" prot="public" static="no">
+        <name>V27POLYA</name>
+        <initializer>0x6d</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/viterbi.h" line="20" column="9" bodyfile="/home/athanasios/gr-satellites/lib/viterbi.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="viterbi_8h_1a48615fae3ecf1c3874e893702629e6f6" prot="public" static="no">
+        <name>V27POLYB</name>
+        <initializer>0x4f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/viterbi.h" line="21" column="9" bodyfile="/home/athanasios/gr-satellites/lib/viterbi.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="viterbi_8h_1a65589c588571c5fbb1cc88884a4509cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* create_viterbi_packed</definition>
+        <argsstring>(int16_t len)</argsstring>
+        <name>create_viterbi_packed</name>
+        <param>
+          <type>int16_t</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/viterbi.h" line="23" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="viterbi_8h_1ace8db595385a391cb3682e2abf2824d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int init_viterbi_packed</definition>
+        <argsstring>(void *vp, int starting_state)</argsstring>
+        <name>init_viterbi_packed</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>starting_state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/viterbi.h" line="24" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="viterbi_8h_1a1c241496e04488c65abe0503e08623ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int update_viterbi_packed</definition>
+        <argsstring>(void *vp, unsigned char sym[], uint16_t npairs)</argsstring>
+        <name>update_viterbi_packed</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <param>
+          <type>unsigned char</type>
+          <declname>sym</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>npairs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/viterbi.h" line="25" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="viterbi_8h_1ac2d726a9fd708b044a878c797b1a666b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int chainback_viterbi_packed</definition>
+        <argsstring>(void *vp, unsigned char *data, unsigned int nbits, unsigned int endstate)</argsstring>
+        <name>chainback_viterbi_packed</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>nbits</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>endstate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/viterbi.h" line="26" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="viterbi_8h_1aa7dc3e69fa75d0d77995dc8bd4865eae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void delete_viterbi_packed</definition>
+        <argsstring>(void *vp)</argsstring>
+        <name>delete_viterbi_packed</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/viterbi.h" line="27" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="viterbi_8h_1a11eefed2dce7ac1db75ca0f214e34cc2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void encode_viterbi_packed</definition>
+        <argsstring>(unsigned char *channel, unsigned char *data, int framebits)</argsstring>
+        <name>encode_viterbi_packed</name>
+        <param>
+          <type>unsigned char *</type>
+          <declname>channel</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>framebits</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/viterbi.h" line="28" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="viterbi_8h_1aa6e28c0aa5f0c62d62e718d47f0f6f90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_viterbi_polynomial_packed</definition>
+        <argsstring>(int16_t polys[2])</argsstring>
+        <name>set_viterbi_polynomial_packed</name>
+        <param>
+          <type>int16_t</type>
+          <declname>polys</declname>
+          <array>[2]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/viterbi.h" line="29" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/athanasios/gr-satellites/lib/viterbi.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="rs_8h" kind="file" language="C++">
+    <compoundname>rs.h</compoundname>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="rs_8h_1ae480dcd4682b4ad7442fdd1db297083e" prot="public" static="no">
+        <name>MAX_FRAME_LEN</name>
+        <initializer>255</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rs.h" line="24" column="9" bodyfile="/home/athanasios/gr-satellites/lib/rs.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="rs_8h_1a24c79fbe6b7b653a65358ab0e90871f1" prot="public" static="no">
+        <name>PARITY_BYTES</name>
+        <initializer>32</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rs.h" line="25" column="9" bodyfile="/home/athanasios/gr-satellites/lib/rs.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="rs_8h_1a2dbcea67be43f2d4f7c10f88cb3d8318" prot="public" static="no">
+        <name>BASIS_CONVENTIONAL</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rs.h" line="27" column="9" bodyfile="/home/athanasios/gr-satellites/lib/rs.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="rs_8h_1a920ed54a97e8bafa074c3bfc7a4af97e" prot="public" static="no">
+        <name>BASIS_DUAL</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rs.h" line="28" column="9" bodyfile="/home/athanasios/gr-satellites/lib/rs.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/athanasios/gr-satellites/lib/rs.h"/>
+  </compounddef>
+</doxygen>

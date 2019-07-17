@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="nusat__decoder__impl_8h" kind="file" language="C++">
+    <compoundname>nusat_decoder_impl.h</compoundname>
+    <includes refid="nusat__decoder_8h" local="no">satellites/nusat_decoder.h</includes>
+    <includes local="no">pmt/pmt.h</includes>
+    <includes local="no">stdint.h</includes>
+    <incdepgraph>
+      <node id="206">
+        <label>stdint.h</label>
+      </node>
+      <node id="203">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="204">
+        <label>gnuradio/block.h</label>
+      </node>
+      <node id="202">
+        <label>satellites/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="203" relation="include">
+        </childnode>
+      </node>
+      <node id="205">
+        <label>pmt/pmt.h</label>
+      </node>
+      <node id="200">
+        <label>nusat_decoder_impl.h</label>
+        <link refid="nusat__decoder__impl_8h"/>
+        <childnode refid="201" relation="include">
+        </childnode>
+        <childnode refid="205" relation="include">
+        </childnode>
+        <childnode refid="206" relation="include">
+        </childnode>
+      </node>
+      <node id="201">
+        <label>satellites/nusat_decoder.h</label>
+        <link refid="nusat__decoder_8h"/>
+        <childnode refid="202" relation="include">
+        </childnode>
+        <childnode refid="204" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classgr_1_1satellites_1_1nusat__decoder__impl" prot="public">gr::satellites::nusat_decoder_impl</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1satellites">gr::satellites</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="nusat__decoder__impl_8h_1aec640b606a07c7f52ab7017cba7200b7" prot="public" static="no">
+        <name>INCLUDED_SATELLITES_NUSAT_DECODERR_IMPL_H</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" line="22" column="9" bodyfile="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nusat__decoder__impl_8h_1a1f15293623649a310a7c68ff240f9647" prot="public" static="no">
+        <name>MSG_LEN</name>
+        <initializer>64</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" line="29" column="9" bodyfile="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nusat__decoder__impl_8h_1ab8f5e10b9f780e53f9583724ac965a0c" prot="public" static="no">
+        <name>HEADER_LEN</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" line="30" column="9" bodyfile="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nusat__decoder__impl_8h_1a3d2f9719f5ef9007b41c1341521cdd8a" prot="public" static="no">
+        <name>LEN_BYTE</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" line="31" column="9" bodyfile="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nusat__decoder__impl_8h_1a5d85f52840e44e559bf25aa6dd5593c4" prot="public" static="no">
+        <name>CRC_BYTE</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" line="32" column="9" bodyfile="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h"/>
+  </compounddef>
+</doxygen>

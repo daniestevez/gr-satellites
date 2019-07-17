@@ -1,0 +1,385 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.13">
+  <compound refid="classgr_1_1satellites_1_1ao40__deinterleaver" kind="class"><name>gr::satellites::ao40_deinterleaver</name>
+    <member refid="classgr_1_1satellites_1_1ao40__deinterleaver_1a1c29decbe0e4fdba7808af30f1f6acd3" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__deinterleaver_1a70149fea8686859b5aac31339fb0be46" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1ao40__deinterleaver__impl" kind="class"><name>gr::satellites::ao40_deinterleaver_impl</name>
+    <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__impl_1a3d324fd31d68ec4b71eab255fa6848cd" kind="function"><name>ao40_deinterleaver_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__impl_1afe386e3ecc6ccdc5bef64b36ecbb4929" kind="function"><name>~ao40_deinterleaver_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__impl_1a5bcb4708b8942efe1639b7763b2e498e" kind="function"><name>forecast</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__impl_1ad156a818ab70f39172cc4cda9115ee8a" kind="function"><name>general_work</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__impl_1afaa23670d034ba9d86dea8b305da52ed" kind="function"><name>msg_handler</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft" kind="class"><name>gr::satellites::ao40_deinterleaver_soft</name>
+    <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft_1a7812e3aed0f56990e1e8cdbece0c86de" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft_1add78871fbb64a6b388b379a900b74a16" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl" kind="class"><name>gr::satellites::ao40_deinterleaver_soft_impl</name>
+    <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl_1a9d739243ba49d1fb8a23f16ecd994aab" kind="function"><name>ao40_deinterleaver_soft_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl_1ad57e6102db85987c527c73c5d2516b1f" kind="function"><name>~ao40_deinterleaver_soft_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl_1a4e520d01bd55b8b1e25428cf282ebbed" kind="function"><name>forecast</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl_1aeb990ba07960c6b600af05151850d4f1" kind="function"><name>general_work</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl_1af0b094913001b04c4eb7289ba503e9a7" kind="function"><name>msg_handler</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1ao40__rs__decoder" kind="class"><name>gr::satellites::ao40_rs_decoder</name>
+    <member refid="classgr_1_1satellites_1_1ao40__rs__decoder_1a2f2556856cda148b4b79cdcd828483d9" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__rs__decoder_1a9dde7e74f8d62525f3b50f8414e2d1b9" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1ao40__rs__decoder__impl" kind="class"><name>gr::satellites::ao40_rs_decoder_impl</name>
+    <member refid="classgr_1_1satellites_1_1ao40__rs__decoder__impl_1a512006a94c62a8a74d8f4d555c98f9a7" kind="variable"><name>d_verbose</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__rs__decoder__impl_1a8bc52fae806af8dfec96dce04dd391b3" kind="function"><name>ao40_rs_decoder_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__rs__decoder__impl_1a5c37463d21a6b0ff06e1f1780bafaffb" kind="function"><name>~ao40_rs_decoder_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__rs__decoder__impl_1afb838db5a51a4841c4af7c9ca7b8b716" kind="function"><name>forecast</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__rs__decoder__impl_1a534bd51f4d963630e90662f9b58b7dde" kind="function"><name>general_work</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__rs__decoder__impl_1a7cda94d2cc704cd9f2c974ef40e670d2" kind="function"><name>msg_handler</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1ao40__syncframe" kind="class"><name>gr::satellites::ao40_syncframe</name>
+    <member refid="classgr_1_1satellites_1_1ao40__syncframe_1af21b1e22692d6c40a638c0dd49f1148b" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__syncframe_1a8ec771e2d2147e89f6b3d90178515799" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1ao40__syncframe__impl" kind="class"><name>gr::satellites::ao40_syncframe_impl</name>
+    <member refid="classgr_1_1satellites_1_1ao40__syncframe__impl_1a845760dd0e0a322c0f7112b7d99fbbb1" kind="variable"><name>d_threshold</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__syncframe__impl_1af7e2fe66ec0de12622b6a9260e362bda" kind="variable"><name>d_syncword</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__syncframe__impl_1ae12f4530ab332b367f1009d58a62a01c" kind="function"><name>ao40_syncframe_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__syncframe__impl_1a09f003f00c0889e841e530288cb08c69" kind="function"><name>~ao40_syncframe_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__syncframe__impl_1a687bc14e17534ac0ef46d642c68d7688" kind="function"><name>work</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1ao40__syncframe__soft" kind="class"><name>gr::satellites::ao40_syncframe_soft</name>
+    <member refid="classgr_1_1satellites_1_1ao40__syncframe__soft_1a7942642e5f2acc8479ef83a0117f2f04" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__syncframe__soft_1a595f4b3fb0a36aa0dc48ea6c4cf104a4" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1ao40__syncframe__soft__impl" kind="class"><name>gr::satellites::ao40_syncframe_soft_impl</name>
+    <member refid="classgr_1_1satellites_1_1ao40__syncframe__soft__impl_1ae6919d86e1cdfc9c9dfb3839b9f3328a" kind="variable"><name>d_threshold</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__syncframe__soft__impl_1a6b3004477fa7f6404ab34f9e3f227202" kind="variable"><name>d_syncword</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__syncframe__soft__impl_1af9edb9ccbe4df5a7e2c61c915ff2b139" kind="function"><name>ao40_syncframe_soft_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__syncframe__soft__impl_1a18f7d0405213e1b9ef56dbe2e14c0793" kind="function"><name>~ao40_syncframe_soft_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1ao40__syncframe__soft__impl_1a5e3a9e1f49de35792a61c715142cc7f1" kind="function"><name>work</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1ax100__decode" kind="class"><name>gr::satellites::ax100_decode</name>
+    <member refid="classgr_1_1satellites_1_1ax100__decode_1a418a9d3477768d4d89ab404cbd95e9e8" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1ax100__decode_1abed83370c1d6df0aeafb437357582c90" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1ax100__decode__impl" kind="class"><name>gr::satellites::ax100_decode_impl</name>
+    <member refid="classgr_1_1satellites_1_1ax100__decode__impl_1a4b79a81556c96deb42eb309b9e51a78f" kind="variable"><name>d_verbose</name></member>
+    <member refid="classgr_1_1satellites_1_1ax100__decode__impl_1ab4cb9a7b781bbaa42ad32c435742ffdd" kind="function"><name>ax100_decode_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1ax100__decode__impl_1a236509308af2f4bc80eeaa9021a75c78" kind="function"><name>~ax100_decode_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1ax100__decode__impl_1a77311b4fa37b7d716f6f2b2a91c4994c" kind="function"><name>forecast</name></member>
+    <member refid="classgr_1_1satellites_1_1ax100__decode__impl_1a10f4f0ee4bd7b6a6159e86ccdf0ea351" kind="function"><name>general_work</name></member>
+    <member refid="classgr_1_1satellites_1_1ax100__decode__impl_1a3ff15f1b1a71ee9830eb4cdec290a4e4" kind="function"><name>msg_handler</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1decode__rs" kind="class"><name>gr::satellites::decode_rs</name>
+    <member refid="classgr_1_1satellites_1_1decode__rs_1ac7e507a33795e5a74aa5c5ef47196c97" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs_1ab58d62a9bc74decbff695da21043210e" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1decode__rs__general" kind="class"><name>gr::satellites::decode_rs_general</name>
+    <member refid="classgr_1_1satellites_1_1decode__rs__general_1aa9a08a160a8b66b7fb89a751de857b7d" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__general_1afab6e2815e5105de8ac0b43f8712e706" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1decode__rs__general__impl" kind="class"><name>gr::satellites::decode_rs_general_impl</name>
+    <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1a7e3e40299c28d764a194c55852b3a7b8" kind="variable"><name>d_verbose</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1a31db2f65b7ecd4dba089c49035e863b4" kind="variable"><name>d_rs</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1a285fa2ef6c0b19279e578224ba82ead9" kind="variable"><name>d_nroots</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1a3049cbcfee4a90fe8da78a6878dd08b8" kind="function"><name>decode_rs_general_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1aba1405927040491559dfb3335e7d7511" kind="function"><name>~decode_rs_general_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1a5ddead852553843e3f662b34d6ddf2ea" kind="function"><name>forecast</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1a81b12b058632c2567107138e0909dcc1" kind="function"><name>general_work</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1a036fb5be364d42d9f3b107161a1db64e" kind="function"><name>msg_handler</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1decode__rs__impl" kind="class"><name>gr::satellites::decode_rs_impl</name>
+    <member refid="classgr_1_1satellites_1_1decode__rs__impl_1ace6afc74e834e57cf44af0bb5e62152d" kind="variable"><name>d_verbose</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__impl_1ab50df8e627e73b34f571d9a7447a5bfa" kind="variable"><name>d_basis</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__impl_1aa3d661ad3d09eddd56a111efd0c1e3ef" kind="function"><name>decode_rs_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__impl_1a7be95ff4d906c2803d731445d7a23b47" kind="function"><name>~decode_rs_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__impl_1a694272674b42a923e90f3228fb72f626" kind="function"><name>forecast</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__impl_1a2150adb379a813bfae885d440bf3aeb8" kind="function"><name>general_work</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__impl_1abefcf641d24848efbd294f41c1eb3d57" kind="function"><name>msg_handler</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1decode__rs__interleaved" kind="class"><name>gr::satellites::decode_rs_interleaved</name>
+    <member refid="classgr_1_1satellites_1_1decode__rs__interleaved_1a07697ba6e58e73a5cddb329ab91f3722" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__interleaved_1a3b26be587ddbb3f82b85a8cb2f97f40e" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1decode__rs__interleaved__impl" kind="class"><name>gr::satellites::decode_rs_interleaved_impl</name>
+    <member refid="classgr_1_1satellites_1_1decode__rs__interleaved__impl_1a2855a80e417f63576fa5ea529e9bc456" kind="variable"><name>d_verbose</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__interleaved__impl_1a1ff71b1df25c74471345bada929cac4c" kind="variable"><name>d_basis</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__interleaved__impl_1ae28447818c59298fafff5e6aa9f826e5" kind="variable"><name>d_codewords</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__interleaved__impl_1aeccdb309cc85f1c38a764666bbd6e313" kind="function"><name>decode_rs_interleaved_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__interleaved__impl_1a0d4ac571bec33aceb8d5a8009b3264a2" kind="function"><name>~decode_rs_interleaved_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__interleaved__impl_1a895ffedfbb83d44b595554aea820f834" kind="function"><name>forecast</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__interleaved__impl_1a21c8f2a449151d09e52bbd2a48e63909" kind="function"><name>general_work</name></member>
+    <member refid="classgr_1_1satellites_1_1decode__rs__interleaved__impl_1a80e5c7167a94b3128c664bef499eb252" kind="function"><name>msg_handler</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1descrambler308" kind="class"><name>gr::satellites::descrambler308</name>
+    <member refid="classgr_1_1satellites_1_1descrambler308_1abbe101a705cc9b1ef1736f59441e0acd" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1descrambler308_1a9c2b08989636f599cb2bc21320eaa8fe" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1descrambler308__impl" kind="class"><name>gr::satellites::descrambler308_impl</name>
+    <member refid="classgr_1_1satellites_1_1descrambler308__impl_1aadd322cdfdb6981594aa5d64a666dc2b" kind="variable"><name>d_counter</name></member>
+    <member refid="classgr_1_1satellites_1_1descrambler308__impl_1ac82bba19d6761feb5ff93bf694f2bda8" kind="variable"><name>d_shift_register</name></member>
+    <member refid="classgr_1_1satellites_1_1descrambler308__impl_1a8d05adc159e3c4dbd18784a364606574" kind="function"><name>d_scramble_bit</name></member>
+    <member refid="classgr_1_1satellites_1_1descrambler308__impl_1a8d460d54c7da2fb95a3d3bc0be5b057d" kind="function"><name>descrambler308_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1descrambler308__impl_1a1da81ea87ff22f770715902e7150fbf4" kind="function"><name>~descrambler308_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1descrambler308__impl_1a23d62d2da3441ce2e4e6ac872f1b4f11" kind="function"><name>work</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1encode__rs" kind="class"><name>gr::satellites::encode_rs</name>
+    <member refid="classgr_1_1satellites_1_1encode__rs_1a50f7f4afbbdf71c7885242c9f29ef318" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1encode__rs_1a6343b5c13af03d891e0b3f39503fb8fb" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1encode__rs__impl" kind="class"><name>gr::satellites::encode_rs_impl</name>
+    <member refid="classgr_1_1satellites_1_1encode__rs__impl_1a5ecc654fdd98be240863bba82c46a6c0" kind="variable"><name>d_basis</name></member>
+    <member refid="classgr_1_1satellites_1_1encode__rs__impl_1a3c25c05d0e2eeedf1b6a15212f721fbc" kind="function"><name>encode_rs_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1encode__rs__impl_1ac55ecb92f1777d7b9d44dee92f163ebc" kind="function"><name>~encode_rs_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1encode__rs__impl_1a6b1ac9739df330c6f1323e409759e307" kind="function"><name>forecast</name></member>
+    <member refid="classgr_1_1satellites_1_1encode__rs__impl_1afb8962f1ffa1a5e8623c7b94a134e023" kind="function"><name>general_work</name></member>
+    <member refid="classgr_1_1satellites_1_1encode__rs__impl_1a0d69408bdb5ca0a5bfce257fbac1e980" kind="function"><name>msg_handler</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1lilacsat1__demux" kind="class"><name>gr::satellites::lilacsat1_demux</name>
+    <member refid="classgr_1_1satellites_1_1lilacsat1__demux_1a774897cd42254decac5f777fcd5bd2c1" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1lilacsat1__demux_1a5a0b5feededf68e066da5c34df1d1689" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1lilacsat1__demux__impl" kind="class"><name>gr::satellites::lilacsat1_demux_impl</name>
+    <member refid="classgr_1_1satellites_1_1lilacsat1__demux__impl_1af6d2fd2bdaa3495dff4889ff858e84d8" kind="variable"><name>d_position</name></member>
+    <member refid="classgr_1_1satellites_1_1lilacsat1__demux__impl_1ab2645579b949d663ca70f50b2371b6fd" kind="variable"><name>d_tag</name></member>
+    <member refid="classgr_1_1satellites_1_1lilacsat1__demux__impl_1a1609c457129ef30fe1f35c39c2393a7b" kind="function"><name>lilacsat1_demux_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1lilacsat1__demux__impl_1ab712624863517d0fe89ce30cf28d8390" kind="function"><name>~lilacsat1_demux_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1lilacsat1__demux__impl_1a0167065ef5ad2611cb9900cee86bf013" kind="function"><name>work</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1nusat__decoder" kind="class"><name>gr::satellites::nusat_decoder</name>
+    <member refid="classgr_1_1satellites_1_1nusat__decoder_1a85aaf670c7f36c10d3cab83c62e0faf1" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1nusat__decoder_1a2b465b4bf4570787a6c53c77836529f6" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1nusat__decoder__impl" kind="class"><name>gr::satellites::nusat_decoder_impl</name>
+    <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1af57f90c70bd7aa970d1f181a0cce825a" kind="variable"><name>d_scrambler_sequence</name></member>
+    <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1a4cd7fa8b51829106e84ed2921e61d5ac" kind="variable"><name>crc8_table</name></member>
+    <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1af9e261f71bb800ed76c15f9a00909ce3" kind="function"><name>crc8</name></member>
+    <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1a31502cc2e68fef76d9de1278c12a9352" kind="function"><name>nusat_decoder_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1acb5dd52673ade8175644d4920e759fb9" kind="function"><name>~nusat_decoder_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1ae1b57fe914d17e4d3fea5a48400c47d8" kind="function"><name>forecast</name></member>
+    <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1a72ee70d8baf16474c7ba6dc3b799ba7c" kind="function"><name>general_work</name></member>
+    <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1a711164747fd5800ade5cd0affbeac101" kind="function"><name>msg_handler</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1rscode__decoder" kind="class"><name>gr::satellites::rscode_decoder</name>
+    <member refid="classgr_1_1satellites_1_1rscode__decoder_1a03178ca66a3a9eb201e3ce0258d4ac08" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1rscode__decoder_1ac5180d89575ad53be9356dec8863d3a3" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1rscode__decoder__impl" kind="class"><name>gr::satellites::rscode_decoder_impl</name>
+    <member refid="classgr_1_1satellites_1_1rscode__decoder__impl_1a5770e3e79801faafce2e30abc44ce683" kind="variable"><name>d_npar</name></member>
+    <member refid="classgr_1_1satellites_1_1rscode__decoder__impl_1ad1cc28f8259b24ae6b3eed3583debbe0" kind="function"><name>rscode_decoder_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1rscode__decoder__impl_1a031ddcb63a251806e92b3173ef12ed11" kind="function"><name>~rscode_decoder_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1rscode__decoder__impl_1a7e21603e1457f2469b2edfa60c101fe9" kind="function"><name>forecast</name></member>
+    <member refid="classgr_1_1satellites_1_1rscode__decoder__impl_1ae31069178eae1a5e52e133e81dbe9062" kind="function"><name>general_work</name></member>
+    <member refid="classgr_1_1satellites_1_1rscode__decoder__impl_1a71415a81e66523a0f40663818254de56" kind="function"><name>msg_handler</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1u482c__decode" kind="class"><name>gr::satellites::u482c_decode</name>
+    <member refid="classgr_1_1satellites_1_1u482c__decode_1af24aa9119b04bed38b45e600a9a0c41e" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1u482c__decode_1aa8ac280cc8e0dd3355004c638e8c4133" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1u482c__decode__impl" kind="class"><name>gr::satellites::u482c_decode_impl</name>
+    <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a55e67c643f5eb713c95a44e532d61914" kind="variable"><name>d_verbose</name></member>
+    <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a6a4d7aa941d621a3e92d2fbe510dd7d2" kind="variable"><name>d_ccsds_sequence</name></member>
+    <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a674ec6d3f747544a50b00ba5456df474" kind="variable"><name>d_vp</name></member>
+    <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a40f8191bf5708ec53c2a54a3bbc4cc5f" kind="variable"><name>d_viterbi</name></member>
+    <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1af4795b6484f9c31b2b0639a67b8b678a" kind="variable"><name>d_scrambler</name></member>
+    <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1acf117b8afcb352064fa2af6a3b53fa86" kind="variable"><name>d_rs</name></member>
+    <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a90c11f1c26ff2551b880f8f08f492c9f" kind="function"><name>u482c_decode_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a23daee0ca89b49836762307ce8967f53" kind="function"><name>~u482c_decode_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a918f4066ab3c8a627c7356a2ffc03833" kind="function"><name>forecast</name></member>
+    <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a4330aa7aab0d1cb4596b212b1a8b0ae6" kind="function"><name>general_work</name></member>
+    <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a5079b8768bb8a35af5c8edb47f74b4f7" kind="function"><name>msg_handler</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1varlen__packet__framer" kind="class"><name>gr::satellites::varlen_packet_framer</name>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__framer_1a00bad6f4c54c8baf53dc93fc282cd105" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__framer_1acc0bef2c620924ec7c30a3b9964ff5aa" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1varlen__packet__framer__impl" kind="class"><name>gr::satellites::varlen_packet_framer_impl</name>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1adbddead324913023b9efc935274c8f5a" kind="variable"><name>d_header_length</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1ad746012ce6fe8c6f754b8c70b7bcb266" kind="variable"><name>d_use_golay</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1abaa0fac43236673e3b4c870853bf8590" kind="variable"><name>d_sync_word</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a9605f184e459b1e58b5055285ceced7b" kind="variable"><name>d_endianness</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a8956eaa01cd03babd544935542b89464" kind="variable"><name>d_packet_tag</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a4fe6c1b7bb5c9d52b5605f3a46035524" kind="variable"><name>d_ninput_items_required</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a08a0b869e2e01f1378e904de8842bd6f" kind="function"><name>varlen_packet_framer_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a88eccac66633075969cdb31117062359" kind="function"><name>~varlen_packet_framer_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1a54a660a5f49f2f3e18473d262585e507" kind="function"><name>forecast</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__framer__impl_1af58937bf69d65e0913513ebe409656a5" kind="function"><name>general_work</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1varlen__packet__tagger" kind="class"><name>gr::satellites::varlen_packet_tagger</name>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__tagger_1a01799293d4267972430e631cb7fdc55a" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__tagger_1a33a17f3d9134302bafcb384f7e57dede" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1satellites_1_1varlen__packet__tagger__impl" kind="class"><name>gr::satellites::varlen_packet_tagger_impl</name>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__tagger__impl_1a30796cc0b219ede79edd714da8829f9c" kind="variable"><name>d_header_length</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__tagger__impl_1afd38319271a4ad05f49caf96b43b179e" kind="variable"><name>d_mtu</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__tagger__impl_1a38e9dcaf9d953ffcd81cc7b0c4270baa" kind="variable"><name>d_use_golay</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__tagger__impl_1a22030230e0f3b81dcaa056598645528e" kind="variable"><name>d_endianness</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__tagger__impl_1a0d9934cd186cba540ccf9d975d282aa5" kind="variable"><name>d_sync_tag</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__tagger__impl_1a3665894c1f6b349b0cf7b5e403cce53a" kind="variable"><name>d_packet_tag</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__tagger__impl_1a45d8a35cffb2e8a75917f499388307e9" kind="variable"><name>d_have_sync</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__tagger__impl_1a6b038466727212756271038547c98e4b" kind="variable"><name>d_ninput_items_required</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__tagger__impl_1a7e43301ddcfae1585865b3d01ed21a4e" kind="function"><name>bits2len</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__tagger__impl_1a851e2d0e6e76940824cb6501746abba3" kind="function"><name>varlen_packet_tagger_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__tagger__impl_1a32509cab7790b1caade7e9b447e84bc2" kind="function"><name>~varlen_packet_tagger_impl</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__tagger__impl_1a35d599295dd7f40c5a293705eacbc874" kind="function"><name>forecast</name></member>
+    <member refid="classgr_1_1satellites_1_1varlen__packet__tagger__impl_1a39f598fb8cdb6086203cb263b8d4a4da" kind="function"><name>general_work</name></member>
+  </compound>
+  <compound refid="namespacegr" kind="namespace"><name>gr</name>
+  </compound>
+  <compound refid="namespacegr_1_1satellites" kind="namespace"><name>gr::satellites</name>
+  </compound>
+  <compound refid="namespacestd" kind="namespace"><name>std</name>
+  </compound>
+  <compound refid="ao40__deinterleaver_8h" kind="file"><name>ao40_deinterleaver.h</name>
+  </compound>
+  <compound refid="ao40__deinterleaver__impl_8h" kind="file"><name>ao40_deinterleaver_impl.h</name>
+  </compound>
+  <compound refid="ao40__deinterleaver__soft_8h" kind="file"><name>ao40_deinterleaver_soft.h</name>
+  </compound>
+  <compound refid="ao40__deinterleaver__soft__impl_8h" kind="file"><name>ao40_deinterleaver_soft_impl.h</name>
+  </compound>
+  <compound refid="ao40__rs__decoder_8h" kind="file"><name>ao40_rs_decoder.h</name>
+  </compound>
+  <compound refid="ao40__rs__decoder__impl_8h" kind="file"><name>ao40_rs_decoder_impl.h</name>
+  </compound>
+  <compound refid="ao40__syncframe_8h" kind="file"><name>ao40_syncframe.h</name>
+  </compound>
+  <compound refid="ao40__syncframe__impl_8h" kind="file"><name>ao40_syncframe_impl.h</name>
+    <member refid="ao40__syncframe__impl_8h_1ae8afdb20071499da11fd7ed18862d562" kind="define"><name>SYNCLEN</name></member>
+  </compound>
+  <compound refid="ao40__syncframe__soft_8h" kind="file"><name>ao40_syncframe_soft.h</name>
+  </compound>
+  <compound refid="ao40__syncframe__soft__impl_8h" kind="file"><name>ao40_syncframe_soft_impl.h</name>
+    <member refid="ao40__syncframe__soft__impl_8h_1ae8afdb20071499da11fd7ed18862d562" kind="define"><name>SYNCLEN</name></member>
+  </compound>
+  <compound refid="api_8h" kind="file"><name>api.h</name>
+    <member refid="api_8h_1a98c3b6b4e453b850ade1b834402b2538" kind="define"><name>SATELLITES_API</name></member>
+  </compound>
+  <compound refid="ax100__decode_8h" kind="file"><name>ax100_decode.h</name>
+  </compound>
+  <compound refid="ax100__decode__impl_8h" kind="file"><name>ax100_decode_impl.h</name>
+  </compound>
+  <compound refid="decode__rs_8h" kind="file"><name>decode_rs.h</name>
+  </compound>
+  <compound refid="decode__rs__general_8h" kind="file"><name>decode_rs_general.h</name>
+  </compound>
+  <compound refid="decode__rs__general__impl_8h" kind="file"><name>decode_rs_general_impl.h</name>
+  </compound>
+  <compound refid="decode__rs__impl_8h" kind="file"><name>decode_rs_impl.h</name>
+  </compound>
+  <compound refid="decode__rs__interleaved_8h" kind="file"><name>decode_rs_interleaved.h</name>
+  </compound>
+  <compound refid="decode__rs__interleaved__impl_8h" kind="file"><name>decode_rs_interleaved_impl.h</name>
+  </compound>
+  <compound refid="descrambler308_8h" kind="file"><name>descrambler308.h</name>
+  </compound>
+  <compound refid="descrambler308__impl_8h" kind="file"><name>descrambler308_impl.h</name>
+  </compound>
+  <compound refid="ecc_8h" kind="file"><name>ecc.h</name>
+    <member refid="ecc_8h_1a297404cf4494159d2a88b39c77103363" kind="define"><name>MAX_NPAR</name></member>
+    <member refid="ecc_8h_1aa8cecfc5c5c054d2875c03e77b7be15d" kind="define"><name>TRUE</name></member>
+    <member refid="ecc_8h_1aa93f0eb578d23995850d61f7d61c55c1" kind="define"><name>FALSE</name></member>
+    <member refid="ecc_8h_1a8521f0d9a069c55226a07fc055408eed" kind="define"><name>MAXDEG</name></member>
+    <member refid="ecc_8h_1affaac463542a40708765b460819c3a11" kind="typedef"><name>BIT32</name></member>
+    <member refid="ecc_8h_1ace493edc80acaea5344a606de06d5257" kind="typedef"><name>BIT16</name></member>
+    <member refid="ecc_8h_1ae92bed6593d875f29f79a12f10e84b5b" kind="variable"><name>pBytes</name></member>
+    <member refid="ecc_8h_1a5dd915356908211565387e01d4a9cd8d" kind="variable"><name>synBytes</name></member>
+    <member refid="ecc_8h_1a48f76a8c0dc23567f303ed6aa221e078" kind="variable"><name>DEBUG</name></member>
+    <member refid="ecc_8h_1afa18ed1ddff9b27670fbecc9b5190fa9" kind="variable"><name>gexp</name></member>
+    <member refid="ecc_8h_1a7d2615f445a9951ef1035da72d589476" kind="variable"><name>glog</name></member>
+    <member refid="ecc_8h_1a39e5f5055851732121a46dab479b3bfc" kind="function"><name>initialize_ecc</name></member>
+    <member refid="ecc_8h_1a75555933650a50987a9c5b39aff2b26a" kind="function"><name>check_syndrome</name></member>
+    <member refid="ecc_8h_1a231146bc254c1a49a9d3cc94c84cfd4e" kind="function"><name>decode_data</name></member>
+    <member refid="ecc_8h_1a33cac00a5b8d040514e163b6d4f97b90" kind="function"><name>encode_data</name></member>
+    <member refid="ecc_8h_1ae66d2a67ac172fd2890b9cd25691d5a3" kind="function"><name>crc_ccitt</name></member>
+    <member refid="ecc_8h_1a65eb83f04917d12d687aaa70449a3036" kind="function"><name>init_galois_tables</name></member>
+    <member refid="ecc_8h_1aea2f56d785c0dfc8af1f9bc2c78294f4" kind="function"><name>ginv</name></member>
+    <member refid="ecc_8h_1a67e5fdd13f145fe895d82b04bc7bffc3" kind="function"><name>gmult</name></member>
+    <member refid="ecc_8h_1a6da28744dd026ab3b7deb96086c74f0d" kind="function"><name>correct_errors_erasures</name></member>
+    <member refid="ecc_8h_1af5ea13e698651189b3705cb2b1e7d2cf" kind="function"><name>add_polys</name></member>
+    <member refid="ecc_8h_1adeed254ee2d542d7da8d54d5d5762f17" kind="function"><name>scale_poly</name></member>
+    <member refid="ecc_8h_1ad6079f119d46b188fc8f0c8f98cbbc03" kind="function"><name>mult_polys</name></member>
+    <member refid="ecc_8h_1aedca0b4d3e5bef4c830e5e82b8ebe655" kind="function"><name>copy_poly</name></member>
+    <member refid="ecc_8h_1afe3883a12ae28716adce4ede69d58191" kind="function"><name>zero_poly</name></member>
+  </compound>
+  <compound refid="encode__rs_8h" kind="file"><name>encode_rs.h</name>
+  </compound>
+  <compound refid="encode__rs__impl_8h" kind="file"><name>encode_rs_impl.h</name>
+  </compound>
+  <compound refid="golay24_8h" kind="file"><name>golay24.h</name>
+    <member refid="golay24_8h_1a4b54d9ede229d591fd5a068f9e7bc100" kind="function"><name>decode_golay24</name></member>
+    <member refid="golay24_8h_1ae2d611e47d5b45cc8a558a6f15586661" kind="function"><name>encode_golay24</name></member>
+  </compound>
+  <compound refid="group__defs_8dox" kind="file"><name>group_defs.dox</name>
+  </compound>
+  <compound refid="lilacsat1__demux_8h" kind="file"><name>lilacsat1_demux.h</name>
+  </compound>
+  <compound refid="lilacsat1__demux__impl_8h" kind="file"><name>lilacsat1_demux_impl.h</name>
+  </compound>
+  <compound refid="main__page_8dox" kind="file"><name>main_page.dox</name>
+  </compound>
+  <compound refid="nusat__decoder_8h" kind="file"><name>nusat_decoder.h</name>
+  </compound>
+  <compound refid="nusat__decoder__impl_8h" kind="file"><name>nusat_decoder_impl.h</name>
+    <member refid="nusat__decoder__impl_8h_1aec640b606a07c7f52ab7017cba7200b7" kind="define"><name>INCLUDED_SATELLITES_NUSAT_DECODERR_IMPL_H</name></member>
+    <member refid="nusat__decoder__impl_8h_1a1f15293623649a310a7c68ff240f9647" kind="define"><name>MSG_LEN</name></member>
+    <member refid="nusat__decoder__impl_8h_1ab8f5e10b9f780e53f9583724ac965a0c" kind="define"><name>HEADER_LEN</name></member>
+    <member refid="nusat__decoder__impl_8h_1a3d2f9719f5ef9007b41c1341521cdd8a" kind="define"><name>LEN_BYTE</name></member>
+    <member refid="nusat__decoder__impl_8h_1a5d85f52840e44e559bf25aa6dd5593c4" kind="define"><name>CRC_BYTE</name></member>
+  </compound>
+  <compound refid="randomizer_8h" kind="file"><name>randomizer.h</name>
+    <member refid="randomizer_8h_1aabaa21c02c14c84326c9cc87c0c27e06" kind="function"><name>ccsds_generate_sequence</name></member>
+    <member refid="randomizer_8h_1a278b0faf9760205fef8ef39f428a873f" kind="function"><name>ccsds_xor_sequence</name></member>
+  </compound>
+  <compound refid="rs_8h" kind="file"><name>rs.h</name>
+    <member refid="rs_8h_1ae480dcd4682b4ad7442fdd1db297083e" kind="define"><name>MAX_FRAME_LEN</name></member>
+    <member refid="rs_8h_1a24c79fbe6b7b653a65358ab0e90871f1" kind="define"><name>PARITY_BYTES</name></member>
+    <member refid="rs_8h_1a2dbcea67be43f2d4f7c10f88cb3d8318" kind="define"><name>BASIS_CONVENTIONAL</name></member>
+    <member refid="rs_8h_1a920ed54a97e8bafa074c3bfc7a4af97e" kind="define"><name>BASIS_DUAL</name></member>
+  </compound>
+  <compound refid="rscode__decoder_8h" kind="file"><name>rscode_decoder.h</name>
+  </compound>
+  <compound refid="rscode__decoder__impl_8h" kind="file"><name>rscode_decoder_impl.h</name>
+    <member refid="rscode__decoder__impl_8h_1a510384812b26c7525b01a8703dd9ce2e" kind="define"><name>INCLUDED_SATELLITES_RSCODE_DECODERR_IMPL_H</name></member>
+    <member refid="rscode__decoder__impl_8h_1a0466137f6e26046add38434ab111e7dc" kind="define"><name>RS_LEN</name></member>
+  </compound>
+  <compound refid="u482c__decode_8h" kind="file"><name>u482c_decode.h</name>
+  </compound>
+  <compound refid="u482c__decode__impl_8h" kind="file"><name>u482c_decode_impl.h</name>
+    <member refid="u482c__decode__impl_8h_1ab3233df23abf571ae7c6e7e165cffd77" kind="define"><name>INCLUDED_SATELLITES_U428C_DECODE_IMPL_H</name></member>
+    <member refid="u482c__decode__impl_8h_1a0466137f6e26046add38434ab111e7dc" kind="define"><name>RS_LEN</name></member>
+    <member refid="u482c__decode__impl_8h_1ab8f5e10b9f780e53f9583724ac965a0c" kind="define"><name>HEADER_LEN</name></member>
+  </compound>
+  <compound refid="varlen__packet__framer_8h" kind="file"><name>varlen_packet_framer.h</name>
+  </compound>
+  <compound refid="varlen__packet__framer__impl_8h" kind="file"><name>varlen_packet_framer_impl.h</name>
+  </compound>
+  <compound refid="varlen__packet__tagger_8h" kind="file"><name>varlen_packet_tagger.h</name>
+  </compound>
+  <compound refid="varlen__packet__tagger__impl_8h" kind="file"><name>varlen_packet_tagger_impl.h</name>
+  </compound>
+  <compound refid="viterbi_8h" kind="file"><name>viterbi.h</name>
+    <member refid="viterbi_8h_1a5ebf7df1dd26a1694f5e89da649f1443" kind="define"><name>VITERBI_CONSTRAINT</name></member>
+    <member refid="viterbi_8h_1ae65f985e386f37c52c8ea93030d472d2" kind="define"><name>VITERBI_TAIL</name></member>
+    <member refid="viterbi_8h_1aec143b14698e0d20f52eb6b709d85eba" kind="define"><name>VITERBI_RATE</name></member>
+    <member refid="viterbi_8h_1ac4de755dd1e3f60b5cbf8743e9259d63" kind="define"><name>V27POLYA</name></member>
+    <member refid="viterbi_8h_1a48615fae3ecf1c3874e893702629e6f6" kind="define"><name>V27POLYB</name></member>
+    <member refid="viterbi_8h_1a65589c588571c5fbb1cc88884a4509cb" kind="function"><name>create_viterbi_packed</name></member>
+    <member refid="viterbi_8h_1ace8db595385a391cb3682e2abf2824d0" kind="function"><name>init_viterbi_packed</name></member>
+    <member refid="viterbi_8h_1a1c241496e04488c65abe0503e08623ae" kind="function"><name>update_viterbi_packed</name></member>
+    <member refid="viterbi_8h_1ac2d726a9fd708b044a878c797b1a666b" kind="function"><name>chainback_viterbi_packed</name></member>
+    <member refid="viterbi_8h_1aa7dc3e69fa75d0d77995dc8bd4865eae" kind="function"><name>delete_viterbi_packed</name></member>
+    <member refid="viterbi_8h_1a11eefed2dce7ac1db75ca0f214e34cc2" kind="function"><name>encode_viterbi_packed</name></member>
+    <member refid="viterbi_8h_1aa6e28c0aa5f0c62d62e718d47f0f6f90" kind="function"><name>set_viterbi_polynomial_packed</name></member>
+  </compound>
+  <compound refid="group__block" kind="group"><name>block</name>
+  </compound>
+  <compound refid="dir_d44c64559bbebec7f509842c48db8b23" kind="dir"><name>include</name>
+  </compound>
+  <compound refid="dir_97aefd0d527b934f1d99a682da8fe6a9" kind="dir"><name>lib</name>
+  </compound>
+  <compound refid="dir_ee57a70fced1f14821cab8c3f1eb4224" kind="dir"><name>rscode</name>
+  </compound>
+  <compound refid="dir_b9c9daf88af0b53029abb567b89bc0b9" kind="dir"><name>satellites</name>
+  </compound>
+  <compound refid="indexpage" kind="page"><name>index</name>
+  </compound>
+</doxygenindex>

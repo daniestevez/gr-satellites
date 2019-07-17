@@ -73,7 +73,6 @@ GR_PYTHON_INSTALL(
     append_crc32c.py
     dsat_image_decoder.py
     strip_ax25_header.py
-    ccsds_telemetry.py
     picsat_telemetry.py
     picsat_telemetry_parser.py
     snet_telemetry.py
@@ -113,9 +112,8 @@ GR_PYTHON_INSTALL(
     lume1_telemetry_parser.py
     lume1_telemetry.py
     ecss_pus.py
-    ccsds_space_packet.py
     qo100_telemetry_print.py
-    DESTINATION ${GR_PYTHON_DIR}/satellites
+    space_packet_parser.py DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
 ########################################################################
