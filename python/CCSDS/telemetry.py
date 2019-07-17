@@ -26,10 +26,10 @@ Construct for the Primary Header of the CCSDS Telemetry Space Data Link Protocol
 
 from construct import *
 
-PrimaryHeader = BitStruct('transfer_frame_version_number' / BitInteger(2),
-                          'spacecraft_id' / BitInteger(10),
-                          'virtual_channel_id' / BitInteger(3),
+PrimaryHeader = BitStruct('transfer_frame_version_number' / BitsInteger(2),
+                          'spacecraft_id' / BitsInteger(10),
+                          'virtual_channel_id' / BitsInteger(3),
                           'ocf_flag' / Flag,
-                          'master_channel_frame_count' / BitInteger(8),
-                          'virtual_channel_frame_count' / BitInteger(8),
-                          'transfer_frame_data_field_status' / BitInteger(16))
+                          'master_channel_frame_count' / BitsInteger(8),
+                          'virtual_channel_frame_count' / BitsInteger(8),
+                          'transfer_frame_data_field_status' / BitsInteger(16))

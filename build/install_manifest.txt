@@ -111,6 +111,11 @@
 /usr/local/lib/python2.7/dist-packages/satellites/ecss_pus.py
 /usr/local/lib/python2.7/dist-packages/satellites/qo100_telemetry_print.py
 /usr/local/lib/python2.7/dist-packages/satellites/space_packet_parser.py
+/usr/local/lib/python2.7/dist-packages/satellites/space_packet.py
+/usr/local/lib/python2.7/dist-packages/satellites/telemetry.py
+/usr/local/lib/python2.7/dist-packages/satellites/telemetry_parser.py
+/usr/local/lib/python2.7/dist-packages/satellites/telecommand.py
+/usr/local/lib/python2.7/dist-packages/satellites/telecommand_parser.py
 /usr/local/lib/python2.7/dist-packages/satellites/__init__.pyc
 /usr/local/lib/python2.7/dist-packages/satellites/kiss.pyc
 /usr/local/lib/python2.7/dist-packages/satellites/hdlc.pyc
@@ -195,6 +200,11 @@
 /usr/local/lib/python2.7/dist-packages/satellites/ecss_pus.pyc
 /usr/local/lib/python2.7/dist-packages/satellites/qo100_telemetry_print.pyc
 /usr/local/lib/python2.7/dist-packages/satellites/space_packet_parser.pyc
+/usr/local/lib/python2.7/dist-packages/satellites/space_packet.pyc
+/usr/local/lib/python2.7/dist-packages/satellites/telemetry.pyc
+/usr/local/lib/python2.7/dist-packages/satellites/telemetry_parser.pyc
+/usr/local/lib/python2.7/dist-packages/satellites/telecommand.pyc
+/usr/local/lib/python2.7/dist-packages/satellites/telecommand_parser.pyc
 /usr/local/lib/python2.7/dist-packages/satellites/__init__.pyo
 /usr/local/lib/python2.7/dist-packages/satellites/kiss.pyo
 /usr/local/lib/python2.7/dist-packages/satellites/hdlc.pyo
@@ -279,6 +289,11 @@
 /usr/local/lib/python2.7/dist-packages/satellites/ecss_pus.pyo
 /usr/local/lib/python2.7/dist-packages/satellites/qo100_telemetry_print.pyo
 /usr/local/lib/python2.7/dist-packages/satellites/space_packet_parser.pyo
+/usr/local/lib/python2.7/dist-packages/satellites/space_packet.pyo
+/usr/local/lib/python2.7/dist-packages/satellites/telemetry.pyo
+/usr/local/lib/python2.7/dist-packages/satellites/telemetry_parser.pyo
+/usr/local/lib/python2.7/dist-packages/satellites/telecommand.pyo
+/usr/local/lib/python2.7/dist-packages/satellites/telecommand_parser.pyo
 /usr/local/share/gnuradio/grc/blocks/satellites_kiss_to_pdu.xml
 /usr/local/share/gnuradio/grc/blocks/satellites_pdu_to_kiss.xml
 /usr/local/share/gnuradio/grc/blocks/satellites_hdlc_framer.xml
@@ -355,6 +370,8 @@
 /usr/local/share/gnuradio/grc/blocks/satellites_qo100_telemetry_print.xml
 /usr/local/share/gnuradio/grc/blocks/satellites_decode_rs_interleaved.xml
 /usr/local/share/gnuradio/grc/blocks/satellites_space_packet_parser.xml
+/usr/local/share/gnuradio/grc/blocks/satellites_telemetry_parser.xml
+/usr/local/share/gnuradio/grc/blocks/satellites_telecommand_parser.xml
 /usr/local/share/doc/gr-satellites/xml/encode__rs__impl_8h.xml
 /usr/local/share/doc/gr-satellites/xml/classgr_1_1satellites_1_1decode__rs__general__impl.xml
 /usr/local/share/doc/gr-satellites/xml/classgr_1_1satellites_1_1rscode__decoder.xml

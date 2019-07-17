@@ -113,7 +113,12 @@ GR_PYTHON_INSTALL(
     lume1_telemetry.py
     ecss_pus.py
     qo100_telemetry_print.py
-    space_packet_parser.py DESTINATION ${GR_PYTHON_DIR}/satellites
+    CCSDS/space_packet_parser.py
+    CCSDS/space_packet.py
+    CCSDS/telemetry.py
+    CCSDS/telemetry_parser.py
+    CCSDS/telecommand.py
+    CCSDS/telecommand_parser.py DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
 ########################################################################

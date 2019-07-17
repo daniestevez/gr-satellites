@@ -93,5 +93,7 @@ install(FILES
     satellites_lume1_telemetry_parser.xml
     satellites_qo100_telemetry_print.xml
     satellites_decode_rs_interleaved.xml
-    satellites_space_packet_parser.xml DESTINATION share/gnuradio/grc/blocks
+    satellites_space_packet_parser.xml
+    satellites_telemetry_parser.xml
+    satellites_telecommand_parser.xml DESTINATION share/gnuradio/grc/blocks
 )

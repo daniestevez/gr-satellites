@@ -122,7 +122,12 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     "/home/athanasios/gr-satellites/python/lume1_telemetry.py"
     "/home/athanasios/gr-satellites/python/ecss_pus.py"
     "/home/athanasios/gr-satellites/python/qo100_telemetry_print.py"
-    "/home/athanasios/gr-satellites/python/space_packet_parser.py"
+    "/home/athanasios/gr-satellites/python/CCSDS/space_packet_parser.py"
+    "/home/athanasios/gr-satellites/python/CCSDS/space_packet.py"
+    "/home/athanasios/gr-satellites/python/CCSDS/telemetry.py"
+    "/home/athanasios/gr-satellites/python/CCSDS/telemetry_parser.py"
+    "/home/athanasios/gr-satellites/python/CCSDS/telecommand.py"
+    "/home/athanasios/gr-satellites/python/CCSDS/telecommand_parser.py"
     )
 endif()
 
@@ -211,7 +216,12 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     "/home/athanasios/gr-satellites/build/python/lume1_telemetry.pyc"
     "/home/athanasios/gr-satellites/build/python/ecss_pus.pyc"
     "/home/athanasios/gr-satellites/build/python/qo100_telemetry_print.pyc"
-    "/home/athanasios/gr-satellites/build/python/space_packet_parser.pyc"
+    "/home/athanasios/gr-satellites/build/python/CCSDS/space_packet_parser.pyc"
+    "/home/athanasios/gr-satellites/build/python/CCSDS/space_packet.pyc"
+    "/home/athanasios/gr-satellites/build/python/CCSDS/telemetry.pyc"
+    "/home/athanasios/gr-satellites/build/python/CCSDS/telemetry_parser.pyc"
+    "/home/athanasios/gr-satellites/build/python/CCSDS/telecommand.pyc"
+    "/home/athanasios/gr-satellites/build/python/CCSDS/telecommand_parser.pyc"
     "/home/athanasios/gr-satellites/build/python/__init__.pyo"
     "/home/athanasios/gr-satellites/build/python/kiss.pyo"
     "/home/athanasios/gr-satellites/build/python/hdlc.pyo"
@@ -295,7 +305,12 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     "/home/athanasios/gr-satellites/build/python/lume1_telemetry.pyo"
     "/home/athanasios/gr-satellites/build/python/ecss_pus.pyo"
     "/home/athanasios/gr-satellites/build/python/qo100_telemetry_print.pyo"
-    "/home/athanasios/gr-satellites/build/python/space_packet_parser.pyo"
+    "/home/athanasios/gr-satellites/build/python/CCSDS/space_packet_parser.pyo"
+    "/home/athanasios/gr-satellites/build/python/CCSDS/space_packet.pyo"
+    "/home/athanasios/gr-satellites/build/python/CCSDS/telemetry.pyo"
+    "/home/athanasios/gr-satellites/build/python/CCSDS/telemetry_parser.pyo"
+    "/home/athanasios/gr-satellites/build/python/CCSDS/telecommand.pyo"
+    "/home/athanasios/gr-satellites/build/python/CCSDS/telecommand_parser.pyo"
     )
 endif()
 

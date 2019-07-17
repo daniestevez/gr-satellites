@@ -115,6 +115,8 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     "/home/athanasios/gr-satellites/grc/satellites_qo100_telemetry_print.xml"
     "/home/athanasios/gr-satellites/grc/satellites_decode_rs_interleaved.xml"
     "/home/athanasios/gr-satellites/grc/satellites_space_packet_parser.xml"
+    "/home/athanasios/gr-satellites/grc/satellites_telemetry_parser.xml"
+    "/home/athanasios/gr-satellites/grc/satellites_telecommand_parser.xml"
     )
 endif()
 
