@@ -23,7 +23,9 @@
 Construct for the Primary Header of the CCSDS Space Packet ( CCSDS 133.0-B-1 )
 '''
 
+
 from construct import *
+
 
 PrimaryHeader = BitStruct('ccsds_version' / BitsInteger(3),
                           'packet_type' / Flag,
@@ -34,4 +36,11 @@ PrimaryHeader = BitStruct('ccsds_version' / BitsInteger(3),
                           'packet_category' / BitsInteger(5),
                           'sequence_flag' / BitsInteger(2),
                           'packet_id' / BitsInteger(14),
-                          'data_length' / BitsInteger(16))
+                          'data_length' / BitsInteger(16))#,
+                        #  'data' / BitsInteger(this.data_length))
+
+#PayLoad = BitStruct('payload' / BitsInteger(PrimaryHeader.data_length))
+
+FullPacket = Struct('primary' / PrimaryHeader)
+
+

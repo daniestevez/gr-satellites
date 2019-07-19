@@ -683,7 +683,7 @@ import space_packet
 
 class space_packet_parser(gr.basic_block):
     """
-    docstring for block au03_telemetry_parser
+    docstring for block space_packet_parser
     """
     def __init__(self):
         gr.basic_block.__init__(self,
@@ -693,8 +693,10 @@ class space_packet_parser(gr.basic_block):
 
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
+        #self.message_port_register_out(pmt.intern('out'))
 
     def handle_msg(self, msg_pmt):
+        self.message_port_pub(pmt.intern('out'), msg_pmt)
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
             print "[ERROR] Received invalid message type. Expected u8vector"
@@ -702,8 +704,9 @@ class space_packet_parser(gr.basic_block):
         packet = bytearray(pmt.u8vector_elements(msg))
 
         try:
-            data = space_packet.PrimaryHeader.parse(packet[:])
+            data1 = space_packet.FullPacket.parse(packet[:])
+            #data2 = space_packet.PayLoad.parse(packet[8:24])
         except:
-            print "Could not decode telemetry beacon"
+            print "Could not decode space packet"
             return
-        print(data)
+        print(data1)
