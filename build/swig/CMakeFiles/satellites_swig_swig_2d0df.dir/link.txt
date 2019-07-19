@@ -1,1 +1,0 @@
-/usr/bin/c++    -rdynamic CMakeFiles/satellites_swig_swig_2d0df.dir/satellites_swig_swig_2d0df.cpp.o  -o satellites_swig_swig_2d0df 
