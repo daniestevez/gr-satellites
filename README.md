@@ -407,6 +407,11 @@ telemetry packet in the terminal as soon as it receives it.
     gr-frontends. For `lilacsat_fcdpp` and `lilacsat_rtlsdr`,
     when using Doppler correction with Gpredict, you have to set
     437.200MHz as the downlink frequency in Gpredict.
+  * `lucky_7`
+    [Lucky-7](http://lucky7satellite.org/),
+    which transmits 4k8 GFSK telemetry in the 70cm band. It uses a SiLabs
+    Si4463 transceiver with a PN9 scrambler and a CRC-16. You must
+    use FM mode to receive this satellite (437.525MHz).
   * `lume1`
     [LUME-1](https://space.skyrocket.de/doc_sdat/lume-1.htm),
     which transmits
