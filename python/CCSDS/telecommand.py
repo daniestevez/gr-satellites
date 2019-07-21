@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2018 Daniel Estevez <daniel@destevez.net>
+# Copyright 2019 Athanasios Theocharis <athatheoc@gmail.com>
 #
 # This is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 #
-
 '''
 Construct for the Transfer Frame Primary Header of Fig
 the CCSDS TC Space Data Link Protocol ( CCSDS 232.0-B-3 )
