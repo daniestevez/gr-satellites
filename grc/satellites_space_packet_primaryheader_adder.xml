@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<block>
+  <name>space_packet_primaryheader_adder</name>
+  <key>satellites_space_packet_primaryheader_adder</key>
+  <category>[Satellites]/CCSDS</category>
+  <import>import satellites</import>
+  <make>satellites.space_packet_primaryheader_adder($ccsds_version, $packet_type, $secondary_header_flag, $AP_ID, $sequence_flags, $packet_sequence_count, $data_length)</make>
+  <param>
+    <name>CCSDS Version</name>
+    <key>ccsds_version</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>Packet Type</name>
+    <key>packet_type</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>Secondary Header Flag</name>
+    <key>secondary_header_flag</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>Application ID</name>
+    <key>AP_ID</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>Sequence Flags</name>
+    <key>sequence_flags</key>
+    <value>3</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>Packet Sequence Count</name>
+    <key>packet_sequence_count</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>Data Length</name>
+    <key>data_length</key>
+    <value>40000</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

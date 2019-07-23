@@ -95,5 +95,6 @@ install(FILES
     satellites_decode_rs_interleaved.xml
     satellites_space_packet_parser.xml
     satellites_telemetry_parser.xml
-    satellites_telecommand_parser.xml DESTINATION share/gnuradio/grc/blocks
+    satellites_telecommand_parser.xml
+    satellites_space_packet_primaryheader_adder.xml DESTINATION share/gnuradio/grc/blocks
 )

@@ -128,3 +128,4 @@ from qo100_telemetry_print import qo100_telemetry_print
 from space_packet_parser import space_packet_parser
 from telemetry_parser import telemetry_parser
 from telecommand_parser import telecommand_parser
+from space_packet_primaryheader_adder import space_packet_primaryheader_adder

@@ -30,17 +30,14 @@ from construct import *
 PrimaryHeader = BitStruct('ccsds_version' / BitsInteger(3),
                           'packet_type' / Flag,
                           'secondary_header_flag' / Flag,
-                          'process_id' / BitsInteger(4),
-                          'level_flag' / Flag,
-                          'payload_flag' / Flag,
-                          'packet_category' / BitsInteger(5),
-                          'sequence_flag' / BitsInteger(2),
+                          'AP_ID' / BitsInteger(11),
+                          'sequence_flags' / BitsInteger(2),
                           'packet_sequence_count' / BitsInteger(14),
                           'data_length' / BitsInteger(16))
 
-PayLoad = Struct('payload' / Bytes(this._.dataLength))
+PayLoad = Struct('payload' / Byte[10])
 
 FullPacket = Struct('primary' / PrimaryHeader,
-                    'payload' / BitsInteger(this.primary.data_length))
+                    'payload' / Byte[this.primary.data_length])
 
 

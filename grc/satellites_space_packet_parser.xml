@@ -4,70 +4,7 @@
   <key>satellites_space_packet_parser</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
-  <make>satellites.space_packet_parser($ccsds_version, $packet_type, $secondary_header_flag, $process_id, $level_flag, $payload_flag, $packet_category, $sequence_flag, $data_length)</make>
-  <param>
-    <name>CCSDS Version</name>
-    <key>ccsds_version</key>
-    <value>0</value>
-    <type>raw</type>
-    <hide>none</hide>
-  </param>
-  <param>
-    <name>Packet Type</name>
-    <key>packet_type</key>
-    <value>0</value>
-    <type>raw</type>
-    <hide>none</hide>
-  </param>
-  <param>
-    <name>Secondary Header Flag</name>
-    <key>secondary_header_flag</key>
-    <value>0</value>
-    <type>raw</type>
-    <hide>none</hide>
-  </param>
-  <param>
-    <name>Process ID</name>
-    <key>process_id</key>
-    <value>12</value>
-    <type>raw</type>
-    <hide>none</hide>
-  </param>
-  <param>
-    <name>Level Flag</name>
-    <key>level_flag</key>
-    <value>0</value>
-    <type>raw</type>
-    <hide>none</hide>
-  </param>
-  <param>
-    <name>Payload Flag</name>
-    <key>payload_flag</key>
-    <value>1</value>
-    <type>raw</type>
-    <hide>none</hide>
-  </param>
-  <param>
-    <name>Packet Category</name>
-    <key>packet_category</key>
-    <value>28</value>
-    <type>raw</type>
-    <hide>none</hide>
-  </param>
-  <param>
-    <name>Sequence Flag</name>
-    <key>sequence_flag</key>
-    <value>3</value>
-    <type>raw</type>
-    <hide>none</hide>
-  </param>
-  <param>
-    <name>Data Length</name>
-    <key>data_length</key>
-    <value>40000</value>
-    <type>raw</type>
-    <hide>none</hide>
-  </param>
+  <make>satellites.space_packet_parser()</make>
   <sink>
     <name>in</name>
     <type>message</type>
