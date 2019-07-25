@@ -29,8 +29,7 @@ class space_packet_primaryheader_adder(gr.basic_block):
     """
     docstring for block space_packet_primaryheader_adder
     """
-    def __init__(self, ccsds_version, packet_type, secondary_header_flag, AP_ID, sequence_flags, packet_sequence_count,
-                 data_length):
+    def __init__(self, packet_type, AP_ID, count_or_name, packet_sequence_name):
         gr.basic_block.__init__(self,
             name="space_packet_primaryheader_adder",
             in_sig=[],
@@ -39,14 +38,15 @@ class space_packet_primaryheader_adder(gr.basic_block):
         ##################################################
         # Parameters
         ##################################################
-        self.ccsds_version = ccsds_version
+        self.ccsds_version = 0
         self.packet_type = packet_type
-        self.secondary_header_flag = secondary_header_flag
+        self.secondary_header_flag = 0
         self.AP_ID = AP_ID
-        self.sequence_flags = sequence_flags
-        self.packet_sequence_count = packet_sequence_count
-        self.data_length = data_length
-
+        self.sequence_flags = 3
+        self.packet_sequence_count = 0
+        self.packet_sequence_name = packet_sequence_name
+        self.count_or_name = count_or_name
+        self.data_length = 0
         ##################################################
         # Blocks
         ##################################################
@@ -60,8 +60,18 @@ class space_packet_primaryheader_adder(gr.basic_block):
             print "[ERROR] Received invalid message type. Expected u8vector"
             return
         packet = pmt.u8vector_elements(msg)
-        header = numpy.array([self.ccsds_version, self.packet_type, self.secondary_header_flag, self.AP_ID,
-        self.sequence_flags, self.packet_sequence_count, self.data_length])
+
+        self.data_length = len(packet)
+
+        if self.packet_type == 0 or self.count_or_name == 0:
+            self.packet_sequence_count += 1
+
+            header = numpy.array([self.ccsds_version, self.packet_type, self.secondary_header_flag, self.AP_ID,
+                                  self.sequence_flags, self.packet_sequence_count, self.data_length])
+        else:
+            header = numpy.array([self.ccsds_version, self.packet_type, self.secondary_header_flag, self.AP_ID,
+                                  self.sequence_flags, self.packet_sequence_name, self.data_length])
+
         finalHeader = numpy.array(numpy.zeros(6), dtype = int)
         finalHeader[0] = (int(bin(header[0]),2) << 5) + (int(bin(header[1]),2) << 4) + (int(bin(header[2]),2) << 3)
         if header[3] > 128:

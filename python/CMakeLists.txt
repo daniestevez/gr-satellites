@@ -119,7 +119,8 @@ GR_PYTHON_INSTALL(
     CCSDS/telemetry_parser.py
     CCSDS/telecommand.py
     CCSDS/telecommand_parser.py
-    CCSDS/space_packet_primaryheader_adder.py DESTINATION ${GR_PYTHON_DIR}/satellites
+    CCSDS/space_packet_primaryheader_adder.py
+    CCSDS/telemetry_primaryheader_adder.py DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
 ########################################################################

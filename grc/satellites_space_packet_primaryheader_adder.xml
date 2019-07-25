@@ -4,27 +4,34 @@
   <key>satellites_space_packet_primaryheader_adder</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
-  <make>satellites.space_packet_primaryheader_adder($ccsds_version, $packet_type, $secondary_header_flag, $AP_ID, $sequence_flags, $packet_sequence_count, $data_length)</make>
+  <make>satellites.space_packet_primaryheader_adder($packet_type, $AP_ID, $count_or_name, $packet_sequence_name)</make>
   <param>
     <name>CCSDS Version</name>
     <key>ccsds_version</key>
     <value>0</value>
     <type>raw</type>
-    <hide>none</hide>
+    <hide>all</hide>
   </param>
   <param>
     <name>Packet Type</name>
     <key>packet_type</key>
-    <value>0</value>
-    <type>raw</type>
-    <hide>none</hide>
+    <value>drop_down</value>
+    <type>enum</type>
+    <option>
+	<name>Telemetry</name>
+	<key>0</key>
+    </option>
+    <option>
+	<name>Telecommand</name>
+	<key>1</key>
+    </option>
   </param>
   <param>
     <name>Secondary Header Flag</name>
     <key>secondary_header_flag</key>
     <value>0</value>
     <type>raw</type>
-    <hide>none</hide>
+    <hide>all</hide>
   </param>
   <param>
     <name>Application ID</name>
@@ -38,21 +45,53 @@
     <key>sequence_flags</key>
     <value>3</value>
     <type>raw</type>
-    <hide>none</hide>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Count or Name</name>
+    <key>count_or_name</key>
+    <value>drop_down</value>
+    <type>enum</type>
+    <hide>#if $packet_type() == '1' then 'none' else 'all'</hide>
+    <option>
+	<name>Count</name>
+	<key>0</key>
+    </option>
+    <option>
+	<name>Name</name>
+	<key>1</key>
+    </option>
   </param>
   <param>
     <name>Packet Sequence Count</name>
     <key>packet_sequence_count</key>
     <value>0</value>
     <type>raw</type>
-    <hide>none</hide>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Packet Sequence Name</name>
+    <key>packet_sequence_name</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>
+#if $count_or_name() == '1'
+	#if $packet_type() == '1'
+		none
+	#else
+		all
+	#end if
+#else
+	all
+#end if	
+    </hide>
   </param>
   <param>
     <name>Data Length</name>
     <key>data_length</key>
     <value>40000</value>
     <type>raw</type>
-    <hide>none</hide>
+    <hide>all</hide>
   </param>
   <sink>
     <name>in</name>

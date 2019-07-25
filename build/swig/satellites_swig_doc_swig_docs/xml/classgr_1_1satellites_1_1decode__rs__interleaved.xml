@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classgr_1_1satellites_1_1decode__rs__interleaved" kind="class" language="C++" prot="public">
+    <compoundname>gr::satellites::decode_rs_interleaved</compoundname>
+    <basecompoundref prot="public" virt="virtual">block</basecompoundref>
+    <includes refid="decode__rs__interleaved_8h" local="no">decode_rs_interleaved.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classgr_1_1satellites_1_1decode__rs__interleaved_1a07697ba6e58e73a5cddb329ab91f3722" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classgr_1_1satellites_1_1decode__rs__interleaved" kindref="compound">decode_rs_interleaved</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;decode_rs_interleaved&gt; gr::satellites::decode_rs_interleaved::sptr</definition>
+        <argsstring></argsstring>
+        <name>sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/include/satellites/decode_rs_interleaved.h" line="38" column="1" bodyfile="/home/athanasios/gr-satellites/include/satellites/decode_rs_interleaved.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classgr_1_1satellites_1_1decode__rs__interleaved_1a3b26be587ddbb3f82b85a8cb2f97f40e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgr_1_1satellites_1_1decode__rs__interleaved_1a07697ba6e58e73a5cddb329ab91f3722" kindref="member">sptr</ref></type>
+        <definition>static sptr gr::satellites::decode_rs_interleaved::make</definition>
+        <argsstring>(bool verbose, int basis, int codewords)</argsstring>
+        <name>make</name>
+        <param>
+          <type>bool</type>
+          <declname>verbose</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>basis</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>codewords</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classgr_1_1satellites_1_1decode__rs__interleaved" kindref="compound">satellites::decode_rs_interleaved</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>To avoid accidental use of raw pointers, <ref refid="classgr_1_1satellites_1_1decode__rs__interleaved" kindref="compound">satellites::decode_rs_interleaved</ref>&apos;s constructor is in a private implementation class. <ref refid="classgr_1_1satellites_1_1decode__rs__interleaved_1a3b26be587ddbb3f82b85a8cb2f97f40e" kindref="member">satellites::decode_rs_interleaved::make</ref> is the public interface for creating new instances. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/include/satellites/decode_rs_interleaved.h" line="48" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>&lt;+description of block+&gt; </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="33">
+        <label>block</label>
+      </node>
+      <node id="32">
+        <label>gr::satellites::decode_rs_interleaved</label>
+        <link refid="classgr_1_1satellites_1_1decode__rs__interleaved"/>
+        <childnode refid="33" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="35">
+        <label>block</label>
+      </node>
+      <node id="34">
+        <label>gr::satellites::decode_rs_interleaved</label>
+        <link refid="classgr_1_1satellites_1_1decode__rs__interleaved"/>
+        <childnode refid="35" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/athanasios/gr-satellites/include/satellites/decode_rs_interleaved.h" line="36" column="1" bodyfile="/home/athanasios/gr-satellites/include/satellites/decode_rs_interleaved.h" bodystart="35" bodyend="49"/>
+    <listofallmembers>
+      <member refid="classgr_1_1satellites_1_1decode__rs__interleaved_1a3b26be587ddbb3f82b85a8cb2f97f40e" prot="public" virt="non-virtual"><scope>gr::satellites::decode_rs_interleaved</scope><name>make</name></member>
+      <member refid="classgr_1_1satellites_1_1decode__rs__interleaved_1a07697ba6e58e73a5cddb329ab91f3722" prot="public" virt="non-virtual"><scope>gr::satellites::decode_rs_interleaved</scope><name>sptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

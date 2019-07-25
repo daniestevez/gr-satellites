@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classgr_1_1satellites_1_1nusat__decoder__impl" kind="class" language="C++" prot="public">
+    <compoundname>gr::satellites::nusat_decoder_impl</compoundname>
+    <basecompoundref refid="classgr_1_1satellites_1_1nusat__decoder" prot="public" virt="non-virtual">gr::satellites::nusat_decoder</basecompoundref>
+    <includes refid="nusat__decoder__impl_8h" local="no">nusat_decoder_impl.h</includes>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1nusat__decoder__impl_1af57f90c70bd7aa970d1f181a0cce825a" prot="private" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t gr::satellites::nusat_decoder_impl::d_scrambler_sequence[]</definition>
+        <argsstring>[]</argsstring>
+        <name>d_scrambler_sequence</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" line="40" column="1" bodyfile="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1nusat__decoder__impl_1a4cd7fa8b51829106e84ed2921e61d5ac" prot="private" static="yes" mutable="no">
+        <type>const uint_fast8_t</type>
+        <definition>const uint_fast8_t gr::satellites::nusat_decoder_impl::crc8_table[]</definition>
+        <argsstring>[]</argsstring>
+        <name>crc8_table</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" line="41" column="1" bodyfile="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classgr_1_1satellites_1_1nusat__decoder__impl_1af9e261f71bb800ed76c15f9a00909ce3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint_fast8_t</type>
+        <definition>uint_fast8_t gr::satellites::nusat_decoder_impl::crc8</definition>
+        <argsstring>(const uint8_t *data, size_t data_len)</argsstring>
+        <name>crc8</name>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>data_len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" line="42" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1satellites_1_1nusat__decoder__impl_1a31502cc2e68fef76d9de1278c12a9352" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::nusat_decoder_impl::nusat_decoder_impl</definition>
+        <argsstring>()</argsstring>
+        <name>nusat_decoder_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" line="45" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1nusat__decoder__impl_1acb5dd52673ade8175644d4920e759fb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::nusat_decoder_impl::~nusat_decoder_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~nusat_decoder_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" line="46" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1nusat__decoder__impl_1ae1b57fe914d17e4d3fea5a48400c47d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::satellites::nusat_decoder_impl::forecast</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items_required)</argsstring>
+        <name>forecast</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items_required</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" line="49" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1nusat__decoder__impl_1a72ee70d8baf16474c7ba6dc3b799ba7c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::satellites::nusat_decoder_impl::general_work</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>general_work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" line="51" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1nusat__decoder__impl_1a711164747fd5800ade5cd0affbeac101" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::satellites::nusat_decoder_impl::msg_handler</definition>
+        <argsstring>(pmt::pmt_t pmt_msg)</argsstring>
+        <name>msg_handler</name>
+        <param>
+          <type>pmt::pmt_t</type>
+          <declname>pmt_msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" line="56" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="137">
+        <label>gr::satellites::nusat_decoder_impl</label>
+        <link refid="classgr_1_1satellites_1_1nusat__decoder__impl"/>
+        <childnode refid="138" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="139">
+        <label>block</label>
+      </node>
+      <node id="138">
+        <label>gr::satellites::nusat_decoder</label>
+        <link refid="classgr_1_1satellites_1_1nusat__decoder"/>
+        <childnode refid="139" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="140">
+        <label>gr::satellites::nusat_decoder_impl</label>
+        <link refid="classgr_1_1satellites_1_1nusat__decoder__impl"/>
+        <childnode refid="141" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="142">
+        <label>block</label>
+      </node>
+      <node id="141">
+        <label>gr::satellites::nusat_decoder</label>
+        <link refid="classgr_1_1satellites_1_1nusat__decoder"/>
+        <childnode refid="142" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" line="38" column="1" bodyfile="/home/athanasios/gr-satellites/lib/nusat_decoder_impl.h" bodystart="37" bodyend="57"/>
+    <listofallmembers>
+      <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1af9e261f71bb800ed76c15f9a00909ce3" prot="private" virt="non-virtual"><scope>gr::satellites::nusat_decoder_impl</scope><name>crc8</name></member>
+      <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1a4cd7fa8b51829106e84ed2921e61d5ac" prot="private" virt="non-virtual"><scope>gr::satellites::nusat_decoder_impl</scope><name>crc8_table</name></member>
+      <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1af57f90c70bd7aa970d1f181a0cce825a" prot="private" virt="non-virtual"><scope>gr::satellites::nusat_decoder_impl</scope><name>d_scrambler_sequence</name></member>
+      <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1ae1b57fe914d17e4d3fea5a48400c47d8" prot="public" virt="non-virtual"><scope>gr::satellites::nusat_decoder_impl</scope><name>forecast</name></member>
+      <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1a72ee70d8baf16474c7ba6dc3b799ba7c" prot="public" virt="non-virtual"><scope>gr::satellites::nusat_decoder_impl</scope><name>general_work</name></member>
+      <member refid="classgr_1_1satellites_1_1nusat__decoder_1a2b465b4bf4570787a6c53c77836529f6" prot="public" virt="non-virtual"><scope>gr::satellites::nusat_decoder_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1a711164747fd5800ade5cd0affbeac101" prot="public" virt="non-virtual"><scope>gr::satellites::nusat_decoder_impl</scope><name>msg_handler</name></member>
+      <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1a31502cc2e68fef76d9de1278c12a9352" prot="public" virt="non-virtual"><scope>gr::satellites::nusat_decoder_impl</scope><name>nusat_decoder_impl</name></member>
+      <member refid="classgr_1_1satellites_1_1nusat__decoder_1a85aaf670c7f36c10d3cab83c62e0faf1" prot="public" virt="non-virtual"><scope>gr::satellites::nusat_decoder_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1satellites_1_1nusat__decoder__impl_1acb5dd52673ade8175644d4920e759fb9" prot="public" virt="non-virtual"><scope>gr::satellites::nusat_decoder_impl</scope><name>~nusat_decoder_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

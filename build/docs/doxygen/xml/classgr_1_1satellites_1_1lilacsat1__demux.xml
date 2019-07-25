@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classgr_1_1satellites_1_1lilacsat1__demux" kind="class" language="C++" prot="public">
+    <compoundname>gr::satellites::lilacsat1_demux</compoundname>
+    <basecompoundref prot="public" virt="virtual">sync_block</basecompoundref>
+    <derivedcompoundref refid="classgr_1_1satellites_1_1lilacsat1__demux__impl" prot="public" virt="non-virtual">gr::satellites::lilacsat1_demux_impl</derivedcompoundref>
+    <includes refid="lilacsat1__demux_8h" local="no">lilacsat1_demux.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classgr_1_1satellites_1_1lilacsat1__demux_1a774897cd42254decac5f777fcd5bd2c1" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classgr_1_1satellites_1_1lilacsat1__demux" kindref="compound">lilacsat1_demux</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;lilacsat1_demux&gt; gr::satellites::lilacsat1_demux::sptr</definition>
+        <argsstring></argsstring>
+        <name>sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/include/satellites/lilacsat1_demux.h" line="37" column="1" bodyfile="/home/athanasios/gr-satellites/include/satellites/lilacsat1_demux.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classgr_1_1satellites_1_1lilacsat1__demux_1a5a0b5feededf68e066da5c34df1d1689" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgr_1_1satellites_1_1lilacsat1__demux_1a774897cd42254decac5f777fcd5bd2c1" kindref="member">sptr</ref></type>
+        <definition>static sptr gr::satellites::lilacsat1_demux::make</definition>
+        <argsstring>(std::string tag)</argsstring>
+        <name>make</name>
+        <param>
+          <type>std::string</type>
+          <declname>tag</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classgr_1_1satellites_1_1lilacsat1__demux" kindref="compound">satellites::lilacsat1_demux</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>To avoid accidental use of raw pointers, satellits::lilacsat1_demux&apos;s constructor is in a private implementation class. <ref refid="classgr_1_1satellites_1_1lilacsat1__demux_1a5a0b5feededf68e066da5c34df1d1689" kindref="member">satellites::lilacsat1_demux::make</ref> is the public interface for creating new instances. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/include/satellites/lilacsat1_demux.h" line="47" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>&lt;+description of block+&gt; </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="121">
+        <label>gr::satellites::lilacsat1_demux</label>
+        <link refid="classgr_1_1satellites_1_1lilacsat1__demux"/>
+        <childnode refid="122" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="122">
+        <label>gr::sync_block</label>
+      </node>
+      <node id="123">
+        <label>gr::satellites::lilacsat1_demux_impl</label>
+        <link refid="classgr_1_1satellites_1_1lilacsat1__demux__impl"/>
+        <childnode refid="121" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="124">
+        <label>gr::satellites::lilacsat1_demux</label>
+        <link refid="classgr_1_1satellites_1_1lilacsat1__demux"/>
+        <childnode refid="125" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="125">
+        <label>gr::sync_block</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/athanasios/gr-satellites/include/satellites/lilacsat1_demux.h" line="35" column="1" bodyfile="/home/athanasios/gr-satellites/include/satellites/lilacsat1_demux.h" bodystart="34" bodyend="48"/>
+    <listofallmembers>
+      <member refid="classgr_1_1satellites_1_1lilacsat1__demux_1a5a0b5feededf68e066da5c34df1d1689" prot="public" virt="non-virtual"><scope>gr::satellites::lilacsat1_demux</scope><name>make</name></member>
+      <member refid="classgr_1_1satellites_1_1lilacsat1__demux_1a774897cd42254decac5f777fcd5bd2c1" prot="public" virt="non-virtual"><scope>gr::satellites::lilacsat1_demux</scope><name>sptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

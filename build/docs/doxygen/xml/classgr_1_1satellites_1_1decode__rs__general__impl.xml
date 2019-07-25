@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classgr_1_1satellites_1_1decode__rs__general__impl" kind="class" language="C++" prot="public">
+    <compoundname>gr::satellites::decode_rs_general_impl</compoundname>
+    <basecompoundref refid="classgr_1_1satellites_1_1decode__rs__general" prot="public" virt="non-virtual">gr::satellites::decode_rs_general</basecompoundref>
+    <includes refid="decode__rs__general__impl_8h" local="no">decode_rs_general_impl.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1decode__rs__general__impl_1a7e3e40299c28d764a194c55852b3a7b8" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool gr::satellites::decode_rs_general_impl::d_verbose</definition>
+        <argsstring></argsstring>
+        <name>d_verbose</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/decode_rs_general_impl.h" line="32" column="1" bodyfile="/home/athanasios/gr-satellites/lib/decode_rs_general_impl.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1decode__rs__general__impl_1a31db2f65b7ecd4dba089c49035e863b4" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* gr::satellites::decode_rs_general_impl::d_rs</definition>
+        <argsstring></argsstring>
+        <name>d_rs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/decode_rs_general_impl.h" line="33" column="1" bodyfile="/home/athanasios/gr-satellites/lib/decode_rs_general_impl.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1decode__rs__general__impl_1a285fa2ef6c0b19279e578224ba82ead9" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int gr::satellites::decode_rs_general_impl::d_nroots</definition>
+        <argsstring></argsstring>
+        <name>d_nroots</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/decode_rs_general_impl.h" line="34" column="1" bodyfile="/home/athanasios/gr-satellites/lib/decode_rs_general_impl.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1satellites_1_1decode__rs__general__impl_1a3049cbcfee4a90fe8da78a6878dd08b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::decode_rs_general_impl::decode_rs_general_impl</definition>
+        <argsstring>(int gfpoly, int fcr, int prim, int nroots, bool verbose)</argsstring>
+        <name>decode_rs_general_impl</name>
+        <param>
+          <type>int</type>
+          <declname>gfpoly</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>fcr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>prim</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nroots</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>verbose</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/decode_rs_general_impl.h" line="37" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1decode__rs__general__impl_1aba1405927040491559dfb3335e7d7511" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::decode_rs_general_impl::~decode_rs_general_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~decode_rs_general_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/decode_rs_general_impl.h" line="38" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1decode__rs__general__impl_1a5ddead852553843e3f662b34d6ddf2ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::satellites::decode_rs_general_impl::forecast</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items_required)</argsstring>
+        <name>forecast</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items_required</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/decode_rs_general_impl.h" line="41" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1decode__rs__general__impl_1a81b12b058632c2567107138e0909dcc1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::satellites::decode_rs_general_impl::general_work</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>general_work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/decode_rs_general_impl.h" line="43" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1decode__rs__general__impl_1a036fb5be364d42d9f3b107161a1db64e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::satellites::decode_rs_general_impl::msg_handler</definition>
+        <argsstring>(pmt::pmt_t pmt_msg)</argsstring>
+        <name>msg_handler</name>
+        <param>
+          <type>pmt::pmt_t</type>
+          <declname>pmt_msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/decode_rs_general_impl.h" line="48" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="77">
+        <label>gr::satellites::decode_rs_general</label>
+        <link refid="classgr_1_1satellites_1_1decode__rs__general"/>
+        <childnode refid="78" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>gr::block</label>
+      </node>
+      <node id="76">
+        <label>gr::satellites::decode_rs_general_impl</label>
+        <link refid="classgr_1_1satellites_1_1decode__rs__general__impl"/>
+        <childnode refid="77" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="80">
+        <label>gr::satellites::decode_rs_general</label>
+        <link refid="classgr_1_1satellites_1_1decode__rs__general"/>
+        <childnode refid="81" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>gr::block</label>
+      </node>
+      <node id="79">
+        <label>gr::satellites::decode_rs_general_impl</label>
+        <link refid="classgr_1_1satellites_1_1decode__rs__general__impl"/>
+        <childnode refid="80" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/athanasios/gr-satellites/lib/decode_rs_general_impl.h" line="30" column="1" bodyfile="/home/athanasios/gr-satellites/lib/decode_rs_general_impl.h" bodystart="29" bodyend="49"/>
+    <listofallmembers>
+      <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1a285fa2ef6c0b19279e578224ba82ead9" prot="private" virt="non-virtual"><scope>gr::satellites::decode_rs_general_impl</scope><name>d_nroots</name></member>
+      <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1a31db2f65b7ecd4dba089c49035e863b4" prot="private" virt="non-virtual"><scope>gr::satellites::decode_rs_general_impl</scope><name>d_rs</name></member>
+      <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1a7e3e40299c28d764a194c55852b3a7b8" prot="private" virt="non-virtual"><scope>gr::satellites::decode_rs_general_impl</scope><name>d_verbose</name></member>
+      <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1a3049cbcfee4a90fe8da78a6878dd08b8" prot="public" virt="non-virtual"><scope>gr::satellites::decode_rs_general_impl</scope><name>decode_rs_general_impl</name></member>
+      <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1a5ddead852553843e3f662b34d6ddf2ea" prot="public" virt="non-virtual"><scope>gr::satellites::decode_rs_general_impl</scope><name>forecast</name></member>
+      <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1a81b12b058632c2567107138e0909dcc1" prot="public" virt="non-virtual"><scope>gr::satellites::decode_rs_general_impl</scope><name>general_work</name></member>
+      <member refid="classgr_1_1satellites_1_1decode__rs__general_1afab6e2815e5105de8ac0b43f8712e706" prot="public" virt="non-virtual"><scope>gr::satellites::decode_rs_general_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1a036fb5be364d42d9f3b107161a1db64e" prot="public" virt="non-virtual"><scope>gr::satellites::decode_rs_general_impl</scope><name>msg_handler</name></member>
+      <member refid="classgr_1_1satellites_1_1decode__rs__general_1aa9a08a160a8b66b7fb89a751de857b7d" prot="public" virt="non-virtual"><scope>gr::satellites::decode_rs_general_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1satellites_1_1decode__rs__general__impl_1aba1405927040491559dfb3335e7d7511" prot="public" virt="non-virtual"><scope>gr::satellites::decode_rs_general_impl</scope><name>~decode_rs_general_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

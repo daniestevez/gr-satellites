@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classgr_1_1satellites_1_1u482c__decode__impl" kind="class" language="C++" prot="public">
+    <compoundname>gr::satellites::u482c_decode_impl</compoundname>
+    <basecompoundref refid="classgr_1_1satellites_1_1u482c__decode" prot="public" virt="non-virtual">gr::satellites::u482c_decode</basecompoundref>
+    <includes refid="u482c__decode__impl_8h" local="no">u482c_decode_impl.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1u482c__decode__impl_1a55e67c643f5eb713c95a44e532d61914" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool gr::satellites::u482c_decode_impl::d_verbose</definition>
+        <argsstring></argsstring>
+        <name>d_verbose</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" line="36" column="1" bodyfile="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1u482c__decode__impl_1a6a4d7aa941d621a3e92d2fbe510dd7d2" prot="private" static="no" mutable="no">
+        <type>char</type>
+        <definition>char gr::satellites::u482c_decode_impl::d_ccsds_sequence[RS_LEN]</definition>
+        <argsstring>[RS_LEN]</argsstring>
+        <name>d_ccsds_sequence</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" line="37" column="1" bodyfile="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1u482c__decode__impl_1a674ec6d3f747544a50b00ba5456df474" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* gr::satellites::u482c_decode_impl::d_vp</definition>
+        <argsstring></argsstring>
+        <name>d_vp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" line="38" column="1" bodyfile="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1u482c__decode__impl_1a40f8191bf5708ec53c2a54a3bbc4cc5f" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int gr::satellites::u482c_decode_impl::d_viterbi</definition>
+        <argsstring></argsstring>
+        <name>d_viterbi</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" line="39" column="1" bodyfile="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1u482c__decode__impl_1af4795b6484f9c31b2b0639a67b8b678a" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int gr::satellites::u482c_decode_impl::d_scrambler</definition>
+        <argsstring></argsstring>
+        <name>d_scrambler</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" line="39" column="1" bodyfile="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1u482c__decode__impl_1acf117b8afcb352064fa2af6a3b53fa86" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int gr::satellites::u482c_decode_impl::d_rs</definition>
+        <argsstring></argsstring>
+        <name>d_rs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" line="39" column="1" bodyfile="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1satellites_1_1u482c__decode__impl_1a90c11f1c26ff2551b880f8f08f492c9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::u482c_decode_impl::u482c_decode_impl</definition>
+        <argsstring>(bool verbose, int viterbi, int scrambler, int rs)</argsstring>
+        <name>u482c_decode_impl</name>
+        <param>
+          <type>bool</type>
+          <declname>verbose</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>viterbi</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>scrambler</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>rs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" line="42" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1u482c__decode__impl_1a23daee0ca89b49836762307ce8967f53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::u482c_decode_impl::~u482c_decode_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~u482c_decode_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" line="43" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1u482c__decode__impl_1a918f4066ab3c8a627c7356a2ffc03833" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::satellites::u482c_decode_impl::forecast</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items_required)</argsstring>
+        <name>forecast</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items_required</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" line="46" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1u482c__decode__impl_1a4330aa7aab0d1cb4596b212b1a8b0ae6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::satellites::u482c_decode_impl::general_work</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>general_work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" line="48" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1u482c__decode__impl_1a5079b8768bb8a35af5c8edb47f74b4f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::satellites::u482c_decode_impl::msg_handler</definition>
+        <argsstring>(pmt::pmt_t pmt_msg)</argsstring>
+        <name>msg_handler</name>
+        <param>
+          <type>pmt::pmt_t</type>
+          <declname>pmt_msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" line="53" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="159">
+        <label>gr::satellites::u482c_decode_impl</label>
+        <link refid="classgr_1_1satellites_1_1u482c__decode__impl"/>
+        <childnode refid="160" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="161">
+        <label>block</label>
+      </node>
+      <node id="160">
+        <label>gr::satellites::u482c_decode</label>
+        <link refid="classgr_1_1satellites_1_1u482c__decode"/>
+        <childnode refid="161" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="162">
+        <label>gr::satellites::u482c_decode_impl</label>
+        <link refid="classgr_1_1satellites_1_1u482c__decode__impl"/>
+        <childnode refid="163" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="164">
+        <label>block</label>
+      </node>
+      <node id="163">
+        <label>gr::satellites::u482c_decode</label>
+        <link refid="classgr_1_1satellites_1_1u482c__decode"/>
+        <childnode refid="164" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" line="34" column="1" bodyfile="/home/athanasios/gr-satellites/lib/u482c_decode_impl.h" bodystart="33" bodyend="54"/>
+    <listofallmembers>
+      <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a6a4d7aa941d621a3e92d2fbe510dd7d2" prot="private" virt="non-virtual"><scope>gr::satellites::u482c_decode_impl</scope><name>d_ccsds_sequence</name></member>
+      <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1acf117b8afcb352064fa2af6a3b53fa86" prot="private" virt="non-virtual"><scope>gr::satellites::u482c_decode_impl</scope><name>d_rs</name></member>
+      <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1af4795b6484f9c31b2b0639a67b8b678a" prot="private" virt="non-virtual"><scope>gr::satellites::u482c_decode_impl</scope><name>d_scrambler</name></member>
+      <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a55e67c643f5eb713c95a44e532d61914" prot="private" virt="non-virtual"><scope>gr::satellites::u482c_decode_impl</scope><name>d_verbose</name></member>
+      <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a40f8191bf5708ec53c2a54a3bbc4cc5f" prot="private" virt="non-virtual"><scope>gr::satellites::u482c_decode_impl</scope><name>d_viterbi</name></member>
+      <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a674ec6d3f747544a50b00ba5456df474" prot="private" virt="non-virtual"><scope>gr::satellites::u482c_decode_impl</scope><name>d_vp</name></member>
+      <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a918f4066ab3c8a627c7356a2ffc03833" prot="public" virt="non-virtual"><scope>gr::satellites::u482c_decode_impl</scope><name>forecast</name></member>
+      <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a4330aa7aab0d1cb4596b212b1a8b0ae6" prot="public" virt="non-virtual"><scope>gr::satellites::u482c_decode_impl</scope><name>general_work</name></member>
+      <member refid="classgr_1_1satellites_1_1u482c__decode_1aa8ac280cc8e0dd3355004c638e8c4133" prot="public" virt="non-virtual"><scope>gr::satellites::u482c_decode_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a5079b8768bb8a35af5c8edb47f74b4f7" prot="public" virt="non-virtual"><scope>gr::satellites::u482c_decode_impl</scope><name>msg_handler</name></member>
+      <member refid="classgr_1_1satellites_1_1u482c__decode_1af24aa9119b04bed38b45e600a9a0c41e" prot="public" virt="non-virtual"><scope>gr::satellites::u482c_decode_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a90c11f1c26ff2551b880f8f08f492c9f" prot="public" virt="non-virtual"><scope>gr::satellites::u482c_decode_impl</scope><name>u482c_decode_impl</name></member>
+      <member refid="classgr_1_1satellites_1_1u482c__decode__impl_1a23daee0ca89b49836762307ce8967f53" prot="public" virt="non-virtual"><scope>gr::satellites::u482c_decode_impl</scope><name>~u482c_decode_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

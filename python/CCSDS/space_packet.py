@@ -32,10 +32,8 @@ PrimaryHeader = BitStruct('ccsds_version' / BitsInteger(3),
                           'secondary_header_flag' / Flag,
                           'AP_ID' / BitsInteger(11),
                           'sequence_flags' / BitsInteger(2),
-                          'packet_sequence_count' / BitsInteger(14),
+                          'packet_sequence_count_or_name' / BitsInteger(14),
                           'data_length' / BitsInteger(16))
-
-PayLoad = Struct('payload' / Byte[10])
 
 FullPacket = Struct('primary' / PrimaryHeader,
                     'payload' / Byte[this.primary.data_length])

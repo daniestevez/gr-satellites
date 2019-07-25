@@ -33,3 +33,6 @@ PrimaryHeader = BitStruct('transfer_frame_version_number' / BitsInteger(2),
                           'master_channel_frame_count' / BitsInteger(8),
                           'virtual_channel_frame_count' / BitsInteger(8),
                           'transfer_frame_data_field_status' / BitsInteger(16))
+
+FullPacket = Struct('primary' / PrimaryHeader,
+                    'payload' / Byte[this._.primary.ocf_flag])

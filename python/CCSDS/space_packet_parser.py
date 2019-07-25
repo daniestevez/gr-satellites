@@ -44,6 +44,7 @@ class space_packet_parser(gr.basic_block):
             print "[ERROR] Received invalid message type. Expected u8vector"
             return
         packet = bytearray(pmt.u8vector_elements(msg))
+
         try:
             data = space_packet.FullPacket.parse(packet[:])
         except:

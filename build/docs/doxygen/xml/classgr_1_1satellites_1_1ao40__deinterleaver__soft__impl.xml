@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl" kind="class" language="C++" prot="public">
+    <compoundname>gr::satellites::ao40_deinterleaver_soft_impl</compoundname>
+    <basecompoundref refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft" prot="public" virt="non-virtual">gr::satellites::ao40_deinterleaver_soft</basecompoundref>
+    <includes refid="ao40__deinterleaver__soft__impl_8h" local="no">ao40_deinterleaver_soft_impl.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl_1a9d739243ba49d1fb8a23f16ecd994aab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::ao40_deinterleaver_soft_impl::ao40_deinterleaver_soft_impl</definition>
+        <argsstring>()</argsstring>
+        <name>ao40_deinterleaver_soft_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ao40_deinterleaver_soft_impl.h" line="33" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl_1ad57e6102db85987c527c73c5d2516b1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::ao40_deinterleaver_soft_impl::~ao40_deinterleaver_soft_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~ao40_deinterleaver_soft_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ao40_deinterleaver_soft_impl.h" line="34" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl_1a4e520d01bd55b8b1e25428cf282ebbed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::satellites::ao40_deinterleaver_soft_impl::forecast</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items_required)</argsstring>
+        <name>forecast</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items_required</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ao40_deinterleaver_soft_impl.h" line="37" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl_1aeb990ba07960c6b600af05151850d4f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::satellites::ao40_deinterleaver_soft_impl::general_work</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>general_work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ao40_deinterleaver_soft_impl.h" line="39" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl_1af0b094913001b04c4eb7289ba503e9a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::satellites::ao40_deinterleaver_soft_impl::msg_handler</definition>
+        <argsstring>(pmt::pmt_t pmt_msg)</argsstring>
+        <name>msg_handler</name>
+        <param>
+          <type>pmt::pmt_t</type>
+          <declname>pmt_msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ao40_deinterleaver_soft_impl.h" line="44" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="18">
+        <label>block</label>
+      </node>
+      <node id="16">
+        <label>gr::satellites::ao40_deinterleaver_soft_impl</label>
+        <link refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl"/>
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>gr::satellites::ao40_deinterleaver_soft</label>
+        <link refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft"/>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="21">
+        <label>block</label>
+      </node>
+      <node id="19">
+        <label>gr::satellites::ao40_deinterleaver_soft_impl</label>
+        <link refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl"/>
+        <childnode refid="20" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>gr::satellites::ao40_deinterleaver_soft</label>
+        <link refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft"/>
+        <childnode refid="21" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/athanasios/gr-satellites/lib/ao40_deinterleaver_soft_impl.h" line="28" column="1" bodyfile="/home/athanasios/gr-satellites/lib/ao40_deinterleaver_soft_impl.h" bodystart="27" bodyend="45"/>
+    <listofallmembers>
+      <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl_1a9d739243ba49d1fb8a23f16ecd994aab" prot="public" virt="non-virtual"><scope>gr::satellites::ao40_deinterleaver_soft_impl</scope><name>ao40_deinterleaver_soft_impl</name></member>
+      <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl_1a4e520d01bd55b8b1e25428cf282ebbed" prot="public" virt="non-virtual"><scope>gr::satellites::ao40_deinterleaver_soft_impl</scope><name>forecast</name></member>
+      <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl_1aeb990ba07960c6b600af05151850d4f1" prot="public" virt="non-virtual"><scope>gr::satellites::ao40_deinterleaver_soft_impl</scope><name>general_work</name></member>
+      <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft_1add78871fbb64a6b388b379a900b74a16" prot="public" virt="non-virtual"><scope>gr::satellites::ao40_deinterleaver_soft_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl_1af0b094913001b04c4eb7289ba503e9a7" prot="public" virt="non-virtual"><scope>gr::satellites::ao40_deinterleaver_soft_impl</scope><name>msg_handler</name></member>
+      <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft_1a7812e3aed0f56990e1e8cdbece0c86de" prot="public" virt="non-virtual"><scope>gr::satellites::ao40_deinterleaver_soft_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1satellites_1_1ao40__deinterleaver__soft__impl_1ad57e6102db85987c527c73c5d2516b1f" prot="public" virt="non-virtual"><scope>gr::satellites::ao40_deinterleaver_soft_impl</scope><name>~ao40_deinterleaver_soft_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

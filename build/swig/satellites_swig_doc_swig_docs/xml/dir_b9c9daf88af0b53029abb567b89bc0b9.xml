@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="dir_b9c9daf88af0b53029abb567b89bc0b9" kind="dir">
+    <compoundname>/home/athanasios/gr-satellites/include/satellites</compoundname>
+    <innerfile refid="ao40__deinterleaver_8h">ao40_deinterleaver.h</innerfile>
+    <innerfile refid="ao40__deinterleaver__soft_8h">ao40_deinterleaver_soft.h</innerfile>
+    <innerfile refid="ao40__rs__decoder_8h">ao40_rs_decoder.h</innerfile>
+    <innerfile refid="ao40__syncframe_8h">ao40_syncframe.h</innerfile>
+    <innerfile refid="ao40__syncframe__soft_8h">ao40_syncframe_soft.h</innerfile>
+    <innerfile refid="api_8h">api.h</innerfile>
+    <innerfile refid="ax100__decode_8h">ax100_decode.h</innerfile>
+    <innerfile refid="decode__rs_8h">decode_rs.h</innerfile>
+    <innerfile refid="decode__rs__general_8h">decode_rs_general.h</innerfile>
+    <innerfile refid="decode__rs__interleaved_8h">decode_rs_interleaved.h</innerfile>
+    <innerfile refid="descrambler308_8h">descrambler308.h</innerfile>
+    <innerfile refid="encode__rs_8h">encode_rs.h</innerfile>
+    <innerfile refid="lilacsat1__demux_8h">lilacsat1_demux.h</innerfile>
+    <innerfile refid="nusat__decoder_8h">nusat_decoder.h</innerfile>
+    <innerfile refid="rscode__decoder_8h">rscode_decoder.h</innerfile>
+    <innerfile refid="u482c__decode_8h">u482c_decode.h</innerfile>
+    <innerfile refid="varlen__packet__framer_8h">varlen_packet_framer.h</innerfile>
+    <innerfile refid="varlen__packet__tagger_8h">varlen_packet_tagger.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/athanasios/gr-satellites/include/satellites/"/>
+  </compounddef>
+</doxygen>

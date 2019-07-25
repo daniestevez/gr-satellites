@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="dir_97aefd0d527b934f1d99a682da8fe6a9" kind="dir">
+    <compoundname>lib</compoundname>
+    <innerdir refid="dir_ee57a70fced1f14821cab8c3f1eb4224">rscode</innerdir>
+    <innerfile refid="ao40__deinterleaver__impl_8h">ao40_deinterleaver_impl.h</innerfile>
+    <innerfile refid="ao40__deinterleaver__soft__impl_8h">ao40_deinterleaver_soft_impl.h</innerfile>
+    <innerfile refid="ao40__rs__decoder__impl_8h">ao40_rs_decoder_impl.h</innerfile>
+    <innerfile refid="ao40__syncframe__impl_8h">ao40_syncframe_impl.h</innerfile>
+    <innerfile refid="ao40__syncframe__soft__impl_8h">ao40_syncframe_soft_impl.h</innerfile>
+    <innerfile refid="ax100__decode__impl_8h">ax100_decode_impl.h</innerfile>
+    <innerfile refid="decode__rs__general__impl_8h">decode_rs_general_impl.h</innerfile>
+    <innerfile refid="decode__rs__impl_8h">decode_rs_impl.h</innerfile>
+    <innerfile refid="decode__rs__interleaved__impl_8h">decode_rs_interleaved_impl.h</innerfile>
+    <innerfile refid="descrambler308__impl_8h">descrambler308_impl.h</innerfile>
+    <innerfile refid="encode__rs__impl_8h">encode_rs_impl.h</innerfile>
+    <innerfile refid="golay24_8h">golay24.h</innerfile>
+    <innerfile refid="lilacsat1__demux__impl_8h">lilacsat1_demux_impl.h</innerfile>
+    <innerfile refid="nusat__decoder__impl_8h">nusat_decoder_impl.h</innerfile>
+    <innerfile refid="randomizer_8h">randomizer.h</innerfile>
+    <innerfile refid="rs_8h">rs.h</innerfile>
+    <innerfile refid="rscode__decoder__impl_8h">rscode_decoder_impl.h</innerfile>
+    <innerfile refid="u482c__decode__impl_8h">u482c_decode_impl.h</innerfile>
+    <innerfile refid="varlen__packet__framer__impl_8h">varlen_packet_framer_impl.h</innerfile>
+    <innerfile refid="varlen__packet__tagger__impl_8h">varlen_packet_tagger_impl.h</innerfile>
+    <innerfile refid="viterbi_8h">viterbi.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/athanasios/gr-satellites/lib/"/>
+  </compounddef>
+</doxygen>

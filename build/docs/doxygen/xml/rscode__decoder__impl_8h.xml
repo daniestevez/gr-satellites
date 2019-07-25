@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="rscode__decoder__impl_8h" kind="file" language="C++">
+    <compoundname>rscode_decoder_impl.h</compoundname>
+    <includes refid="rscode__decoder_8h" local="no">satellites/rscode_decoder.h</includes>
+    <includes local="no">pmt/pmt.h</includes>
+    <includes local="no">stdint.h</includes>
+    <incdepgraph>
+      <node id="219">
+        <label>satellites/rscode_decoder.h</label>
+        <link refid="rscode__decoder_8h"/>
+        <childnode refid="220" relation="include">
+        </childnode>
+        <childnode refid="222" relation="include">
+        </childnode>
+      </node>
+      <node id="224">
+        <label>stdint.h</label>
+      </node>
+      <node id="221">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="222">
+        <label>gnuradio/block.h</label>
+      </node>
+      <node id="218">
+        <label>rscode_decoder_impl.h</label>
+        <link refid="rscode__decoder__impl_8h"/>
+        <childnode refid="219" relation="include">
+        </childnode>
+        <childnode refid="223" relation="include">
+        </childnode>
+        <childnode refid="224" relation="include">
+        </childnode>
+      </node>
+      <node id="220">
+        <label>satellites/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="221" relation="include">
+        </childnode>
+      </node>
+      <node id="223">
+        <label>pmt/pmt.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classgr_1_1satellites_1_1rscode__decoder__impl" prot="public">gr::satellites::rscode_decoder_impl</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1satellites">gr::satellites</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="rscode__decoder__impl_8h_1a510384812b26c7525b01a8703dd9ce2e" prot="public" static="no">
+        <name>INCLUDED_SATELLITES_RSCODE_DECODERR_IMPL_H</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode_decoder_impl.h" line="22" column="9" bodyfile="/home/athanasios/gr-satellites/lib/rscode_decoder_impl.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="rscode__decoder__impl_8h_1a0466137f6e26046add38434ab111e7dc" prot="public" static="no">
+        <name>RS_LEN</name>
+        <initializer>255</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode_decoder_impl.h" line="29" column="9" bodyfile="/home/athanasios/gr-satellites/lib/rscode_decoder_impl.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/athanasios/gr-satellites/lib/rscode_decoder_impl.h"/>
+  </compounddef>
+</doxygen>

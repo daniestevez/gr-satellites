@@ -1,0 +1,456 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="ecc_8h" kind="file" language="C++">
+    <compoundname>ecc.h</compoundname>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="ecc_8h_1a297404cf4494159d2a88b39c77103363" prot="public" static="no">
+        <name>MAX_NPAR</name>
+        <initializer>16</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="48" column="9" bodyfile="/home/athanasios/gr-satellites/lib/rscode/ecc.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ecc_8h_1aa8cecfc5c5c054d2875c03e77b7be15d" prot="public" static="no">
+        <name>TRUE</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="54" column="9" bodyfile="/home/athanasios/gr-satellites/lib/rscode/ecc.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ecc_8h_1aa93f0eb578d23995850d61f7d61c55c1" prot="public" static="no">
+        <name>FALSE</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="55" column="9" bodyfile="/home/athanasios/gr-satellites/lib/rscode/ecc.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ecc_8h_1a8521f0d9a069c55226a07fc055408eed" prot="public" static="no">
+        <name>MAXDEG</name>
+        <initializer>(<ref refid="ecc_8h_1a297404cf4494159d2a88b39c77103363" kindref="member">MAX_NPAR</ref>*2)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="63" column="9" bodyfile="/home/athanasios/gr-satellites/lib/rscode/ecc.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="ecc_8h_1affaac463542a40708765b460819c3a11" prot="public" static="no">
+        <type>unsigned long</type>
+        <definition>typedef unsigned long BIT32</definition>
+        <argsstring></argsstring>
+        <name>BIT32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="57" column="1" bodyfile="/home/athanasios/gr-satellites/lib/rscode/ecc.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="ecc_8h_1ace493edc80acaea5344a606de06d5257" prot="public" static="no">
+        <type>unsigned short</type>
+        <definition>typedef unsigned short BIT16</definition>
+        <argsstring></argsstring>
+        <name>BIT16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="58" column="1" bodyfile="/home/athanasios/gr-satellites/lib/rscode/ecc.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="ecc_8h_1ae92bed6593d875f29f79a12f10e84b5b" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int pBytes[MAXDEG]</definition>
+        <argsstring>[MAXDEG]</argsstring>
+        <name>pBytes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="67" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="ecc_8h_1a5dd915356908211565387e01d4a9cd8d" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int synBytes[MAXDEG]</definition>
+        <argsstring>[MAXDEG]</argsstring>
+        <name>synBytes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="70" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="ecc_8h_1a48f76a8c0dc23567f303ed6aa221e078" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int DEBUG</definition>
+        <argsstring></argsstring>
+        <name>DEBUG</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="73" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="ecc_8h_1afa18ed1ddff9b27670fbecc9b5190fa9" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int gexp[]</definition>
+        <argsstring>[]</argsstring>
+        <name>gexp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="85" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="ecc_8h_1a7d2615f445a9951ef1035da72d589476" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int glog[]</definition>
+        <argsstring>[]</argsstring>
+        <name>glog</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="86" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ecc_8h_1a39e5f5055851732121a46dab479b3bfc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void initialize_ecc</definition>
+        <argsstring>(int n_par)</argsstring>
+        <name>initialize_ecc</name>
+        <param>
+          <type>int</type>
+          <declname>n_par</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="76" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="ecc_8h_1a75555933650a50987a9c5b39aff2b26a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int check_syndrome</definition>
+        <argsstring>(void)</argsstring>
+        <name>check_syndrome</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="77" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="ecc_8h_1a231146bc254c1a49a9d3cc94c84cfd4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void decode_data</definition>
+        <argsstring>(unsigned char data[], int nbytes)</argsstring>
+        <name>decode_data</name>
+        <param>
+          <type>unsigned char</type>
+          <declname>data</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbytes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="78" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="ecc_8h_1a33cac00a5b8d040514e163b6d4f97b90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void encode_data</definition>
+        <argsstring>(unsigned char msg[], int nbytes, unsigned char dst[])</argsstring>
+        <name>encode_data</name>
+        <param>
+          <type>unsigned char</type>
+          <declname>msg</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbytes</declname>
+        </param>
+        <param>
+          <type>unsigned char</type>
+          <declname>dst</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="79" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="ecc_8h_1ae66d2a67ac172fd2890b9cd25691d5a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="ecc_8h_1ace493edc80acaea5344a606de06d5257" kindref="member">BIT16</ref></type>
+        <definition>BIT16 crc_ccitt</definition>
+        <argsstring>(unsigned char *msg, int len)</argsstring>
+        <name>crc_ccitt</name>
+        <param>
+          <type>unsigned char *</type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="82" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="ecc_8h_1a65eb83f04917d12d687aaa70449a3036" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_galois_tables</definition>
+        <argsstring>(void)</argsstring>
+        <name>init_galois_tables</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="88" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="ecc_8h_1aea2f56d785c0dfc8af1f9bc2c78294f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ginv</definition>
+        <argsstring>(int elt)</argsstring>
+        <name>ginv</name>
+        <param>
+          <type>int</type>
+          <declname>elt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="89" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="ecc_8h_1a67e5fdd13f145fe895d82b04bc7bffc3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmult</definition>
+        <argsstring>(int a, int b)</argsstring>
+        <name>gmult</name>
+        <param>
+          <type>int</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="90" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="ecc_8h_1a6da28744dd026ab3b7deb96086c74f0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int correct_errors_erasures</definition>
+        <argsstring>(unsigned char codeword[], int csize, int nerasures, int erasures[])</argsstring>
+        <name>correct_errors_erasures</name>
+        <param>
+          <type>unsigned char</type>
+          <declname>codeword</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>csize</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nerasures</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>erasures</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="94" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="ecc_8h_1af5ea13e698651189b3705cb2b1e7d2cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void add_polys</definition>
+        <argsstring>(int dst[], int src[])</argsstring>
+        <name>add_polys</name>
+        <param>
+          <type>int</type>
+          <declname>dst</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>src</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="97" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="ecc_8h_1adeed254ee2d542d7da8d54d5d5762f17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void scale_poly</definition>
+        <argsstring>(int k, int poly[])</argsstring>
+        <name>scale_poly</name>
+        <param>
+          <type>int</type>
+          <declname>k</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>poly</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="98" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="ecc_8h_1ad6079f119d46b188fc8f0c8f98cbbc03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void mult_polys</definition>
+        <argsstring>(int dst[], int p1[], int p2[])</argsstring>
+        <name>mult_polys</name>
+        <param>
+          <type>int</type>
+          <declname>dst</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p1</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p2</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="99" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="ecc_8h_1aedca0b4d3e5bef4c830e5e82b8ebe655" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void copy_poly</definition>
+        <argsstring>(int dst[], int src[])</argsstring>
+        <name>copy_poly</name>
+        <param>
+          <type>int</type>
+          <declname>dst</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>src</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="101" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="ecc_8h_1afe3883a12ae28716adce4ede69d58191" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void zero_poly</definition>
+        <argsstring>(int poly[])</argsstring>
+        <name>zero_poly</name>
+        <param>
+          <type>int</type>
+          <declname>poly</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h" line="102" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/athanasios/gr-satellites/lib/rscode/ecc.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classgr_1_1satellites_1_1ax100__decode__impl" kind="class" language="C++" prot="public">
+    <compoundname>gr::satellites::ax100_decode_impl</compoundname>
+    <basecompoundref refid="classgr_1_1satellites_1_1ax100__decode" prot="public" virt="non-virtual">gr::satellites::ax100_decode</basecompoundref>
+    <includes refid="ax100__decode__impl_8h" local="no">ax100_decode_impl.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgr_1_1satellites_1_1ax100__decode__impl_1a4b79a81556c96deb42eb309b9e51a78f" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool gr::satellites::ax100_decode_impl::d_verbose</definition>
+        <argsstring></argsstring>
+        <name>d_verbose</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ax100_decode_impl.h" line="32" column="1" bodyfile="/home/athanasios/gr-satellites/lib/ax100_decode_impl.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1satellites_1_1ax100__decode__impl_1ab4cb9a7b781bbaa42ad32c435742ffdd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::ax100_decode_impl::ax100_decode_impl</definition>
+        <argsstring>(bool verbose)</argsstring>
+        <name>ax100_decode_impl</name>
+        <param>
+          <type>bool</type>
+          <declname>verbose</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ax100_decode_impl.h" line="35" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1ax100__decode__impl_1a236509308af2f4bc80eeaa9021a75c78" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::satellites::ax100_decode_impl::~ax100_decode_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~ax100_decode_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ax100_decode_impl.h" line="36" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1ax100__decode__impl_1a77311b4fa37b7d716f6f2b2a91c4994c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::satellites::ax100_decode_impl::forecast</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items_required)</argsstring>
+        <name>forecast</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items_required</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ax100_decode_impl.h" line="39" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1ax100__decode__impl_1a10f4f0ee4bd7b6a6159e86ccdf0ea351" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::satellites::ax100_decode_impl::general_work</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>general_work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ax100_decode_impl.h" line="41" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1satellites_1_1ax100__decode__impl_1a3ff15f1b1a71ee9830eb4cdec290a4e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::satellites::ax100_decode_impl::msg_handler</definition>
+        <argsstring>(pmt::pmt_t pmt_msg)</argsstring>
+        <name>msg_handler</name>
+        <param>
+          <type>pmt::pmt_t</type>
+          <declname>pmt_msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/lib/ax100_decode_impl.h" line="45" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="61">
+        <label>gr::satellites::ax100_decode</label>
+        <link refid="classgr_1_1satellites_1_1ax100__decode"/>
+        <childnode refid="62" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>block</label>
+      </node>
+      <node id="60">
+        <label>gr::satellites::ax100_decode_impl</label>
+        <link refid="classgr_1_1satellites_1_1ax100__decode__impl"/>
+        <childnode refid="61" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="64">
+        <label>gr::satellites::ax100_decode</label>
+        <link refid="classgr_1_1satellites_1_1ax100__decode"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>block</label>
+      </node>
+      <node id="63">
+        <label>gr::satellites::ax100_decode_impl</label>
+        <link refid="classgr_1_1satellites_1_1ax100__decode__impl"/>
+        <childnode refid="64" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/athanasios/gr-satellites/lib/ax100_decode_impl.h" line="30" column="1" bodyfile="/home/athanasios/gr-satellites/lib/ax100_decode_impl.h" bodystart="29" bodyend="47"/>
+    <listofallmembers>
+      <member refid="classgr_1_1satellites_1_1ax100__decode__impl_1ab4cb9a7b781bbaa42ad32c435742ffdd" prot="public" virt="non-virtual"><scope>gr::satellites::ax100_decode_impl</scope><name>ax100_decode_impl</name></member>
+      <member refid="classgr_1_1satellites_1_1ax100__decode__impl_1a4b79a81556c96deb42eb309b9e51a78f" prot="private" virt="non-virtual"><scope>gr::satellites::ax100_decode_impl</scope><name>d_verbose</name></member>
+      <member refid="classgr_1_1satellites_1_1ax100__decode__impl_1a77311b4fa37b7d716f6f2b2a91c4994c" prot="public" virt="non-virtual"><scope>gr::satellites::ax100_decode_impl</scope><name>forecast</name></member>
+      <member refid="classgr_1_1satellites_1_1ax100__decode__impl_1a10f4f0ee4bd7b6a6159e86ccdf0ea351" prot="public" virt="non-virtual"><scope>gr::satellites::ax100_decode_impl</scope><name>general_work</name></member>
+      <member refid="classgr_1_1satellites_1_1ax100__decode_1abed83370c1d6df0aeafb437357582c90" prot="public" virt="non-virtual"><scope>gr::satellites::ax100_decode_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1satellites_1_1ax100__decode__impl_1a3ff15f1b1a71ee9830eb4cdec290a4e4" prot="public" virt="non-virtual"><scope>gr::satellites::ax100_decode_impl</scope><name>msg_handler</name></member>
+      <member refid="classgr_1_1satellites_1_1ax100__decode_1a418a9d3477768d4d89ab404cbd95e9e8" prot="public" virt="non-virtual"><scope>gr::satellites::ax100_decode_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1satellites_1_1ax100__decode__impl_1a236509308af2f4bc80eeaa9021a75c78" prot="public" virt="non-virtual"><scope>gr::satellites::ax100_decode_impl</scope><name>~ax100_decode_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

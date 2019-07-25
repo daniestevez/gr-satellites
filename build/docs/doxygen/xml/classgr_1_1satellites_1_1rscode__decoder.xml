@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classgr_1_1satellites_1_1rscode__decoder" kind="class" language="C++" prot="public">
+    <compoundname>gr::satellites::rscode_decoder</compoundname>
+    <basecompoundref prot="public" virt="virtual">block</basecompoundref>
+    <derivedcompoundref refid="classgr_1_1satellites_1_1rscode__decoder__impl" prot="public" virt="non-virtual">gr::satellites::rscode_decoder_impl</derivedcompoundref>
+    <includes refid="rscode__decoder_8h" local="no">rscode_decoder.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classgr_1_1satellites_1_1rscode__decoder_1a03178ca66a3a9eb201e3ce0258d4ac08" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classgr_1_1satellites_1_1rscode__decoder" kindref="compound">rscode_decoder</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;rscode_decoder&gt; gr::satellites::rscode_decoder::sptr</definition>
+        <argsstring></argsstring>
+        <name>sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/include/satellites/rscode_decoder.h" line="39" column="1" bodyfile="/home/athanasios/gr-satellites/include/satellites/rscode_decoder.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classgr_1_1satellites_1_1rscode__decoder_1ac5180d89575ad53be9356dec8863d3a3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgr_1_1satellites_1_1rscode__decoder_1a03178ca66a3a9eb201e3ce0258d4ac08" kindref="member">sptr</ref></type>
+        <definition>static sptr gr::satellites::rscode_decoder::make</definition>
+        <argsstring>(int npar)</argsstring>
+        <name>make</name>
+        <param>
+          <type>int</type>
+          <declname>npar</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classgr_1_1satellites_1_1rscode__decoder" kindref="compound">satellites::rscode_decoder</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>To avoid accidental use of raw pointers, <ref refid="classgr_1_1satellites_1_1rscode__decoder" kindref="compound">satellites::rscode_decoder</ref>&apos;s constructor is in a private implementation class. <ref refid="classgr_1_1satellites_1_1rscode__decoder_1ac5180d89575ad53be9356dec8863d3a3" kindref="member">satellites::rscode_decoder::make</ref> is the public interface for creating new instances. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/include/satellites/rscode_decoder.h" line="49" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>&lt;+description of block+&gt; </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="144">
+        <label>block</label>
+      </node>
+      <node id="145">
+        <label>gr::satellites::rscode_decoder_impl</label>
+        <link refid="classgr_1_1satellites_1_1rscode__decoder__impl"/>
+        <childnode refid="143" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="143">
+        <label>gr::satellites::rscode_decoder</label>
+        <link refid="classgr_1_1satellites_1_1rscode__decoder"/>
+        <childnode refid="144" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="147">
+        <label>block</label>
+      </node>
+      <node id="146">
+        <label>gr::satellites::rscode_decoder</label>
+        <link refid="classgr_1_1satellites_1_1rscode__decoder"/>
+        <childnode refid="147" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/athanasios/gr-satellites/include/satellites/rscode_decoder.h" line="37" column="1" bodyfile="/home/athanasios/gr-satellites/include/satellites/rscode_decoder.h" bodystart="36" bodyend="50"/>
+    <listofallmembers>
+      <member refid="classgr_1_1satellites_1_1rscode__decoder_1ac5180d89575ad53be9356dec8863d3a3" prot="public" virt="non-virtual"><scope>gr::satellites::rscode_decoder</scope><name>make</name></member>
+      <member refid="classgr_1_1satellites_1_1rscode__decoder_1a03178ca66a3a9eb201e3ce0258d4ac08" prot="public" virt="non-virtual"><scope>gr::satellites::rscode_decoder</scope><name>sptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

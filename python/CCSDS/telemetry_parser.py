@@ -47,6 +47,6 @@ class telemetry_parser(gr.basic_block):
         try:
             data = telemetry.PrimaryHeader.parse(packet[:])
         except:
-            print "Could not decode telemetry beacon"
+            print "Could not decode telemetry packet"
             return
         print(data)

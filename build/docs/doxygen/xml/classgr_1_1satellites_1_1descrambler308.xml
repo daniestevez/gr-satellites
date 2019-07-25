@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classgr_1_1satellites_1_1descrambler308" kind="class" language="C++" prot="public">
+    <compoundname>gr::satellites::descrambler308</compoundname>
+    <basecompoundref prot="public" virt="virtual">sync_block</basecompoundref>
+    <derivedcompoundref refid="classgr_1_1satellites_1_1descrambler308__impl" prot="public" virt="non-virtual">gr::satellites::descrambler308_impl</derivedcompoundref>
+    <includes refid="descrambler308_8h" local="no">descrambler308.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classgr_1_1satellites_1_1descrambler308_1abbe101a705cc9b1ef1736f59441e0acd" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classgr_1_1satellites_1_1descrambler308" kindref="compound">descrambler308</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;descrambler308&gt; gr::satellites::descrambler308::sptr</definition>
+        <argsstring></argsstring>
+        <name>sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/include/satellites/descrambler308.h" line="37" column="1" bodyfile="/home/athanasios/gr-satellites/include/satellites/descrambler308.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classgr_1_1satellites_1_1descrambler308_1a9c2b08989636f599cb2bc21320eaa8fe" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgr_1_1satellites_1_1descrambler308_1abbe101a705cc9b1ef1736f59441e0acd" kindref="member">sptr</ref></type>
+        <definition>static sptr gr::satellites::descrambler308::make</definition>
+        <argsstring>()</argsstring>
+        <name>make</name>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classgr_1_1satellites_1_1descrambler308" kindref="compound">satellites::descrambler308</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>To avoid accidental use of raw pointers, <ref refid="classgr_1_1satellites_1_1descrambler308" kindref="compound">satellites::descrambler308</ref>&apos;s constructor is in a private implementation class. <ref refid="classgr_1_1satellites_1_1descrambler308_1a9c2b08989636f599cb2bc21320eaa8fe" kindref="member">satellites::descrambler308::make</ref> is the public interface for creating new instances. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/include/satellites/descrambler308.h" line="47" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>&lt;+description of block+&gt; </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="101">
+        <label>gr::satellites::descrambler308_impl</label>
+        <link refid="classgr_1_1satellites_1_1descrambler308__impl"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="100">
+        <label>sync_block</label>
+      </node>
+      <node id="99">
+        <label>gr::satellites::descrambler308</label>
+        <link refid="classgr_1_1satellites_1_1descrambler308"/>
+        <childnode refid="100" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="103">
+        <label>sync_block</label>
+      </node>
+      <node id="102">
+        <label>gr::satellites::descrambler308</label>
+        <link refid="classgr_1_1satellites_1_1descrambler308"/>
+        <childnode refid="103" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/athanasios/gr-satellites/include/satellites/descrambler308.h" line="35" column="1" bodyfile="/home/athanasios/gr-satellites/include/satellites/descrambler308.h" bodystart="34" bodyend="48"/>
+    <listofallmembers>
+      <member refid="classgr_1_1satellites_1_1descrambler308_1a9c2b08989636f599cb2bc21320eaa8fe" prot="public" virt="non-virtual"><scope>gr::satellites::descrambler308</scope><name>make</name></member>
+      <member refid="classgr_1_1satellites_1_1descrambler308_1abbe101a705cc9b1ef1736f59441e0acd" prot="public" virt="non-virtual"><scope>gr::satellites::descrambler308</scope><name>sptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classgr_1_1satellites_1_1varlen__packet__tagger" kind="class" language="C++" prot="public">
+    <compoundname>gr::satellites::varlen_packet_tagger</compoundname>
+    <basecompoundref prot="public" virt="virtual">block</basecompoundref>
+    <includes refid="varlen__packet__tagger_8h" local="no">varlen_packet_tagger.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classgr_1_1satellites_1_1varlen__packet__tagger_1a01799293d4267972430e631cb7fdc55a" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classgr_1_1satellites_1_1varlen__packet__tagger" kindref="compound">varlen_packet_tagger</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;varlen_packet_tagger&gt; gr::satellites::varlen_packet_tagger::sptr</definition>
+        <argsstring></argsstring>
+        <name>sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/include/satellites/varlen_packet_tagger.h" line="46" column="1" bodyfile="/home/athanasios/gr-satellites/include/satellites/varlen_packet_tagger.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classgr_1_1satellites_1_1varlen__packet__tagger_1a33a17f3d9134302bafcb384f7e57dede" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgr_1_1satellites_1_1varlen__packet__tagger_1a01799293d4267972430e631cb7fdc55a" kindref="member">sptr</ref></type>
+        <definition>static sptr gr::satellites::varlen_packet_tagger::make</definition>
+        <argsstring>(const std::string &amp;sync_key, const std::string &amp;packet_key, int length_field_size, int max_packet_size, endianness_t endianness, bool use_golay)</argsstring>
+        <name>make</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sync_key</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>packet_key</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>length_field_size</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>max_packet_size</declname>
+        </param>
+        <param>
+          <type>endianness_t</type>
+          <declname>endianness</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>use_golay</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sync_key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>packet_key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length_field_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_packet_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endianness</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>use_golay</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>For 24-bit golay headers </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/athanasios/gr-satellites/include/satellites/varlen_packet_tagger.h" line="56" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Examine input stream for sync tags and extract packet length. </para>    </briefdescription>
+    <detaileddescription>
+<para>input: stream of bits (unpacked bytes) with sync tags output: a tagged stream of bits containing just the received packets</para><para>This block uses the sync tag on the input stream to identify the header of packets. The length of each packet is extracted from the stream&apos;s header. The length of the header field and the endianness are parameters. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="64">
+        <label>gr::satellites::varlen_packet_tagger</label>
+        <link refid="classgr_1_1satellites_1_1varlen__packet__tagger"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>block</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="66">
+        <label>gr::satellites::varlen_packet_tagger</label>
+        <link refid="classgr_1_1satellites_1_1varlen__packet__tagger"/>
+        <childnode refid="67" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>block</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/athanasios/gr-satellites/include/satellites/varlen_packet_tagger.h" line="44" column="1" bodyfile="/home/athanasios/gr-satellites/include/satellites/varlen_packet_tagger.h" bodystart="43" bodyend="62"/>
+    <listofallmembers>
+      <member refid="classgr_1_1satellites_1_1varlen__packet__tagger_1a33a17f3d9134302bafcb384f7e57dede" prot="public" virt="non-virtual"><scope>gr::satellites::varlen_packet_tagger</scope><name>make</name></member>
+      <member refid="classgr_1_1satellites_1_1varlen__packet__tagger_1a01799293d4267972430e631cb7fdc55a" prot="public" virt="non-virtual"><scope>gr::satellites::varlen_packet_tagger</scope><name>sptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
