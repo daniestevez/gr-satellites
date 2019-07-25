@@ -130,3 +130,4 @@ from telemetry_parser import telemetry_parser
 from telecommand_parser import telecommand_parser
 from space_packet_primaryheader_adder import space_packet_primaryheader_adder
 from telemetry_primaryheader_adder import telemetry_primaryheader_adder
+from telecommand_primaryheader_adder import telecommand_primaryheader_adder

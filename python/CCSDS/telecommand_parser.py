@@ -45,8 +45,8 @@ class telecommand_parser(gr.basic_block):
         packet = bytearray(pmt.u8vector_elements(msg))
 
         try:
-            data = telecommand.PrimaryHeader.parse(packet[:])
+            data = telecommand.FullPacket.parse(packet[:])
         except:
-            print "Could not decode telemetry beacon"
+            print "Could not decode telecommand packet"
             return
         print(data)

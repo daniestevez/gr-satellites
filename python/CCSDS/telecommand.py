@@ -33,3 +33,6 @@ PrimaryHeader = BitStruct('transfer_frame_version' / BitsInteger(2),
                           'virtual_channel_id' / BitsInteger(6),
                           'frame_length' / BitsInteger(10),
                           'frame_sequence_number' / BitsInteger(8))
+
+FullPacket = Struct('primary' / PrimaryHeader,
+                    'pyaload' / Byte[this.primary.frame_length - 5])

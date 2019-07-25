@@ -24,7 +24,6 @@ from gnuradio import gr
 import pmt
 import space_packet
 
-
 class space_packet_parser(gr.basic_block):
     """
     docstring for block space_packet_parser
