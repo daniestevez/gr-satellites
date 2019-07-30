@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<block>
+  <name>pathID_demultiplexer</name>
+  <key>pathID_demultiplexer</key>
+  <category>[Satellites]/CCSDS</category>
+  <import>import satellites</import>
+  <make>satellites.pathID_demultiplexer($num_output)</make>
+  <param>
+    <name>Number of outputs</name>
+    <key>num_output</key>
+    <type>raw</type>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>message</type>
+    <nports>$num_output</nports>
+  </source>
+</block>
