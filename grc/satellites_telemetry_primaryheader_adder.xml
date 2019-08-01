@@ -2,7 +2,7 @@
 <block>
   <name>telemetry_primaryheader_adder</name>
   <key>satellites_telemetry_primaryheader_adder</key>
-  <category>[satellites]</category>
+  <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
   <make>satellites.telemetry_primaryheader_adder()</make>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.

@@ -4,11 +4,11 @@
   <key>pathID_demultiplexer</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
-  <make>satellites.pathID_demultiplexer($num_output)</make>
+  <make>satellites.pathID_demultiplexer($pathID_outputs)</make>
   <param>
-    <name>Number of outputs</name>
-    <key>num_output</key>
-    <type>raw</type>
+    <name>Path ID outputs</name>
+    <key>pathID_outputs</key>
+    <type>int_vector</type>
   </param>
   <sink>
     <name>in</name>
@@ -17,6 +17,6 @@
   <source>
     <name>out</name>
     <type>message</type>
-    <nports>$num_output</nports>
+    <nports>len($pathID_outputs)</nports>
   </source>
 </block>

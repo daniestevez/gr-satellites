@@ -28,17 +28,20 @@ class pathID_demultiplexer(gr.basic_block):
     """
     docstring for block pathID_demultiplexer
     """
-    def __init__(self, num_output):
+    def __init__(self, pathID_outputs):
         gr.basic_block.__init__(self,
             name="pathID_demultiplexer",
             in_sig=[],
             out_sig=[])
-        self.num_output = num_output
+        self.pathID_outputs = pathID_outputs
         self.message_port_register_in(pmt.intern('in'))
 
-        for i in range(num_output):
+        self.outputDict = {}
+        for i in range(len(pathID_outputs)):
+            self.outputDict[pathID_outputs[i]] = i
             self.message_port_register_out(pmt.intern('out'+str(i)))
 
+        self.message_port_register_out(pmt.intern('other'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
 
     def handle_msg(self, msg_pmt):
@@ -49,10 +52,12 @@ class pathID_demultiplexer(gr.basic_block):
         packet = bytearray(pmt.u8vector_elements(msg))
 
         try:
-            data = space_packet.FullPacket.parse(packet[:])
+            data = space_packet.PrimaryHeader.parse(packet[:])
         except:
             print "Could not decode space packet"
             return
 
-        outPort = data.__getattr__('primary').search('AP_ID')
-        self.message_port_pub(pmt.intern('out'+str(outPort)), msg_pmt)
+        outPort = data.__getattr__('AP_ID')
+        port = self.outputDict[outPort]
+
+        self.message_port_pub(pmt.intern('out'+str(port)), msg_pmt)
