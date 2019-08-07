@@ -133,3 +133,4 @@ from telemetry_primaryheader_adder import telemetry_primaryheader_adder
 from telecommand_primaryheader_adder import telecommand_primaryheader_adder
 from pathID_demultiplexer import pathID_demultiplexer
 from virtual_channel_demultiplexer import virtual_channel_demultiplexer
+from telemetry_ocf_adder import telemetry_ocf_adder

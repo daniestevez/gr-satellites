@@ -38,5 +38,17 @@ PrimaryHeader = BitStruct('transfer_frame_version_number' / BitsInteger(2),
                           'segment_length_id' / BitsInteger(2),
                           'first_header_pointer' / BitsInteger(11))
 
-FullPacket = Struct('primary' / PrimaryHeader,
-                    'payload' / Byte[this._.primary.ocf_flag])
+OCFTrailer = BitStruct('control_word_type' / Flag,
+                       'clcw_version_number' / BitsInteger(2),
+                       'status_field' / BitsInteger(3),
+                       'cop_in_effect' / BitsInteger(2),
+                       'virtual_channel_identification' / BitsInteger(6),
+                       'rsvd_spare1' / BitsInteger(2),
+                       'no_rf_avail' / Flag,
+                       'no_bit_lock' / Flag,
+                       'lockout' / Flag,
+                       'wait' / Flag,
+                       'retransmit' / Flag,
+                       'farmb_counter' / BitsInteger(2),
+                       'rsvd_spare2' / Flag,
+                       'report_value' / BitsInteger(8))

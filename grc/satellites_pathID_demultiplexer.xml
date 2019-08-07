@@ -17,6 +17,6 @@
   <source>
     <name>out</name>
     <type>message</type>
-    <nports>len($pathID_outputs)</nports>
+    <nports>len($pathID_outputs)+1</nports>
   </source>
 </block>

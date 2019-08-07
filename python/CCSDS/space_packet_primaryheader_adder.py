@@ -47,6 +47,7 @@ class space_packet_primaryheader_adder(gr.basic_block):
         self.packet_sequence_name = packet_sequence_name
         self.count_or_name = count_or_name
         self.data_length = 0
+
         ##################################################
         # Blocks
         ##################################################

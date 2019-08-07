@@ -36,12 +36,12 @@ class pathID_demultiplexer(gr.basic_block):
         self.pathID_outputs = pathID_outputs
         self.message_port_register_in(pmt.intern('in'))
 
-        self.outputDict = {}
+        self.outputDict = Dict()
         for i in range(len(pathID_outputs)):
             self.outputDict[pathID_outputs[i]] = i
             self.message_port_register_out(pmt.intern('out'+str(i)))
 
-        self.message_port_register_out(pmt.intern('other'))
+        self.message_port_register_out(pmt.intern('out' + str(len(pathID_outputs))))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
 
     def handle_msg(self, msg_pmt):
@@ -54,10 +54,17 @@ class pathID_demultiplexer(gr.basic_block):
         try:
             data = space_packet.PrimaryHeader.parse(packet[:])
         except:
-            print "Could not decode space packet"
+            print "Could not decode space packet primary header"
             return
 
         outPort = data.__getattr__('AP_ID')
         port = self.outputDict[outPort]
+        if port == -1 :
+            self.message_port_pub(pmt.intern('out' + str(len(self.pathID_outputs))), msg_pmt)
+            print "Discarded message"
+        else:
+            self.message_port_pub(pmt.intern('out' + str(port)), msg_pmt)
 
-        self.message_port_pub(pmt.intern('out'+str(port)), msg_pmt)
+class Dict(dict):
+    def __missing__(self, key):
+        return -1

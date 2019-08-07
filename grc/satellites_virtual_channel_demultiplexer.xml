@@ -1,24 +1,22 @@
 <?xml version="1.0"?>
 <block>
   <name>virtual_channel_demultiplexer</name>
-  <key>satellites_virtual_channel_demultiplexer</key>
+  <key>virtual_channel_demultiplexer</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
   <make>satellites.virtual_channel_demultiplexer($vc_outputs)</make>
   <param>
-    <name>Virtual Channel outputs</name>
-    <key>virtual_channel_outputs</key>
+    <name>Virtual Channel ID outputs</name>
+    <key>vc_outputs</key>
     <type>int_vector</type>
   </param>
   <sink>
     <name>in</name>
     <type>message</type>
   </sink>
-  <check>len($vc_outputs) &gt; 0</check>
-  <check>len($vc_outputs) &lt; 8</check>
   <source>
     <name>out</name>
     <type>message</type>
-    <nports>len($vc_outputs)</nports>
+    <nports>len($vc_outputs)+1</nports>
   </source>
 </block>
