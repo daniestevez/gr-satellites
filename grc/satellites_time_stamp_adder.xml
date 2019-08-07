@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <block>
-  <name>time_stamp_adder</name>
-  <key>satellites_time_stamp_adder</key>
+  <name>space_packet_time_stamp_adder</name>
+  <key>satellites_space_packet_time_stamp_adder</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
   <make>satellites.time_stamp_adder($input_manual_automatic)</make>
