@@ -84,7 +84,7 @@ class telemetry_ocf_adder(gr.basic_block):
         finalHeader[1] = (int(bin(header[4]), 2) << 2) + int(bin(header[5]), 2)
         finalHeader[2] = (int(bin(header[6]), 2) << 7) + (int(bin(header[7]), 2) << 6) + (int(bin(header[8]), 2) << 5) + (int(bin(header[9]), 2) << 4) + (int(bin(header[10]), 2) << 3) + (int(bin(header[11]), 2) << 1) + (int(bin(header[12]), 2))
         finalHeader[3] = int(bin(header[13]), 2)
-        
+
         finalPacket = numpy.append(finalHeader, packet)
         finalPacket = array.array('B', finalPacket[:])
         finalPacket = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(finalPacket), finalPacket))

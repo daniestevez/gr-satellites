@@ -124,7 +124,8 @@ GR_PYTHON_INSTALL(
     CCSDS/telecommand_primaryheader_adder.py
     CCSDS/pathID_demultiplexer.py
     CCSDS/virtual_channel_demultiplexer.py
-    CCSDS/telemetry_ocf_adder.py DESTINATION ${GR_PYTHON_DIR}/satellites
+    CCSDS/telemetry_ocf_adder.py
+    CCSDS/time_stamp_adder.py DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
 ########################################################################

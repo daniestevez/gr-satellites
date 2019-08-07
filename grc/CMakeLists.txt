@@ -101,5 +101,6 @@ install(FILES
     satellites_telecommand_primaryheader_adder.xml
     satellites_pathID_demultiplexer.xml
     satellites_virtual_channel_demultiplexer.xml
-    satellites_telemetry_ocf_adder.xml DESTINATION share/gnuradio/grc/blocks
+    satellites_telemetry_ocf_adder.xml
+    satellites_time_stamp_adder.xml DESTINATION share/gnuradio/grc/blocks
 )

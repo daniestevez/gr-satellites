@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <block>
   <name>pathID_demultiplexer</name>
-  <key>pathID_demultiplexer</key>
+  <key>satellites_pathID_demultiplexer</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
   <make>satellites.pathID_demultiplexer($pathID_outputs)</make>

@@ -52,3 +52,6 @@ OCFTrailer = BitStruct('control_word_type' / Flag,
                        'farmb_counter' / BitsInteger(2),
                        'rsvd_spare2' / Flag,
                        'report_value' / BitsInteger(8))
+
+FullPacket = Struct('primary' / PrimaryHeader,
+                    'ocftrailer' / OCFTrailer)

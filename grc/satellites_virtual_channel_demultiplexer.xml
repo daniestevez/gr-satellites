@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <block>
   <name>virtual_channel_demultiplexer</name>
-  <key>virtual_channel_demultiplexer</key>
+  <key>satellites_virtual_channel_demultiplexer</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
   <make>satellites.virtual_channel_demultiplexer($vc_outputs)</make>

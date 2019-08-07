@@ -45,7 +45,7 @@ class telemetry_parser(gr.basic_block):
         packet = bytearray(pmt.u8vector_elements(msg))
 
         try:
-            data = telemetry.PrimaryHeader.parse(packet[:])
+            data = telemetry.FullPacket.parse(packet[:])
         except:
             print "Could not decode telemetry packet"
             return
