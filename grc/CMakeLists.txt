@@ -93,14 +93,14 @@ install(FILES
     satellites_lume1_telemetry_parser.xml
     satellites_qo100_telemetry_print.xml
     satellites_decode_rs_interleaved.xml
-    satellites_space_packet_parser.xml
-    satellites_telemetry_parser.xml
-    satellites_telecommand_parser.xml
-    satellites_space_packet_primaryheader_adder.xml
-    satellites_telemetry_primaryheader_adder.xml
-    satellites_telecommand_primaryheader_adder.xml
-    satellites_pathID_demultiplexer.xml
-    satellites_virtual_channel_demultiplexer.xml
-    satellites_telemetry_ocf_adder.xml
-    satellites_time_stamp_adder.xml DESTINATION share/gnuradio/grc/blocks
+    CCSDS/satellites_space_packet_parser.xml
+    CCSDS/satellites_telemetry_parser.xml
+    CCSDS/satellites_telecommand_parser.xml
+    CCSDS/satellites_space_packet_primaryheader_adder.xml
+    CCSDS/satellites_telemetry_primaryheader_adder.xml
+    CCSDS/satellites_telecommand_primaryheader_adder.xml
+    CCSDS/satellites_pathID_demultiplexer.xml
+    CCSDS/satellites_virtual_channel_demultiplexer.xml
+    CCSDS/satellites_telemetry_ocf_adder.xml
+    CCSDS/satellites_space_packet_time_stamp_adder.xml DESTINATION share/gnuradio/grc/blocks
 )

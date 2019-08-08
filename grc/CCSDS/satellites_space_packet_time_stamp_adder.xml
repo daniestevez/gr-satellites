@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<block>
+  <name>space_packet_time_stamp_adder</name>
+  <key>satellites_space_packet_time_stamp_adder</key>
+  <category>[Satellites]/CCSDS</category>
+  <import>import satellites</import>
+  <make>satellites.space_packet_time_stamp_adder($input_manual_automatic, $year, $month, $day, $hour, $minute, $second)</make>
+  <param>
+    <name>Manual or Automatic Time</name>
+    <key>manual_automatic</key>
+    <value>drop_down</value>
+    <type>enum</type>
+    <option>
+	<name>Manual</name>
+	<key>0</key>
+    </option>
+    <option>
+	<name>Automatic</name>
+	<key>1</key>
+    </option>
+  </param>
+  <param>
+    <name>Year</name>
+    <key>year</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $manual_automatic() == '0' then 'none' else 'all'</hide>
+  </param>
+  <param>
+    <name>Month</name>
+    <key>month</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $manual_automatic() == '0' then 'none' else 'all'</hide>
+  </param>
+  <param>
+    <name>Day</name>
+    <key>day</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $manual_automatic() == '0' then 'none' else 'all'</hide>
+  </param>
+  <param>
+    <name>Hour</name>
+    <key>hour</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $manual_automatic() == '0' then 'none' else 'all'</hide>
+  </param>
+  <param>
+    <name>Minute</name>
+    <key>minute</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $manual_automatic() == '0' then 'none' else 'all'</hide>
+  </param>
+  <param>
+    <name>Second</name>
+    <key>second</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $manual_automatic() == '0' then 'none' else 'all'</hide>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

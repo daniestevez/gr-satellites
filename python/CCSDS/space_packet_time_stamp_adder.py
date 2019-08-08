@@ -21,6 +21,7 @@
 
 import numpy
 from gnuradio import gr
+from datetime import datetime
 import pmt
 import array
 import space_packet
@@ -29,13 +30,23 @@ class space_packet_time_stamp_adder(gr.basic_block):
     """
     docstring for block time_stamp_adder
     """
-    def __init__(self, input_manual_automatic):
+    def __init__(self, input_manual_automatic, year, month, day, hour, minute, second):
         gr.basic_block.__init__(self,
             name="space_packet_time_stamp_adder",
             in_sig=[],
             out_sig=[])
 
+        ##################################################
+        # Parameters
+        ##################################################
         self.input_manual_automatic = input_manual_automatic
+        self.year = year
+        self.month = month
+        self.day = day
+        self.hour = hour
+        self.minute = minute
+        self.second = second
+
         ##################################################
         # Blocks
         ##################################################
@@ -51,7 +62,7 @@ class space_packet_time_stamp_adder(gr.basic_block):
             "[ERROR] Received invalid message type. Expected u8vector"
             return
         packet = pmt.u8vector_elements(msg)
-
+        now = datetime.now()
         finalPacket = numpy.append(finalHeader, packet)
         finalPacket = array.array('B', finalPacket[:])
         finalPacket = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(finalPacket), finalPacket))
