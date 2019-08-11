@@ -28,9 +28,23 @@ import space_packet
 
 class space_packet_time_stamp_adder(gr.basic_block):
     """
-    docstring for block time_stamp_adder
+    Time Stamp Adder (CCSDS 301.0-B-4)
+    The user should study the time code formats book and fill only the necessary fields.
+
+    On another note, the space packet parser, in case of a time stamp addition, will only display information
+    if a PField is used, since metadata are crucial to the parsing of the time stamp.
+
+    The user, in general, should check the code of the preferred time format and confirm that the behavior is
+    the wanted one. Great care should be taken on the variability of the size. (E.g. in ASCII A time format,
+    the user should define the size of the decimal fraction of the second subfield.)
     """
-    def __init__(self, input_manual_automatic, year, month, day, hour, minute, second):
+    def __init__(self, input_manual_automatic, time_format, pfield, pfield_extension, time_code_identification_cuc,
+                 epoch_year_cuc, epoch_month_cuc, epoch_day_cuc, basic_time_num_octets_cuc, fractional_time_num_octets_cuc, pfield_extension_extended,
+                 additional_octets_basic_time_cuc, additional_octets_fractional_time_cuc, rsvd_cuc,
+                 time_code_identification_cds, epoch_identification_cds, epoch_year_cds, epoch_month_cds, epoch_day_cds,
+                 length_of_day_cds,
+                 length_of_submillisecond_cds, time_code_identification_ccs, calendar_variation_ccs,
+                 number_of_subsecond_ccs, year, month, day, hour, minute, second, microsecond):
         gr.basic_block.__init__(self,
             name="space_packet_time_stamp_adder",
             in_sig=[],
@@ -40,13 +54,36 @@ class space_packet_time_stamp_adder(gr.basic_block):
         # Parameters
         ##################################################
         self.input_manual_automatic = input_manual_automatic
+        self.time_format = time_format
+        self.pfield = pfield #Checks if the P-Field will be used
+        self.pfield_extension = pfield_extension #Checks if the PField will be extended
+        self.time_code_identification_cuc = time_code_identification_cuc
+        self.epoch_year_cuc = epoch_year_cuc
+        self.epoch_month_cuc = epoch_month_cuc
+        self.epoch_day_cuc = epoch_day_cuc
+        self.basic_time_num_octets_cuc = basic_time_num_octets_cuc
+        self.fractional_time_num_octets_cuc = fractional_time_num_octets_cuc
+        self.pfield_extension_extended = pfield_extension_extended #Checks if the PField Extension will be extended
+        self.additional_octets_basic_time_cuc = additional_octets_basic_time_cuc
+        self.additional_octets_fractional_time_cuc = additional_octets_fractional_time_cuc
+        self.rsvd_cuc = rsvd_cuc
+        self.time_code_identification_cds = time_code_identification_cds
+        self.epoch_identification_cds = epoch_identification_cds
+        self.epoch_year_cds = epoch_year_cds
+        self.epoch_month_cds = epoch_year_cds
+        self.epoch_day_cds = epoch_day_cds
+        self.length_of_day_cds = length_of_day_cds
+        self.length_of_submillisecond_cds = length_of_submillisecond_cds
+        self.time_code_identification_ccs = time_code_identification_ccs
+        self.calendar_variation_ccs = calendar_variation_ccs
+        self.number_of_subsecond_ccs = number_of_subsecond_ccs
         self.year = year
         self.month = month
         self.day = day
         self.hour = hour
         self.minute = minute
         self.second = second
-
+        self.microsecond = microsecond
         ##################################################
         # Blocks
         ##################################################
@@ -62,7 +99,48 @@ class space_packet_time_stamp_adder(gr.basic_block):
             "[ERROR] Received invalid message type. Expected u8vector"
             return
         packet = pmt.u8vector_elements(msg)
-        now = datetime.now()
+
+        mask = 0b11111111 #Use this to take the last 8 bits of a number
+
+        if self.input_manual_automatic == 1:
+            now = datetime.now()
+            self.year = now.year
+            self.month = now.month
+            self.day = now.day
+            self.hour = now.hour
+            self.minute = now.minute
+            self.second = now.second
+            self.microsecond = now.microsecond
+
+        if self.time_format == 0: #CUC
+            if self.pfield == 1:
+                size = 2 + self.basic_time_num_octets_cuc + self.fractional_time_num_octets_cuc + 2 + \
+                       self.additional_octets_basic_time_cuc + self.additional_octets_fractional_time_cuc
+                finalHeader = numpy.array(numpy.zeros(size), dtype=int)
+                #User should define the allocation of the unsegmented time code format here
+            else:
+                print "Agency should define unsegmented code"
+        elif self.time_format == 1: #CDS
+            if self.pfield == 1:
+                temp_size = 0
+                if self.length_of_submillisecond_cds == 1 or self.length_of_submillisecond_cds == 2:
+                    temp_size = self.length_of_submillisecond_cds
+                finalHeader = numpy.array(numpy.zeros(7 + 1*self.length_of_day_cds + temp_size), dtype=int)
+                finalHeader[0] = (int(bin(self.pfield_extension), 2) << 7) + (int(bin(self.time_code_identification_cds), 2) << 4) + (int(bin(self.epoch_identification_cds), 2) << 3) + (int(bin(self.length_of_day_cds), 2) << 2) + (int(bin(self.length_of_submillisecond_cds), 2))
+                if self.length_of_day_cds == 0:
+                    finalHeader[1] = (int(bin(self.year - 1958), 2) << 8)
+                    #finalHeader[2] = (int(bin()))
+        elif self.time_format == 2: #CCS
+            print "elif"
+        elif self.time_format == 3: #ASCII A
+            print "eliif"
+        elif self.time_format == 4: #ASCII B
+            print "elif"
+        else:
+            print "Time Format Unknown"
+
+
+
         finalPacket = numpy.append(finalHeader, packet)
         finalPacket = array.array('B', finalPacket[:])
         finalPacket = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(finalPacket), finalPacket))

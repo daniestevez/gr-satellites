@@ -61,7 +61,7 @@ class space_packet_primaryheader_adder(gr.basic_block):
             print "[ERROR] Received invalid message type. Expected u8vector"
             return
         packet = pmt.u8vector_elements(msg)
-
+        mask = 0b11111111 #Use this to take the last 8 bits of a number
         self.data_length = len(packet)
 
         if self.packet_type == 0 or self.count_or_name == 0:
@@ -73,28 +73,15 @@ class space_packet_primaryheader_adder(gr.basic_block):
             header = numpy.array([self.ccsds_version, self.packet_type, self.secondary_header_flag, self.AP_ID,
                                   self.sequence_flags, self.packet_sequence_name, self.data_length])
 
-        finalHeader = numpy.array(numpy.zeros(6), dtype = int)
-        finalHeader[0] = (int(bin(header[0]),2) << 5) + (int(bin(header[1]),2) << 4) + (int(bin(header[2]),2) << 3)
-        if header[3] > 128:
-            finalHeader[0] += int(bin(header[3]),2) >> 8
-            finalHeader[1] = int(bin(header[3])[5:].zfill(8), 2)
-        else:
-            finalHeader[1] = int(bin(header[3]), 2)
-
-        finalHeader[2] = (int(bin(header[4]),2) << 6)
-        if header[5] > 128:
-            finalHeader[2] += int(bin(header[5]),2)  >> 8
-            finalHeader[3] = int(bin(header[5])[8:].zfill(8), 2)
-        else:
-            finalHeader[3] = int(bin(header[5]), 2)
-
-        if header[6] > 128:
-            finalHeader[4] = int(bin(header[6]), 2) >> 8
-            finalHeader[5] = int(bin(header[6])[8:].zfill(8), 2)
-        else:
-            finalHeader[4] = 0
-            finalHeader[5] = int(bin(header[6]), 2)
-
+        finalHeader = numpy.array(numpy.zeros(6), dtype=int)
+        finalHeader[0] = (int(bin(header[0]), 2) << 5) + (int(bin(header[1]), 2) << 4) + (int(bin(header[2]), 2) << 3)
+        finalHeader[0] += int(bin(header[3]), 2) >> 8
+        finalHeader[1] = int(bin(header[3] & mask), 2)
+        finalHeader[2] = (int(bin(header[4]), 2) << 6)
+        finalHeader[2] += int(bin(header[5]), 2) >> 8
+        finalHeader[3] = int(bin(header[5] & mask), 2)
+        finalHeader[4] = int(bin(header[6]), 2) >> 8
+        finalHeader[5] = int(bin(header[6] & mask), 2)
         finalPacket = numpy.append(finalHeader, packet)
         finalPacket = array.array('B', finalPacket[:])
         finalPacket = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(finalPacket), finalPacket))

@@ -4,7 +4,7 @@
   <key>satellites_space_packet_time_stamp_adder</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
-  <make>satellites.space_packet_time_stamp_adder($input_manual_automatic, $year, $month, $day, $hour, $minute, $second)</make>
+  <make>satellites.space_packet_time_stamp_adder($input_manual_automatic, $time_format, $pfield, $pfield_extension, $time_code_identification_cuc, $epoch_year_cuc, $epoch_month_cuc, $epoch_day_cuc, $basic_time_num_octets_cuc, $fractional_time_num_octets_cuc, $pfield_extension_extended, $additional_octets_basic_time_cuc, $additional_octets_fractional_time_cuc, $rsvd_cuc, $time_code_identification_cds, $epoch_identification_cds, $epoch_year_cds, $epoch_month_cds, $epoch_day_cds, $length_of_day_cds, $length_of_submillisecond_cds, $time_code_identification_ccs, $calendar_variation_ccs, $number_of_subsecond_ccs, $year, $month, $day, $hour, $minute, $second, $microsecond)</make>
   <param>
     <name>Manual or Automatic Time</name>
     <key>manual_automatic</key>
@@ -102,13 +102,76 @@
 #end if	
     </hide>
     <option>
-	<name>Level 1</name>
+	<name>1958 January 1 epoch</name>
 	<key>1</key>
     </option>
     <option>
-	<name>Level 2</name>
+	<name>Agency Defined epoch</name>
 	<key>2</key>
     </option>
+  </param>
+  <param>
+    <name>Epoch Year</name>
+    <key>epoch_year_cuc</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>
+#if $time_format() == '0'
+	#if $pfield() == '0'
+		#if $time_code_identification_cuc() == '2'
+			none
+		#else
+			all
+		#end if
+	#else
+		all
+	#end if
+#else
+	all
+#end if	
+    </hide>
+  </param>
+  <param>
+    <name>Epoch Month</name>
+    <key>epoch_month_cuc</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>
+#if $time_format() == '0'
+	#if $pfield() == '0'
+		#if $time_code_identification_cuc() == '2'
+			none
+		#else
+			all
+		#end if
+	#else
+		all
+	#end if
+#else
+	all
+#end if	
+    </hide>
+  </param>
+  <param>
+    <name>Epoch Day</name>
+    <key>epoch_day_cuc</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>
+#if $time_format() == '0'
+	#if $pfield() == '0'
+		#if $time_code_identification_cuc() == '2'
+			none
+		#else
+			all
+		#end if
+	#else
+		all
+	#end if
+#else
+	all
+#end if	
+    </hide>
   </param>
   <param>
     <name>Basic Time Number of Octets</name>
@@ -196,7 +259,7 @@
   </param>
   <param>
     <name>Additional Octets of Fractional Time</name>
-    <key>additional_octets_fracational_time_cuc</key>
+    <key>additional_octets_fractional_time_cuc</key>
     <value>0</value>
     <type>raw</type>
     <hide>
@@ -260,13 +323,76 @@
 #end if	
     </hide>
     <option>
-	<name>Level 1</name>
+	<name>1958 January 1 Epoch</name>
 	<key>0</key>
     </option>
     <option>
-	<name>Level 2</name>
+	<name>Agency Defined Epoch</name>
 	<key>1</key>
     </option>
+  </param>
+  <param>
+    <name>Epoch Year</name>
+    <key>epoch_year_cds</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>
+#if $time_format() == '0'
+	#if $pfield() == '0'
+		#if $epoch_identification_cds() == '1'
+			none
+		#else
+			all
+		#end if
+	#else
+		all
+	#end if
+#else
+	all
+#end if	
+    </hide>
+  </param>
+  <param>
+    <name>Epoch Month</name>
+    <key>epoch_month_cds</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>
+#if $time_format() == '0'
+	#if $pfield() == '0'
+		#if $epoch_identification_cds() == '1'
+			none
+		#else
+			all
+		#end if
+	#else
+		all
+	#end if
+#else
+	all
+#end if	
+    </hide>
+  </param>
+  <param>
+    <name>Epoch Day</name>
+    <key>epoch_day_cds</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>
+#if $time_format() == '0'
+	#if $pfield() == '0'
+		#if $epoch_identification_cds() == '1'
+			none
+		#else
+			all
+		#end if
+	#else
+		all
+	#end if
+#else
+	all
+#end if	
+    </hide>
   </param>
   <param>
     <name>Length of Day Segment</name>
@@ -437,6 +563,13 @@
   <param>
     <name>Second</name>
     <key>second</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $manual_automatic() == '0' then 'none' else 'all'</hide>
+  </param>
+  <param>
+    <name>Microsecond</name>
+    <key>microsecond</key>
     <value>0</value>
     <type>raw</type>
     <hide>#if $manual_automatic() == '0' then 'none' else 'all'</hide>

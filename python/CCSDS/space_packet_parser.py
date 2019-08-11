@@ -45,7 +45,7 @@ class space_packet_parser(gr.basic_block):
         packet = bytearray(pmt.u8vector_elements(msg))
 
         try:
-            data = space_packet.FullPacket.parse(packet[:])
+            data = space_packet.FullPacketNoTimeStamp.parse(packet[:])
         except:
             print "Could not decode space packet"
             return

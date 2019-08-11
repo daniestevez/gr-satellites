@@ -60,6 +60,7 @@ class telecommand_primaryheader_adder(gr.basic_block):
             print "[ERROR] Received invalid message type. Expected u8vector"
             return
         packet = pmt.u8vector_elements(msg)
+        mask = 0b11111111
         self.frame_length = len(packet) + 5
         if self.bypass == 1:
             self.frame_sequence_number = 0
@@ -72,19 +73,11 @@ class telecommand_primaryheader_adder(gr.basic_block):
         finalHeader = numpy.array(numpy.zeros(5), dtype=int)
         finalHeader[0] = (int(bin(header[0]), 2) << 6) + (int(bin(header[1]), 2) << 5) + (int(bin(header[2]), 2) << 4) + \
                          (int(bin(header[3]), 2) << 2)
-        if header[4] > 128:
-            finalHeader[0] += int(bin(header[4]), 2) >> 8
-            finalHeader[1] = int(bin(header[4])[4:].zfill(8), 2)
-        else:
-            finalHeader[1] = int(bin(header[4]), 2)
-
+        finalHeader[0] += int(bin(header[4]), 2) >> 8
+        finalHeader[1] = int(bin(header[4] & mask), 2)
         finalHeader[2] = (int(bin(header[5]), 2) << 2)
-        if header[5] > 128:
-            finalHeader[2] += int(bin(header[6]), 2) >> 8
-            finalHeader[3] = int(bin(header[6])[4:].zfill(8), 2)
-        else:
-            finalHeader[3] = int(bin(header[6]), 2)
-
+        finalHeader[2] += int(bin(header[6]), 2) >> 8
+        finalHeader[3] = int(bin(header[6] & mask), 2)
         finalHeader[4] = int(bin(header[7]), 2)
 
         finalPacket = numpy.append(finalHeader, packet)
