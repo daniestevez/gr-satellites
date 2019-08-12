@@ -71,14 +71,13 @@ class telecommand_primaryheader_adder(gr.basic_block):
                              self.virtual_channel_id, self.frame_length, self.frame_sequence_number])
 
         finalHeader = numpy.array(numpy.zeros(5), dtype=int)
-        finalHeader[0] = (int(bin(header[0]), 2) << 6) + (int(bin(header[1]), 2) << 5) + (int(bin(header[2]), 2) << 4) + \
-                         (int(bin(header[3]), 2) << 2)
-        finalHeader[0] += int(bin(header[4]), 2) >> 8
-        finalHeader[1] = int(bin(header[4] & mask), 2)
-        finalHeader[2] = (int(bin(header[5]), 2) << 2)
-        finalHeader[2] += int(bin(header[6]), 2) >> 8
-        finalHeader[3] = int(bin(header[6] & mask), 2)
-        finalHeader[4] = int(bin(header[7]), 2)
+        finalHeader[0] = header[0] << 6 + header[1] << 5 + header[2] << 4 + header[3] << 2
+        finalHeader[0] += header[4] >> 8
+        finalHeader[1] = header[4] & mask
+        finalHeader[2] = header[5] << 2
+        finalHeader[2] += header[6] >> 8
+        finalHeader[3] = header[6] & mask
+        finalHeader[4] = header[7]
 
         finalPacket = numpy.append(finalHeader, packet)
         finalPacket = array.array('B', finalPacket[:])

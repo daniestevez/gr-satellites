@@ -125,11 +125,41 @@ class space_packet_time_stamp_adder(gr.basic_block):
                 temp_size = 0
                 if self.length_of_submillisecond_cds == 1 or self.length_of_submillisecond_cds == 2:
                     temp_size = self.length_of_submillisecond_cds
-                finalHeader = numpy.array(numpy.zeros(7 + 1*self.length_of_day_cds + temp_size), dtype=int)
-                finalHeader[0] = (int(bin(self.pfield_extension), 2) << 7) + (int(bin(self.time_code_identification_cds), 2) << 4) + (int(bin(self.epoch_identification_cds), 2) << 3) + (int(bin(self.length_of_day_cds), 2) << 2) + (int(bin(self.length_of_submillisecond_cds), 2))
+                finalHeader = numpy.array(numpy.zeros(7 + 1*self.length_of_day_cds + 2*temp_size), dtype=int)
+                finalHeader[0] = self.pfield_extension << 7 + self.time_code_identification_cds << 4 + self.epoch_identification_cds << 3 + self.length_of_day_cds << 2 + self.length_of_submillisecond_cds
                 if self.length_of_day_cds == 0:
-                    finalHeader[1] = (int(bin(self.year - 1958), 2) << 8)
-                    #finalHeader[2] = (int(bin()))
+                    finalHeader[1] = daysSinceEpoch() >> 8
+                    finalHeader[2] = daysSinceEpoch() & mask
+                    finalHeader[3] = msOfTheDay() >> 24
+                    finalHeader[4] = (msOfTheDay() >> 16) & mask
+                    finalHeader[5] = (msOfTheDay() >> 8) & mask
+                    finalHeader[6] = msOfTheDay() & mask
+                    if temp_size == 1:
+                        finalHeader[7] = self.microsecond >> 8
+                        finalHeader[8] = self.microsecond & mask
+                    elif temp_size == 2:
+                        finalHeader[7] = self.microsecond >> 24
+                        finalHeader[8] = (self.microsecond >> 16) & mask
+                        finalHeader[9] = (self.microsecond >> 8) & mask
+                        finalHeader[10] = self.microsecond & mask
+                else:
+                    finalHeader[1] = daysSinceEpoch() >> 16
+                    finalHeader[2] = (daysSinceEpoch() >> 8) & mask
+                    finalHeader[3] = daysSinceEpoch() & mask
+                    finalHeader[4] = msOfTheDay() >> 24
+                    finalHeader[5] = (msOfTheDay() >> 16) & mask
+                    finalHeader[6] = (msOfTheDay() >> 8) & mask
+                    finalHeader[7] = msOfTheDay() & mask
+                    if temp_size == 1:
+                        finalHeader[8] = self.microsecond >> 8
+                        finalHeader[9] = self.microsecond & mask
+                    elif temp_size == 2:
+                        finalHeader[8] = self.microsecond >> 24
+                        finalHeader[9] = (self.microsecond >> 16) & mask
+                        finalHeader[10] = (self.microsecond >> 8) & mask
+                        finalHeader[11] = self.microsecond & mask
+
+
         elif self.time_format == 2: #CCS
             print "elif"
         elif self.time_format == 3: #ASCII A
@@ -145,3 +175,14 @@ class space_packet_time_stamp_adder(gr.basic_block):
         finalPacket = array.array('B', finalPacket[:])
         finalPacket = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(finalPacket), finalPacket))
         self.message_port_pub(pmt.intern('out'), finalPacket)
+
+    def daysSinceEpoch(self):
+        if self.epoch_identification_cds == 0:
+            self.epoch_year_cds = 1958
+            self.epoch_month_cds = 1
+            self.epoch_day_cds = 1
+
+        return (self.year - self.epoch_year_cds)*365 + (self.month - self.epoch_month_cds)*30 + self.day - self.epoch_day_cds
+
+    def msOfTheDay(self):
+        return self.hour*60*60*1000 + self.minute*60*1000 + self.second * 1000

@@ -74,14 +74,14 @@ class space_packet_primaryheader_adder(gr.basic_block):
                                   self.sequence_flags, self.packet_sequence_name, self.data_length])
 
         finalHeader = numpy.array(numpy.zeros(6), dtype=int)
-        finalHeader[0] = (int(bin(header[0]), 2) << 5) + (int(bin(header[1]), 2) << 4) + (int(bin(header[2]), 2) << 3)
-        finalHeader[0] += int(bin(header[3]), 2) >> 8
-        finalHeader[1] = int(bin(header[3] & mask), 2)
-        finalHeader[2] = (int(bin(header[4]), 2) << 6)
-        finalHeader[2] += int(bin(header[5]), 2) >> 8
-        finalHeader[3] = int(bin(header[5] & mask), 2)
-        finalHeader[4] = int(bin(header[6]), 2) >> 8
-        finalHeader[5] = int(bin(header[6] & mask), 2)
+        finalHeader[0] = header[0] << 5 + header[1] << 4 + header[2] << 3
+        finalHeader[0] += header[3] >> 8
+        finalHeader[1] = header[3] & mask
+        finalHeader[2] = header[4] << 6
+        finalHeader[2] += header[5] >> 8
+        finalHeader[3] = header[5] & mask
+        finalHeader[4] = header[6] >> 8
+        finalHeader[5] = header[6] & mask
         finalPacket = numpy.append(finalHeader, packet)
         finalPacket = array.array('B', finalPacket[:])
         finalPacket = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(finalPacket), finalPacket))
