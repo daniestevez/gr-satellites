@@ -29,14 +29,16 @@ import space_packet
 class space_packet_time_stamp_adder(gr.basic_block):
     """
     Time Stamp Adder (CCSDS 301.0-B-4)
-    The user should study the time code formats book and fill only the necessary fields.
+    --- The user should study the time code formats book and fill only the necessary fields.
 
-    On another note, the space packet parser, in case of a time stamp addition, will only display information
+    --- On another note, the space packet parser, in case of a time stamp addition, will only display information
     if a PField is used, since metadata are crucial to the parsing of the time stamp.
 
-    The user, in general, should check the code of the preferred time format and confirm that the behavior is
+    --- The user, in general, should check the code of the preferred time format and confirm that the behavior is
     the wanted one. Great care should be taken on the variability of the size. (E.g. in ASCII A time format,
-    the user should define the size of the decimal fraction of the second subfield.)
+    the user should define the size of the decimal fraction of the second subfield and should change the finalHeader array.)
+
+    --- Automated time only prints a timestamp down to microseconds
     """
     def __init__(self, input_manual_automatic, time_format, pfield, pfield_extension, time_code_identification_cuc,
                  epoch_year_cuc, epoch_month_cuc, epoch_day_cuc, basic_time_num_octets_cuc, fractional_time_num_octets_cuc, pfield_extension_extended,
@@ -44,7 +46,7 @@ class space_packet_time_stamp_adder(gr.basic_block):
                  time_code_identification_cds, epoch_identification_cds, epoch_year_cds, epoch_month_cds, epoch_day_cds,
                  length_of_day_cds,
                  length_of_submillisecond_cds, time_code_identification_ccs, calendar_variation_ccs,
-                 number_of_subsecond_ccs, year, month, day, hour, minute, second, microsecond):
+                 number_of_subsecond_ccs, year, month, day, hour, minute, second, microsecond, picosecond):
         gr.basic_block.__init__(self,
             name="space_packet_time_stamp_adder",
             in_sig=[],
@@ -84,6 +86,7 @@ class space_packet_time_stamp_adder(gr.basic_block):
         self.minute = minute
         self.second = second
         self.microsecond = microsecond
+        self.picosecond = picosecond
         ##################################################
         # Blocks
         ##################################################
@@ -111,6 +114,8 @@ class space_packet_time_stamp_adder(gr.basic_block):
             self.minute = now.minute
             self.second = now.second
             self.microsecond = now.microsecond
+            if self.length_of_submillisecond_cds >= 2:
+                self.length_of_submillisecond_cds = 1
 
         if self.time_format == 0: #CUC
             if self.pfield == 1:
@@ -138,10 +143,10 @@ class space_packet_time_stamp_adder(gr.basic_block):
                         finalHeader[7] = self.microsecond >> 8
                         finalHeader[8] = self.microsecond & mask
                     elif temp_size == 2:
-                        finalHeader[7] = self.microsecond >> 24
-                        finalHeader[8] = (self.microsecond >> 16) & mask
-                        finalHeader[9] = (self.microsecond >> 8) & mask
-                        finalHeader[10] = self.microsecond & mask
+                        finalHeader[7] = self.picosecond >> 24
+                        finalHeader[8] = (self.picosecond >> 16) & mask
+                        finalHeader[9] = (self.picosecond >> 8) & mask
+                        finalHeader[10] = self.picosecond & mask
                 else:
                     finalHeader[1] = daysSinceEpoch() >> 16
                     finalHeader[2] = (daysSinceEpoch() >> 8) & mask
@@ -154,18 +159,80 @@ class space_packet_time_stamp_adder(gr.basic_block):
                         finalHeader[8] = self.microsecond >> 8
                         finalHeader[9] = self.microsecond & mask
                     elif temp_size == 2:
-                        finalHeader[8] = self.microsecond >> 24
-                        finalHeader[9] = (self.microsecond >> 16) & mask
-                        finalHeader[10] = (self.microsecond >> 8) & mask
-                        finalHeader[11] = self.microsecond & mask
-
-
+                        finalHeader[8] = self.picosecond >> 24
+                        finalHeader[9] = (self.picosecond >> 16) & mask
+                        finalHeader[10] = (self.picosecond >> 8) & mask
+                        finalHeader[11] = self.picosecond & mask
+            else:
+                print "Behavior should be defined by the user"
         elif self.time_format == 2: #CCS
-            print "elif"
+            if self.pfield == 1:
+                finalHeader = numpy.array(numpy.zeros(8 + self.number_of_subsecond_ccs), dtype=int)
+                finalHeader[0] = self.pfield_extension << 7 + self.time_code_identification_ccs << 4 + self.calendar_variation_ccs << 3 +  self.number_of_subsecond_ccs
+                finalHeader[1] = self.year >> 8
+                finalHeader[2] = self.year & mask
+                if self.calendar_variation_ccs == 0:
+                    finalHeader[3] = self.month
+                    finalHeader[4] = self.day
+                else:
+                    finalheader[3] = (30*month + self.day) >> 8
+                    finalHeader[4] = (30*month + self.day) & mask
+                finalHeader[5] = self.hour
+                finalHeader[6] = self.minute
+                finalHeader[7] = self.second
+                if self.number_of_subsecond_ccs >= 1:
+                    finalHeader[8] = self.microsecond/10000
+                if self.number_of_subsecond_ccs >= 2:
+                    finalHeader[9] = (self.microsecond/100) % 100
+                if self.number_of_subsecond_ccs >= 3:
+                    finalHeader[10] = self.microsecond % 100
+                if self.number_of_subsecond_ccs >= 1:
+                    finalHeader[11] = (self.picosecond % 1000000)/10000
+                if self.number_of_subsecond_ccs >= 1:
+                    finalHeader[12] = (self.picosecond % 10000)/100
+                if self.number_of_subsecond_ccs >= 1:
+                    finalHeader[13] = self.microsecond % 100
+            else:
+                print "Behavior should be defined by the user"
         elif self.time_format == 3: #ASCII A
-            print "eliif"
+            finalHeader = numpy.array(numpy.zeros(17), dtype=int)
+            finalHeader[0] = ord(str(self.year/1000))
+            finalHeader[1] = ord(str(self.year/100 % 10))
+            finalHeader[2] = ord(str(self.year/10 % 10))
+            finalHeader[3] = ord(str(self.year % 10))
+            finalHeader[4] = ord(str(self.month / 10))
+            finalHeader[5] = ord(str(self.month % 10))
+            finalHeader[6] = ord(str(self.day / 10))
+            finalHeader[7] = ord(str(self.day % 10))
+            finalHeader[8] = ord('T')
+            finalHeader[9] = ord(str(self.hour / 10))
+            finalHeader[10] = ord(str(self.hour % 10))
+            finalHeader[11] = ord(str(self.minute/1000))
+            finalHeader[12] = ord(str(self.minute/1000))
+            finalHeader[13] = ord(str(self.second/1000))
+            finalHeader[14] = ord(str(self.second/1000))
+            finalHeader[15] = ord(str(self.microsecond/100000))
+            finalHeader[16] = ord('Z')
+
         elif self.time_format == 4: #ASCII B
-            print "elif"
+            finalHeader = numpy.array(numpy.zeros(16), dtype=int)
+            finalHeader[0] = ord(str(self.year / 1000))
+            finalHeader[1] = ord(str(self.year / 100 % 10))
+            finalHeader[2] = ord(str(self.year / 10 % 10))
+            finalHeader[3] = ord(str(self.year % 10))
+            dayOfYear = self.month*30 + self.day
+            finalHeader[4] = ord(str(dayOfYear / 100))
+            finalHeader[5] = ord(str((dayOfYear / 10) % 10))
+            finalHeader[6] = ord(str(dayOfYear % 10))
+            finalHeader[7] = ord('T')
+            finalHeader[8] = ord(str(self.hour / 10))
+            finalHeader[9] = ord(str(self.hour % 10))
+            finalHeader[10] = ord(str(self.minute / 1000))
+            finalHeader[11] = ord(str(self.minute / 1000))
+            finalHeader[12] = ord(str(self.second / 1000))
+            finalHeader[13] = ord(str(self.second / 1000))
+            finalHeader[14] = ord(str(self.microsecond / 100000))
+            finalHeader[15] = ord('Z')
         else:
             print "Time Format Unknown"
 

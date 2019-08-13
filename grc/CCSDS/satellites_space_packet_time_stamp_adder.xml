@@ -4,7 +4,7 @@
   <key>satellites_space_packet_time_stamp_adder</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
-  <make>satellites.space_packet_time_stamp_adder($input_manual_automatic, $time_format, $pfield, $pfield_extension, $time_code_identification_cuc, $epoch_year_cuc, $epoch_month_cuc, $epoch_day_cuc, $basic_time_num_octets_cuc, $fractional_time_num_octets_cuc, $pfield_extension_extended, $additional_octets_basic_time_cuc, $additional_octets_fractional_time_cuc, $rsvd_cuc, $time_code_identification_cds, $epoch_identification_cds, $epoch_year_cds, $epoch_month_cds, $epoch_day_cds, $length_of_day_cds, $length_of_submillisecond_cds, $time_code_identification_ccs, $calendar_variation_ccs, $number_of_subsecond_ccs, $year, $month, $day, $hour, $minute, $second, $microsecond)</make>
+  <make>satellites.space_packet_time_stamp_adder($input_manual_automatic, $time_format, $pfield, $pfield_extension, $time_code_identification_cuc, $epoch_year_cuc, $epoch_month_cuc, $epoch_day_cuc, $basic_time_num_octets_cuc, $fractional_time_num_octets_cuc, $pfield_extension_extended, $additional_octets_basic_time_cuc, $additional_octets_fractional_time_cuc, $rsvd_cuc, $time_code_identification_cds, $epoch_identification_cds, $epoch_year_cds, $epoch_month_cds, $epoch_day_cds, $length_of_day_cds, $length_of_submillisecond_cds, $time_code_identification_ccs, $calendar_variation_ccs, $number_of_subsecond_ccs, $year, $month, $day, $hour, $minute, $second, $microsecond, $picosecond)</make>
   <param>
     <name>Manual or Automatic Time</name>
     <key>manual_automatic</key>
@@ -573,6 +573,27 @@
     <value>0</value>
     <type>raw</type>
     <hide>#if $manual_automatic() == '0' then 'none' else 'all'</hide>
+  </param>
+  <param>
+    <name>Picosecond</name>
+    <key>picosecond</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>
+#if $manual_automatic() == '0'
+	#if $time_format() == '1'
+		#if $length_of_submillisecond_cds() == '2'
+			none
+		#else
+			all
+		#end if
+	#else
+		all
+	#end if
+#else
+	all
+#end if	
+    </hide>
   </param>
   <sink>
     <name>in</name>
