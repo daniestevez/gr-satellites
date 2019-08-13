@@ -77,7 +77,7 @@ TimeCodeCCS = Struct('pfield' / PFieldCCS,
                      'dayOfMonth' / If(this.pfield.calendar_variation_flag == 0, BytesInteger(1)),
                      'dayOfYear' / If(this.pfield.calendar_variation_flag == 1, BytesInteger(1)),
                      'hour' / BytesInteger(1),
-                     'month' / BytesInteger(1),
+                     'minute' / BytesInteger(1),
                      'second' / BytesInteger(1),
                      'subseconds' / Byte[this.pfield.resolution])
 
