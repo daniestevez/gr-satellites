@@ -39,6 +39,10 @@ class space_packet_time_stamp_adder(gr.basic_block):
     the user should define the size of the decimal fraction of the second subfield and should change the finalHeader array.)
 
     --- Automated time only prints a timestamp down to microseconds
+
+    --- When defining an epoch, the user should check that it fits into the bytes that were assigned to hold the difference.
+        E.g. If the epoch "0001 January 1" is defined in CDS, then it will not be able to fit today's date into a 16-bit
+        DAYS part.
     """
     def __init__(self, input_manual_automatic, time_format, pfield, pfield_extension, time_code_identification_cuc,
                  epoch_year_cuc, epoch_month_cuc, epoch_day_cuc, basic_time_num_octets_cuc, fractional_time_num_octets_cuc, pfield_extension_extended,
@@ -94,7 +98,6 @@ class space_packet_time_stamp_adder(gr.basic_block):
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
         self.message_port_register_out(pmt.intern('out'))
 
-
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
@@ -117,8 +120,9 @@ class space_packet_time_stamp_adder(gr.basic_block):
             if self.length_of_submillisecond_cds >= 2:
                 self.length_of_submillisecond_cds = 1
 
+        finalHeader = numpy.array(numpy.zeros(20), dtype = int)
         if self.time_format == 0: #CUC
-            if self.pfield == 1:
+            if self.pfield == 0:
                 size = 2 + self.basic_time_num_octets_cuc + self.fractional_time_num_octets_cuc + 2 + \
                        self.additional_octets_basic_time_cuc + self.additional_octets_fractional_time_cuc
                 finalHeader = numpy.array(numpy.zeros(size), dtype=int)
@@ -126,19 +130,19 @@ class space_packet_time_stamp_adder(gr.basic_block):
             else:
                 print "Agency should define unsegmented code"
         elif self.time_format == 1: #CDS
-            if self.pfield == 1:
+            if self.pfield == 0:
                 temp_size = 0
                 if self.length_of_submillisecond_cds == 1 or self.length_of_submillisecond_cds == 2:
                     temp_size = self.length_of_submillisecond_cds
                 finalHeader = numpy.array(numpy.zeros(7 + 1*self.length_of_day_cds + 2*temp_size), dtype=int)
-                finalHeader[0] = self.pfield_extension << 7 + self.time_code_identification_cds << 4 + self.epoch_identification_cds << 3 + self.length_of_day_cds << 2 + self.length_of_submillisecond_cds
+                finalHeader[0] = (self.pfield_extension << 7) + (self.time_code_identification_cds << 4) + (self.epoch_identification_cds << 3) + (self.length_of_day_cds << 2) + (self.length_of_submillisecond_cds)
                 if self.length_of_day_cds == 0:
-                    finalHeader[1] = daysSinceEpoch() >> 8
-                    finalHeader[2] = daysSinceEpoch() & mask
-                    finalHeader[3] = msOfTheDay() >> 24
-                    finalHeader[4] = (msOfTheDay() >> 16) & mask
-                    finalHeader[5] = (msOfTheDay() >> 8) & mask
-                    finalHeader[6] = msOfTheDay() & mask
+                    finalHeader[1] = self.daysSinceEpoch() >> 8
+                    finalHeader[2] = self.daysSinceEpoch() & mask
+                    finalHeader[3] = self.msOfTheDay() >> 24
+                    finalHeader[4] = (self.msOfTheDay() >> 16) & mask
+                    finalHeader[5] = (self.msOfTheDay() >> 8) & mask
+                    finalHeader[6] = self.msOfTheDay() & mask
                     if temp_size == 1:
                         finalHeader[7] = self.microsecond >> 8
                         finalHeader[8] = self.microsecond & mask
@@ -148,13 +152,13 @@ class space_packet_time_stamp_adder(gr.basic_block):
                         finalHeader[9] = (self.picosecond >> 8) & mask
                         finalHeader[10] = self.picosecond & mask
                 else:
-                    finalHeader[1] = daysSinceEpoch() >> 16
-                    finalHeader[2] = (daysSinceEpoch() >> 8) & mask
-                    finalHeader[3] = daysSinceEpoch() & mask
-                    finalHeader[4] = msOfTheDay() >> 24
-                    finalHeader[5] = (msOfTheDay() >> 16) & mask
-                    finalHeader[6] = (msOfTheDay() >> 8) & mask
-                    finalHeader[7] = msOfTheDay() & mask
+                    finalHeader[1] = self.daysSinceEpoch() >> 16
+                    finalHeader[2] = (self.daysSinceEpoch() >> 8) & mask
+                    finalHeader[3] = self.daysSinceEpoch() & mask
+                    finalHeader[4] = self.msOfTheDay() >> 24
+                    finalHeader[5] = (self.msOfTheDay() >> 16) & mask
+                    finalHeader[6] = (self.msOfTheDay() >> 8) & mask
+                    finalHeader[7] = self.msOfTheDay() & mask
                     if temp_size == 1:
                         finalHeader[8] = self.microsecond >> 8
                         finalHeader[9] = self.microsecond & mask
@@ -166,17 +170,17 @@ class space_packet_time_stamp_adder(gr.basic_block):
             else:
                 print "Behavior should be defined by the user"
         elif self.time_format == 2: #CCS
-            if self.pfield == 1:
+            if self.pfield == 0:
                 finalHeader = numpy.array(numpy.zeros(8 + self.number_of_subsecond_ccs), dtype=int)
-                finalHeader[0] = self.pfield_extension << 7 + self.time_code_identification_ccs << 4 + self.calendar_variation_ccs << 3 +  self.number_of_subsecond_ccs
+                finalHeader[0] = (self.pfield_extension << 7) + (self.time_code_identification_ccs << 4) + (self.calendar_variation_ccs << 3) + (self.number_of_subsecond_ccs)
                 finalHeader[1] = self.year >> 8
                 finalHeader[2] = self.year & mask
                 if self.calendar_variation_ccs == 0:
                     finalHeader[3] = self.month
                     finalHeader[4] = self.day
                 else:
-                    finalheader[3] = (30*month + self.day) >> 8
-                    finalHeader[4] = (30*month + self.day) & mask
+                    finalHeader[3] = (30*self.month + self.day) >> 8
+                    finalHeader[4] = (30*self.month + self.day) & mask
                 finalHeader[5] = self.hour
                 finalHeader[6] = self.minute
                 finalHeader[7] = self.second
@@ -186,12 +190,13 @@ class space_packet_time_stamp_adder(gr.basic_block):
                     finalHeader[9] = (self.microsecond/100) % 100
                 if self.number_of_subsecond_ccs >= 3:
                     finalHeader[10] = self.microsecond % 100
-                if self.number_of_subsecond_ccs >= 1:
+                if self.number_of_subsecond_ccs >= 4:
                     finalHeader[11] = (self.picosecond % 1000000)/10000
-                if self.number_of_subsecond_ccs >= 1:
+                if self.number_of_subsecond_ccs >= 5:
                     finalHeader[12] = (self.picosecond % 10000)/100
-                if self.number_of_subsecond_ccs >= 1:
+                if self.number_of_subsecond_ccs >= 6:
                     finalHeader[13] = self.microsecond % 100
+
             else:
                 print "Behavior should be defined by the user"
         elif self.time_format == 3: #ASCII A
@@ -235,8 +240,12 @@ class space_packet_time_stamp_adder(gr.basic_block):
             finalHeader[15] = ord('Z')
         else:
             print "Time Format Unknown"
-
-
+        x = 0
+        for i in finalHeader:
+            if i > 255:
+                print x
+            else:
+                x = x+1
 
         finalPacket = numpy.append(finalHeader, packet)
         finalPacket = array.array('B', finalPacket[:])

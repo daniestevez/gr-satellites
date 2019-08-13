@@ -62,9 +62,9 @@ PFieldCDS = BitStruct('pfield_extension' / Flag,
                       'length_of_submillisecond_segment' / BitsInteger(2))
 
 TimeCodeCDS = Struct('pfield' / PFieldCDS,
-                     'days' / BitsInteger((2+this.pfield.length_of_day_segment)*8),
-                     'ms_of_day' / BitsInteger(32),
-                     'submilliseconds_of_ms' / Byte[this.pfield.length_of_submillisecond_segment])
+                     'days' / BytesInteger(2+this.pfield.length_of_day_segment),
+                     'ms_of_day' / BytesInteger(4),
+                     'submilliseconds_of_ms' / BytesInteger(2*this.pfield.length_of_submillisecond_segment))
 
 PFieldCCS = BitStruct('pfield_extension' / Flag,
                       'time_code_identification' / BitsInteger(3),
@@ -72,47 +72,49 @@ PFieldCCS = BitStruct('pfield_extension' / Flag,
                       'resolution' / BitsInteger(3))
 
 TimeCodeCCS = Struct('pfield' / PFieldCCS,
-                     'year' / BitsInteger(16),
-                     'month/dayOfMonth_or_dayOfYear' / Byte[2],
-                     'hour' / BitsInteger(8),
-                     'month' / BitsInteger(8),
-                     'second' / BitsInteger(8),
+                     'year' / BytesInteger(2),
+                     'month' / If(this.pfield.calendar_variation_flag == 0, BytesInteger(1)),
+                     'dayOfMonth' / If(this.pfield.calendar_variation_flag == 0, BytesInteger(1)),
+                     'dayOfYear' / If(this.pfield.calendar_variation_flag == 1, BytesInteger(1)),
+                     'hour' / BytesInteger(1),
+                     'month' / BytesInteger(1),
+                     'second' / BytesInteger(1),
                      'subseconds' / Byte[this.pfield.resolution])
 
-TimeCodeASCIIA = BitStruct('yearChar1' / BitsInteger(8),
-                           'yearChar2' / BitsInteger(8),
-                           'yearChar3' / BitsInteger(8),
-                           'yearChar4' / BitsInteger(8),
-                           'monthChar1' / BitsInteger(8),
-                           'monthChar2' / BitsInteger(8),
-                           'dayChar1' / BitsInteger(8),
-                           'dayChar2' / BitsInteger(8),
-                           'calendar_time_separator' / BitsInteger(8),
-                           'hourChar1' / BitsInteger(8),
-                           'hourChar2' / BitsInteger(8),
-                           'minuteChar1' / BitsInteger(8),
-                           'minuteChar2' / BitsInteger(8),
-                           'secondChar1' / BitsInteger(8),
-                           'secondChar2' / BitsInteger(8),
+TimeCodeASCIIA = BitStruct('yearChar1' / BytesInteger(1),
+                           'yearChar2' / BytesInteger(1),
+                           'yearChar3' / BytesInteger(1),
+                           'yearChar4' / BytesInteger(1),
+                           'monthChar1' / BytesInteger(1),
+                           'monthChar2' / BytesInteger(1),
+                           'dayChar1' / BytesInteger(1),
+                           'dayChar2' / BytesInteger(1),
+                           'calendar_time_separator' / BytesInteger(1),
+                           'hourChar1' / BytesInteger(1),
+                           'hourChar2' / BytesInteger(1),
+                           'minuteChar1' / BytesInteger(1),
+                           'minuteChar2' / BytesInteger(1),
+                           'secondChar1' / BytesInteger(1),
+                           'secondChar2' / BytesInteger(1),
                            'decimal_fraction_of_second' / Byte[1], #User should define this amount of bytes
-                           'time_code_terminator' / BitsInteger(8))
+                           'time_code_terminator' / BytesInteger(1))
 
-TimeCodeASCIIB = BitStruct('yearChar1' / BitsInteger(8),
-                           'yearChar2' / BitsInteger(8),
-                           'yearChar3' / BitsInteger(8),
-                           'yearChar4' / BitsInteger(8),
-                           'dayChar1' / BitsInteger(8),
-                           'dayChar2' / BitsInteger(8),
-                           'dayChar3' / BitsInteger(8),
-                           'calendar_time_separator' / BitsInteger(8),
-                           'hourChar1' / BitsInteger(8),
-                           'hourChar2' / BitsInteger(8),
-                           'minuteChar1' / BitsInteger(8),
-                           'minuteChar2' / BitsInteger(8),
-                           'secondChar1' / BitsInteger(8),
-                           'secondChar2' / BitsInteger(8),
+TimeCodeASCIIB = BitStruct('yearChar1' / BytesInteger(1),
+                           'yearChar2' / BytesInteger(1),
+                           'yearChar3' / BytesInteger(1),
+                           'yearChar4' / BytesInteger(1),
+                           'dayChar1' / BytesInteger(1),
+                           'dayChar2' / BytesInteger(1),
+                           'dayChar3' / BytesInteger(1),
+                           'calendar_time_separator' / BytesInteger(1),
+                           'hourChar1' / BytesInteger(1),
+                           'hourChar2' / BytesInteger(1),
+                           'minuteChar1' / BytesInteger(1),
+                           'minuteChar2' / BytesInteger(1),
+                           'secondChar1' / BytesInteger(1),
+                           'secondChar2' / BytesInteger(1),
                            'decimal_fraction_of_second' / Byte[1], #User should define this amount of bytes
-                           'time_code_terminator' / BitsInteger(8))
+                           'time_code_terminator' / BitsInteger(1))
 
 FullPacketNoTimeStamp = Struct('primary' / PrimaryHeader,
                                'payload' / Byte[this.primary.data_length])
@@ -124,7 +126,7 @@ FullPacketCUC = Struct('primary' / PrimaryHeader,
 #Since timestamp is permanent through Mission Phase, User should define payload timestamp size
 FullPacketCDS = Struct('primary' / PrimaryHeader,
                        'timestamp' / TimeCodeCDS,
-                       'payload' / Byte[this.primary.data_length - 7 - this.timestamp.pfield.length_of_day_segment - this.timestamp.pfield.length_of_submillisecond_segment])
+                       'payload' / Byte[2])#this.primary.data_length - 7 - this.timestamp.pfield.length_of_day_segment - this.timestamp.pfield.length_of_submillisecond_segment])
 
 FullPacketCCS = Struct('primary' / PrimaryHeader,
                        'timestamp' / TimeCodeCCS,
