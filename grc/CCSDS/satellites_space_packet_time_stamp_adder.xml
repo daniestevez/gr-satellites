@@ -78,11 +78,11 @@
     </hide>
     <option>
 	<name>Yes</name>
-	<key>1</key>
+	<key>0</key>
     </option>
     <option>
 	<name>No</name>
-	<key>0</key>
+	<key>1</key>
     </option>
   </param>
   <param>
@@ -244,7 +244,7 @@
     <hide>
 #if $time_format() == '0'
 	#if $pfield() == '0'
-		#if $pfield_extension() == '1'
+		#if $pfield_extension() == '0'
 			none
 		#else
 			all
@@ -265,7 +265,7 @@
     <hide>
 #if $time_format() == '0'
 	#if $pfield() == '0'
-		#if $pfield_extension() == '1'
+		#if $pfield_extension() == '0'
 			none
 		#else
 			all
@@ -286,7 +286,7 @@
     <hide>
 #if $time_format() == '0'
 	#if $pfield() == '0'
-		#if $pfield_extension() == '1'
+		#if $pfield_extension() == '0'
 			none
 		#else
 			all

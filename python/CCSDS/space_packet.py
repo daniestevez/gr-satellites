@@ -50,11 +50,17 @@ PFieldCUCExtension = BitStruct('pfieldextension' / Flag,
 
 TimeCodeCUC = Struct('pfield' / PFieldCUC,
                      'pfield_extended' / PFieldCUCExtension,
-                     'tfield' / BitsInteger((this.pfield.number_of_basic_time_unit_octets +
-                                     this.pfield.number_of_fractional_time_unit_octets + 2 +
-                                     this.pfield_extended.number_of_additional_basic_time_unit_octets +
-                                     this.pfield.number_of_additional_fractional_time_unit_octets)*8))
+                     'basis_time_unit' / BytesInteger(7),
+# IfThenElse(this.pfield_extended.pfieldextension == 1,
+#                                                     BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1),
+#                                                     BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1 +
+#                                                       this.pfield_extended.number_of_additional_basic_time_unit_octets)),
 
+                     'fractional_time_unit' / BytesInteger(7))
+                     # IfThenElse(this.pfield_extended.pfieldextension == 1,
+                     #                                BytesInteger(this.pfield.number_of_fractional_time_unit_octets + 1),
+                     #                                BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1 +
+                     #                                  this.pfield_extended.number_of_additional_fractional_time_unit_octets)))
 PFieldCDS = BitStruct('pfield_extension' / Flag,
                       'time_code_identification' / BitsInteger(3),
                       'epoch_identification' / BitsInteger(1),
@@ -96,6 +102,7 @@ TimeCodeASCIIA = BitStruct('yearChar1' / BytesInteger(1),
                            'minuteChar2' / BytesInteger(1),
                            'secondChar1' / BytesInteger(1),
                            'secondChar2' / BytesInteger(1),
+                           #HERE A READUNTIL FUNCTION IN CONSTRUCT COULD BE USED TO READ UNTIL YOU FIND THE Z CHARACTER
                            'decimal_fraction_of_second' / Byte[1], #User should define this amount of bytes
                            'time_code_terminator' / BytesInteger(1))
 
@@ -124,7 +131,7 @@ FullPacketCUC = Struct('primary' / PrimaryHeader,
                        'payload' / Byte[this.primary.data_length - 2 - this.timestamp.pfield.first_pfield.number_of_basic_time_unit_octets - this.timestamp.pfield.first_pfield.number_of_fractional_time_unit_octets])
 
 #Since timestamp is permanent through Mission Phase, User should define payload timestamp size
-FullPacketCDS = Struct('primary' / PrimaryHeader,
+FullPacketCDS = Struct('primary' / PrimaryHeader, 
                        'timestamp' / TimeCodeCDS,
                        'payload' / Byte[2])#this.primary.data_length - 7 - this.timestamp.pfield.length_of_day_segment - this.timestamp.pfield.length_of_submillisecond_segment])
 

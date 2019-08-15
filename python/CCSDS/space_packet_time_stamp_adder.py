@@ -123,10 +123,27 @@ class space_packet_time_stamp_adder(gr.basic_block):
         finalHeader = numpy.array(numpy.zeros(20), dtype = int)
         if self.time_format == 0: #CUC
             if self.pfield == 0:
-                size = 2 + self.basic_time_num_octets_cuc + self.fractional_time_num_octets_cuc + 2 + \
-                       self.additional_octets_basic_time_cuc + self.additional_octets_fractional_time_cuc
+                if self.pfield_extension == 0:
+                    basic_time = 1 + self.basic_time_num_octets_cuc + self.additional_octets_basic_time_cuc
+                    fractional_time = 1 + self.fractional_time_num_octets_cuc + self.additional_octets_fractional_time_cuc
+                else:
+                    basic_time = 1 + self.basic_time_num_octets_cuc
+                    fractional_time = 1 + self.fractional_time_num_octets_cuc
+
+                size = basic_time + fractional_time
                 finalHeader = numpy.array(numpy.zeros(size), dtype=int)
-                #User should define the allocation of the unsegmented time code format here
+                secondsSinceEpoch = self.secondsSinceEpoch()
+                for i in (range(basic_time)):
+                    if (i != basic_time - 1):
+                        finalHeader[i] = secondsSinceEpoch >> 8*(basic_time - i - 1) & mask
+                    else:
+                        finalHeader[i] = secondsSinceEpoch & mask
+
+                for i in range(basic_time + 1, size):
+                    if (i + 1 != size):
+                        finalHeader[i] = secondsSinceEpoch >> 8*(size - i - 1) & mask
+                    else:
+                        finalHeader[i] = secondsSinceEpoch & mask
             else:
                 print "Agency should define unsegmented code"
         elif self.time_format == 1: #CDS
@@ -218,7 +235,6 @@ class space_packet_time_stamp_adder(gr.basic_block):
             finalHeader[14] = ord(str(self.second/1000))
             finalHeader[15] = ord(str(self.microsecond/100000))
             finalHeader[16] = ord('Z')
-
         elif self.time_format == 4: #ASCII B
             finalHeader = numpy.array(numpy.zeros(16), dtype=int)
             finalHeader[0] = ord(str(self.year / 1000))
@@ -241,11 +257,13 @@ class space_packet_time_stamp_adder(gr.basic_block):
         else:
             print "Time Format Unknown"
         x = 0
-        for i in finalHeader:
-            if i > 255:
-                print x
-            else:
-                x = x+1
+        # for i in finalHeader:
+        #     if i > 255:
+        #         print i
+        #         print x
+        #         x = x + 1
+        #     else:
+        #         x = x+1
 
         finalPacket = numpy.append(finalHeader, packet)
         finalPacket = array.array('B', finalPacket[:])
@@ -262,3 +280,11 @@ class space_packet_time_stamp_adder(gr.basic_block):
 
     def msOfTheDay(self):
         return self.hour*60*60*1000 + self.minute*60*1000 + self.second * 1000
+
+    def secondsSinceEpoch(self):
+        if self.time_code_identification_cuc == 0:
+            self.epoch_year_cuc = 1958
+            self.epoch_month_cuc = 1
+            self.epoch_day_cuc = 1
+        days = (self.year - self.epoch_year_cuc)*365 + (self.month - self.epoch_month_cuc)*30 + self.day - self.epoch_day_cuc
+        return days*24*60*60 + self.hour*3600 + self.minute*60 + self.second

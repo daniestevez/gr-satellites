@@ -26,7 +26,7 @@ import space_packet
 
 class space_packet_parser(gr.basic_block):
     """
-    docstring for block space_packet_parser
+
     """
 
     def __init__(self):
@@ -43,9 +43,16 @@ class space_packet_parser(gr.basic_block):
             print "[ERROR] Received invalid message type. Expected u8vector"
             return
         packet = bytearray(pmt.u8vector_elements(msg))
-
         try:
-            data = space_packet.FullPacketCCS.parse(packet[:])
+            # secondaryheaderflag = space_packet.PrimaryHeader.parse(packet[:]).get('secondary_header_flag')
+            # if secondaryheaderflag == 1:
+            #     if
+            #     elif:
+            #     elif:
+            #     elif:
+            #     elif:
+            # else:
+            data = space_packet.FullPacketCUC.parse(packet[:])
         except:
             print "Could not decode space packet"
             return

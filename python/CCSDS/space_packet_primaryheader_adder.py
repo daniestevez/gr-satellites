@@ -29,7 +29,7 @@ class space_packet_primaryheader_adder(gr.basic_block):
     """
     docstring for block space_packet_primaryheader_adder
     """
-    def __init__(self, packet_type, AP_ID, count_or_name, packet_sequence_name):
+    def __init__(self, packet_type, secondary_header_flag, AP_ID, count_or_name, packet_sequence_name):
         gr.basic_block.__init__(self,
             name="space_packet_primaryheader_adder",
             in_sig=[],
@@ -40,7 +40,7 @@ class space_packet_primaryheader_adder(gr.basic_block):
         ##################################################
         self.ccsds_version = 0
         self.packet_type = packet_type
-        self.secondary_header_flag = 0
+        self.secondary_header_flag = secondary_header_flag
         self.AP_ID = AP_ID
         self.sequence_flags = 3
         self.packet_sequence_count = 0
@@ -74,7 +74,7 @@ class space_packet_primaryheader_adder(gr.basic_block):
                                   self.sequence_flags, self.packet_sequence_name, self.data_length])
 
         finalHeader = numpy.array(numpy.zeros(6), dtype=int)
-        finalHeader[0] = header[0] << 5 + header[1] << 4 + header[2] << 3
+        finalHeader[0] = (header[0] << 5) + (header[1] << 4) + (header[2] << 3)
         finalHeader[0] += header[3] >> 8
         finalHeader[1] = header[3] & mask
         finalHeader[2] = header[4] << 6
