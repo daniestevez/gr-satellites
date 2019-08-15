@@ -109,7 +109,7 @@ class space_packet_time_stamp_adder(gr.basic_block):
         mask = 0b11111111 #Use this to take the last 8 bits of a number
 
         if self.input_manual_automatic == 1:
-            now = datetime.now()
+            now = datetime.utcnow()
             self.year = now.year
             self.month = now.month
             self.day = now.day
@@ -230,9 +230,9 @@ class space_packet_time_stamp_adder(gr.basic_block):
             finalHeader[9] = ord(str(self.hour / 10))
             finalHeader[10] = ord(str(self.hour % 10))
             finalHeader[11] = ord(str(self.minute/1000))
-            finalHeader[12] = ord(str(self.minute/1000))
+            finalHeader[12] = ord(str(self.minute % 1000))
             finalHeader[13] = ord(str(self.second/1000))
-            finalHeader[14] = ord(str(self.second/1000))
+            finalHeader[14] = ord(str(self.second % 1000))
             finalHeader[15] = ord(str(self.microsecond/100000))
             finalHeader[16] = ord('Z')
         elif self.time_format == 4: #ASCII B

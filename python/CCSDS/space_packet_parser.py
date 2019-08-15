@@ -51,7 +51,7 @@ class space_packet_parser(gr.basic_block):
             #     elif:
             #     elif:
             #     elif:
-            # else:
+            #     else:
             data = space_packet.FullPacketCUC.parse(packet[:])
         except:
             print "Could not decode space packet"
