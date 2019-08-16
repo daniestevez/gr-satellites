@@ -29,11 +29,13 @@ class space_packet_parser(gr.basic_block):
 
     """
 
-    def __init__(self):
+    def __init__(self, time_header, time_format):
         gr.basic_block.__init__(self,
                                 name="space_packet_parser",
                                 in_sig=[],
                                 out_sig=[])
+        self.time_header = time_header
+        self.time_format = time_format
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
 
@@ -44,15 +46,21 @@ class space_packet_parser(gr.basic_block):
             return
         packet = bytearray(pmt.u8vector_elements(msg))
         try:
-            # secondaryheaderflag = space_packet.PrimaryHeader.parse(packet[:]).get('secondary_header_flag')
-            # if secondaryheaderflag == 1:
-            #     if
-            #     elif:
-            #     elif:
-            #     elif:
-            #     elif:
-            #     else:
-            data = space_packet.FullPacketCUC.parse(packet[:])
+            if self.time_header == 0:
+                if self.time_format == 0:
+                    data = space_packet.FullPacketCUC.parse(packet[:])
+                elif self.time_format == 1:
+                    data = space_packet.FullPacketCDS.parse(packet[:])
+                elif self.time_format == 2:
+                    data = space_packet.FullPacketCCS.parse(packet[:])
+                elif self.time_format == 3:
+                    data = space_packet.FullPacketASCIIA.parse(packet[:])
+                elif self.time_format == 4:
+                    data = space_packet.FullPacketASCIIB.parse(packet[:])
+                else:
+                    print "Time Format Unknown"
+            else:
+                data = space_packet.FullPacketNoTimeStamp.parse(packet[:])
         except:
             print "Could not decode space packet"
             return
