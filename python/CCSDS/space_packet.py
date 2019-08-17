@@ -45,18 +45,18 @@ PFieldCUC = BitStruct('pfield_extension' / Flag,
 
 PFieldCUCExtension = BitStruct('pfieldextension' / Flag,
                                'number_of_additional_basic_time_unit_octets' / BitsInteger(2),
-                               'number_of_additional_fractional_time_unit_octets' / BitsInteger(2),
+                               'number_of_additional_fractional_time_unit_octets' / BitsInteger(3),
                                'reserved_for_mission_definition' / BitsInteger(2))
 
 TimeCodeCUC = Struct('pfield' / PFieldCUC,
-                     'pfield_extended' / PFieldCUCExtension,
-                     'basis_time_unit' / BytesInteger(7),
+                     'pfield_extended' / If(this.pfield.pfield_extension == 1, PFieldCUCExtension),
+                     'basis_time_unit' / BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1),
 # IfThenElse(this.pfield_extended.pfieldextension == 1,
 #                                                     BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1),
 #                                                     BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1 +
 #                                                       this.pfield_extended.number_of_additional_basic_time_unit_octets)),
 
-                     'fractional_time_unit' / BytesInteger(7))
+                     'fractional_time_unit' / BytesInteger(this.pfield.number_of_fractional_time_unit_octets + 1))
                      # IfThenElse(this.pfield_extended.pfieldextension == 1,
                      #                                BytesInteger(this.pfield.number_of_fractional_time_unit_octets + 1),
                      #                                BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1 +
@@ -121,19 +121,19 @@ TimeCodeASCIIB = BitStruct('yearChar1' / BytesInteger(1),
                            'secondChar1' / BytesInteger(1),
                            'secondChar2' / BytesInteger(1),
                            'decimal_fraction_of_second' / Byte[1], #User should define this amount of bytes
-                           'time_code_terminator' / BitsInteger(1))
+                           'time_code_terminator' / BytesInteger(1))
 
 FullPacketNoTimeStamp = Struct('primary' / PrimaryHeader,
                                'payload' / Byte[this.primary.data_length])
 
 FullPacketCUC = Struct('primary' / PrimaryHeader,
                        'timestamp' / TimeCodeCUC,
-                       'payload' / Byte[this.primary.data_length - 2 - this.timestamp.pfield.first_pfield.number_of_basic_time_unit_octets - this.timestamp.pfield.first_pfield.number_of_fractional_time_unit_octets])
+                       'payload' / Byte[this.primary.data_length - 4 - this.timestamp.pfield.number_of_basic_time_unit_octets - this.timestamp.pfield.number_of_fractional_time_unit_octets])
 
 #Since timestamp is permanent through Mission Phase, User should define payload timestamp size
 FullPacketCDS = Struct('primary' / PrimaryHeader, 
                        'timestamp' / TimeCodeCDS,
-                       'payload' / Byte[2])#this.primary.data_length - 7 - this.timestamp.pfield.length_of_day_segment - this.timestamp.pfield.length_of_submillisecond_segment])
+                       'payload' / Byte[this.primary.data_length - 7 - this.timestamp.pfield.length_of_day_segment - this.timestamp.pfield.length_of_submillisecond_segment])
 
 FullPacketCCS = Struct('primary' / PrimaryHeader,
                        'timestamp' / TimeCodeCCS,
