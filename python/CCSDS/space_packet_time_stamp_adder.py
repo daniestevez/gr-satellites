@@ -46,7 +46,7 @@ class space_packet_time_stamp_adder(gr.basic_block):
         DAYS part.
     """
     def __init__(self, input_manual_automatic, time_format, pfield, pfield_extension, time_code_identification_cuc,
-                 epoch_year_cuc, epoch_month_cuc, epoch_day_cuc, basic_time_num_octets_cuc, fractional_time_num_octets_cuc, pfield_extension_extended,
+                 epoch_year_cuc, epoch_month_cuc, epoch_day_cuc, basic_time_num_octets_cuc, fractional_time_num_octets_cuc, pfield_extension_appended,
                  additional_octets_basic_time_cuc, additional_octets_fractional_time_cuc, rsvd_cuc,
                  time_code_identification_cds, epoch_identification_cds, epoch_year_cds, epoch_month_cds, epoch_day_cds,
                  length_of_day_cds,
@@ -63,14 +63,14 @@ class space_packet_time_stamp_adder(gr.basic_block):
         self.input_manual_automatic = input_manual_automatic
         self.time_format = time_format
         self.pfield = pfield #Checks if the P-Field will be used
-        self.pfield_extension = pfield_extension #Checks if the PField will be extended
+        self.pfield_extension = pfield_extension #Checks if the PField will be appended
         self.time_code_identification_cuc = time_code_identification_cuc
         self.epoch_year_cuc = epoch_year_cuc
         self.epoch_month_cuc = epoch_month_cuc
         self.epoch_day_cuc = epoch_day_cuc
         self.basic_time_num_octets_cuc = basic_time_num_octets_cuc
         self.fractional_time_num_octets_cuc = fractional_time_num_octets_cuc
-        self.pfield_extension_extended = pfield_extension_extended #Checks if the PField Extension will be extended
+        self.pfield_extension_appended = pfield_extension_appended #Checks if the PField Extension will be appended
         self.additional_octets_basic_time_cuc = additional_octets_basic_time_cuc
         self.additional_octets_fractional_time_cuc = additional_octets_fractional_time_cuc
         self.rsvd_cuc = rsvd_cuc
@@ -122,7 +122,7 @@ class space_packet_time_stamp_adder(gr.basic_block):
                 self.length_of_submillisecond_cds = 1
         else:
             self.now = datetime(self.year, self.month, self.day, self.hour, self.minute, self.second, self.microsecond)
-        finalHeader = numpy.array(numpy.zeros(20), dtype = int)
+        finalHeader = numpy.zeros(20, dtype=int).tolist()
         if self.time_format == 0: #CUC
             if self.pfield == 0:
                 if self.pfield_extension == 0:
@@ -134,21 +134,10 @@ class space_packet_time_stamp_adder(gr.basic_block):
                     fractional_time = 1 + self.fractional_time_num_octets_cuc
                     size = basic_time + fractional_time + 1 #For the 1 pfeild
 
-                finalHeader = numpy.array(numpy.zeros(size), dtype=int)
-                secondsSinceEpoch = self.secondsSinceEpoch()
+                finalHeader = numpy.zeros(size, dtype=int).tolist()
                 finalHeader[0] = (self.pfield_extension << 7) + (self.time_code_identification_cuc << 4) + (self.basic_time_num_octets_cuc << 2) + (self.fractional_time_num_octets_cuc)
+                finalHeader.append(array.array('B', self.secondsSinceEpoch().to_bytes(basic_time, 'big')).tolist())
 
-                for i in (range(basic_time)):
-                    if (i != basic_time - 1):
-                        finalHeader[i+1] = secondsSinceEpoch >> 8*(basic_time - i - 1) & mask
-                    else:
-                        finalHeader[i+1] = secondsSinceEpoch & mask
-
-                for i in range(basic_time, size - 1):
-                    if (i + 1 != size):
-                        finalHeader[i+1] = secondsSinceEpoch >> 8*(size - i - 1) & mask
-                    else:
-                        finalHeader[i+1] = secondsSinceEpoch & mask
             else:
                 print "Agency should define unsegmented code"
         elif self.time_format == 1: #CDS
@@ -156,27 +145,27 @@ class space_packet_time_stamp_adder(gr.basic_block):
                 temp_size = 0
                 if self.length_of_submillisecond_cds == 1 or self.length_of_submillisecond_cds == 2:
                     temp_size = self.length_of_submillisecond_cds
-                finalHeader = numpy.array(numpy.zeros(7 + 1*self.length_of_day_cds + 2*temp_size), dtype=int)
+                finalHeader = numpy.zeros(7 + 1*self.length_of_day_cds + 2*temp_size, dtype=int).tolist()
                 finalHeader[0] = (self.pfield_extension << 7) + (self.time_code_identification_cds << 4) + (self.epoch_identification_cds << 3) + (self.length_of_day_cds << 2) + (self.length_of_submillisecond_cds)
                 if self.length_of_day_cds == 0:
-                    finalHeader.extend(array.array('B', self.daysSinceEpoch().to_bytes(2, 'big')).tolist())
-                    finalHeader.extend(array.array('B', self.msOfTheDay().to_bytes(4, 'big')).tolist())
+                    finalHeader.append(array.array('B', self.daysSinceEpoch().to_bytes(2, 'big')).tolist())
+                    finalHeader.append(array.array('B', self.msOfTheDay().to_bytes(4, 'big')).tolist())
                     if temp_size == 1:
-                        finalHeader.extend(array.array('B', self.microsecond.to_bytes(2, 'big')).tolist())
+                        finalHeader.append(array.array('B', self.microsecond.to_bytes(2, 'big')).tolist())
                     elif temp_size == 2:
-                        finalHeader.extend(array.array('B', self.picosecond.to_bytes(4, 'big')).tolist())
+                        finalHeader.append(array.array('B', self.picosecond.to_bytes(4, 'big')).tolist())
                 else:
-                    finalHeader.extend(array.array('B', self.daysSinceEpoch().to_bytes(3, 'big')).tolist())
-                    finalHeader.extend(array.array('B', self.msOfTheDay().to_bytes(4, 'big')).tolist())
+                    finalHeader.append(array.array('B', self.daysSinceEpoch().to_bytes(3, 'big')).tolist())
+                    finalHeader.append(array.array('B', self.msOfTheDay().to_bytes(4, 'big')).tolist())
                     if temp_size == 1:
-                        finalHeader.extend(array.array('B', self.microsecond.to_bytes(2, 'big')).tolist())
+                        finalHeader.append(array.array('B', self.microsecond.to_bytes(2, 'big')).tolist())
                     elif temp_size == 2:
-                        finalHeader.extend(array.array('B', self.picosecond.to_bytes(4, 'big')).tolist())
+                        finalHeader.append(array.array('B', self.picosecond.to_bytes(4, 'big')).tolist())
             else:
                 print "Behavior should be defined by the user"
         elif self.time_format == 2: #CCS
             if self.pfield == 0:
-                finalHeader = numpy.array(numpy.zeros(8 + self.number_of_subsecond_ccs), dtype=int)
+                finalHeader = numpy.zeros(8 + self.number_of_subsecond_ccs, dtype=int).tolist()
                 finalHeader[0] = (self.pfield_extension << 7) + (self.time_code_identification_ccs << 4) + (self.calendar_variation_ccs << 3) + (self.number_of_subsecond_ccs)
                 finalHeader[1] = self.year >> 8
                 finalHeader[2] = self.year & mask
@@ -205,7 +194,7 @@ class space_packet_time_stamp_adder(gr.basic_block):
             else:
                 print "Behavior should be defined by the user"
         elif self.time_format == 3: #ASCII A
-            finalHeader = numpy.array(numpy.zeros(17), dtype=int)
+            finalHeader = numpy.zeros(17, dtype=int).tolist()
             finalHeader[0] = ord(str(self.year/1000))
             finalHeader[1] = ord(str(self.year/100 % 10))
             finalHeader[2] = ord(str(self.year/10 % 10))
@@ -224,7 +213,7 @@ class space_packet_time_stamp_adder(gr.basic_block):
             finalHeader[15] = ord(str(self.microsecond/100000))
             finalHeader[16] = ord('Z')
         elif self.time_format == 4: #ASCII B
-            finalHeader = numpy.array(numpy.zeros(16), dtype=int)
+            finalHeader = numpy.zeros(16, dtype=int).tolist()
             finalHeader[0] = ord(str(self.year / 1000))
             finalHeader[1] = ord(str(self.year / 100 % 10))
             finalHeader[2] = ord(str(self.year / 10 % 10))
@@ -270,9 +259,10 @@ class space_packet_time_stamp_adder(gr.basic_block):
         return self.hour*60*60*1000 + self.minute*60*1000 + self.second * 1000
 
     def secondsSinceEpoch(self):
-        if self.time_code_identification_cuc == 0:
+        if self.time_code_identification_cuc == 1:
             self.epoch_year_cuc = 1958
             self.epoch_month_cuc = 1
             self.epoch_day_cuc = 1
-        timestamp = (self.now.toordinal() - date(self.epoch_year_cuc, self.epoch_month_cuc, self.epoch_day_ccuc).toordinal())*86400
+
+        timestamp = (self.now.toordinal() - date(year = self.epoch_year_cuc, month = self.epoch_month_cuc, day = self.epoch_day_cuc).toordinal())*86400
         return timestamp
