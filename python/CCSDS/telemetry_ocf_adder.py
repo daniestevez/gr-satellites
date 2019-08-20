@@ -72,18 +72,20 @@ class telemetry_ocf_adder(gr.basic_block):
             return
         packet = pmt.u8vector_elements(msg)
 
-        header = numpy.array([self.control_word_type, self.clcw_version_number, self.status_field,
-                              self.cop_in_effect, self.virtual_channel_identification, self.rsvd_spare1,
-                              self.no_rf_avail,
-                              self.no_bit_lock, self.lockout, self.wait, self.retransmit, self.farmb_counter,
-                              self.rsvd_spare2,
-                              self.report_value])
-
-        finalHeader = numpy.array(numpy.zeros(4), dtype=int)
-        finalHeader[0] = (int(bin(header[0]), 2) << 7) + (int(bin(header[1]), 2) << 5) + (int(bin(header[2]), 2) << 2) + int(bin(header[3]), 2)
-        finalHeader[1] = (int(bin(header[4]), 2) << 2) + int(bin(header[5]), 2)
-        finalHeader[2] = (int(bin(header[6]), 2) << 7) + (int(bin(header[7]), 2) << 6) + (int(bin(header[8]), 2) << 5) + (int(bin(header[9]), 2) << 4) + (int(bin(header[10]), 2) << 3) + (int(bin(header[11]), 2) << 1) + (int(bin(header[12]), 2))
-        finalHeader[3] = int(bin(header[13]), 2)
+        finalHeader = array.array('B', space_packet.PrimaryHeader.build(dict(control_word_type = self.control_word_type,
+                                                                             clcw_version_number = self.clcw_version_number,
+                                                                             status_field = self.status_field,
+                                                                             cop_in_effect = self.cop_in_effect,
+                                                                             virtual_channel_identification = self.virtual_channel_identification,
+                                                                             rsvd_spare1 = self.rsvd_spare1,
+                                                                             no_rf_avail = self.no_rf_avail,
+                                                                             no_bit_lock = self.no_bit_lock,
+                                                                             lockout = self.lockout,
+                                                                             wait = self.wait,
+                                                                             retransmit = self.retransmit,
+                                                                             farmb_counter = self.farmb_counter,
+                                                                             rsvd_spare2 = self.rsvd_spare2,
+                                                                             report_value = self.report_value))).tolist()
 
         finalPacket = numpy.append(finalHeader, packet)
         finalPacket = array.array('B', finalPacket[:])

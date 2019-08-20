@@ -59,17 +59,6 @@ class telemetry_primaryheader_adder(gr.basic_block):
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
         self.message_port_register_out(pmt.intern('out'))
 
-    PrimaryHeader = BitStruct('transfer_frame_version_number' / BitsInteger(2),
-                              'spacecraft_id' / BitsInteger(10),
-                              'virtual_channel_id' / BitsInteger(3),
-                              'ocf_flag' / Flag,
-                              'master_channel_frame_count' / BitsInteger(8),
-                              'virtual_channel_frame_count' / BitsInteger(8),
-                              'transfer_frame_secondary_header_flag' / Flag,
-                              'synch_flag' / Flag,
-                              'packet_order_flag' / Flag,
-                              'segment_length_id' / BitsInteger(2),
-                              'first_header_pointer' / BitsInteger(11))
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):

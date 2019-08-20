@@ -113,7 +113,7 @@
   <param>
     <name>Epoch Year</name>
     <key>epoch_year_cuc</key>
-    <value>0</value>
+    <value>1</value>
     <type>raw</type>
     <hide>
 #if $time_format() == '0'
@@ -134,7 +134,7 @@
   <param>
     <name>Epoch Month</name>
     <key>epoch_month_cuc</key>
-    <value>0</value>
+    <value>1</value>
     <type>raw</type>
     <hide>
 #if $time_format() == '0'
@@ -155,7 +155,7 @@
   <param>
     <name>Epoch Day</name>
     <key>epoch_day_cuc</key>
-    <value>0</value>
+    <value>1</value>
     <type>raw</type>
     <hide>
 #if $time_format() == '0'
@@ -334,7 +334,7 @@
   <param>
     <name>Epoch Year</name>
     <key>epoch_year_cds</key>
-    <value>0</value>
+    <value>1</value>
     <type>raw</type>
     <hide>
 #if $time_format() == '1'
@@ -355,7 +355,7 @@
   <param>
     <name>Epoch Month</name>
     <key>epoch_month_cds</key>
-    <value>0</value>
+    <value>1</value>
     <type>raw</type>
     <hide>
 #if $time_format() == '1'
@@ -376,7 +376,7 @@
   <param>
     <name>Epoch Day</name>
     <key>epoch_day_cds</key>
-    <value>0</value>
+    <value>1</value>
     <type>raw</type>
     <hide>
 #if $time_format() == '1'

@@ -23,6 +23,7 @@ import numpy
 from gnuradio import gr
 from datetime import datetime
 from datetime import timedelta
+import construct
 import pmt
 import array
 import space_packet
@@ -92,8 +93,15 @@ class space_packet_time_stamp_adder(gr.basic_block):
         self.second = second
         self.microsecond = microsecond
         self.picosecond = picosecond
-        self.epoch_cuc = datetime(self.epoch_year_cuc, self.epoch_month_cuc, self.epoch_day_cuc)
-        self.epoch_cds = datetime(self.epoch_year_cds, self.epoch_month_cds, self.epoch_day_cds)
+        if self.time_code_identification_cuc == 1:
+            self.epoch_cuc = datetime(1958, 1, 1)
+        else:
+            self.epoch_cuc = datetime(self.epoch_year_cuc, self.epoch_month_cuc, self.epoch_day_cuc)
+
+        if self.epoch_identification_cds == 0:
+            self.epoch_cds = datetime(1958, 1, 1)
+        else:
+            self.epoch_cds = datetime(self.epoch_year_cds, self.epoch_month_cds, self.epoch_day_cds)
 
         ##################################################
         # Blocks
@@ -123,20 +131,21 @@ class space_packet_time_stamp_adder(gr.basic_block):
                 self.length_of_submillisecond_cds = 1
         else:
             self.now = datetime(self.year, self.month, self.day, self.hour, self.minute, self.second, self.microsecond)
-        finalHeader = [0]
         if self.time_format == 0: #CUC
             if self.pfield == 0:
                 if self.pfield_extension == 0:
                     basic_time = 1 + self.basic_time_num_octets_cuc + self.additional_octets_basic_time_cuc
                     fractional_time = 1 + self.fractional_time_num_octets_cuc + self.additional_octets_fractional_time_cuc
-                    size = basic_time + fractional_time + 2 #For the 2 pfields
                 else:
+                    print "here"
                     basic_time = 1 + self.basic_time_num_octets_cuc
                     fractional_time = 1 + self.fractional_time_num_octets_cuc
-                    size = basic_time + fractional_time + 1 #For the 1 pfield
 
-                finalHeader[0] = (self.pfield_extension << 7) + (self.time_code_identification_cuc << 4) + (self.basic_time_num_octets_cuc << 2) + (self.fractional_time_num_octets_cuc)
-                finalHeader.extend(array.array('B', construct.BytesInteger(basic_time).build(int(self.now - self.epoch)).total_seconds).tolist())
+                finalHeader = array.array('B', space_packet.PFieldCUC.build(dict(pfield_extension = self.pfield_extension,
+                                                                            time_code_identification = self.time_code_identification_cuc,
+                                                                            number_of_basic_time_unit_octets = self.basic_time_num_octets_cuc,
+                                                                            number_of_fractional_time_unit_octets = self.fractional_time_num_octets_cuc))).tolist()
+                finalHeader.extend(array.array('B', construct.BytesInteger(basic_time).build(int((self.now - self.epoch_cuc).total_seconds()))).tolist())
 
             else:
                 print "Agency should define unsegmented code"
@@ -229,7 +238,7 @@ class space_packet_time_stamp_adder(gr.basic_block):
         #     else:
         #         x = x+1
 
-        finalPacket = numpy.extend(finalHeader, packet)
+        finalPacket = numpy.append(finalHeader, packet)
         finalPacket = array.array('B', finalPacket[:])
         finalPacket = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(finalPacket), finalPacket))
         self.message_port_pub(pmt.intern('out'), finalPacket)

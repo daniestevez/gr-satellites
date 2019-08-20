@@ -50,14 +50,13 @@ class space_packet_parser(gr.basic_block):
         try:
             if self.time_header == 0:
                 try:
-                    packet_format = packet_formats[time_format]
+                    packet_format = packet_formats[self.time_format]
                 except IndexError:
                     print "Time Format Unknown"
                     return
             else:
                 packet_format = packet_formats[5]
-
-            packet_format.parse(packet[:])
+            data = packet_format.parse(packet[:])
         except:
             print "Could not decode space packet"
             return

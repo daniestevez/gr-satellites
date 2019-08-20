@@ -50,7 +50,7 @@ PFieldCUCExtension = BitStruct('pfieldextension' / Flag,
 
 TimeCodeCUC = Struct('pfield' / PFieldCUC,
                      'pfield_extended' / If(this.pfield.pfield_extension == 1, PFieldCUCExtension),
-                     'basis_time_unit' / BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1),
+                     'basic_time_unit' / BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1),
 # IfThenElse(this.pfield_extended.pfieldextension == 1,
 #                                                     BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1),
 #                                                     BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1 +
@@ -128,7 +128,7 @@ FullPacketNoTimeStamp = Struct('primary' / PrimaryHeader,
 
 FullPacketCUC = Struct('primary' / PrimaryHeader,
                        'timestamp' / TimeCodeCUC,
-                       'payload' / Byte[this.primary.data_length - 4 - this.timestamp.pfield.number_of_basic_time_unit_octets - this.timestamp.pfield.number_of_fractional_time_unit_octets])
+                       'payload' / Byte[this.primary.data_length - 3 - this.timestamp.pfield.number_of_basic_time_unit_octets - this.timestamp.pfield.number_of_fractional_time_unit_octets])
 
 #Since timestamp is permanent through Mission Phase, User should define payload timestamp size
 FullPacketCDS = Struct('primary' / PrimaryHeader, 

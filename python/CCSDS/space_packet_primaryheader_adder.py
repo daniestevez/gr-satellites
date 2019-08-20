@@ -63,15 +63,9 @@ class space_packet_primaryheader_adder(gr.basic_block):
         packet = pmt.u8vector_elements(msg)
 
         self.data_length = len(packet)
-        PrimaryHeader = BitStruct('ccsds_version' / BitsInteger(3),
-                                  'packet_type' / BitsInteger(1),
-                                  'secondary_header_flag' / Flag,
-                                  'AP_ID' / BitsInteger(11),
-                                  'sequence_flags' / BitsInteger(2),
-                                  'packet_sequence_count_or_name' / BitsInteger(14),
-                                  'data_length' / BitsInteger(16))
         self.packet_sequence_count += 1
         count_or_name = self.packet_sequence_count if self.packet_type == 0 or self.count_or_name == 0 else self.packet_sequence_name
+
         finalHeader = array.array('B', space_packet.PrimaryHeader.build(dict(ccsds_version = self.ccsds_version,
                                                                 packet_type = self.packet_type,
                                                                 secondary_header_flag = self.secondary_header_flag,
