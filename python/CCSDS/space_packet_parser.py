@@ -45,22 +45,19 @@ class space_packet_parser(gr.basic_block):
             print "[ERROR] Received invalid message type. Expected u8vector"
             return
         packet = bytearray(pmt.u8vector_elements(msg))
+        packet_formats = [space_packet.FullPacketCUC, space_packet.FullPacketCDS, space_packet.FullPacketCCS,
+                          space_packet.FullPacketASCIIA, space_packet.FullPacketASCIIB, space_packet.FullPacketNoTimeStamp]
         try:
             if self.time_header == 0:
-                if self.time_format == 0:
-                    data = space_packet.FullPacketCUC.parse(packet[:])
-                elif self.time_format == 1:
-                    data = space_packet.FullPacketCDS.parse(packet[:])
-                elif self.time_format == 2:
-                    data = space_packet.FullPacketCCS.parse(packet[:])
-                elif self.time_format == 3:
-                    data = space_packet.FullPacketASCIIA.parse(packet[:])
-                elif self.time_format == 4:
-                    data = space_packet.FullPacketASCIIB.parse(packet[:])
-                else:
+                try:
+                    packet_format = packet_formats[time_format]
+                except IndexError:
                     print "Time Format Unknown"
+                    return
             else:
-                data = space_packet.FullPacketNoTimeStamp.parse(packet[:])
+                packet_format = packet_formats[5]
+
+            packet_format.parse(packet[:])
         except:
             print "Could not decode space packet"
             return

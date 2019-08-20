@@ -60,7 +60,7 @@ class virtual_channel_demultiplexer(gr.basic_block):
             print "Could not decode telemetry primary header"
             return
 
-        outPort = data.__getattr__('virtual_channel_id')
+        outPort = data.virtual_channel_id
         port = self.outputDict[outPort]
         if port == -1:
             self.message_port_pub(pmt.intern('out' + str(len(self.vc_outputs))), msg_pmt)

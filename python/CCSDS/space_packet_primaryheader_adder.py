@@ -61,27 +61,25 @@ class space_packet_primaryheader_adder(gr.basic_block):
             print "[ERROR] Received invalid message type. Expected u8vector"
             return
         packet = pmt.u8vector_elements(msg)
-        mask = 0b11111111 #Use this to take the last 8 bits of a number
+
         self.data_length = len(packet)
+        PrimaryHeader = BitStruct('ccsds_version' / BitsInteger(3),
+                                  'packet_type' / BitsInteger(1),
+                                  'secondary_header_flag' / Flag,
+                                  'AP_ID' / BitsInteger(11),
+                                  'sequence_flags' / BitsInteger(2),
+                                  'packet_sequence_count_or_name' / BitsInteger(14),
+                                  'data_length' / BitsInteger(16))
+        self.packet_sequence_count += 1
+        count_or_name = self.packet_sequence_count if self.packet_type == 0 or self.count_or_name == 0 else self.packet_sequence_name
+        finalHeader = array.array('B', space_packet.PrimaryHeader.build(dict(ccsds_version = self.ccsds_version,
+                                                                packet_type = self.packet_type,
+                                                                secondary_header_flag = self.secondary_header_flag,
+                                                                AP_ID = self.AP_ID,
+                                                                sequence_flags = self.sequence_flags,
+                                                                packet_sequence_count_or_name = count_or_name,
+                                                                data_length = self.data_length))).tolist()
 
-        if self.packet_type == 0 or self.count_or_name == 0:
-            self.packet_sequence_count += 1
-
-            header = numpy.array([self.ccsds_version, self.packet_type, self.secondary_header_flag, self.AP_ID,
-                                  self.sequence_flags, self.packet_sequence_count, self.data_length])
-        else:
-            header = numpy.array([self.ccsds_version, self.packet_type, self.secondary_header_flag, self.AP_ID,
-                                  self.sequence_flags, self.packet_sequence_name, self.data_length])
-
-        finalHeader = numpy.array(numpy.zeros(6), dtype=int)
-        finalHeader[0] = (header[0] << 5) + (header[1] << 4) + (header[2] << 3)
-        finalHeader[0] += header[3] >> 8
-        finalHeader[1] = header[3] & mask
-        finalHeader[2] = header[4] << 6
-        finalHeader[2] += header[5] >> 8
-        finalHeader[3] = header[5] & mask
-        finalHeader[4] = header[6] >> 8
-        finalHeader[5] = header[6] & mask
         finalPacket = numpy.append(finalHeader, packet)
         finalPacket = array.array('B', finalPacket[:])
         finalPacket = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(finalPacket), finalPacket))

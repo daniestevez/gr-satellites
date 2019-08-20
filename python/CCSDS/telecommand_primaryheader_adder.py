@@ -60,24 +60,20 @@ class telecommand_primaryheader_adder(gr.basic_block):
             print "[ERROR] Received invalid message type. Expected u8vector"
             return
         packet = pmt.u8vector_elements(msg)
-        mask = 0b11111111
         self.frame_length = len(packet) + 5
         if self.bypass == 1:
             self.frame_sequence_number = 0
         else:
             self.frame_sequence_number += 1
 
-        header = numpy.array([self.transfer_frame_version, self.bypass, self.control, self.RSVD_spare, self.spacecraft_id,
-                             self.virtual_channel_id, self.frame_length, self.frame_sequence_number])
-
-        finalHeader = numpy.array(numpy.zeros(5), dtype=int)
-        finalHeader[0] = header[0] << 6 + header[1] << 5 + header[2] << 4 + header[3] << 2
-        finalHeader[0] += header[4] >> 8
-        finalHeader[1] = header[4] & mask
-        finalHeader[2] = header[5] << 2
-        finalHeader[2] += header[6] >> 8
-        finalHeader[3] = header[6] & mask
-        finalHeader[4] = header[7]
+        finalHeader = array.array('B', telecommand.PrimaryHeader.build(dict(transfer_frame_version = self.transfer_frame_version,
+                                                                            bypass = self.bypass,
+                                                                            control = self.control,
+                                                                            RSVD_spare = self.RSVD_spare,
+                                                                            spacecraft_id = self.spacecraft_id,
+                                                                            virtual_channel_id = self.virtual_channel_id,
+                                                                            frame_length = self.frame_length,
+                                                                            frame_sequence_number = self.frame_sequence_number))).tolist()
 
         finalPacket = numpy.append(finalHeader, packet)
         finalPacket = array.array('B', finalPacket[:])
