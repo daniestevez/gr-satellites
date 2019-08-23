@@ -26,9 +26,7 @@ After choosing which time format will be used, the User should check the sizes o
 as well as the payload variable size of the FullPacket[TimeCodeFormat].
 '''
 
-
 from construct import *
-
 
 PrimaryHeader = BitStruct('ccsds_version' / BitsInteger(3),
                           'packet_type' / BitsInteger(1),
@@ -37,6 +35,10 @@ PrimaryHeader = BitStruct('ccsds_version' / BitsInteger(3),
                           'sequence_flags' / BitsInteger(2),
                           'packet_sequence_count_or_name' / BitsInteger(14),
                           'data_length' / BitsInteger(16))
+
+#########################################
+## CUC related structs
+#########################################
 
 PFieldCUC = BitStruct('pfield_extension' / Flag,
                       'time_code_identification' / BitsInteger(3),
@@ -50,17 +52,28 @@ PFieldCUCExtension = BitStruct('pfieldextension' / Flag,
 
 TimeCodeCUC = Struct('pfield' / PFieldCUC,
                      'pfield_extended' / If(this.pfield.pfield_extension == 1, PFieldCUCExtension),
-                     'basic_time_unit' / BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1),
-# IfThenElse(this.pfield_extended.pfieldextension == 1,
-#                                                     BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1),
-#                                                     BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1 +
-#                                                       this.pfield_extended.number_of_additional_basic_time_unit_octets)),
+                     'basic_time_unit' / IfThenElse(this.pfield.pfield_extension == 0,
+                                                    BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1),
+                                                    BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1 +
+                                                                 this.pfield_extended.number_of_additional_basic_time_unit_octets)),
 
-                     'fractional_time_unit' / BytesInteger(this.pfield.number_of_fractional_time_unit_octets + 1))
-                     # IfThenElse(this.pfield_extended.pfieldextension == 1,
-                     #                                BytesInteger(this.pfield.number_of_fractional_time_unit_octets + 1),
-                     #                                BytesInteger(this.pfield.number_of_basic_time_unit_octets + 1 +
-                     #                                  this.pfield_extended.number_of_additional_fractional_time_unit_octets)))
+                    'fractional_time_unit' / IfThenElse(this.pfield.pfield_extension == 0,
+                                                         BytesInteger(this.pfield.number_of_fractional_time_unit_octets + 1),
+                                                         BytesInteger(this.pfield.number_of_fractional_time_unit_octets + 1 +
+                                                                      this.pfield_extended.number_of_additional_fractional_time_unit_octets)))
+
+FullPacketCUC = Struct('primary' / PrimaryHeader,
+                       'timestamp' / TimeCodeCUC,
+                       'payload' / IfThenElse(this.timestamp.pfield.pfield_extension == 0,
+                                              Byte[this.primary.data_length - 3 - this.timestamp.pfield.number_of_basic_time_unit_octets -
+                                                   this.timestamp.pfield.number_of_fractional_time_unit_octets],
+                                              Byte[this.primary.data_length - 4 - this.timestamp.pfield.number_of_basic_time_unit_octets - this.timestamp.pfield.number_of_fractional_time_unit_octets -
+                                                   this.timestamp.pfield_extended.number_of_additional_basic_time_unit_octets - this.timestamp.pfield_extended.number_of_additional_fractional_time_unit_octets]))
+
+#########################################
+## CDS related structs
+#########################################
+
 PFieldCDS = BitStruct('pfield_extension' / Flag,
                       'time_code_identification' / BitsInteger(3),
                       'epoch_identification' / BitsInteger(1),
@@ -68,9 +81,19 @@ PFieldCDS = BitStruct('pfield_extension' / Flag,
                       'length_of_submillisecond_segment' / BitsInteger(2))
 
 TimeCodeCDS = Struct('pfield' / PFieldCDS,
-                     'days' / BytesInteger(2+this.pfield.length_of_day_segment),
+                     'days' / BytesInteger(2 + this.pfield.length_of_day_segment),
                      'ms_of_day' / BytesInteger(4),
-                     'submilliseconds_of_ms' / BytesInteger(2*this.pfield.length_of_submillisecond_segment))
+                     'submilliseconds_of_ms' / BytesInteger(2 * this.pfield.length_of_submillisecond_segment))
+
+# Since timestamp is permanent through Mission Phase, User should define payload timestamp size
+FullPacketCDS = Struct('primary' / PrimaryHeader,
+                       'timestamp' / TimeCodeCDS,
+                       'payload' / Byte[this.primary.data_length - 7 - this.timestamp.pfield.length_of_day_segment -
+                                        2*this.timestamp.pfield.length_of_submillisecond_segment])
+
+#########################################
+## CCS related structs
+#########################################
 
 PFieldCCS = BitStruct('pfield_extension' / Flag,
                       'time_code_identification' / BitsInteger(3),
@@ -102,8 +125,8 @@ TimeCodeASCIIA = BitStruct('yearChar1' / BytesInteger(1),
                            'minuteChar2' / BytesInteger(1),
                            'secondChar1' / BytesInteger(1),
                            'secondChar2' / BytesInteger(1),
-                           #HERE A READUNTIL FUNCTION IN CONSTRUCT COULD BE USED TO READ UNTIL YOU FIND THE Z CHARACTER
-                           'decimal_fraction_of_second' / Byte[1], #User should define this amount of bytes
+                           # HERE A READUNTIL FUNCTION IN CONSTRUCT COULD BE USED TO READ UNTIL YOU FIND THE Z CHARACTER
+                           'decimal_fraction_of_second' / Byte[1],  # User should define this amount of bytes
                            'time_code_terminator' / BytesInteger(1))
 
 TimeCodeASCIIB = BitStruct('yearChar1' / BytesInteger(1),
@@ -120,20 +143,11 @@ TimeCodeASCIIB = BitStruct('yearChar1' / BytesInteger(1),
                            'minuteChar2' / BytesInteger(1),
                            'secondChar1' / BytesInteger(1),
                            'secondChar2' / BytesInteger(1),
-                           'decimal_fraction_of_second' / Byte[1], #User should define this amount of bytes
+                           'decimal_fraction_of_second' / Byte[1],  # User should define this amount of bytes
                            'time_code_terminator' / BytesInteger(1))
 
 FullPacketNoTimeStamp = Struct('primary' / PrimaryHeader,
                                'payload' / Byte[this.primary.data_length])
-
-FullPacketCUC = Struct('primary' / PrimaryHeader,
-                       'timestamp' / TimeCodeCUC,
-                       'payload' / Byte[this.primary.data_length - 3 - this.timestamp.pfield.number_of_basic_time_unit_octets - this.timestamp.pfield.number_of_fractional_time_unit_octets])
-
-#Since timestamp is permanent through Mission Phase, User should define payload timestamp size
-FullPacketCDS = Struct('primary' / PrimaryHeader, 
-                       'timestamp' / TimeCodeCDS,
-                       'payload' / Byte[this.primary.data_length - 7 - this.timestamp.pfield.length_of_day_segment - this.timestamp.pfield.length_of_submillisecond_segment])
 
 FullPacketCCS = Struct('primary' / PrimaryHeader,
                        'timestamp' / TimeCodeCCS,
@@ -141,8 +155,10 @@ FullPacketCCS = Struct('primary' / PrimaryHeader,
 
 FullPacketASCIIA = Struct('primary' / PrimaryHeader,
                           'timestamp' / TimeCodeASCIIA,
-                          'payload' / Byte[this.primary.data_length - 17]) #Change this depending on the number of decimal fractions of a second
+                          'payload' / Byte[
+                              this.primary.data_length - 17])  # Change this depending on the number of decimal fractions of a second
 
 FullPacketASCIIB = Struct('primary' / PrimaryHeader,
                           'timestamp' / TimeCodeASCIIA,
-                          'payload' / Byte[this.primary.data_length - 16]) #Change this depending on the number of decimal fractions of a second
+                          'payload' / Byte[
+                              this.primary.data_length - 16])  # Change this depending on the number of decimal fractions of a second

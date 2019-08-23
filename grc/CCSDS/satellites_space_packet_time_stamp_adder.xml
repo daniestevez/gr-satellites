@@ -53,11 +53,11 @@
     <hide>#if $time_format() &gt; '2' then 'all' else 'none'</hide>
     <option>
 	<name>Yes</name>
-	<key>0</key>
+	<key>1</key>
     </option>
     <option>
 	<name>No</name>
-	<key>1</key>
+	<key>0</key>
     </option>
   </param>
   <param>
@@ -67,7 +67,7 @@
     <type>enum</type>
     <hide>
 #if $time_format() == '0'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		none
 	#else
 		all
@@ -92,7 +92,7 @@
     <type>enum</type>
     <hide>
 #if $time_format() == '0'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		none
 	#else
 		all
@@ -117,7 +117,7 @@
     <type>raw</type>
     <hide>
 #if $time_format() == '0'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		#if $time_code_identification_cuc() == '2'
 			none
 		#else
@@ -138,7 +138,7 @@
     <type>raw</type>
     <hide>
 #if $time_format() == '0'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		#if $time_code_identification_cuc() == '2'
 			none
 		#else
@@ -159,7 +159,7 @@
     <type>raw</type>
     <hide>
 #if $time_format() == '0'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		#if $time_code_identification_cuc() == '2'
 			none
 		#else
@@ -180,7 +180,7 @@
     <type>raw</type>
     <hide>
 #if $time_format() == '0'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		none
 	#else
 		all
@@ -197,7 +197,7 @@
     <type>raw</type>
     <hide>
 #if $time_format() == '0'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		none
 	#else
 		all
@@ -214,7 +214,7 @@
     <type>enum</type>
     <hide>
 #if $time_format() == '0'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		#if $pfield_extension() == '1'
 			none
 		#else
@@ -243,7 +243,7 @@
     <type>raw</type>
     <hide>
 #if $time_format() == '0'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		#if $pfield_extension() == '1'
 			none
 		#else
@@ -264,7 +264,7 @@
     <type>raw</type>
     <hide>
 #if $time_format() == '0'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		#if $pfield_extension() == '1'
 			none
 		#else
@@ -285,7 +285,7 @@
     <type>raw</type>
     <hide>
 #if $time_format() == '0'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		#if $pfield_extension() == '1'
 			none
 		#else
@@ -313,7 +313,7 @@
     <type>enum</type>
     <hide>
 #if $time_format() == '1'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		none
 	#else
 		all
@@ -338,7 +338,7 @@
     <type>raw</type>
     <hide>
 #if $time_format() == '1'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		#if $epoch_identification_cds() == '1'
 			none
 		#else
@@ -359,7 +359,7 @@
     <type>raw</type>
     <hide>
 #if $time_format() == '1'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		#if $epoch_identification_cds() == '1'
 			none
 		#else
@@ -380,7 +380,7 @@
     <type>raw</type>
     <hide>
 #if $time_format() == '1'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		#if $epoch_identification_cds() == '1'
 			none
 		#else
@@ -401,7 +401,7 @@
     <type>enum</type>
     <hide>
 #if $time_format() == '1'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		none
 	#else
 		all
@@ -426,7 +426,7 @@
     <type>enum</type>
     <hide>
 #if $time_format() == '1'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		none
 	#else
 		all
@@ -443,7 +443,7 @@
 	<name>Microsecond</name>
 	<key>1</key>
     </option>
-  <option>
+    <option>
 	<name>Picosecond</name>
 	<key>2</key>
     </option>
@@ -462,7 +462,7 @@
     <type>enum</type>
     <hide>
 #if $time_format() == '2'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		none
 	#else
 		all
@@ -487,7 +487,7 @@
     <type>enum</type>
     <hide>
 #if $time_format() == '2'
-	#if $pfield() == '0'
+	#if $pfield() == '1'
 		none
 	#else
 		all

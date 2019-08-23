@@ -72,7 +72,7 @@ class telemetry_ocf_adder(gr.basic_block):
             return
         packet = pmt.u8vector_elements(msg)
 
-        finalHeader = array.array('B', space_packet.PrimaryHeader.build(dict(control_word_type = self.control_word_type,
+        finalHeader = array.array('B', telemetry.OCFTrailer.build(dict(control_word_type = self.control_word_type,
                                                                              clcw_version_number = self.clcw_version_number,
                                                                              status_field = self.status_field,
                                                                              cop_in_effect = self.cop_in_effect,

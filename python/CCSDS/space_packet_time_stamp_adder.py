@@ -117,65 +117,75 @@ class space_packet_time_stamp_adder(gr.basic_block):
             "[ERROR] Received invalid message type. Expected u8vector"
             return
         packet = pmt.u8vector_elements(msg)
-
         if self.input_manual_automatic == 1:
             self.now = datetime.utcnow()
-            self.year = self.now.year
-            self.month = self.now.month
-            self.day = self.now.day
-            self.hour = self.now.hour
-            self.minute = self.now.minute
-            self.second = self.now.second
-            self.microsecond = self.now.microsecond
             if self.length_of_submillisecond_cds >= 2:
                 self.length_of_submillisecond_cds = 1
         else:
             self.now = datetime(self.year, self.month, self.day, self.hour, self.minute, self.second, self.microsecond)
         if self.time_format == 0: #CUC
-            if self.pfield == 0:
-                if self.pfield_extension == 0:
-                    basic_time = 1 + self.basic_time_num_octets_cuc + self.additional_octets_basic_time_cuc
-                    fractional_time = 1 + self.fractional_time_num_octets_cuc + self.additional_octets_fractional_time_cuc
-                else:
-                    print "here"
-                    basic_time = 1 + self.basic_time_num_octets_cuc
-                    fractional_time = 1 + self.fractional_time_num_octets_cuc
 
-                finalHeader = array.array('B', space_packet.PFieldCUC.build(dict(pfield_extension = self.pfield_extension,
-                                                                            time_code_identification = self.time_code_identification_cuc,
-                                                                            number_of_basic_time_unit_octets = self.basic_time_num_octets_cuc,
-                                                                            number_of_fractional_time_unit_octets = self.fractional_time_num_octets_cuc))).tolist()
-                finalHeader.extend(array.array('B', construct.BytesInteger(basic_time).build(int((self.now - self.epoch_cuc).total_seconds()))).tolist())
+            basic_time = 1 + self.basic_time_num_octets_cuc
+            fractional_time = 1 + self.fractional_time_num_octets_cuc
+
+            if self.pfield == 1: #If it exists
+
+                finalHeader = array.array('B', space_packet.PFieldCUC.build(
+                    dict(pfield_extension=self.pfield_extension,
+                         time_code_identification=self.time_code_identification_cuc,
+                         number_of_basic_time_unit_octets=self.basic_time_num_octets_cuc,
+                         number_of_fractional_time_unit_octets=self.fractional_time_num_octets_cuc))).tolist()
+
+                if self.pfield_extension == 1: #If it is extended
+                    basic_time += self.additional_octets_basic_time_cuc
+                    fractional_time +=self.additional_octets_fractional_time_cuc
+                    finalHeader.extend(array.array('B', space_packet.PFieldCUCExtension.build(
+                        dict(pfieldextension=self.pfield_extension_extended,
+                             number_of_additional_basic_time_unit_octets=self.additional_octets_basic_time_cuc,
+                             number_of_additional_fractional_time_unit_octets=self.additional_octets_fractional_time_cuc,
+                             reserved_for_mission_definition=self.rsvd_cuc))).tolist())
+                temp_diff = self.now - self.epoch_cuc
+                print temp_diff.total_seconds()
+                finalHeader.extend(array.array('B', construct.BytesInteger(basic_time).build(int(temp_diff.total_seconds()))).tolist())
+                finalHeader.extend(array.array('B', construct.BytesInteger(fractional_time).build(temp_diff.total_seconds() - int(temp_diff.total_seconds()))).tolist())
 
             else:
                 print "Agency should define unsegmented code"
         elif self.time_format == 1: #CDS
-            if self.pfield == 0:
-                finalHeader[0] = (self.pfield_extension << 7) + (self.time_code_identification_cds << 4) + (self.epoch_identification_cds << 3) + (self.length_of_day_cds << 2) + (self.length_of_submillisecond_cds)
+            if self.pfield == 1:
+                finalHeader = array.array('B', space_packet.PFieldCDS.build(dict(pfield_extension = self.pfield_extension,
+                                                                                 time_code_identification = self.time_code_identification_cds,
+                                                                                 epoch_identification = self.epoch_identification_cds,
+                                                                                 length_of_day_segment = self.length_of_day_cds,
+                                                                                 length_of_submillisecond_segment = self.length_of_submillisecond_cds))).tolist()
                 days_len = 2 if self.length_of_day_cds == 0 else 3
                 finalHeader.extend(
                     array.array('B', construct.BytesInteger(days_len).build((self.now - self.epoch_cds).days)).tolist())
-                finalHeader.extend(array.array('B', construct.Int32ub.build(self.msOfTheDay())).tolist())
+                finalHeader.extend(array.array('B', construct.Int32ub.build(self.now.microsecond/1000)).tolist())
                 if self.length_of_submillisecond_cds == 1:
-                    finalHeader.extend(array.array('B', construct.Int16ub.build(self.microsecond)).tolist())
+                    finalHeader.extend(array.array('B', construct.Int16ub.build(self.now.microsecond % 1000)).tolist())
                 elif self.length_of_submillisecond_cds == 2:
+                    print "here"
                     finalHeader.extend(array.array('B', construct.Int32ub.build(self.picosecond)).tolist())
             else:
                 print "Behavior should be defined by the user"
         elif self.time_format == 2: #CCS
             if self.pfield == 0:
-                finalHeader[0] = (self.pfield_extension << 7) + (self.time_code_identification_ccs << 4) + (self.calendar_variation_ccs << 3) + (self.number_of_subsecond_ccs)
-                finalHeader[1] = self.year >> 8
-                finalHeader[2] = self.year & 0xff
+                finalHeader = array.array('B', space_packet.PFieldCDS.build(dict(pfield_extension = self.pfield_extension,
+                                                                                 time_code_identification=self.time_code_identification_ccs,
+                                                                                 calendar_variation_flag=self.calendar_variation_ccs,
+                                                                                 resolution=self.number_of_subsecond_ccs))).tolist()
+                finalHeader.extend(array.array('B', construct.Int16ub.build(self.now.year)).tolist())
                 if self.calendar_variation_ccs == 0:
-                    finalHeader[3] = self.month
-                    finalHeader[4] = self.day
+                    finalHeader.extend(array.array('B', construct.Int8ub.build(self.now.month)).tolist())
+                    finalHeader.extend(array.array('B', construct.Int8ub.build(self.now.day)).tolist())
                 else:
-                    finalHeader[3] = (30*self.month + self.day) >> 8
-                    finalHeader[4] = (30*self.month + self.day) & 0xff
-                finalHeader[5] = self.hour
-                finalHeader[6] = self.minute
-                finalHeader[7] = self.second
+                    finalHeader.extend(array.array('B', construct.Int16ub.build(self.now.timetuple().tm_yday)).tolist())
+
+                finalHeader.extend(array.array('B', construct.Int8ub.build(self.now.hour)).tolist())
+                finalHeader.extend(array.array('B', construct.Int8ub.build(self.now.minute)).tolist())
+                finalHeader.extend(array.array('B', construct.Int8ub.build(self.now.second)).tolist())
+
                 if self.number_of_subsecond_ccs >= 1:
                     finalHeader[8] = self.microsecond/10000
                 if self.number_of_subsecond_ccs >= 2:
@@ -242,6 +252,3 @@ class space_packet_time_stamp_adder(gr.basic_block):
         finalPacket = array.array('B', finalPacket[:])
         finalPacket = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(finalPacket), finalPacket))
         self.message_port_pub(pmt.intern('out'), finalPacket)
-
-    def msOfTheDay(self):
-        return self.hour*60*60*1000 + self.minute*60*1000 + self.second * 1000
