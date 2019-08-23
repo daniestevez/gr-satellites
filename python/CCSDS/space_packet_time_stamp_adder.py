@@ -150,9 +150,10 @@ class space_packet_time_stamp_adder(gr.basic_block):
                              number_of_additional_fractional_time_unit_octets=self.additional_octets_fractional_time_cuc,
                              reserved_for_mission_definition=self.rsvd_cuc))).tolist())
                 temp_diff = self.now - self.epoch_cuc
-                print temp_diff.total_seconds()
-                finalHeader.extend(array.array('B', construct.BytesInteger(basic_time).build(int(temp_diff.total_seconds()))).tolist())
-                finalHeader.extend(array.array('B', construct.BytesInteger(fractional_time).build(temp_diff.total_seconds() - int(temp_diff.total_seconds()))).tolist())
+                total_basic = int(temp_diff.total_seconds())
+                total_frac = int((temp_diff.total_seconds() - total_basic)*(256**fractional_time))
+                finalHeader.extend(array.array('B', construct.BytesInteger(basic_time).build(total_basic)).tolist())
+                finalHeader.extend(array.array('B', construct.BytesInteger(fractional_time).build(total_frac)).tolist())
 
             else:
                 print "Agency should define unsegmented code"
