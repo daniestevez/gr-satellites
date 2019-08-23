@@ -36,12 +36,12 @@ class pathID_demultiplexer(gr.basic_block):
         self.pathID_outputs = pathID_outputs
         self.message_port_register_in(pmt.intern('in'))
 
-        self.outputDict = Dict()
+        self.outputDict = {}
         for i in range(len(pathID_outputs)):
             self.outputDict[pathID_outputs[i]] = i
             self.message_port_register_out(pmt.intern('out'+str(i)))
 
-        self.message_port_register_out(pmt.intern('out' + str(len(pathID_outputs))))
+        self.message_port_register_out(pmt.intern('discarded'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
 
     def handle_msg(self, msg_pmt):
@@ -62,5 +62,5 @@ class pathID_demultiplexer(gr.basic_block):
             port = self.outputDict[outPort]
             self.message_port_pub(pmt.intern('out' + str(port)), msg_pmt)
         except KeyError:
-            self.message_port_pub(pmt.intern('out' + str(len(self.pathID_outputs))), msg_pmt)
+            self.message_port_pub(pmt.intern('discarded'), msg_pmt)
             print "Discarded message"

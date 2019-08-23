@@ -217,7 +217,6 @@ class space_packet_time_stamp_adder(gr.basic_block):
         elif self.time_format == 4: #ASCII B
             finalHeader = []
             iso = self.now.strftime("%Y-") + str(self.now.timetuple().tm_yday)+ self.now.strftime("T%H:%M:%S.%f")
-            print iso
             for i in range(16 + 4 - 1):  # 4 is the number of characters such as :,-,. in the isoformat and -1 to add the Z character
                 char = iso[i]
                 if char != '-' and char != ':' and char != '.':

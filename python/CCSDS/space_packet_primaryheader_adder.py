@@ -61,7 +61,6 @@ class space_packet_primaryheader_adder(gr.basic_block):
             print "[ERROR] Received invalid message type. Expected u8vector"
             return
         packet = pmt.u8vector_elements(msg)
-        print len(packet)
         self.data_length = len(packet)
         self.packet_sequence_count += 1
         count_or_name = self.packet_sequence_count if self.packet_type == 0 or self.count_or_name == 0 else self.packet_sequence_name

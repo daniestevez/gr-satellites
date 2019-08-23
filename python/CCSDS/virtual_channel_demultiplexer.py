@@ -42,9 +42,8 @@ class virtual_channel_demultiplexer(gr.basic_block):
             self.outputDict[vc_outputs[i]] = i
             self.message_port_register_out(pmt.intern('out' + str(i)))
 
-        self.message_port_register_out(pmt.intern('out' + str(len(vc_outputs))))
+        self.message_port_register_out(pmt.intern('discarded'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
-
 
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
@@ -59,10 +58,10 @@ class virtual_channel_demultiplexer(gr.basic_block):
             print "Could not decode telemetry primary header"
             return
 
+        outPort = data.virtual_channel_id
         try:
-            outPort = data.virtual_channel_id
             port = self.outputDict[outPort]
             self.message_port_pub(pmt.intern('out' + str(port)), msg_pmt)
         except KeyError:
-            self.message_port_pub(pmt.intern('out' + str(len(self.vc_outputs))), msg_pmt)
+            self.message_port_pub(pmt.intern('discarded'), msg_pmt)
             print "Discarded message"
