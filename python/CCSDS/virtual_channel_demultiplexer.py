@@ -49,8 +49,7 @@ class virtual_channel_demultiplexer(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print
-            "[ERROR] Received invalid message type. Expected u8vector"
+            print "[ERROR] Received invalid message type. Expected u8vector"
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
@@ -60,14 +59,10 @@ class virtual_channel_demultiplexer(gr.basic_block):
             print "Could not decode telemetry primary header"
             return
 
-        outPort = data.virtual_channel_id
-        port = self.outputDict[outPort]
-        if port == -1:
+        try:
+            outPort = data.virtual_channel_id
+            port = self.outputDict[outPort]
+            self.message_port_pub(pmt.intern('out' + str(port)), msg_pmt)
+        except KeyError:
             self.message_port_pub(pmt.intern('out' + str(len(self.vc_outputs))), msg_pmt)
             print "Discarded message"
-        else:
-            self.message_port_pub(pmt.intern('out' + str(port)), msg_pmt)
-
-class Dict(dict):
-    def __missing__(self, key):
-        return -1

@@ -110,55 +110,69 @@ TimeCodeCCS = Struct('pfield' / PFieldCCS,
                      'second' / BytesInteger(1),
                      'subseconds' / Byte[this.pfield.resolution])
 
-TimeCodeASCIIA = BitStruct('yearChar1' / BytesInteger(1),
-                           'yearChar2' / BytesInteger(1),
-                           'yearChar3' / BytesInteger(1),
-                           'yearChar4' / BytesInteger(1),
-                           'monthChar1' / BytesInteger(1),
-                           'monthChar2' / BytesInteger(1),
-                           'dayChar1' / BytesInteger(1),
-                           'dayChar2' / BytesInteger(1),
-                           'calendar_time_separator' / BytesInteger(1),
-                           'hourChar1' / BytesInteger(1),
-                           'hourChar2' / BytesInteger(1),
-                           'minuteChar1' / BytesInteger(1),
-                           'minuteChar2' / BytesInteger(1),
-                           'secondChar1' / BytesInteger(1),
-                           'secondChar2' / BytesInteger(1),
-                           # HERE A READUNTIL FUNCTION IN CONSTRUCT COULD BE USED TO READ UNTIL YOU FIND THE Z CHARACTER
-                           'decimal_fraction_of_second' / Byte[1],  # User should define this amount of bytes
-                           'time_code_terminator' / BytesInteger(1))
-
-TimeCodeASCIIB = BitStruct('yearChar1' / BytesInteger(1),
-                           'yearChar2' / BytesInteger(1),
-                           'yearChar3' / BytesInteger(1),
-                           'yearChar4' / BytesInteger(1),
-                           'dayChar1' / BytesInteger(1),
-                           'dayChar2' / BytesInteger(1),
-                           'dayChar3' / BytesInteger(1),
-                           'calendar_time_separator' / BytesInteger(1),
-                           'hourChar1' / BytesInteger(1),
-                           'hourChar2' / BytesInteger(1),
-                           'minuteChar1' / BytesInteger(1),
-                           'minuteChar2' / BytesInteger(1),
-                           'secondChar1' / BytesInteger(1),
-                           'secondChar2' / BytesInteger(1),
-                           'decimal_fraction_of_second' / Byte[1],  # User should define this amount of bytes
-                           'time_code_terminator' / BytesInteger(1))
-
-FullPacketNoTimeStamp = Struct('primary' / PrimaryHeader,
-                               'payload' / Byte[this.primary.data_length])
-
 FullPacketCCS = Struct('primary' / PrimaryHeader,
                        'timestamp' / TimeCodeCCS,
                        'payload' / Byte[this.primary.data_length - 8 - this.timestamp.pfield.resolution])
 
+#########################################
+## ASCII A (Month - Day Format) related structs
+#########################################
+
+TimeCodeASCIIA = Struct('yearChar1' / BytesInteger(1),
+                        'yearChar2' / BytesInteger(1),
+                        'yearChar3' / BytesInteger(1),
+                        'yearChar4' / BytesInteger(1),
+                        'monthChar1' / BytesInteger(1),
+                        'monthChar2' / BytesInteger(1),
+                        'dayChar1' / BytesInteger(1),
+                        'dayChar2' / BytesInteger(1),
+                        'calendar_time_separator' / BytesInteger(1),
+                        'hourChar1' / BytesInteger(1),
+                        'hourChar2' / BytesInteger(1),
+                        'minuteChar1' / BytesInteger(1),
+                        'minuteChar2' / BytesInteger(1),
+                        'secondChar1' / BytesInteger(1),
+                        'secondChar2' / BytesInteger(1),
+                        # HERE A READUNTIL FUNCTION IN CONSTRUCT COULD BE USED TO READ UNTIL YOU FIND THE Z CHARACTER
+                        'decimal_fraction_of_second' / Byte[1],  # User should define this amount of bytes
+                        'time_code_terminator' / BytesInteger(1))
+
 FullPacketASCIIA = Struct('primary' / PrimaryHeader,
                           'timestamp' / TimeCodeASCIIA,
-                          'payload' / Byte[
-                              this.primary.data_length - 17])  # Change this depending on the number of decimal fractions of a second
+                          'payload' / Byte[this.primary.data_length - 17])  # Change this depending on the number of decimal fractions of a second
+
+#########################################
+## ASCII A (Month - Day Format) related structs
+#########################################
+
+TimeCodeASCIIB = Struct('yearChar1' / BytesInteger(1),
+                        'yearChar2' / BytesInteger(1),
+                        'yearChar3' / BytesInteger(1),
+                        'yearChar4' / BytesInteger(1),
+                        'dayChar1' / BytesInteger(1),
+                        'dayChar2' / BytesInteger(1),
+                        'dayChar3' / BytesInteger(1),
+                        'calendar_time_separator' / BytesInteger(1),
+                        'hourChar1' / BytesInteger(1),
+                        'hourChar2' / BytesInteger(1),
+                        'minuteChar1' / BytesInteger(1),
+                        'minuteChar2' / BytesInteger(1),
+                        'secondChar1' / BytesInteger(1),
+                        'secondChar2' / BytesInteger(1),
+                        'decimal_fraction_of_second' / Byte[1],  # User should define this amount of bytes
+                        'time_code_terminator' / BytesInteger(1))
 
 FullPacketASCIIB = Struct('primary' / PrimaryHeader,
-                          'timestamp' / TimeCodeASCIIA,
-                          'payload' / Byte[
-                              this.primary.data_length - 16])  # Change this depending on the number of decimal fractions of a second
+                          'timestamp' / TimeCodeASCIIB,
+                          'payload' / Byte[this.primary.data_length - 16])  # Change this depending on the number of decimal fractions of a second
+
+#########################################
+## No Time Stamps
+#########################################
+FullPacketNoTimeStamp = Struct('primary' / PrimaryHeader,
+                               'payload' / Byte[this.primary.data_length])
+
+
+
+
+

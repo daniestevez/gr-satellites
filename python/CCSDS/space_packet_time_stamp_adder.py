@@ -45,6 +45,9 @@ class space_packet_time_stamp_adder(gr.basic_block):
     --- When defining an epoch, the user should check that it fits into the bytes that were assigned to hold the difference.
         E.g. If the epoch "0001 January 1" is defined in CDS, then it will not be able to fit today's date into a 16-bit
         DAYS part.
+    --- On ASCII Code the number of decimals is set to 1. The user should change this if more decimals are wanted.
+        The user should change this both in the space_packet.py file (in the TimeASCII(A/B) Struct and in FullPacketASCII(A/B) Struct)
+        and in this file, in handle_msg in the loop of how many characters should the construct build.
     """
     def __init__(self, input_manual_automatic, time_format, pfield, pfield_extension, time_code_identification_cuc,
                  epoch_year_cuc, epoch_month_cuc, epoch_day_cuc, basic_time_num_octets_cuc, fractional_time_num_octets_cuc, pfield_extension_extended,
@@ -121,6 +124,8 @@ class space_packet_time_stamp_adder(gr.basic_block):
             self.now = datetime.utcnow()
             if self.length_of_submillisecond_cds >= 2:
                 self.length_of_submillisecond_cds = 1
+            if self.number_of_subsecond_ccs >= 4:
+                self.length_of_susecond_ccs = 3
         else:
             self.now = datetime(self.year, self.month, self.day, self.hour, self.minute, self.second, self.microsecond)
         if self.time_format == 0: #CUC
@@ -170,8 +175,8 @@ class space_packet_time_stamp_adder(gr.basic_block):
             else:
                 print "Behavior should be defined by the user"
         elif self.time_format == 2: #CCS
-            if self.pfield == 0:
-                finalHeader = array.array('B', space_packet.PFieldCDS.build(dict(pfield_extension = self.pfield_extension,
+            if self.pfield == 1:
+                finalHeader = array.array('B', space_packet.PFieldCCS.build(dict(pfield_extension = self.pfield_extension,
                                                                                  time_code_identification=self.time_code_identification_ccs,
                                                                                  calendar_variation_flag=self.calendar_variation_ccs,
                                                                                  resolution=self.number_of_subsecond_ccs))).tolist()
@@ -187,66 +192,40 @@ class space_packet_time_stamp_adder(gr.basic_block):
                 finalHeader.extend(array.array('B', construct.Int8ub.build(self.now.second)).tolist())
 
                 if self.number_of_subsecond_ccs >= 1:
-                    finalHeader[8] = self.microsecond/10000
+                    finalHeader.extend(array.array('B', construct.Int8ub.build(self.now.microsecond/10**4)).tolist())
                 if self.number_of_subsecond_ccs >= 2:
-                    finalHeader[9] = (self.microsecond/100) % 100
+                    finalHeader.extend(array.array('B', construct.Int8ub.build((self.now.microsecond/10**2)% 10**2)).tolist())
                 if self.number_of_subsecond_ccs >= 3:
-                    finalHeader[10] = self.microsecond % 100
+                    finalHeader.extend(array.array('B', construct.Int8ub.build(self.now.microsecond % 10**2)).tolist())
                 if self.number_of_subsecond_ccs >= 4:
-                    finalHeader[11] = (self.picosecond % 1000000)/10000
+                    finalHeader.extend(array.array('B', construct.Int8ub.build((self.now.picosecond % 10**6)/10**4)).tolist())
                 if self.number_of_subsecond_ccs >= 5:
-                    finalHeader[12] = (self.picosecond % 10000)/100
+                    finalHeader.extend(array.array('B', construct.Int8ub.build((self.now.picosecond % 10**4)/10**2)).tolist())
                 if self.number_of_subsecond_ccs >= 6:
-                    finalHeader[13] = self.microsecond % 100
+                    finalHeader.extend(array.array('B', construct.Int8ub.build(self.now.picosecond % 10**2)).tolist())
 
             else:
                 print "Behavior should be defined by the user"
         elif self.time_format == 3: #ASCII A
-            finalHeader[0] = ord(str(self.year/1000))
-            finalHeader[1] = ord(str(self.year/100 % 10))
-            finalHeader[2] = ord(str(self.year/10 % 10))
-            finalHeader[3] = ord(str(self.year % 10))
-            finalHeader[4] = ord(str(self.month / 10))
-            finalHeader[5] = ord(str(self.month % 10))
-            finalHeader[6] = ord(str(self.day / 10))
-            finalHeader[7] = ord(str(self.day % 10))
-            finalHeader[8] = ord('T')
-            finalHeader[9] = ord(str(self.hour / 10))
-            finalHeader[10] = ord(str(self.hour % 10))
-            finalHeader[11] = ord(str(self.minute/10))
-            finalHeader[12] = ord(str(self.minute % 10))
-            finalHeader[13] = ord(str(self.second/10))
-            finalHeader[14] = ord(str(self.second % 10))
-            finalHeader[15] = ord(str(self.microsecond/100000))
-            finalHeader[16] = ord('Z')
+            finalHeader = []
+            for i in range(17+5 - 1): #5 is the number of characters such as :,-,. in the isoformat and -1 to add the Z character
+                char = self.now.isoformat()[i]
+                if char!='-' and char!=':' and char!='.':
+                    finalHeader.extend(array.array('B', construct.Int8ub.build(ord(char))).tolist())
+
+            finalHeader.extend(array.array('B', construct.Int8ub.build(ord('Z'))).tolist())
         elif self.time_format == 4: #ASCII B
-            finalHeader[0] = ord(str(self.year / 1000))
-            finalHeader[1] = ord(str(self.year / 100 % 10))
-            finalHeader[2] = ord(str(self.year / 10 % 10))
-            finalHeader[3] = ord(str(self.year % 10))
-            dayOfYear = self.month*30 + self.day
-            finalHeader[4] = ord(str(dayOfYear / 100))
-            finalHeader[5] = ord(str((dayOfYear / 10) % 10))
-            finalHeader[6] = ord(str(dayOfYear % 10))
-            finalHeader[7] = ord('T')
-            finalHeader[8] = ord(str(self.hour / 10))
-            finalHeader[9] = ord(str(self.hour % 10))
-            finalHeader[10] = ord(str(self.minute / 1000))
-            finalHeader[11] = ord(str(self.minute / 1000))
-            finalHeader[12] = ord(str(self.second / 1000))
-            finalHeader[13] = ord(str(self.second / 1000))
-            finalHeader[14] = ord(str(self.microsecond / 100000))
-            finalHeader[15] = ord('Z')
+            finalHeader = []
+            iso = self.now.strftime("%Y-") + str(self.now.timetuple().tm_yday)+ self.now.strftime("T%H:%M:%S.%f")
+            print iso
+            for i in range(16 + 4 - 1):  # 4 is the number of characters such as :,-,. in the isoformat and -1 to add the Z character
+                char = iso[i]
+                if char != '-' and char != ':' and char != '.':
+                    finalHeader.extend(array.array('B', construct.Int8ub.build(ord(char))).tolist())
+
+            finalHeader.extend(array.array('B', construct.Int8ub.build(ord('Z'))).tolist())
         else:
             print "Time Format Unknown"
-        x = 0
-        # for i in finalHeader:
-        #     if i > 255:
-        #         print i
-        #         print x
-        #         x = x + 1
-        #     else:
-        #         x = x+1
 
         finalPacket = numpy.append(finalHeader, packet)
         finalPacket = array.array('B', finalPacket[:])

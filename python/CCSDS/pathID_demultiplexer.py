@@ -57,14 +57,10 @@ class pathID_demultiplexer(gr.basic_block):
             print "Could not decode space packet primary header"
             return
 
-        outPort = data.__getattr__('AP_ID')
-        port = self.outputDict[outPort]
-        if port == -1 :
+        outPort = data.AP_ID
+        try:
+            port = self.outputDict[outPort]
+            self.message_port_pub(pmt.intern('out' + str(port)), msg_pmt)
+        except KeyError:
             self.message_port_pub(pmt.intern('out' + str(len(self.pathID_outputs))), msg_pmt)
             print "Discarded message"
-        else:
-            self.message_port_pub(pmt.intern('out' + str(port)), msg_pmt)
-
-class Dict(dict):
-    def __missing__(self, key):
-        return -1
