@@ -4,7 +4,7 @@
   <key>satellites_space_packet_time_stamp_adder</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
-  <make>satellites.space_packet_time_stamp_adder($manual_automatic, $time_format, $pfield, $pfield_extension, $time_code_identification_cuc, $epoch_year_cuc, $epoch_month_cuc, $epoch_day_cuc, $basic_time_num_octets_cuc, $fractional_time_num_octets_cuc, $pfield_extension_extended, $additional_octets_basic_time_cuc, $additional_octets_fractional_time_cuc, $rsvd_cuc, $time_code_identification_cds, $epoch_identification_cds, $epoch_year_cds, $epoch_month_cds, $epoch_day_cds, $length_of_day_cds, $length_of_submillisecond_cds, $time_code_identification_ccs, $calendar_variation_ccs, $number_of_subsecond_ccs, $year, $month, $day, $hour, $minute, $second, $microsecond, $picosecond)</make>
+  <make>satellites.space_packet_time_stamp_adder($manual_automatic, $time_format, $pfield, $pfield_extension, $time_code_identification_cuc, $epoch_year_cuc, $epoch_month_cuc, $epoch_day_cuc, $basic_time_num_octets_cuc, $fractional_time_num_octets_cuc, $pfield_extension_extended, $additional_octets_basic_time_cuc, $additional_octets_fractional_time_cuc, $rsvd_cuc, $time_code_identification_cds, $epoch_identification_cds, $epoch_year_cds, $epoch_month_cds, $epoch_day_cds, $length_of_day_cds, $length_of_submillisecond_cds, $time_code_identification_ccs, $calendar_variation_ccs, $number_of_subsecond_ccs, $year, $month, $day, $hour, $minute, $second, $microsecond, $picosecond, $ascii_dec_num, $add_z_terminator)</make>
   <param>
     <name>Manual or Automatic Time</name>
     <key>manual_automatic</key>
@@ -594,6 +594,39 @@
 	all
 #end if	
     </hide>
+  </param>
+    <param>
+    <name>Number of decimals</name>
+    <key>ascii_dec_num</key>
+    <value>1</value>
+    <hide>
+	#if $time_format() &gt; '2'
+		none
+	#else
+		all
+	#end if
+     </hide>
+  </param>
+  <param>
+    <name>Add Z terminator</name>
+    <key>add_z_terminator</key>
+    <value>drop_down</value>
+    <type>enum</type>
+    <hide>
+#if $time_format() &gt; '2'
+	none
+#else
+	all
+#end if	
+    </hide>
+    <option>
+	<name>Yes</name>
+	<key>1</key>
+    </option>
+    <option>
+	<name>No</name>
+	<key>0</key>
+    </option>
   </param>
   <sink>
     <name>in</name>

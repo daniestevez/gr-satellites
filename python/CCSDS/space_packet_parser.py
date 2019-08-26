@@ -29,13 +29,15 @@ class space_packet_parser(gr.basic_block):
 
     """
 
-    def __init__(self, time_header, time_format):
+    def __init__(self, time_header, time_format, ascii_dec_num, add_z_terminator):
         gr.basic_block.__init__(self,
                                 name="space_packet_parser",
                                 in_sig=[],
                                 out_sig=[])
         self.time_header = time_header
         self.time_format = time_format
+        self.ascii_dec_num = ascii_dec_num
+        self.add_z_terminator = add_z_terminator
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
 
@@ -56,7 +58,14 @@ class space_packet_parser(gr.basic_block):
                     return
             else:
                 packet_format = packet_formats[5]
-            data = packet_format.parse(packet[:])
+            if self.time_header == 0 and self.time_format > 2:
+                if (self.ascii_dec_num < 0 or self.ascii_dec_num > 6):
+                    print
+                    "Decimals of ASCII in Space Packet Parser block should be between 0 and 6. The number was automatically set to 1."
+                    self.ascii_dec_num = 1
+                data = packet_format.parse(packet[:], number_of_decimals = self.ascii_dec_num, add_Z = self.add_z_terminator)
+            else:
+                data = packet_format.parse(packet[:])
         except:
             print "Could not decode space packet"
             return

@@ -61,7 +61,8 @@ class virtual_channel_demultiplexer(gr.basic_block):
         outPort = data.virtual_channel_id
         try:
             port = self.outputDict[outPort]
-            self.message_port_pub(pmt.intern('out' + str(port)), msg_pmt)
         except KeyError:
             self.message_port_pub(pmt.intern('discarded'), msg_pmt)
             print "Discarded message"
+        else:
+            self.message_port_pub(pmt.intern('out' + str(port)), msg_pmt)

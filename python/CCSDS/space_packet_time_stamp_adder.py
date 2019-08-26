@@ -55,7 +55,8 @@ class space_packet_time_stamp_adder(gr.basic_block):
                  time_code_identification_cds, epoch_identification_cds, epoch_year_cds, epoch_month_cds, epoch_day_cds,
                  length_of_day_cds,
                  length_of_submillisecond_cds, time_code_identification_ccs, calendar_variation_ccs,
-                 number_of_subsecond_ccs, year, month, day, hour, minute, second, microsecond, picosecond):
+                 number_of_subsecond_ccs, year, month, day, hour, minute, second, microsecond, picosecond, ascii_dec_num,
+                 add_z_terminator):
         gr.basic_block.__init__(self,
             name="space_packet_time_stamp_adder",
             in_sig=[],
@@ -81,13 +82,15 @@ class space_packet_time_stamp_adder(gr.basic_block):
         self.time_code_identification_cds = time_code_identification_cds
         self.epoch_identification_cds = epoch_identification_cds
         self.epoch_year_cds = epoch_year_cds
-        self.epoch_month_cds = epoch_year_cds
+        self.epoch_month_cds = epoch_month_cds
         self.epoch_day_cds = epoch_day_cds
         self.length_of_day_cds = length_of_day_cds
         self.length_of_submillisecond_cds = length_of_submillisecond_cds
         self.time_code_identification_ccs = time_code_identification_ccs
         self.calendar_variation_ccs = calendar_variation_ccs
         self.number_of_subsecond_ccs = number_of_subsecond_ccs
+        self.add_z_terminator = add_z_terminator
+        self.ascii_dec_num = ascii_dec_num
         self.year = year
         self.month = month
         self.day = day
@@ -207,23 +210,22 @@ class space_packet_time_stamp_adder(gr.basic_block):
 
             else:
                 print "Behavior should be defined by the user"
-        elif self.time_format == 3: #ASCII A
-            finalHeader = []
-            for i in range(17+5 - 1): #5 is the number of characters such as :,-,. in the isoformat and -1 to add the Z character
-                char = self.now.isoformat()[i]
-                if char!='-' and char!=':' and char!='.':
-                    finalHeader.extend(array.array('B', construct.Int8ub.build(ord(char))).tolist())
+        elif self.time_format == 3 or self.time_format == 4:
+            if(self.ascii_dec_num < 0 or self.ascii_dec_num > 6):
+                print "Decimals of ASCII in Time Stamp Adder block should be between 0 and 6. The number was automatically set to 1."
+                self.ascii_dec_num = 1
 
-            finalHeader.extend(array.array('B', construct.Int8ub.build(ord('Z'))).tolist())
-        elif self.time_format == 4: #ASCII B
-            finalHeader = []
-            iso = self.now.strftime("%Y-") + str(self.now.timetuple().tm_yday)+ self.now.strftime("T%H:%M:%S.%f")
-            for i in range(16 + 4 - 1):  # 4 is the number of characters such as :,-,. in the isoformat and -1 to add the Z character
-                char = iso[i]
-                if char != '-' and char != ':' and char != '.':
-                    finalHeader.extend(array.array('B', construct.Int8ub.build(ord(char))).tolist())
+            if self.time_format == 3: # ASCII A
+                arr = self.now.isoformat()
+            else: #ASCII B
+                arr = self.now.strftime("%Y-%jT%H:%M:%S.%f")
 
-            finalHeader.extend(array.array('B', construct.Int8ub.build(ord('Z'))).tolist())
+            arr = arr[: -(6 - self.ascii_dec_num)]
+
+            if (self.add_z_terminator == 1):
+                arr += 'Z'
+
+            finalHeader= array.array('B', arr).tolist()
         else:
             print "Time Format Unknown"
 

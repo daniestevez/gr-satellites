@@ -4,7 +4,7 @@
   <key>satellites_space_packet_parser</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
-  <make>satellites.space_packet_parser($time_header, $time_format)</make>
+  <make>satellites.space_packet_parser($time_header, $time_format, $ascii_dec_num, $add_z_terminator)</make>
   <param>
     <name>Time Header</name>
     <key>time_header</key>
@@ -46,6 +46,43 @@
 	<key>4</key>
     </option>
   </param>   
+  <param>
+    <name>Number of decimals</name>
+    <key>ascii_dec_num</key>
+    <value>1</value>
+    <hide>
+    #if $time_header() == '0'
+	#if $time_format() &gt; '2'
+		none
+	#else
+		all
+	#end if
+#else
+	all
+#end if	
+     </hide>
+  </param>
+    <param>
+    <name>Add Z terminator</name>
+    <key>add_z_terminator</key>
+    <value>drop_down</value>
+    <type>enum</type>
+    <hide>
+#if $time_format() &gt; '2'
+	none
+#else
+	all
+#end if	
+    </hide>
+    <option>
+	<name>Yes</name>
+	<key>1</key>
+    </option>
+    <option>
+	<name>No</name>
+	<key>0</key>
+    </option>
+  </param>
   <sink>
     <name>in</name>
     <type>message</type>
