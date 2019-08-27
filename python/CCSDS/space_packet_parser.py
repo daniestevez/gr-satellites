@@ -47,8 +47,15 @@ class space_packet_parser(gr.basic_block):
             print "[ERROR] Received invalid message type. Expected u8vector"
             return
         packet = bytearray(pmt.u8vector_elements(msg))
-        packet_formats = [space_packet.FullPacketCUC, space_packet.FullPacketCDS, space_packet.FullPacketCCS,
-                          space_packet.FullPacketASCIIA, space_packet.FullPacketASCIIB, space_packet.FullPacketNoTimeStamp]
+        if self.pfield_exists == 1:
+            packet_formats = [space_packet.FullPacketCUCWithPField, space_packet.FullPacketCDSWithPField,
+                              space_packet.FullPacketCCSWithPField]
+        else:
+            packet_formats = [space_packet.FullPacketCUCNoPField, space_packet.FullPacketCDSNoPField,
+                              space_packet.FullPacketCCSNoPField]
+
+        packet_formats.extend([space_packet.FullPacketASCIIA, space_packet.FullPacketASCIIB,
+                              space_packet.FullPacketNoTimeStamp])
         try:
             if self.time_header == 0:
                 try:
@@ -58,14 +65,23 @@ class space_packet_parser(gr.basic_block):
                     return
             else:
                 packet_format = packet_formats[5]
-            if self.time_header == 0 and self.time_format > 2:
-                if (self.ascii_dec_num < 0 or self.ascii_dec_num > 6):
-                    print
-                    "Decimals of ASCII in Space Packet Parser block should be between 0 and 6. The number was automatically set to 1."
-                    self.ascii_dec_num = 1
-                data = packet_format.parse(packet[:], number_of_decimals = self.ascii_dec_num, add_Z = self.add_z_terminator)
+
+            if self.pfield_exists == 0 and self.time_format <= 2:
+                if self.time_format == 0:
+                    data = packet_format.parse(packet[:], num_of_basic_time_units = self.num_of_basic_time_units, num_of_fractional_time_units = self.num_of_fractional_time_units)
+                elif self.time_format == 1:
+                    data = packet_format.parse(packet[:], length_of_day_segment = self.length_of_day_segment, length_of_submillisecond_segment = self.length_of_submillisecond_segment)
+                else:
+                    data = packet_format.parse(packet[:], calendar_variation_flag = self.calendar_variation_flag, resolution = self.resolution)
             else:
-                data = packet_format.parse(packet[:])
+                if self.time_header == 0 and self.time_format > 2:
+                    if self.ascii_dec_num < 0 or self.ascii_dec_num > 6:
+                        print
+                        "Decimals of ASCII in Space Packet Parser block should be between 0 and 6. The number was automatically set to 1."
+                        self.ascii_dec_num = 1
+                    data = packet_format.parse(packet[:], number_of_decimals=self.ascii_dec_num, add_Z=self.add_z_terminator)
+                else:
+                    data = packet_format.parse(packet[:])
         except:
             print "Could not decode space packet"
             return
