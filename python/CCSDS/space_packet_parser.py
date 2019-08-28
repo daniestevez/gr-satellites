@@ -31,7 +31,7 @@ class space_packet_parser(gr.basic_block):
 
     def __init__(self, time_header, time_format, ascii_dec_num, add_z_terminator):
         gr.basic_block.__init__(self,
-                                name="space_packet_parser",
+                                name="Space Packet Parser",
                                 in_sig=[],
                                 out_sig=[])
         self.time_header = time_header

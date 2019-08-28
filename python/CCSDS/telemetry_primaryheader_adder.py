@@ -40,7 +40,7 @@ class telemetry_primaryheader_adder(gr.basic_block):
         ##################################################
         # Parameters
         ##################################################
-        self.transfer_frame_version_number = transfer_frame_version_number
+        self.transfer_frame_version_number = 0
         self.spacecraft_id = spacecraft_id
         self.virtual_channel_id = virtual_channel_id
         self.ocf_flag = ocf_flag

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<block>
+  <name>Time Format Parameters</name>
+  <key>variable_time_format_parameters</key>
+  <category>[Satellites]/CCSDS</category>
+  <import>def struct(data): return type('Struct', (object,), data)()</import>
+  <var_make>self.$id = $id = struct({#slurp
+#set $basictime = $getVar('basic_time_num_octets_cuc')
+$basictime: $getVar('basic_time'),
+#set $fractime = $getVar('fractional_time_num_octets_cuc')
+$fractime: $getVar('frac_time'), 
+#set $addbasictime = $getVar('additional_basic_time_num_octets_cuc')
+$addbasictime: $getVar('additional_basic_time'),
+#set $addfractime = $getVar('additional_fractional_time_num_octets_cuc')
+$addfractime: $getVar('additional_fractional_time'),#slurp
+
+})</var_make>
+  <var_value>struct({#slurp
+#set $basictime = $getVar('basic_time_num_octets_cuc')
+$basictime: $getVar('basic_time'),
+#set $fractime = $getVar('fractional_time_num_octets_cuc')
+$fractime: $getVar('frac_time'), 
+#set $addbasictime = $getVar('additional_basic_time_num_octets_cuc')
+$addbasictime: $getVar('additional_basic_time'),
+#set $addfractime = $getVar('additional_fractional_time_num_octets_cuc')
+$addfractime: $getVar('additional_fractional_time'),#slurp
+
+})</var_value>
+  <make></make>
+
+  <param>
+    <name>Basic Time</name>
+    <key>basic_time_num_octets_cuc</key>
+    <value>basic_time_num_octets_cuc</value>
+    <type>string</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Fractional Time</name>
+    <key>fractional_time_num_octets_cuc</key>
+    <value>fractional_time_num_octets_cuc</value>
+    <type>string</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Basic Time Additional</name>
+    <key>additional_basic_time_num_octets_cuc</key>
+    <value>additional_basic_time_num_octets_cuc</value>
+    <type>string</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Fractional Time</name>
+    <key>additional_fractional_time_num_octets_cuc</key>
+    <value>additional_fractional_time_num_octets_cuc</value>
+    <type>string</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>$basic_time_num_octets_cuc()</name>
+    <key>basic_time</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $time_format() == '0' then 'none' else 'all'#</hide>
+  </param>
+  <param>
+    <name>$fractional_time_num_octets_cuc()</name>
+    <key>frac_time</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $time_format() == '0' then 'none' else 'all'#</hide>
+  </param>
+  <param>
+    <name>$additional_basic_time_num_octets_cuc()</name>
+    <key>additional_basic_time</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $time_format() == '0' then 'none' else 'all'#</hide>
+  </param>
+  <param>
+    <name>$additional_fractional_time_num_octets_cuc()</name>
+    <key>additional_fractional_time</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $time_format() == '0' then 'none' else 'all'#</hide>
+  </param>
+</block>
