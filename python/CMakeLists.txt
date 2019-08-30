@@ -117,6 +117,7 @@ GR_PYTHON_INSTALL(
     qo100_telemetry_print.py
     swiatowid_packet_crop.py
     check_swiatowid_crc.py
+    swiatowid_packet_split.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
