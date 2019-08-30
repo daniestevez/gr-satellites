@@ -503,6 +503,13 @@ telemetry packet in the terminal as soon as it receives it.
     transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
     Reed-Solomon code. You must use FM mode to
     receive this satellite (437.775MHz).
+  * `swiatowid`
+    [Światowid](https://satrevolution.com/projects/swiatowid/),
+    which transmits 9k6 FSK image data in the 70cm band. It uses a custom
+    protocol with a (58,48) Reed-Solomon code and a CRC-16CCITT. You must use FM
+    mode to receive this satellite (435.500MHz). Światowid also transmits
+    standard 1k2 AFSK AX.25 APRS in the same frequency. The APRS data can be
+    received with the `generic_1k2_afsk_ax25` decoder.
   * `tanusha3_pm`
     [TANUSHA-3](https://swsu.ru/space/),
     which transmits FM audio, 1k2 AX.25 AFSK telemetry and 1k2 audio frequency
