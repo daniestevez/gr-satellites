@@ -4,7 +4,7 @@
   <key>satellites_space_packet_parser</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
-  <make>satellites.space_packet_parser($time_header, $time_format, $ascii_dec_num, $add_z_terminator)</make>
+  <make>satellites.space_packet_parser($time_header, $time_format, $pfield, $basic_time_num_octets_cuc,$fractional_time_num_octets_cuc,$additional_octets_basic_time_cuc,$additional_octets_fractional_time_cuc,$length_of_day_cds,$length_of_submillisecond_cds,$calendar_variation_ccs,$number_of_subsecond_ccs,$ascii_dec_num,$add_z_terminator)</make>
   <param>
     <name>Time Header</name>
     <key>time_header</key>
@@ -21,10 +21,9 @@
   </param>
   <param>
     <name>Time Format</name>
-    <key>time_format</key>
+<key>time_format</key>
     <value>drop_down</value>
     <type>enum</type>
-    <hide>#if $time_header() == '1' then 'all' else 'none' </hide>
     <option>
 	<name>CUC</name>
 	<key>0</key>
@@ -45,9 +44,9 @@
 	<name>ASCII B</name>
 	<key>4</key>
     </option>
-  </param>   
+  </param> 
   <param>
-    <name>PField presence</name>
+    <name>PField Presence</name>
     <key>pfield</key>
     <value>drop_down</value>
     <type>enum</type>
@@ -62,147 +61,65 @@
     </option>
   </param>
   <param>
-    <name>Number of decimals</name>
-    <key>ascii_dec_num</key>
-    <value>1</value>
-    <hide>
-    #if $time_header() == '0'
-	#if $time_format() &gt; '2'
-		none
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-     </hide>
-  </param>
-    <param>
-    <name>Add Z terminator</name>
-    <key>add_z_terminator</key>
-    <value>drop_down</value>
-    <type>enum</type>
-    <hide>
-#if $time_format() &gt; '2'
-	none
-#else
-	all
-#end if	
-    </hide>
-    <option>
-	<name>Yes</name>
-	<key>1</key>
-    </option>
-    <option>
-	<name>No</name>
-	<key>0</key>
-    </option>
-  </param>
-    <param>
     <name>Basic Time Number of Octets</name>
     <key>basic_time_num_octets_cuc</key>
-    <value>0</value>
-    <type>raw</type>
-    <hide>
-#if $time_format() == '0'
-	none
-#else
-	all
-#end if	
-    </hide>
+    <value>variable_time_format_parameters_0.basic_time_num_octets_cuc</value>
+    <hide>#if $time_header() == '0' and $time_format() == '0' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Fractional Time Number of Octets</name>
     <key>fractional_time_num_octets_cuc</key>
-    <value>0</value>
-    <type>raw</type>
-    <hide>
-#if $time_format() == '0'
-	none
-#else
-	all
-#end if	
-    </hide>
+    <value>variable_time_format_parameters_0.fractional_time_num_octets_cuc</value>
+    <hide>#if $time_header() == '0' and $time_format() == '0' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Additional Octets of Basic Time</name>
     <key>additional_octets_basic_time_cuc</key>
-    <value>0</value>
-    <type>raw</type>
-    <hide>
-#if $time_format() == '0'
-	none
-#else
-	all
-#end if	
-    </hide>
+    <value>variable_time_format_parameters_0.additional_basic_time_num_octets_cuc</value>
+    <hide>#if $time_header() == '0' and $time_format() == '0' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Additional Octets of Fractional Time</name>
     <key>additional_octets_fractional_time_cuc</key>
-    <value>0</value>
-    <type>raw</type>
-    <hide>
-#if $time_format() == '0'
-	none
-#else
-	all
-#end if	
-    </hide>
+    <value>variable_time_format_parameters_0.additional_fractional_time_num_octets_cuc</value>
+    <hide>#if $time_header() == '0' and $time_format() == '0' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Length of Day Segment</name>
     <key>length_of_day_cds</key>
-        <value>drop_down</value>
-    <type>enum</type>
-    <hide>
-#if $time_format() == '1'
-	#if $pfield() == '1'
-		none
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
-    <option>
-	<name>16-bit day segment</name>
-	<key>0</key>
-    </option>
-    <option>
-	<name>24-bit day segments</name>
-	<key>1</key>
-    </option>
+    <value>variable_time_format_parameters_0.len_of_day</value>
+    <hide>#if $time_header() == '0' and $time_format() == '1' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Length of Submillisecond Segment</name>
     <key>length_of_submillisecond_cds</key>
-    <value>drop_down</value>
-    <type>enum</type>
-    <hide>
-#if $time_format() == '1'
-	#if $pfield() == '1'
-		none
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
-    <option>
-	<name>Millisecond</name>
-	<key>0</key>
-    </option>
-    <option>
-	<name>Microsecond</name>
-	<key>1</key>
-    </option>
-    <option>
-	<name>Picosecond</name>
-	<key>2</key>
-    </option>
+    <value>variable_time_format_parameters_0.len_of_submilsecs</value>
+    <hide>#if $time_header() == '0' and $time_format() == '1' then 'none' else 'all'#</hide>
+  </param>
+  <param>
+    <name>Calendar Variation</name>
+    <key>calendar_variation_ccs</key>
+    <value>variable_time_format_parameters_0.calendar_variation</value>
+    <hide>#if $time_header() == '0' and $time_format() == '2' then 'none' else 'all'#</hide>
+  </param>
+  <param>
+    <name>Number of subsecond segments</name>
+    <key>number_of_subsecond_ccs</key>
+    <value>variable_time_format_parameters_0.num_of_subsecs</value>
+    <type>raw</type>
+    <hide>#if $time_header() == '0' and $time_format() == '2' then 'none' else 'all'#</hide>
+  </param>
+    <param>
+    <name>Number of decimals</name>
+    <key>ascii_dec_num</key>
+    <value>variable_time_format_parameters_0.ascii_dec</value>
+    <hide>#if $time_format() &gt; '2' then 'none' else 'all'#</hide>
+  </param>
+  <param>
+    <name>Add Z terminator</name>
+    <key>add_z_terminator</key>
+    <value>variable_time_format_parameters_0.add_z</value>
+    <hide>#if $time_format() &gt; '2' then 'none' else 'all'#</hide>
   </param>
   <sink>
     <name>in</name>

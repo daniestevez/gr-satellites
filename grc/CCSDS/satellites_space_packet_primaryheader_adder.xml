@@ -82,17 +82,7 @@
     <key>packet_sequence_name</key>
     <value>0</value>
     <type>raw</type>
-    <hide>
-#if $count_or_name() == '1'
-	#if $packet_type() == '1'
-		none
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $count_or_name() == '1' and $packet_type() == '1' then 'none' else 'all'</hide>
   </param>
   <param>
     <name>Data Length</name>

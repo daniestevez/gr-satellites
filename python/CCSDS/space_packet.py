@@ -81,7 +81,7 @@ TimeCodeCUCNoPField = Struct('basic_time_unit' / BytesInteger(this._._.num_of_ba
 
 FullPacketCUCNoPField = Struct('primary' / PrimaryHeader,
                                'timestamp' / TimeCodeCUCNoPField,
-                               'payload' / Byte[this.primary.data_length - 2 - this._.num_of_basic_time_units -
+                               'payload' / Byte[this.primary.data_length - this._.num_of_basic_time_units -
                                                           this._.num_of_fractional_time_units])
 
 #########################################

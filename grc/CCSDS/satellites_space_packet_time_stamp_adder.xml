@@ -46,7 +46,7 @@
     </option>
   </param>
   <param>
-    <name>PField presence</name>
+    <name>PField Presence</name>
     <key>pfield</key>
     <value>drop_down</value>
     <type>enum</type>
@@ -65,17 +65,7 @@
     <key>pfield_extension</key>
     <value>drop_down</value>
     <type>enum</type>
-    <hide>
-#if $time_format() == '0'
-	#if $pfield() == '1'
-		none
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $time_format() == '0' and $pfield() == '1' then 'none' else 'all'#</hide>
     <option>
 	<name>Yes</name>
 	<key>1</key>
@@ -90,17 +80,7 @@
     <key>time_code_identification_cuc</key>
     <value>drop_down</value>
     <type>enum</type>
-    <hide>
-#if $time_format() == '0'
-	#if $pfield() == '1'
-		none
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $time_format() == '0' then 'none' else 'all'#</hide>
     <option>
 	<name>1958 January 1 epoch</name>
 	<key>1</key>
@@ -115,118 +95,40 @@
     <key>epoch_year_cuc</key>
     <value>1</value>
     <type>raw</type>
-    <hide>
-#if $time_format() == '0'
-	#if $pfield() == '1'
-		#if $time_code_identification_cuc() == '2'
-			none
-		#else
-			all
-		#end if
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $time_format() == '0' and $time_code_identification_cuc() == '2' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Epoch Month</name>
     <key>epoch_month_cuc</key>
     <value>1</value>
     <type>raw</type>
-    <hide>
-#if $time_format() == '0'
-	#if $pfield() == '1'
-		#if $time_code_identification_cuc() == '2'
-			none
-		#else
-			all
-		#end if
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $time_format() == '0' and $time_code_identification_cuc() == '2' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Epoch Day</name>
     <key>epoch_day_cuc</key>
     <value>1</value>
     <type>raw</type>
-    <hide>
-#if $time_format() == '0'
-	#if $pfield() == '1'
-		#if $time_code_identification_cuc() == '2'
-			none
-		#else
-			all
-		#end if
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $time_format() == '0' and $time_code_identification_cuc() == '2' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Basic Time Number of Octets</name>
     <key>basic_time_num_octets_cuc</key>
     <value>variable_time_format_parameters_0.basic_time_num_octets_cuc</value>
-    <type>raw</type>
-    <hide>
-#if $time_format() == '0'
-	#if $pfield() == '1'
-		none
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $time_format() == '0' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Fractional Time Number of Octets</name>
     <key>fractional_time_num_octets_cuc</key>
     <value>variable_time_format_parameters_0.fractional_time_num_octets_cuc</value>
-    <type>raw</type>
-    <hide>
-#if $time_format() == '0'
-	#if $pfield() == '1'
-		none
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $time_format() == '0' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>PField Extension extended</name>
     <key>pfield_extension_extended</key>
     <value>drop_down</value>
     <type>enum</type>
-    <hide>
-#if $time_format() == '0'
-	#if $pfield() == '1'
-		#if $pfield_extension() == '1'
-			none
-		#else
-			all
-		#end if
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $time_format() == '0' and $pfield() == '1' and $pfield_extension() == '1' then 'none' else 'all'#</hide>
     <option>
 	<name>Yes</name>
 	<key>1</key>
@@ -241,63 +143,21 @@
     <key>additional_octets_basic_time_cuc</key>
     <value>variable_time_format_parameters_0.additional_basic_time_num_octets_cuc</value>
     <type>raw</type>
-    <hide>
-#if $time_format() == '0'
-	#if $pfield() == '1'
-		#if $pfield_extension() == '1'
-			none
-		#else
-			all
-		#end if
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $time_format() == '0' and $pfield() == '1' and $pfield_extension() == '1' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Additional Octets of Fractional Time</name>
     <key>additional_octets_fractional_time_cuc</key>
     <value>variable_time_format_parameters_0.additional_fractional_time_num_octets_cuc</value>
     <type>raw</type>
-    <hide>
-#if $time_format() == '0'
-	#if $pfield() == '1'
-		#if $pfield_extension() == '1'
-			none
-		#else
-			all
-		#end if
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $time_format() == '0' and $pfield() == '1' and $pfield_extension() == '1' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Reserved for Mission Definition</name>
     <key>rsvd_cuc</key>
     <value>0</value>
     <type>raw</type>
-    <hide>
-#if $time_format() == '0'
-	#if $pfield() == '1'
-		#if $pfield_extension() == '1'
-			none
-		#else
-			all
-		#end if
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $time_format() == '0' and $pfield() == '1' and $pfield_extension() == '1' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Time Code Identification</name>
@@ -311,17 +171,7 @@
     <key>epoch_identification_cds</key>
     <value>drop_down</value>
     <type>enum</type>
-    <hide>
-#if $time_format() == '1'
-	#if $pfield() == '1'
-		none
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $time_format() == '1' then 'none' else 'all'#</hide>
     <option>
 	<name>1958 January 1 Epoch</name>
 	<key>0</key>
@@ -336,117 +186,33 @@
     <key>epoch_year_cds</key>
     <value>1</value>
     <type>raw</type>
-    <hide>
-#if $time_format() == '1'
-	#if $pfield() == '1'
-		#if $epoch_identification_cds() == '1'
-			none
-		#else
-			all
-		#end if
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $time_format() == '1' and $epoch_identification_cds() == '1' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Epoch Month</name>
     <key>epoch_month_cds</key>
     <value>1</value>
     <type>raw</type>
-    <hide>
-#if $time_format() == '1'
-	#if $pfield() == '1'
-		#if $epoch_identification_cds() == '1'
-			none
-		#else
-			all
-		#end if
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $time_format() == '1' and $epoch_identification_cds() == '1' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Epoch Day</name>
     <key>epoch_day_cds</key>
     <value>1</value>
     <type>raw</type>
-    <hide>
-#if $time_format() == '1'
-	#if $pfield() == '1'
-		#if $epoch_identification_cds() == '1'
-			none
-		#else
-			all
-		#end if
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $time_format() == '1' and $epoch_identification_cds() == '1' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Length of Day Segment</name>
     <key>length_of_day_cds</key>
-        <value>drop_down</value>
-    <type>enum</type>
-    <hide>
-#if $time_format() == '1'
-	#if $pfield() == '1'
-		none
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
-    <option>
-	<name>16-bit day segment</name>
-	<key>0</key>
-    </option>
-    <option>
-	<name>24-bit day segments</name>
-	<key>1</key>
-    </option>
+    <value>variable_time_format_parameters_0.len_of_day</value>
+    <hide>#if $time_format() == '1' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Length of Submillisecond Segment</name>
     <key>length_of_submillisecond_cds</key>
-    <value>drop_down</value>
-    <type>enum</type>
-    <hide>
-#if $time_format() == '1'
-	#if $pfield() == '1'
-		none
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
-    <option>
-	<name>Millisecond</name>
-	<key>0</key>
-    </option>
-    <option>
-	<name>Microsecond</name>
-	<key>1</key>
-    </option>
-    <option>
-	<name>Picosecond</name>
-	<key>2</key>
-    </option>
+    <value>variable_time_format_parameters_0.len_of_submilsecs</value>
+    <hide>#if $time_format() == '1' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Time Code Identification</name>
@@ -458,72 +224,14 @@
   <param>
     <name>Calendar Variation</name>
     <key>calendar_variation_ccs</key>
-    <value>drop_down</value>
-    <type>enum</type>
-    <hide>
-#if $time_format() == '2'
-	#if $pfield() == '1'
-		none
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
-    <option>
-	<name>Month of year/day of month</name>
-	<key>0</key>
-    </option>
-    <option>
-	<name>Day of year</name>
-	<key>1</key>
-    </option>
+    <value>variable_time_format_parameters_0.calendar_variation</value>
+    <hide>#if $time_format() == '2' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Number of subsecond segments</name>
     <key>number_of_subsecond_ccs</key>
-    <value>drop_down</value>
-    <type>enum</type>
-    <hide>
-#if $time_format() == '2'
-	#if $pfield() == '1'
-		none
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
-   <option>
-	<name>1 s</name>
-	<key>0</key>
-    </option>
-   <option>
-	<name>10^-2 s</name>
-	<key>1</key>
-    </option>
-   <option>
-	<name>10^-4 s</name>
-	<key>2</key>
-    </option>
-   <option>
-	<name>10^-6 s</name>
-	<key>3</key>
-    </option>
-   <option>
-	<name>10^-8 s</name>
-	<key>4</key>
-    </option>
-   <option>
-	<name>10^-10 s</name>
-	<key>5</key>
-    </option>
-   <option>
-	<name>10^-12 s</name>
-	<key>6</key>
-    </option>
+    <value>variable_time_format_parameters_0.num_of_subsecs</value>
+    <hide>#if $time_format() == '2' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Year</name>
@@ -579,54 +287,19 @@
     <key>picosecond</key>
     <value>0</value>
     <type>raw</type>
-    <hide>
-#if $manual_automatic() == '0'
-	#if $time_format() == '1'
-		#if $length_of_submillisecond_cds() == '2'
-			none
-		#else
-			all
-		#end if
-	#else
-		all
-	#end if
-#else
-	all
-#end if	
-    </hide>
+    <hide>#if $manual_automatic() == '0' and $time_format() == '1' and $length_of_submillisecond_cds() == '2' then 'none' else 'all'#</hide>
   </param>
-    <param>
+   <param>
     <name>Number of decimals</name>
     <key>ascii_dec_num</key>
-    <value>1</value>
-    <hide>
-	#if $time_format() &gt; '2'
-		none
-	#else
-		all
-	#end if
-     </hide>
+    <value>variable_time_format_parameters_0.ascii_dec</value>
+    <hide>#if $time_format() &gt; '2' then 'none' else 'all'#</hide>
   </param>
   <param>
     <name>Add Z terminator</name>
     <key>add_z_terminator</key>
-    <value>drop_down</value>
-    <type>enum</type>
-    <hide>
-#if $time_format() &gt; '2'
-	none
-#else
-	all
-#end if	
-    </hide>
-    <option>
-	<name>Yes</name>
-	<key>1</key>
-    </option>
-    <option>
-	<name>No</name>
-	<key>0</key>
-    </option>
+    <value>variable_time_format_parameters_0.add_z</value>
+    <hide>#if $time_format() &gt; '2' then 'none' else 'all'#</hide>
   </param>
   <sink>
     <name>in</name>

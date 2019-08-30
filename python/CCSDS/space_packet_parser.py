@@ -29,13 +29,25 @@ class space_packet_parser(gr.basic_block):
 
     """
 
-    def __init__(self, time_header, time_format, ascii_dec_num, add_z_terminator):
+    def __init__(self, time_header, time_format, pfield, basic_time_num_octets_cuc, fractional_time_num_octets_cuc,
+                 additional_octets_basic_time_cuc, additional_octets_fractional_time_cuc, length_of_day_cds,
+                 length_of_submillisecond_cds, calendar_variation_ccs, number_of_subsecond_ccs, ascii_dec_num,
+                 add_z_terminator):
         gr.basic_block.__init__(self,
                                 name="Space Packet Parser",
                                 in_sig=[],
                                 out_sig=[])
         self.time_header = time_header
         self.time_format = time_format
+        self.pfield = pfield
+        self.basic_time_num_octets_cuc = basic_time_num_octets_cuc
+        self.fractional_time_num_octets_cuc = fractional_time_num_octets_cuc
+        self.additional_octets_basic_time_cuc = additional_octets_basic_time_cuc
+        self.additional_octets_fractional_time_cuc = additional_octets_fractional_time_cuc
+        self.length_of_day_cds = length_of_day_cds
+        self.length_of_submillisecond_cds = length_of_submillisecond_cds
+        self.calendar_variation_ccs = calendar_variation_ccs
+        self.number_of_subsecond_ccs = number_of_subsecond_ccs
         self.ascii_dec_num = ascii_dec_num
         self.add_z_terminator = add_z_terminator
         self.message_port_register_in(pmt.intern('in'))
@@ -47,7 +59,7 @@ class space_packet_parser(gr.basic_block):
             print "[ERROR] Received invalid message type. Expected u8vector"
             return
         packet = bytearray(pmt.u8vector_elements(msg))
-        if self.pfield_exists == 1:
+        if self.pfield == 1:
             packet_formats = [space_packet.FullPacketCUCWithPField, space_packet.FullPacketCDSWithPField,
                               space_packet.FullPacketCCSWithPField]
         else:
@@ -66,13 +78,13 @@ class space_packet_parser(gr.basic_block):
             else:
                 packet_format = packet_formats[5]
 
-            if self.pfield_exists == 0 and self.time_format <= 2:
+            if self.pfield == 0 and self.time_format <= 2:
                 if self.time_format == 0:
-                    data = packet_format.parse(packet[:], num_of_basic_time_units = self.num_of_basic_time_units, num_of_fractional_time_units = self.num_of_fractional_time_units)
+                    data = packet_format.parse(packet[:], num_of_basic_time_units = 1+ self.basic_time_num_octets_cuc + self.additional_octets_basic_time_cuc, num_of_fractional_time_units = 1 + self.fractional_time_num_octets_cuc + self.additional_octets_fractional_time_cuc)
                 elif self.time_format == 1:
-                    data = packet_format.parse(packet[:], length_of_day_segment = self.length_of_day_segment, length_of_submillisecond_segment = self.length_of_submillisecond_segment)
+                    data = packet_format.parse(packet[:], length_of_day_segment = self.length_of_day_cds, length_of_submillisecond_segment = self.length_of_submillisecond_cds)
                 else:
-                    data = packet_format.parse(packet[:], calendar_variation_flag = self.calendar_variation_flag, resolution = self.resolution)
+                    data = packet_format.parse(packet[:], calendar_variation_flag = self.calendar_variation_ccs, resolution = self.number_of_subsecond_ccs)
             else:
                 if self.time_header == 0 and self.time_format > 2:
                     if self.ascii_dec_num < 0 or self.ascii_dec_num > 6:
