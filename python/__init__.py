@@ -129,3 +129,4 @@ from qo100_telemetry_print import qo100_telemetry_print
 from swiatowid_packet_crop import swiatowid_packet_crop
 from check_swiatowid_crc import check_swiatowid_crc
 from swiatowid_packet_split import swiatowid_packet_split
+from swiatowid_image_decoder import swiatowid_image_decoder

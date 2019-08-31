@@ -140,7 +140,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>0.175*3</value>
+      <value>0.175*3*0.5</value>
     </param>
   </block>
   <block>
@@ -168,139 +168,6 @@
     <param>
       <key>value</key>
       <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_file_sink</key>
-    <param>
-      <key>append</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>file</key>
-      <value>/tmp/swiatowid_img.jpg</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(336, 828)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_file_sink_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>unbuffered</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_file_sink</key>
-    <param>
-      <key>append</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>file</key>
-      <value>/tmp/swiatowid.kss</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(832, 852)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_file_sink_0_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>unbuffered</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_message_debug</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1008, 704)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_message_debug_0</value>
     </param>
   </block>
   <block>
@@ -352,100 +219,6 @@
     <param>
       <key>vlen</key>
       <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_pdu_to_tagged_stream</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(104, 844)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_pdu_to_tagged_stream_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>tag</key>
-      <value>packet_len</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_pdu_to_tagged_stream</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(600, 868)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_pdu_to_tagged_stream_1</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>tag</key>
-      <value>packet_len</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
     </param>
   </block>
   <block>
@@ -802,45 +575,6 @@
     </param>
   </block>
   <block>
-    <key>kiss_pdu_to_kiss</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(648, 712)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>kiss_pdu_to_kiss_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>parameter</key>
     <param>
       <key>alias</key>
@@ -932,6 +666,81 @@
     <param>
       <key>value</key>
       <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>low_pass_filter</key>
+    <param>
+      <key>beta</key>
+      <value>6.76</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>cutoff_freq</key>
+      <value>5000</value>
+    </param>
+    <param>
+      <key>decim</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>fir_filter_fff</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(640, 212)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>gain</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>low_pass_filter_0</value>
+    </param>
+    <param>
+      <key>interp</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>samp_rate</key>
+      <value>48000</value>
+    </param>
+    <param>
+      <key>width</key>
+      <value>200</value>
+    </param>
+    <param>
+      <key>win</key>
+      <value>firdes.WIN_HAMMING</value>
     </param>
   </block>
   <block>
@@ -1060,49 +869,6 @@
     </param>
   </block>
   <block>
-    <key>satellites_check_swiatowid_crc</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(352, 560)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>satellites_check_swiatowid_crc_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>verbose</key>
-      <value>True</value>
-    </param>
-  </block>
-  <block>
     <key>satellites_decode_rs_general</key>
     <param>
       <key>alias</key>
@@ -1130,7 +896,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(352, 676)</value>
+      <value>(528, 540)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1158,7 +924,7 @@
     </param>
     <param>
       <key>verbose</key>
-      <value>True</value>
+      <value>False</value>
     </param>
   </block>
   <block>
@@ -1303,6 +1069,49 @@
     </param>
   </block>
   <block>
+    <key>satellites_swiatowid_image_decoder</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>display</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>fullscreen</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(992, 716)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>satellites_swiatowid_image_decoder_0</value>
+    </param>
+    <param>
+      <key>path</key>
+      <value>/tmp/</value>
+    </param>
+  </block>
+  <block>
     <key>satellites_swiatowid_packet_crop</key>
     <param>
       <key>alias</key>
@@ -1361,7 +1170,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(80, 712)</value>
+      <value>(304, 576)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1433,19 +1242,7 @@
   </block>
   <connection>
     <source_block_id>blocks_multiply_const_vxx_0</source_block_id>
-    <sink_block_id>digital_clock_recovery_mm_xx_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_pdu_to_tagged_stream_0</source_block_id>
-    <sink_block_id>blocks_file_sink_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_pdu_to_tagged_stream_1</source_block_id>
-    <sink_block_id>blocks_file_sink_0_0</sink_block_id>
+    <sink_block_id>low_pass_filter_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -1474,38 +1271,20 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>kiss_pdu_to_kiss_0</source_block_id>
-    <sink_block_id>blocks_pdu_to_tagged_stream_1</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>pdus</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>satellites_check_swiatowid_crc_0</source_block_id>
-    <sink_block_id>satellites_swiatowid_packet_split_0</sink_block_id>
-    <source_key>fail</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>satellites_check_swiatowid_crc_0</source_block_id>
-    <sink_block_id>satellites_swiatowid_packet_split_0</sink_block_id>
-    <source_key>ok</source_key>
-    <sink_key>in</sink_key>
+    <source_block_id>low_pass_filter_0</source_block_id>
+    <sink_block_id>digital_clock_recovery_mm_xx_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>satellites_decode_rs_general_0</source_block_id>
-    <sink_block_id>blocks_pdu_to_tagged_stream_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>pdus</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>satellites_decode_rs_general_0</source_block_id>
-    <sink_block_id>kiss_pdu_to_kiss_0</sink_block_id>
+    <sink_block_id>satellites_swiatowid_image_decoder_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>satellites_print_timestamp_0</source_block_id>
-    <sink_block_id>satellites_check_swiatowid_crc_0</sink_block_id>
+    <sink_block_id>satellites_swiatowid_packet_split_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>

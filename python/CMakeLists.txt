@@ -118,6 +118,7 @@ GR_PYTHON_INSTALL(
     swiatowid_packet_crop.py
     check_swiatowid_crc.py
     swiatowid_packet_split.py
+    swiatowid_image_decoder.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
