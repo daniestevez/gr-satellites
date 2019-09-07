@@ -28,14 +28,22 @@ class telemetry_parser(gr.basic_block):
     """
     docstring for block CCSDS telemetry_parser
     """
-    def __init__(self, coding, coding_options):
+    def __init__(self, coding, reed_solomon_concat, e, q, I, turbo, ldpc_tf, ldpc_tf_size, size):
         gr.basic_block.__init__(self,
             name="telemetry_parser",
             in_sig=[],
             out_sig=[])
 
         self.coding = coding
-        self.coding_options = coding_options
+        self.reed_solomon_concat = reed_solomon_concat
+        self.e = e
+        self.q = q
+        self.I = I
+        self.turbo = turbo
+        self.ldpc_tf = ldpc_tf
+        self.ldpc_tc_size = ldpc_tf_size
+        self.size = size
+
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
 
@@ -54,6 +62,19 @@ class telemetry_parser(gr.basic_block):
         print(data)
 
     def calculateSize(self):
-        size = 4
+        if self.coding == 1 or self.coding == 2 or self.coding == 7:
+            size = self.size
+        elif self.coding == 3 or self.coding == 4:
+            size = (255 - 2 * self.e - self.q) * self.I
 
+            if self.reed_solomon_concat == 0:
+                if ((255-self.q)*self.I)%4!=0:
+                    print "Codeblock (255-q)*I is not a multiple of 4"
+        elif self.coding == 5:
+            size = self.turbo
+        else:
+            if self.ldpc_tf < 3:
+                size = self.ldpc_tc_size
+            else:
+                size = 892
         return size

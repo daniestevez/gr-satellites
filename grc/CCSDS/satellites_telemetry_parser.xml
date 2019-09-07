@@ -4,7 +4,7 @@
   <key>satellites_telemetry_parser</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
-  <make>satellites.telemetry_parser($coding, $options)</make>
+  <make>satellites.telemetry_parser($coding, $reed_solomon_concat, $e, $q, $I, $turbo, $ldpc_tf, $ldpc_tf_size, $size)</make>
 <param>
     <name>Coding</name>
     <key>coding</key>
@@ -41,27 +41,112 @@
     </option>
   </param>
   <param>
-    <name>Options</name>
-    <key>options</key>
+    <name>Reed Solomon or Concatenated</name>
+    <key>reed_solomon_concat</key>
     <value>drop_down</value>
     <type>enum</type>
-    <hide>none</hide>
+    <hide>#if $coding() == '3' or $coding() == '4' then 'none' else 'all'</hide>
     <option>
-	<name>Uncoded</name>
+	<name>32-bit Compatibility</name>
+	<key>0</key>
+    </option>
+    <option>
+	<name>Octet Compatibility</name>
+	<key>1</key>
+    </option>
+  </param>
+  <param>
+    <name>Error Correction Capability</name>
+    <key>e</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $coding() == '3' or $coding() == '4' then 'none' else 'all'</hide>
+  </param>
+  <param>
+    <name>Number of Virtuall Fill Symbols</name>
+    <key>q</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $coding() == '3' or $coding() == '4' then 'none' else 'all'</hide>
+  </param>
+  <param>
+    <name>Interleaving Depth</name>
+    <key>I</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $coding() == '3' or $coding() == '4' then 'none' else 'all'</hide>
+  </param>
+  <param>
+    <name>Turbo</name>
+    <key>turbo</key>
+    <value>drop_down</value>
+    <type>enum</type>
+    <hide>#if $coding() == '5' then 'none' else 'all'</hide>
+    <option>
+	<name>223</name>
+	<key>223</key>
+    </option>
+    <option>
+	<name>446</name>
+	<key>446</key>
+    </option>
+    <option>
+	<name>892</name>
+	<key>892</key>
+    </option>
+    <option>
+	<name>1115</name>
+	<key>1115</key>
+    </option>
+  </param>
+  <param>
+    <name>LDPC applied to TF</name>
+    <key>ldpc_tf</key>
+    <value>drop_down</value>
+    <type>enum</type>
+    <hide>#if $coding() == '6' then 'none' else 'all'</hide>
+    <option>
+	<name>rate-1/2</name>
+	<key>0</key>
+    </option>
+    <option>
+	<name>rate-2/3</name>
 	<key>1</key>
     </option>
     <option>
-	<name>Convolutional</name>
+	<name>rate-4/5</name>
 	<key>2</key>
     </option>
     <option>
-	<name>Reed Solomon</name>
+	<name>rate-7/8</name>
 	<key>3</key>
     </option>
+  </param>
+  <param>
+    <name>LDPC Size</name>
+    <key>ldpc_tf_size</key>
+    <value>drop_down</value>
+    <type>enum</type>
+    <hide>#if $coding() == '6' and $ldpc_tf() &lt; '3' then 'none' else 'all'</hide>
     <option>
-	<name>Concatenated</name>
-	<key>4</key>
+	<name>128</name>
+	<key>128</key>
     </option>
+    <option>
+	<name>512</name>
+	<key>512</key>
+    </option>
+    <option>
+	<name>2048</name>
+	<key>2048</key>
+    </option>
+  </param>
+  <param>
+    <name>Size</name>
+    <key>size</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $coding() == '1' or $coding() == '2' or $coding() == '7' then 'none' else 'all'</hide>
   </param>
   <sink>
     <name>in</name>
