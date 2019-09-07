@@ -28,12 +28,14 @@ class telemetry_parser(gr.basic_block):
     """
     docstring for block CCSDS telemetry_parser
     """
-    def __init__(self):
+    def __init__(self, coding, coding_options):
         gr.basic_block.__init__(self,
             name="telemetry_parser",
             in_sig=[],
             out_sig=[])
 
+        self.coding = coding
+        self.coding_options = coding_options
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
 
@@ -45,8 +47,13 @@ class telemetry_parser(gr.basic_block):
         packet = bytearray(pmt.u8vector_elements(msg))
 
         try:
-            data = telemetry.FullPacket.parse(packet[:])
+            data = telemetry.FullPacket.parse(packet[:], size=self.calculateSize())
         except:
             print "Could not decode telemetry packet"
             return
         print(data)
+
+    def calculateSize(self):
+        size = 4
+
+        return size

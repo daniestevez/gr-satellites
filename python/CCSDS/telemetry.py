@@ -54,4 +54,5 @@ OCFTrailer = BitStruct('control_word_type' / Flag,
                        'report_value' / BitsInteger(8))
 
 FullPacket = Struct('primary' / PrimaryHeader,
-                    'ocftrailer' / OCFTrailer)
+                    'payload' / Byte[this._.size],
+                    'ocftrailer' / If(this.primary.ocf_flag == 1, OCFTrailer))

@@ -103,5 +103,6 @@ install(FILES
     CCSDS/satellites_virtual_channel_demultiplexer.xml
     CCSDS/satellites_telemetry_ocf_adder.xml
     CCSDS/satellites_space_packet_time_stamp_adder.xml
-    CCSDS/variable_time_format_parameters.xml DESTINATION share/gnuradio/grc/blocks
+    CCSDS/variable_time_format_parameters.xml
+    CCSDS/satellites_telemetry_packet_reconstruction.xml DESTINATION share/gnuradio/grc/blocks
 )
