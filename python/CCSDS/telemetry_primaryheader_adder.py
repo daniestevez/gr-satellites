@@ -95,6 +95,7 @@ class telemetry_primaryheader_adder(gr.basic_block):
 
             self.list.extend(packet[:limit])
             packet = packet[limit:]
+
             if len(self.list) == self.size:
                 finalPacket = numpy.append(self.calculateFinalHeader(), self.list)
                 self.sendPacket(finalPacket)

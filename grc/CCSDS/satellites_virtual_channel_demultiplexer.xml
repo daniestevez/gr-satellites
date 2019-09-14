@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <block>
-  <name>virtual_channel_demultiplexer</name>
+  <name>Virtual Channel Demultiplexer</name>
   <key>satellites_virtual_channel_demultiplexer</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>

@@ -21,6 +21,7 @@
 
 import numpy
 from gnuradio import gr
+import pmt
 import telemetry
 import space_packet
 class telemetry_packet_reconstruction(gr.basic_block):
@@ -35,6 +36,7 @@ class telemetry_packet_reconstruction(gr.basic_block):
 
         self.packet = packet
         self.last_packet = []
+        self.length_of_space_packet = 0
         ##################################################
         # Blocks
         ##################################################
@@ -53,8 +55,11 @@ class telemetry_packet_reconstruction(gr.basic_block):
 
         if parsed.first_header_pointer == 0x3ff:
             self.last_packet.extend(packet[:])
-       # else:
-         #   while len(packet>0):
+        elif parsed.first_header_pointer == 0 and len(self.last_packet) != 0:
+            self.sendPacket()
+        else:
+            
+
 
 
         if parsed.first_header_pointer != 0 and parsed.first_header_pointer != 0x3ff:
@@ -69,10 +74,6 @@ class telemetry_packet_reconstruction(gr.basic_block):
 
             space_packet_parsed = space_packet.PrimaryHeader.parse()
 
-        packet = array.array('B', packet[:])
-        packet = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(packet), packet))
-        self.message_port_pub(pmt.intern('out'), packet)
-
     def calculateSize(self):
         if self.coding == 0 or self.coding == 1:
             size = self.num_of_octets
@@ -83,7 +84,10 @@ class telemetry_packet_reconstruction(gr.basic_block):
         size = 4
         return size
 
-    def sendPacket(self, packet):
+    def sendPacket(self):
+        packet = self.last_packet
         packet = array.array('B', packet[:])
         packet = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(packet), packet))
         self.message_port_pub(pmt.intern('out'), packet)
+        self.length_of_space_packet = 0
+        self.last_packet = []

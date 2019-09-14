@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <block>
-  <name>telemetry_primaryheader_adder</name>
+  <name>Telemetry Primary Header Adder</name>
   <key>satellites_telemetry_primaryheader_adder</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>

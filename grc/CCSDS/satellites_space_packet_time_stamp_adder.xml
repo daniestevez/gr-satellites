@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <block>
-  <name>space_packet_time_stamp_adder</name>
+  <name>Space Packet Time Stamp Adder</name>
   <key>satellites_space_packet_time_stamp_adder</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>

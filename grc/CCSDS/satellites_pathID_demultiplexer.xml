@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <block>
-  <name>pathID_demultiplexer</name>
+  <name>Path ID Demultiplexer</name>
   <key>satellites_pathID_demultiplexer</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>

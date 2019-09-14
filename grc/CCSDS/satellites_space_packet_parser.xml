@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <block>
-  <name>space_packet_parser</name>
+  <name>Space Packet Parser</name>
   <key>satellites_space_packet_parser</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
@@ -24,6 +24,7 @@
 <key>time_format</key>
     <value>drop_down</value>
     <type>enum</type>
+    <hide>#if $time_header() == '0' then 'none' else 'all'</hide>
     <option>
 	<name>CUC</name>
 	<key>0</key>

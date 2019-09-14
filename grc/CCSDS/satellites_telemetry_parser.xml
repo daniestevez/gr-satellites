@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <block>
-  <name>telemetry_parser</name>
+  <name>Telemetry Parser</name>
   <key>satellites_telemetry_parser</key>
   <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
