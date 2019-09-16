@@ -97,5 +97,6 @@ install(FILES
     satellites_check_swiatowid_crc.xml
     satellites_swiatowid_packet_split.xml
     satellites_swiatowid_image_decoder.xml
+    satellites_taurus1_telemetry_parser.xml
     DESTINATION share/gnuradio/grc/blocks
 )

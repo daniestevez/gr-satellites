@@ -385,6 +385,14 @@ telemetry packet in the terminal as soon as it receives it.
     an r=1/2, k=7 convolutional code and a (255,223) Reed-Solomon code (the
     protocol is very similar to LilacSat-2). It also uses a CCSDS scrambler.
     You must use FM mode to receive this satellite.
+  * `lilacsat1`
+    [LilacSat-1](http://lilacsat.hit.edu.cn/wp/?page_id=594) *(inactive)*,
+    which transmits 9k6
+    BPSK telemetry in the 70cm band. It uses FEC with an r=1/2, k=7
+    convolutional code an interleaved telemetry and Codec2 digital voice.
+    It has an optical camera on board and it transmits JPEG images
+    together with the telemetry. LilacSat-1 reentered
+    in March 2019. You must use wide SSB mode to receive this satellite.
   * `lilacsat2`
     [LilacSat-2](http://lilacsat.hit.edu.cn/?page_id=257), which transmits 9k6
     BPSK, 4k8 GFSK and FM subaudio telemetry in the 70cm band. It uses FEC with
@@ -517,6 +525,13 @@ telemetry packet in the terminal as soon as it receives it.
     phase modulation packets. For the AFSK packets you can use any regular
     packet decoder such as direwolf. You must use FM mode to receive this
     satellite (437.050MHz).
+  *`taurus1`
+    [Taurus-1](https://space.skyrocket.de/doc_sdat/taurus-1.htm),
+    which transmits 9k6
+    BPSK telemetry in the 70cm band. It uses FEC with an r=1/2, k=7
+    convolutional code an interleaved telemetry and Codec2 digital voice.
+    You must use wide SSB mode to receive this satellite
+    (435.840MHz).
   * `tw_1a`, `tw_1b`, `tw_1c`
     [TW-1A](http://space.skyrocket.de/doc_sdat/shangkeda-2.htm),
     [TW-1B](http://space.skyrocket.de/doc_sdat/njust-2.htm),

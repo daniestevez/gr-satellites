@@ -130,3 +130,6 @@ from swiatowid_packet_crop import swiatowid_packet_crop
 from check_swiatowid_crc import check_swiatowid_crc
 from swiatowid_packet_split import swiatowid_packet_split
 from swiatowid_image_decoder import swiatowid_image_decoder
+
+from taurus1_telemetry_parser import taurus1_telemetry_parser
+

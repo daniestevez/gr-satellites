@@ -119,6 +119,7 @@ GR_PYTHON_INSTALL(
     check_swiatowid_crc.py
     swiatowid_packet_split.py
     swiatowid_image_decoder.py
+    taurus1_telemetry_parser.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
