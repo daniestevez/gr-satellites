@@ -29,10 +29,7 @@ class space_packet_parser(gr.basic_block):
 
     """
 
-    def __init__(self, time_header, time_format, pfield, basic_time_num_octets_cuc, fractional_time_num_octets_cuc,
-                 additional_octets_basic_time_cuc, additional_octets_fractional_time_cuc, length_of_day_cds,
-                 length_of_submillisecond_cds, calendar_variation_ccs, number_of_subsecond_ccs, ascii_dec_num,
-                 add_z_terminator):
+    def __init__(self, time_header, time_format, pfield, id_time):
         gr.basic_block.__init__(self,
                                 name="Space Packet Parser",
                                 in_sig=[],
@@ -40,16 +37,17 @@ class space_packet_parser(gr.basic_block):
         self.time_header = time_header
         self.time_format = time_format
         self.pfield = pfield
-        self.basic_time_num_octets_cuc = basic_time_num_octets_cuc
-        self.fractional_time_num_octets_cuc = fractional_time_num_octets_cuc
-        self.additional_octets_basic_time_cuc = additional_octets_basic_time_cuc
-        self.additional_octets_fractional_time_cuc = additional_octets_fractional_time_cuc
-        self.length_of_day_cds = length_of_day_cds
-        self.length_of_submillisecond_cds = length_of_submillisecond_cds
-        self.calendar_variation_ccs = calendar_variation_ccs
-        self.number_of_subsecond_ccs = number_of_subsecond_ccs
-        self.ascii_dec_num = ascii_dec_num
-        self.add_z_terminator = add_z_terminator
+        self.basic_time_num_octets_cuc = id_time.basic_time_num_octets_cuc
+        self.fractional_time_num_octets_cuc = id_time.fractional_time_num_octets_cuc
+        self.additional_octets_basic_time_cuc = id_time.additional_basic_time_num_octets_cuc
+        self.additional_octets_fractional_time_cuc = id_time.additional_fractional_time_num_octets_cuc
+        self.length_of_day_cds = id_time.len_of_day
+        self.length_of_submillisecond_cds = id_time.len_of_submilsecs
+        self.calendar_variation_ccs = id_time.calendar_variation
+        self.number_of_subsecond_ccs = id_time.num_of_subsecs
+        self.add_z_terminator = id_time.add_z
+        self.ascii_dec_num = id_time.ascii_dec
+
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
 

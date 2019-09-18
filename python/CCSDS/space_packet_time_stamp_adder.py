@@ -33,9 +33,6 @@ class space_packet_time_stamp_adder(gr.basic_block):
     Time Stamp Adder (CCSDS 301.0-B-4)
     --- The user should study the time code formats book and fill only the necessary fields.
 
-    --- On another note, the space packet parser, in case of a time stamp addition, will only display information
-    if a PField is used, since metadata are crucial to the parsing of the time stamp.
-
     --- The user, in general, should check the code of the preferred time format and confirm that the behavior is
     the wanted one. Great care should be taken on the variability of the size. (E.g. in ASCII A time format,
     the user should define the size of the decimal fraction of the second subfield and should change the finalHeader array.)
@@ -45,18 +42,11 @@ class space_packet_time_stamp_adder(gr.basic_block):
     --- When defining an epoch, the user should check that it fits into the bytes that were assigned to hold the difference.
         E.g. If the epoch "0001 January 1" is defined in CDS, then it will not be able to fit today's date into a 16-bit
         DAYS part.
-    --- On ASCII Code the number of decimals is set to 1. The user should change this if more decimals are wanted.
-        The user should change this both in the space_packet.py file (in the TimeASCII(A/B) Struct and in FullPacketASCII(A/B) Struct)
-        and in this file, in handle_msg in the loop of how many characters should the construct build.
     """
     def __init__(self, input_manual_automatic, time_format, pfield, pfield_extension, time_code_identification_cuc,
-                 epoch_year_cuc, epoch_month_cuc, epoch_day_cuc, basic_time_num_octets_cuc, fractional_time_num_octets_cuc, pfield_extension_extended,
-                 additional_octets_basic_time_cuc, additional_octets_fractional_time_cuc, rsvd_cuc,
+                 epoch_year_cuc, epoch_month_cuc, epoch_day_cuc, pfield_extension_extended,rsvd_cuc,
                  time_code_identification_cds, epoch_identification_cds, epoch_year_cds, epoch_month_cds, epoch_day_cds,
-                 length_of_day_cds,
-                 length_of_submillisecond_cds, time_code_identification_ccs, calendar_variation_ccs,
-                 number_of_subsecond_ccs, year, month, day, hour, minute, second, microsecond, picosecond, ascii_dec_num,
-                 add_z_terminator):
+                 time_code_identification_ccs, year, month, day, hour, minute, second, microsecond, picosecond,id_time):
         gr.basic_block.__init__(self,
             name="space_packet_time_stamp_adder",
             in_sig=[],
@@ -73,24 +63,24 @@ class space_packet_time_stamp_adder(gr.basic_block):
         self.epoch_year_cuc = epoch_year_cuc
         self.epoch_month_cuc = epoch_month_cuc
         self.epoch_day_cuc = epoch_day_cuc
-        self.basic_time_num_octets_cuc = basic_time_num_octets_cuc
-        self.fractional_time_num_octets_cuc = fractional_time_num_octets_cuc
+        self.basic_time_num_octets_cuc = id_time.basic_time_num_octets_cuc
+        self.fractional_time_num_octets_cuc = id_time.fractional_time_num_octets_cuc
         self.pfield_extension_extended = pfield_extension_extended #Checks if the PField Extension will be extended
-        self.additional_octets_basic_time_cuc = additional_octets_basic_time_cuc
-        self.additional_octets_fractional_time_cuc = additional_octets_fractional_time_cuc
+        self.additional_octets_basic_time_cuc = id_time.additional_basic_time_num_octets_cuc
+        self.additional_octets_fractional_time_cuc = id_time.additional_fractional_time_num_octets_cuc
         self.rsvd_cuc = rsvd_cuc
         self.time_code_identification_cds = time_code_identification_cds
         self.epoch_identification_cds = epoch_identification_cds
         self.epoch_year_cds = epoch_year_cds
         self.epoch_month_cds = epoch_month_cds
         self.epoch_day_cds = epoch_day_cds
-        self.length_of_day_cds = length_of_day_cds
-        self.length_of_submillisecond_cds = length_of_submillisecond_cds
+        self.length_of_day_cds = id_time.len_of_day
+        self.length_of_submillisecond_cds = id_time.len_of_submilsecs
         self.time_code_identification_ccs = time_code_identification_ccs
-        self.calendar_variation_ccs = calendar_variation_ccs
-        self.number_of_subsecond_ccs = number_of_subsecond_ccs
-        self.add_z_terminator = add_z_terminator
-        self.ascii_dec_num = ascii_dec_num
+        self.calendar_variation_ccs = id_time.calendar_variation
+        self.number_of_subsecond_ccs = id_time.num_of_subsecs
+        self.add_z_terminator = id_time.add_z
+        self.ascii_dec_num = id_time.ascii_dec
         self.year = year
         self.month = month
         self.day = day
@@ -99,6 +89,7 @@ class space_packet_time_stamp_adder(gr.basic_block):
         self.second = second
         self.microsecond = microsecond
         self.picosecond = picosecond
+        self.id_time = id_time
         if self.time_code_identification_cuc == 1:
             self.epoch_cuc = datetime(1958, 1, 1)
         else:

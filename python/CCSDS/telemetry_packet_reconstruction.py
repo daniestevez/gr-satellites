@@ -19,11 +19,12 @@
 # Boston, MA 02110-1301, USA.
 # 
 
-import numpy
 from gnuradio import gr
 import pmt
 import telemetry
 import space_packet
+import array
+
 class telemetry_packet_reconstruction(gr.basic_block):
     """
     docstring for block telemetry_packet_reconstruction
@@ -35,7 +36,7 @@ class telemetry_packet_reconstruction(gr.basic_block):
             out_sig=[])
 
         self.packet = packet
-        self.last_packet = []
+        self.space_packet = []
         self.length_of_space_packet = 0
         ##################################################
         # Blocks
@@ -53,26 +54,24 @@ class telemetry_packet_reconstruction(gr.basic_block):
 
         parsed = telemetry.FullPacket.parse(packet[:], size=self.calculateSize())
 
-        if parsed.first_header_pointer == 0x3ff:
-            self.last_packet.extend(packet[:])
-        elif parsed.first_header_pointer == 0 and len(self.last_packet) != 0:
-            self.sendPacket()
-        else:
-            
+        payload = parsed.payload
+
+        while len(payload) != 0:
+            if len(self.space_packet) < 6:
+                left = 6 - len(self.space_packet)
+                self.space_packet = payload[:left]
+                payload = payload[left:]
+            if len(self.space_packet) >= 6:
+                self.length_of_space_packet = space_packet.PrimaryHeader.parse(payload).data_length
+
+                left = self.length_of_space_packet + 6 - len(self.space_packet)
+                self.space_packet.extend(payload[:left])
+                payload = payload[left:]
+
+                if 6 + self.length_of_space_packet == len(space_packet):
+                    self.sendPacket()
 
 
-
-        if parsed.first_header_pointer != 0 and parsed.first_header_pointer != 0x3ff:
-            self.last_packet.extend(packet[:parsed.first_header_pointer])
-            packet = packet[parsed.first_header_pointer:]
-            self.sendPacket(self.last_packet)
-            primary_header = space_packet.PrimaryHeader.parse(packet[:])
-            self.last_packet = packet[:primary_header.data_length+6]
-
-        elif parsed.first_header_pointer == 0x3ff:
-            self.last_packet.extend(packet[:parsed.first_header_pointer])
-
-            space_packet_parsed = space_packet.PrimaryHeader.parse()
 
     def calculateSize(self):
         if self.coding == 0 or self.coding == 1:
@@ -85,9 +84,9 @@ class telemetry_packet_reconstruction(gr.basic_block):
         return size
 
     def sendPacket(self):
-        packet = self.last_packet
+        packet = self.space_packet
         packet = array.array('B', packet[:])
         packet = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(packet), packet))
         self.message_port_pub(pmt.intern('out'), packet)
         self.length_of_space_packet = 0
-        self.last_packet = []
+        self.space_packet = []

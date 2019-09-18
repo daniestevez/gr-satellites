@@ -2,7 +2,7 @@
 <block>
   <name>Telemetry Packet Reconstruction</name>
   <key>satellites_telemetry_packet_reconstruction</key>
-  <category>[satellites]</category>
+  <category>[Satellites]/CCSDS</category>
   <import>import satellites</import>
   <make>satellites.telemetry_packet_reconstruction($first_header_pointer)</make>
   <param>
