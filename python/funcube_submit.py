@@ -56,7 +56,7 @@ class funcube_submit(gr.basic_block):
 
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
 
         frame = binascii.b2a_hex(str(bytearray(pmt.u8vector_elements(msg)))).upper()
@@ -65,7 +65,7 @@ class funcube_submit(gr.basic_block):
         url = self.base_url + '/api/data/hex/' + self.site_id + '/?digest=' + self.digest(frame)
         r = requests.post(url, data = frame, headers = {'Content-Type' : 'application/text'})
         if r.status_code != 200:
-            print 'FUNcube server error while submitting telemetry'
-            print 'Reply:', r.text
-            print 'HTTP code', r.status_code
+            print('FUNcube server error while submitting telemetry')
+            print('Reply:', r.text)
+            print('HTTP code', r.status_code)
 

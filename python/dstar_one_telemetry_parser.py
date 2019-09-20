@@ -25,7 +25,7 @@ import pmt
 
 import traceback
 
-import dstar_one_telemetry
+from . import dstar_one_telemetry
 
 class dstar_one_telemetry_parser(gr.basic_block):
     """
@@ -43,14 +43,14 @@ class dstar_one_telemetry_parser(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
         try:
             data = dstar_one_telemetry.Beacon.parse(packet[2:])
         except Exception:
-            print "Could not decode telemetry beacon"
+            print("Could not decode telemetry beacon")
             traceback.print_exc()
             return
         print(data)

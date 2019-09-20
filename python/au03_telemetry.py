@@ -22,7 +22,7 @@
 import datetime
 
 from construct import *
-from adapters import UNIXTimestampAdapter
+from .adapters import UNIXTimestampAdapter
 
 Timestamp = UNIXTimestampAdapter(Int32sb)
 

@@ -23,7 +23,7 @@ from construct import *
 
 import datetime
 
-from ccsds_telemetry import *
+from .ccsds_telemetry import *
 
 class TimeAdapter(Adapter):
     def _encode(self, obj, context, path = None):

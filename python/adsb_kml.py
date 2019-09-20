@@ -24,8 +24,8 @@ from gnuradio import gr
 import pmt
 import array
 
-from csp_header import CSP
-import gomx3_beacon
+from .csp_header import CSP
+from . import gomx3_beacon
 
 class adsb_kml(gr.basic_block):
     """
@@ -43,7 +43,7 @@ class adsb_kml(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
 
         packet = array.array("B", pmt.u8vector_elements(msg))
@@ -61,7 +61,7 @@ class adsb_kml(gr.basic_block):
         beacon = gomx3_beacon.beacon_1_0(payload)
 
         
-        print """<Placemark>
+        print("""<Placemark>
         <name>{}</name>
         <description>Altitude: {}ft Time: {}</description>
         <styleUrl>#plane</styleUrl>
@@ -69,5 +69,5 @@ class adsb_kml(gr.basic_block):
 </Placemark>""".format(hex(beacon.adsb_last_icao), beacon.adsb_last_alt,
                         beacon.adsb_last_time,
                         beacon.adsb_last_lon if beacon.adsb_last_lon <= 180 else beacon.adsb_last_lon - 360,
-                        beacon.adsb_last_lat)
+                        beacon.adsb_last_lat))
 

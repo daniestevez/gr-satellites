@@ -38,7 +38,7 @@ class sat3cat2_telemetry_parser(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = str(bytearray(pmt.u8vector_elements(msg)))
 
@@ -58,6 +58,6 @@ class sat3cat2_telemetry_parser(gr.basic_block):
             '  Control: ({:.1e},{:.1e},{:.1e})V'.format(float(data[10]), float(data[11]), float(data[12]))
 
             print(string)
-        except IndexError, ValueError:
-            print "Malformed beacon:"
-            print packet[17:]
+        except IndexError as ValueError:
+            print("Malformed beacon:")
+            print(packet[17:])

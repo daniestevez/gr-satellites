@@ -23,7 +23,7 @@ import datetime
 
 from construct import *
 import construct.core
-from adapters import LinearAdapter, UNIXTimestampAdapter
+from .adapters import LinearAdapter, UNIXTimestampAdapter
 
 # Number of sensors
 VOLT_SENSORS = 7

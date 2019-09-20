@@ -24,7 +24,7 @@ import collections
 import pmt
 import array
 
-from kiss import *
+from .kiss import *
 
 class pdu_to_kiss(gr.basic_block):
     """
@@ -43,7 +43,7 @@ class pdu_to_kiss(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
 
         buff = list()

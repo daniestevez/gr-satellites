@@ -24,7 +24,7 @@ import pmt
 import array
 import binascii
 import datetime
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 class submit(gr.basic_block):
     """
@@ -61,7 +61,7 @@ class submit(gr.basic_block):
 
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
 
         self.request['frame'] = \
@@ -72,17 +72,17 @@ class submit(gr.basic_block):
           if self.initialTimestamp else now
         self.request['timestamp'] = timestamp.isoformat()[:-3] + 'Z'
 
-        params = urllib.urlencode(self.request)
-        f = urllib.urlopen('{}?{}'.format(self.url, params), data=params)
+        params = urllib.parse.urlencode(self.request)
+        f = urllib.request.urlopen('{}?{}'.format(self.url, params), data=params)
         reply = f.read()
         code = f.getcode()
         if code < 200 or code >= 300:
-            print "Server error while submitting telemetry"
-            print "Reply:"
-            print reply
-            print "URL:", f.geturl()
-            print "HTTP code:", f.getcode()
-            print "Info:"
-            print f.info()
+            print("Server error while submitting telemetry")
+            print("Reply:")
+            print(reply)
+            print("URL:", f.geturl())
+            print("HTTP code:", f.getcode())
+            print("Info:")
+            print(f.info())
         f.close()
         

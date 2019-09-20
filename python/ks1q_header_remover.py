@@ -40,7 +40,7 @@ class ks1q_header_remover(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
@@ -48,11 +48,11 @@ class ks1q_header_remover(gr.basic_block):
             return
 
         if self.verbose:
-            print 'Spacecraft ID', binascii.b2a_hex(packet[:2])
+            print('Spacecraft ID', binascii.b2a_hex(packet[:2]))
             if packet[2] == 0x50:
-                print 'CSP downlink, protocol version 0'
+                print('CSP downlink, protocol version 0')
             else:
-                print 'Unknown packet type'
+                print('Unknown packet type')
 
         data = packet[3:]
         self.message_port_pub(pmt.intern('out'),

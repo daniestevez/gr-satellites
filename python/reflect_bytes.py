@@ -26,7 +26,7 @@ import struct
 
 import numpy as np
 
-from eseo_line_decoder import reflect_bytes as reflect
+from .eseo_line_decoder import reflect_bytes as reflect
 
 class reflect_bytes(gr.basic_block):
     """
@@ -44,7 +44,7 @@ class reflect_bytes(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = np.array(pmt.u8vector_elements(msg), dtype = 'uint8')
         packet = np.unpackbits(packet)

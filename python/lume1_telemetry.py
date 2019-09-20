@@ -20,10 +20,10 @@
 # 
 
 from construct import *
-import ccsds_space_packet
-import ecss_pus
+from . import ccsds_space_packet
+from . import ecss_pus
 
-from adapters import LinearAdapter
+from .adapters import LinearAdapter
 
 TMHeader = BitStruct(
     'version' / BitsInteger(2),

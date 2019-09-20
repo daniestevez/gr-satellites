@@ -20,7 +20,7 @@
 # 
 
 from construct import *
-from adapters import LinearAdapter, AffineAdapter
+from .adapters import LinearAdapter, AffineAdapter
 
 # Beacon of type 1
 General = Struct(

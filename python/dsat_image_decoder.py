@@ -24,8 +24,8 @@ import os.path
 import binascii
 from datetime import datetime
 
-from csp_header import CSP
-from feh import FehOpener
+from .csp_header import CSP
+from .feh import FehOpener
 
 import numpy
 from gnuradio import gr
@@ -54,7 +54,7 @@ class dsat_image_decoder(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
@@ -71,8 +71,8 @@ class dsat_image_decoder(gr.basic_block):
             # next 12 bytes are for GPS position
             self.length = struct.unpack('<I', packet[21:25])[0]
 
-            print 'Image {} announced. Length {}. Timestamp {}'.format(self.current_id,
-                                                                       self.length, self.current_timestamp)
+            print('Image {} announced. Length {}. Timestamp {}'.format(self.current_id,
+                                                                       self.length, self.current_timestamp))
 
             self.filename = os.path.join(self.path, str(self.current_id) + '.jpg')
             if self.current_id not in self.files:
@@ -118,7 +118,7 @@ class dsat_image_decoder(gr.basic_block):
         
         if self.remaining[self.current_id] <= 0:
             # image finished
-            print 'Finished downloading image', self.current_id
+            print('Finished downloading image', self.current_id)
             f.close()
             del self.remaining[self.current_id]
             del self.files[self.current_id]

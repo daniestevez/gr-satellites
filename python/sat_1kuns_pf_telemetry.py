@@ -21,9 +21,9 @@
 
 from construct import *
 
-from adapters import *
+from .adapters import *
 
-from au03_telemetry import Timestamp
+from .au03_telemetry import Timestamp
 
 Beacon = Struct(
         'beacon_counter' / Int16ub,

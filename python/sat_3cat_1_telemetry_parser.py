@@ -23,7 +23,7 @@ import numpy
 from gnuradio import gr
 import pmt
 
-import sat_3cat_1_telemetry
+from . import sat_3cat_1_telemetry
 
 class sat_3cat_1_telemetry_parser(gr.basic_block):
     """
@@ -41,13 +41,13 @@ class sat_3cat_1_telemetry_parser(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
         try:
             data = sat_3cat_1_telemetry.Beacon.parse(packet)
         except:
-            print "Could not decode telemetry beacon"
+            print("Could not decode telemetry beacon")
             return
         print(data)

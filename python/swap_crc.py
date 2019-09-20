@@ -24,7 +24,7 @@ from gnuradio import gr
 import pmt
 import array
 
-import csp_header
+from . import csp_header
 
 class swap_crc(gr.basic_block):
     """
@@ -43,7 +43,7 @@ class swap_crc(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = array.array("B", pmt.u8vector_elements(msg))
         try:

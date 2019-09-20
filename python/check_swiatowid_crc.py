@@ -23,7 +23,7 @@ from gnuradio import gr
 import pmt
 import array
 import struct
-from check_eseo_crc import crc16_ccitt_zero as crc16_ccitt_zero
+from .check_eseo_crc import crc16_ccitt_zero as crc16_ccitt_zero
 
 class check_swiatowid_crc(gr.basic_block):
     """
@@ -45,7 +45,7 @@ class check_swiatowid_crc(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = array.array("B", pmt.u8vector_elements(msg))
 
@@ -57,9 +57,9 @@ class check_swiatowid_crc(gr.basic_block):
         crc = crc16_ccitt_zero(packet_out)
         if packet[-2] == crc & 0xff and packet[-1] == crc >> 8:
             if self.verbose:
-                print "CRC OK"
+                print("CRC OK")
             self.message_port_pub(pmt.intern('ok'), msg_out)
         else:
             if self.verbose:
-                print "CRC failed"
+                print("CRC failed")
             self.message_port_pub(pmt.intern('fail'), msg_out)

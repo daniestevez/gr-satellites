@@ -24,7 +24,7 @@ import pmt
 import array
 import struct
 
-from hdlc_deframer import fcs_ok
+from .hdlc_deframer import fcs_ok
 
 class check_astrocast_crc(gr.basic_block):
     """
@@ -46,7 +46,7 @@ class check_astrocast_crc(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = array.array("B", pmt.u8vector_elements(msg))[1:] # drop initial 0x7e
 
@@ -59,9 +59,9 @@ class check_astrocast_crc(gr.basic_block):
         msg_out = pmt.cons(pmt.car(msg_pmt), pmt.init_u8vector(len(packet_out), packet_out))
         if fcs_ok(packet[:idx]):
             if self.verbose:
-                print "CRC OK"
+                print("CRC OK")
             self.message_port_pub(pmt.intern('ok'), msg_out)
         else:
             if self.verbose:
-                print "CRC failed"
+                print("CRC failed")
             self.message_port_pub(pmt.intern('fail'), msg_out)

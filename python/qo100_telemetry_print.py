@@ -39,12 +39,12 @@ class qo100_telemetry_print(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
         text = str(packet[:-2])
         for k in range(0, len(text), 64):
-            print(text[k:k+64])
+            print((text[k:k+64]))
 
         

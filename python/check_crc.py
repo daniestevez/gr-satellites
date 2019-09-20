@@ -24,8 +24,8 @@ import pmt
 import array
 import struct
 
-import crc32c
-import csp_header
+from . import crc32c
+from . import csp_header
 
 class check_crc(gr.basic_block):
     """
@@ -49,31 +49,31 @@ class check_crc(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = array.array("B", pmt.u8vector_elements(msg))
         try:
             header = csp_header.CSP(packet[:4])
         except ValueError as e:
             if self.verbose:
-                print e
+                print(e)
             return
         if not self.force and not header.crc:
             if self.verbose:
-                print "CRC not used"
+                print("CRC not used")
             self.message_port_pub(pmt.intern('ok'), msg_pmt)
         else:
             if len(packet) < 8: # bytes CSP header, 4 bytes CRC-32C
                 if self.verbose:
-                    print "Malformed CSP packet (too short)"
+                    print("Malformed CSP packet (too short)")
                 return
             crc = crc32c.crc(packet[:-4] if self.include_header else packet[4:-4])
             packet_crc = struct.unpack(">I", packet[-4:])[0]
             if crc == packet_crc:
                 if self.verbose:
-                    print "CRC OK"
+                    print("CRC OK")
                 self.message_port_pub(pmt.intern('ok'), msg_pmt)
             else:
                 if self.verbose:
-                    print "CRC failed"
+                    print("CRC failed")
                 self.message_port_pub(pmt.intern('fail'), msg_pmt)

@@ -24,8 +24,8 @@ from gnuradio import gr
 import pmt
 import array
 
-from csp_header import CSP
-import gomx3_beacon
+from .csp_header import CSP
+from . import gomx3_beacon
 
 class gomx3_beacon_parser(gr.basic_block):
     """
@@ -43,23 +43,23 @@ class gomx3_beacon_parser(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
 
         packet = array.array("B", pmt.u8vector_elements(msg))
         try:
             header = CSP(packet[:4])
         except ValueError as e:
-            print e
+            print(e)
             return
         # check that message is beacon
         if header.destination != 10 or header.dest_port != 30:
-            print "Not a beacon: destination address {} port {}".format(header.destination,
-                                                                        header.dest_port)
-            print
+            print("Not a beacon: destination address {} port {}".format(header.destination,
+                                                                        header.dest_port))
+            print()
             return
         if len(packet) < 5:
-            print "Malformed beacon (too short)"
+            print("Malformed beacon (too short)")
             return
         beacon_type = packet[4]
         payload = packet[4:]
@@ -68,6 +68,6 @@ class gomx3_beacon_parser(gr.basic_block):
         if header.source == 1 and beacon_type == 0 and len(payload) == 140:
             beacon = gomx3_beacon.beacon_1_0(payload)
 
-        print(beacon if beacon else "Beacon type {} {}".format(header.source, beacon_type))
-        print
+        print((beacon if beacon else "Beacon type {} {}".format(header.source, beacon_type)))
+        print()
 

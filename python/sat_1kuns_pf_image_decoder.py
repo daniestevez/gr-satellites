@@ -23,7 +23,7 @@ import struct
 import os.path
 import binascii
 
-from feh import FehOpener
+from .feh import FehOpener
 
 import numpy
 from gnuradio import gr
@@ -51,7 +51,7 @@ class sat_1kuns_pf_image_decoder(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
@@ -65,7 +65,7 @@ class sat_1kuns_pf_image_decoder(gr.basic_block):
         if self.current_file == -1:
             if block == 0:
                 # first file received
-                print "Starting image 0"
+                print("Starting image 0")
                 self.current_file = 0
                 self.filename = os.path.join(self.path, 'img{}.jpg'.format(self.current_file))
                 self.f = open(self.filename, 'wb', 0)
@@ -73,7 +73,7 @@ class sat_1kuns_pf_image_decoder(gr.basic_block):
                 return
         elif block == 0:
             # new file
-            print "Image {} finished. Starting image {}".format(self.current_file, self.current_file+1)
+            print("Image {} finished. Starting image {}".format(self.current_file, self.current_file+1))
             self.f.close()
             self.current_file += 1
             self.expected_block = 0
@@ -82,9 +82,9 @@ class sat_1kuns_pf_image_decoder(gr.basic_block):
             self.displaying = False
         elif block != self.expected_block:
             # lost block
-            print "Lost image block {}".format(self.expected_block)
+            print("Lost image block {}".format(self.expected_block))
         
-        print "Received image block {}".format(block)
+        print("Received image block {}".format(block))
         self.f.write(data)
         self.expected_block = block + 1
 

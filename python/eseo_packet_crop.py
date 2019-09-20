@@ -23,7 +23,7 @@ from gnuradio import gr
 import pmt
 import array
 
-from eseo_line_decoder import reflect_bytes
+from .eseo_line_decoder import reflect_bytes
 
 class eseo_packet_crop(gr.basic_block):
     """
@@ -44,7 +44,7 @@ class eseo_packet_crop(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = array.array("B", pmt.u8vector_elements(msg))
 

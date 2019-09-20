@@ -20,7 +20,7 @@
 # 
 
 from construct import *
-from adapters import LinearAdapter
+from .adapters import LinearAdapter
 
 Beacon = Struct(
     Const(b'\x6c'),

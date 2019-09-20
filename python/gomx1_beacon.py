@@ -69,9 +69,9 @@ class gomx1_beacon_a(object):
                         payload)
         self.temp1 = temp1 / 4.0
         self.temp2 = temp2 / 4.0
-        self.panel_temp = map(lambda x: x/4.0, struct.unpack('>6h', panel_temp))
+        self.panel_temp = [x/4.0 for x in struct.unpack('>6h', panel_temp)]
         self.last_batt_volt = last_batt_volt / 100.0
-        self.vboost = map(lambda x: x*1e-3, struct.unpack('>3H', vboost))
+        self.vboost = [x*1e-3 for x in struct.unpack('>3H', vboost)]
         self.vbatt = vbatt * 1e-3
         self.curout = struct.unpack('>6H', curout)
         self.curin = struct.unpack('>3H', curin)

@@ -22,8 +22,8 @@ import numpy
 from gnuradio import gr
 import pmt
 import array
-import hdlc_deframer
-import hdlc
+from . import hdlc_deframer
+from . import hdlc
 import binascii
 
 class k2sat_deframer(gr.basic_block):
@@ -73,7 +73,7 @@ class k2sat_deframer(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = array.array("B", pmt.u8vector_elements(msg))
 

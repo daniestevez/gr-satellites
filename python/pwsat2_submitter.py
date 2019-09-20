@@ -24,7 +24,7 @@ import numpy
 from gnuradio import gr
 import pmt
 
-import hdlc
+from . import hdlc
 
 import json
 import base64
@@ -59,8 +59,8 @@ class pwsat2_submitter(gr.basic_block):
         try:
             credentials = self.loadCredentials(credentials_path)
         except (ValueError, IOError) as e:
-            print 'Could not load credentials for', self.baseUrl
-            print e
+            print('Could not load credentials for', self.baseUrl)
+            print(e)
             self.cookies = None
             return
 
@@ -78,7 +78,7 @@ class pwsat2_submitter(gr.basic_block):
 
     def putPacket(self, frame, timestamp):
         if self.cookies is None:
-            print 'Not uploading packet to', self.baseUrl, 'as we are not authenticated'
+            print('Not uploading packet to', self.baseUrl, 'as we are not authenticated')
             return
         url = self.baseUrl+'/communication/frame'
 
@@ -92,7 +92,7 @@ class pwsat2_submitter(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
 
         data = list(pmt.u8vector_elements(msg))
@@ -108,4 +108,4 @@ class pwsat2_submitter(gr.basic_block):
 
         response = self.putPacket(frame, timestamp)
         if response:
-            print 'Packet uploaded to', self.baseUrl, response
+            print('Packet uploaded to', self.baseUrl, response)

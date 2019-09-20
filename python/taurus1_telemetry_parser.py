@@ -23,7 +23,7 @@ import numpy
 from gnuradio import gr
 import pmt
 
-import by701_telemetry
+from . import by701_telemetry
 import struct
 
 class taurus1_telemetry_parser(gr.basic_block):
@@ -42,7 +42,7 @@ class taurus1_telemetry_parser(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
@@ -52,9 +52,9 @@ class taurus1_telemetry_parser(gr.basic_block):
         data = by701_telemetry.beacon_parse(packet[5+7:])
         if data:
             print(data)
-            print
+            print()
         else:
-            print 'Could not parse beacon'
-            print
+            print('Could not parse beacon')
+            print()
 
         

@@ -25,7 +25,7 @@ import construct
 import datetime
 from distutils.version import LooseVersion
 
-from adapters import LinearAdapter
+from .adapters import LinearAdapter
 
 LTUFrameHeader = BitStruct(
     'SrcId' / BitsInteger(7),

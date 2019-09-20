@@ -23,7 +23,7 @@ import struct
 import os.path
 import binascii
 
-from feh import FehOpener
+from .feh import FehOpener
 
 import numpy
 from gnuradio import gr
@@ -50,7 +50,7 @@ class k2sat_image_decoder(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
@@ -65,7 +65,7 @@ class k2sat_image_decoder(gr.basic_block):
             # first packet in image
             filename = os.path.join(self.path, 'image_{}.jpg'.format(self.num_images))
             self.f = open(filename, 'wb')
-            print 'Started image', self.num_images
+            print('Started image', self.num_images)
             self.num_images += 1
             self.next_frame_count = virtual_channel_frame_count
 
@@ -74,7 +74,7 @@ class k2sat_image_decoder(gr.basic_block):
             return
         
         if virtual_channel_frame_count != self.next_frame_count:
-            print 'Lost image packet. Image decoding failed.'
+            print('Lost image packet. Image decoding failed.')
             self.next_frame_count = None
             self.f.close()
             return
@@ -93,5 +93,5 @@ class k2sat_image_decoder(gr.basic_block):
             # last packet in image
             self.f.close()
             self.next_frame_count = None
-            print 'Finished downloading image'
+            print('Finished downloading image')
         

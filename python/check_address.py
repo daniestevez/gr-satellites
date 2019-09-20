@@ -47,7 +47,7 @@ class check_address(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = array.array("B", pmt.u8vector_elements(msg))
 
@@ -62,7 +62,7 @@ class check_address(gr.basic_block):
         else:
             address = packet[7:14]
 
-        callsign = array.array('B', map(lambda c: c >> 1, address[:6])).tostring().rstrip(' ')
+        callsign = array.array('B', [c >> 1 for c in address[:6]]).tostring().rstrip(' ')
         ssid = int((address[6] >> 1) & 0x0f)
 
         if callsign != self.callsign or (self.ssid != None and ssid != self.ssid):

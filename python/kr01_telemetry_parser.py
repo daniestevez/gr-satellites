@@ -23,7 +23,7 @@ import numpy
 from gnuradio import gr
 import pmt
 
-import kr01_telemetry
+from . import kr01_telemetry
 
 class kr01_telemetry_parser(gr.basic_block):
     """
@@ -41,14 +41,14 @@ class kr01_telemetry_parser(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
         try:
             data = kr01_telemetry.Beacon.parse(packet[0x23:])
         except:
-            print "Could not parse telemetry beacon"
+            print("Could not parse telemetry beacon")
             return
         print(data)
         

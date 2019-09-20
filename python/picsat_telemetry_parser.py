@@ -25,7 +25,7 @@ import pmt
 
 import traceback
 
-import picsat_telemetry
+from . import picsat_telemetry
 
 class picsat_telemetry_parser(gr.basic_block):
     """
@@ -43,14 +43,14 @@ class picsat_telemetry_parser(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
         try:
-            print(picsat_telemetry.Packet.parse(packet))
-            print
+            print((picsat_telemetry.Packet.parse(packet)))
+            print()
         except Exception:
-            print "Error decoding telemetry"
+            print("Error decoding telemetry")
             traceback.print_exc()
-            print
+            print()

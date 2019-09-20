@@ -24,7 +24,7 @@ from gnuradio import gr
 import pmt
 import array
 
-import gomx1_beacon
+from . import gomx1_beacon
 
 class gomx1_beacon_parser(gr.basic_block):
     """
@@ -42,7 +42,7 @@ class gomx1_beacon_parser(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
 
         packet = array.array("B", pmt.u8vector_elements(msg))
@@ -54,6 +54,6 @@ class gomx1_beacon_parser(gr.basic_block):
             beacon = "Not a beacon"
 
         print(beacon)
-        print
+        print()
 
 

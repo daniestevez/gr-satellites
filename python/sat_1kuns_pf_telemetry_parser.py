@@ -23,7 +23,7 @@ import numpy
 from gnuradio import gr
 import pmt
 
-import sat_1kuns_pf_telemetry
+from . import sat_1kuns_pf_telemetry
 
 class sat_1kuns_pf_telemetry_parser(gr.basic_block):
     """
@@ -41,7 +41,7 @@ class sat_1kuns_pf_telemetry_parser(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
@@ -55,7 +55,7 @@ class sat_1kuns_pf_telemetry_parser(gr.basic_block):
             else:
                 data = sat_1kuns_pf_telemetry.Beacon.parse(packet[4:])
         except Exception as e:
-            print "Could not decode telemetry beacon"
+            print("Could not decode telemetry beacon")
             print(e)
             return
         print(data)

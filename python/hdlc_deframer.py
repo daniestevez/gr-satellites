@@ -24,7 +24,7 @@ import collections
 import pmt
 import array
 
-import hdlc
+from . import hdlc
 
 def pack(s):
     d = bytearray()

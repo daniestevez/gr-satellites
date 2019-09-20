@@ -22,7 +22,7 @@ import numpy
 from gnuradio import gr
 import pmt
 
-import funcube_telemetry
+from . import funcube_telemetry
 import struct
 
 import construct
@@ -49,7 +49,7 @@ class funcube_telemetry_parser(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = bytearray(pmt.u8vector_elements(msg))
 
@@ -58,30 +58,30 @@ class funcube_telemetry_parser(gr.basic_block):
 
         data = funcube_telemetry.beacon_parse(packet)
         if data:
-            print 'Frame type {}'.format(data.header.frametype)
+            print('Frame type {}'.format(data.header.frametype))
             if isinstance(data.header.frametype, int):
-                print 'Unknown frame type. Not processing frame.'
+                print('Unknown frame type. Not processing frame.')
                 return
-            print '-'*40
-            print 'Realtime telemetry:'
-            print '-'*40
-            print(data.realtime)
-            print '-'*40
+            print('-'*40)
+            print('Realtime telemetry:')
+            print('-'*40)
+            print((data.realtime))
+            print('-'*40)
             if data.header.frametype[:2] == 'FM':
-                print 'Fitter Message {}'.format(data.header.frametype[2])
-                print '-'*40
-                print(data.payload)
+                print('Fitter Message {}'.format(data.header.frametype[2]))
+                print('-'*40)
+                print((data.payload))
             if data.header.frametype[:2] == 'HR':
-                print 'High resolution {}'.format(data.header.frametype[2])
-                print '-'*40
-                print(data.payload)
+                print('High resolution {}'.format(data.header.frametype[2]))
+                print('-'*40)
+                print((data.payload))
             if data.header.frametype[:2] == 'WO':
                 chunk = int(data.header.frametype[2:])
                 try:
                     seq = data.realtime.search('seqnumber')
                 except AttributeError:
-                    print 'Unknown realtime format. Unable to get seqnumber.'
-                    print
+                    print('Unknown realtime format. Unable to get seqnumber.')
+                    print()
                     return
                 remaining = (PAYLOAD_SIZE*chunk) % WHOLEORBIT_SIZE
                 recover = True
@@ -100,18 +100,18 @@ class funcube_telemetry_parser(gr.basic_block):
                 self.last_chunk = chunk
                 self.last_wo = data.payload[-remaining:]
                 self.last_seq = seq
-                print 'Whole orbit {}'.format(chunk)
+                print('Whole orbit {}'.format(chunk))
                 if not recover:
-                    print '(could not recover data from previous beacon)'
-                print '-'*40
-                print wos
+                    print('(could not recover data from previous beacon)')
+                print('-'*40)
+                print(wos)
                 if chunk == WHOLEORBIT_MAX:
-                    print '-'*40
+                    print('-'*40)
                     # callsign included
-                    print 'Callsign: {}'.format(funcube_telemetry.Callsign.parse(self.last_wo))
-            print
+                    print('Callsign: {}'.format(funcube_telemetry.Callsign.parse(self.last_wo)))
+            print()
         else:
-            print 'Could not parse beacon'
-            print
+            print('Could not parse beacon')
+            print()
 
         

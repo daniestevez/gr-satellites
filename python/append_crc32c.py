@@ -24,7 +24,7 @@ import pmt
 import array
 import struct
 
-import crc32c
+from . import crc32c
 
 class append_crc32c(gr.basic_block):
     """
@@ -45,7 +45,7 @@ class append_crc32c(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         packet = array.array("B", pmt.u8vector_elements(msg))
         crc = crc32c.crc(packet if self.include_header else packet[4:])

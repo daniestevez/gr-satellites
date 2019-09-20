@@ -24,9 +24,9 @@ from gnuradio import gr
 import pmt
 import array
 
-from snet_telemetry import LTUFrameHeader
+from .snet_telemetry import LTUFrameHeader
 
-from bch15 import decode_bch15
+from .bch15 import decode_bch15
 
 class snet_deframer(gr.basic_block):
     """
@@ -46,7 +46,7 @@ class snet_deframer(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print "[ERROR] Received invalid message type. Expected u8vector"
+            print("[ERROR] Received invalid message type. Expected u8vector")
             return
         #packet = bytearray(pmt.u8vector_elements(msg))
         bits = np.array(pmt.u8vector_elements(msg))
@@ -57,7 +57,7 @@ class snet_deframer(gr.basic_block):
         if not all((decode_bch15(ltu[j,:]) for j in range(14))):
             # decode failure
             if self.verbose:
-                print 'BCH decode failure'
+                print('BCH decode failure')
             return
         
         ltu = np.fliplr(ltu[:,-5:]).ravel()
@@ -78,7 +78,7 @@ class snet_deframer(gr.basic_block):
 
         if crc != hdr.CRC5:
             if self.verbose:
-                print 'CRC5 fail'
+                print('CRC5 fail')
             return
 
         if self.verbose:
@@ -102,7 +102,7 @@ class snet_deframer(gr.basic_block):
             bch_d = 7
         else:
             if self.verbose:
-                print "Invalid AiTypeSrc"
+                print("Invalid AiTypeSrc")
             return
 
         if uncoded:
@@ -124,7 +124,7 @@ class snet_deframer(gr.basic_block):
                 if bch_d and not all((decode_bch15(block[j,:], d = bch_d) for j in range(16))):
                     # decode failure
                     if self.verbose:
-                        print 'BCH decode failure'
+                        print('BCH decode failure')
                     return
             
                 if bch_d:

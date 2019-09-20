@@ -20,7 +20,7 @@
 # 
 
 from construct import *
-from adapters import *
+from .adapters import *
 
 Timestamp = UNIXTimestampAdapter(Int32ul)
 
