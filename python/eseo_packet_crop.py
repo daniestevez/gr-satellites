@@ -21,7 +21,6 @@
 import numpy as np
 from gnuradio import gr
 import pmt
-import array
 
 from .eseo_line_decoder import reflect_bytes
 
@@ -46,10 +45,10 @@ class eseo_packet_crop(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
 
         # find packet end marker
-        idx = packet.tostring().find('\x7e\x7e')
+        idx = packet.find(b'\x7e\x7e')
         if idx == -1:
             return
         crop = idx if not self.drop_rs else idx - 16
@@ -59,6 +58,6 @@ class eseo_packet_crop(gr.basic_block):
         # reverse byte ordering
         packet = np.frombuffer(packet[:crop], dtype = 'uint8')
         packet = np.packbits(reflect_bytes(np.unpackbits(packet)))
-        packet = array.array('B', packet)
+        packet = bytes(packet)
 
         self.message_port_pub(pmt.intern('out'),  pmt.cons(pmt.car(msg_pmt), pmt.init_u8vector(len(packet), packet)))

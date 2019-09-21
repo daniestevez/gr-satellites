@@ -28,7 +28,6 @@ from . import hdlc
 
 import json
 import base64
-import array
 import datetime
 
 class pwsat2_submitter(gr.basic_block):
@@ -95,12 +94,12 @@ class pwsat2_submitter(gr.basic_block):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
 
-        data = list(pmt.u8vector_elements(msg))
+        data = bytearray(pmt.u8vector_elements(msg))
         crc = hdlc.crc_ccitt(data)
         data.append(crc & 0xff)
         data.append((crc >> 8) & 0xff)
 
-        frame = bytes(bytearray(data))
+        frame = bytes(data)
         
         now = datetime.datetime.utcnow()
         timestamp = now - self.startTimestamp + self.initialTimestamp \

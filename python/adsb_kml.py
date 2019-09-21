@@ -22,7 +22,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
 
 from .csp_header import CSP
 from . import gomx3_beacon
@@ -46,7 +45,7 @@ class adsb_kml(gr.basic_block):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
 
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
         header = CSP(packet[:4])
         # check that message is beacon
         if header.destination != 10 or header.dest_port != 30:

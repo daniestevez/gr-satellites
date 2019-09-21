@@ -21,7 +21,6 @@
 
 import struct
 import os.path
-import binascii
 from datetime import datetime
 
 from .csp_header import CSP
@@ -56,7 +55,7 @@ class dsat_image_decoder(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = bytearray(pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
 
         # check packet len
         if len(packet) <= 15+8:

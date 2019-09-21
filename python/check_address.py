@@ -21,7 +21,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
 import struct
 
 class check_address(gr.basic_block):
@@ -49,7 +48,7 @@ class check_address(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
 
         # check packet length
         # an AX.25 header with 2 addresses, control and PID is 16 bytes
@@ -62,8 +61,8 @@ class check_address(gr.basic_block):
         else:
             address = packet[7:14]
 
-        callsign = array.array('B', [c >> 1 for c in address[:6]]).tostring().rstrip(' ')
-        ssid = int((address[6] >> 1) & 0x0f)
+        callsign = bytes([c >> 1 for c in address[:6]]).decode('ascii').rstrip(' ')
+        ssid = (address[6] >> 1) & 0x0f
 
         if callsign != self.callsign or (self.ssid != None and ssid != self.ssid):
             # incorrect address

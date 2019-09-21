@@ -21,7 +21,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
 import struct
 
 from . import crc32c
@@ -47,8 +46,8 @@ class append_crc32c(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
         crc = crc32c.crc(packet if self.include_header else packet[4:])
-        packet += array.array("B", struct.pack(">I", crc))
+        packet += struct.pack(">I", crc)
         self.message_port_pub(pmt.intern('out'),
                               pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(packet), packet)))

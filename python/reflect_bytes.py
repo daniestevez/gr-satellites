@@ -21,8 +21,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
-import struct
 
 import numpy as np
 
@@ -49,7 +47,7 @@ class reflect_bytes(gr.basic_block):
         packet = np.array(pmt.u8vector_elements(msg), dtype = 'uint8')
         packet = np.unpackbits(packet)
         packet = reflect(packet)
-        packet = array.array('B', np.packbits(packet))
+        packet = bytes(np.packbits(packet))
         
         self.message_port_pub(pmt.intern('out'),
                               pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(packet), packet)))

@@ -22,7 +22,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
 
 from . import gomx1_beacon
 
@@ -45,7 +44,7 @@ class gomx1_beacon_parser(gr.basic_block):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
 
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
         payload = packet[4:]
 
         try:

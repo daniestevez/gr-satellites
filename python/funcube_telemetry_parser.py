@@ -51,7 +51,7 @@ class funcube_telemetry_parser(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = bytearray(pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
 
         if len(packet) != 256:
             return
@@ -96,7 +96,7 @@ class funcube_telemetry_parser(gr.basic_block):
                 else:
                     wo = data.payload[:-remaining]
                 assert len(wo) % WHOLEORBIT_SIZE == 0
-                wos = funcube_telemetry.WholeOrbit(data.header.satid)[len(wo) / WHOLEORBIT_SIZE].parse(wo)
+                wos = funcube_telemetry.WholeOrbit(data.header.satid)[len(wo) // WHOLEORBIT_SIZE].parse(wo)
                 self.last_chunk = chunk
                 self.last_wo = data.payload[-remaining:]
                 self.last_seq = seq

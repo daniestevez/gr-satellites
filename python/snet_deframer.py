@@ -22,7 +22,6 @@
 import numpy as np
 from gnuradio import gr
 import pmt
-import array
 
 from .snet_telemetry import LTUFrameHeader
 
@@ -48,7 +47,6 @@ class snet_deframer(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        #packet = bytearray(pmt.u8vector_elements(msg))
         bits = np.array(pmt.u8vector_elements(msg))
 
         ltu = bits[:210].reshape((15,14)).transpose()
@@ -152,7 +150,7 @@ class snet_deframer(gr.basic_block):
                 print('CRC13 fail')
             return
 
-        pdu = array.array('B', np.packbits(pdu_bytes))
+        pdu = bytes(np.packbits(pdu_bytes))
         pdu_tags = pmt.make_dict()
         pdu_tags = pmt.dict_add(pdu_tags, pmt.intern('SNET SrcId'), pmt.from_long(hdr.SrcId))
         self.message_port_pub(pmt.intern('out'),

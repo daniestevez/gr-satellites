@@ -21,7 +21,6 @@
 
 import struct
 import os.path
-import binascii
 
 from .csp_header import CSP
 from .feh import FehOpener
@@ -62,7 +61,7 @@ class by701_image_decoder(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = bytearray(pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
 
         # check packet len
         if len(packet) <= 15+8:
@@ -76,8 +75,8 @@ class by701_image_decoder(gr.basic_block):
 
         image_id = struct.unpack('<I', packet[4:8])[0]
         flag = struct.unpack('<b', packet[8:9])[0]
-        length = struct.unpack('<I', packet[9:12] + bytearray([0]))[0]
-        index = struct.unpack('<I', packet[12:15] + bytearray([0]))[0]
+        length = struct.unpack('<I', packet[9:12] + b'\x00')[0]
+        index = struct.unpack('<I', packet[12:15] + b'\x00')[0]
         data = packet[15:-8]
 
         if flag in flags:

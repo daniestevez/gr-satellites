@@ -22,7 +22,6 @@ import numpy
 from gnuradio import gr
 import collections
 import pmt
-import array
 
 from . import hdlc
 
@@ -80,7 +79,7 @@ class hdlc_deframer(gr.sync_block):
                     self.bits.clear()
                     if frame and (not self.check or fcs_ok(frame)):
                         # send frame
-                        buff = array.array('B', frame[:-2]) # trim fcs
+                        buff = frame[:-2] # trim fcs
                         self.message_port_pub(pmt.intern('out'), pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(buff), buff)))
                 else:
                     self.bits.append(x)

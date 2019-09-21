@@ -21,8 +21,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
-import binascii
 import hashlib
 import requests
 
@@ -48,7 +46,7 @@ class funcube_submit(gr.basic_block):
         md5.update(hex_string)
         md5.update(':')
         md5.update(self.auth_code)
-        return binascii.b2a_hex(md5.digest())
+        return md5.digest().hex()
         
     def handle_msg(self, msg_pmt):
         if not self.base_url or not self.site_id or not self.auth_code:
@@ -59,7 +57,7 @@ class funcube_submit(gr.basic_block):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
 
-        frame = binascii.b2a_hex(str(bytearray(pmt.u8vector_elements(msg)))).upper()
+        frame = bytes(pmt.u8vector_elements(msg)).upper()
         frame = ' '.join([frame[j:j+2] for j in range(0, len(frame), 2)]) # add space every two hex chars
 
         url = self.base_url + '/api/data/hex/' + self.site_id + '/?digest=' + self.digest(frame)

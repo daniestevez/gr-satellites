@@ -21,7 +21,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
 import struct
 
 from . import crc32c
@@ -51,7 +50,7 @@ class check_crc(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes( pmt.u8vector_elements(msg))
         try:
             header = csp_header.CSP(packet[:4])
         except ValueError as e:

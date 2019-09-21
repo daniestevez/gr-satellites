@@ -22,7 +22,6 @@ import numpy
 from gnuradio import gr
 import collections
 import pmt
-import array
 
 from . import hdlc
 
@@ -70,7 +69,5 @@ class hdlc_framer(gr.basic_block):
                     ones = 0
                 byte >>= 1
         buff.extend(hdlc.flag * self.postamble_bytes)
-
-        buff = array.array('B', buff)
 
         self.message_port_pub(pmt.intern('out'), pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(buff), buff)))

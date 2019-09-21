@@ -21,8 +21,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
-import struct
 from .check_eseo_crc import crc16_ccitt_zero as crc16_ccitt_zero
 
 class check_swiatowid_crc(gr.basic_block):
@@ -47,7 +45,7 @@ class check_swiatowid_crc(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
 
         if len(packet) < 3:
             return

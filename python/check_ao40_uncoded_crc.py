@@ -20,7 +20,6 @@
 
 from gnuradio import gr
 import pmt
-import array
 
 from .ao40_uncoded_crc import crc
 
@@ -46,7 +45,7 @@ class check_ao40_uncoded_crc(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
         if crc(packet) == 0:
             if self.verbose:
                 print("CRC OK")

@@ -21,7 +21,6 @@
 import numpy as np
 from gnuradio import gr
 import pmt
-import array
 
 def reflect_bytes(x):
     return np.fliplr(x[:x.size//8*8].reshape((-1,8))).ravel()
@@ -87,6 +86,6 @@ class eseo_line_decoder(gr.basic_block):
             packet = packet[:-cutbits]
         packet = np.packbits(packet)
         
-        packet = array.array('B', packet)
+        packet = bytes(packet)
         self.message_port_pub(pmt.intern('out'),  pmt.cons(pmt.car(msg_pmt), pmt.init_u8vector(len(packet), packet)))
 

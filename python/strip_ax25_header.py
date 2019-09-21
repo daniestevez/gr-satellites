@@ -21,7 +21,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
 import struct
 
 class strip_ax25_header(gr.basic_block):
@@ -42,7 +41,7 @@ class strip_ax25_header(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
         if len(packet) <= 16:
             return
         packet = packet[16:]

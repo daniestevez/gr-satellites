@@ -22,7 +22,6 @@ import numpy
 from gnuradio import gr
 
 import pmt
-import array
 
 from . import csp_header
 
@@ -45,7 +44,7 @@ class swap_crc(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
         try:
             header = csp_header.CSP(packet[:4])
         except ValueError as e:
@@ -57,8 +56,7 @@ class swap_crc(gr.basic_block):
                 # malformed
                 return
             crc = packet[-4:]
-            crc.reverse()
-            packet = packet[:-4] + crc
-            msg_pmt = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(packet), bytearray(packet)))
+            packet = packet[:-4] + crc[::-1]
+            msg_pmt = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(packet), packet))
             self.message_port_pub(pmt.intern('out'), msg_pmt)
 

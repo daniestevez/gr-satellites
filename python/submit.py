@@ -21,8 +21,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
-import binascii
 import datetime
 import urllib.request, urllib.parse, urllib.error
 
@@ -64,8 +62,7 @@ class submit(gr.basic_block):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
 
-        self.request['frame'] = \
-          binascii.b2a_hex(str(bytearray(pmt.u8vector_elements(msg)))).upper()
+        self.request['frame'] = bytes(pmt.u8vector_elements(msg)).hex().upper()
         
         now = datetime.datetime.utcnow()
         timestamp = now - self.startTimestamp + self.initialTimestamp \

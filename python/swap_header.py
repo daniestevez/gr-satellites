@@ -22,7 +22,6 @@ import numpy
 from gnuradio import gr
 
 import pmt
-import array
 
 class swap_header(gr.basic_block):
     """
@@ -43,10 +42,8 @@ class swap_header(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
         header = packet[:4]
-        header.reverse()
-        packet = header + packet[4:]
-        msg_pmt = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(packet), bytearray(packet)))
+        packet = header[::-1] + packet[4:]
+        msg_pmt = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(packet), packet))
         self.message_port_pub(pmt.intern('out'), msg_pmt)
-

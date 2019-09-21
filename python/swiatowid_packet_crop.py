@@ -21,7 +21,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
 
 class swiatowid_packet_crop(gr.basic_block):
     """
@@ -42,7 +41,7 @@ class swiatowid_packet_crop(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
 
         packet_length = packet[0] + packet[1] * 256 - 8
         if packet_length + 2 > len(packet):

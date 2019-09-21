@@ -43,7 +43,7 @@ class lume1_telemetry_parser(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = bytearray(pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
 
         try:
             data = lume1_telemetry.Beacon.parse(packet[4:])

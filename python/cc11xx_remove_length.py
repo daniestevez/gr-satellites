@@ -21,7 +21,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
 
 class cc11xx_remove_length(gr.basic_block):
     """
@@ -42,6 +41,6 @@ class cc11xx_remove_length(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = pmt.u8vector_elements(msg)
 
         self.message_port_pub(pmt.intern('out'),  pmt.cons(pmt.car(msg_pmt), pmt.init_u8vector(len(packet) - 1, packet[1:])))

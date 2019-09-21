@@ -20,8 +20,7 @@
 
 import numpy
 
-flag = [numpy.uint8(0), numpy.uint8(1), numpy.uint8(1), numpy.uint8(1),
-        numpy.uint8(1), numpy.uint8(1), numpy.uint8(1), numpy.uint8(0)]
+flag = bytes([0] + 6*[1] + [0])
 
 def crc_ccitt(data):
     # implementation taken from

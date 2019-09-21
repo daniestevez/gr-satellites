@@ -22,7 +22,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
 
 class snet_classifier(gr.basic_block):
     """
@@ -42,12 +41,6 @@ class snet_classifier(gr.basic_block):
         self.message_port_register_out(pmt.intern('SNET-D'))
 
     def handle_msg(self, msg_pmt):
-        msg = pmt.cdr(msg_pmt)
-        if not pmt.is_u8vector(msg):
-            print("[ERROR] Received invalid message type. Expected u8vector")
-            return
-        packet = array.array("B", pmt.u8vector_elements(msg))
-
         srcId = pmt.dict_ref(pmt.car(msg_pmt), pmt.intern('SNET SrcId'), pmt.PMT_NIL)
         if pmt.eq(srcId, pmt.PMT_NIL):
             return

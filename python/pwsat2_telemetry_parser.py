@@ -51,10 +51,10 @@ class pwsat2_telemetry_parser(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = bytearray(pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
 
         try:
-            data = self.pwsat2_decoder.PayloadDecoder.decode(bytes(packet[16:]))
+            data = self.pwsat2_decoder.PayloadDecoder.decode(packet[16:])
         except Exception as e:
             print("Could not decode telemetry beacon")
             print(e)

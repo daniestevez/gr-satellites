@@ -40,15 +40,15 @@ class sat3cat2_telemetry_parser(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = str(bytearray(pmt.u8vector_elements(msg)))
+        packet = bytes(pmt.u8vector_elements(msg))
 
         try:
             data = packet[17:].split()
         
-            status = {'1' : 'Survival', '2' : 'Sun-safe', '3' : 'Nominal',\
-                    '4' : 'TX', '5' : 'RX', '6' : 'Payload', '7' : 'Payload' }
-            adcs = {'0' : 'auto', '1' : 'manual'}
-            if data[5] == '0':
+            status = {b'1' : 'Survival', b'2' : 'Sun-safe', b'3' : 'Nominal',\
+                    b'4' : 'TX', b'5' : 'RX', b'6' : 'Payload', b'7' : 'Payload' }
+            adcs = {b'0' : 'auto', b'1' : 'manual'}
+            if data[5] == b'0':
                 detumbling = 'Detumbling  ({},{},{})nT'.format(float(data[7]), float(data[8]), float(data[9]))
             else:
                 detumbling = 'SS-nominal  Sun: ({:.2f},{:.2f},{:.2f})'.format(float(data[7]), float(data[8]), float(data[9]))

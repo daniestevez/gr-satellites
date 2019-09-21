@@ -21,8 +21,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
-import struct
 
 crc_table = [\
     0x0000, 0xc0c1, 0xc181, 0x0140, 0xc301, 0x03c0, 0x0280, 0xc241,\
@@ -91,7 +89,7 @@ class check_tt64_crc(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
 
         if len(packet) < 48:
             if self.verbose:

@@ -22,7 +22,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
 import struct
 
 class beesat_classifier(gr.basic_block):
@@ -48,7 +47,7 @@ class beesat_classifier(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
         satellite = None
         if len(packet) < 2 + 6 + 2:  # 2byte header, 6byte callsign, 2byte callsign crc
             return

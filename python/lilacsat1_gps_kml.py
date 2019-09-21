@@ -22,7 +22,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
 
 from .csp_header import CSP
 from . import by701_telemetry
@@ -46,7 +45,7 @@ class lilacsat1_gps_kml(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = bytearray(pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
 
         if len(packet) <= 4+8:
             return
@@ -61,7 +60,7 @@ class lilacsat1_gps_kml(gr.basic_block):
         if not data or 'latitude' not in data:
             return
 
-        line = array.array('B','{},{},{}\n'.format(data.longitude, data.latitude, data.altitude))
+        line = '{},{},{}\n'.format(data.longitude, data.latitude, data.altitude).encode('ascii')
 
         self.message_port_pub(pmt.intern('out'), pmt.cons(pmt.PMT_NIL,\
                             pmt.init_u8vector(len(line), line)))

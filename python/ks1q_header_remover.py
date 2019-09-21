@@ -21,7 +21,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import binascii
 
 class ks1q_header_remover(gr.basic_block):
     """
@@ -42,13 +41,13 @@ class ks1q_header_remover(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = bytearray(pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
 
         if len(packet) <= 3:
             return
 
         if self.verbose:
-            print('Spacecraft ID', binascii.b2a_hex(packet[:2]))
+            print('Spacecraft ID', packet[:2].hex())
             if packet[2] == 0x50:
                 print('CSP downlink, protocol version 0')
             else:

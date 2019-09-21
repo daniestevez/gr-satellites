@@ -21,10 +21,8 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
 from . import hdlc_deframer
 from . import hdlc
-import binascii
 
 class k2sat_deframer(gr.basic_block):
     """
@@ -64,7 +62,7 @@ class k2sat_deframer(gr.basic_block):
             self.crc_table.append(tmp)
 
     def check_packet(self, packet):
-        data = array.array('B', [0x7e]) + packet # add 0x7e HDLC flag for CRC-16 check
+        data = b'\x7e' + packet # add 0x7e HDLC flag for CRC-16 check
         checksum = 0xFFFF
         for d in data:
             checksum = ((checksum << 8) & 0xFF00) ^ self.crc_table[((checksum >> 8) ^ d) & 0x00FF]
@@ -75,12 +73,12 @@ class k2sat_deframer(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
 
         # search all packet end markers in current packet
         start = 0
         while True:
-            idx = packet[start:].tostring().find('\x7e\x55\x55\x55') # find packet end marker
+            idx = packet[start:].find(b'\x7e\x55\x55\x55') # find packet end marker
             if idx == -1:
                 break
             if self.check_packet(packet[:idx]): # check if this is a valid packet

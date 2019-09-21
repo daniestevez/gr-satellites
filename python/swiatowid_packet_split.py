@@ -21,7 +21,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
 
 class swiatowid_packet_split(gr.basic_block):
     """

@@ -21,7 +21,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
 
 class cc11xx_packet_crop(gr.basic_block):
     """
@@ -44,7 +43,7 @@ class cc11xx_packet_crop(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))
+        packet = bytes(pmt.u8vector_elements(msg))
 
         crc_len = 2 if self.crc16 else 0
         packet_length = packet[0] + 1 + crc_len

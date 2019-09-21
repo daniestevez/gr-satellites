@@ -21,8 +21,6 @@
 import numpy
 from gnuradio import gr
 import pmt
-import array
-import struct
 
 from .hdlc_deframer import fcs_ok
 
@@ -48,10 +46,10 @@ class check_astrocast_crc(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = array.array("B", pmt.u8vector_elements(msg))[1:] # drop initial 0x7e
+        packet = bytes(pmt.u8vector_elements(msg))[1:] # drop initial 0x7e
 
         # find final 0x7e
-        idx = packet.tostring().find('\x7e')
+        idx = packet.find(b'\x7e')
         if idx == -1:
             return
         

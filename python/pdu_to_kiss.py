@@ -22,7 +22,6 @@ import numpy
 from gnuradio import gr
 import collections
 import pmt
-import array
 
 from .kiss import *
 
@@ -60,7 +59,7 @@ class pdu_to_kiss(gr.basic_block):
                 buff.append(numpy.uint8(x))
         buff.append(FEND)
 
-        buff = array.array('B', buff)
+        buff = bytes(buff)
 
         self.message_port_pub(pmt.intern('out'), pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(buff), buff)))
 
