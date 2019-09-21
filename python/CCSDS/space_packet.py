@@ -61,9 +61,9 @@ TimeCodeCUCWithPField = Struct('pfield' / PFieldCUC,
 
                                'fractional_time_unit' / IfThenElse(this.pfield.pfield_extension == 0,
                                                                    BytesInteger(
-                                                                       this.pfield.number_of_fractional_time_unit_octets + 1),
+                                                                       this.pfield.number_of_fractional_time_unit_octets),
                                                                    BytesInteger(
-                                                                       this.pfield.number_of_fractional_time_unit_octets + 1 +
+                                                                       this.pfield.number_of_fractional_time_unit_octets +
                                                                        this.pfield_extended.number_of_additional_fractional_time_unit_octets)))
 
 FullPacketCUCWithPField = Struct('primary' / PrimaryHeader,

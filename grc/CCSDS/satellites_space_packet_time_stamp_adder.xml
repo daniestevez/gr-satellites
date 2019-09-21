@@ -46,9 +46,8 @@
     </option>
   </param>
   <param>
-    <name>ID Time Format</name>
+    <name>Time Format ID</name>
     <key>id_time</key>
-    <value>0</value>
     <type>raw</type>
   </param>
   <param>
