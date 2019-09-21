@@ -127,7 +127,7 @@ class space_packet_time_stamp_adder(gr.basic_block):
 
         if self.time_format == 0: #CUC
             basic_time = 1 + self.basic_time_num_octets_cuc
-            fractional_time = 1 + self.fractional_time_num_octets_cuc
+            fractional_time = self.fractional_time_num_octets_cuc
 
             if self.pfield == 1: #If it exists
 

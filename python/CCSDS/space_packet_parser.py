@@ -78,7 +78,7 @@ class space_packet_parser(gr.basic_block):
 
             if self.pfield == 0 and self.time_format <= 2:
                 if self.time_format == 0:
-                    data = packet_format.parse(packet[:], num_of_basic_time_units = 1+ self.basic_time_num_octets_cuc + self.additional_octets_basic_time_cuc, num_of_fractional_time_units = 1 + self.fractional_time_num_octets_cuc + self.additional_octets_fractional_time_cuc)
+                    data = packet_format.parse(packet[:], num_of_basic_time_units = 1+ self.basic_time_num_octets_cuc + self.additional_octets_basic_time_cuc, num_of_fractional_time_units = self.fractional_time_num_octets_cuc + self.additional_octets_fractional_time_cuc)
                 elif self.time_format == 1:
                     data = packet_format.parse(packet[:], length_of_day_segment = self.length_of_day_cds, length_of_submillisecond_segment = self.length_of_submillisecond_cds)
                 else:
