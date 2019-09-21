@@ -70,10 +70,10 @@ FullPacketCUCWithPField = Struct('primary' / PrimaryHeader,
                                  'timestamp' / TimeCodeCUCWithPField,
                                  'payload' / IfThenElse(this.timestamp.pfield.pfield_extension == 0,
                                                         Byte[
-                                                            this.primary.data_length - 3 - this.timestamp.pfield.number_of_basic_time_unit_octets -
+                                                            this.primary.data_length - 2 - this.timestamp.pfield.number_of_basic_time_unit_octets -
                                                             this.timestamp.pfield.number_of_fractional_time_unit_octets],
                                                         Byte[
-                                                            this.primary.data_length - 4 - this.timestamp.pfield.number_of_basic_time_unit_octets - this.timestamp.pfield.number_of_fractional_time_unit_octets -
+                                                            this.primary.data_length - 3 - this.timestamp.pfield.number_of_basic_time_unit_octets - this.timestamp.pfield.number_of_fractional_time_unit_octets -
                                                             this.timestamp.pfield_extended.number_of_additional_basic_time_unit_octets - this.timestamp.pfield_extended.number_of_additional_fractional_time_unit_octets]))
 
 TimeCodeCUCNoPField = Struct('basic_time_unit' / BytesInteger(this._._.num_of_basic_time_units),
