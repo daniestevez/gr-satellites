@@ -24,6 +24,7 @@
     <key>id_time</key>
     <value>0</value>
     <type>raw</type>
+    <hide>#if $time_header() == '0' then 'none' else 'all'</hide>
   </param>
   <param>
     <name>Time Format</name>
@@ -57,7 +58,7 @@
     <key>pfield</key>
     <value>drop_down</value>
     <type>enum</type>
-    <hide>#if $time_format() &gt; '2' then 'all' else 'none'</hide>
+    <hide>#if $time_format() &gt; '2' or $time_header() == '1' then 'all' else 'none'</hide>
     <option>
 	<name>Yes</name>
 	<key>1</key>

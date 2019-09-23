@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <?grc format='1' created='3.7.13'?>
 <flow_graph>
-  <timestamp>Wed Jul 17 13:48:30 2019</timestamp>
+  <timestamp>Thu Aug 29 16:14:03 2019</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -90,33 +90,6 @@
     </param>
   </block>
   <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(8, 160)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>32000</value>
-    </param>
-  </block>
-  <block>
     <key>blocks_message_strobe</key>
     <param>
       <key>alias</key>
@@ -136,7 +109,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(8, 340)</value>
+      <value>(32, 116)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -187,7 +160,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(248, 276)</value>
+      <value>(472, 92)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -199,11 +172,11 @@
     </param>
     <param>
       <key>length_modulo</key>
-      <value>2</value>
+      <value>4</value>
     </param>
     <param>
       <key>maxsize</key>
-      <value>100</value>
+      <value>4</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -211,7 +184,7 @@
     </param>
     <param>
       <key>minsize</key>
-      <value>100</value>
+      <value>4</value>
     </param>
     <param>
       <key>minoutbuf</key>
@@ -238,7 +211,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(776, 232)</value>
+      <value>(520, 356)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -247,6 +220,22 @@
     <param>
       <key>id</key>
       <value>satellites_space_packet_parser_0</value>
+    </param>
+    <param>
+      <key>pfield</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>id_time</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>time_format</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>time_header</key>
+      <value>1</value>
     </param>
   </block>
   <block>
@@ -285,7 +274,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(592, 332)</value>
+      <value>(48, 336)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -324,173 +313,6 @@
       <value>3</value>
     </param>
   </block>
-  <block>
-    <key>satellites_space_packet_time_stamp_adder</key>
-    <param>
-      <key>additional_octets_basic_time_cuc</key>
-      <value>3</value>
-    </param>
-    <param>
-      <key>additional_octets_fractional_time_cuc</key>
-      <value>3</value>
-    </param>
-    <param>
-      <key>basic_time_num_octets_cuc</key>
-      <value>3</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>calendar_variation_ccs</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>day</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>epoch_day_cds</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>epoch_day_cuc</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>epoch_identification_cds</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>epoch_month_cds</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>epoch_month_cuc</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>epoch_year_cds</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>epoch_year_cuc</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>fractional_time_num_octets_cuc</key>
-      <value>3</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(160, 8)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>hour</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>satellites_space_packet_time_stamp_adder_0</value>
-    </param>
-    <param>
-      <key>length_of_day_cds</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>length_of_submillisecond_cds</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>manual_automatic</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>microsecond</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minute</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>month</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>number_of_subsecond_ccs</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>pfield_extension_extended</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>pfield_extension</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>pfield</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>picosecond</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>rsvd_cuc</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>second</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>time_code_identification_ccs</key>
-      <value>5</value>
-    </param>
-    <param>
-      <key>time_code_identification_cds</key>
-      <value>4</value>
-    </param>
-    <param>
-      <key>time_code_identification_cuc</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>time_format</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>year</key>
-      <value>2000</value>
-    </param>
-  </block>
   <connection>
     <source_block_id>blocks_message_strobe_0</source_block_id>
     <sink_block_id>blocks_random_pdu_0</sink_block_id>
@@ -499,19 +321,13 @@
   </connection>
   <connection>
     <source_block_id>blocks_random_pdu_0</source_block_id>
-    <sink_block_id>satellites_space_packet_time_stamp_adder_0</sink_block_id>
+    <sink_block_id>satellites_space_packet_primaryheader_adder_0</sink_block_id>
     <source_key>pdus</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>satellites_space_packet_primaryheader_adder_0</source_block_id>
     <sink_block_id>satellites_space_packet_parser_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>satellites_space_packet_time_stamp_adder_0</source_block_id>
-    <sink_block_id>satellites_space_packet_primaryheader_adder_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>

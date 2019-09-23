@@ -35,18 +35,19 @@ class space_packet_parser(gr.basic_block):
                                 in_sig=[],
                                 out_sig=[])
         self.time_header = time_header
-        self.time_format = time_format
-        self.pfield = pfield
-        self.basic_time_num_octets_cuc = id_time.basic_time_num_octets_cuc
-        self.fractional_time_num_octets_cuc = id_time.fractional_time_num_octets_cuc
-        self.additional_octets_basic_time_cuc = id_time.additional_basic_time_num_octets_cuc
-        self.additional_octets_fractional_time_cuc = id_time.additional_fractional_time_num_octets_cuc
-        self.length_of_day_cds = id_time.len_of_day
-        self.length_of_submillisecond_cds = id_time.len_of_submilsecs
-        self.calendar_variation_ccs = id_time.calendar_variation
-        self.number_of_subsecond_ccs = id_time.num_of_subsecs
-        self.add_z_terminator = id_time.add_z
-        self.ascii_dec_num = id_time.ascii_dec
+        self.time_format = time_format if time_header == 0 else 0
+        self.pfield = pfield if time_header == 0 else 0
+        self.basic_time_num_octets_cuc = id_time.basic_time_num_octets_cuc if time_header == 0 else 0
+        self.fractional_time_num_octets_cuc = id_time.fractional_time_num_octets_cuc if time_header == 0 else 0
+        self.additional_octets_basic_time_cuc = id_time.additional_basic_time_num_octets_cuc if time_header == 0 else 0
+        self.additional_octets_fractional_time_cuc = id_time.additional_fractional_time_num_octets_cuc if time_header == 0 else 0
+        self.length_of_day_cds = id_time.len_of_day if time_header == 0 else 0
+        self.length_of_submillisecond_cds = id_time.len_of_submilsecs if time_header == 0 else 0
+        self.calendar_variation_ccs = id_time.calendar_variation if time_header == 0 else 0
+        self.number_of_subsecond_ccs = id_time.num_of_subsecs if time_header == 0 else 0
+        self.add_z_terminator = id_time.add_z if time_header == 0 else 0
+        self.ascii_dec_num = id_time.ascii_dec if time_header == 0 else 0
+
 
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
@@ -76,7 +77,7 @@ class space_packet_parser(gr.basic_block):
             else:
                 packet_format = packet_formats[5]
 
-            if self.pfield == 0 and self.time_format <= 2:
+            if self.pfield == 0 and self.time_format <= 2 and self.time_header == 0:
                 if self.time_format == 0:
                     data = packet_format.parse(packet[:], num_of_basic_time_units = 1+ self.basic_time_num_octets_cuc + self.additional_octets_basic_time_cuc, num_of_fractional_time_units = self.fractional_time_num_octets_cuc + self.additional_octets_fractional_time_cuc)
                 elif self.time_format == 1:
