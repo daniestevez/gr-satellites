@@ -46,7 +46,7 @@ class space_packet_time_stamp_adder(gr.basic_block):
     def __init__(self, input_manual_automatic, time_format, pfield, pfield_extension, time_code_identification_cuc,
                  epoch_year_cuc, epoch_month_cuc, epoch_day_cuc, pfield_extension_extended,rsvd_cuc,
                  time_code_identification_cds, epoch_identification_cds, epoch_year_cds, epoch_month_cds, epoch_day_cds,
-                 time_code_identification_ccs, year, month, day, hour, minute, second, microsecond, picosecond,id_time):
+                 time_code_identification_ccs, year, month, day, hour, minute, second, microsecond, picosecond, id_time):
         gr.basic_block.__init__(self,
             name="space_packet_time_stamp_adder",
             in_sig=[],

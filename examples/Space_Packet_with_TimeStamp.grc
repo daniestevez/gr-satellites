@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <?grc format='1' created='3.7.13'?>
 <flow_graph>
-  <timestamp>Thu Aug 29 16:14:03 2019</timestamp>
+  <timestamp>Tue Sep 24 19:49:13 2019</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -90,6 +90,113 @@
     </param>
   </block>
   <block>
+    <key>variable_time_format_parameters</key>
+    <param>
+      <key>ascii_dec</key>
+      <value>ascii_dec</value>
+    </param>
+    <param>
+      <key>add_z</key>
+      <value>add_z</value>
+    </param>
+    <param>
+      <key>additional_basic_time_num_octets_cuc</key>
+      <value>additional_basic_time_num_octets_cuc</value>
+    </param>
+    <param>
+      <key>basic_time_num_octets_cuc</key>
+      <value>basic_time_num_octets_cuc</value>
+    </param>
+    <param>
+      <key>calendar_variation</key>
+      <value>calendar_variation</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>additional_fractional_time_num_octets_cuc</key>
+      <value>additional_fractional_time_num_octets_cuc</value>
+    </param>
+    <param>
+      <key>fractional_time_num_octets_cuc</key>
+      <value>fractional_time_num_octets_cuc</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(872, 24)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>variable_time_format_parameters_0</value>
+    </param>
+    <param>
+      <key>len_of_day</key>
+      <value>len_of_day</value>
+    </param>
+    <param>
+      <key>len_of_submilsecs</key>
+      <value>len_of_submilsecs</value>
+    </param>
+    <param>
+      <key>num_of_subsecs</key>
+      <value>num_of_subsecs</value>
+    </param>
+    <param>
+      <key>time_format_general</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>add_z_terminator</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>additional_basic_time</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>additional_fractional_time</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>ascii_dec_num</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>basic_time</key>
+      <value>3</value>
+    </param>
+    <param>
+      <key>calendar_variation_ccs</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>frac_time</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>length_of_day_cds</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>length_of_submillisecond_cds</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>number_of_subsecond_ccs</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_message_strobe</key>
     <param>
       <key>alias</key>
@@ -109,7 +216,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(48, 116)</value>
+      <value>(48, 140)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -160,7 +267,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(472, 92)</value>
+      <value>(560, 116)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -211,7 +318,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(520, 356)</value>
+      <value>(952, 292)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -223,11 +330,11 @@
     </param>
     <param>
       <key>pfield</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>id_time</key>
-      <value>0</value>
+      <value>variable_time_format_parameters_0</value>
     </param>
     <param>
       <key>time_format</key>
@@ -235,7 +342,7 @@
     </param>
     <param>
       <key>time_header</key>
-      <value>1</value>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -274,7 +381,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(48, 336)</value>
+      <value>(520, 304)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -313,6 +420,145 @@
       <value>3</value>
     </param>
   </block>
+  <block>
+    <key>satellites_space_packet_time_stamp_adder</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>day</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>epoch_day_cds</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>epoch_day_cuc</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>epoch_identification_cds</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>epoch_month_cds</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>epoch_month_cuc</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>epoch_year_cds</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>epoch_year_cuc</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(64, 308)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>hour</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>satellites_space_packet_time_stamp_adder_0</value>
+    </param>
+    <param>
+      <key>manual_automatic</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>microsecond</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minute</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>month</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>pfield_extension_extended</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>pfield_extension</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>pfield</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>picosecond</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>rsvd_cuc</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>second</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>time_code_identification_ccs</key>
+      <value>5</value>
+    </param>
+    <param>
+      <key>time_code_identification_cds</key>
+      <value>4</value>
+    </param>
+    <param>
+      <key>time_code_identification_cuc</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>id_time</key>
+      <value>variable_time_format_parameters_0</value>
+    </param>
+    <param>
+      <key>time_format</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>year</key>
+      <value>0</value>
+    </param>
+  </block>
   <connection>
     <source_block_id>blocks_message_strobe_0</source_block_id>
     <sink_block_id>blocks_random_pdu_0</sink_block_id>
@@ -321,13 +567,19 @@
   </connection>
   <connection>
     <source_block_id>blocks_random_pdu_0</source_block_id>
-    <sink_block_id>satellites_space_packet_primaryheader_adder_0</sink_block_id>
+    <sink_block_id>satellites_space_packet_time_stamp_adder_0</sink_block_id>
     <source_key>pdus</source_key>
     <sink_key>in</sink_key>
   </connection>
   <connection>
     <source_block_id>satellites_space_packet_primaryheader_adder_0</source_block_id>
     <sink_block_id>satellites_space_packet_parser_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>satellites_space_packet_time_stamp_adder_0</source_block_id>
+    <sink_block_id>satellites_space_packet_primaryheader_adder_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>
   </connection>
