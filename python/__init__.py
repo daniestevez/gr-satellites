@@ -34,6 +34,8 @@ except ImportError:
 # import any pure python here
 #
 
+__all__ = ['components']
+
 from .kiss_to_pdu import kiss_to_pdu
 from .pdu_to_kiss import pdu_to_kiss
 from .hdlc_framer import hdlc_framer

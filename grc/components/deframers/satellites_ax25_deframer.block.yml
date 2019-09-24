@@ -1,0 +1,24 @@
+id: satellites_ax25_deframer
+label: AX.25 Deframer
+category: '[Satellites]/Deframers'
+
+parameters:
+-   id: g3ruh_scrambler
+    label: G3RUH scrambling
+    dtype: bool
+    default: 'True'
+    options: ['True', 'False']
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.deframers
+    make: satellites.components.deframers.ax25_deframer(g3ruh_scrambler=${g3ruh_scrambler})
+
+file_format: 1

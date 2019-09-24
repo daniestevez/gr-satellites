@@ -124,6 +124,8 @@ GR_PYTHON_INSTALL(
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
+add_subdirectory(components)
+
 ########################################################################
 # Handle the unit tests
 ########################################################################

@@ -101,3 +101,5 @@ install(FILES
     satellites_taurus1_telemetry_parser.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )
+
+add_subdirectory(components)
