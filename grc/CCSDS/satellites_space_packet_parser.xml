@@ -22,6 +22,7 @@
   <param>
     <name>Time Format ID</name>
     <key>id_time</key>
+    <value>'default_value'</value>
     <type>raw</type>
     <hide>#if $time_header() == '0' then 'none' else 'all'</hide>
   </param>

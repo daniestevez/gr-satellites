@@ -9,6 +9,7 @@
     <name>Path ID outputs</name>
     <key>pathID_outputs</key>
     <type>int_vector</type>
+    <hide>none</hide>
   </param>
   <sink>
     <name>in</name>
