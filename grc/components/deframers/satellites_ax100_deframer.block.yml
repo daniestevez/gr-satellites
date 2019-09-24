@@ -1,0 +1,29 @@
+id: satellites_ax100_deframer
+label: GOMspace AX100 Deframer
+category: '[Satellites]/Deframers'
+
+parameters:
+-   id: mode
+    label: Mode
+    dtype: string
+    defaults: 'RS'
+    options: ['RS', 'ASM']
+    option_labels: ['Reed Solomon', 'ASM+Golay']
+-   id: threshold
+    label: Syncword threshold
+    dtype: int
+    default: 0
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.deframers
+    make: satellites.components.deframers.ax100_deframer(mode = ${mode}, syncword_threshold = ${threshold})
+
+file_format: 1

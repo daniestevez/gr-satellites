@@ -125,6 +125,7 @@ GR_PYTHON_INSTALL(
 )
 
 add_subdirectory(components)
+add_subdirectory(hier)
 
 ########################################################################
 # Handle the unit tests

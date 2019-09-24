@@ -18,8 +18,28 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 
-install(FILES
-    satellites_ax25_deframer.block.yml
-    satellites_ax100_deframer.block.yml
-    DESTINATION share/gnuradio/grc/blocks
+########################################################################
+# Include python install macros
+########################################################################
+include(GrPython)
+if(NOT PYTHONINTERP_FOUND)
+    return()
+endif()
+
+########################################################################
+# Install python sources
+########################################################################
+GR_PYTHON_INSTALL(
+    FILES
+    __init__.py
+    sync_to_pdu_packed.py
+    DESTINATION ${GR_PYTHON_DIR}/satellites/hier
 )
+
+########################################################################
+# Handle the unit tests
+########################################################################
+include(GrTest)
+
+set(GR_TEST_TARGET_DEPS gnuradio-satellites)
+set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)

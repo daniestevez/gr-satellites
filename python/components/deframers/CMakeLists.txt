@@ -33,6 +33,7 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     ax25_deframer.py
+    ax100_deframer.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/components/deframers
 )
 

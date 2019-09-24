@@ -19,14 +19,8 @@
 # The presence of this file turns this directory into a Python package
 
 '''
-gr-satellites deframer components
+gr-satellites hierarchical flowgraphs
 
-The deframers transform soft symbols into frames, detecting packet
-boundaries and performing error correction and checking as needed.
-
-The input to these hierarchical blocks is a stream of soft symbols
-and the output are PDUs with the frames. 
+These are Python files compiled from hierarchical flowgraphs
 '''
 
-from .ax25_deframer import ax25_deframer
-from .ax100_deframer import ax100_deframer
