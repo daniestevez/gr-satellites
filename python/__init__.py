@@ -19,8 +19,14 @@
 # The presence of this file turns this directory into a Python package
 
 '''
-This is the GNU Radio SATELLITES module. Place your Python package
-description here (python/__init__.py).
+GNU Radio gr-satellites out-of-tree module.
+
+gr-satellites is a GNU Radio out-of-tree module encompassing a
+collection of telemetry decoders that supports many different Amateur
+satellites. It suports most popular protocols, such as AX.25, the
+GOMspace NanoCom U482C and AX100 modems, an important part of the CCSDS
+stack, the AO-40 protocol used in the FUNcube satellites, and several
+ad-hoc protocols used in other satellites.
 '''
 
 
