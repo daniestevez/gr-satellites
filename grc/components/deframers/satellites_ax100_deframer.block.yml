@@ -6,7 +6,7 @@ parameters:
 -   id: mode
     label: Mode
     dtype: string
-    defaults: 'RS'
+    default: 'RS'
     options: ['RS', 'ASM']
     option_labels: ['Reed Solomon', 'ASM+Golay']
 -   id: threshold
