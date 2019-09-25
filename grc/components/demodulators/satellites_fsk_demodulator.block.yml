@@ -1,0 +1,26 @@
+id: satellites_fsk_demodulator
+label: FSK Demodulator
+category: '[Satellites]/Demodulators'
+
+parameters:
+-   id: baudrate
+    label: Baudrate
+    dtype: float
+-   id: samp_rate
+    label: Sample rate
+    dtype: float
+    default: samp_rate
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: stream
+    dtype: float
+
+templates:
+    imports: import satellites.components.demodulators
+    make: satellites.components.demodulators.fsk_demodulator(baudrate = ${baudrate}, samp_rate = ${samp_rate})
+
+file_format: 1

@@ -32,11 +32,9 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
-    DESTINATION ${GR_PYTHON_DIR}/satellites/components
+    fsk_demodulator.py
+    DESTINATION ${GR_PYTHON_DIR}/satellites/components/demodulators
 )
-
-add_subdirectory(deframers)
-add_subdirectory(demodulators)
 
 ########################################################################
 # Handle the unit tests
