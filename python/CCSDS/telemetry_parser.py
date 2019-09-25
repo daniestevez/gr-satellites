@@ -46,6 +46,7 @@ class telemetry_parser(gr.basic_block):
 
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
+        self.message_port_register_out(pmt.intern('out'))
 
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
@@ -60,6 +61,8 @@ class telemetry_parser(gr.basic_block):
             print "Could not decode telemetry packet"
             return
         print(data)
+        self.message_port_pub(pmt.intern('out'), msg_pmt)
+
 
     def calculateSize(self):
         if self.coding == 1 or self.coding == 2 or self.coding == 7:

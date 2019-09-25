@@ -37,7 +37,7 @@ class virtual_channel_demultiplexer(gr.basic_block):
         self.vc_outputs = vc_outputs
         self.message_port_register_in(pmt.intern('in'))
 
-        self.outputDict = Dict()
+        self.outputDict = {}
         for i in range(len(vc_outputs)):
             self.outputDict[vc_outputs[i]] = i
             self.message_port_register_out(pmt.intern('out' + str(i)))

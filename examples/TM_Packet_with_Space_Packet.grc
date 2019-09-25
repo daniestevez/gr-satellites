@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <?grc format='1' created='3.7.13'?>
 <flow_graph>
-  <timestamp>Thu Aug 29 16:14:03 2019</timestamp>
+  <timestamp>Wed Sep 25 23:44:07 2019</timestamp>
   <block>
     <key>options</key>
     <param>
       <key>author</key>
-      <value>Athanasios Theocharis</value>
+      <value></value>
     </param>
     <param>
       <key>window_size</key>
@@ -22,7 +22,7 @@
     </param>
     <param>
       <key>description</key>
-      <value>Simple Flowgraph of a Space Packet sending and receiving entity</value>
+      <value></value>
     </param>
     <param>
       <key>_enabled</key>
@@ -38,7 +38,7 @@
     </param>
     <param>
       <key>generate_options</key>
-      <value>no_gui</value>
+      <value>qt_gui</value>
     </param>
     <param>
       <key>hier_block_src_path</key>
@@ -82,7 +82,7 @@
     </param>
     <param>
       <key>title</key>
-      <value>Space Packet No TimeStamp</value>
+      <value></value>
     </param>
     <param>
       <key>placement</key>
@@ -109,7 +109,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(80, 188)</value>
+      <value>(80, 132)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -160,7 +160,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(496, 164)</value>
+      <value>(392, 108)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -172,11 +172,11 @@
     </param>
     <param>
       <key>length_modulo</key>
-      <value>4</value>
+      <value>2</value>
     </param>
     <param>
       <key>maxsize</key>
-      <value>4</value>
+      <value>2</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -184,133 +184,11 @@
     </param>
     <param>
       <key>minsize</key>
-      <value>4</value>
+      <value>2</value>
     </param>
     <param>
       <key>minoutbuf</key>
       <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>satellites_space_packet_parser</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(520, 356)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>satellites_space_packet_parser_0</value>
-    </param>
-    <param>
-      <key>pfield</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>id_time</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>time_format</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>time_header</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>satellites_space_packet_primaryheader_adder</key>
-    <param>
-      <key>AP_ID</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>ccsds_version</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>count_or_name</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>data_length</key>
-      <value>40000</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(48, 336)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>satellites_space_packet_primaryheader_adder_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>packet_sequence_count</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>packet_sequence_name</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>packet_type</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>secondary_header_flag</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>sequence_flags</key>
-      <value>3</value>
     </param>
   </block>
   <connection>
@@ -318,17 +196,5 @@
     <sink_block_id>blocks_random_pdu_0</sink_block_id>
     <source_key>strobe</source_key>
     <sink_key>generate</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_random_pdu_0</source_block_id>
-    <sink_block_id>satellites_space_packet_primaryheader_adder_0</sink_block_id>
-    <source_key>pdus</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>satellites_space_packet_primaryheader_adder_0</source_block_id>
-    <sink_block_id>satellites_space_packet_parser_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>in</sink_key>
   </connection>
 </flow_graph>

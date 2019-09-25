@@ -87,7 +87,7 @@ class telemetry_ocf_adder(gr.basic_block):
                                                                              rsvd_spare2 = self.rsvd_spare2,
                                                                              report_value = self.report_value))).tolist()
 
-        finalPacket = numpy.append(finalHeader, packet)
+        finalPacket = numpy.append(packet, finalHeader)
         finalPacket = array.array('B', finalPacket[:])
         finalPacket = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(finalPacket), finalPacket))
         self.message_port_pub(pmt.intern('out'), finalPacket)

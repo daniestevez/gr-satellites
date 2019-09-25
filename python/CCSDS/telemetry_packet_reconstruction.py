@@ -80,7 +80,6 @@ class telemetry_packet_reconstruction(gr.basic_block):
             size = self.reed_solomon
         elif self.coding == 3:
             size = self.concatenated
-        size = 4
         return size
 
     def sendPacket(self):
