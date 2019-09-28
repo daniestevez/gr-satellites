@@ -38,7 +38,7 @@
     </param>
     <param>
       <key>generate_options</key>
-      <value>qt_gui</value>
+      <value>no_gui</value>
     </param>
     <param>
       <key>hier_block_src_path</key>
@@ -46,7 +46,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>top_block</value>
+      <value>space_packet_pathID_demux</value>
     </param>
     <param>
       <key>max_nouts</key>
@@ -109,7 +109,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(88, 156)</value>
+      <value>(80, 116)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -160,7 +160,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(400, 132)</value>
+      <value>(384, 60)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -411,7 +411,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(80, 296)</value>
+      <value>(72, 488)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -420,6 +420,156 @@
     <param>
       <key>id</key>
       <value>satellites_space_packet_primaryheader_adder_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>packet_sequence_count</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>packet_sequence_name</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>packet_type</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>secondary_header_flag</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>sequence_flags</key>
+      <value>3</value>
+    </param>
+  </block>
+  <block>
+    <key>satellites_space_packet_primaryheader_adder</key>
+    <param>
+      <key>AP_ID</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>ccsds_version</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>count_or_name</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>data_length</key>
+      <value>40000</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(72, 240)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>satellites_space_packet_primaryheader_adder_0_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>packet_sequence_count</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>packet_sequence_name</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>packet_type</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>secondary_header_flag</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>sequence_flags</key>
+      <value>3</value>
+    </param>
+  </block>
+  <block>
+    <key>satellites_space_packet_primaryheader_adder</key>
+    <param>
+      <key>AP_ID</key>
+      <value>3</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>ccsds_version</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>count_or_name</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>data_length</key>
+      <value>40000</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(72, 360)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>satellites_space_packet_primaryheader_adder_0_1</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -463,6 +613,18 @@
     <sink_key>in</sink_key>
   </connection>
   <connection>
+    <source_block_id>blocks_random_pdu_0</source_block_id>
+    <sink_block_id>satellites_space_packet_primaryheader_adder_0_0</sink_block_id>
+    <source_key>pdus</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_random_pdu_0</source_block_id>
+    <sink_block_id>satellites_space_packet_primaryheader_adder_0_1</sink_block_id>
+    <source_key>pdus</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
     <source_block_id>satellites_pathID_demultiplexer_0</source_block_id>
     <sink_block_id>satellites_space_packet_parser_0_2</sink_block_id>
     <source_key>discarded</source_key>
@@ -482,6 +644,18 @@
   </connection>
   <connection>
     <source_block_id>satellites_space_packet_primaryheader_adder_0</source_block_id>
+    <sink_block_id>satellites_pathID_demultiplexer_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>satellites_space_packet_primaryheader_adder_0_0</source_block_id>
+    <sink_block_id>satellites_pathID_demultiplexer_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>satellites_space_packet_primaryheader_adder_0_1</source_block_id>
     <sink_block_id>satellites_pathID_demultiplexer_0</sink_block_id>
     <source_key>out</source_key>
     <sink_key>in</sink_key>

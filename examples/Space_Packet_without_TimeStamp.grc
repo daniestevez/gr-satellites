@@ -6,7 +6,7 @@
     <key>options</key>
     <param>
       <key>author</key>
-      <value>Athanasios Theocharis</value>
+      <value></value>
     </param>
     <param>
       <key>window_size</key>
@@ -22,7 +22,7 @@
     </param>
     <param>
       <key>description</key>
-      <value>Simple Flowgraph of a Space Packet sending and receiving entity</value>
+      <value></value>
     </param>
     <param>
       <key>_enabled</key>
@@ -46,7 +46,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>top_block</value>
+      <value>space_packet_no_timestamp</value>
     </param>
     <param>
       <key>max_nouts</key>
@@ -82,7 +82,7 @@
     </param>
     <param>
       <key>title</key>
-      <value>Space Packet No TimeStamp</value>
+      <value></value>
     </param>
     <param>
       <key>placement</key>

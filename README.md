@@ -529,6 +529,9 @@ it useful, I have added `generic_4k8_fsk_ax25`, `generic_9k6_fsk_ax25` and
 radio. For the time being, I do not plan to add a 1k2 AFSK decoder, since it is not
 so easy to implement a good AFSK decoder (a good AGC is a challenge, for instance).
 
+## CCSDS Basic Blue Books
+Descriptions for these blocks have been added in [CCSDS_README.md](https://github.com/athatheo/gr-satellites/blob/master/CCSDS_README.md) file.
+
 ## Submitting telemetry to SatNOGS
 
 To sumbit telemetry to the [SatNOGS database](http://db.satnogs.org/) (or

@@ -29,13 +29,12 @@ class telemetry_packet_reconstruction(gr.basic_block):
     """
     docstring for block telemetry_packet_reconstruction
     """
-    def __init__(self, packet):
+    def __init__(self):
         gr.basic_block.__init__(self,
             name="telemetry_packet_reconstruction",
             in_sig=[],
             out_sig=[])
 
-        self.packet = packet
         self.space_packet = []
         self.length_of_space_packet = 0
         ##################################################
@@ -50,19 +49,30 @@ class telemetry_packet_reconstruction(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print "[ERROR] Received invalid message type. Expected u8vector"
             return
-        packet = pmt.u8vector_elements(msg)
+        packet = bytearray(pmt.u8vector_elements(msg))
+        size = len(packet) - 6
+        try:
+            header = telemetry.PrimaryHeader.parse(packet[:])
+            if header.ocf_flag == 1:
+                size -= 4
+        except:
+            print "Could not decode telemetry packet"
+            print len(packet)
+            return
 
-        parsed = telemetry.FullPacket.parse(packet[:], size=self.calculateSize())
+        parsed = telemetry.FullPacket.parse(packet[:], size=size)
 
         payload = parsed.payload
-
         while len(payload) != 0:
             if len(self.space_packet) < 6:
                 left = 6 - len(self.space_packet)
                 self.space_packet = payload[:left]
                 payload = payload[left:]
             if len(self.space_packet) >= 6:
-                self.length_of_space_packet = space_packet.PrimaryHeader.parse(payload).data_length
+                x = space_packet.PrimaryHeader.parse(bytearray(self.space_packet[:]))
+                print x
+                print x.data_length
+                self.length_of_space_packet = space_packet.PrimaryHeader.parse(self.space_packet).data_length
 
                 left = self.length_of_space_packet + 6 - len(self.space_packet)
                 self.space_packet.extend(payload[:left])
@@ -70,17 +80,6 @@ class telemetry_packet_reconstruction(gr.basic_block):
 
                 if 6 + self.length_of_space_packet == len(space_packet):
                     self.sendPacket()
-
-
-
-    def calculateSize(self):
-        if self.coding == 0 or self.coding == 1:
-            size = self.num_of_octets
-        elif self.coding == 2:
-            size = self.reed_solomon
-        elif self.coding == 3:
-            size = self.concatenated
-        return size
 
     def sendPacket(self):
         packet = self.space_packet
