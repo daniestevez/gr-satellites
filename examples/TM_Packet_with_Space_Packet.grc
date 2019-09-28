@@ -242,7 +242,7 @@
     <key>satellites_space_packet_primaryheader_adder</key>
     <param>
       <key>AP_ID</key>
-      <value>0</value>
+      <value>3</value>
     </param>
     <param>
       <key>alias</key>
@@ -479,7 +479,7 @@
     </param>
     <param>
       <key>size</key>
-      <value>8</value>
+      <value>4</value>
     </param>
     <param>
       <key>spacecraft_id</key>

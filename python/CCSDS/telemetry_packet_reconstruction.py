@@ -57,28 +57,24 @@ class telemetry_packet_reconstruction(gr.basic_block):
                 size -= 4
         except:
             print "Could not decode telemetry packet"
-            print len(packet)
             return
 
         parsed = telemetry.FullPacket.parse(packet[:], size=size)
 
         payload = parsed.payload
+        #The number 6 is used here, because that's the length of the Primary Header.
+        #todo: Add a variable for this
         while len(payload) != 0:
             if len(self.space_packet) < 6:
                 left = 6 - len(self.space_packet)
-                self.space_packet = payload[:left]
+                self.space_packet.extend(payload[:left])
                 payload = payload[left:]
             if len(self.space_packet) >= 6:
-                x = space_packet.PrimaryHeader.parse(bytearray(self.space_packet[:]))
-                print x
-                print x.data_length
-                self.length_of_space_packet = space_packet.PrimaryHeader.parse(self.space_packet).data_length
-
+                self.length_of_space_packet = space_packet.PrimaryHeader.parse(bytearray(self.space_packet)).data_length
                 left = self.length_of_space_packet + 6 - len(self.space_packet)
                 self.space_packet.extend(payload[:left])
                 payload = payload[left:]
-
-                if 6 + self.length_of_space_packet == len(space_packet):
+                if 6 + self.length_of_space_packet == len(self.space_packet):
                     self.sendPacket()
 
     def sendPacket(self):
