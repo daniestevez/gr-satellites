@@ -19,9 +19,15 @@
 # The presence of this file turns this directory into a Python package
 
 '''
-gr-satellites components
+gr-satellites datasink components
 
-These components are the basic high-level building blocks of gr-satellites.
+The datasinks consume frames or packets in order to do something
+useful with them (printing telemetry, reconstructing images,
+storing to file, etc.)
+
+The input to these blocks are PDUs with the frames.
 '''
 
-__all__ = ['deframers', 'demodulators', 'datasinks']
+from ... import sat_1kuns_pf_image_decoder
+from ... import sat_1kuns_pf_telemetry_parser
+

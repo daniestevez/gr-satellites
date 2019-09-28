@@ -19,9 +19,9 @@
 # The presence of this file turns this directory into a Python package
 
 '''
-gr-satellites components
+gr-satellites core module
 
-These components are the basic high-level building blocks of gr-satellites.
+This module contains the core functionality of gr-satellites
 '''
 
-__all__ = ['deframers', 'demodulators', 'datasinks']
+from .gr_satellites_flowgraph import gr_satellites_flowgraph

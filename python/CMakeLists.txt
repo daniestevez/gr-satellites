@@ -126,6 +126,8 @@ GR_PYTHON_INSTALL(
 
 add_subdirectory(components)
 add_subdirectory(hier)
+add_subdirectory(core)
+add_subdirectory(satyaml)
 
 ########################################################################
 # Handle the unit tests

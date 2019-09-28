@@ -32,12 +32,9 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
-    DESTINATION ${GR_PYTHON_DIR}/satellites/components
+    gr_satellites_flowgraph.py
+    DESTINATION ${GR_PYTHON_DIR}/satellites/core
 )
-
-add_subdirectory(deframers)
-add_subdirectory(demodulators)
-add_subdirectory(datasinks)
 
 ########################################################################
 # Handle the unit tests
