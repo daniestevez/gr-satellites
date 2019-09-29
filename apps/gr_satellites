@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+
+import satellites.core
+from gnuradio import gr, blocks
+
+import signal
+import argparse
+import sys
+
+def argument_parser():
+    description = 'gr-satellites - GNU Radio decoders for Amateur satellites'
+    p = argparse.ArgumentParser(description = description)
+    p.add_argument('--wavfile', help = 'WAV input file')
+    p.add_argument('satellite', help = 'Satellite description (name, NORAD ID or YAML file)')
+    p.add_argument('--samp_rate', type = float, help = 'Sample rate (Hz)', required = True)
+    return p
+
+def check_options(options, parser):
+    if options.wavfile is None:
+        print('Need to specify exactly one of the following input sources: {--wavfile}', file = sys.stderr)
+        parser.print_usage(file = sys.stderr)
+        sys.exit(1)
+
+def parse_satellite(satellite):
+    if satellite.lower().endswith('.yml'):
+        return {'file' : satellite}
+    elif satellite.isnumeric():
+        return {'norad' : int(satellite)}
+    else:
+        return {'name' : satellite}
+    
+class gr_satellites_top_block(gr.top_block):
+    def __init__(self, options):
+        gr.top_block.__init__(self, 'gr-satellites top block')
+        self.flowgraph = satellites.core.gr_satellites_flowgraph(samp_rate = options.samp_rate, **parse_satellite(options.satellite))
+        self.wavfile = blocks.wavfile_source(options.wavfile, False)
+        self.connect(self.wavfile, self.flowgraph)
+
+def main():
+    parser = argument_parser()
+    options = parser.parse_args()
+    check_options(options, parser)
+
+    tb = gr_satellites_top_block(options)
+
+    def sig_handler(sig=None, frame=None):
+        tb.stop()
+        tb.wait()
+        sys.exit(0)
+
+    signal.signal(signal.SIGINT, sig_handler)
+    signal.signal(signal.SIGTERM, sig_handler)
+
+    tb.start()
+    tb.wait()
+        
+if __name__ == '__main__':
+    main()
