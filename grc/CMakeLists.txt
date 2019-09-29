@@ -103,3 +103,4 @@ install(FILES
 )
 
 add_subdirectory(components)
+add_subdirectory(core)

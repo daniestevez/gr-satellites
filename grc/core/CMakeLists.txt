@@ -18,32 +18,7 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 
-########################################################################
-# Include python install macros
-########################################################################
-include(GrPython)
-if(NOT PYTHONINTERP_FOUND)
-    return()
-endif()
-
-########################################################################
-# Install python sources
-########################################################################
-GR_PYTHON_INSTALL(
-    FILES
-    __init__.py
-    DESTINATION ${GR_PYTHON_DIR}/satellites/satyaml
-)
-
 install(FILES
-    1KUNS-PF.yml
-    DESTINATION ${GR_PYTHON_DIR}/satellites/satyaml
+    satellites_satellite_decoder.block.yml
+    DESTINATION share/gnuradio/grc/blocks
 )
-
-########################################################################
-# Handle the unit tests
-########################################################################
-include(GrTest)
-
-set(GR_TEST_TARGET_DEPS gnuradio-satellites)
-set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)

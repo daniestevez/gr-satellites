@@ -1,0 +1,53 @@
+id: satellites_satellite_decoder
+label: Satellite decoder
+category: '[Satellites]/Core'
+
+parameters:
+-   id: definition
+    label: Satellite definition
+    dtype: enum
+    options: ['file', 'name', 'norad']
+    option_labels: ['YAML file', 'Satellite name', 'NORAD ID']
+-   id: file
+    label: File
+    dtype: file_open
+    hide: ${ 'none' if definition == 'file' else 'all' }
+-   id: name
+    label: Satellite name
+    dtype: string
+    hide: ${ 'none' if definition == 'name' else 'all' }
+-   id: norad
+    label: NORAD ID
+    dtype: int
+    hide: ${ 'none' if definition == 'norad' else 'all' }
+-   id: samp_rate
+    label: Sample Rate
+    dtype: float
+    default: samp_rate
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.core
+    make: |
+        % if context.get('definition')() == 'file':
+        satellites.core.gr_satellites_flowgraph(file = ${file}, samp_rate = ${samp_rate}, grc_block = True)
+        % else:
+        % if context.get('definition')() == 'name':
+        satellites.core.gr_satellites_flowgraph(name = ${name}, samp_rate = ${samp_rate}, grc_block = True)
+        % else:
+        % if context.get('definition')() == 'norad':
+        satellites.core.gr_satellites_flowgraph(norad = ${norad}, samp_rate = ${samp_rate}, grc_block = True)
+        % else:
+        raise ValueError('Unspecified satellite type')
+        % endif
+        % endif
+        % endif
+
+file_format: 1

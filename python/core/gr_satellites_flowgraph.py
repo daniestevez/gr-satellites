@@ -22,8 +22,10 @@ from gnuradio import gr
 from ..components import demodulators
 from ..components import deframers
 from ..components import datasinks
+from .satyaml import yamlfiles
 
 import functools
+import yaml
 
 def set_options(cl, *args, **kwargs):
     """
@@ -48,22 +50,49 @@ class gr_satellites_flowgraph(gr.hier_block2):
     gr-satellites decoder flowgraph
 
     Uses a YAML file with a satellite description to create a
-    hierarchical flowgraph for that satellite
+    hierarchical flowgraph for that satellite. There are two modes of
+    operation. If this is called from GRC, then only demodulation and
+    deframing is done, getting all messages to the 'out' output port. If
+    this is not called from GRC, then messages are routed to data sinks
+    as appropriate.
 
-    TODO: describe input and output
+    Args:
+        file: filename of the YAML file to load (string)
+        name: satellite name to search in all YAML files (string)
+        norad: NORAD ID to search in all YAML files (int)
+        samp_rate: sample rate (float)
+        grc_block: whether this is called from GRC (bool)
+
+    Note that exactly one of file, name and norad should be specified
     """
-    def __init__(self, satyaml, samp_rate):
+    def __init__(self, file = None, name = None, norad = None, samp_rate = None, grc_block = False):
         gr.hier_block2.__init__(self, "gr_satellites_flowgraph",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
+        
+        if samp_rate is None:
+            raise ValueError('samp_rate not specified')
+
+        if sum([x is not None for x in [file, name, norad]]) != 1:
+            raise ValueError('exactly one of file, name and norad needs to be specified')
+        
+        if file is not None:
+            satyaml = yamlfiles.get_yamldata(file)
+        elif name is not None:
+            satyaml = yamlfiles.search_name(name)
+        else:
+            satyaml = yamlfiles.search_norad(norad)
 
         self.set_default_config()
 
         # TODO: contol all sorts of lookup errors
-        self._datasinks = dict()
-        for key, info in satyaml['data'].items():
-            datasink = getattr(datasinks, info['decoder'])()
-            self._datasinks[key] = datasink
+        if grc_block:
+            self.message_port_register_hier_out('out')
+        else:
+            self._datasinks = dict()
+            for key, info in satyaml['data'].items():
+                datasink = getattr(datasinks, info['decoder'])()
+                self._datasinks[key] = datasink
 
         self._demodulators = dict()
         self._deframers = dict()
@@ -75,8 +104,11 @@ class gr_satellites_flowgraph(gr.hier_block2):
             self._demodulators[key] = demodulator
             self._deframers[key] = deframer
 
-            for data in transmitter['data']:
-                self.msg_connect((deframer, 'out'), (self._datasinks[data], 'in'))
+            if grc_block:
+                self.msg_connect((deframer, 'out'), (self, 'out'))
+            else:                                 
+                for data in transmitter['data']:
+                    self.msg_connect((deframer, 'out'), (self._datasinks[data], 'in'))
 
     def get_demodulator(self, modulation):
         return self._demodulator_hooks[modulation]
