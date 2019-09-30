@@ -1,0 +1,13 @@
+name: GOMX-3
+norad: 40949
+data:
+  &tlm Telemetry:
+    decoder: gomx3_beacon_parser
+transmitters:
+  19k2 FSK downlink:
+    frequency: 437.250e+6
+    modulation: FSK
+    baudrate: 19200
+    framing: AX100 Reed Solomon
+    data:
+    - *tlm

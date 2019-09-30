@@ -30,4 +30,4 @@ The input to these blocks are PDUs with the frames.
 
 from ... import sat_1kuns_pf_image_decoder
 from ... import sat_1kuns_pf_telemetry_parser
-
+from ... import gomx3_beacon_parser
