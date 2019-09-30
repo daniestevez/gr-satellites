@@ -13,11 +13,14 @@ def argument_parser():
     p.add_argument('--wavfile', help = 'WAV input file')
     p.add_argument('satellite', help = 'Satellite description (name, NORAD ID or YAML file)')
     p.add_argument('--samp_rate', type = float, help = 'Sample rate (Hz)', required = True)
+    p.add_argument('--udp', nargs = '?', const = True, help = 'Use UDP input')
+    p.add_argument('--udp_ip', default = '::', help = 'UDP input listen IP [default=%(default)r]')
+    p.add_argument('--udp_port', default = '7355', type = int, help = 'UDP input listen port [default=%(default)r]')
     return p
 
 def check_options(options, parser):
-    if options.wavfile is None:
-        print('Need to specify exactly one of the following input sources: {--wavfile}', file = sys.stderr)
+    if sum(x is None for x in [options.wavfile, options.udp]) != 1:
+        print('Need to specify exactly one of the following input sources: {--wavfile, --udp}', file = sys.stderr)
         parser.print_usage(file = sys.stderr)
         sys.exit(1)
 
@@ -32,9 +35,27 @@ def parse_satellite(satellite):
 class gr_satellites_top_block(gr.top_block):
     def __init__(self, options):
         gr.top_block.__init__(self, 'gr-satellites top block')
+        self.options = options
+        
         self.flowgraph = satellites.core.gr_satellites_flowgraph(samp_rate = options.samp_rate, **parse_satellite(options.satellite))
-        self.wavfile = blocks.wavfile_source(options.wavfile, False)
-        self.connect(self.wavfile, self.flowgraph)
+        self.setup_input()
+        self.connect(self.input, self.flowgraph)
+
+    def setup_input(self):
+        if self.options.wavfile is not None:
+            return self.setup_wavfile_input()
+        elif self.options.udp is True:
+            return self.setup_udp_input()
+        else:
+            raise Exception('No input source set for flowgraph')
+
+    def setup_wavfile_input(self):
+        self.input = blocks.wavfile_source(self.options.wavfile, False)
+
+    def setup_udp_input(self):
+        self.udp = blocks.udp_source(gr.sizeof_short, self.options.udp_ip, self.options.udp_port, 1472, False)
+        self.input = blocks.short_to_float(1, 32767)
+        self.connect(self.udp, self.input)
 
 def main():
     parser = argument_parser()
