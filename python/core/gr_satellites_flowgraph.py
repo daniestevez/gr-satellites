@@ -22,7 +22,7 @@ from gnuradio import gr
 from ..components import demodulators
 from ..components import deframers
 from ..components import datasinks
-from .satyaml import yamlfiles
+from ..satyaml import yamlfiles
 
 import functools
 import yaml

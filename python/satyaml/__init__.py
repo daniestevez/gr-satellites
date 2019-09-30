@@ -21,6 +21,7 @@
 '''
 gr-satellites satellite YAML files
 
-This module contains only satellite YAML files
+This module contains satellite YAML files and supporting Python code
 '''
 
+from .satyaml import yamlfiles
