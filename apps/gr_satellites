@@ -13,7 +13,7 @@ def argument_parser():
     p.add_argument('--wavfile', help = 'WAV input file')
     p.add_argument('satellite', help = 'Satellite description (name, NORAD ID or YAML file)')
     p.add_argument('--samp_rate', type = float, help = 'Sample rate (Hz)', required = True)
-    p.add_argument('--udp', nargs = '?', const = True, help = 'Use UDP input')
+    p.add_argument('--udp', action = 'store_true', help = 'Use UDP input')
     p.add_argument('--udp_ip', default = '::', help = 'UDP input listen IP [default=%(default)r]')
     p.add_argument('--udp_port', default = '7355', type = int, help = 'UDP input listen port [default=%(default)r]')
     return p
