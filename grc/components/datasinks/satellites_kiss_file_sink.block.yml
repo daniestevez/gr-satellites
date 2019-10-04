@@ -1,0 +1,24 @@
+id: satellites_kiss_file_sink
+label: KISS File Sink
+category: '[Satellites]/Data sinks'
+
+parameters:
+-   id: file
+    label: File
+    dtype: file_open
+-   id: append
+    label: Append file
+    dtype: bool
+    default: 'False'
+    options: ['True', 'False']
+    option_labels: [Append, Overwrite]
+
+inputs:
+-   domain: message
+    id: in
+
+templates:
+    imports: import satellites.components.datasinks
+    make: satellites.components.datasinks.kiss_file_sink(${file}, append = ${append})
+
+file_format: 1
