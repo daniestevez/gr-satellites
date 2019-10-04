@@ -74,7 +74,6 @@ GR_PYTHON_INSTALL(
     append_crc32c.py
     dsat_image_decoder.py
     strip_ax25_header.py
-    ccsds_telemetry.py
     picsat_telemetry.py
     picsat_telemetry_parser.py
     snet_telemetry.py
@@ -114,13 +113,26 @@ GR_PYTHON_INSTALL(
     lume1_telemetry_parser.py
     lume1_telemetry.py
     ecss_pus.py
-    ccsds_space_packet.py
     qo100_telemetry_print.py
     swiatowid_packet_crop.py
     check_swiatowid_crc.py
     swiatowid_packet_split.py
     swiatowid_image_decoder.py
     taurus1_telemetry_parser.py
+    CCSDS/space_packet_parser.py
+    CCSDS/space_packet.py
+    CCSDS/telemetry.py
+    CCSDS/telemetry_parser.py
+    CCSDS/telecommand.py
+    CCSDS/telecommand_parser.py
+    CCSDS/space_packet_primaryheader_adder.py
+    CCSDS/telemetry_primaryheader_adder.py
+    CCSDS/telecommand_primaryheader_adder.py
+    CCSDS/pathID_demultiplexer.py
+    CCSDS/virtual_channel_demultiplexer.py
+    CCSDS/telemetry_ocf_adder.py
+    CCSDS/space_packet_time_stamp_adder.py
+    CCSDS/telemetry_packet_reconstruction.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

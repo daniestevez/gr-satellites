@@ -5,7 +5,7 @@ gr-satellites is a GNU Radio out-of-tree module encompassing a collection of
 telemetry decoders that supports many different Amateur satellites. This
 open-source project started in 2015 with the goal of providing telemetry
 decoders for all the satellites that transmit on the Amateur radio bands. It
-suports most popular protocols, such as AX.25, the GOMspace NanoCom U482C and
+supports most popular protocols, such as AX.25, the GOMspace NanoCom U482C and
 AX100 modems, an important part of the CCSDS stack, the AO-40 protocol used in
 the FUNcube satellites, and several ad-hoc protocols used in other satellites.
 
@@ -69,7 +69,7 @@ Required dependencies:
   * Phil Karn's KA9Q `libfec`. A fork that builds in modern linux systems can be found
     [here](https://github.com/daniestevez/libfec).
   * [construct](https://construct.readthedocs.io/en/latest/), at least version 2.9.
-  * [requests](https://pypi.org/project/requests/2.7.0/).
+  * [requests](https://pypi.org/project/requests/).
   * [swig](http://www.swig.org/)
 
 The following GNUradio out-of-tree modules are only required for the decoder of
@@ -582,6 +582,9 @@ radio. Additionally, there is `generic_1k2_afsk_ax25` for 1k2 AFSK AX.25 packet
 radio. Note that the performance of the AFSK decoder may not be optimal due to
 improvable aspects in the signal processing (designing a good AGC is a
 challenge, for instance).
+
+## CCSDS Basic Blue Books
+Descriptions for these blocks have been added in [CCSDS_README.md](https://github.com/athatheo/gr-satellites/blob/master/CCSDS_README.md) file.
 
 ## Submitting telemetry to SatNOGS
 

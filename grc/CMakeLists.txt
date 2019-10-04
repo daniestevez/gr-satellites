@@ -99,5 +99,17 @@ install(FILES
     satellites_swiatowid_packet_split.block.yml
     satellites_swiatowid_image_decoder.block.yml
     satellites_taurus1_telemetry_parser.block.yml
+    CCSDS/satellites_space_packet_parser.block.yml
+    CCSDS/satellites_telemetry_parser.block.yml
+    CCSDS/satellites_telecommand_parser.block.yml
+    CCSDS/satellites_space_packet_primaryheader_adder.block.yml
+    CCSDS/satellites_telemetry_primaryheader_adder.block.yml
+    CCSDS/satellites_telecommand_primaryheader_adder.block.yml
+    CCSDS/satellites_pathID_demultiplexer.block.yml
+    CCSDS/satellites_virtual_channel_demultiplexer.block.yml
+    CCSDS/satellites_telemetry_ocf_adder.block.yml
+    CCSDS/satellites_space_packet_time_stamp_adder.block.yml
+    CCSDS/variable_time_format_parameters.block.yml
+    CCSDS/satellites_telemetry_packet_reconstruction.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )

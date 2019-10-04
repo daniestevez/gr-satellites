@@ -1,0 +1,103 @@
+id: variable_time_format_parameters
+label: Time Format Parameters
+category: '[Satellites]/CCSDS'
+
+parameters:
+-   id: time_format_general
+    label: Time Format
+    dtype: enum
+    default: drop_down
+    options: ['0', '1', '2', '3', '4']
+    option_labels: [CUC, CDS, CCS, ASCII A, ASCII B]
+-   id: basic_time
+    label: $basic_time_num_octets_cuc()
+    dtype: raw
+    default: '0'
+    hide: ${ ('none' if time_format_general == '0' else 'all') }
+-   id: frac_time
+    label: $fractional_time_num_octets_cuc()
+    dtype: raw
+    default: '0'
+    hide: ${ ('none' if time_format_general == '0' else 'all') }
+-   id: additional_basic_time
+    label: $additional_basic_time_num_octets_cuc()
+    dtype: raw
+    default: '0'
+    hide: ${ ('none' if time_format_general == '0' else 'all') }
+-   id: additional_fractional_time
+    label: $additional_fractional_time_num_octets_cuc()
+    dtype: raw
+    default: '0'
+    hide: ${ ('none' if time_format_general == '0' else 'all') }
+-   id: length_of_day_cds
+    label: $len_of_day()
+    dtype: enum
+    default: drop_down
+    options: ['0', '1']
+    option_labels: [16-bit day segment, 24-bit day segments]
+    hide: ${ ('none' if time_format_general == '1' else 'all') }
+-   id: length_of_submillisecond_cds
+    label: $len_of_submilsecs()
+    dtype: enum
+    default: drop_down
+    options: ['0', '1', '2']
+    option_labels: [Millisecond, Microsecond, Picosecond]
+    hide: ${ ('none' if time_format_general == '1' else 'all') }
+-   id: calendar_variation_ccs
+    label: $calendar_variation()
+    dtype: enum
+    default: drop_down
+    options: ['0', '1']
+    option_labels: [Month of year/day of month, Day of year]
+    hide: ${ ('none' if time_format_general == '2' else 'all') }
+-   id: number_of_subsecond_ccs
+    label: $num_of_subsecs()
+    dtype: enum
+    default: drop_down
+    options: ['0', '1', '2', '3', '4', '5', '6']
+    option_labels: [1 s, 10^-2 s, 10^-4 s, 10^-6 s, 10^-8 s, 10^-10 s, 10^-12 s]
+    hide: ${ ('none' if time_format_general == '2' else 'all') }
+-   id: ascii_dec_num
+    label: $ascii_dec()
+    dtype: ''
+    default: '1'
+    hide: ${ ('none' if time_format_general > '2' else 'all') }
+-   id: add_z_terminator
+    label: $add_z()
+    dtype: enum
+    default: drop_down
+    options: ['1', '0']
+    option_labels: ['Yes', 'No']
+    hide: ${ ('none' if time_format_general > '2' else 'all') }
+value: ${value}
+
+templates:
+    imports: "def struct(data): return type('Struct', (object,), data)()"
+    var_make: |-
+        self.${id} = ${id} = struct({
+            'basic_time_num_octets_cuc': ${context.get('basic_time')},
+            'fractional_time_num_octets_cuc': ${context.get('frac_time')},
+            'additional_basic_time_num_octets_cuc': ${context.get('additional_basic_time')},
+            'additional_fractional_time_num_octets_cuc': ${context.get('additional_fractional_time')},
+            'len_of_day': ${context.get('length_of_day_cds')},
+            'len_of_submilsecs': ${context.get('length_of_submillisecond_cds')},
+            'calendar_variation': ${context.get('calendar_variation_ccs')},
+            'num_of_subsecs': ${context.get('number_of_subsecond_ccs')},
+            'ascii_dec': ${context.get('ascii_dec_num')},
+            'add_z': ${context.get('add_z_terminator')},
+        })
+    var_value: |-
+        struct({
+            'basic_time_num_octects_cuc': ${context.get('basic_time')},
+            'fractional_time_num_octets_cuc': ${context.get('frac_time')},
+            'additional_basic_time_num_octets_cuc': ${context.get('additional_basic_time')},
+            'additional_fractional_time_num_octets_cuc': ${context.get('additional_fractional_time')},
+            'len_of_day': ${context.get('length_of_day_cds')},
+            'len_of_submilsecs': ${context.get('length_of_submillisecond_cds')},
+            'calendar_variation': ${context.get('calendar_variation_ccs')},
+            'num_of_subsecs': ${context.get('number_of_subsecond_ccs')},
+            'ascii_dec': ${context.get('ascii_dec_num')},
+            'add_z': ${context.get('add_z_terminator')},
+        })
+
+file_format: 1

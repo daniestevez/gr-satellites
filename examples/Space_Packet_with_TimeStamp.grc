@@ -1,0 +1,184 @@
+options:
+  parameters:
+    author: ''
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: no_gui
+    hier_block_src_path: '.:'
+    id: space_packet_timestamp
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: run
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: ''
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: variable_time_format_parameters_0
+  id: variable_time_format_parameters
+  parameters:
+    add_z_terminator: '1'
+    additional_basic_time: '0'
+    additional_fractional_time: '0'
+    ascii_dec_num: '1'
+    basic_time: '3'
+    calendar_variation_ccs: '0'
+    comment: ''
+    frac_time: '0'
+    length_of_day_cds: '0'
+    length_of_submillisecond_cds: '0'
+    number_of_subsecond_ccs: '0'
+    time_format_general: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [872, 24]
+    rotation: 0
+    state: enabled
+- name: blocks_message_strobe_0
+  id: blocks_message_strobe
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    msg: pmt.intern("TEST")
+    period: '1000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 140]
+    rotation: 0
+    state: enabled
+- name: blocks_random_pdu_0
+  id: blocks_random_pdu
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    length_modulo: '4'
+    mask: '0xFF'
+    maxoutbuf: '0'
+    maxsize: '4'
+    minoutbuf: '0'
+    minsize: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [560, 116]
+    rotation: 0
+    state: enabled
+- name: satellites_space_packet_parser_0
+  id: satellites_space_packet_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    id_time: variable_time_format_parameters_0
+    pfield: '0'
+    time_format: '0'
+    time_header: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [952, 292]
+    rotation: 0
+    state: enabled
+- name: satellites_space_packet_primaryheader_adder_0
+  id: satellites_space_packet_primaryheader_adder
+  parameters:
+    AP_ID: '0'
+    affinity: ''
+    alias: ''
+    ccsds_version: '0'
+    comment: ''
+    count_or_name: '0'
+    data_length: '40000'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packet_sequence_count: '0'
+    packet_sequence_name: '0'
+    packet_type: '0'
+    secondary_header_flag: '1'
+    sequence_flags: '3'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [520, 304]
+    rotation: 0
+    state: enabled
+- name: satellites_space_packet_time_stamp_adder_0
+  id: satellites_space_packet_time_stamp_adder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    day: '0'
+    epoch_day_cds: '1'
+    epoch_day_cuc: '1'
+    epoch_identification_cds: '0'
+    epoch_month_cds: '1'
+    epoch_month_cuc: '1'
+    epoch_year_cds: '1'
+    epoch_year_cuc: '1'
+    hour: '0'
+    id_time: variable_time_format_parameters_0
+    manual_automatic: '1'
+    maxoutbuf: '0'
+    microsecond: '0'
+    minoutbuf: '0'
+    minute: '0'
+    month: '0'
+    pfield: '0'
+    pfield_extension: '0'
+    pfield_extension_extended: '1'
+    picosecond: '0'
+    rsvd_cuc: '0'
+    second: '0'
+    time_code_identification_ccs: '5'
+    time_code_identification_cds: '4'
+    time_code_identification_cuc: '1'
+    time_format: '0'
+    year: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [64, 308]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_message_strobe_0, strobe, blocks_random_pdu_0, generate]
+- [blocks_random_pdu_0, pdus, satellites_space_packet_time_stamp_adder_0, in]
+- [satellites_space_packet_primaryheader_adder_0, out, satellites_space_packet_parser_0,
+  in]
+- [satellites_space_packet_time_stamp_adder_0, out, satellites_space_packet_primaryheader_adder_0,
+  in]
+
+metadata:
+  file_format: 1
