@@ -23,7 +23,18 @@ from construct import *
 
 import datetime
 
-from .ccsds_telemetry import *
+# An adapted version of Space Packet primary header
+# where the APID is broken down as used by the PicSat mission
+PrimaryHeader = BitStruct('ccsds_version' / BitsInteger(3),
+                          'packet_type' / Flag,
+                          'secondary_header_flag' / Flag,
+                          'process_id' / BitsInteger(4),
+                          'level_flag' / Flag,
+                          'payload_flag' / Flag,
+                          'packet_category' / BitsInteger(5),
+                          'sequence_flag' / BitsInteger(2),
+                          'packet_id' / BitsInteger(14),
+                          'data_length' / BitsInteger(16))
 
 class TimeAdapter(Adapter):
     def _encode(self, obj, context, path = None):

@@ -20,7 +20,7 @@
 # 
 
 from construct import *
-from . import ccsds_space_packet
+from . import space_packet as ccsds_space_packet
 from . import ecss_pus
 
 from .adapters import LinearAdapter
