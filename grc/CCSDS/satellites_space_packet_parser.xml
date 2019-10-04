@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<block>
+  <name>Space Packet Parser</name>
+  <key>satellites_space_packet_parser</key>
+  <category>[Satellites]/CCSDS</category>
+  <import>import satellites</import>
+  <make>satellites.space_packet_parser($time_header, $time_format, $pfield, $id_time)</make>
+  <param>
+    <name>Time Header</name>
+    <key>time_header</key>
+    <value>drop_down</value>
+    <type>enum</type>
+    <option>
+	<name>Yes</name>
+	<key>0</key>
+    </option>
+    <option>
+	<name>No</name>
+	<key>1</key>
+    </option>
+  </param>
+  <param>
+    <name>Time Format ID</name>
+    <key>id_time</key>
+    <value>'default_value'</value>
+    <type>raw</type>
+    <hide>#if $time_header() == '0' then 'none' else 'all'</hide>
+  </param>
+  <param>
+    <name>Time Format</name>
+<key>time_format</key>
+    <value>drop_down</value>
+    <type>enum</type>
+    <hide>#if $time_header() == '0' then 'none' else 'all'</hide>
+    <option>
+	<name>CUC</name>
+	<key>0</key>
+    </option>
+    <option>
+	<name>CDS</name>
+	<key>1</key>
+    </option>
+    <option>
+	<name>CCS</name>
+	<key>2</key>
+    </option>
+    <option>
+	<name>ASCII A</name>
+	<key>3</key>
+    </option>
+    <option>
+	<name>ASCII B</name>
+	<key>4</key>
+    </option>
+  </param> 
+  <param>
+    <name>PField Presence</name>
+    <key>pfield</key>
+    <value>drop_down</value>
+    <type>enum</type>
+    <hide>#if $time_format() &gt; '2' or $time_header() == '1' then 'all' else 'none'</hide>
+    <option>
+	<name>Yes</name>
+	<key>1</key>
+    </option>
+    <option>
+	<name>No</name>
+	<key>0</key>
+    </option>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+</block>

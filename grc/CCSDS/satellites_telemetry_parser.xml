@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<block>
+  <name>Telemetry Parser</name>
+  <key>satellites_telemetry_parser</key>
+  <category>[Satellites]/CCSDS</category>
+  <import>import satellites</import>
+  <make>satellites.telemetry_parser()</make>
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>message</type>
+    <optional>1</optional>
+  </source>
+</block>

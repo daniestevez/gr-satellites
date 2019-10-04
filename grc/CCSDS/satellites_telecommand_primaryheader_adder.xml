@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<block>
+  <name>Telecommand Primary Header Adder</name>
+  <key>satellites_telecommand_primaryheader_adder</key>
+  <category>[Satellites]/CCSDS</category>
+  <import>import satellites</import>
+  <make>satellites.telecommand_primaryheader_adder($bypass, $control, $spacecraft_id, $virtual_channel_id)</make>
+  <param>
+    <name>Transfer Frame Version</name>
+    <key>transfer_frame_version</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Bypass</name>
+    <key>bypass</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>Control</name>
+    <key>control</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>RSVD Spare</name>
+    <key>rsvd_space</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Spacecraft ID</name>
+    <key>spacecraft_id</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>Virtual Channel ID</name>
+    <key>virtual_channel_id</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>Frame Length</name>
+    <key>frame_length</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Frame Sequence Number</name>
+    <key>frame_sequence_number</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>all</hide>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

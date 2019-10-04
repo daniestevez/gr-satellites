@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<block>
+  <name>Telemetry OCF Adder</name>
+  <key>satellites_telemetry_ocf_adder</key>
+  <category>[Satellites]/CCSDS</category>
+  <import>import satellites</import>
+  <make>satellites.telemetry_ocf_adder($control_word_type, $clcw_version_number, $status_field, $cop_in_effect, $virtual_channel_identification, $rsvd_spare1, $no_rf_avail, $no_bit_lock, $lockout, $wait, $retransmit, $farmb_counter, $rsvd_spare2, $report_value)</make>
+  <param>
+    <name>Control Word Type</name>
+    <key>control_word_type</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>CLCW version number</name>
+    <key>clcw_version_number</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Status Field</name>
+    <key>status_field</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>COP in effect</name>
+    <key>cop_in_effect</key>
+    <value>1</value>
+    <type>raw</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Virtual Channel Identificationo</name>
+    <key>virtual_channel_identification</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>RSVD Spare 1</name>
+    <key>rsvd_spare1</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>No RF Avail</name>
+    <key>no_rf_avail</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>No Bit Lock</name>
+    <key>no_bit_lock</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>Lockout</name>
+    <key>lockout</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>Wait</name>
+    <key>wait</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>Retransmit</name>
+    <key>retransmit</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <param>
+    <name>Farm-B Counter </name>
+    <key>farmb_counter</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>RSVD Spare 2</name>
+    <key>rsvd_spare2</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Report Value</name>
+    <key>report_value</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>none</hide>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

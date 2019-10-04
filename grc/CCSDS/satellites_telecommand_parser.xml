@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<block>
+  <name>Telecommand Parser</name>
+  <key>satellites_telecommand_parser</key>
+  <category>[Satellites]/CCSDS</category>
+  <import>import satellites</import>
+  <make>satellites.telecommand_parser()</make>
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+</block>

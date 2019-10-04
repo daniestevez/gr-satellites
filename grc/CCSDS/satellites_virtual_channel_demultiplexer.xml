@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<block>
+  <name>Virtual Channel Demultiplexer</name>
+  <key>satellites_virtual_channel_demultiplexer</key>
+  <category>[Satellites]/CCSDS</category>
+  <import>import satellites</import>
+  <make>satellites.virtual_channel_demultiplexer($vc_outputs)</make>
+  <param>
+    <name>Virtual Channel ID outputs</name>
+    <key>vc_outputs</key>
+    <type>int_vector</type>
+    <hide>none</hide>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>message</type>
+    <nports>len($vc_outputs)</nports>
+  </source>
+  <source>
+    <name>discarded</name>
+    <type>message</type>
+  </source>
+</block>

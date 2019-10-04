@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<block>
+  <name>Telemetry Packet Reconstruction</name>
+  <key>satellites_telemetry_packet_reconstruction</key>
+  <category>[Satellites]/CCSDS</category>
+  <import>import satellites</import>
+  <make>satellites.telemetry_packet_reconstruction()</make>
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

@@ -1,0 +1,281 @@
+<?xml version="1.0"?>
+<block>
+  <name>Time Format Parameters</name>
+  <key>variable_time_format_parameters</key>
+  <category>[Satellites]/CCSDS</category>
+  <import>def struct(data): return type('Struct', (object,), data)()</import>
+  <var_make>self.$id = $id = struct({#slurp
+#set $basictime = $getVar('basic_time_num_octets_cuc')
+$basictime: $getVar('basic_time'),
+#set $fractime = $getVar('fractional_time_num_octets_cuc')
+$fractime: $getVar('frac_time'), 
+#set $addbasictime = $getVar('additional_basic_time_num_octets_cuc')
+$addbasictime: $getVar('additional_basic_time'),
+#set $addfractime = $getVar('additional_fractional_time_num_octets_cuc')
+$addfractime: $getVar('additional_fractional_time'),
+#set $lenofday = $getVar('len_of_day')
+$lenofday: $getVar('length_of_day_cds'), 
+#set $lenofsubmilsecs = $getVar('len_of_submilsecs')
+$lenofsubmilsecs: $getVar('length_of_submillisecond_cds'),
+#set $calendar = $getVar('calendar_variation')
+$calendar: $getVar('calendar_variation_ccs'),
+#set $subsecs = $getVar('num_of_subsecs')
+$subsecs: $getVar('number_of_subsecond_ccs'),
+#set $asciidec = $getVar('ascii_dec')
+$asciidec: $getVar('ascii_dec_num'),
+#set $addZ = $getVar('add_z')
+$addZ: $getVar('add_z_terminator'),#slurp
+})</var_make>
+  <var_value>struct({#slurp
+#set $basictime = $getVar('basic_time_num_octets_cuc')
+$basictime: $getVar('basic_time'),
+#set $fractime = $getVar('fractional_time_num_octets_cuc')
+$fractime: $getVar('frac_time'), 
+#set $addbasictime = $getVar('additional_basic_time_num_octets_cuc')
+$addbasictime: $getVar('additional_basic_time'),
+#set $addfractime = $getVar('additional_fractional_time_num_octets_cuc')
+$addfractime: $getVar('additional_fractional_time'),
+#set $lenofday = $getVar('len_of_day')
+$lenofday: $getVar('length_of_day_cds'), 
+#set $lenofsubmilsecs = $getVar('len_of_submilsecs')
+$lenofsubmilsecs: $getVar('length_of_submillisecond_cds'),
+#set $calendar = $getVar('calendar_variation')
+$calendar: $getVar('calendar_variation_ccs'),
+#set $subsecs = $getVar('num_of_subsecs')
+$subsecs: $getVar('number_of_subsecond_ccs'),
+#set $asciidec = $getVar('ascii_dec')
+$asciidec: $getVar('ascii_dec_num'),
+#set $addZ = $getVar('add_z')
+$addZ: $getVar('add_z_terminator'),#slurp
+})</var_value>
+  <make></make>
+  <param>
+    <name>Basic Time</name>
+    <key>basic_time_num_octets_cuc</key>
+    <value>basic_time_num_octets_cuc</value>
+    <type>string</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Fractional Time</name>
+    <key>fractional_time_num_octets_cuc</key>
+    <value>fractional_time_num_octets_cuc</value>
+    <type>string</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Basic Time Additional</name>
+    <key>additional_basic_time_num_octets_cuc</key>
+    <value>additional_basic_time_num_octets_cuc</value>
+    <type>string</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Fractional Time</name>
+    <key>additional_fractional_time_num_octets_cuc</key>
+    <value>additional_fractional_time_num_octets_cuc</value>
+    <type>string</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Length of Day</name>
+    <key>len_of_day</key>
+    <value>len_of_day</value>
+    <type>string</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Length of Submilliseconds</name>
+    <key>len_of_submilsecs</key>
+    <value>len_of_submilsecs</value>
+    <type>string</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Calendar Variation</name>
+    <key>calendar_variation</key>
+    <value>calendar_variation</value>
+    <type>string</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Number of Subseconds</name>
+    <key>num_of_subsecs</key>
+    <value>num_of_subsecs</value>
+    <type>string</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>ASCII Decimals</name>
+    <key>ascii_dec</key>
+    <value>ascii_dec</value>
+    <type>string</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Add Z terminator</name>
+    <key>add_z</key>
+    <value>add_z</value>
+    <type>string</type>
+    <hide>all</hide>
+  </param>
+  <param>
+    <name>Time Format</name>
+    <key>time_format_general</key>
+    <value>drop_down</value>
+    <type>enum</type>
+    <option>
+	<name>CUC</name>
+	<key>0</key>
+    </option>
+    <option>
+	<name>CDS</name>
+	<key>1</key>
+    </option>
+    <option>
+	<name>CCS</name>
+	<key>2</key>
+    </option>
+    <option>
+	<name>ASCII A</name>
+	<key>3</key>
+    </option>
+    <option>
+	<name>ASCII B</name>
+	<key>4</key>
+    </option>
+  </param>
+  <param>
+    <name>$basic_time_num_octets_cuc()</name>
+    <key>basic_time</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $time_format_general() == '0' then 'none' else 'all'#</hide>
+  </param>
+  <param>
+    <name>$fractional_time_num_octets_cuc()</name>
+    <key>frac_time</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $time_format_general() == '0' then 'none' else 'all'#</hide>
+  </param>
+  <param>
+    <name>$additional_basic_time_num_octets_cuc()</name>
+    <key>additional_basic_time</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $time_format_general() == '0' then 'none' else 'all'#</hide>
+  </param>
+  <param>
+    <name>$additional_fractional_time_num_octets_cuc()</name>
+    <key>additional_fractional_time</key>
+    <value>0</value>
+    <type>raw</type>
+    <hide>#if $time_format_general() == '0' then 'none' else 'all'#</hide>
+  </param>
+  <param>
+    <name>$len_of_day()</name>
+    <key>length_of_day_cds</key>
+     <value>drop_down</value>
+    <type>enum</type>
+    <hide>#if $time_format_general() == '1' then 'none' else 'all'#</hide>
+    <option>
+	<name>16-bit day segment</name>
+	<key>0</key>
+    </option>
+    <option>
+	<name>24-bit day segments</name>
+	<key>1</key>
+    </option>
+  </param>
+  <param>
+    <name>$len_of_submilsecs()</name>
+    <key>length_of_submillisecond_cds</key>
+    <value>drop_down</value>
+    <type>enum</type>
+    <hide>#if $time_format_general() == '1' then 'none' else 'all'#</hide>
+    <option>
+	<name>Millisecond</name>
+	<key>0</key>
+    </option>
+    <option>
+	<name>Microsecond</name>
+	<key>1</key>
+    </option>
+    <option>
+	<name>Picosecond</name>
+	<key>2</key>
+    </option>
+  </param>
+  <param>
+    <name>$calendar_variation()</name>
+    <key>calendar_variation_ccs</key>
+    <value>drop_down</value>
+    <type>enum</type>
+    <hide>#if $time_format_general() == '2' then 'none' else 'all'#</hide>
+    <option>
+	<name>Month of year/day of month</name>
+	<key>0</key>
+    </option>
+    <option>
+	<name>Day of year</name>
+	<key>1</key>
+    </option>
+  </param>
+  <param>
+    <name>$num_of_subsecs()</name>
+    <key>number_of_subsecond_ccs</key>
+    <value>drop_down</value>
+    <type>enum</type>
+    <hide>#if $time_format_general() == '2' then 'none' else 'all'#</hide>
+   <option>
+	<name>1 s</name>
+	<key>0</key>
+    </option>
+   <option>
+	<name>10^-2 s</name>
+	<key>1</key>
+    </option>
+   <option>
+	<name>10^-4 s</name>
+	<key>2</key>
+    </option>
+   <option>
+	<name>10^-6 s</name>
+	<key>3</key>
+    </option>
+   <option>
+	<name>10^-8 s</name>
+	<key>4</key>
+    </option>
+   <option>
+	<name>10^-10 s</name>
+	<key>5</key>
+    </option>
+   <option>
+	<name>10^-12 s</name>
+	<key>6</key>
+    </option>
+  </param>
+    <param>
+    <name>$ascii_dec()</name>
+    <key>ascii_dec_num</key>
+    <value>1</value>
+    <hide>#if $time_format_general() &gt; '2' then 'none' else 'all'#</hide>
+  </param>
+  <param>
+    <name>$add_z()</name>
+    <key>add_z_terminator</key>
+    <value>drop_down</value>
+    <type>enum</type>
+    <hide>#if $time_format_general() &gt; '2' then 'none' else 'all'#</hide>
+    <option>
+	<name>Yes</name>
+	<key>1</key>
+    </option>
+    <option>
+	<name>No</name>
+	<key>0</key>
+    </option>
+  </param>
+</block>

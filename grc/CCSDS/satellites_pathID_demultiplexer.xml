@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<block>
+  <name>Path ID Demultiplexer</name>
+  <key>satellites_pathID_demultiplexer</key>
+  <category>[Satellites]/CCSDS</category>
+  <import>import satellites</import>
+  <make>satellites.pathID_demultiplexer($pathID_outputs)</make>
+  <param>
+    <name>Path ID outputs</name>
+    <key>pathID_outputs</key>
+    <type>int_vector</type>
+    <hide>none</hide>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>message</type>
+    <nports>len($pathID_outputs)</nports>
+  </source>
+  <source>
+    <name>discarded</name>
+    <type>message</type>
+  </source>
+</block>
