@@ -303,7 +303,7 @@ telemetry packet in the terminal as soon as it receives it.
     and see below for how to submit to the telemetry database.
   * `eseo`
     [ESEO](https://www.esa.int/Education/ESEO),
-    which transmits 9k6 GFSK telemetry in the 70cm band. It uses a custom protocol
+    which transmits 9k6 or 4k8 GFSK telemetry in the 70cm band. It uses a custom protocol
     vaguely similar to AX.25 with some form of G3RUH scrambling and a
     (255,239) Reed-Solomon code. You must use FM mode to receive this satellite (437.000MHz).
   * `facsat_1`,

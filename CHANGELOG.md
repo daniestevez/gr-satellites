@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Support for GNU Radio 3.8
+- Support for 4k8 in ESEO decoder
 
 ### Removed
 - Support for GNU Radio 3.7
