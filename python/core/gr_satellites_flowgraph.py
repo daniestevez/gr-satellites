@@ -97,6 +97,9 @@ class gr_satellites_flowgraph(gr.hier_block2):
             for key, info in satyaml['data'].items():
                 datasink = getattr(datasinks, info['decoder'])()
                 self._datasinks[key] = datasink
+            self._additional_datasinks = list()
+            if options is not None and options.kiss_out:
+                self._additional_datasinks.append(datasinks.kiss_file_sink(options.kiss_out, bool(options.kiss_append)))
 
         self._demodulators = dict()
         self._deframers = dict()
@@ -113,6 +116,8 @@ class gr_satellites_flowgraph(gr.hier_block2):
             else:                                 
                 for data in transmitter['data']:
                     self.msg_connect((deframer, 'out'), (self._datasinks[data], 'in'))
+                    for s in self._additional_datasinks:
+                        self.msg_connect((deframer, 'out'), (s, 'in'))
 
     def get_demodulator(self, modulation):
         return self._demodulator_hooks[modulation]

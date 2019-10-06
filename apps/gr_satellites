@@ -17,6 +17,9 @@ def argument_parser():
     p_input.add_argument('--udp', action = 'store_true', help = 'Use UDP input')
     p_input.add_argument('--udp_ip', default = '::', help = 'UDP input listen IP [default=%(default)r]')
     p_input.add_argument('--udp_port', default = '7355', type = int, help = 'UDP input listen port [default=%(default)r]')
+    p_output = p.add_argument_group('output')
+    p_output.add_argument('--kiss_out', help = 'KISS output file')
+    p_output.add_argument('--kiss_append', action = 'store_true', help = 'Append to KISS output file')
     return p
 
 def check_options(options, parser):
