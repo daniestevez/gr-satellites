@@ -38,6 +38,7 @@ GR_PYTHON_INSTALL(
 add_subdirectory(deframers)
 add_subdirectory(demodulators)
 add_subdirectory(datasinks)
+add_subdirectory(datasources)
 
 ########################################################################
 # Handle the unit tests

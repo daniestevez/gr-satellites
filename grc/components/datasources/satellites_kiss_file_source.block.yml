@@ -1,0 +1,18 @@
+id: satellites_kiss_file_source
+label: KISS File Source
+category: '[Satellites]/Data sources'
+
+parameters:
+-   id: file
+    label: File
+    dtype: file_open
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.datasources
+    make: satellites.components.datasources.kiss_file_source(${file})
+
+file_format: 1

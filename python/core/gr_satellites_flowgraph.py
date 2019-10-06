@@ -22,11 +22,13 @@ from gnuradio import gr
 from ..components import demodulators
 from ..components import deframers
 from ..components import datasinks
+from ..components import datasources
 from ..satyaml import yamlfiles
 
 import functools
 import yaml
 import argparse
+import itertools
 
 def set_options(cl, *args, **kwargs):
     """
@@ -79,12 +81,14 @@ class gr_satellites_flowgraph(gr.hier_block2):
 
     Note that exactly one of file, name and norad should be specified
     """
-    def __init__(self, file = None, name = None, norad = None, samp_rate = None, grc_block = False, options = None):
+    def __init__(self, file = None, name = None, norad = None, samp_rate = None, grc_block = False, options = None, pdu_in = False):
         gr.hier_block2.__init__(self, "gr_satellites_flowgraph",
-            gr.io_signature(1, 1, gr.sizeof_float),
+            gr.io_signature(0, 0, 0) if pdu_in else gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
-        
-        if samp_rate is None:
+
+        if pdu_in:
+            self.message_port_register_hier_in('in')
+        elif samp_rate is None:
             raise ValueError('samp_rate not specified')
 
         satyaml = self.open_satyaml(file, name, norad)
@@ -101,23 +105,27 @@ class gr_satellites_flowgraph(gr.hier_block2):
             if options is not None and options.kiss_out:
                 self._additional_datasinks.append(datasinks.kiss_file_sink(options.kiss_out, bool(options.kiss_append)))
 
-        self._demodulators = dict()
-        self._deframers = dict()
-        for key, transmitter in satyaml['transmitters'].items():
-            baudrate = transmitter['baudrate']
-            demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate, options = options)
-            deframer = self.get_deframer(transmitter['framing'])(options = options)
-            self.connect(self, demodulator, deframer)
-            self._demodulators[key] = demodulator
-            self._deframers[key] = deframer
+        if pdu_in:
+            for sink in itertools.chain(self._datasinks.values(), self._additional_datasinks):
+                self.msg_connect((self, 'in'), (sink, 'in'))
+        else:
+            self._demodulators = dict()
+            self._deframers = dict()
+            for key, transmitter in satyaml['transmitters'].items():
+                baudrate = transmitter['baudrate']
+                demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate, options = options)
+                deframer = self.get_deframer(transmitter['framing'])(options = options)
+                self.connect(self, demodulator, deframer)
+                self._demodulators[key] = demodulator
+                self._deframers[key] = deframer
 
-            if grc_block:
-                self.msg_connect((deframer, 'out'), (self, 'out'))
-            else:                                 
-                for data in transmitter['data']:
-                    self.msg_connect((deframer, 'out'), (self._datasinks[data], 'in'))
-                    for s in self._additional_datasinks:
-                        self.msg_connect((deframer, 'out'), (s, 'in'))
+                if grc_block:
+                    self.msg_connect((deframer, 'out'), (self, 'out'))
+                else:                                 
+                    for data in transmitter['data']:
+                        self.msg_connect((deframer, 'out'), (self._datasinks[data], 'in'))
+                        for s in self._additional_datasinks:
+                            self.msg_connect((deframer, 'out'), (s, 'in'))
 
     def get_demodulator(self, modulation):
         return self._demodulator_hooks[modulation]

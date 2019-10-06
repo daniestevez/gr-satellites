@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import satellites.core
+import satellites.components.datasources as datasources
 from gnuradio import gr, blocks
 
 import signal
@@ -11,20 +12,27 @@ def argument_parser():
     description = 'gr-satellites - GNU Radio decoders for Amateur satellites'
     info = 'The satellite parameter can be specified using name, NORAD ID or path to YAML file'
     p = argparse.ArgumentParser(description = description, conflict_handler = 'resolve', prog = f'gr_satellites satellite', epilog = info)
+
     p_input = p.add_argument_group('input')
     p_input.add_argument('--wavfile', help = 'WAV input file')
-    p_input.add_argument('--samp_rate', type = float, help = 'Sample rate (Hz)', required = True)
+    p_input.add_argument('--samp_rate', type = float, help = 'Sample rate (Hz)')
     p_input.add_argument('--udp', action = 'store_true', help = 'Use UDP input')
     p_input.add_argument('--udp_ip', default = '::', help = 'UDP input listen IP [default=%(default)r]')
     p_input.add_argument('--udp_port', default = '7355', type = int, help = 'UDP input listen port [default=%(default)r]')
+    p_input.add_argument('--kiss_in', help = 'KISS input file')
+    
     p_output = p.add_argument_group('output')
     p_output.add_argument('--kiss_out', help = 'KISS output file')
     p_output.add_argument('--kiss_append', action = 'store_true', help = 'Append to KISS output file')
     return p
 
 def check_options(options, parser):
-    if sum([bool(x) for x in [options.wavfile, options.udp]]) != 1:
-        print('Need to specify exactly one of the following input sources: {--wavfile, --udp}', file = sys.stderr)
+    if sum([bool(x) for x in [options.wavfile, options.udp, options.kiss_in]]) != 1:
+        print('Need to specify exactly one of the following input sources: {--wavfile, --udp, --kiss_in}', file = sys.stderr)
+        parser.print_usage(file = sys.stderr)
+        sys.exit(1)
+    if options.kiss_in is None and options.samp_rate is None:
+        print('Need to specify --samp_rate unless --kiss_in is used', file = sys.stderr)
         parser.print_usage(file = sys.stderr)
         sys.exit(1)
 
@@ -45,16 +53,23 @@ class gr_satellites_top_block(gr.top_block):
         check_options(options, parser)
         
         self.options = options
+
+        pdu_in = options.kiss_in is not None
         
-        self.flowgraph = satellites.core.gr_satellites_flowgraph(samp_rate = options.samp_rate, options = options, **sat)
+        self.flowgraph = satellites.core.gr_satellites_flowgraph(samp_rate = options.samp_rate, pdu_in = pdu_in, options = options, **sat)
         self.setup_input()
-        self.connect(self.input, self.flowgraph)
+        if pdu_in:
+            self.msg_connect((self.input, 'out'), (self.flowgraph, 'in'))
+        else:
+            self.connect(self.input, self.flowgraph)
 
     def setup_input(self):
         if self.options.wavfile is not None:
             return self.setup_wavfile_input()
         elif self.options.udp is True:
             return self.setup_udp_input()
+        elif self.options.kiss_in is not None:
+            return self.setup_kiss_input()
         else:
             raise Exception('No input source set for flowgraph')
 
@@ -65,6 +80,9 @@ class gr_satellites_top_block(gr.top_block):
         self.udp = blocks.udp_source(gr.sizeof_short, self.options.udp_ip, self.options.udp_port, 1472, False)
         self.input = blocks.short_to_float(1, 32767)
         self.connect(self.udp, self.input)
+
+    def setup_kiss_input(self):
+        self.input = datasources.kiss_file_source(self.options.kiss_in)
 
 def main():
     parser = argument_parser()

@@ -18,7 +18,28 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 
-add_subdirectory(deframers)
-add_subdirectory(demodulators)
-add_subdirectory(datasinks)
-add_subdirectory(datasources)
+########################################################################
+# Include python install macros
+########################################################################
+include(GrPython)
+if(NOT PYTHONINTERP_FOUND)
+    return()
+endif()
+
+########################################################################
+# Install python sources
+########################################################################
+GR_PYTHON_INSTALL(
+    FILES
+    __init__.py
+    kiss_file_source.py
+    DESTINATION ${GR_PYTHON_DIR}/satellites/components/datasources
+)
+
+########################################################################
+# Handle the unit tests
+########################################################################
+include(GrTest)
+
+set(GR_TEST_TARGET_DEPS gnuradio-satellites)
+set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)
