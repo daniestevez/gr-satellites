@@ -31,8 +31,9 @@ class fsk_demodulator(gr.hier_block2):
     Args:
         baudrate: Baudrate in symbols per second (float)
         sample_rate: Sample rate in samples per second (float)
+        options: Options from argparse
     """
-    def __init__(self, baudrate, samp_rate):
+    def __init__(self, baudrate, samp_rate, options = None):
         gr.hier_block2.__init__(self, "fsk_demodulator",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(1, 1, gr.sizeof_float))
@@ -51,10 +52,31 @@ class fsk_demodulator(gr.hier_block2):
         taps = firdes.low_pass(1, samp_rate, filter_cutoff, filter_transition)
         self.lowpass = filter.fir_filter_fff(decimation, taps)
 
-        gain_mu = 0.5
+        try:
+            gain_mu = options.gain_mu
+        except AttributeError:
+            gain_mu = self._default_gain_mu
+
         gain_omega = 0.25 * gain_mu * gain_mu
         mu = 0.5
-        omega_relative_limit = 200e-6
+
+        try:
+            omega_relative_limit = options.clock_offset_limit_ppm
+        except AttributeError:
+            omega_relative_limit = self._default_omega_relative_limit_ppm
+        omega_relative_limit *= 1e-6
+        
         self.clock_recovery = digital.clock_recovery_mm_ff(sps, gain_omega, mu, gain_mu, omega_relative_limit)
 
         self.connect(self, self.lowpass, self.clock_recovery, self)
+
+    _default_gain_mu = 0.5
+    _default_omega_relative_limit_ppm = 200
+    
+    @classmethod
+    def add_options(cls, parser):
+        """
+        Adds FSK demodulator specific options to the argparse parser
+        """
+        parser.add_argument('--clock_offset_limit', type = float, default = cls._default_omega_relative_limit_ppm, help = 'Maximum clock offset (ppm) [default=%(default)r]')
+        parser.add_argument('--gain_mu', type = float, default = cls._default_gain_mu, help = 'Gain for MM clock recovery [default=%(default)r]')

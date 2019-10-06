@@ -26,6 +26,7 @@ from ..satyaml import yamlfiles
 
 import functools
 import yaml
+import argparse
 
 def set_options(cl, *args, **kwargs):
     """
@@ -45,6 +46,18 @@ def set_options(cl, *args, **kwargs):
 
     return C
 
+def try_add_options(x, parser):
+    """
+    Given an object x, calls x.add_options(parser) if add_options
+    is an attribute of x.
+
+    Args:
+       x: an object
+       parser: an argparser ArgumentParser
+    """
+    if hasattr(x, 'add_options'):
+        x.add_options(parser)
+        
 class gr_satellites_flowgraph(gr.hier_block2):
     """
     gr-satellites decoder flowgraph
@@ -62,10 +75,11 @@ class gr_satellites_flowgraph(gr.hier_block2):
         norad: NORAD ID to search in all YAML files (int)
         samp_rate: sample rate (float)
         grc_block: whether this is called from GRC (bool)
+        options: options from argparser
 
     Note that exactly one of file, name and norad should be specified
     """
-    def __init__(self, file = None, name = None, norad = None, samp_rate = None, grc_block = False):
+    def __init__(self, file = None, name = None, norad = None, samp_rate = None, grc_block = False, options = None):
         gr.hier_block2.__init__(self, "gr_satellites_flowgraph",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
@@ -73,17 +87,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         if samp_rate is None:
             raise ValueError('samp_rate not specified')
 
-        if sum([x is not None for x in [file, name, norad]]) != 1:
-            raise ValueError('exactly one of file, name and norad needs to be specified')
-        
-        if file is not None:
-            satyaml = yamlfiles.get_yamldata(file)
-        elif name is not None:
-            satyaml = yamlfiles.search_name(name)
-        else:
-            satyaml = yamlfiles.search_norad(norad)
-
-        self.set_default_config()
+        satyaml = self.open_satyaml(file, name, norad)
 
         # TODO: contol all sorts of lookup errors
         if grc_block:
@@ -98,8 +102,8 @@ class gr_satellites_flowgraph(gr.hier_block2):
         self._deframers = dict()
         for key, transmitter in satyaml['transmitters'].items():
             baudrate = transmitter['baudrate']
-            demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate)
-            deframer = self.get_deframer(transmitter['framing'])()
+            demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate, options = options)
+            deframer = self.get_deframer(transmitter['framing'])(options = options)
             self.connect(self, demodulator, deframer)
             self._demodulators[key] = demodulator
             self._deframers[key] = deframer
@@ -115,18 +119,43 @@ class gr_satellites_flowgraph(gr.hier_block2):
 
     def get_deframer(self, framing):
         return self._deframer_hooks[framing]
-                    
-    def set_default_config(self):
-        """
-        Sets default configuration parameters for the decoder
-        """
-        default_sync_threshold = 4
-        self._demodulator_hooks = {
-            'FSK' : demodulators.fsk_demodulator,
-                             }
-        self._deframer_hooks = {
-            'AX.25' : set_options(deframers.ax25_deframer, g3ruh_scrambler = 'False'),
-            'AX.25 G3RUH' : set_options(deframers.ax25_deframer, g3ruh_scrambler = 'True'),
-            'AX100 ASM+Golay' : set_options(deframers.ax100_deframer, mode = 'ASM', syncword_threshold = default_sync_threshold),
-            'AX100 Reed Solomon' : set_options(deframers.ax100_deframer, mode = 'RS', syncword_threshold = default_sync_threshold),
-                          }
+
+    @staticmethod
+    def open_satyaml(file, name, norad):
+        if sum([x is not None for x in [file, name, norad]]) != 1:
+            raise ValueError('exactly one of file, name and norad needs to be specified')
+        
+        if file is not None:
+            satyaml = yamlfiles.get_yamldata(file)
+        elif name is not None:
+            satyaml = yamlfiles.search_name(name)
+        else:
+            satyaml = yamlfiles.search_norad(norad)
+
+        return satyaml
+
+    @classmethod
+    def add_options(cls, parser, file = None, name = None, norad = None):
+        satyaml = cls.open_satyaml(file, name, norad)
+
+        data_options = parser.add_argument_group('data sink')
+        demod_options = parser.add_argument_group('demodulation')
+        deframe_options = parser.add_argument_group('deframing')
+
+        for info in satyaml['data'].values():
+            try_add_options(getattr(datasinks, info['decoder']), data_options)
+    
+        for transmitter in satyaml['transmitters'].values():
+            try_add_options(cls._demodulator_hooks[transmitter['modulation']], demod_options)
+            try_add_options(cls._deframer_hooks[transmitter['framing']], deframe_options)
+
+    # Default parameters
+    _demodulator_hooks = {
+        'FSK' : demodulators.fsk_demodulator,
+    }
+    _deframer_hooks = {
+        'AX.25' : set_options(deframers.ax25_deframer, g3ruh_scrambler = 'False'),
+        'AX.25 G3RUH' : set_options(deframers.ax25_deframer, g3ruh_scrambler = 'True'),
+        'AX100 ASM+Golay' : set_options(deframers.ax100_deframer, mode = 'ASM'),
+        'AX100 Reed Solomon' : set_options(deframers.ax100_deframer, mode = 'RS'),
+    }

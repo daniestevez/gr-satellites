@@ -34,12 +34,18 @@ class ax100_deframer(gr.hier_block2):
     Args:
         mode: mode to use ('RS' or 'ASM') (string)
         syncword_threshold: number of bit errors allowed in syncword (int)
+        options: Options from argparse
     """
-    def __init__(self, mode, syncword_threshold):
+    def __init__(self, mode, syncword_threshold = None, options = None):
         gr.hier_block2.__init__(self, "ax100_deframer",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
         self.message_port_register_hier_out('out')
+
+        try:
+            syncword_threshold = options.syncword_threshold
+        except AttributeError:
+            pass
 
         if mode not in ['RS', 'ASM']:
             raise Exception("Unsupported AX100 mode. Use 'RS' or 'ASM'")
@@ -61,3 +67,12 @@ class ax100_deframer(gr.hier_block2):
         self.connect(*self._blocks)
         self.msg_connect((self.deframer, 'out'), (self.fec, 'in'))
         self.msg_connect((self.fec, 'out'), (self, 'out'))
+
+    _default_sync_threshold = 4
+        
+    @classmethod
+    def add_options(cls, parser):
+        """
+        Adds AX100 deframer specific options to the argparse parser
+        """
+        parser.add_argument('--syncword_threshold', type = int, default = cls._default_sync_threshold, help = 'Syncword bit errors [default=%(default)r]')

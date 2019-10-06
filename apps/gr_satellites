@@ -9,17 +9,18 @@ import sys
 
 def argument_parser():
     description = 'gr-satellites - GNU Radio decoders for Amateur satellites'
-    p = argparse.ArgumentParser(description = description)
-    p.add_argument('--wavfile', help = 'WAV input file')
-    p.add_argument('satellite', help = 'Satellite description (name, NORAD ID or YAML file)')
-    p.add_argument('--samp_rate', type = float, help = 'Sample rate (Hz)', required = True)
-    p.add_argument('--udp', action = 'store_true', help = 'Use UDP input')
-    p.add_argument('--udp_ip', default = '::', help = 'UDP input listen IP [default=%(default)r]')
-    p.add_argument('--udp_port', default = '7355', type = int, help = 'UDP input listen port [default=%(default)r]')
+    info = 'The satellite parameter can be specified using name, NORAD ID or path to YAML file'
+    p = argparse.ArgumentParser(description = description, conflict_handler = 'resolve', prog = f'gr_satellites satellite', epilog = info)
+    p_input = p.add_argument_group('input')
+    p_input.add_argument('--wavfile', help = 'WAV input file')
+    p_input.add_argument('--samp_rate', type = float, help = 'Sample rate (Hz)', required = True)
+    p_input.add_argument('--udp', action = 'store_true', help = 'Use UDP input')
+    p_input.add_argument('--udp_ip', default = '::', help = 'UDP input listen IP [default=%(default)r]')
+    p_input.add_argument('--udp_port', default = '7355', type = int, help = 'UDP input listen port [default=%(default)r]')
     return p
 
 def check_options(options, parser):
-    if sum(x is None for x in [options.wavfile, options.udp]) != 1:
+    if sum([bool(x) for x in [options.wavfile, options.udp]]) != 1:
         print('Need to specify exactly one of the following input sources: {--wavfile, --udp}', file = sys.stderr)
         parser.print_usage(file = sys.stderr)
         sys.exit(1)
@@ -33,11 +34,16 @@ def parse_satellite(satellite):
         return {'name' : satellite}
     
 class gr_satellites_top_block(gr.top_block):
-    def __init__(self, options):
+    def __init__(self, parser):
         gr.top_block.__init__(self, 'gr-satellites top block')
+        sat = parse_satellite(sys.argv[1])
+        satellites.core.gr_satellites_flowgraph.add_options(parser, **sat)
+        options = parser.parse_args(sys.argv[2:])
+        check_options(options, parser)
+        
         self.options = options
         
-        self.flowgraph = satellites.core.gr_satellites_flowgraph(samp_rate = options.samp_rate, **parse_satellite(options.satellite))
+        self.flowgraph = satellites.core.gr_satellites_flowgraph(samp_rate = options.samp_rate, options = options, **sat)
         self.setup_input()
         self.connect(self.input, self.flowgraph)
 
@@ -59,10 +65,11 @@ class gr_satellites_top_block(gr.top_block):
 
 def main():
     parser = argument_parser()
-    options = parser.parse_args()
-    check_options(options, parser)
-
-    tb = gr_satellites_top_block(options)
+    if len(sys.argv) <= 1 or sys.argv[1][0] == '-':
+        parser.print_usage(file = sys.stderr)
+        sys.exit(1)
+    
+    tb = gr_satellites_top_block(parser)
 
     def sig_handler(sig=None, frame=None):
         tb.stop()
