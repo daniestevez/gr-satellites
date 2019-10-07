@@ -33,6 +33,7 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     kiss_file_sink.py
+    telemetry_submit.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/components/datasinks
 )
 

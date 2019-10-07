@@ -1,0 +1,28 @@
+id: satellites_telemetry_submit
+label: Telemetry Submit
+category: '[Satellites]/Data sinks'
+
+parameters:
+-   id: server
+    label: Server
+    dtype: string
+    default: 'SatNOGS'
+    options: ['SatNOGS', 'FUNcube', 'PWSat']
+    option_labels: [SatNOGS DB, AMSAT-UK Data Warehouse, PW-Sat2 Ground Station]
+-   id: norad
+    label: NORAD ID
+    dtype: int
+    default: 0
+    hide: ${ 'all' if server != 'SatNOGS' else 'none' }
+
+inputs:
+-   domain: message
+    id: in
+
+templates:
+    imports: |-
+        import satellites.components.datasinks
+        import satellites.core.config
+    make: satellites.components.datasinks.telemetry_submit(${server}, ${norad}, satellites.core.config.open_config())
+
+file_format: 1

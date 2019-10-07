@@ -33,3 +33,4 @@ from ... import sat_1kuns_pf_telemetry_parser
 from ... import gomx3_beacon_parser
 
 from .kiss_file_sink import kiss_file_sink
+from .telemetry_submit import telemetry_submit

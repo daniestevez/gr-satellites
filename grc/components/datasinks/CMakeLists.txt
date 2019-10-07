@@ -20,5 +20,6 @@
 
 install(FILES
     satellites_kiss_file_sink.block.yml
+    satellites_telemetry_submit.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )
