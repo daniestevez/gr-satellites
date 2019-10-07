@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - Support for GNU Radio 3.7
 
+## [1.8.1] - 2019-10-07
+### Fixed
+- Bug with FUNcube telemetry submitter in some flowgraphs
+
 ## [1.8.0] - 2019-10-04
 ### Added
 - Światowid image decoder
