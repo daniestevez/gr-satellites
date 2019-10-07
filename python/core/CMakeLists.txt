@@ -33,6 +33,7 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     gr_satellites_flowgraph.py
+    config.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/core
 )
 

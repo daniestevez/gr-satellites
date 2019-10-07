@@ -78,10 +78,12 @@ class gr_satellites_flowgraph(gr.hier_block2):
         samp_rate: sample rate (float)
         grc_block: whether this is called from GRC (bool)
         options: options from argparser
+        config: configuration file from configparser
 
     Note that exactly one of file, name and norad should be specified
     """
-    def __init__(self, file = None, name = None, norad = None, samp_rate = None, grc_block = False, options = None, pdu_in = False):
+    def __init__(self, file = None, name = None, norad = None, samp_rate = None,\
+                 grc_block = False, options = None, config = None, pdu_in = False):
         gr.hier_block2.__init__(self, "gr_satellites_flowgraph",
             gr.io_signature(0, 0, 0) if pdu_in else gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
