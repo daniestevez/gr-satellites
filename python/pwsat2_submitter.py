@@ -68,6 +68,9 @@ class pwsat2_submitter(gr.basic_block):
         if response.status_code == 200:
             self.cookies = response.cookies
         else:
+            print('Could not authenticate to PW-Sat2 server')
+            print('Reply:', response.text)
+            print('HTTP code', response.status_code)
             self.cookies = None
     
     def loadCredentials(self, path):
@@ -81,7 +84,7 @@ class pwsat2_submitter(gr.basic_block):
             return
         url = self.baseUrl+'/communication/frame'
 
-        payload = { 'frame': base64.b64encode(frame),
+        payload = { 'frame': str(base64.b64encode(frame), encoding = 'ascii'),
                     'timestamp': int((timestamp - datetime.datetime(1970, 1, 1)).total_seconds() * 1000),
                     'traffic': 'Rx'}
 

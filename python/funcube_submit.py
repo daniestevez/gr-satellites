@@ -44,8 +44,8 @@ class funcube_submit(gr.basic_block):
     def digest(self, hex_string):
         md5 = hashlib.md5()
         md5.update(hex_string)
-        md5.update(':')
-        md5.update(self.auth_code)
+        md5.update(b':')
+        md5.update(bytes(self.auth_code, encoding = 'ascii'))
         return md5.digest().hex()
         
     def handle_msg(self, msg_pmt):
@@ -57,8 +57,8 @@ class funcube_submit(gr.basic_block):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
 
-        frame = bytes(pmt.u8vector_elements(msg)).upper()
-        frame = ' '.join([frame[j:j+2] for j in range(0, len(frame), 2)]) # add space every two hex chars
+        frame = bytes(bytes(pmt.u8vector_elements(msg)).hex().upper(), encoding =  'ascii')
+        frame = b' '.join([frame[j:j+2] for j in range(0, len(frame), 2)]) # add space every two hex chars
 
         url = self.base_url + '/api/data/hex/' + self.site_id + '/?digest=' + self.digest(frame)
         r = requests.post(url, data = frame, headers = {'Content-Type' : 'application/text'})
