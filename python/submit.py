@@ -69,7 +69,7 @@ class submit(gr.basic_block):
           if self.initialTimestamp else now
         self.request['timestamp'] = timestamp.isoformat()[:-3] + 'Z'
 
-        params = urllib.parse.urlencode(self.request)
+        params = bytes(urllib.parse.urlencode(self.request), encoding = 'ascii')
         f = urllib.request.urlopen('{}?{}'.format(self.url, params), data=params)
         reply = f.read()
         code = f.getcode()
