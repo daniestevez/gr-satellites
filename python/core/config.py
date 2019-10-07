@@ -37,8 +37,8 @@ def open_config():
         return write_default_config(config_filename)
 
     config = configparser.ConfigParser()
-    with open(config_filename) as f:
-        return config.read(f)
+    config.read(config_filename)
+    return config
 
 def write_default_config(file):
     """
