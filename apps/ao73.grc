@@ -466,7 +466,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    auth_code: WjbqhzyysmL9
+    auth_code: auth_code
     comment: ''
     site_id: site_id
     url: http://data.amsat-uk.org
