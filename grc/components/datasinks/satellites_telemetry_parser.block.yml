@@ -1,0 +1,18 @@
+id: satellites_telemetry_parser
+label: Telemetry Parser
+category: '[Satellites]/Data sinks'
+
+parameters:
+-   id: definition
+    label: Telemetry Definition
+    dtype: string
+
+inputs:
+-   domain: message
+    id: in
+
+templates:
+    imports: import satellites.components.datasinks
+    make: satellites.components.datasinks.telemetry_parser(${definition})
+
+file_format: 1

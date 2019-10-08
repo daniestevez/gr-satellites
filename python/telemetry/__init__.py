@@ -19,19 +19,11 @@
 # The presence of this file turns this directory into a Python package
 
 '''
-gr-satellites datasink components
+gr-satellites telemetry definitions
 
-The datasinks consume frames or packets in order to do something
-useful with them (printing telemetry, reconstructing images,
-storing to file, etc.)
-
-The input to these blocks are PDUs with the frames.
+These are telemetry defintions. Most of them are just a construct
+object, but in more complex cases, another class supporting the
+.parse method and relying on construct is used.
 '''
 
-from ... import sat_1kuns_pf_image_decoder
-from ... import sat_1kuns_pf_telemetry_parser
-from ... import gomx3_beacon_parser
-
-from .kiss_file_sink import kiss_file_sink
-from .telemetry_submit import telemetry_submit
-from .telemetry_parser import telemetry_parser
+from .sat_1kuns_pf import sat_1kuns_pf
