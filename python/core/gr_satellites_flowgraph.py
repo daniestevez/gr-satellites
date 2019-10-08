@@ -128,8 +128,8 @@ class gr_satellites_flowgraph(gr.hier_block2):
                 else:                                 
                     for data in transmitter['data']:
                         self.msg_connect((deframer, 'out'), (self._datasinks[data], 'in'))
-                        for s in self._additional_datasinks:
-                            self.msg_connect((deframer, 'out'), (s, 'in'))
+                    for s in self._additional_datasinks:
+                        self.msg_connect((deframer, 'out'), (s, 'in'))
 
     def get_telemetry_submitters(self, satyaml, config):
         """
