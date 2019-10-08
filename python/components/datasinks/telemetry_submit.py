@@ -50,7 +50,7 @@ class telemetry_submit(gr.hier_block2):
             url = 'http://data.amsat-uk.org'
             self.submit = funcube_submit(url, config['FUNcube']['site_id'], config['FUNcube']['auth_code'])
         elif server == 'PWSat':
-            self.submit = pwsat2_submitter(config['PW-Sat2']['credentials_file'])
+            self.submit = pwsat2_submitter(config['PW-Sat2']['credentials_file'], '')
         else:
             raise ValueError('Unsupported telemetry server')
 
