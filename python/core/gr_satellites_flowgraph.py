@@ -106,6 +106,8 @@ class gr_satellites_flowgraph(gr.hier_block2):
             self._additional_datasinks = list()
             if options is not None and options.kiss_out:
                 self._additional_datasinks.append(datasinks.kiss_file_sink(options.kiss_out, bool(options.kiss_append)))
+            if config.getboolean('Groundstation', 'submit_tlm'):
+                self._additional_datasinks.extend(self.get_telemetry_submitters(satyaml, config))
 
         if pdu_in:
             for sink in itertools.chain(self._datasinks.values(), self._additional_datasinks):
@@ -128,6 +130,20 @@ class gr_satellites_flowgraph(gr.hier_block2):
                         self.msg_connect((deframer, 'out'), (self._datasinks[data], 'in'))
                         for s in self._additional_datasinks:
                             self.msg_connect((deframer, 'out'), (s, 'in'))
+
+    def get_telemetry_submitters(self, satyaml, config):
+        """
+        Returns a list of block instances of telemetry submitters appropriate for this satellite
+
+        Args:
+            satyaml: satellite YAML file, as returned by self.open_satyaml
+            config: configuration file from configparser
+        """
+        norad = satyaml['norad']
+        submitters = [datasinks.telemetry_submit('SatNOGS', norad, config)]
+        for server in satyaml.get('telemetry_servers', []):
+            submitters.append(datasinks.telemetry_submit(server, norad, config))
+        return submitters
 
     def get_demodulator(self, modulation):
         return self._demodulator_hooks[modulation]
