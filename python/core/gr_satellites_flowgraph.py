@@ -101,7 +101,10 @@ class gr_satellites_flowgraph(gr.hier_block2):
         else:
             self._datasinks = dict()
             for key, info in satyaml['data'].items():
-                datasink = getattr(datasinks, info['decoder'])()
+                if 'decoder' in info:
+                    datasink = getattr(datasinks, info['decoder'])()
+                elif 'telemetry' in info:
+                    datasink = datasinks.telemetry_parser(info['telemetry'], options = options)
                 self._datasinks[key] = datasink
             self._additional_datasinks = list()
             if options is not None and options.kiss_out:
@@ -174,7 +177,10 @@ class gr_satellites_flowgraph(gr.hier_block2):
         deframe_options = parser.add_argument_group('deframing')
 
         for info in satyaml['data'].values():
-            try_add_options(getattr(datasinks, info['decoder']), data_options)
+            if 'decoder' in info:
+                try_add_options(getattr(datasinks, info['decoder']), data_options)
+            if 'telemetry' in info:
+                try_add_options(datasinks.telemetry_parser, data_options)
     
         for transmitter in satyaml['transmitters'].values():
             try_add_options(cls._demodulator_hooks[transmitter['modulation']], demod_options)

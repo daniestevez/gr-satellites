@@ -23,6 +23,7 @@ import pmt
 from ... import telemetry
 import sys
 from construct.core import ConstructError
+import os
 
 class telemetry_parser(gr.basic_block):
     """
@@ -35,15 +36,20 @@ class telemetry_parser(gr.basic_block):
 
     Args:
         definition: telemetry definition name (to load from the telemetry package) (str)
-        file: file to print output (defaults to sys.stdout)
+        file: file or file path to print output (defaults to sys.stdout)
+        options: options from argparse
     """
-    def __init__(self, definition, file = sys.stdout):
+    def __init__(self, definition, file = sys.stdout, options = None):
         gr.basic_block.__init__(self, "telemetry_submit",
             in_sig = [],
             out_sig = [])
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
         self.format = getattr(telemetry, definition)
+        if options is not None and options.telemetry_output:
+            file = options.telemetry_output
+        if type(file) in [str, bytes] or isinstance(file, os.PathLike):
+            file = open(file, 'a')
         self.file = file
 
     def handle_msg(self, msg_pmt):
@@ -60,3 +66,10 @@ class telemetry_parser(gr.basic_block):
             return
         if data:
             print(data, file = self.file)
+
+    @classmethod
+    def add_options(cls, parser):
+        """
+        Adds telemetry parser specific options to the argparse parser
+        """
+        parser.add_argument('--telemetry_output', default = sys.stdout, help = 'Telemetry output file [default=stdout]')

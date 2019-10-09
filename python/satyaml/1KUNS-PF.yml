@@ -3,7 +3,7 @@ alternative_names:
 norad: 43466
 data:
   &tlm Telemetry:
-    decoder: sat_1kuns_pf_telemetry_parser
+    telemetry: sat_1kuns_pf
   &image JPEG Images:
     decoder: sat_1kuns_pf_image_decoder
 transmitters:
