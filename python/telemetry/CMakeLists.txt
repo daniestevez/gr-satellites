@@ -33,6 +33,7 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     csp.py
+    gomx_3.py
     sat_1kuns_pf.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/telemetry
 )

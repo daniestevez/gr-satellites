@@ -2,7 +2,7 @@ name: GOMX-3
 norad: 40949
 data:
   &tlm Telemetry:
-    decoder: gomx3_beacon_parser
+    telemetry: gomx_3
 transmitters:
   19k2 FSK downlink:
     frequency: 437.250e+6

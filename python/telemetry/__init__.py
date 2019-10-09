@@ -26,4 +26,5 @@ object, but in more complex cases, another class supporting the
 .parse method and relying on construct is used.
 '''
 
+from .gomx_3 import gomx_3
 from .sat_1kuns_pf import sat_1kuns_pf
