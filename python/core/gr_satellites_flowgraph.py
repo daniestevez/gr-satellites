@@ -172,9 +172,9 @@ class gr_satellites_flowgraph(gr.hier_block2):
     def add_options(cls, parser, file = None, name = None, norad = None):
         satyaml = cls.open_satyaml(file, name, norad)
 
-        data_options = parser.add_argument_group('data sink')
         demod_options = parser.add_argument_group('demodulation')
         deframe_options = parser.add_argument_group('deframing')
+        data_options = parser.add_argument_group('data sink')
 
         for info in satyaml['data'].values():
             if 'decoder' in info:
