@@ -5,7 +5,7 @@ category: '[Satellites]/Data sinks'
 parameters:
 -   id: file
     label: File
-    dtype: file_open
+    dtype: file_save
 -   id: append
     label: Append file
     dtype: bool
