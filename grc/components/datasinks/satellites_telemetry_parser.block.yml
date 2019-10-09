@@ -6,6 +6,17 @@ parameters:
 -   id: definition
     label: Telemetry Definition
     dtype: string
+-   id: output
+    label: Output
+    dtype: enum
+    default: 'stdout'
+    options: ['stdout', 'file']
+    option_labels: [Standard output (stdout), File]
+    hide: ${ 'part' if output == 'file' else 'none' }
+-   id: file
+    label: File
+    dtype: file_save
+    hide: ${ 'all' if output == 'stdout' else 'none' }
 
 inputs:
 -   domain: message
@@ -13,6 +24,11 @@ inputs:
 
 templates:
     imports: import satellites.components.datasinks
-    make: satellites.components.datasinks.telemetry_parser(${definition})
+    make: |
+        % if context.get('output')() == 'stdout':
+        satellites.components.datasinks.telemetry_parser(${definition})
+        % else:
+        satellites.components.datasinks.telemetry_parser(${definition}, file = ${file})
+        % endif
 
 file_format: 1
