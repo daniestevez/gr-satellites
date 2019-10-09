@@ -5,7 +5,7 @@ category: '[Satellites]/Data sinks'
 parameters:
 -   id: server
     label: Server
-    dtype: string
+    dtype: enum
     default: 'SatNOGS'
     options: ['SatNOGS', 'FUNcube', 'PWSat']
     option_labels: [SatNOGS DB, AMSAT-UK Data Warehouse, PW-Sat2 Ground Station]

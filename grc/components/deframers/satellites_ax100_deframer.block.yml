@@ -5,7 +5,7 @@ category: '[Satellites]/Deframers'
 parameters:
 -   id: mode
     label: Mode
-    dtype: string
+    dtype: enum
     default: 'RS'
     options: ['RS', 'ASM']
     option_labels: ['Reed Solomon', 'ASM+Golay']
