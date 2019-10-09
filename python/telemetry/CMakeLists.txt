@@ -32,6 +32,7 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
+    csp.py
     sat_1kuns_pf.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/telemetry
 )

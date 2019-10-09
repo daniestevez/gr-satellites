@@ -22,26 +22,29 @@
 from construct import *
 from ..adapters import *
 from ..au03_telemetry import Timestamp
+from .csp import CSPHeader
 
 Beacon = Struct(
-        'beacon_counter' / Int16ub,
-        'solar_panel_voltage' / LinearAdapter(1/16.0, Int8ub)[3],
-        'eps_temp' / AffineAdapter(1, 100, Int8ub)[4],
-        'eps_boot_cause' / Int8ub,
-        'eps_batt_mode' / Int8ub,
-        'solar_panel_current' / LinearAdapter(1/10.0, Int8ub),
-        'system_input_current' / LinearAdapter(1/16.0, Int8ub),
-        'battery_voltage' / LinearAdapter(1/34.0, Int8ub),
-        'radio_PA_temp' / AffineAdapter(1, 100, Int8ub),
-        'tx_count' / Int16ub,
-        'rx_count' / Int16ub,
-        'obc_temp' / AffineAdapter(1, 100, Int8ub)[2],
-        'ang_velocity_mag' / Int8ub,
-        'magnetometer' / LinearAdapter(1/6.0, Int8sb)[3],
-        'main_axis_of_rot' / Int8ub
-        )
+    'csp_header' / CSPHeader,
+    'beacon_counter' / Int16ub,
+    'solar_panel_voltage' / LinearAdapter(1/16.0, Int8ub)[3],
+    'eps_temp' / AffineAdapter(1, 100, Int8ub)[4],
+    'eps_boot_cause' / Int8ub,
+    'eps_batt_mode' / Int8ub,
+    'solar_panel_current' / LinearAdapter(1/10.0, Int8ub),
+    'system_input_current' / LinearAdapter(1/16.0, Int8ub),
+    'battery_voltage' / LinearAdapter(1/34.0, Int8ub),
+    'radio_PA_temp' / AffineAdapter(1, 100, Int8ub),
+    'tx_count' / Int16ub,
+    'rx_count' / Int16ub,
+    'obc_temp' / AffineAdapter(1, 100, Int8ub)[2],
+    'ang_velocity_mag' / Int8ub,
+    'magnetometer' / LinearAdapter(1/6.0, Int8sb)[3],
+    'main_axis_of_rot' / Int8ub
+    )
 
 WODBeacon = Struct(
+    'csp_header' / CSPHeader,
     'timestamp' / Timestamp,
     'sp_voltage' / LinearAdapter(1000, Int16ub)[3],
     'sp_regulator_temp' / Int16sb[3],
@@ -74,7 +77,7 @@ class sat_1kuns_pf:
             # this is most likely an image packet
             return 
         
-        if len(packet[4:]) >= 88:
-            return WODBeacon.parse(packet[4:])
+        if len(packet) >= 92:
+            return WODBeacon.parse(packet)
         else:
-            return Beacon.parse(packet[4:])
+            return Beacon.parse(packet)
