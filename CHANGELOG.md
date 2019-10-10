@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.0.0] - 2019-10-10
 ### Added
 - Support for GNU Radio 3.8
 - Support for 4k8 in ESEO decoder
@@ -118,7 +120,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v1.8.1...maint-3.8
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v2.0.0...maint-3.8
+[2.0.0]: https://github.com/daniestevez/gr-satellites/compare/v1.8.1...v2.0.0
 [1.8.1]: https://github.com/daniestevez/gr-satellites/compare/v1.8.0...v1.8.1
 [1.8.0]: https://github.com/daniestevez/gr-satellites/compare/v1.7.0...v1.8.0
 [1.7.0]: https://github.com/daniestevez/gr-satellites/compare/v1.6.0...v1.7.0
