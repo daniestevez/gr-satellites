@@ -426,6 +426,12 @@ telemetry packet in the terminal as soon as it receives it.
     4k8 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
     transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
     Reed-Solomon code. You must use FM mode to receive this satellite (437.060MHz).
+  * `luojia_1`
+    [Luojia-1](https://space.skyrocket.de/doc_sdat/luojia-1.htm),
+    which transmits
+    4k8 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
+    transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
+    Reed-Solomon code. You must use FM mode to receive this satellite (437.250 MHz).
   * `mysat1`
     [MYSAT 1](https://space.skyrocket.de/doc_sdat/mysat-1.htm),
     which transmits 1k2 or 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
