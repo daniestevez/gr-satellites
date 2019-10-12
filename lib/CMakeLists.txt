@@ -22,8 +22,8 @@
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
 
-include_directories(${FEC_INCLUDE_DIRS} ${Boost_INCLUDE_DIR})
-link_directories(${FEC_LIBRARY_DIRS} ${Boost_LIBRARY_DIRS})
+include_directories(${FEC_INCLUDE_DIRS} ${Boost_INCLUDE_DIR} ${VOLK_INCLUDE_DIRS})
+link_directories(${FEC_LIBRARY_DIRS} ${Boost_LIBRARY_DIRS} ${VOLK_LIBRARIES})
 
 list(APPEND satellites_sources
     decode_rs_impl.cc
@@ -58,7 +58,7 @@ if(NOT satellites_sources)
 endif(NOT satellites_sources)
 
 add_library(gnuradio-satellites SHARED ${satellites_sources})
-target_link_libraries(gnuradio-satellites ${FEC_LIBRARIES} ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES})
+target_link_libraries(gnuradio-satellites ${FEC_LIBRARIES} ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} ${VOLK_LIBRARIES})
 set_target_properties(gnuradio-satellites PROPERTIES DEFINE_SYMBOL "gnuradio_satellites_EXPORTS")
 
 if(APPLE)
