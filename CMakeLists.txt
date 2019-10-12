@@ -126,6 +126,7 @@ endif()
 ########################################################################
 find_package(CppUnit)
 find_package(Doxygen)
+find_package(Volk REQUIRED)
 
 # Search for GNU Radio and its components and versions. Add any
 # components required to the list of GR_REQUIRED_COMPONENTS (in all
