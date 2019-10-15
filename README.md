@@ -24,6 +24,33 @@ correct timestamps for the packets when uploading them to the telemetry
 server. It also simplifies Doppler correction of the recording with Gpredict if
 the recording was not Doppler corrected.
 
+## Branches and releases
+
+There are currently three development branches of gr-satellites:
+
+* `maint-3.7` Compatible with GNU Radio 3.7 only. No future development will be
+  done on this branch. Perhaps important changes, such as very popular
+  satellites, will be backported from the `maint-3.8` branch.
+
+* `maint-3.8` Compatible with GNU Radio 3.8 only. Future development is being
+  doing in this branch, adding support to new satellites as they get
+  launched. If contributing to gr-satellites, please send pull requests to
+  `maint-3.8` if in doubt.
+
+* `next` Branch where a large refactor of gr-satellites bringing important
+  changes is being done. Active development is happening, but there are still
+  several months of until the `next` branch is fully usable.
+
+Currently, `master` is set equal  to `maint-3.7`, as it seems that most people
+still use GNU Radio 3.7. When GNU Radio 3.8 becomes more popular, `master` will
+be set to `maint-3.8`.
+
+Regarding the numbered releases, the `1.x.y` series is used for stable releases
+on the `maint-3.7` branch (and so, releases supporting GNU Radio 3.7), the
+`2.x.y` series is used for stable releases on the `maint-3.8` (and so, releases
+supporting GNU Radio 3.8), and alpha releases are done on the `next` branch
+showcasing some of the latest developments.
+
 ## Installation
 
 First you need to install the dependencies (see below).
