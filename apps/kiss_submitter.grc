@@ -88,7 +88,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    host: 127.0.0.1
+    host: localhost
     maxoutbuf: '0'
     minoutbuf: '0'
     mtu: '10000'
@@ -116,7 +116,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1144, 108.0]
+    coordinate: [680, 108.0]
     rotation: 0
     state: enabled
 - name: host
@@ -324,7 +324,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [872, 108.0]
+    coordinate: [1000, 108.0]
     rotation: 0
     state: disabled
 
@@ -333,9 +333,9 @@ connections:
 - [blocks_socket_pdu_0, pdus, blocks_pdu_to_tagged_stream_0, pdus]
 - [satellites_kiss_to_pdu_0, out, satellites_pdu_to_kiss_0, in]
 - [satellites_kiss_to_pdu_0, out, satellites_print_timestamp_0, in]
-- [satellites_kiss_to_pdu_0, out, satellites_submit_0, in]
 - [satellites_pdu_to_kiss_0, out, blocks_socket_pdu_0_0, pdus]
 - [satellites_print_timestamp_0, out, blocks_message_debug_0, print_pdu]
+- [satellites_print_timestamp_0, out, satellites_submit_0, in]
 
 metadata:
   file_format: 1
