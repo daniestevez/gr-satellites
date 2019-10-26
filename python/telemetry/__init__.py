@@ -28,3 +28,4 @@ object, but in more complex cases, another class supporting the
 
 from .gomx_3 import gomx_3
 from .sat_1kuns_pf import sat_1kuns_pf
+from .ax25 import ax25

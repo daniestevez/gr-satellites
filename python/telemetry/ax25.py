@@ -55,3 +55,5 @@ Frame = Struct(
     Embedded(Header),
     'info' / GreedyBytes
     )
+
+ax25 = Frame

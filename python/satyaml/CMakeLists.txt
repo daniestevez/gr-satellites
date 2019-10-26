@@ -39,6 +39,7 @@ GR_PYTHON_INSTALL(
 install(FILES
     1KUNS-PF.yml
     GOMX-3.yml
+    US01.yml
     DESTINATION ${GR_PYTHON_DIR}/satellites/satyaml
 )
 
