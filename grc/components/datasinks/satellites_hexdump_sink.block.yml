@@ -1,0 +1,13 @@
+id: satellites_hexdump_sink
+label: Hexdump Sink
+category: '[Satellites]/Data sinks'
+
+inputs:
+-   domain: message
+    id: in
+
+templates:
+    imports: import satellites.components.datasinks
+    make: satellites.components.datasinks.hexdump_sink()
+
+file_format: 1

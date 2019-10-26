@@ -35,3 +35,4 @@ from ... import gomx3_beacon_parser
 from .kiss_file_sink import kiss_file_sink
 from .telemetry_submit import telemetry_submit
 from .telemetry_parser import telemetry_parser
+from .hexdump_sink import hexdump_sink

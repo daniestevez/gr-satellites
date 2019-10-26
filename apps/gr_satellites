@@ -43,6 +43,7 @@ def argument_parser():
     p_output = p.add_argument_group('output')
     p_output.add_argument('--kiss_out', help = 'KISS output file')
     p_output.add_argument('--kiss_append', action = 'store_true', help = 'Append to KISS output file')
+    p_output.add_argument('--hexdump', action = 'store_true', help = 'Hexdump instead of telemetry parse')
     return p
 
 def check_options(options, parser):

@@ -100,13 +100,16 @@ class gr_satellites_flowgraph(gr.hier_block2):
             self.message_port_register_hier_out('out')
         else:
             self._datasinks = dict()
-            for key, info in satyaml['data'].items():
-                if 'decoder' in info:
-                    datasink = getattr(datasinks, info['decoder'])()
-                elif 'telemetry' in info:
-                    datasink = datasinks.telemetry_parser(info['telemetry'], options = options)
-                self._datasinks[key] = datasink
             self._additional_datasinks = list()
+            if options.hexdump:
+                self._additional_datasinks.append(datasinks.hexdump_sink())
+            else:
+                for key, info in satyaml['data'].items():
+                    if 'decoder' in info:
+                        datasink = getattr(datasinks, info['decoder'])()
+                    elif 'telemetry' in info:
+                        datasink = datasinks.telemetry_parser(info['telemetry'], options = options)
+                    self._datasinks[key] = datasink
             if options is not None and options.kiss_out:
                 self._additional_datasinks.append(datasinks.kiss_file_sink(options.kiss_out, bool(options.kiss_append)))
             if config.getboolean('Groundstation', 'submit_tlm'):
@@ -128,9 +131,10 @@ class gr_satellites_flowgraph(gr.hier_block2):
 
                 if grc_block:
                     self.msg_connect((deframer, 'out'), (self, 'out'))
-                else:                                 
-                    for data in transmitter['data']:
-                        self.msg_connect((deframer, 'out'), (self._datasinks[data], 'in'))
+                else:
+                    if not options.hexdump:
+                        for data in transmitter['data']:
+                            self.msg_connect((deframer, 'out'), (self._datasinks[data], 'in'))
                     for s in self._additional_datasinks:
                         self.msg_connect((deframer, 'out'), (s, 'in'))
 
