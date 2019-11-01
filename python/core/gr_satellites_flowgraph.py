@@ -198,8 +198,8 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'FSK' : demodulators.fsk_demodulator,
     }
     _deframer_hooks = {
-        'AX.25' : set_options(deframers.ax25_deframer, g3ruh_scrambler = 'False'),
-        'AX.25 G3RUH' : set_options(deframers.ax25_deframer, g3ruh_scrambler = 'True'),
+        'AX.25' : set_options(deframers.ax25_deframer, g3ruh_scrambler = False),
+        'AX.25 G3RUH' : set_options(deframers.ax25_deframer, g3ruh_scrambler = True),
         'AX100 ASM+Golay' : set_options(deframers.ax100_deframer, mode = 'ASM'),
         'AX100 Reed Solomon' : set_options(deframers.ax100_deframer, mode = 'RS'),
     }
