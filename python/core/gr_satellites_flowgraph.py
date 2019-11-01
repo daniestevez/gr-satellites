@@ -76,16 +76,19 @@ class gr_satellites_flowgraph(gr.hier_block2):
         name: satellite name to search in all YAML files (string)
         norad: NORAD ID to search in all YAML files (int)
         samp_rate: sample rate (float)
+        iq: use IQ or real input (bool)
         grc_block: whether this is called from GRC (bool)
         options: options from argparser
         config: configuration file from configparser
+        pdu_in: use PDU input instead of samples (bool)
 
     Note that exactly one of file, name and norad should be specified
     """
-    def __init__(self, file = None, name = None, norad = None, samp_rate = None,\
+    def __init__(self, file = None, name = None, norad = None, samp_rate = None, iq = False,\
                  grc_block = False, options = None, config = None, pdu_in = False):
         gr.hier_block2.__init__(self, "gr_satellites_flowgraph",
-            gr.io_signature(0, 0, 0) if pdu_in else gr.io_signature(1, 1, gr.sizeof_float),
+            gr.io_signature(0, 0, 0) if pdu_in else \
+              gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
             gr.io_signature(0, 0, 0))
 
         if pdu_in:
@@ -123,7 +126,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
             self._deframers = dict()
             for key, transmitter in satyaml['transmitters'].items():
                 baudrate = transmitter['baudrate']
-                demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate, options = options)
+                demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate, iq = iq, options = options)
                 deframer = self.get_deframer(transmitter['framing'])(options = options)
                 self.connect(self, demodulator, deframer)
                 self._demodulators[key] = demodulator

@@ -24,10 +24,15 @@ parameters:
     label: Sample Rate
     dtype: float
     default: samp_rate
+-   id: iq
+    label: IQ input
+    dtype: bool
+    default: False
+    hide: part
 
 inputs:
 -   domain: stream
-    dtype: float
+    dtype: ${ 'complex' if iq else 'float' }
 
 outputs:
 -   domain: message
@@ -37,13 +42,13 @@ templates:
     imports: import satellites.core
     make: |
         % if context.get('definition')() == 'file':
-        satellites.core.gr_satellites_flowgraph(file = ${file}, samp_rate = ${samp_rate}, grc_block = True)
+        satellites.core.gr_satellites_flowgraph(file = ${file}, samp_rate = ${samp_rate}, grc_block = True, iq = ${iq})
         % else:
         % if context.get('definition')() == 'name':
-        satellites.core.gr_satellites_flowgraph(name = ${name}, samp_rate = ${samp_rate}, grc_block = True)
+        satellites.core.gr_satellites_flowgraph(name = ${name}, samp_rate = ${samp_rate}, grc_block = True, iq = ${iq})
         % else:
         % if context.get('definition')() == 'norad':
-        satellites.core.gr_satellites_flowgraph(norad = ${norad}, samp_rate = ${samp_rate}, grc_block = True)
+        satellites.core.gr_satellites_flowgraph(norad = ${norad}, samp_rate = ${samp_rate}, grc_block = True, iq = ${iq})
         % else:
         raise ValueError('Unspecified satellite type')
         % endif

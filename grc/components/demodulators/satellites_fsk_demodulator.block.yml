@@ -10,10 +10,15 @@ parameters:
     label: Sample rate
     dtype: float
     default: samp_rate
+-   id: iq
+    label: IQ input
+    dtype: bool
+    default: False
+    hide: part
 
 inputs:
 -   domain: stream
-    dtype: float
+    dtype: ${ 'complex' if iq else 'float' }
 
 outputs:
 -   domain: stream
@@ -21,6 +26,6 @@ outputs:
 
 templates:
     imports: import satellites.components.demodulators
-    make: satellites.components.demodulators.fsk_demodulator(baudrate = ${baudrate}, samp_rate = ${samp_rate})
+    make: satellites.components.demodulators.fsk_demodulator(baudrate = ${baudrate}, samp_rate = ${samp_rate}, iq = ${iq})
 
 file_format: 1

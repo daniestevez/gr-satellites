@@ -39,6 +39,7 @@ def argument_parser():
     p_input.add_argument('--udp_ip', default = '::', help = 'UDP input listen IP [default=%(default)r]')
     p_input.add_argument('--udp_port', default = '7355', type = int, help = 'UDP input listen port [default=%(default)r]')
     p_input.add_argument('--kiss_in', help = 'KISS input file')
+    p_input.add_argument('--iq', action = 'store_true', help = 'Use IQ input')
     
     p_output = p.add_argument_group('output')
     p_output.add_argument('--kiss_out', help = 'KISS output file')
@@ -78,7 +79,7 @@ class gr_satellites_top_block(gr.top_block):
 
         self.config = open_config()
         
-        self.flowgraph = satellites.core.gr_satellites_flowgraph(samp_rate = options.samp_rate,\
+        self.flowgraph = satellites.core.gr_satellites_flowgraph(samp_rate = options.samp_rate, iq = self.options.iq,\
                                                                  pdu_in = pdu_in, options = options, config = self.config,\
                                                                  **sat)
         self.setup_input()
@@ -98,12 +99,28 @@ class gr_satellites_top_block(gr.top_block):
             raise Exception('No input source set for flowgraph')
 
     def setup_wavfile_input(self):
-        self.input = blocks.wavfile_source(self.options.wavfile, False)
+        self.wavfile_source = blocks.wavfile_source(self.options.wavfile, False)
+        if self.options.iq:
+            self.float_to_complex = blocks.float_to_complex(1)
+            self.connect((self.wavfile_source, 0), (self.float_to_complex, 0))
+            self.connect((self.wavfile_source, 1), (self.float_to_complex, 1))
+            self.input = self.float_to_complex
+        else:
+            self.input = self.wavfile_source
 
     def setup_udp_input(self):
         self.udp = blocks.udp_source(gr.sizeof_short, self.options.udp_ip, self.options.udp_port, 1472, False)
-        self.input = blocks.short_to_float(1, 32767)
-        self.connect(self.udp, self.input)
+        self.short_to_float = blocks.short_to_float(1, 32767)
+        self.connect(self.udp, self.short_to_float)
+        if self.options.iq:
+            self.deinterleave = blocks.deinterleave(gr.sizeof_float, 1)
+            self.float_to_complex = blocks.float_to_complex(1)
+            self.connect(self.short_to_float, self.deinterleave)
+            self.connect((self.deinterleave, 0), (self.float_to_complex, 0))
+            self.connect((self.deinterleave, 1), (self.float_to_complex, 1))
+            self.input = self.float_to_complex
+        else:
+            self.input = self.short_to_float
 
     def setup_kiss_input(self):
         self.input = datasources.kiss_file_source(self.options.kiss_in)
