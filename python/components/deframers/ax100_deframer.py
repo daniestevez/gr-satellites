@@ -19,8 +19,8 @@
 # Boston, MA 02110-1301, USA.
 
 from gnuradio import gr, digital
-from satellites import nrzi_decode, hdlc_deframer, ax100_decode, u482c_decode
-from satellites.hier.sync_to_pdu_packed import sync_to_pdu_packed
+from ... import nrzi_decode, hdlc_deframer, ax100_decode, u482c_decode
+from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 
 _syncword = '10010011000010110101000111011110'
 

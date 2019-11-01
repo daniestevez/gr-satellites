@@ -19,7 +19,7 @@
 # Boston, MA 02110-1301, USA.
 
 from gnuradio import gr, digital
-from satellites import nrzi_decode, hdlc_deframer
+from ... import nrzi_decode, hdlc_deframer
 
 class ax25_deframer(gr.hier_block2):
     """
