@@ -42,10 +42,11 @@ class ax100_deframer(gr.hier_block2):
             gr.io_signature(0, 0, 0))
         self.message_port_register_hier_out('out')
 
-        try:
-            syncword_threshold = options.syncword_threshold
-        except AttributeError:
-            pass
+        if syncword_threshold is None:
+            try:
+                syncword_threshold = options.syncword_threshold
+            except AttributeError:
+                syncword_threshold = self._default_sync_threshold
 
         if mode not in ['RS', 'ASM']:
             raise Exception("Unsupported AX100 mode. Use 'RS' or 'ASM'")
