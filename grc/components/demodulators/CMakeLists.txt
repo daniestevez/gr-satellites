@@ -19,6 +19,7 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
+    satellites_bpsk_demodulator.block.yml
     satellites_fsk_demodulator.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )

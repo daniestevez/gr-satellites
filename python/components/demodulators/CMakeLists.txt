@@ -32,6 +32,7 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
+    bpsk_demodulator.py
     fsk_demodulator.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/components/demodulators
 )

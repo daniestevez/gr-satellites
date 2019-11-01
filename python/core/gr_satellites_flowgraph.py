@@ -196,6 +196,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
     # Default parameters
     _demodulator_hooks = {
         'FSK' : demodulators.fsk_demodulator,
+        'BPSK' : demodulators.bpsk_demodulator,
     }
     _deframer_hooks = {
         'AX.25' : set_options(deframers.ax25_deframer, g3ruh_scrambler = False),

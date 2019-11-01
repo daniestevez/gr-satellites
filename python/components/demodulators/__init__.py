@@ -28,4 +28,5 @@ The input to these hierarchical blocks is a stream of samples
 and the output is a stream of soft symbols. 
 '''
 
+from .bpsk_demodulator import bpsk_demodulator
 from .fsk_demodulator import fsk_demodulator
