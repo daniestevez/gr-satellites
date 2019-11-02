@@ -6,8 +6,8 @@ parameters:
 -   id: server
     label: Server
     dtype: enum
-    default: 'SatNOGS'
-    options: ['SatNOGS', 'FUNcube', 'PWSat']
+    default: '"SatNOGS"'
+    options: ['"SatNOGS"', '"FUNcube"', '"PWSat"']
     option_labels: [SatNOGS DB, AMSAT-UK Data Warehouse, PW-Sat2 Ground Station]
 -   id: norad
     label: NORAD ID

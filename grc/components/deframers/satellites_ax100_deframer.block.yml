@@ -6,8 +6,8 @@ parameters:
 -   id: mode
     label: Mode
     dtype: enum
-    default: 'RS'
-    options: ['RS', 'ASM']
+    default: '"RS"'
+    options: ['"RS"', '"ASM"']
     option_labels: ['Reed Solomon', 'ASM+Golay']
 -   id: threshold
     label: Syncword threshold
