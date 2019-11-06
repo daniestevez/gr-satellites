@@ -552,7 +552,7 @@ telemetry packet in the terminal as soon as it receives it.
     phase modulation packets. For the AFSK packets you can use any regular
     packet decoder such as direwolf. You must use FM mode to receive this
     satellite (437.050MHz).
-  *`taurus1`
+  * `taurus1`
     [Taurus-1](https://space.skyrocket.de/doc_sdat/taurus-1.htm),
     which transmits 9k6
     BPSK telemetry in the 70cm band. It uses FEC with an r=1/2, k=7
