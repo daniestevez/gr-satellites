@@ -145,8 +145,12 @@ namespace gr {
       else {
 	GR_LOG_INFO(d_logger, "Reed-Solomon decoding OK");
       }
-      
+            
       length = data[LEN_BYTE];
+      if (length >= msg_length - HEADER_LEN) {
+	GR_LOG_INFO(d_logger, "Length field corrupted");
+	return;
+      }
 
       // Descramble
       for (i = 0; i < length; i++) {
