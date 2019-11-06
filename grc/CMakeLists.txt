@@ -60,7 +60,6 @@ install(FILES
     satellites_append_crc32c.block.yml
     satellites_dsat_image_decoder.block.yml
     satellites_nusat_decoder.block.yml
-    satellites_rscode_decoder.block.yml
     satellites_strip_ax25_header.block.yml
     satellites_picsat_telemetry_parser.block.yml
     satellites_snet_deframer.block.yml

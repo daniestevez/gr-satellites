@@ -38,10 +38,6 @@ list(APPEND satellites_sources
     varlen_packet_framer_impl.cc
     viterbi.c
     nusat_decoder_impl.cc
-    rscode/berlekamp.c
-    rscode/galois.c
-    rscode/rs.c
-    rscode_decoder_impl.cc
     ao40_syncframe_soft_impl.cc
     ao40_deinterleaver_soft_impl.cc
     descrambler308_impl.cc

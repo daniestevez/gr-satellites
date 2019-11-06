@@ -315,6 +315,26 @@ blocks:
     coordinate: [592, 408]
     rotation: 0
     state: enabled
+- name: satellites_decode_rs_general_0
+  id: satellites_decode_rs_general
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    fcr: '1'
+    gfpoly: '0x11d'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nroots: '16'
+    prim: '1'
+    verbose: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [306, 389]
+    rotation: 0
+    state: enabled
 - name: satellites_print_timestamp_0
   id: satellites_print_timestamp
   parameters:
@@ -330,22 +350,6 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [824, 404]
-    rotation: 0
-    state: enabled
-- name: satellites_rscode_decoder_0
-  id: satellites_rscode_decoder
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    npar: '16'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [304, 420]
     rotation: 0
     state: enabled
 - name: satellites_submit_0
@@ -412,10 +416,10 @@ connections:
 - [digital_clock_recovery_mm_xx_0, '0', digital_binary_slicer_fb_0, '0']
 - [low_pass_filter_0, '0', digital_clock_recovery_mm_xx_0, '0']
 - [satellites_check_tt64_crc_0, ok, satellites_print_timestamp_0, in]
+- [satellites_decode_rs_general_0, out, satellites_check_tt64_crc_0, in]
 - [satellites_print_timestamp_0, out, blocks_message_debug_0, print_pdu]
 - [satellites_print_timestamp_0, out, satellites_submit_0, in]
-- [satellites_rscode_decoder_0, out, satellites_check_tt64_crc_0, in]
-- [sync_to_pdu_packed_0, out, satellites_rscode_decoder_0, in]
+- [sync_to_pdu_packed_0, out, satellites_decode_rs_general_0, in]
 - [sync_to_pdu_packed_0, out, satellites_submit_0_0, in]
 
 metadata:

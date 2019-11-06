@@ -29,8 +29,10 @@
 #include <gnuradio/io_signature.h>
 #include "nusat_decoder_impl.h"
 
+#include "rs.h"
+
 extern "C" {
-#include "rscode/ecc.h"
+#include <fec.h>
 }
 
 namespace gr {
@@ -78,8 +80,7 @@ namespace gr {
               gr::io_signature::make(0, 0, 0),
 	      gr::io_signature::make(0, 0, 0))
     {
-      // Initialize Galois tables and polynomial for Reed-Solomon
-      initialize_ecc(4);
+      d_rs = init_rs_char(8, 0x11d, 1, 1, 4, 0);
       
       message_port_register_out(pmt::mp("out"));
       message_port_register_in(pmt::mp("in"));
@@ -92,6 +93,7 @@ namespace gr {
      */
     nusat_decoder_impl::~nusat_decoder_impl()
     {
+      free_rs_char(d_rs);
     }
 
     void
@@ -122,29 +124,26 @@ namespace gr {
     void
     nusat_decoder_impl::msg_handler (pmt::pmt_t pmt_msg) {
       pmt::pmt_t msg = pmt::cdr(pmt_msg);
-      uint8_t data[MSG_LEN];
+      uint8_t data[MAX_FRAME_LEN];
       uint8_t * const packet = data + HEADER_LEN;
       int length;
       int msg_length;
       int i;
       size_t offset(0);
+      int rs_res;
 
+      memset(data, 0, sizeof(data));
       msg_length = std::min(pmt::length(msg), sizeof(data));
       memcpy(data, pmt::uniform_vector_elements(msg, offset), msg_length);
 
       // Reed-Solomon decoding
-      decode_data(data, msg_length);
-      if (check_syndrome() != 0) {
-	if (correct_errors_erasures(data, msg_length, 0, NULL) != 1) {
-	  GR_LOG_INFO(d_logger, "Reed-Solomon decoding failed");
-	  return;
-	}
-        else {
-	  GR_LOG_INFO(d_logger, "Reed-Solomon corrected errors");
-	}
+      rs_res = decode_rs_char(d_rs, data, NULL, 0);
+      if (rs_res < 0) {
+	GR_LOG_INFO(d_logger, "Reed-Solomon decoding failed");
+	return;
       }
       else {
-	GR_LOG_INFO(d_logger, "Reed-Solomon found no errors");
+	GR_LOG_INFO(d_logger, "Reed-Solomon decoding OK");
       }
       
       length = data[LEN_BYTE];

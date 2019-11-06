@@ -39,6 +39,7 @@ namespace gr {
      private:
       static const uint8_t d_scrambler_sequence[];
       static const uint_fast8_t crc8_table[];
+      void *d_rs;
       uint_fast8_t crc8(const uint8_t *data, size_t data_len);
       
      public:
