@@ -1,0 +1,13 @@
+name: 3CAT-1
+norad: 99999
+data:
+  &tlm Telemetry:
+    unknown_format
+transmitters:
+  9k6 FSK downlink:
+    frequency: 437.250e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: 3CAT-1
+    data:
+    - *tlm

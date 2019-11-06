@@ -203,4 +203,5 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'AX.25 G3RUH' : set_options(deframers.ax25_deframer, g3ruh_scrambler = True),
         'AX100 ASM+Golay' : set_options(deframers.ax100_deframer, mode = 'ASM'),
         'AX100 Reed Solomon' : set_options(deframers.ax100_deframer, mode = 'RS'),
+        '3CAT-1' : deframers.sat_3cat_1_deframer,
     }

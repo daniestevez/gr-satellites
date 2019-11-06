@@ -19,7 +19,8 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
-    satellites_ax25_deframer.block.yml
     satellites_ax100_deframer.block.yml
+    satellites_ax25_deframer.block.yml
+    satellites_sat_3cat_1_deframer.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )
