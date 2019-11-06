@@ -112,6 +112,8 @@ class gr_satellites_flowgraph(gr.hier_block2):
                         datasink = getattr(datasinks, info['decoder'])()
                     elif 'telemetry' in info:
                         datasink = datasinks.telemetry_parser(info['telemetry'], options = options)
+                    else:
+                        datasink = datasinks.hexdump_sink()
                     self._datasinks[key] = datasink
             if options is not None and options.kiss_out:
                 self._additional_datasinks.append(datasinks.kiss_file_sink(options.kiss_out, bool(options.kiss_append)))
