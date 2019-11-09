@@ -75,7 +75,7 @@ class fsk_demodulator(gr.hier_block2):
         mu = 0.5
 
         try:
-            omega_relative_limit = options.clock_offset_limit_ppm
+            omega_relative_limit = options.clock_offset_limit
         except AttributeError:
             omega_relative_limit = self._default_omega_relative_limit_ppm
         omega_relative_limit *= 1e-6
