@@ -117,7 +117,7 @@ class bpsk_demodulator(gr.hier_block2):
     _default_rrc_alpha = 0.35
     _default_fll_bw = 100
     _default_clk_rel_bw = 0.1
-    _default_clk_limit = 50e-3
+    _default_clk_limit = 0.1
     _default_costas_bw = 150
     
     @classmethod

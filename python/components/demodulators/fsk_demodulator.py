@@ -78,14 +78,14 @@ class fsk_demodulator(gr.hier_block2):
             omega_relative_limit = options.clock_offset_limit
         except AttributeError:
             omega_relative_limit = self._default_omega_relative_limit_ppm
-        omega_relative_limit *= 1e-6
+        omega_relative_limit
         
         self.clock_recovery = digital.clock_recovery_mm_ff(sps, gain_omega, mu, gain_mu, omega_relative_limit)
 
         self.connect(self.demod, self.lowpass, self.clock_recovery, self)
 
     _default_gain_mu = 0.5
-    _default_omega_relative_limit_ppm = 200
+    _default_omega_relative_limit = 0.1
     _default_deviation_hz = 3000
     
     @classmethod
@@ -93,6 +93,6 @@ class fsk_demodulator(gr.hier_block2):
         """
         Adds FSK demodulator specific options to the argparse parser
         """
-        parser.add_argument('--clock_offset_limit', type = float, default = cls._default_omega_relative_limit_ppm, help = 'Maximum clock offset (ppm) [default=%(default)r]')
+        parser.add_argument('--clock_offset_limit', type = float, default = cls._default_omega_relative_limit, help = 'Maximum clock offset (relative) [default=%(default)r]')
         parser.add_argument('--gain_mu', type = float, default = cls._default_gain_mu, help = 'Gain for MM clock recovery [default=%(default)r]')
         parser.add_argument('--deviation', type = float, default = cls._default_deviation_hz, help = 'Deviation (Hz) [default=%(default)r]')
