@@ -21,10 +21,11 @@
 from gnuradio import gr, digital
 from ... import nrzi_decode, hdlc_deframer, ax100_decode, u482c_decode
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
+from ...core.options_block import options_block
 
 _syncword = '10010011000010110101000111011110'
 
-class ax100_deframer(gr.hier_block2):
+class ax100_deframer(gr.hier_block2, options_block):
     """
     Hierarchical block to deframe the GOMspace AX100 protocols.
 
@@ -40,13 +41,12 @@ class ax100_deframer(gr.hier_block2):
         gr.hier_block2.__init__(self, "ax100_deframer",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
+        options_block.__init__(self, options)
+        
         self.message_port_register_hier_out('out')
 
         if syncword_threshold is None:
-            try:
-                syncword_threshold = options.syncword_threshold
-            except AttributeError:
-                syncword_threshold = self._default_sync_threshold
+            syncword_threshold = self.options.syncword_threshold
 
         if mode not in ['RS', 'ASM']:
             raise Exception("Unsupported AX100 mode. Use 'RS' or 'ASM'")

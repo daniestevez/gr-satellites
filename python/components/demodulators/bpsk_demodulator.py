@@ -22,8 +22,9 @@ from gnuradio import gr, analog, blocks, digital, filter
 from gnuradio.filter import firdes
 from math import ceil, pi
 from ...hier.rms_agc import rms_agc
+from ...core.options_block import options_block
 
-class bpsk_demodulator(gr.hier_block2):
+class bpsk_demodulator(gr.hier_block2, options_block):
     """
     Hierarchical block to demodulate BPSK.
 
@@ -40,6 +41,7 @@ class bpsk_demodulator(gr.hier_block2):
         gr.hier_block2.__init__(self, "bpsk_demodulator",
             gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
             gr.io_signature(1, 1, gr.sizeof_float))
+        options_block.__init__(self, options)
 
         sps = samp_rate / baudrate
         max_sps = 10
@@ -53,10 +55,7 @@ class bpsk_demodulator(gr.hier_block2):
         filter_transition = baudrate * 0.2
 
         if f_offset is None:
-            try:
-                f_offset = options.f_offset
-            except AttributeError:
-                pass
+            f_offset = self.options.f_offset
         if f_offset is None:
             if iq:
                 f_offset = 0
@@ -72,16 +71,8 @@ class bpsk_demodulator(gr.hier_block2):
 
         self.agc = rms_agc(1e-2, 0.5)
 
-        try:
-            alpha = options.rrc_alpha
-        except AttributeError:
-            alpha = self._default_rrc_alpha
-        try:
-            fll_bw = options.fll_bw
-        except AttributeError:
-            fll_bw = self._default_fll_bw
-        fll_bw *= 2*pi*decimation/samp_rate
-        self.fll = digital.fll_band_edge_cc(sps, alpha, 100, fll_bw)
+        fll_bw = 2*pi*decimation/samp_rate*self.options.fll_bw
+        self.fll = digital.fll_band_edge_cc(sps, self.options.rrc_alpha, 100, fll_bw)
 
         filter_cutoff2 = baudrate * 1.0
         filter_transition2 = baudrate * 0.1
@@ -89,23 +80,11 @@ class bpsk_demodulator(gr.hier_block2):
         self.lowpass = filter.fir_filter_ccf(1, taps2)
         
         nfilts = 16
-        rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), alpha, int(ceil(11*sps*nfilts)))
-        try:
-            clk_bw = options.clk_bw
-        except AttributeError:
-            clk_bw = self._default_clk_rel_bw
-        clk_bw *= 2*pi/sps
-        try:
-            clk_limit = options.clk_limit
-        except AttributeError:
-            clk_limit = self._default_clk_limit
-        self.clock_recovery = digital.pfb_clock_sync_ccf(sps, clk_bw, rrc_taps, nfilts, nfilts//2, clk_limit, 1)
+        rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), self.options.rrc_alpha, int(ceil(11*sps*nfilts)))
+        clk_bw = 2*pi/sps*self.options.clk_bw
+        self.clock_recovery = digital.pfb_clock_sync_ccf(sps, clk_bw, rrc_taps, nfilts, nfilts//2, self.options.clk_limit, 1)
 
-        try:
-            costas_bw = options.costas_bw
-        except AttributeError:
-            costas_bw = self._default_costas_bw
-        costas_bw *= 2*pi/baudrate
+        costas_bw = 2*pi/baudrate*self.options.costas_bw
         self.costas = digital.costas_loop_cc(costas_bw, 2, False)
 
         self.complex_to_real = blocks.complex_to_real()

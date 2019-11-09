@@ -21,8 +21,9 @@
 from gnuradio import gr, analog, digital, filter
 from gnuradio.filter import firdes
 from math import ceil, pi
+from ...core.options_block import options_block
 
-class fsk_demodulator(gr.hier_block2):
+class fsk_demodulator(gr.hier_block2, options_block):
     """
     Hierarchical block to demodulate FSK.
 
@@ -41,12 +42,10 @@ class fsk_demodulator(gr.hier_block2):
         gr.hier_block2.__init__(self, "fsk_demodulator",
             gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
             gr.io_signature(1, 1, gr.sizeof_float))
+        options_block.__init__(self, options)
+        
         if iq:
-            try:
-                deviation = options.deviation
-            except AttributeError:
-                deviation = self._default_deviation_hz
-            self.demod = analog.quadrature_demod_cf(0.5*samp_rate/(2*pi*deviation))
+            self.demod = analog.quadrature_demod_cf(0.5*samp_rate/(2*pi*self.options.deviation))
             self.connect(self, self.demod)
         else:
             self.demod = self
@@ -66,21 +65,11 @@ class fsk_demodulator(gr.hier_block2):
         taps = firdes.low_pass(1, samp_rate, filter_cutoff, filter_transition)
         self.lowpass = filter.fir_filter_fff(decimation, taps)
 
-        try:
-            gain_mu = options.gain_mu
-        except AttributeError:
-            gain_mu = self._default_gain_mu
-
+        gain_mu = self.options.gain_mu
         gain_omega = 0.25 * gain_mu * gain_mu
         mu = 0.5
 
-        try:
-            omega_relative_limit = options.clock_offset_limit
-        except AttributeError:
-            omega_relative_limit = self._default_omega_relative_limit_ppm
-        omega_relative_limit
-        
-        self.clock_recovery = digital.clock_recovery_mm_ff(sps, gain_omega, mu, gain_mu, omega_relative_limit)
+        self.clock_recovery = digital.clock_recovery_mm_ff(sps, gain_omega, mu, gain_mu, self.options.clock_offset_limit)
 
         self.connect(self.demod, self.lowpass, self.clock_recovery, self)
 
