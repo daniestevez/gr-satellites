@@ -37,7 +37,7 @@ class bpsk_demodulator(gr.hier_block2):
         options: Options from argparse
     """
     def __init__(self, baudrate, samp_rate, iq, f_offset = None, options = None):
-        gr.hier_block2.__init__(self, "fsk_demodulator",
+        gr.hier_block2.__init__(self, "bpsk_demodulator",
             gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
             gr.io_signature(1, 1, gr.sizeof_float))
 
