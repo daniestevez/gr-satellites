@@ -76,7 +76,6 @@ install(FILES
     satellites_cc11xx_packet_crop.block.yml
     satellites_check_cc11xx_crc.block.yml
     satellites_cc11xx_remove_length.block.yml
-    satellites_sat_3cat_1_telemetry_parser.block.yml
     satellites_suomi_100_telemetry_parser.block.yml
     satellites_mysat1_telemetry_parser.block.yml
     satellites_pwsat2_telemetry_parser.block.yml

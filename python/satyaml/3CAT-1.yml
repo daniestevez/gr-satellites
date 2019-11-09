@@ -1,8 +1,8 @@
 name: 3CAT-1
-norad: 99999
+norad: 43728
 data:
   &tlm Telemetry:
-    unknown_format
+    telemetry: sat_3cat_1
 transmitters:
   9k6 FSK downlink:
     frequency: 437.250e+6

@@ -23,7 +23,7 @@ import datetime
 
 from construct import *
 import construct.core
-from .adapters import LinearAdapter, UNIXTimestampAdapter
+from ..adapters import LinearAdapter, UNIXTimestampAdapter
 
 # Number of sensors
 VOLT_SENSORS = 7
@@ -104,7 +104,7 @@ ShortData = Struct(\
 
 Data = Select(LongData, ShortData)
 
-Beacon = Struct(\
+sat_3cat_1 = Struct(\
     Const(b'\x00'),\
     'beacon_id' / BeaconID * set_delta_min_delay,\
     'sc_time' / Timestamp * set_last_timestamp,\
