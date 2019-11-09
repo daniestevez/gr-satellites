@@ -57,7 +57,7 @@ class sat_3cat_1_deframer(gr.hier_block2):
                                            threshold = syncword_threshold)
         self.scrambler = pn9_scrambler()
         try:
-            rs_verbose = options.rs_verbose
+            rs_verbose = options.verbose_rs
         except AttributeError:
             rs_verbose = False
         self.rs = decode_rs_general(0x11d, 1, 1, 32, rs_verbose)
