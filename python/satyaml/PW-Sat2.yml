@@ -1,0 +1,22 @@
+name: PW-Sat2
+norad: 43814
+telemetry_servers:
+  - PWSat
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  1k2 BPSK downlink:
+    frequency: 435.275e+6
+    modulation: BPSK
+    baudrate: 1200
+    framing: AX.25 G3RUH
+    data:
+    - *tlm
+  1k2 BPSK downlink:
+    frequency: 435.275e+6
+    modulation: BPSK
+    baudrate: 9600
+    framing: AX.25 G3RUH
+    data:
+    - *tlm
