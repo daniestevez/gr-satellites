@@ -33,7 +33,7 @@ class SatYAML:
 
     modulations = ['FSK', 'BPSK']
     framings = ['AX.25', 'AX.25 G3RUH', 'AX100 ASM+Golay', 'AX100 Reed Solomon',\
-                '3CAT-1']
+                '3CAT-1', 'Astrocast FX.25 NRZ-I', 'Astrocast FX.25 NRZ']
     
     def check_yaml(self, yml):
         d = self.get_yamldata(yml)

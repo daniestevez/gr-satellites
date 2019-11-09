@@ -37,6 +37,7 @@ GR_PYTHON_INSTALL(
 )
 
 install(FILES
+    Astrocast_0_1.yml
     1KUNS-PF.yml
     3CAT-1.yml
     EntrySat.yml

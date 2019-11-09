@@ -1,0 +1,29 @@
+id: satellites_astrocast_fx25_deframer
+label: Astrocast FX.25 Deframer
+category: '[Satellites]/Deframers'
+
+parameters:
+-   id: threshold
+    label: Syncword threshold
+    dtype: int
+    default: 0
+-   id: nrzi
+    label: Coding
+    dtype: enum
+    default: 'True'
+    options: ['True', 'False']
+    option_labels: ['NRZ-I', 'NRZ']
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.deframers
+    make: satellites.components.deframers.astrocast_fx25_deframer(nrzi = ${nrzi}, syncword_threshold = ${threshold})
+
+file_format: 1

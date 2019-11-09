@@ -1,0 +1,20 @@
+name: Astrocast 0.1
+norad: 43798
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  1k2 FSK FX.25 NRZ-I downlink:
+    frequency: 437.175e+6
+    modulation: FSK
+    baudrate: 1200
+    framing: Astrocast FX.25 NRZ-I
+    data:
+    - *tlm
+  1k2 FSK FX.25 NRZ downlink:
+    frequency: 437.175e+6
+    modulation: FSK
+    baudrate: 1200
+    framing: Astrocast FX.25 NRZ
+    data:
+    - *tlm

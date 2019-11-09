@@ -74,7 +74,7 @@ class fsk_demodulator(gr.hier_block2, options_block):
         self.connect(self.demod, self.lowpass, self.clock_recovery, self)
 
     _default_gain_mu = 0.5
-    _default_omega_relative_limit = 0.1
+    _default_omega_relative_limit = 0.01
     _default_deviation_hz = 3000
     
     @classmethod

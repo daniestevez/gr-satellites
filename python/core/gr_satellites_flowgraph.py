@@ -206,4 +206,6 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'AX100 ASM+Golay' : set_options(deframers.ax100_deframer, mode = 'ASM'),
         'AX100 Reed Solomon' : set_options(deframers.ax100_deframer, mode = 'RS'),
         '3CAT-1' : deframers.sat_3cat_1_deframer,
+        'Astrocast FX.25 NRZ-I' : set_options(deframers.astrocast_fx25_deframer, nrzi = True),
+        'Astrocast FX.25 NRZ' : set_options(deframers.astrocast_fx25_deframer, nrzi = False),
     }
