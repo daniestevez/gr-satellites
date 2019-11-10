@@ -19,6 +19,7 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
+    satellites_astrocast_9k6_deframer.block.yml
     satellites_astrocast_fx25_deframer.block.yml
     satellites_ax100_deframer.block.yml
     satellites_ax25_deframer.block.yml

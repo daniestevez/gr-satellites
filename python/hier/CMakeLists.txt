@@ -32,6 +32,8 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
+    ccsds_descrambler.py
+    sync_to_pdu.py
     sync_to_pdu_packed.py
     rms_agc.py
     pn9_scrambler.py
