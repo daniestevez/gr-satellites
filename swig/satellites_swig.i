@@ -10,7 +10,6 @@
 %{
 #include "satellites/decode_rs.h"
 #include "satellites/encode_rs.h"
-#include "satellites/ao40_deinterleaver.h"
 #include "satellites/ao40_rs_decoder.h"
 #include "satellites/ax100_decode.h"
 #include "satellites/u482c_decode.h"
@@ -29,8 +28,6 @@
 GR_SWIG_BLOCK_MAGIC2(satellites, decode_rs);
 %include "satellites/encode_rs.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, encode_rs);
-%include "satellites/ao40_deinterleaver.h"
-GR_SWIG_BLOCK_MAGIC2(satellites, ao40_deinterleaver);
 %include "satellites/ao40_rs_decoder.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, ao40_rs_decoder);
 %include "satellites/ax100_decode.h"
