@@ -68,7 +68,7 @@ class sat_3cat_1_deframer(gr.hier_block2, options_block):
     @classmethod
     def add_options(cls, parser):
         """
-        Adds AX100 deframer specific options to the argparse parser
+        Adds 3CAT-1 deframer specific options to the argparse parser
         """
         parser.add_argument('--syncword_threshold', type = int, default = cls._default_sync_threshold, help = 'Syncword bit errors [default=%(default)r]')
         parser.add_argument('--verbose_rs', action = 'store_true', help = 'Verbose RS decoder')
