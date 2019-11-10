@@ -28,6 +28,7 @@ The input to these hierarchical blocks is a stream of soft symbols
 and the output are PDUs with the frames. 
 '''
 
+from .ao40_fec_deframer import ao40_fec_deframer
 from .astrocast_9k6_deframer import astrocast_9k6_deframer
 from .astrocast_fx25_deframer import astrocast_fx25_deframer
 from .ax100_deframer import ax100_deframer

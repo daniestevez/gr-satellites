@@ -209,4 +209,5 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'Astrocast FX.25 NRZ-I' : set_options(deframers.astrocast_fx25_deframer, nrzi = True),
         'Astrocast FX.25 NRZ' : set_options(deframers.astrocast_fx25_deframer, nrzi = False),
         'Astrocast 9k6' : deframers.astrocast_9k6_deframer,
+        'AO-40 FEC' : deframers.ao40_fec_deframer,
     }
