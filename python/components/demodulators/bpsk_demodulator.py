@@ -64,7 +64,6 @@ class bpsk_demodulator(gr.hier_block2, options_block):
             else:
                 f_offset = 12000
 
-        sps = samp_rate / baudrate
         taps = firdes.low_pass(1, samp_rate, filter_cutoff, filter_transition)
         f = filter.freq_xlating_fir_filter_ccf if iq else filter.freq_xlating_fir_filter_fcf
         self.xlating = f(decimation, taps, f_offset, samp_rate)
