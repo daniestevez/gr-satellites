@@ -40,6 +40,7 @@ def argument_parser():
     p_input.add_argument('--udp_port', default = '7355', type = int, help = 'UDP input listen port [default=%(default)r]')
     p_input.add_argument('--kiss_in', help = 'KISS input file')
     p_input.add_argument('--iq', action = 'store_true', help = 'Use IQ input')
+    p_input.add_argument('--input_gain', type = float, default = 1, help = 'Input gain (can be negative to invert signal) [default=%(default)r]')    
     
     p_output = p.add_argument_group('output')
     p_output.add_argument('--kiss_out', help = 'KISS output file')
@@ -86,7 +87,10 @@ class gr_satellites_top_block(gr.top_block):
         if pdu_in:
             self.msg_connect((self.input, 'out'), (self.flowgraph, 'in'))
         else:
-            self.connect(self.input, self.flowgraph)
+            gain = self.options.input_gain
+            self.gain = blocks.multiply_const_cc(gain) if self.options.iq else\
+              blocks.multiply_const_ff(gain)
+            self.connect(self.input, self.gain, self.flowgraph)
 
     def setup_input(self):
         if self.options.wavfile is not None:
