@@ -26,7 +26,6 @@ include(GrPlatform) #define LIB_SUFFIX
 list(APPEND satellites_sources
     decode_rs_impl.cc
     encode_rs_impl.cc
-    ao40_syncframe_impl.cc
     ao40_deinterleaver_impl.cc
     ao40_rs_decoder_impl.cc
     ax100_decode_impl.cc
