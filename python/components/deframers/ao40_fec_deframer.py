@@ -19,7 +19,7 @@
 # Boston, MA 02110-1301, USA.
 
 from gnuradio import gr, digital, fec
-from ... import ao40_syncframe, ao40_deinterleaver, ao40_rs_decoder
+from ... import ao40_syncframe_soft, ao40_deinterleaver, ao40_rs_decoder
 from ...hier.ccsds_descrambler import ccsds_descrambler
 from ...core.options_block import options_block
 
@@ -45,7 +45,7 @@ class ao40_fec_deframer(gr.hier_block2, options_block):
         if syncword_threshold is None:
             syncword_threshold = self.options.syncword_threshold
 
-        self.deframer = ao40_syncframe(syncword_threshold)
+        self.deframer = ao40_syncframe_soft(syncword_threshold)
         self.deinterleaver = ao40_deinterleaver()
         self.viterbi = fec.cc_decoder.make(5132,7, 2, [79,-109], 0, -1, fec.CC_TERMINATED, False)
         self.viterbi_decoder = fec.async_decoder(self.viterbi, False, False, int(5132/8))
