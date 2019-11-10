@@ -19,7 +19,7 @@
 # Boston, MA 02110-1301, USA.
 
 from gnuradio import gr, digital, fec
-from ... import ao40_syncframe_soft, ao40_deinterleaver, ao40_rs_decoder
+from ... import ao40_syncframe_soft, ao40_deinterleaver_soft, ao40_rs_decoder
 from ...hier.ccsds_descrambler import ccsds_descrambler
 from ...utils.options_block import options_block
 
@@ -34,7 +34,7 @@ class ao40_fec_deframer(gr.hier_block2, options_block):
         syncword_threshold: number of bit errors allowed in syncword (int)
         options: Options from argparse
     """
-    def __init__(self, syncword_threshold = None, nrzi = True, options = None):
+    def __init__(self, syncword_threshold = None, options = None):
         gr.hier_block2.__init__(self, "ao40_fec_deframer",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
@@ -46,7 +46,7 @@ class ao40_fec_deframer(gr.hier_block2, options_block):
             syncword_threshold = self.options.syncword_threshold
 
         self.deframer = ao40_syncframe_soft(syncword_threshold)
-        self.deinterleaver = ao40_deinterleaver()
+        self.deinterleaver = ao40_deinterleaver_soft()
         self.viterbi = fec.cc_decoder.make(5132,7, 2, [79,-109], 0, -1, fec.CC_TERMINATED, False)
         self.viterbi_decoder = fec.async_decoder(self.viterbi, False, False, int(5132/8))
         self.scrambler = ccsds_descrambler()
