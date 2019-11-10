@@ -35,9 +35,10 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         sample_rate: Sample rate in samples per second (float)
         iq: Whether the input is IQ or real (bool)
         f_offset: Frequency offset in Hz (float)
+        differential: Perform non-coherent DBPSK decoding (bool)
         options: Options from argparse
     """
-    def __init__(self, baudrate, samp_rate, iq, f_offset = None, options = None):
+    def __init__(self, baudrate, samp_rate, iq, f_offset = None, differential = False, options = None):
         gr.hier_block2.__init__(self, "bpsk_demodulator",
             gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
             gr.io_signature(1, 1, gr.sizeof_float))
@@ -68,7 +69,8 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         f = filter.freq_xlating_fir_filter_ccf if iq else filter.freq_xlating_fir_filter_fcf
         self.xlating = f(decimation, taps, f_offset, samp_rate)
 
-        self.agc = rms_agc(1e-2, 0.5)
+        agc_ref = 0.5
+        self.agc = rms_agc(1e-2, agc_ref)
 
         fll_bw = 2*pi*decimation/samp_rate*self.options.fll_bw
         self.fll = digital.fll_band_edge_cc(sps, self.options.rrc_alpha, 100, fll_bw)
@@ -83,14 +85,22 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         clk_bw = 2*pi/sps*self.options.clk_bw
         self.clock_recovery = digital.pfb_clock_sync_ccf(sps, clk_bw, rrc_taps, nfilts, nfilts//2, self.options.clk_limit, 1)
 
-        costas_bw = 2*pi/baudrate*self.options.costas_bw
-        self.costas = digital.costas_loop_cc(costas_bw, 2, False)
+        self.connect(self, self.xlating, self.agc, self.fll, self.lowpass, self.clock_recovery)
 
-        self.complex_to_real = blocks.complex_to_real()
-
-        self.connect(self, self.xlating, self.agc, self.fll, self.lowpass,\
-                     self.clock_recovery, self.costas, self.complex_to_real, self)
-
+        self.complex_to_real = blocks.complex_to_real(1)
+                
+        if differential:
+            self.delay = blocks.delay(gr.sizeof_gr_complex, 1)
+            self.multiply_conj = blocks.multiply_conjugate_cc(1)
+            self.multiply_const = blocks.multiply_const_ff(-1/agc_ref**2, 1) # -1 since inversion is needed
+            self.connect(self.clock_recovery, (self.multiply_conj, 0))
+            self.connect(self.clock_recovery, self.delay, (self.multiply_conj, 1))
+            self.connect(self.multiply_conj, self.complex_to_real, self.multiply_const, self)
+        else:
+            costas_bw = 2*pi/baudrate*self.options.costas_bw
+            self.costas = digital.costas_loop_cc(costas_bw, 2, False)
+            self.multiply_const = blocks.multiply_const_ff(1/agc_ref, 1)
+            self.connect(self.clock_recovery, self.costas, self.complex_to_real, self.multiply_const, self)
 
     _default_rrc_alpha = 0.35
     _default_fll_bw = 100

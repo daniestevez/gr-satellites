@@ -14,6 +14,10 @@ parameters:
     label: Frequency offset (Hz)
     dtype: float
     default: 0
+-   id: differential
+    label: Differential
+    dtype: bool
+    default: False
 -   id: iq
     label: IQ input
     dtype: bool
@@ -30,6 +34,6 @@ outputs:
 
 templates:
     imports: import satellites.components.demodulators
-    make: satellites.components.demodulators.bpsk_demodulator(baudrate = ${baudrate}, samp_rate = ${samp_rate}, f_offset = ${f_offset}, iq = ${iq})
+    make: satellites.components.demodulators.bpsk_demodulator(baudrate = ${baudrate}, samp_rate = ${samp_rate}, f_offset = ${f_offset}, differential = ${differential}, iq = ${iq})
 
 file_format: 1

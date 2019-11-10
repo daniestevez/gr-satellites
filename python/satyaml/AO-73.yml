@@ -1,0 +1,15 @@
+name: AO-73
+alternative_names:
+  - FUNcube-1
+norad: 39444
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  1k2 BPSK downlink:
+    frequency: 145.935e+6
+    modulation: DBPSK
+    baudrate: 1200
+    framing: AO-40 FEC
+    data:
+    - *tlm

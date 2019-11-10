@@ -31,7 +31,7 @@ class SatYAML:
     def __init__(self, path = _default_path):
         self._path = pathlib.Path(path)
 
-    modulations = ['FSK', 'BPSK']
+    modulations = ['FSK', 'BPSK', 'DBPSK']
     framings = ['AX.25', 'AX.25 G3RUH', 'AX100 ASM+Golay', 'AX100 Reed Solomon',\
                 '3CAT-1', 'Astrocast FX.25 NRZ-I', 'Astrocast FX.25 NRZ', 'Astrocast 9k6',\
                 'AO-40 FEC']

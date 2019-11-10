@@ -199,6 +199,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
     _demodulator_hooks = {
         'FSK' : demodulators.fsk_demodulator,
         'BPSK' : demodulators.bpsk_demodulator,
+        'DBPSK' : set_options(demodulators.bpsk_demodulator, differential = True),
     }
     _deframer_hooks = {
         'AX.25' : set_options(deframers.ax25_deframer, g3ruh_scrambler = False),
