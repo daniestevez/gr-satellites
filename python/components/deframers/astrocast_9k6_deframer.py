@@ -38,7 +38,7 @@ class astrocast_9k6_deframer(gr.hier_block2, options_block):
         options: Options from argparse
     """
     def __init__(self, syncword_threshold = None, nrzi = True, options = None):
-        gr.hier_block2.__init__(self, "sat_astrocast_9k6_deframer",
+        gr.hier_block2.__init__(self, "astrocast_9k6_deframer",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
         options_block.__init__(self, options)
