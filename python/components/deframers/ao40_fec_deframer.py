@@ -21,7 +21,7 @@
 from gnuradio import gr, digital, fec
 from ... import ao40_syncframe_soft, ao40_deinterleaver, ao40_rs_decoder
 from ...hier.ccsds_descrambler import ccsds_descrambler
-from ...core.options_block import options_block
+from ...utils.options_block import options_block
 
 class ao40_fec_deframer(gr.hier_block2, options_block):
     """

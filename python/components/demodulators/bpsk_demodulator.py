@@ -22,7 +22,7 @@ from gnuradio import gr, analog, blocks, digital, filter
 from gnuradio.filter import firdes
 from math import ceil, pi
 from ...hier.rms_agc import rms_agc
-from ...core.options_block import options_block
+from ...utils.options_block import options_block
 
 class bpsk_demodulator(gr.hier_block2, options_block):
     """

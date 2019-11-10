@@ -22,7 +22,7 @@ inputs:
 templates:
     imports: |-
         import satellites.components.datasinks
-        import satellites.core.config
-    make: satellites.components.datasinks.telemetry_submit(${server}, ${norad}, satellites.core.config.open_config())
+        import satellites.utils.config
+    make: satellites.components.datasinks.telemetry_submit(${server}, ${norad}, satellites.utils.config.open_config())
 
 file_format: 1

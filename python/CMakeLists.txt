@@ -127,6 +127,7 @@ add_subdirectory(core)
 add_subdirectory(hier)
 add_subdirectory(satyaml)
 add_subdirectory(telemetry)
+add_subdirectory(utils)
 
 ########################################################################
 # Handle the unit tests

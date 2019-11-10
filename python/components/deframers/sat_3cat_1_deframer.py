@@ -22,7 +22,7 @@ from gnuradio import gr, digital
 from ... import decode_rs_general
 from ...hier.pn9_scrambler import pn9_scrambler
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
-from ...core.options_block import options_block
+from ...utils.options_block import options_block
 
 _syncword = '11010011100100011101001110010001'
 

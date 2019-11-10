@@ -22,7 +22,7 @@ from gnuradio import gr, digital
 from ... import decode_rs_interleaved
 from ...hier.sync_to_pdu import sync_to_pdu
 from ...hier.ccsds_descrambler import ccsds_descrambler
-from ...core.options_block import options_block
+from ...utils.options_block import options_block
 
 _syncword = '00011010110011111111110000011101'
 

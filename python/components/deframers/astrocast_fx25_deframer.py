@@ -21,7 +21,7 @@
 from gnuradio import gr, digital
 from ... import nrzi_decode, reflect_bytes, decode_rs, check_astrocast_crc
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
-from ...core.options_block import options_block
+from ...utils.options_block import options_block
 
 _syncword = '0111010111111010110000011010001101011000110100000110010001110110'
 

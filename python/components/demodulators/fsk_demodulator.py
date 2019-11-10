@@ -21,7 +21,7 @@
 from gnuradio import gr, analog, digital, filter
 from gnuradio.filter import firdes
 from math import ceil, pi
-from ...core.options_block import options_block
+from ...utils.options_block import options_block
 
 class fsk_demodulator(gr.hier_block2, options_block):
     """

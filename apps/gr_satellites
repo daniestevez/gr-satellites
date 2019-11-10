@@ -19,7 +19,7 @@
 # Boston, MA 02110-1301, USA.
 
 import satellites.core
-from satellites.core.config import open_config
+from satellites.utils.config import open_config
 import satellites.components.datasources as datasources
 from gnuradio import gr, blocks
 
