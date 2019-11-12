@@ -38,6 +38,7 @@ GR_PYTHON_INSTALL(
     ax100_deframer.py
     ax25_deframer.py
     sat_3cat_1_deframer.py
+    u482c_deframer.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/components/deframers
 )
 
