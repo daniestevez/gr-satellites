@@ -42,12 +42,19 @@ Address = Struct(
         )
 
 Control = Hex(Int8ub)
+Control16 = Hex(Int16ub)
 
 PID = Hex(Int8ub)
 
 Header = Struct(
     'addresses' / RepeatUntil(lambda x, lst, ctx: x.ssid.extension, Address),
     'control' / Control,
+    'pid' / PID
+    )
+
+Header16 = Struct(
+    'addresses' / RepeatUntil(lambda x, lst, ctx: x.ssid.extension, Address),
+    'control' / Control16,
     'pid' / PID
     )
 

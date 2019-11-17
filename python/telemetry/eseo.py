@@ -20,7 +20,8 @@
 # 
 
 from construct import *
-from .adapters import LinearAdapter, AffineAdapter
+from ..adapters import LinearAdapter, AffineAdapter
+from .ax25 import Header16
 
 # Beacon of type 1
 General = Struct(
@@ -285,16 +286,9 @@ Payload = Struct(
     'ade_in_omega' / Int8ul,
     'ade_oprq_q' / Float32b[3])
 
-Beacon = Struct(
+eseo = Struct(
+    'header' / Header16,
     'type' / Int8ul,
     'byte' / Int8ul,
     'data' / Switch(this.type, {3 : General, 4 : PowerSystem, 5 : OBDH, 6 : AOCS, 7 : FDIR, 8 : Payload})
     )
-    
-    
-    
-    
-    
-    
-    
-    

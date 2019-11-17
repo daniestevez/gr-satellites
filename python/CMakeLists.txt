@@ -103,8 +103,6 @@ GR_PYTHON_INSTALL(
     eseo_line_decoder.py
     check_eseo_crc.py
     funcube_submit.py
-    eseo_telemetry.py
-    eseo_telemetry_parser.py
     dstar_one_telemetry.py
     dstar_one_telemetry_parser.py
     reflect_bytes.py

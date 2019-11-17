@@ -4,7 +4,7 @@ alternative_names:
 norad: 43792
 data:
   &tlm Telemetry:
-    unknown
+    telemetry: eseo
 transmitters:
   9k6 FSK downlink:
     frequency: 437.000e+6
