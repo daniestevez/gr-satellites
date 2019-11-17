@@ -1,0 +1,23 @@
+id: satellites_tt64_deframer
+label: TT-64 Deframer
+category: '[Satellites]/Deframers'
+
+parameters:
+-   id: threshold
+    label: Syncword threshold
+    dtype: int
+    default: 0
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.deframers
+    make: satellites.components.deframers.tt64_deframer(syncword_threshold = ${threshold})
+
+file_format: 1
