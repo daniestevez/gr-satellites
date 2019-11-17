@@ -142,3 +142,4 @@ from .swiatowid_image_decoder import swiatowid_image_decoder
 
 from .taurus1_telemetry_parser import taurus1_telemetry_parser
 
+from .manchester_sync import manchester_sync

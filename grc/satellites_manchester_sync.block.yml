@@ -1,0 +1,23 @@
+id: satellites_manchester_sync
+label: Manchester Sync
+category: '[Satellites]/Coding'
+
+parameters:
+-   id: history
+    label: History
+    dtype: int
+    default: 0
+
+inputs:
+-   domain: stream
+    dtype: complex
+
+outputs:
+-   domain: stream
+    dtype: complex
+
+templates:
+    imports: import satellites
+    make: satellites.manchester_sync(history = ${history})
+
+file_format: 1
