@@ -25,6 +25,8 @@ install(FILES
     satellites_astrocast_fx25_deframer.block.yml
     satellites_ax100_deframer.block.yml
     satellites_ax25_deframer.block.yml
+    satellites_eseo_deframer.block.yml
+    satellites_lucky7_deframer.block.yml
     satellites_sat_3cat_1_deframer.block.yml
     satellites_tt64_deframer.block.yml
     satellites_u482c_deframer.block.yml

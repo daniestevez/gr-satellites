@@ -33,6 +33,7 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     ccsds_descrambler.py
+    si4463_scrambler.py
     sync_to_pdu.py
     sync_to_pdu_packed.py
     rms_agc.py

@@ -217,4 +217,5 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'AO-40 uncoded' : deframers.ao40_uncoded_deframer,
         'TT-64' : deframers.tt64_deframer,
         'ESEO' : deframers.eseo_deframer,
+        'Lucky-7' : deframers.lucky7_deframer,
     }

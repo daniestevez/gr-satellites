@@ -45,6 +45,7 @@ install(FILES
     EntrySat.yml
     ESEO.yml
     GOMX-3.yml
+    Lucky-7.yml
     PW-Sat2.yml
     QO-100.yml
     US01.yml

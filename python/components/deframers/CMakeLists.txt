@@ -39,6 +39,7 @@ GR_PYTHON_INSTALL(
     ax100_deframer.py
     ax25_deframer.py
     eseo_deframer.py
+    lucky7_deframer.py
     sat_3cat_1_deframer.py
     tt64_deframer.py
     u482c_deframer.py
