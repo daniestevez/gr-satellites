@@ -1,0 +1,22 @@
+name: QO-100
+alternative_names:
+  - Es'hail 2
+norad: 43700
+data:
+  &tlm Telemetry:
+    decoder: qo100_telemetry_print
+transmitters:
+  400baud uncoded BPSK beacon:
+    frequency: 10489.800e+6
+    modulation: DBPSK Manchester
+    baudrate: 400
+    framing: AO-40 uncoded
+    data:
+    - *tlm
+  400baud FEC BPSK beacon:
+    frequency: 10489.800e+6
+    modulation: DBPSK Manchester
+    baudrate: 400
+    framing: AO-40 FEC inverted
+    data:
+    - *tlm
