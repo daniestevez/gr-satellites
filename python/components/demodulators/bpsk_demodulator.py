@@ -23,6 +23,7 @@ from gnuradio.filter import firdes
 from math import ceil, pi
 from ...hier.rms_agc import rms_agc
 from ...utils.options_block import options_block
+from ... import manchester_sync
 
 class bpsk_demodulator(gr.hier_block2, options_block):
     """
@@ -36,14 +37,17 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         iq: Whether the input is IQ or real (bool)
         f_offset: Frequency offset in Hz (float)
         differential: Perform non-coherent DBPSK decoding (bool)
+        manchester: Use Manchester coding (bool)
         options: Options from argparse
     """
-    def __init__(self, baudrate, samp_rate, iq, f_offset = None, differential = False, options = None):
+    def __init__(self, baudrate, samp_rate, iq, f_offset = None, differential = False, manchester = False, options = None):
         gr.hier_block2.__init__(self, "bpsk_demodulator",
             gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
             gr.io_signature(1, 1, gr.sizeof_float))
         options_block.__init__(self, options)
 
+        if manchester:
+            baudrate *= 2
         sps = samp_rate / baudrate
         max_sps = 10
         if sps > max_sps:
@@ -88,25 +92,32 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         self.connect(self, self.xlating, self.agc, self.fll, self.lowpass, self.clock_recovery)
 
         self.complex_to_real = blocks.complex_to_real(1)
+
+        if manchester:
+            self.manchester = manchester_sync(self.options.manchester_history)
+            self.connect(self.clock_recovery, self.manchester)
+        else:
+            self.manchester = self.clock_recovery
                 
         if differential:
             self.delay = blocks.delay(gr.sizeof_gr_complex, 1)
             self.multiply_conj = blocks.multiply_conjugate_cc(1)
             self.multiply_const = blocks.multiply_const_ff(-1/agc_ref**2, 1) # -1 since inversion is needed
-            self.connect(self.clock_recovery, (self.multiply_conj, 0))
-            self.connect(self.clock_recovery, self.delay, (self.multiply_conj, 1))
+            self.connect(self.manchester, (self.multiply_conj, 0))
+            self.connect(self.manchester, self.delay, (self.multiply_conj, 1))
             self.connect(self.multiply_conj, self.complex_to_real, self.multiply_const, self)
         else:
             costas_bw = 2*pi/baudrate*self.options.costas_bw
             self.costas = digital.costas_loop_cc(costas_bw, 2, False)
             self.multiply_const = blocks.multiply_const_ff(1/agc_ref, 1)
-            self.connect(self.clock_recovery, self.costas, self.complex_to_real, self.multiply_const, self)
+            self.connect(self.manchester, self.costas, self.complex_to_real, self.multiply_const, self)
 
     _default_rrc_alpha = 0.35
     _default_fll_bw = 100
     _default_clk_rel_bw = 0.1
     _default_clk_limit = 0.01
     _default_costas_bw = 150
+    _default_manchester_history = 32
     
     @classmethod
     def add_options(cls, parser):
@@ -119,3 +130,4 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         parser.add_argument('--clk_bw', type = float, default = cls._default_clk_rel_bw, help = 'Clock recovery bandwidth (relative to baudrate) [default=%(default)r]')
         parser.add_argument('--clk_limit', type = float, default = cls._default_clk_limit, help = 'Clock recovery limit (relative to baudrate) [default=%(default)r]')
         parser.add_argument('--costas_bw', type = float, default = cls._default_fll_bw, help = 'Costas loop bandwidth (Hz) [default=%(default)r]')
+        parser.add_argument('--manchester_history', type = int, default = cls._default_manchester_history, help = 'Manchester recovery history (symbols) [default=%(default)r]')

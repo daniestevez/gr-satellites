@@ -18,6 +18,10 @@ parameters:
     label: Differential
     dtype: bool
     default: False
+-   id: manchester
+    label: Manchester
+    dtype: bool
+    default: False
 -   id: iq
     label: IQ input
     dtype: bool
@@ -34,6 +38,6 @@ outputs:
 
 templates:
     imports: import satellites.components.demodulators
-    make: satellites.components.demodulators.bpsk_demodulator(baudrate = ${baudrate}, samp_rate = ${samp_rate}, f_offset = ${f_offset}, differential = ${differential}, iq = ${iq})
+    make: satellites.components.demodulators.bpsk_demodulator(baudrate = ${baudrate}, samp_rate = ${samp_rate}, f_offset = ${f_offset}, differential = ${differential}, manchester = ${manchester}, iq = ${iq})
 
 file_format: 1
