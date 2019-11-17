@@ -21,7 +21,6 @@
 from gnuradio import gr, digital
 from ... import decode_rs_general, check_tt64_crc
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
-from ...hier.ccsds_descrambler import ccsds_descrambler
 from ...utils.options_block import options_block
 
 _syncword = '0010110111010100'
