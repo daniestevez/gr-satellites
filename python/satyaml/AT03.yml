@@ -1,0 +1,16 @@
+name: AT03
+alternative_names:
+  - Pegasus
+  - QB50 AT03
+norad: 42784
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  9k6 FSK downlink:
+    frequency: 436.670e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: TT-64
+    data:
+    - *tlm

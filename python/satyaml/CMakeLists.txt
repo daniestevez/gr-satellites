@@ -41,6 +41,7 @@ install(FILES
     3CAT-1.yml
     AO-73.yml
     Astrocast_0_1.yml
+    AT03.yml
     EntrySat.yml
     GOMX-3.yml
     PW-Sat2.yml
