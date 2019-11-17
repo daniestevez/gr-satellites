@@ -20,6 +20,7 @@
 
 install(FILES
     satellites_ao40_fec_deframer.block.yml
+    satellites_ao40_uncoded_deframer.block.yml
     satellites_astrocast_9k6_deframer.block.yml
     satellites_astrocast_fx25_deframer.block.yml
     satellites_ax100_deframer.block.yml

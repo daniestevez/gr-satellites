@@ -45,6 +45,7 @@ install(FILES
     EntrySat.yml
     GOMX-3.yml
     PW-Sat2.yml
+    QO-100.yml
     US01.yml
     DESTINATION ${GR_PYTHON_DIR}/satellites/satyaml
 )
