@@ -34,6 +34,7 @@ from .astrocast_9k6_deframer import astrocast_9k6_deframer
 from .astrocast_fx25_deframer import astrocast_fx25_deframer
 from .ax100_deframer import ax100_deframer
 from .ax25_deframer import ax25_deframer
+from .eseo_deframer import eseo_deframer
 from .sat_3cat_1_deframer import sat_3cat_1_deframer
 from .tt64_deframer import tt64_deframer
 from .u482c_deframer import u482c_deframer

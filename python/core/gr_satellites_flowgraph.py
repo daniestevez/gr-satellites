@@ -216,4 +216,5 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'AO-40 FEC inverted' : set_options(deframers.ao40_fec_deframer, inverted = True),
         'AO-40 uncoded' : deframers.ao40_uncoded_deframer,
         'TT-64' : deframers.tt64_deframer,
+        'ESEO' : deframers.eseo_deframer,
     }

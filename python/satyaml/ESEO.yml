@@ -1,0 +1,15 @@
+name: ESEO
+alternative_names:
+  - FUNcube-4
+norad: 43792
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  9k6 FSK downlink:
+    frequency: 437.000e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: ESEO
+    data:
+    - *tlm

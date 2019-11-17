@@ -43,6 +43,7 @@ install(FILES
     Astrocast_0_1.yml
     AT03.yml
     EntrySat.yml
+    ESEO.yml
     GOMX-3.yml
     PW-Sat2.yml
     QO-100.yml
