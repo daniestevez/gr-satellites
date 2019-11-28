@@ -48,6 +48,7 @@ install(FILES
     Lucky-7.yml
     PW-Sat2.yml
     QO-100.yml
+    Reaktor_Hello_World.yml
     US01.yml
     DESTINATION ${GR_PYTHON_DIR}/satellites/satyaml
 )

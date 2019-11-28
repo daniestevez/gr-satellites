@@ -1,0 +1,13 @@
+name: Reaktor Hello World
+norad: 43743
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  9k6 FSK downlink:
+    frequency: 437.775e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: Reaktor Hello World
+    data:
+    - *tlm
