@@ -38,5 +38,6 @@ from .eseo_deframer import eseo_deframer
 from .lucky7_deframer import lucky7_deframer
 from .reaktor_hello_world_deframer import reaktor_hello_world_deframer
 from .sat_3cat_1_deframer import sat_3cat_1_deframer
+from .snet_deframer import snet_deframer
 from .tt64_deframer import tt64_deframer
 from .u482c_deframer import u482c_deframer
