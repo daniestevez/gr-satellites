@@ -1,0 +1,37 @@
+id: satellites_afsk_demodulator
+label: AFSK Demodulator
+category: '[Satellites]/Demodulators'
+
+parameters:
+-   id: baudrate
+    label: Baudrate
+    dtype: float
+-   id: samp_rate
+    label: Sample rate
+    dtype: float
+    default: samp_rate
+-   id: af_carrier
+    label: AF carrier
+    dtype: float
+-   id: deviation
+    label: Deviation
+    dtype: float
+-   id: iq
+    label: IQ input
+    dtype: bool
+    default: False
+    hide: part
+
+inputs:
+-   domain: stream
+    dtype: ${ 'complex' if iq else 'float' }
+
+outputs:
+-   domain: stream
+    dtype: float
+
+templates:
+    imports: import satellites.components.demodulators
+    make: satellites.components.demodulators.afsk_demodulator(baudrate = ${baudrate}, samp_rate = ${samp_rate}, iq = ${iq}, af_carrier = ${af_carrier}, deviation = ${deviation})
+
+file_format: 1

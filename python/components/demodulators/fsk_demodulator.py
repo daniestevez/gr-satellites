@@ -36,16 +36,21 @@ class fsk_demodulator(gr.hier_block2, options_block):
         baudrate: Baudrate in symbols per second (float)
         sample_rate: Sample rate in samples per second (float)
         iq: Whether the input is IQ or real (bool)
+        deviation: Deviation in Hz (float)
         options: Options from argparse
     """
-    def __init__(self, baudrate, samp_rate, iq, options = None):
+    def __init__(self, baudrate, samp_rate, iq, deviation = None, options = None):
         gr.hier_block2.__init__(self, "fsk_demodulator",
             gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
             gr.io_signature(1, 1, gr.sizeof_float))
         options_block.__init__(self, options)
-        
+
+        if deviation is not None:
+            _deviation = deviation
+        else:
+            _deviation = self.options.deviation
         if iq:
-            self.demod = analog.quadrature_demod_cf(0.5*samp_rate/(2*pi*self.options.deviation))
+            self.demod = analog.quadrature_demod_cf(0.5*samp_rate/(2*pi*_deviation))
             self.connect(self, self.demod)
         else:
             self.demod = self

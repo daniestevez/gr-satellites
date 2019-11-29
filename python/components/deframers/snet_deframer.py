@@ -18,7 +18,7 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 
-from gnuradio import gr, digital
+from gnuradio import gr, blocks, digital
 from ... import snet_deframer as deframer
 from ...hier.sync_to_pdu import sync_to_pdu
 from ...utils.options_block import options_block
@@ -47,13 +47,14 @@ class snet_deframer(gr.hier_block2, options_block):
         if syncword_threshold is None:
             syncword_threshold = self.options.syncword_threshold
 
+        self.invert = blocks.multiply_const_ff(-1, 1)
         self.slicer = digital.binary_slicer_fb()
         self.deframer = sync_to_pdu(packlen = 8 * 512,\
                                     sync = _syncword,\
                                     threshold = syncword_threshold)
         self.fec = deframer(self.options.verbose_fec)
         
-        self.connect(self, self.slicer, self.deframer)
+        self.connect(self, self.invert, self.slicer, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.fec, 'in'))
         self.msg_connect((self.fec, 'out'), (self, 'out'))
 

@@ -128,7 +128,13 @@ class gr_satellites_flowgraph(gr.hier_block2):
             self._deframers = dict()
             for key, transmitter in satyaml['transmitters'].items():
                 baudrate = transmitter['baudrate']
-                demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate, iq = iq, options = options)
+                additional_options = dict()
+                try:
+                    additional_options['deviation'] = transmitter['deviation']
+                    additional_options['af_carrier'] = transmitter['af_carrier']
+                except KeyError:
+                    pass
+                demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate, iq = iq, options = options, **additional_options)
                 deframer = self.get_deframer(transmitter['framing'])(options = options)
                 self.connect(self, demodulator, deframer)
                 self._demodulators[key] = demodulator
@@ -197,6 +203,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
 
     # Default parameters
     _demodulator_hooks = {
+        'AFSK' : demodulators.afsk_demodulator,
         'FSK' : demodulators.fsk_demodulator,
         'BPSK' : demodulators.bpsk_demodulator,
         'BPSK Manchester' : set_options(demodulators.bpsk_demodulator, manchester = True),

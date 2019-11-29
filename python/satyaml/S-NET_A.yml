@@ -1,0 +1,17 @@
+name: S-NET A
+norad: 43186
+alternative_names:
+  - DP0TBB
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  1k2 AFSK downlink:
+    frequency: 435.950e+6
+    modulation: AFSK
+    baudrate: 1200
+    af_carrier: 1500
+    deviation: 1200
+    framing: S-NET
+    data:
+    - *tlm
