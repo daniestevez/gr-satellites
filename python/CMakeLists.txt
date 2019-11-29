@@ -77,11 +77,9 @@ GR_PYTHON_INSTALL(
     ccsds_telemetry.py
     picsat_telemetry.py
     picsat_telemetry_parser.py
-    snet_telemetry.py
     snet_deframer.py
     bch15.py
     beesat_classifier.py
-    snet_telemetry_parser.py
     adapters.py
     snet_classifier.py
     sat_1kuns_pf_telemetry.py

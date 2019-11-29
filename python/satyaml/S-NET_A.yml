@@ -4,7 +4,7 @@ alternative_names:
   - DP0TBB
 data:
   &tlm Telemetry:
-    unknown
+    telemetry: snet
 transmitters:
   1k2 AFSK downlink:
     frequency: 435.950e+6

@@ -66,7 +66,6 @@ install(FILES
     satellites_ao40_syncframe_soft.block.yml
     satellites_ao40_deinterleaver_soft.block.yml
     satellites_beesat_classifier.block.yml
-    satellites_snet_telemetry_parser.block.yml
     satellites_snet_classifier.block.yml
     satellites_sat_1kuns_pf_telemetry_parser.block.yml
     satellites_sat_1kuns_pf_image_decoder.block.yml

@@ -32,3 +32,4 @@ from .gomx_1 import gomx_1
 from .gomx_3 import gomx_3
 from .sat_1kuns_pf import sat_1kuns_pf
 from .sat_3cat_1 import sat_3cat_1
+from .snet import snet

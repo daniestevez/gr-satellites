@@ -39,6 +39,7 @@ GR_PYTHON_INSTALL(
     gomx_3.py
     sat_1kuns_pf.py
     sat_3cat_1.py
+    snet.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/telemetry
 )
 
