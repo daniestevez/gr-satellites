@@ -122,7 +122,7 @@ class bpsk_demodulator(gr.hier_block2, options_block):
     @classmethod
     def add_options(cls, parser):
         """
-        Adds FSK demodulator specific options to the argparse parser
+        Adds BPSK demodulator specific options to the argparse parser
         """
         parser.add_argument('--f_offset', type = float, default = None, help = 'Frequency offset (Hz) [default=1500 or 12000]')
         parser.add_argument('--rrc_alpha', type = float, default = cls._default_rrc_alpha, help = 'RRC roll-off (Hz) [default=%(default)r]')
