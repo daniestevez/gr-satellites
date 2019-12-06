@@ -1,0 +1,23 @@
+id: satellites_nusat_deframer
+label: NuSat Deframer
+category: '[Satellites]/Deframers'
+
+parameters:
+-   id: threshold
+    label: Syncword threshold
+    dtype: int
+    default: 0
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.deframers
+    make: satellites.components.deframers.nusat_deframer(syncword_threshold = ${threshold})
+
+file_format: 1

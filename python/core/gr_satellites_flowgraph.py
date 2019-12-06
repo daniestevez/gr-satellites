@@ -228,4 +228,5 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'Reaktor Hello World' : deframers.reaktor_hello_world_deframer,
         'S-NET' : deframers.snet_deframer,
         'Swiatowid' : deframers.swiatowid_deframer,
+        'NuSat' : deframers.nusat_deframer,
     }

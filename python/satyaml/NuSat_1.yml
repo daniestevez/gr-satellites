@@ -1,0 +1,15 @@
+name: NuSat 1
+alternative_names:
+  - ÑuSat 1
+norad: 41557
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  40k FSK downlink:
+    frequency: 436.445e+6
+    modulation: FSK
+    baudrate: 40000
+    framing: NuSat
+    data:
+    - *tlm

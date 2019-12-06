@@ -40,6 +40,7 @@ GR_PYTHON_INSTALL(
     ax25_deframer.py
     eseo_deframer.py
     lucky7_deframer.py
+    nusat_deframer.py
     reaktor_hello_world_deframer.py
     sat_3cat_1_deframer.py
     snet_deframer.py

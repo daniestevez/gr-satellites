@@ -35,7 +35,7 @@ class SatYAML:
     framings = ['AX.25', 'AX.25 G3RUH', 'AX100 ASM+Golay', 'AX100 Reed Solomon',\
                 '3CAT-1', 'Astrocast FX.25 NRZ-I', 'Astrocast FX.25 NRZ', 'Astrocast 9k6',\
                 'AO-40 FEC', 'AO-40 FEC inverted', 'AO-40 uncoded', 'TT-64', 'ESEO', 'Lucky-7',\
-                'Reaktor Hello World', 'S-NET', 'Swiatowid']
+                'Reaktor Hello World', 'S-NET', 'Swiatowid', 'NuSat']
     
     def check_yaml(self, yml):
         d = self.get_yamldata(yml)
