@@ -129,5 +129,5 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         parser.add_argument('--fll_bw', type = float, default = cls._default_fll_bw, help = 'FLL bandwidth (Hz) [default=%(default)r]')
         parser.add_argument('--clk_bw', type = float, default = cls._default_clk_rel_bw, help = 'Clock recovery bandwidth (relative to baudrate) [default=%(default)r]')
         parser.add_argument('--clk_limit', type = float, default = cls._default_clk_limit, help = 'Clock recovery limit (relative to baudrate) [default=%(default)r]')
-        parser.add_argument('--costas_bw', type = float, default = cls._default_fll_bw, help = 'Costas loop bandwidth (Hz) [default=%(default)r]')
+        parser.add_argument('--costas_bw', type = float, default = cls._default_costas_bw, help = 'Costas loop bandwidth (Hz) [default=%(default)r]')
         parser.add_argument('--manchester_history', type = int, default = cls._default_manchester_history, help = 'Manchester recovery history (symbols) [default=%(default)r]')
