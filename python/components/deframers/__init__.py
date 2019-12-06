@@ -35,6 +35,7 @@ from .astrocast_fx25_deframer import astrocast_fx25_deframer
 from .ax100_deframer import ax100_deframer
 from .ax25_deframer import ax25_deframer
 from .eseo_deframer import eseo_deframer
+from .k2sat_deframer import k2sat_deframer
 from .lucky7_deframer import lucky7_deframer
 from .nusat_deframer import nusat_deframer
 from .reaktor_hello_world_deframer import reaktor_hello_world_deframer

@@ -229,4 +229,5 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'S-NET' : deframers.snet_deframer,
         'Swiatowid' : deframers.swiatowid_deframer,
         'NuSat' : deframers.nusat_deframer,
+        'K2SAT' : deframers.k2sat_deframer,
     }

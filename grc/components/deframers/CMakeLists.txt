@@ -26,6 +26,7 @@ install(FILES
     satellites_ax100_deframer.block.yml
     satellites_ax25_deframer.block.yml
     satellites_eseo_deframer.block.yml
+    satellites_k2sat_deframer_component.block.yml
     satellites_lucky7_deframer.block.yml
     satellites_nusat_deframer.block.yml
     satellites_reaktor_hello_world_deframer.block.yml
