@@ -30,6 +30,7 @@ install(FILES
     satellites_reaktor_hello_world_deframer.block.yml
     satellites_sat_3cat_1_deframer.block.yml
     satellites_snet_deframer_component.block.yml
+    satellites_swiatowid_deframer.block.yml
     satellites_tt64_deframer.block.yml
     satellites_u482c_deframer.block.yml
     DESTINATION share/gnuradio/grc/blocks

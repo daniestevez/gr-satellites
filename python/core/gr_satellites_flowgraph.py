@@ -227,4 +227,5 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'Lucky-7' : deframers.lucky7_deframer,
         'Reaktor Hello World' : deframers.reaktor_hello_world_deframer,
         'S-NET' : deframers.snet_deframer,
+        'Swiatowid' : deframers.swiatowid_deframer,
     }
