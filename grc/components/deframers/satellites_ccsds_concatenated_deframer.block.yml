@@ -1,0 +1,37 @@
+id: satellites_ccsds_concatenated_deframer
+label: CCSDS Concatenated Deframer
+category: '[Satellites]/Deframers'
+
+parameters:
+-   id: frame_size
+    label: Frame size (bytes)
+    dtype: int
+    default: 223
+-   id: differential
+    label: Differential encoding
+    dtype: bool
+    default: 'False'
+    options: ['True', 'False']
+-   id: dual_basis
+    label: Use RS dual basis
+    dtype: bool
+    default: 'False'
+    options: ['True', 'False']
+-   id: threshold
+    label: Syncword threshold
+    dtype: int
+    default: 0
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.deframers
+    make: satellites.components.deframers.ccsds_concatenated_deframer(frame_size = ${frame_size}, differential = ${differential}, dual_basis = ${dual_basis}, syncword_threshold = ${threshold})
+
+file_format: 1

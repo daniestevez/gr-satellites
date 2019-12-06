@@ -38,6 +38,8 @@ GR_PYTHON_INSTALL(
     astrocast_fx25_deframer.py
     ax100_deframer.py
     ax25_deframer.py
+    ccsds_concatenated_deframer.py
+    ccsds_rs_deframer.py
     eseo_deframer.py
     k2sat_deframer.py
     lucky7_deframer.py
