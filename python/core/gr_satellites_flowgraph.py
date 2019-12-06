@@ -128,14 +128,19 @@ class gr_satellites_flowgraph(gr.hier_block2):
             self._deframers = dict()
             for key, transmitter in satyaml['transmitters'].items():
                 baudrate = transmitter['baudrate']
-                additional_options = dict()
+                demodulator_additional_options = dict()
                 try:
-                    additional_options['deviation'] = transmitter['deviation']
-                    additional_options['af_carrier'] = transmitter['af_carrier']
+                    demodulator_additional_options['deviation'] = transmitter['deviation']
+                    demodulator_options['af_carrier'] = transmitter['af_carrier']
                 except KeyError:
                     pass
-                demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate, iq = iq, options = options, **additional_options)
-                deframer = self.get_deframer(transmitter['framing'])(options = options)
+                demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate, iq = iq, options = options, **demodulator_additional_options)
+                deframer_additional_options = dict()
+                try:
+                    deframer_additional_options['frame_size'] = transmitter['frame size']
+                except KeyError:
+                    pass
+                deframer = self.get_deframer(transmitter['framing'])(options = options, **deframer_additional_options)
                 self.connect(self, demodulator, deframer)
                 self._demodulators[key] = demodulator
                 self._deframers[key] = deframer
@@ -230,4 +235,12 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'Swiatowid' : deframers.swiatowid_deframer,
         'NuSat' : deframers.nusat_deframer,
         'K2SAT' : deframers.k2sat_deframer,
+        'CCSDS Reed-Solomon' : deframers.ccsds_rs_deframer,
+        'CCSDS Reed-Solomon dual' : set_options(deframers.ccsds_rs_deframer, dual_basis = True),
+        'CCSDS Reed-Solomon differential' : set_options(deframers.ccsds_rs_deframer, differential = True),
+        'CCSDS Reed-Solomon dual differential' : set_options(deframers.ccsds_rs_deframer, differential = True, dual_basis = True),
+        'CCSDS Concatenated' : deframers.ccsds_concatenated_deframer,
+        'CCSDS Concatenated dual' : set_options(deframers.ccsds_concatenated_deframer, dual_basis = True),
+        'CCSDS Concatenated differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True),
+        'CCSDS Concatenated dual differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True, dual_basis = True),
     }

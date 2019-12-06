@@ -1,0 +1,14 @@
+name: KS-1Q
+norad: 41845
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  20k FSK downlink:
+    frequency: 436.500e+6
+    modulation: FSK
+    baudrate: 20000
+    framing: CCSDS Concatenated dual
+    frame size: 223
+    data:
+    - *tlm

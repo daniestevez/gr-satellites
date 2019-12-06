@@ -42,9 +42,11 @@ install(FILES
     AO-73.yml
     Astrocast_0_1.yml
     AT03.yml
+    BY70-1.yml
     EntrySat.yml
     ESEO.yml
     GOMX-3.yml
+    KS-1Q.yml
     Lucky-7.yml
     NuSat_1.yml
     PW-Sat2.yml

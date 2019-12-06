@@ -1,0 +1,14 @@
+name: BY70-1
+norad: 41909
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  9k6 BPSK downlink:
+    frequency: 436.200e+6
+    modulation: BPSK
+    baudrate: 9600
+    framing: CCSDS Concatenated differential
+    frame size: 114
+    data:
+    - *tlm
