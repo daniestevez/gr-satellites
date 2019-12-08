@@ -176,6 +176,18 @@ telemetry packet in the terminal as soon as it receives it.
     which
     transmits 9k6 AX.25 BPSK telemetry in the 2m band. You must use wide SSB
     mode to receive this satellite.
+  * `aausat_4`
+    [AAUSAT-4](http://www.space.aau.dk/aausat4/), which transmits 2k4 or 9k6 GFSK
+    telemetry in the 70cm band. It uses the CSP protocol and FEC with an r=1/2, k=7
+    convolutional code and a (255,223) Reed-Solomon code. You must use FM mode
+    to receive this satellite (437.425MHz).
+  * `aisat`
+    [AISAT](https://directory.eoportal.org/web/eoportal/satellite-missions/a/aisat),
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
+    U482C transceiver with the CSP protocol and FEC with a (255,223)
+    Reed-Solomon code. It also uses a CCSDS scrambler. There is no telemetry
+    parser yet, as the beacon format is unknown. This satellite has an AIS
+    receiver on board. You must use FM mode to receive this satellite.
   * `aistechsat2`
     [AISTECHSAT-2](https://space.skyrocket.de/doc_sdat/aistechsat-1.htm),
     which transmits
@@ -198,28 +210,6 @@ telemetry packet in the terminal as soon as it receives it.
     error detection.
     The decoder requires the [beesat-sdr](https://github.com/daniestevez/beesat-sdr) OOT module.
     You must use FM mode to receive this satellite (436.250MHz).
-  * `astrocast`, `astrocast_old`, `astrocast_9k6`
-    [Astrocast 0.1](https://space.skyrocket.de/doc_sdat/astrocast-0.htm), which
-    transmits 1k2 FSK telemetry in the 70cm band. It uses
-    the FX.25 protocol with a (255,223) CCSDS Reed-Solomon code.
-    The `astrocast_old` decoder is for the protocol variant used until 2019-02-13, which
-    wast not completely compatible with AX.25.
-    The `astrocast_9k6` decoder is for the 9k6 FSK protocol used for data download. This
-    uses five interleaved (255,223) CCSDS Reed-Solomon codewords following the CCSDS
-    standard.
-    You must use FM mode
-    to receive this satellite (437.150MHz).
-  * `atl_1`
-    [ATL-1](https://space.skyrocket.de/doc_sdat/atl-1.htm), which
-    transmits 1.25k FSK telemetry in the 70cm band. It uses the AO-40 FEC protocol, which includes
-    block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
-    two interleaved (160,128) Reed-Solomon codes. You must use FM mode
-    to receive this satellite (437.175MHz).
-  * `aausat_4`
-    [AAUSAT-4](http://www.space.aau.dk/aausat4/), which transmits 2k4 or 9k6 GFSK
-    telemetry in the 70cm band. It uses the CSP protocol and FEC with an r=1/2, k=7
-    convolutional code and a (255,223) Reed-Solomon code. You must use FM mode
-    to receive this satellite (437.425MHz).
   * `ao40_uncoded`
     [AO-40](https://en.wikipedia.org/wiki/OSCAR_40) *(inactive)*,
     which transmitted 400bps BPSK
@@ -234,13 +224,17 @@ telemetry packet in the terminal as soon as it receives it.
     block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
     two interleaved (160,128) Reed-Solomon codes. You must use SSB mode to
     receive this satellite (145.935MHz).
-  * `aisat`
-    [AISAT](https://directory.eoportal.org/web/eoportal/satellite-missions/a/aisat),
-    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
-    U482C transceiver with the CSP protocol and FEC with a (255,223)
-    Reed-Solomon code. It also uses a CCSDS scrambler. There is no telemetry
-    parser yet, as the beacon format is unknown. This satellite has an AIS
-    receiver on board. You must use FM mode to receive this satellite.
+  * `astrocast`, `astrocast_old`, `astrocast_9k6`
+    [Astrocast 0.1](https://space.skyrocket.de/doc_sdat/astrocast-0.htm), which
+    transmits 1k2 FSK telemetry in the 70cm band. It uses
+    the FX.25 protocol with a (255,223) CCSDS Reed-Solomon code.
+    The `astrocast_old` decoder is for the protocol variant used until 2019-02-13, which
+    wast not completely compatible with AX.25.
+    The `astrocast_9k6` decoder is for the 9k6 FSK protocol used for data download. This
+    uses five interleaved (255,223) CCSDS Reed-Solomon codewords following the CCSDS
+    standard.
+    You must use FM mode
+    to receive this satellite (437.150MHz).
   * `at03`
     [QB50 AT03 (PEGASUS)](https://spacedatacenter.at/pegasus/),
     which transmits 9k6 GFSK telemetry in the 70cm band. It uses the TT-64
@@ -256,6 +250,12 @@ telemetry packet in the terminal as soon as it receives it.
     parser yet, as the beacon format is unknown. This satellite is on a low
     inclination orbit, so it can only be received near the equator. You must
     use FM mode to receive this satellite (437.485MHz).
+  * `atl_1`
+    [ATL-1](https://space.skyrocket.de/doc_sdat/atl-1.htm), which
+    transmits 1.25k FSK telemetry in the 70cm band. It uses the AO-40 FEC protocol, which includes
+    block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
+    two interleaved (160,128) Reed-Solomon codes. You must use FM mode
+    to receive this satellite (437.175MHz).
   * `au02`
     [QB50 AU02 (UNSW-EC0)](http://www.acser.unsw.edu.au/QB50),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
