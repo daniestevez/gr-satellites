@@ -94,7 +94,7 @@ namespace gr {
 
       for (int dec = 0; dec < 2; dec++) {
 	for (i = 0; i < N; i++) {
-	  scratch[i] = data[2*i + dec] ^ 0xff; // data needs to be inverted for some reason
+	  scratch[i] = data[2*i + dec];
 	}
 	rs_res[dec] = decode_rs_8(scratch, NULL, 0, 255 - N);
 	if (rs_res[0] == -1) {

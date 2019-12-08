@@ -335,7 +335,7 @@ blocks:
     comment: ''
     cutoff_freq: '700'
     decim: '5'
-    gain: '-1'
+    gain: '1'
     interp: '1'
     maxoutbuf: '0'
     minoutbuf: '0'

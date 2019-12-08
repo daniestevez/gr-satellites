@@ -75,7 +75,7 @@ namespace gr {
       for (int i = 0; i < noutput_items; i++) {
 	match = 0;
 	for (int j = 0; j < d_synclen; j++) {
-	  match += (in[i + j * d_step] >= 0.0) ^ d_syncword[j];
+	  match += (in[i + j * d_step] < 0.0) ^ d_syncword[j];
 	}
 	if (match >= d_synclen - d_threshold) {
 	  // sync found

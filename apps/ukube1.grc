@@ -214,7 +214,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    const: '-4'
+    const: '4'
     maxoutbuf: '0'
     minoutbuf: '0'
     type: float
