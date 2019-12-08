@@ -80,24 +80,6 @@ blocks:
     coordinate: [649, 467]
     rotation: 0
     state: enabled
-- name: blocks_file_sink_0
-  id: blocks_file_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    append: 'False'
-    comment: ''
-    file: /tmp/smog_symbols.f32
-    type: float
-    unbuffered: 'False'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1066, 447]
-    rotation: 0
-    state: true
 - name: blocks_message_debug_0
   id: blocks_message_debug
   parameters:
@@ -429,6 +411,21 @@ blocks:
     coordinate: [593, 708]
     rotation: 0
     state: enabled
+- name: satellites_smogp_short_fec_decoder_soft_0
+  id: satellites_smogp_short_fec_decoder_soft
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [95, 766]
+    rotation: 0
+    state: enabled
 - name: satellites_submit_0
   id: satellites_submit
   parameters:
@@ -459,12 +456,14 @@ connections:
 - [blocks_udp_source_0, '0', blocks_short_to_float_0, '0']
 - [dc_blocker_xx_0, '0', blocks_divide_xx_0, '0']
 - [dc_blocker_xx_0, '0', blocks_rms_xx_0, '0']
-- [digital_clock_recovery_mm_xx_0, '0', blocks_file_sink_0, '0']
 - [digital_clock_recovery_mm_xx_0, '0', satellites_ao40_fec_decoder_soft_0, '0']
+- [digital_clock_recovery_mm_xx_0, '0', satellites_smogp_short_fec_decoder_soft_0,
+  '0']
 - [low_pass_filter_0, '0', dc_blocker_xx_0, '0']
 - [satellites_ao40_fec_decoder_soft_0, out, satellites_print_timestamp_0, in]
 - [satellites_print_timestamp_0, out, blocks_message_debug_0, print_pdu]
 - [satellites_print_timestamp_0, out, satellites_submit_0, in]
+- [satellites_smogp_short_fec_decoder_soft_0, out, satellites_print_timestamp_0, in]
 
 metadata:
   file_format: 1
