@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2018 Daniel Estevez <daniel@destevez.net>.
+ * Copyright 2019 Daniel Estevez <daniel@destevez.net>.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INCLUDED_SATELLITES_AO40_DEINTERLEAVER_SOFT_H
-#define INCLUDED_SATELLITES_AO40_DEINTERLEAVER_SOFT_H
+#ifndef INCLUDED_SATELLITES_MATRIX_DEINTERLEAVER_SOFT_H
+#define INCLUDED_SATELLITES_MATRIX_DEINTERLEAVER_SOFT_H
 
 #include <satellites/api.h>
 #include <gnuradio/block.h>
@@ -30,24 +30,24 @@ namespace gr {
      * \ingroup satellites
      *
      */
-    class SATELLITES_API ao40_deinterleaver_soft : virtual public gr::block
+    class SATELLITES_API matrix_deinterleaver_soft : virtual public gr::block
     {
      public:
-      typedef boost::shared_ptr<ao40_deinterleaver_soft> sptr;
+      typedef boost::shared_ptr<matrix_deinterleaver_soft> sptr;
 
       /*!
-       * \brief Return a shared_ptr to a new instance of satellites::ao40_deinterleaver_soft.
+       * \brief Return a shared_ptr to a new instance of satellites::matrix_deinterleaver_soft.
        *
-       * To avoid accidental use of raw pointers, satellites::ao40_deinterleaver_soft's
+       * To avoid accidental use of raw pointers, satellites::matrix_deinterleaver_soft's
        * constructor is in a private implementation
-       * class. satellites::ao40_deinterleaver_soft::make is the public interface for
+       * class. satellites::matrix_deinterleaver_soft::make is the public interface for
        * creating new instances.
        */
-      static sptr make();
+      static sptr make(int rows, int cols, int output_size, int output_skip);
     };
 
   } // namespace satellites
 } // namespace gr
 
-#endif /* INCLUDED_SATELLITES_AO40_DEINTERLEAVER_SOFT_H */
+#endif /* INCLUDED_SATELLITES_MATRIX_DEINTERLEAVER_SOFT_H */
 

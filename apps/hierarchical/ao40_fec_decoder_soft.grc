@@ -86,7 +86,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [776, 132]
+    coordinate: [821, 132]
     rotation: 0
     state: enabled
 - name: pad_sink_0
@@ -127,21 +127,6 @@ blocks:
     coordinate: [16, 140]
     rotation: 0
     state: enabled
-- name: satellites_ao40_deinterleaver_soft_0
-  id: satellites_ao40_deinterleaver_soft
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [496, 144]
-    rotation: 0
-    state: enabled
 - name: satellites_ao40_rs_decoder_0
   id: satellites_ao40_rs_decoder
   parameters:
@@ -176,15 +161,34 @@ blocks:
     coordinate: [155, 124]
     rotation: 0
     state: true
+- name: satellites_matrix_deinterleaver_soft_0
+  id: satellites_matrix_deinterleaver_soft
+  parameters:
+    affinity: ''
+    alias: ''
+    cols: '65'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    output_size: '5132'
+    output_skip: '65'
+    rows: '80'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [516, 116]
+    rotation: 0
+    state: true
 
 connections:
 - [ccsds_descrambler_0, out, satellites_ao40_rs_decoder_0, in]
 - [fec_async_decoder_0, out, ccsds_descrambler_0, in]
 - [pad_source_0, '0', satellites_distributed_syncframe_soft_0, '0']
-- [satellites_ao40_deinterleaver_soft_0, out, fec_async_decoder_0, in]
 - [satellites_ao40_rs_decoder_0, out, pad_sink_0, in]
-- [satellites_distributed_syncframe_soft_0, out, satellites_ao40_deinterleaver_soft_0,
+- [satellites_distributed_syncframe_soft_0, out, satellites_matrix_deinterleaver_soft_0,
   in]
+- [satellites_matrix_deinterleaver_soft_0, out, fec_async_decoder_0, in]
 
 metadata:
   file_format: 1

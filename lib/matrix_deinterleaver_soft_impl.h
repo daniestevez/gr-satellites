@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2017 Daniel Estevez <daniel@destevez.net>.
+ * Copyright 2019 Daniel Estevez <daniel@destevez.net>.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,22 +16,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INCLUDED_SATELLITES_AO40_DEINTERLEAVER_SOFT_IMPL_H
-#define INCLUDED_SATELLITES_AO40_DEINTERLEAVER_SOFT_IMPL_H
+#ifndef INCLUDED_SATELLITES_MATRIX_DEINTERLEAVER_SOFT_IMPL_H
+#define INCLUDED_SATELLITES_MATRIX_DEINTERLEAVER_SOFT_IMPL_H
 
-#include <satellites/ao40_deinterleaver_soft.h>
+#include <satellites/matrix_deinterleaver_soft.h>
 
 namespace gr {
   namespace satellites {
 
-    class ao40_deinterleaver_soft_impl : public ao40_deinterleaver_soft
+    class matrix_deinterleaver_soft_impl : public matrix_deinterleaver_soft
     {
      private:
-      // Nothing to declare in this block.
+      int d_rows;
+      int d_cols;
+      int d_output_size;
+      int d_output_skip;
 
      public:
-      ao40_deinterleaver_soft_impl();
-      ~ao40_deinterleaver_soft_impl();
+      matrix_deinterleaver_soft_impl(int rows, int cols, int output_size, int output_skip);
+      ~matrix_deinterleaver_soft_impl();
 
       // Where all the action really happens
       void forecast (int noutput_items, gr_vector_int &ninput_items_required);
@@ -47,5 +50,5 @@ namespace gr {
   } // namespace satellites
 } // namespace gr
 
-#endif /* INCLUDED_SATELLITES_AO40_DEINTERLEAVER_SOFT_IMPL_H */
+#endif /* INCLUDED_SATELLITES_MATRIX_DEINTERLEAVER_SOFT_IMPL_H */
 

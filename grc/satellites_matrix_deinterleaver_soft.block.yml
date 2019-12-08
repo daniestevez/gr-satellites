@@ -1,0 +1,35 @@
+id: satellites_matrix_deinterleaver_soft
+label: Matrix deinterleaver (soft symbols)
+category: '[Satellites]/Coding'
+
+parameters:
+-   id: rows
+    labels: Rows
+    dtype: int
+    default: '80'
+-   id: cols
+    labels: Columns
+    dtype: int
+    default: '65'
+-   id: output_size
+    labels: Output size
+    dtype: int
+    default: '5132'
+-   id: output_skip
+    labels: Output skip
+    dtype: int
+    default: '65'
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites
+    make: satellites.matrix_deinterleaver_soft(${rows}, ${cols}, ${output_size}, ${output_skip})
+
+file_format: 1

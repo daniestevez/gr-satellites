@@ -42,11 +42,11 @@ list(APPEND satellites_sources
     rscode/galois.c
     rscode/rs.c
     rscode_decoder_impl.cc
-    ao40_deinterleaver_soft_impl.cc
     descrambler308_impl.cc
     decode_rs_general_impl.cc
     decode_rs_interleaved_impl.cc
     distributed_syncframe_soft_impl.cc
+    matrix_deinterleaver_soft_impl.cc
 )
 
 set(satellites_sources "${satellites_sources}" PARENT_SCOPE)
