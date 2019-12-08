@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Support for SMOG-P and ATL-1 (long frame FEC decoding)
+### Changed
+- Replaced AO-40 synchronizer by more general distributed synchronizer
 
 ### [2.1.0] - 2019-11-01
 ### Added

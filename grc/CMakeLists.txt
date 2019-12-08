@@ -64,7 +64,6 @@ install(FILES
     satellites_strip_ax25_header.block.yml
     satellites_picsat_telemetry_parser.block.yml
     satellites_snet_deframer.block.yml
-    satellites_ao40_syncframe_soft.block.yml
     satellites_ao40_deinterleaver_soft.block.yml
     satellites_beesat_classifier.block.yml
     satellites_snet_telemetry_parser.block.yml
@@ -99,6 +98,7 @@ install(FILES
     satellites_swiatowid_packet_split.block.yml
     satellites_swiatowid_image_decoder.block.yml
     satellites_taurus1_telemetry_parser.block.yml
+    satellites_distributed_syncframe_soft.block.yml
     CCSDS/satellites_space_packet_parser.block.yml
     CCSDS/satellites_telemetry_parser.block.yml
     CCSDS/satellites_telecommand_parser.block.yml

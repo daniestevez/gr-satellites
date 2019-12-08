@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2018 Daniel Estevez <daniel@destevez.net>.
+ * Copyright 2019 Daniel Estevez <daniel@destevez.net>.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INCLUDED_SATELLITES_AO40_SYNCFRAME_SOFT_H
-#define INCLUDED_SATELLITES_AO40_SYNCFRAME_SOFT_H
+#ifndef INCLUDED_SATELLITES_DISTRIBUTED_SYNCFRAME_SOFT_H
+#define INCLUDED_SATELLITES_DISTRIBUTED_SYNCFRAME_SOFT_H
 
 #include <satellites/api.h>
 #include <gnuradio/sync_block.h>
@@ -30,24 +30,24 @@ namespace gr {
      * \ingroup satellites
      *
      */
-    class SATELLITES_API ao40_syncframe_soft : virtual public gr::sync_block
+    class SATELLITES_API distributed_syncframe_soft : virtual public gr::sync_block
     {
      public:
-      typedef boost::shared_ptr<ao40_syncframe_soft> sptr;
+      typedef boost::shared_ptr<distributed_syncframe_soft> sptr;
 
       /*!
-       * \brief Return a shared_ptr to a new instance of satellites::syncframe_soft.
+       * \brief Return a shared_ptr to a new instance of satellites::distributed_syncframe_soft.
        *
-       * To avoid accidental use of raw pointers, satellites::syncframe_soft's
+       * To avoid accidental use of raw pointers, satellites::distributed_syncframe_soft's
        * constructor is in a private implementation
-       * class. satellites::syncframe_soft::make is the public interface for
+       * class. satellites::distributed_syncframe_soft::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int threshold);
+      static sptr make(int threshold, const std::string& syncword, int step);
     };
 
   } // namespace satellites
 } // namespace gr
 
-#endif /* INCLUDED_SATELLITES_AO40_SYNCFRAME_H */
+#endif /* INCLUDED_SATELLITES_DISTRIBUTED_SYNCFRAME_H */
 

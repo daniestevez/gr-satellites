@@ -21,34 +21,37 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include "ao40_syncframe_soft_impl.h"
-
-#define STEP 80
+#include "distributed_syncframe_soft_impl.h"
 
 namespace gr {
   namespace satellites {
 
-    ao40_syncframe_soft::sptr
-    ao40_syncframe_soft::make(int threshold)
+    distributed_syncframe_soft::sptr
+    distributed_syncframe_soft::make(int threshold, const std::string& syncword, int step)
     {
       return gnuradio::get_initial_sptr
-        (new ao40_syncframe_soft_impl(threshold));
+        (new distributed_syncframe_soft_impl(threshold, syncword, step));
     }
-
-    const uint8_t ao40_syncframe_soft_impl::d_syncword[] =
-      {1,1,1,1,1,1,1,0,0,0,0,1,1,1,0,1,1,1,1,0,0,1,0,1,1,0,0,1,0,0,
-      1,0,0,0,0,0,0,1,0,0,0,1,0,0,1,1,0,0,0,1,0,1,1,1,0,1,0,1,1,0,1,1,0,0,0};
 
     /*
      * The private constructor
      */
-    ao40_syncframe_soft_impl::ao40_syncframe_soft_impl(int threshold)
-      : gr::sync_block("ao40_syncframe_soft",
+    distributed_syncframe_soft_impl::distributed_syncframe_soft_impl(int threshold, const std::string& syncword, int step)
+      : gr::sync_block("distributed_syncframe_soft",
               gr::io_signature::make(1, 1, sizeof(float)),
               gr::io_signature::make(0, 0, 0))
     {
       d_threshold = threshold;
-      set_history(SYNCLEN * STEP);
+      d_step = step;
+      d_synclen = syncword.length();
+
+      d_syncword = new uint8_t [d_synclen];
+      
+      for (int i = 0; i < d_synclen; i++) {
+	d_syncword[i] = syncword[i] & 1; // look at LSB only, as in correlate_access_code_bb_impl.cc
+      }
+            
+      set_history(d_synclen * d_step);
 
       message_port_register_out(pmt::mp("out"));
     }
@@ -56,12 +59,12 @@ namespace gr {
     /*
      * Our virtual destructor.
      */
-    ao40_syncframe_soft_impl::~ao40_syncframe_soft_impl()
+    distributed_syncframe_soft_impl::~distributed_syncframe_soft_impl()
     {
     }
 
     int
-    ao40_syncframe_soft_impl::work(int noutput_items,
+    distributed_syncframe_soft_impl::work(int noutput_items,
         gr_vector_const_void_star &input_items,
         gr_vector_void_star &output_items)
     {
@@ -71,14 +74,14 @@ namespace gr {
 
       for (int i = 0; i < noutput_items; i++) {
 	match = 0;
-	for (int j = 0; j < SYNCLEN; j++) {
-	  match += (in[i + j * STEP] >= 0.0) ^ d_syncword[j];
+	for (int j = 0; j < d_synclen; j++) {
+	  match += (in[i + j * d_step] >= 0.0) ^ d_syncword[j];
 	}
-	if (match >= SYNCLEN - d_threshold) {
+	if (match >= d_synclen - d_threshold) {
 	  // sync found
 	  message_port_pub(pmt::mp("out"),
 			   pmt::cons(pmt::PMT_NIL,
-				     pmt::init_f32vector(SYNCLEN * STEP, in + i)));
+				     pmt::init_f32vector(d_synclen * d_step, in + i)));
 	}
       }
 
