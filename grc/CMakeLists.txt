@@ -99,6 +99,7 @@ install(FILES
     satellites_taurus1_telemetry_parser.block.yml
     satellites_distributed_syncframe_soft.block.yml
     satellites_matrix_deinterleaver_soft.block.yml
+    satellites_smogp_signalling.block.yml
     CCSDS/satellites_space_packet_parser.block.yml
     CCSDS/satellites_telemetry_parser.block.yml
     CCSDS/satellites_telecommand_parser.block.yml

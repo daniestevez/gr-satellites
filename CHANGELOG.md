@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- Support for SMOG-P and ATL-1 (long and short frame FEC decoding)
+- Support for SMOG-P and ATL-1 (AO-40 long, short frame FEC decoding and signalling frames)
 ### Changed
 - Replaced AO-40 synchronizer by more general distributed synchronizer
 - Replaced AO-40 deinterleaver by more general matrix deinterleaver

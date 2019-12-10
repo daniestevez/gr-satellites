@@ -308,6 +308,21 @@ blocks:
     coordinate: [275, 893]
     rotation: 0
     state: enabled
+- name: digital_binary_slicer_fb_0
+  id: digital_binary_slicer_fb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [239, 622]
+    rotation: 0
+    state: true
 - name: digital_clock_recovery_mm_xx_0
   id: digital_clock_recovery_mm_xx
   parameters:
@@ -603,6 +618,19 @@ blocks:
     coordinate: [837, 1004]
     rotation: 0
     state: enabled
+- name: satellites_smogp_signalling_0
+  id: satellites_smogp_signalling
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [762, 622]
+    rotation: 0
+    state: true
 - name: satellites_submit_0
   id: satellites_submit
   parameters:
@@ -621,7 +649,25 @@ blocks:
     bus_structure: null
     coordinate: [905, 676]
     rotation: 0
-    state: disabled
+    state: enabled
+- name: sync_to_pdu_packed_0
+  id: sync_to_pdu_packed
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packlen: 64-6+6
+    sync: '''0010110111010100100101111111110111010011011110110000111100011111'''
+    threshold: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [466, 602]
+    rotation: 0
+    state: true
 
 connections:
 - [blocks_add_const_vxx_0, '0', blocks_divide_xx_0, '1']
@@ -639,6 +685,8 @@ connections:
 - [dc_blocker_xx_0, '0', blocks_divide_xx_0, '0']
 - [dc_blocker_xx_0, '0', blocks_rms_xx_0, '0']
 - [dc_blocker_xx_0_0, '0', blocks_divide_xx_0_0, '0']
+- [digital_binary_slicer_fb_0, '0', sync_to_pdu_packed_0, '0']
+- [digital_clock_recovery_mm_xx_0, '0', digital_binary_slicer_fb_0, '0']
 - [digital_clock_recovery_mm_xx_0, '0', satellites_ao40_fec_decoder_soft_0, '0']
 - [digital_clock_recovery_mm_xx_0, '0', satellites_smogp_short_fec_decoder_soft_0,
   '0']
@@ -655,6 +703,7 @@ connections:
 - [satellites_smogp_short_fec_decoder_soft_0, out, satellites_print_timestamp_0, in]
 - [satellites_smogp_short_fec_decoder_soft_0_0, out, satellites_print_timestamp_0,
   in]
+- [sync_to_pdu_packed_0, out, satellites_smogp_signalling_0, in]
 
 metadata:
   file_format: 1
