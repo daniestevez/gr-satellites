@@ -40,5 +40,6 @@ install(FILES
     decode_rs_interleaved.h
     distributed_syncframe_soft.h
     matrix_deinterleaver_soft.h
+    decode_ra_code.h
     DESTINATION include/satellites
 )
