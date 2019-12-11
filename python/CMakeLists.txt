@@ -121,6 +121,8 @@ GR_PYTHON_INSTALL(
     taurus1_telemetry_parser.py
     smogp_signalling.py
     smogp_packet_filter.py
+    smogp_telemetry.py
+    smogp_telemetry_parser.py
     CCSDS/space_packet_parser.py
     CCSDS/space_packet.py
     CCSDS/telemetry.py

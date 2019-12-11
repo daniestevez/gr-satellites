@@ -102,6 +102,7 @@ install(FILES
     satellites_smogp_signalling.block.yml
     satellites_decode_ra_code.block.yml
     satellites_smogp_packet_filter.block.yml
+    satellites_smogp_telemetry_parser.block.yml
     CCSDS/satellites_space_packet_parser.block.yml
     CCSDS/satellites_telemetry_parser.block.yml
     CCSDS/satellites_telecommand_parser.block.yml
