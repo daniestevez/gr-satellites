@@ -458,6 +458,21 @@ blocks:
     coordinate: [593, 708]
     rotation: 0
     state: enabled
+- name: satellites_smogp_packet_filter_0
+  id: satellites_smogp_packet_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [765, 945]
+    rotation: 0
+    state: true
 - name: satellites_smogp_short_fec_decoder_soft_0
   id: satellites_smogp_short_fec_decoder_soft
   parameters:
@@ -579,10 +594,11 @@ connections:
   '0']
 - [low_pass_filter_0, '0', dc_blocker_xx_0, '0']
 - [satellites_ao40_fec_decoder_soft_0, out, satellites_print_timestamp_0, in]
-- [satellites_decode_ra_code_0, out, satellites_print_timestamp_0, in]
-- [satellites_decode_ra_code_0_0, out, satellites_print_timestamp_0, in]
+- [satellites_decode_ra_code_0, out, satellites_smogp_packet_filter_0, in]
+- [satellites_decode_ra_code_0_0, out, satellites_smogp_packet_filter_0, in]
 - [satellites_print_timestamp_0, out, blocks_message_debug_0, print_pdu]
 - [satellites_print_timestamp_0, out, satellites_submit_0, in]
+- [satellites_smogp_packet_filter_0, out, satellites_print_timestamp_0, in]
 - [satellites_smogp_short_fec_decoder_soft_0, out, satellites_print_timestamp_0, in]
 - [sync_to_pdu_packed_0, out, satellites_smogp_signalling_0, in]
 - [sync_to_pdu_packed_0_0, out, satellites_decode_ra_code_0, in]

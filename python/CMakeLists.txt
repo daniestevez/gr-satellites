@@ -120,6 +120,7 @@ GR_PYTHON_INSTALL(
     swiatowid_image_decoder.py
     taurus1_telemetry_parser.py
     smogp_signalling.py
+    smogp_packet_filter.py
     CCSDS/space_packet_parser.py
     CCSDS/space_packet.py
     CCSDS/telemetry.py

@@ -147,3 +147,4 @@ from .space_packet_time_stamp_adder import space_packet_time_stamp_adder
 from .telemetry_packet_reconstruction import telemetry_packet_reconstruction
 
 from .smogp_signalling import smogp_signalling
+from .smogp_packet_filter import smogp_packet_filter
