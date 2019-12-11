@@ -23,6 +23,8 @@ import numpy
 from gnuradio import gr
 import pmt
 
+import traceback
+
 from . import smogp_telemetry
 
 class smogp_telemetry_parser(gr.basic_block):
@@ -48,6 +50,7 @@ class smogp_telemetry_parser(gr.basic_block):
         try:
             data = smogp_telemetry.Beacon.parse(packet)
         except:
-            print("Could not decode telemetry beacon")
+            print("Error decoding telemetry")
+            traceback.print_exc()
             return
         print(data)
