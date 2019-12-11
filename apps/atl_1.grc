@@ -92,7 +92,7 @@ blocks:
     bus_structure: null
     coordinate: [905, 824]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_multiply_const_vxx_0
   id: blocks_multiply_const_vxx
   parameters:
@@ -501,6 +501,19 @@ blocks:
     coordinate: [775, 619]
     rotation: 0
     state: true
+- name: satellites_smogp_telemetry_parser_0
+  id: satellites_smogp_telemetry_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1022, 931]
+    rotation: 0
+    state: enabled
 - name: satellites_submit_0
   id: satellites_submit
   parameters:
@@ -597,6 +610,7 @@ connections:
 - [satellites_decode_ra_code_0, out, satellites_smogp_packet_filter_0, in]
 - [satellites_decode_ra_code_0_0, out, satellites_smogp_packet_filter_0, in]
 - [satellites_print_timestamp_0, out, blocks_message_debug_0, print_pdu]
+- [satellites_print_timestamp_0, out, satellites_smogp_telemetry_parser_0, in]
 - [satellites_print_timestamp_0, out, satellites_submit_0, in]
 - [satellites_smogp_packet_filter_0, out, satellites_print_timestamp_0, in]
 - [satellites_smogp_short_fec_decoder_soft_0, out, satellites_print_timestamp_0, in]
