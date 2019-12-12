@@ -132,10 +132,77 @@ Telemetry2 = Struct(
     'ack_info' / AckInfo[3]
     )
 
+ComStatus = BitStruct(
+    'com_data_rate' / BitsInteger(3),
+    'tx_power_level' / BitsInteger(2),
+    Padding(3)
+    )
+
+ComProtection = BitStruct(
+    'com1_overcurrent' / Flag,
+    'com2_overcurrent' / Flag,
+    'com1_limiter_switch' / Flag,
+    'com2_limiter_switch' / Flag,
+    'com1_limiter_switch_override' / Flag,
+    'com2_limiter_switch_override' / Flag,
+    Padding(2)
+    )
+    
+Functional = BitStruct(
+    'msen' / Flag[2],
+    'flash' / Flag[2],
+    'rtcc' / Flag[2],
+    Padding(1),
+    'current_com' / BitsInteger(1)
+    )
+
+COM = Struct(
+    'timestamp' / Timestamp,
+    'swr_bridge' / Int8ul,
+    'last_rx_rssi' / Int8sl,
+    'spectrum_analyzer_status' / Int8ul,
+    'active_com_voltage' / Voltage,
+    'active_com_temperature' / Temperature,
+    'active_com_spectrum_analyzer_temperature' / Temperature
+    )
+
+TID = Struct(
+    'timestamp' / Timestamp,
+    'temperature' / Temperature,
+    'voltage' / Voltage,
+    'radfet_voltage' / Int24ub[2],
+    'measurement_serial' / Int16ul
+    )
+
+MSEN = Struct(
+    'msen_gyroscope' / Int16sl[3],
+    'msen_magneto' / Int16sl[3],
+    Padding(6),
+    'msen_temperature' / Temperature
+    )
+
+Telemetry3 = Struct(
+    'timestamp' / Timestamp,
+    'obc_supply_voltage' / Voltage,
+    'rtcc_temperature' / Int16sl[2],
+    Padding(2),
+    'eps2_panel_a_temperature' / Temperature[2],
+    'com_status' / ComStatus,
+    'com_tx_current' / Int16ul,
+    'com_rx_current' / Int16ul,
+    'com_protection' / ComProtection,
+    'msen' / MSEN[2],
+    'functional' / Functional,
+    'com' / COM,
+    'tid' / TID[2],
+    'ack_info' / AckInfo[3]
+    )    
+
 Beacon = Struct(
     'type' / Int8ul,
     'payload' / Switch(this.type, {
         1 : Telemetry1,
         2 : Telemetry2,
+        3 : Telemetry3,
         }, default = GreedyBytes)
     )
