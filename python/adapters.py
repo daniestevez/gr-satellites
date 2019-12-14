@@ -47,6 +47,13 @@ class TableAdapter(Adapter):
         self.table = table
         return Adapter.__init__(self, *args, **kwargs)
     def _encode(self, obj, context, path = None):
-        return self.table.index(obj)
+        try:
+            return self.table.index(obj)
+        except ValueError:
+            return None
     def _decode(self, obj, context, path = None):
-        return self.table[obj]
+        try:
+            return self.table[obj]
+        except IndexError:
+            return None
+
