@@ -214,6 +214,19 @@ Beacon = Struct(
     'ack_info' / AckInfo[3]
     )    
 
+SpectrumResult = Struct(
+    'timestamp' / Timestamp,
+    'startfreq' / Int32ul,
+    'stepfreq' / Int32ul,
+    'rbw' / Int8ul,
+    'pckt_index' / Int8ul,
+    'pckt_count' / Int8ul,
+    'spectrum_len' / Int16ul,
+    Padding(2),
+    'measid' / Int16ul,
+    'spectrum_data' / Bytes(this.spectrum_len)
+    )
+
 Frame = Struct(
     'type' / Int8ul,
     'payload' / Switch(this.type, {
@@ -221,5 +234,6 @@ Frame = Struct(
         2 : Telemetry2,
         3 : Telemetry3,
         4 : Beacon,
+        5 : SpectrumResult,
         }, default = GreedyBytes)
     )
