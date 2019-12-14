@@ -123,6 +123,7 @@ GR_PYTHON_INSTALL(
     smogp_packet_filter.py
     smogp_telemetry.py
     smogp_telemetry_parser.py
+    smogp_spectrum_save.py
     CCSDS/space_packet_parser.py
     CCSDS/space_packet.py
     CCSDS/telemetry.py

@@ -693,6 +693,20 @@ blocks:
     coordinate: [762, 622]
     rotation: 0
     state: true
+- name: satellites_smogp_spectrum_save_0
+  id: satellites_smogp_spectrum_save
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    path: /tmp/
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [910, 981]
+    rotation: 0
+    state: true
 - name: satellites_smogp_telemetry_parser_0
   id: satellites_smogp_telemetry_parser
   parameters:
@@ -703,7 +717,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [909, 961]
+    coordinate: [907, 934]
     rotation: 0
     state: enabled
 - name: satellites_submit_0
@@ -714,7 +728,7 @@ blocks:
     comment: ''
     latitude: latitude
     longitude: longitude
-    noradID: '99999'
+    noradID: '44832'
     source: callsign
     tstamp: recstart
     url: https://db.satnogs.org/api/telemetry/
@@ -853,6 +867,7 @@ connections:
 - [satellites_decode_ra_code_0, out, satellites_smogp_packet_filter_0, in]
 - [satellites_decode_ra_code_0_0, out, satellites_smogp_packet_filter_0, in]
 - [satellites_print_timestamp_0, out, blocks_message_debug_0, print_pdu]
+- [satellites_print_timestamp_0, out, satellites_smogp_spectrum_save_0, in]
 - [satellites_print_timestamp_0, out, satellites_smogp_telemetry_parser_0, in]
 - [satellites_print_timestamp_0, out, satellites_submit_0, in]
 - [satellites_smogp_packet_filter_0, out, satellites_print_timestamp_0, in]
