@@ -493,6 +493,11 @@ telemetry packet in the terminal as soon as it receives it.
     [rscode](http://rscode.sourceforge.net/) library.
     A sample IQ recording is
     included in [satellite-recordings](https://github.com/daniestevez/satellite-recordings).
+  * `ops_sat`
+    [OPS-SAT](https://opssat1.esoc.esa.int/),
+    which transmits 9k6 AX.25 telemetry in the 70cm band. It uses a G3RUH
+    scrambler and the frames are encoded using a CCSDS Reed-Solomon code and a
+    CCSDS scrambler. You must use FM mode to receive this satellite (437.200 MHz).
   * `picsat`
     [PicSat](http://picsat.obspm.fr/),
     which transmits 1k2 or 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
