@@ -20,7 +20,7 @@
 # 
 
 from construct import *
-from .adapters import AffineAdapter, LinearAdapter, UNIXTimestampAdapter
+from .adapters import AffineAdapter, LinearAdapter, UNIXTimestampAdapter, TableAdapter
 
 Timestamp = UNIXTimestampAdapter(Int32sl)
 
@@ -253,6 +253,101 @@ FileFragment = Struct(
     'data' / Bytes(217)
     )
 
+ADCResultsEntry = Struct(
+    'vcc' / Voltage,
+    'vbg' / Voltage,
+    'vcore' / Voltage,
+    'vextref' / Voltage,
+    'an' / Voltage[4]
+    )
+
+ADCResults = Struct(
+    'timestamp' / Timestamp,
+    'internal_reference' / ADCResultsEntry,
+    'external_reference' / ADCResultsEntry
+    )
+
+ATLSPIStatus = BitStruct(
+    'spi_mux_functional' / Flag,
+    'msen_cs_pin_select_failed' / Flag,
+    'rtcc_cs_pin_select_failed' / Flag,
+    'flash_cs_pin_select_failed' / Flag,
+    'all_cs_pin_deselect_failed' / Flag,
+    'miso_pin_test_failed' / Flag,
+    'mosi_pin_test_failed' / Flag,
+    'sclk_pin_test_failed' / Flag
+    )
+
+ATLBusStatus = Enum(Int8sl, unknown = 0, ok = 1, bit_error = -1, no_response = -2, bus_error = -3)
+
+ValidFlag = Enum(Int8ul, valid = ord('V'))
+
+ATLTelemetry1 = Struct(
+    'uptime' / Int32sl,
+    'system_time' / Timestamp,
+    'obc_id' / Int8ul,
+    'oscillator' / Enum(Int8ul, internal = ord('I'), external = ord('E')),
+    'adc_results_valid' / ValidFlag,
+    'adc_results' / ADCResults,
+    'spi_status' / ATLSPIStatus,
+    'spi_flash_startcount' / Int8ul,
+    'spi_msen_startcount' / Int8ul,
+    'spi_rtcc_startcount' / Int8ul,
+    'random_number' / Int8ul,
+    'mppt_bus_status' / Enum(Int8sl, no_data = 0, valid_data = 1, channel_number_mismatch = -1, checksum_error = -2,\
+                                 no_response = -3, bus_error = -4)[6],
+    'accu_bus_status' / ATLBusStatus[2],
+    'pcu_bus_status' / ATLBusStatus[2],
+    'current_com' / Int8ul,
+    'com_uptime_seconds' / Int32sl,
+    'com_tx_power_level' / TableAdapter([10, 25, 50, 100], Int8ul),
+    'com_tx_current' / Int16sl,
+    'com_rx_current' / Int16sl,    
+    'com_tx_voltage_drop' / Voltage,
+    'scheduled_spectrum_analysis_queue' / Int16ul,
+    'scheduled_file_download_queue' / Int16ul,
+    'energy_management_mod' / Enum(Int8ul, normal = 0, normal_reduced = 1, energy_saving = 2, emergency = 3),
+    'morse_period' / Int8ul,
+    'radio_cycle' / LinearAdapter(1e6, Int32sl),
+    'sleep' / LinearAdapter(1e6, Int32sl),
+    'last_telecomand_seconds_ago' / Int32sl,
+    'automatic_antenna_openings' / Int16ul,
+    'cpu_usage_cycles' / Int16ul,
+    'cpu_idle_us' / Int32sl,
+    'cpu_work_over_us' / Int32sl,
+    'obc_flash_checksum' / Hex(Int32ul),
+    'obc_flash_checksum_prev_diff' / Hex(Int32ul),
+    'scheduled_datalog_queue' / Int16ul,
+    'current_scheduled_datalog' / Int16ul
+    )
+
+ATLTelemetry2 = Struct(
+    'msen_data_valid' / ValidFlag,
+    'timestamp' / Timestamp,
+    'temperature' / Float32l,
+    'msen_gyroscope' / Float32l[3],
+    'msen_magneto_raw' / Int16sl[3],
+    'msen_magnto_min_max_valid' / Enum(Int8ul, yes = ord('Y')),
+    'msen_magneto_min_max' / Int16sl[6],
+    'msen_magneto_scale' / Float32l[3],
+    'msen_magneto' / Float32l[3],
+    'ack_info' / AckInfo[17]
+    )
+
+ATLACCUMeasurement = Struct(
+    'valid' / Int8ul,
+    '1wbus' / Int8ul,
+    'timestamp' / Timestamp,
+# TODO implement corrections from https://github.com/szlldm/smogp_atl1_gndsw/blob/master/main.h
+    'battery_current_raw' / Int16ul,
+    'temperatures_raw' / Int16ul[6]
+    )
+
+ATLTelemetry3 = Struct(
+    'timestamp' / Timestamp,
+    'accu_measurements' / ATLACCUMeasurement[4]
+    )
+
 Frame = Struct(
     'type' / Int8ul,
     'payload' / Switch(this.type, {
@@ -263,5 +358,8 @@ Frame = Struct(
         5 : SpectrumResult,
         6 : FileInfo,
         7 : FileFragment,
+        129 : ATLTelemetry1,
+        130 : ATLTelemetry2,
+        131 : ATLTelemetry3,
         }, default = GreedyBytes)
     )
