@@ -198,11 +198,28 @@ Telemetry3 = Struct(
     'ack_info' / AckInfo[3]
     )    
 
+UplinkStats = Struct(
+    'valid_packets' / Int32sl,
+    'rx_error_wrong_size' / Int16ul,
+    'rx_error_golay_failed' / Int16ul,
+    'rx_error_wrong_signature' / Int16ul,
+    'rx_error_invalid_serial' / Int16ul,
+    'obc_com_trx_error_statistic' / Int32ul
+    )
+
 Beacon = Struct(
+    'timestamp' / Timestamp,
+    'beacon_message' / PaddedString(80, 'utf8'),
+    'uplink_stats' / UplinkStats,
+    'ack_info' / AckInfo[3]
+    )    
+
+Frame = Struct(
     'type' / Int8ul,
     'payload' / Switch(this.type, {
         1 : Telemetry1,
         2 : Telemetry2,
         3 : Telemetry3,
+        4 : Beacon,
         }, default = GreedyBytes)
     )
