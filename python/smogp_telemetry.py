@@ -227,6 +227,32 @@ SpectrumResult = Struct(
     'spectrum_data' / Bytes(this.spectrum_len)
     )
 
+File = Struct(
+    'file_id' / Int8ul,
+    'file_type' / Int8ul,
+    'page_addr' / Int16ul,
+    'file_size' / Int24ub,
+    'timestamp' / Timestamp,
+    'filename' / PaddedString(10, 'utf8')
+    )
+
+FileInfo = Struct(
+    'timestamp' / Timestamp,
+    'files' / File[5]
+    )
+
+FileFragment = Struct(
+    'timestamp' / Timestamp,
+    'pckt_index' / Int16ul,
+    'pckt_count' / Int16ul,
+    'file_type' / Int8ul,
+    'page_addr' / Int16ul,
+    'file_size' / Int24ub,
+    'timestamp' / Timestamp,
+    'filename' / PaddedString(10, 'utf8'),
+    'data' / Bytes(217)
+    )
+
 Frame = Struct(
     'type' / Int8ul,
     'payload' / Switch(this.type, {
@@ -235,5 +261,7 @@ Frame = Struct(
         3 : Telemetry3,
         4 : Beacon,
         5 : SpectrumResult,
+        6 : FileInfo,
+        7 : FileFragment,
         }, default = GreedyBytes)
     )
