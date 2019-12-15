@@ -348,6 +348,45 @@ ATLTelemetry3 = Struct(
     'accu_measurements' / ATLACCUMeasurement[4]
     )
 
+SMOGPTelemetry1 = Struct(
+    'uptime' / Int32sl,
+    'system_time' / Timestamp,
+    'obc_id' / Int8ul,
+    'oscillator' / Enum(Int8ul, internal = ord('I'), external = ord('E')),
+    'adc_results_valid' / ValidFlag,
+    'adc_results' / ADCResults,
+    'spi_status' / ATLSPIStatus,
+    'spi_flash_startcount' / Int8ul,
+    'spi_msen_startcount' / Int8ul,
+    'spi_rtcc_startcount' / Int8ul,
+    'random_number' / Int8ul,
+    'mppt_bus_status' / Enum(Int8sl, no_data = 0, valid_data = 1, channel_number_mismatch = -1, checksum_error = -2,\
+                                 no_response = -3, bus_error = -4)[6],
+    'accu_bus_status' / ATLBusStatus[2],
+    'pcu_bus_status' / ATLBusStatus[2],
+    'current_com' / Int8ul,
+    'com_uptime_seconds' / Int32sl,
+    'com_tx_power_level' / TableAdapter([10, 11, 12, 13, 14, 15, 16, 25, 29, 33, 38, 42, 46, 50, 75, 100], Int8ul),
+    'com_tx_current' / Int16sl,
+    'com_rx_current' / Int16sl,    
+    'com_tx_voltage_drop' / Voltage,
+    'scheduled_spectrum_analysis_queue' / Int16ul,
+    'scheduled_file_download_queue' / Int16ul,
+    'energy_management_mod' / Enum(Int8ul, normal = 0, normal_reduced = 1, energy_saving = 2, emergency = 3),
+    'morse_period' / Int8ul,
+    'radio_cycle' / LinearAdapter(1e6, Int32sl),
+    'sleep' / LinearAdapter(1e6, Int32sl),
+    'last_telecomand_seconds_ago' / Int32sl,
+    'automatic_antenna_openings' / Int16ul,
+    'cpu_usage_cycles' / Int16ul,
+    'cpu_idle_us' / Int32sl,
+    'cpu_work_over_us' / Int32sl,
+    'obc_flash_checksum' / Hex(Int32ul),
+    'obc_flash_checksum_prev_diff' / Hex(Int32ul),
+    'scheduled_datalog_queue' / Int16ul,
+    'current_scheduled_datalog' / Int16ul
+    )
+
 Frame = Struct(
     'type' / Int8ul,
     'payload' / Switch(this.type, {
@@ -358,6 +397,8 @@ Frame = Struct(
         5 : SpectrumResult,
         6 : FileInfo,
         7 : FileFragment,
+        33 : SMOGPTelemetry1,
+        34 : ATLTelemetry2, # SMOGPTelemetry2 is exactly the same as ATLTelemetry2
         129 : ATLTelemetry1,
         130 : ATLTelemetry2,
         131 : ATLTelemetry3,
