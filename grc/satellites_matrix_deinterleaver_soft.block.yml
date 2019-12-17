@@ -4,19 +4,19 @@ category: '[Satellites]/Coding'
 
 parameters:
 -   id: rows
-    labels: Rows
+    label: Rows
     dtype: int
     default: '80'
 -   id: cols
-    labels: Columns
+    label: Columns
     dtype: int
     default: '65'
 -   id: output_size
-    labels: Output size
+    label: Output size
     dtype: int
     default: '5132'
 -   id: output_skip
-    labels: Output skip
+    label: Output skip
     dtype: int
     default: '65'
 
