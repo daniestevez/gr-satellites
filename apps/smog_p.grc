@@ -322,22 +322,7 @@ blocks:
     bus_structure: null
     coordinate: [239, 622]
     rotation: 0
-    state: true
-- name: digital_binary_slicer_fb_0_0
-  id: digital_binary_slicer_fb
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [798, 1163]
-    rotation: 0
-    state: true
+    state: enabled
 - name: digital_clock_recovery_mm_xx_0
   id: digital_clock_recovery_mm_xx
   parameters:
@@ -601,7 +586,7 @@ blocks:
     bus_structure: null
     coordinate: [463, 864]
     rotation: 0
-    state: true
+    state: enabled
 - name: satellites_decode_ra_code_0_0
   id: satellites_decode_ra_code
   parameters:
@@ -617,7 +602,7 @@ blocks:
     bus_structure: null
     coordinate: [469, 966]
     rotation: 0
-    state: true
+    state: enabled
 - name: satellites_print_timestamp_0
   id: satellites_print_timestamp
   parameters:
@@ -649,7 +634,7 @@ blocks:
     bus_structure: null
     coordinate: [605, 829]
     rotation: 0
-    state: true
+    state: enabled
 - name: satellites_smogp_short_fec_decoder_soft_0
   id: satellites_smogp_short_fec_decoder_soft
   parameters:
@@ -757,78 +742,78 @@ blocks:
     coordinate: [466, 602]
     rotation: 0
     state: true
-- name: sync_to_pdu_packed_0_0
-  id: sync_to_pdu_packed
+- name: sync_to_pdu_soft_0_0
+  id: sync_to_pdu_soft
   parameters:
     affinity: ''
     alias: ''
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    packlen: '260'
+    packlen: 260 * 8
     sync: '''0010110111010100'''
     threshold: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [149, 846]
+    coordinate: [125, 846]
     rotation: 0
-    state: true
-- name: sync_to_pdu_packed_0_0_0
-  id: sync_to_pdu_packed
+    state: enabled
+- name: sync_to_pdu_soft_0_0_0
+  id: sync_to_pdu_soft
   parameters:
     affinity: ''
     alias: ''
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    packlen: '514'
+    packlen: 514 * 8
     sync: '''0010110111010100'''
     threshold: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [148, 948]
+    coordinate: [129, 944]
     rotation: 0
-    state: true
-- name: sync_to_pdu_packed_0_0_0_0
-  id: sync_to_pdu_packed
+    state: enabled
+- name: sync_to_pdu_soft_0_0_0_0
+  id: sync_to_pdu_soft
   parameters:
     affinity: ''
     alias: ''
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    packlen: '514'
+    packlen: 514 * 8
     sync: '''0010110111010100'''
     threshold: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [959, 1172]
+    coordinate: [941, 1169]
     rotation: 0
-    state: true
-- name: sync_to_pdu_packed_0_0_1
-  id: sync_to_pdu_packed
+    state: enabled
+- name: sync_to_pdu_soft_0_0_1
+  id: sync_to_pdu_soft
   parameters:
     affinity: ''
     alias: ''
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    packlen: '260'
+    packlen: 260 * 8
     sync: '''0010110111010100'''
     threshold: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [960, 1070]
+    coordinate: [937, 1071]
     rotation: 0
-    state: true
+    state: enabled
 
 connections:
 - [blocks_add_const_vxx_0, '0', blocks_divide_xx_0, '1']
@@ -847,18 +832,17 @@ connections:
 - [dc_blocker_xx_0, '0', blocks_rms_xx_0, '0']
 - [dc_blocker_xx_0_0, '0', blocks_divide_xx_0_0, '0']
 - [digital_binary_slicer_fb_0, '0', sync_to_pdu_packed_0, '0']
-- [digital_binary_slicer_fb_0, '0', sync_to_pdu_packed_0_0, '0']
-- [digital_binary_slicer_fb_0, '0', sync_to_pdu_packed_0_0_0, '0']
-- [digital_binary_slicer_fb_0_0, '0', sync_to_pdu_packed_0_0_0_0, '0']
-- [digital_binary_slicer_fb_0_0, '0', sync_to_pdu_packed_0_0_1, '0']
 - [digital_clock_recovery_mm_xx_0, '0', digital_binary_slicer_fb_0, '0']
 - [digital_clock_recovery_mm_xx_0, '0', satellites_ao40_fec_decoder_soft_0, '0']
 - [digital_clock_recovery_mm_xx_0, '0', satellites_smogp_short_fec_decoder_soft_0,
   '0']
-- [digital_clock_recovery_mm_xx_0_0, '0', digital_binary_slicer_fb_0_0, '0']
+- [digital_clock_recovery_mm_xx_0, '0', sync_to_pdu_soft_0_0, '0']
+- [digital_clock_recovery_mm_xx_0, '0', sync_to_pdu_soft_0_0_0, '0']
 - [digital_clock_recovery_mm_xx_0_0, '0', satellites_ao40_fec_decoder_soft_0_0, '0']
 - [digital_clock_recovery_mm_xx_0_0, '0', satellites_smogp_short_fec_decoder_soft_0_0,
   '0']
+- [digital_clock_recovery_mm_xx_0_0, '0', sync_to_pdu_soft_0_0_0_0, '0']
+- [digital_clock_recovery_mm_xx_0_0, '0', sync_to_pdu_soft_0_0_1, '0']
 - [low_pass_filter_0, '0', dc_blocker_xx_0, '0']
 - [low_pass_filter_0_0, '0', blocks_rms_xx_0_0, '0']
 - [low_pass_filter_0_0, '0', dc_blocker_xx_0_0, '0']
@@ -875,10 +859,10 @@ connections:
 - [satellites_smogp_short_fec_decoder_soft_0_0, out, satellites_print_timestamp_0,
   in]
 - [sync_to_pdu_packed_0, out, satellites_smogp_signalling_0, in]
-- [sync_to_pdu_packed_0_0, out, satellites_decode_ra_code_0, in]
-- [sync_to_pdu_packed_0_0_0, out, satellites_decode_ra_code_0_0, in]
-- [sync_to_pdu_packed_0_0_0_0, out, satellites_decode_ra_code_0_0, in]
-- [sync_to_pdu_packed_0_0_1, out, satellites_decode_ra_code_0, in]
+- [sync_to_pdu_soft_0_0, out, satellites_decode_ra_code_0, in]
+- [sync_to_pdu_soft_0_0_0, out, satellites_decode_ra_code_0_0, in]
+- [sync_to_pdu_soft_0_0_0_0, out, satellites_decode_ra_code_0_0, in]
+- [sync_to_pdu_soft_0_0_1, out, satellites_decode_ra_code_0, in]
 
 metadata:
   file_format: 1

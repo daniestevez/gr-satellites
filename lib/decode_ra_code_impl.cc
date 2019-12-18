@@ -22,11 +22,14 @@
 #include "config.h"
 #endif
 
+#include <cstdio>
+
 #include <gnuradio/io_signature.h>
+#include <gnuradio/logger.h>
 #include "decode_ra_code_impl.h"
 
 extern "C" {
-#include "radecoder/ra_decoder.h"
+#include "radecoder/ra_decoder_gen.h"
 }
 
 namespace gr {
@@ -81,9 +84,27 @@ namespace gr {
       pmt::pmt_t msg = pmt::cdr(pmt_msg);
       uint8_t *ra_out = new uint8_t [d_size];
       size_t offset(0);
+      const float * const soft_bits = (const float *) pmt::uniform_vector_elements(msg, offset);
 
-      memset(ra_out, 0, d_size);
-      ra_decode((const uint8_t*) pmt::uniform_vector_elements(msg, offset), ra_out, d_size);
+      ra_length_init(d_size/2);
+
+      if (pmt::length(msg) != ra_code_length * RA_BITCOUNT) {
+	fprintf(stderr, "message length: %d, expected: %d\n", pmt::length(msg), ra_code_length * RA_BITCOUNT);
+	GR_LOG_ERROR(d_logger, "Invalid message length");
+	return;
+      }
+
+      float *ra_in = new float [ra_code_length * RA_BITCOUNT];
+      // Weird bit organization: see radecoder/ra_decoder.c
+      for (int i = 0; i < ra_code_length * RA_BITCOUNT / 8; i++) {
+	for (int j = 0; j < 8; j++) {
+	  ra_in[8 * i + j] = -soft_bits[8 * i + 7 - j];
+	}
+      }
+
+      ra_decoder_gen(ra_in, (ra_word_t *) ra_out, 20);
+
+      delete[] ra_in;
 
       message_port_pub(pmt::mp("out"),
 		       pmt::cons(pmt::PMT_NIL,

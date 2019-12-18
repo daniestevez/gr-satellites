@@ -10,7 +10,7 @@ options:
     gen_linking: dynamic
     generate_options: no_gui
     hier_block_src_path: '.:'
-    id: smog_p
+    id: atl_1
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -565,42 +565,42 @@ blocks:
     coordinate: [479, 599]
     rotation: 0
     state: true
-- name: sync_to_pdu_packed_0_0
-  id: sync_to_pdu_packed
+- name: sync_to_pdu_soft_0_0
+  id: sync_to_pdu_soft
   parameters:
     affinity: ''
     alias: ''
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    packlen: '260'
+    packlen: 260 * 8
     sync: '''0010110111010100'''
     threshold: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [272, 859]
+    coordinate: [271, 863]
     rotation: 0
-    state: true
-- name: sync_to_pdu_packed_0_0_0
-  id: sync_to_pdu_packed
+    state: enabled
+- name: sync_to_pdu_soft_0_0_0
+  id: sync_to_pdu_soft
   parameters:
     affinity: ''
     alias: ''
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    packlen: '514'
+    packlen: 514 * 8
     sync: '''0010110111010100'''
     threshold: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [271, 961]
+    coordinate: [275, 961]
     rotation: 0
-    state: true
+    state: enabled
 
 connections:
 - [blocks_add_const_vxx_0, '0', blocks_divide_xx_0, '1']
@@ -613,12 +613,12 @@ connections:
 - [dc_blocker_xx_0, '0', blocks_divide_xx_0, '0']
 - [dc_blocker_xx_0, '0', blocks_rms_xx_0, '0']
 - [digital_binary_slicer_fb_0, '0', sync_to_pdu_packed_0, '0']
-- [digital_binary_slicer_fb_0, '0', sync_to_pdu_packed_0_0, '0']
-- [digital_binary_slicer_fb_0, '0', sync_to_pdu_packed_0_0_0, '0']
 - [digital_clock_recovery_mm_xx_0, '0', digital_binary_slicer_fb_0, '0']
 - [digital_clock_recovery_mm_xx_0, '0', satellites_ao40_fec_decoder_soft_0, '0']
 - [digital_clock_recovery_mm_xx_0, '0', satellites_smogp_short_fec_decoder_soft_0,
   '0']
+- [digital_clock_recovery_mm_xx_0, '0', sync_to_pdu_soft_0_0, '0']
+- [digital_clock_recovery_mm_xx_0, '0', sync_to_pdu_soft_0_0_0, '0']
 - [low_pass_filter_0, '0', dc_blocker_xx_0, '0']
 - [satellites_ao40_fec_decoder_soft_0, out, satellites_print_timestamp_0, in]
 - [satellites_decode_ra_code_0, out, satellites_smogp_packet_filter_0, in]
@@ -630,8 +630,8 @@ connections:
 - [satellites_smogp_packet_filter_0, out, satellites_print_timestamp_0, in]
 - [satellites_smogp_short_fec_decoder_soft_0, out, satellites_print_timestamp_0, in]
 - [sync_to_pdu_packed_0, out, satellites_smogp_signalling_0, in]
-- [sync_to_pdu_packed_0_0, out, satellites_decode_ra_code_0, in]
-- [sync_to_pdu_packed_0_0_0, out, satellites_decode_ra_code_0_0, in]
+- [sync_to_pdu_soft_0_0, out, satellites_decode_ra_code_0, in]
+- [sync_to_pdu_soft_0_0_0, out, satellites_decode_ra_code_0_0, in]
 
 metadata:
   file_format: 1
