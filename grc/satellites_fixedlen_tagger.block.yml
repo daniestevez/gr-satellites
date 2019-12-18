@@ -10,7 +10,7 @@ parameters:
     dtype: enum
     options: [complex, float, int, short, byte]
     option_attributes:
-        t: [numpy.complex, numpy.float, numpy.int, numpy.short, numpy.byte]
+        t: [numpy.complex64, numpy.float32, numpy.int, numpy.short, numpy.byte]
     hide: part
 -   id: syncword_tag
     label: Syncword tag
