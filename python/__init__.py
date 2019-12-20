@@ -150,3 +150,6 @@ from .smogp_signalling import smogp_signalling
 from .smogp_packet_filter import smogp_packet_filter
 from .smogp_telemetry_parser import smogp_telemetry_parser
 from .smogp_spectrum_save import smogp_spectrum_save
+
+from .aausat4_remove_fsm import aausat4_remove_fsm
+from .aausat4_telemetry_parser import aausat4_telemetry_parser

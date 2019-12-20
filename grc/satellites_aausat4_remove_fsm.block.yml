@@ -1,0 +1,21 @@
+id: satellites_aausat4_check_fsm
+label: AAUSAT-4 remove FSM
+category: '[Satellites]/Coding'
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: short
+    optional: true
+-   domain: message
+    id: long
+    optional: true
+
+templates:
+    imports: import satellites
+    make: satellites.aausat4_remove_fsm()
+
+file_format: 1

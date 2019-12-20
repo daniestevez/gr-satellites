@@ -102,8 +102,6 @@ Required dependencies:
 The following GNUradio out-of-tree modules are only required for the decoder of
 one particular satellite. You may install only the ones you're interested in.
 
-  * [gr-aausat](https://github.com/daniestevez/gr-aausat) AAUSAT-4 decoder and
-    telemetry parser
   * [beesat-sdr](https://github.com/daniestevez/beesat-sdr) BEESAT and TECHNOSAT decoder and TNC. It is also used for D-STAR One.
   * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) This only needs to be installed
   if you want to submit telemetry to HIT. A complete decoder which does not use gr-lilacsat

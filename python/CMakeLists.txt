@@ -124,6 +124,9 @@ GR_PYTHON_INSTALL(
     smogp_telemetry.py
     smogp_telemetry_parser.py
     smogp_spectrum_save.py
+    aausat4_remove_fsm.py
+    aausat4_telemetry.py
+    aausat4_telemetry_parser.py
     CCSDS/space_packet_parser.py
     CCSDS/space_packet.py
     CCSDS/telemetry.py
