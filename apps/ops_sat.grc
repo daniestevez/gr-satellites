@@ -522,7 +522,7 @@ blocks:
     comment: ''
     latitude: latitude
     longitude: longitude
-    noradID: '99999'
+    noradID: '44878'
     source: callsign
     tstamp: recstart
     url: https://db.satnogs.org/api/telemetry/
@@ -532,7 +532,7 @@ blocks:
     bus_structure: null
     coordinate: [944, 592]
     rotation: 0
-    state: disabled
+    state: enabled
 
 connections:
 - [blocks_multiply_const_vxx_0, '0', low_pass_filter_0_0, '0']
