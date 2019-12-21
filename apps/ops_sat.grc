@@ -442,7 +442,7 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    verbose: 'True'
+    verbose: 'False'
   states:
     bus_sink: false
     bus_source: false
@@ -455,7 +455,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    check_fcs: 'True'
+    check_fcs: 'False'
     comment: ''
     max_length: '10000'
     maxoutbuf: '0'
