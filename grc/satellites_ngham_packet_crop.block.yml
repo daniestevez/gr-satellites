@@ -1,0 +1,21 @@
+id: satellites_ngham_packet_crop
+label: NGHam Packet Crop
+category: '[Satellites]/NGHam'
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: rs16
+    optional: true
+-   domain: message
+    id: rs32
+    optional: true
+
+templates:
+    imports: import satellites
+    make: satellites.ngham_packet_crop()
+
+file_format: 1
