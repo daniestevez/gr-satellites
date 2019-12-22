@@ -107,6 +107,8 @@ install(FILES
     satellites_aausat4_remove_fsm.block.yml
     satellites_aausat4_telemetry_parser.block.yml
     satellites_ngham_packet_crop.block.yml
+    satellites_ngham_remove_padding.block.yml
+    satellites_ngham_check_crc.block.yml
     CCSDS/satellites_space_packet_parser.block.yml
     CCSDS/satellites_telemetry_parser.block.yml
     CCSDS/satellites_telecommand_parser.block.yml

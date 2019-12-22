@@ -1,0 +1,28 @@
+id: satellites_ngham_check_crc
+label: Check NGHam CRC-16
+category: '[Satellites]/NGHam'
+
+parameters:
+-   id: verbose
+    label: Verbose
+    dtype: bool
+    options: ['True', 'False']
+    option_labels: ['Yes', 'No']
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: ok
+    optional: true
+-   domain: message
+    id: fail
+    optional: true
+
+templates:
+    imports: import satellites
+    make: satellites.ngham_check_crc(${verbose})
+
+file_format: 1

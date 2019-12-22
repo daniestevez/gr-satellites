@@ -155,3 +155,5 @@ from .aausat4_remove_fsm import aausat4_remove_fsm
 from .aausat4_telemetry_parser import aausat4_telemetry_parser
 
 from .ngham_packet_crop import ngham_packet_crop
+from .ngham_remove_padding import ngham_remove_padding
+from .ngham_check_crc import ngham_check_crc
