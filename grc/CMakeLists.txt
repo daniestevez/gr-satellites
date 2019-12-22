@@ -110,6 +110,7 @@ install(FILES
     satellites_ngham_remove_padding.block.yml
     satellites_ngham_check_crc.block.yml
     satellites_floripasat_telemetry_parser.block.yml
+    satellites_bme_submitter.block.yml
     CCSDS/satellites_space_packet_parser.block.yml
     CCSDS/satellites_telemetry_parser.block.yml
     CCSDS/satellites_telecommand_parser.block.yml

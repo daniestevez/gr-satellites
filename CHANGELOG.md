@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for OPS-SAT
 - Standanlone decoder for AAUSAT-4
 - Support for FloripaSat-1
+- BME telemetry forwarder
 ### Changed
 - Replaced AO-40 synchronizer by more general distributed synchronizer
 - Replaced AO-40 deinterleaver by more general matrix deinterleaver

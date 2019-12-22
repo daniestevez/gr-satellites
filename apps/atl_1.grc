@@ -409,6 +409,22 @@ blocks:
     coordinate: [92, 718]
     rotation: 0
     state: enabled
+- name: satellites_bme_submitter_0
+  id: satellites_bme_submitter
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    password: ''
+    satellite: atl1
+    user: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [997, 570]
+    rotation: 0
+    state: true
 - name: satellites_decode_ra_code_0
   id: satellites_decode_ra_code
   parameters:
@@ -624,6 +640,7 @@ connections:
 - [satellites_decode_ra_code_0, out, satellites_smogp_packet_filter_0, in]
 - [satellites_decode_ra_code_0_0, out, satellites_smogp_packet_filter_0, in]
 - [satellites_print_timestamp_0, out, blocks_message_debug_0, print_pdu]
+- [satellites_print_timestamp_0, out, satellites_bme_submitter_0, in]
 - [satellites_print_timestamp_0, out, satellites_smogp_spectrum_save_0, in]
 - [satellites_print_timestamp_0, out, satellites_smogp_telemetry_parser_0, in]
 - [satellites_print_timestamp_0, out, satellites_submit_0, in]

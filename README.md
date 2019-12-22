@@ -712,6 +712,12 @@ because when it is enabled the flowgraph won't run unless `proxy_publish.py` is
 running. Also see [this information](http://lilacsat.hit.edu.cn/?p=559) about
 how to set the proper ports in `proxy_publish.py`.
 
+## Submitting telemetry to BME (SMOG-P, ATL-1, SMOG-1)
+
+To submit telemetry to the [BME server](https://gnd.bme.hu:8080/) you first need
+to register an account there. Then modify the "BME Telemetry Forwarder" in the
+GRC flowgraph to include your username and password.
+
 ## Submitting telemetry from EQUiSat
 
 The EQUiSat flowgraph also supports submitting telemetry to the Brown Space 
