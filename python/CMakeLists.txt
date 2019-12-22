@@ -130,6 +130,8 @@ GR_PYTHON_INSTALL(
     ngham_packet_crop.py
     ngham_remove_padding.py
     ngham_check_crc.py
+    floripasat_telemetry.py
+    floripasat_telemetry_parser.py
     CCSDS/space_packet_parser.py
     CCSDS/space_packet.py
     CCSDS/telemetry.py

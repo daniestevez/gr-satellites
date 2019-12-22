@@ -347,6 +347,12 @@ telemetry packet in the terminal as soon as it receives it.
     transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
     Reed-Solomon code. The telemetry format is unknown. You must use FM mode to
     receive this satellite (437.350MHz).
+  * `floripasat_1`,
+    [FloripaSat-1](https://floripasat.ufsc.br/), which transmits 1k2 FSK
+    telemetry in the 2m band. It uses the
+    [NGHam](https://github.com/skagmo/ngham) protocol and AX.25, but the
+    Reed-Solomon of NGHam and the complete AX.25 seem to be not correctly
+    implemented. You must use FM mode to receive this satellite (145.900MHz).
   * `fmn1`
     [FMN-1](https://space.skyrocket.de/doc_sdat/fengmaniu-1.htm),
     which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
