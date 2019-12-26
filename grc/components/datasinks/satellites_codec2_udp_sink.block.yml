@@ -1,0 +1,23 @@
+id: satellites_codec2_udp_sink
+label: Codec2 UDP sink
+category: '[Satellites]/Data sinks'
+
+parameters:
+-   id: ip
+    label: IP
+    dtype: string
+    default: '127.0.0.1'
+-   id: port
+    label: Port
+    dtype: int
+    default: 7000
+
+inputs:
+-   domain: message
+    id: in
+
+templates:
+    imports: import satellites.components.datasinks
+    make: satellites.components.datasinks.codec2_udp_sink(ip=${ip}, port=${port}) 
+
+file_format: 1

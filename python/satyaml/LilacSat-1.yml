@@ -1,0 +1,26 @@
+name: LilacSat-1
+alternative_names:
+  - CN02
+  - QB50 CN02
+  - LO-90
+norad: 42725
+data:
+  &tlm Telemetry:
+    telemetry: by70_1
+  &codec2 Codec2:
+    decoder: codec2_udp_sink
+transports:
+  &kiss KISS:
+    protocol: KISS no control byte
+    data:
+    - *tlm
+transmitters:
+  9k6 BPSK downlink:
+    frequency: 436.510e+6
+    modulation: BPSK
+    baudrate: 9600
+    framing: LilacSat-1
+    transports:
+    - *kiss
+    additional_data:
+      codec2: *codec2

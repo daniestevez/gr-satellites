@@ -19,6 +19,7 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
+    satellites_codec2_udp_sink.block.yml
     satellites_hexdump_sink.block.yml
     satellites_kiss_file_sink.block.yml
     satellites_telemetry_parser.block.yml

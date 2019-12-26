@@ -1,2 +1,3 @@
 *~
 apps/*.py
+__pycache__

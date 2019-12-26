@@ -38,7 +38,8 @@ class SatYAML:
                 'Reaktor Hello World', 'S-NET', 'Swiatowid', 'NuSat', 'K2SAT',\
                 'CCSDS Reed-Solomon', 'CCSDS Reed-Solomon dual', 'CCSDS Reed-Solomon differential',\
                 'CCSDS Reed-Solomon dual differential', 'CCSDS Concatenated', 'CCSDS Concatenated dual',\
-                'CCSDS Concatenated differential', 'CCSDS Concatenated dual differential']
+                'CCSDS Concatenated differential', 'CCSDS Concatenated dual differential',\
+                'LilacSat-1']
     transports = ['KISS', 'KISS no control byte']
     
     def check_yaml(self, yml):
@@ -90,6 +91,10 @@ class SatYAML:
                 for t in transmitter['transports']:
                     if t not in d['transports']:
                         raise YAMLError(f'Transport entry {t} used in {key} is not defined in transports field in {yml}')
+            if 'additional_data' in transmitter:
+                for k, dd in transmitter['additional_data'].items():
+                    if dd not in d['data']:
+                        raise YAMLError(f'Additional data entry {dd} used in {key} is not defined in data field in {yml}')
             
     def check_all_yaml(self):
         for yml in self.yaml_files():

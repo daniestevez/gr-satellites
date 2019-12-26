@@ -32,6 +32,7 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
+    codec2_udp_sink.py
     hexdump_sink.py
     kiss_file_sink.py
     telemetry_parser.py

@@ -110,7 +110,11 @@ class gr_satellites_flowgraph(gr.hier_block2):
             else:
                 for key, info in satyaml['data'].items():
                     if 'decoder' in info:
-                        datasink = getattr(datasinks, info['decoder'])()
+                        ds = getattr(datasinks, info['decoder'])
+                        try:
+                            datasink = ds(options = options)
+                        except TypeError: # raised if ds doesn't have an options parameter
+                            datasink = ds()
                     elif 'telemetry' in info:
                         datasink = datasinks.telemetry_parser(info['telemetry'], options = options)
                     else:
@@ -165,6 +169,9 @@ class gr_satellites_flowgraph(gr.hier_block2):
                                 self.msg_connect((deframer, 'out'), (self._transports[transport], 'in'))
                     for s in self._additional_datasinks:
                         self.msg_connect((deframer, 'out'), (s, 'in'))
+                    if 'additional_data' in transmitter:
+                        for k, v in transmitter['additional_data'].items():
+                            self.msg_connect((deframer, k), (self._datasinks[v], 'in'))
 
     def get_telemetry_submitters(self, satyaml, config):
         """
@@ -258,6 +265,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'CCSDS Concatenated dual' : set_options(deframers.ccsds_concatenated_deframer, dual_basis = True),
         'CCSDS Concatenated differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True),
         'CCSDS Concatenated dual differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True, dual_basis = True),
+        'LilacSat-1' : deframers.lilacsat_1_deframer,
     }
     _transport_hooks = {
         'KISS' : transports.kiss_transport,

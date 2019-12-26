@@ -28,3 +28,5 @@ KS-1Q
 gr_satellites KS-1Q --wavfile ~/satellite-recordings/ks_1q.wav --samp_rate 48e3 --clock_offset_limit 0.005 --gain_mu 0.175 --input_gain 10
 BY70-1
 gr_satellites BY70-1 --wavfile ~/satellite-recordings/by701.wav --samp_rate 48e3
+LilacSat-1
+gr_satellites LilacSat-1 --wavfile ~/satellite-recordings/lilacsat1.wav --samp_rate 48e3

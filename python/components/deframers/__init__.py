@@ -38,6 +38,7 @@ from .ccsds_concatenated_deframer import ccsds_concatenated_deframer
 from .ccsds_rs_deframer import ccsds_rs_deframer
 from .eseo_deframer import eseo_deframer
 from .k2sat_deframer import k2sat_deframer
+from .lilacsat_1_deframer import lilacsat_1_deframer
 from .lucky7_deframer import lucky7_deframer
 from .nusat_deframer import nusat_deframer
 from .reaktor_hello_world_deframer import reaktor_hello_world_deframer
