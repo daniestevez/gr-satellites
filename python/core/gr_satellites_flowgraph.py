@@ -125,12 +125,13 @@ class gr_satellites_flowgraph(gr.hier_block2):
             if config.getboolean('Groundstation', 'submit_tlm'):
                 self._additional_datasinks.extend(self.get_telemetry_submitters(satyaml, config))
             self._transports = dict()
-            for key, info in satyaml['transports'].items():
-                transport = self.get_transport(info['protocol'])()
-                self._transports[key] = transport
-                if not options.hexdump:
-                    for data in info['data']:
-                        self.msg_connect((transport, 'out'), (self._datasinks[data], 'in'))
+            if 'transports' in satyaml:
+                for key, info in satyaml['transports'].items():
+                    transport = self.get_transport(info['protocol'])()
+                    self._transports[key] = transport
+                    if not options.hexdump:
+                        for data in info['data']:
+                            self.msg_connect((transport, 'out'), (self._datasinks[data], 'in'))
 
         if pdu_in:
             for sink in itertools.chain(self._datasinks.values(), self._additional_datasinks):
