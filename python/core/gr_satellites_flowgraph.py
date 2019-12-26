@@ -144,7 +144,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
                 demodulator_additional_options = dict()
                 try:
                     demodulator_additional_options['deviation'] = transmitter['deviation']
-                    demodulator_options['af_carrier'] = transmitter['af_carrier']
+                    demodulator_additional_options['af_carrier'] = transmitter['af_carrier']
                 except KeyError:
                     pass
                 demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate, iq = iq, options = options, **demodulator_additional_options)
