@@ -116,6 +116,7 @@ GR_PYTHON_INSTALL(
     swiatowid_image_decoder.py
     taurus1_telemetry_parser.py
     manchester_sync.py
+    header_remover.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

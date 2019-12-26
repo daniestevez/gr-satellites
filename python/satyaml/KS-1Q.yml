@@ -2,7 +2,12 @@ name: KS-1Q
 norad: 41845
 data:
   &tlm Telemetry:
-    unknown
+    telemetry: csp
+transports:
+  &kiss KISS:
+    protocol: KISS KS-1Q
+    data:
+    - *tlm
 transmitters:
   20k FSK downlink:
     frequency: 436.500e+6
@@ -10,5 +15,5 @@ transmitters:
     baudrate: 20000
     framing: CCSDS Concatenated dual
     frame size: 223
-    data:
-    - *tlm
+    transports:
+    - *kiss

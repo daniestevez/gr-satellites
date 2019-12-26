@@ -97,6 +97,7 @@ install(FILES
     satellites_swiatowid_image_decoder.block.yml
     satellites_taurus1_telemetry_parser.block.yml
     satellites_manchester_sync.block.yml
+    satellites_header_remover.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )
 

@@ -271,4 +271,5 @@ class gr_satellites_flowgraph(gr.hier_block2):
     _transport_hooks = {
         'KISS' : transports.kiss_transport,
         'KISS no control byte' : set_options(transports.kiss_transport, control_byte = False),
+        'KISS KS-1Q' : set_options(transports.kiss_transport, control_byte = False, header_remove_bytes = 3),
     }

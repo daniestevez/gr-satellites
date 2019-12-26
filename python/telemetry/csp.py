@@ -36,3 +36,13 @@ CSPHeader = ByteSwapped(BitStruct(
     'rdp' / Flag,
     'crc' / Flag
     ))
+
+csp = Struct(
+    'header' / CSPHeader,
+    'payload' / GreedyBytes
+    )
+
+csp_swapped = Struct(
+    'header' / ByteSwapped(CSPHeader),
+    'payload' / GreedyBytes
+    )
