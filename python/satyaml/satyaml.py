@@ -39,6 +39,7 @@ class SatYAML:
                 'CCSDS Reed-Solomon', 'CCSDS Reed-Solomon dual', 'CCSDS Reed-Solomon differential',\
                 'CCSDS Reed-Solomon dual differential', 'CCSDS Concatenated', 'CCSDS Concatenated dual',\
                 'CCSDS Concatenated differential', 'CCSDS Concatenated dual differential']
+    transports = ['KISS', 'KISS no control byte']
     
     def check_yaml(self, yml):
         d = self.get_yamldata(yml)
@@ -54,6 +55,12 @@ class SatYAML:
                     raise YAMLError(f'Unknown telemetry server {server}')
         if 'data' not in d:
             raise YAMLError(f'Missing data field in {yml}')
+        if 'transports' in d:
+            for key, transport in d['transports'].items():
+                if 'protocol' not in transport:
+                    raise YAMLError(f'Missing protocol field in transport {key}')
+                if transport['protocol'] not in self.transports:
+                    raise YAMLError(f'Unknown protocol field in transport {key}')
         if 'transmitters' not in d:
             raise YAMLError(f'Missing transmitters field in {yml}')
         for key, transmitter in d['transmitters'].items():
@@ -73,11 +80,16 @@ class SatYAML:
                 raise YAMLError(f'Missing framing field in {key} in {yml}')
             if transmitter['framing'] not in self.framings:
                 raise YAMLError(f'Unknown framing in {key} in {yml}')
-            if 'data' not in transmitter:
-                raise YAMLError(f'Missing data field in {key} in {yml}')
-            for dd in transmitter['data']:
-                if dd not in d['data']:
-                    raise YAMLError(f'Data entry {dd} used in {key} is not defined in data field in {yml}')
+            if 'data' not in transmitter and 'transports' not in transmitter:
+                raise YAMLError(f'No data or transport field in {key} in {yml}')
+            if 'data' in transmitter:
+                for dd in transmitter['data']:
+                    if dd not in d['data']:
+                        raise YAMLError(f'Data entry {dd} used in {key} is not defined in data field in {yml}')
+            if 'transport' in transmitter:
+                for t in transmitter['transports']:
+                    if t not in d['transports']:
+                        raise YAMLError(f'Transport entry {t} used in {key} is not defined in transports field in {yml}')
             
     def check_all_yaml(self):
         for yml in self.yaml_files():

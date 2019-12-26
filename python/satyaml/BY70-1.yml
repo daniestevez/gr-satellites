@@ -3,6 +3,11 @@ norad: 41909
 data:
   &tlm Telemetry:
     unknown
+transports:
+  &kiss KISS:
+    protocol: KISS no control byte
+    data:
+    - *tlm
 transmitters:
   9k6 BPSK downlink:
     frequency: 436.200e+6
@@ -10,5 +15,5 @@ transmitters:
     baudrate: 9600
     framing: CCSDS Concatenated differential
     frame size: 114
-    data:
-    - *tlm
+    transports:
+    - *kiss

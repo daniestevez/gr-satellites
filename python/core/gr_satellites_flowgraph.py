@@ -23,6 +23,7 @@ from ..components import demodulators
 from ..components import deframers
 from ..components import datasinks
 from ..components import datasources
+from ..components import transports
 from ..satyaml import yamlfiles
 
 import functools
@@ -119,6 +120,13 @@ class gr_satellites_flowgraph(gr.hier_block2):
                 self._additional_datasinks.append(datasinks.kiss_file_sink(options.kiss_out, bool(options.kiss_append)))
             if config.getboolean('Groundstation', 'submit_tlm'):
                 self._additional_datasinks.extend(self.get_telemetry_submitters(satyaml, config))
+            self._transports = dict()
+            for key, info in satyaml['transports'].items():
+                transport = self.get_transport(info['protocol'])()
+                self._transports[key] = transport
+                if not options.hexdump:
+                    for data in info['data']:
+                        self.msg_connect((transport, 'out'), (self._datasinks[data], 'in'))
 
         if pdu_in:
             for sink in itertools.chain(self._datasinks.values(), self._additional_datasinks):
@@ -149,8 +157,12 @@ class gr_satellites_flowgraph(gr.hier_block2):
                     self.msg_connect((deframer, 'out'), (self, 'out'))
                 else:
                     if not options.hexdump:
-                        for data in transmitter['data']:
-                            self.msg_connect((deframer, 'out'), (self._datasinks[data], 'in'))
+                        if 'data' in transmitter:
+                            for data in transmitter['data']:
+                                self.msg_connect((deframer, 'out'), (self._datasinks[data], 'in'))
+                        if 'transports' in transmitter:
+                            for transport in transmitter['transports']:
+                                self.msg_connect((deframer, 'out'), (self._transports[transport], 'in'))
                     for s in self._additional_datasinks:
                         self.msg_connect((deframer, 'out'), (s, 'in'))
 
@@ -173,6 +185,9 @@ class gr_satellites_flowgraph(gr.hier_block2):
 
     def get_deframer(self, framing):
         return self._deframer_hooks[framing]
+
+    def get_transport(self, protocol):
+        return self._transport_hooks[protocol]
 
     @staticmethod
     def open_satyaml(file, name, norad):
@@ -243,4 +258,8 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'CCSDS Concatenated dual' : set_options(deframers.ccsds_concatenated_deframer, dual_basis = True),
         'CCSDS Concatenated differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True),
         'CCSDS Concatenated dual differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True, dual_basis = True),
+    }
+    _transport_hooks = {
+        'KISS' : transports.kiss_transport,
+        'KISS no control byte' : set_options(transports.kiss_transport, control_byte = False),
     }
