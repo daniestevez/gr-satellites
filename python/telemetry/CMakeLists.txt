@@ -33,6 +33,7 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     ax25.py
+    by70_1.py
     csp.py
     eseo.py
     gomx_1.py

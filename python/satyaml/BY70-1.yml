@@ -2,7 +2,7 @@ name: BY70-1
 norad: 41909
 data:
   &tlm Telemetry:
-    unknown
+    telemetry: by70_1
 transports:
   &kiss KISS:
     protocol: KISS no control byte
