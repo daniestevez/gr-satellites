@@ -18,8 +18,7 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 
-add_subdirectory(deframers)
-add_subdirectory(demodulators)
-add_subdirectory(datasinks)
-add_subdirectory(datasources)
-add_subdirectory(transports)
+install(FILES
+    satellites_kiss_transport.block.yml
+    DESTINATION share/gnuradio/grc/blocks
+)

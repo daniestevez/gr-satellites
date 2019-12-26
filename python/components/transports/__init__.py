@@ -19,9 +19,14 @@
 # The presence of this file turns this directory into a Python package
 
 '''
-gr-satellites components
+gr-satellites transport components
 
-These components are the basic high-level building blocks of gr-satellites.
+The transports transform PDUs with packets in a certain protocol
+into PDUs with packets into another protocol. They are used to
+implement upper layer network protocols.
+
+The input to these hierarchical blocks are PDUs and the output
+are PDUs as well.
 '''
 
-__all__ = ['deframers', 'demodulators', 'datasinks', 'transports']
+from .kiss_transport import kiss_transport

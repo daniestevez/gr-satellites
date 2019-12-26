@@ -32,14 +32,9 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
-    DESTINATION ${GR_PYTHON_DIR}/satellites/components
+    kiss_transport.py
+    DESTINATION ${GR_PYTHON_DIR}/satellites/components/transports
 )
-
-add_subdirectory(deframers)
-add_subdirectory(demodulators)
-add_subdirectory(datasinks)
-add_subdirectory(datasources)
-add_subdirectory(transports)
 
 ########################################################################
 # Handle the unit tests

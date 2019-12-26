@@ -1,0 +1,24 @@
+id: satellites_kiss_transport
+label: KISS Transport
+category: '[Satellites]/Transports'
+
+parameters:
+-   id: use_control
+    label: Expect control byte
+    dtype: bool
+    default: 'True'
+    options: ['True', 'False']
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.transports
+    make: satellites.components.transports.kiss_transport(control_byte=${use_control})
+
+file_format: 1
