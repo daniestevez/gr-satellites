@@ -94,7 +94,7 @@ An older version may be used, but note the following:
 Required dependencies:
 
   * Phil Karn's KA9Q `libfec`. A fork that builds in modern linux systems can be found
-    [here](https://github.com/daniestevez/libfec).
+    [here](https://github.com/quiet/libfec).
   * [construct](https://construct.readthedocs.io/en/latest/), at least version 2.9.
   * [requests](https://pypi.org/project/requests/).
   * [swig](http://www.swig.org/)
