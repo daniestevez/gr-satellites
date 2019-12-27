@@ -61,7 +61,7 @@ if(NOT satellites_sources)
 endif(NOT satellites_sources)
 
 add_library(gnuradio-satellites SHARED ${satellites_sources})
-target_link_libraries(gnuradio-satellites ${FEC_LIBRARIES} gnuradio::gnuradio-runtime)
+target_link_libraries(gnuradio-satellites ${FEC_LIBRARIES} ${VOLK_LIBRARIES} gnuradio::gnuradio-runtime)
 target_include_directories(gnuradio-satellites
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PUBLIC $<INSTALL_INTERFACE:include>
