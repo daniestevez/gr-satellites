@@ -51,6 +51,7 @@ namespace gr {
 		  gr::io_signature::make(0, 0, 0))
     {
       d_size = size;
+      d_ra_context = new ra_context();
 
       message_port_register_out(pmt::mp("out"));
       message_port_register_in(pmt::mp("in"));
@@ -85,8 +86,10 @@ namespace gr {
       uint8_t *ra_out = new uint8_t [d_size];
       size_t offset(0);
       const float * const soft_bits = (const float *) pmt::uniform_vector_elements(msg, offset);
+      int ra_code_length;
 
-      ra_length_init(d_size/2);
+      ra_length_init(d_ra_context, d_size/2);
+      ra_code_length = d_ra_context->ra_code_length;
 
       if (pmt::length(msg) != ra_code_length * RA_BITCOUNT) {
 	fprintf(stderr, "message length: %d, expected: %d\n", pmt::length(msg), ra_code_length * RA_BITCOUNT);
@@ -102,7 +105,7 @@ namespace gr {
 	}
       }
 
-      ra_decoder_gen(ra_in, (ra_word_t *) ra_out, 20);
+      ra_decoder_gen(d_ra_context, ra_in, (ra_word_t *) ra_out, 20);
 
       delete[] ra_in;
 

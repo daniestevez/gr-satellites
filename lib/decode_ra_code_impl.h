@@ -23,6 +23,10 @@
 
 #include <satellites/decode_ra_code.h>
 
+extern "C" {
+#include "radecoder/ra_config.h"
+}
+
 namespace gr {
   namespace satellites {
 
@@ -30,6 +34,7 @@ namespace gr {
     {
      private:
       int d_size;
+      struct ra_context *d_ra_context;
       
      public:
       decode_ra_code_impl(int size);

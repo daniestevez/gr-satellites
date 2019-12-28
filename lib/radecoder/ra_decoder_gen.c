@@ -1,5 +1,6 @@
 /*
  * Copyright 2015-2019 Miklos Maroti.
+ * Copyright 2019 Daniel Estevez <daniel@destevez.net> (reentrant version)
  *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,18 +28,14 @@
 
 /* --- REPEAT ACCUMULATE GENERIC DECODER --- */
 
-static float ra_dataword_gen[RA_MAX_DATA_LENGTH * RA_BITCOUNT];
-static float ra_codeword_gen[RA_MAX_CODE_LENGTH * RA_BITCOUNT];
-static float ra_forward_gen[RA_MAX_DATA_LENGTH * RA_BITCOUNT];
-
-void ra_prepare_gen(float *softbits) {
+void ra_prepare_gen(struct ra_context *ctx, float *softbits) {
   int index;
 
-  for (index = 0; index < ra_data_length * RA_BITCOUNT; index++)
-    ra_dataword_gen[index] = 0.0f;
+  for (index = 0; index < ctx->ra_data_length * RA_BITCOUNT; index++)
+    ctx->ra_dataword_gen[index] = 0.0f;
 
-  for (index = 0; index < ra_code_length * RA_BITCOUNT; index++)
-    ra_codeword_gen[index] = softbits[index];
+  for (index = 0; index < ctx->ra_code_length * RA_BITCOUNT; index++)
+    ctx->ra_codeword_gen[index] = softbits[index];
 }
 
 static inline float ra_llr_min(float a, float b) {
@@ -52,22 +49,22 @@ static inline float ra_llr_min(float a, float b) {
   return copysignf(a, c);
 }
 
-void ra_improve_gen(float *codeword, int puncture, bool half) {
+void ra_improve_gen(struct ra_context *ctx, float *codeword, int puncture, bool half) {
   int index, bit, pos;
   float accu[RA_BITCOUNT];
   float data, left;
 
-  assert(ra_data_length > 0); /* to avoid pos uninitialized warning */
+  assert(ctx->ra_data_length > 0); /* to avoid pos uninitialized warning */
 
   for (bit = 0; bit < RA_BITCOUNT; bit++)
     accu[bit] = FLT_MAX;
 
-  for (index = 0; index < ra_data_length; index++) {
-    pos = ra_lfsr_next();
+  for (index = 0; index < ctx->ra_data_length; index++) {
+    pos = ra_lfsr_next(ctx);
 
     for (bit = 0; bit < RA_BITCOUNT; bit++) {
-      data = ra_dataword_gen[pos * RA_BITCOUNT + bit];
-      ra_forward_gen[index * RA_BITCOUNT + bit] = accu[bit];
+      data = ctx->ra_dataword_gen[pos * RA_BITCOUNT + bit];
+      ctx->ra_forward_gen[index * RA_BITCOUNT + bit] = accu[bit];
       accu[bit] = ra_llr_min(accu[bit], data);
     }
 
@@ -82,14 +79,14 @@ void ra_improve_gen(float *codeword, int puncture, bool half) {
     accu[RA_BITCOUNT - 1] = data;
   }
 
-  if (ra_data_length % puncture != 0) {
+  if (ctx->ra_data_length % puncture != 0) {
     for (bit = 0; bit < RA_BITCOUNT; bit++) {
       data = codeword[(bit + 1) % RA_BITCOUNT];
       accu[bit] = accu[bit] + data + data;
     }
   }
 
-  for (index = ra_data_length - 1; index >= 0; index--) {
+  for (index = ctx->ra_data_length - 1; index >= 0; index--) {
     data = accu[RA_BITCOUNT - 1];
     for (bit = RA_BITCOUNT - 1; bit >= 1; bit--)
       accu[bit] = accu[bit - 1];
@@ -101,33 +98,33 @@ void ra_improve_gen(float *codeword, int puncture, bool half) {
     }
 
     for (bit = 0; bit < RA_BITCOUNT; bit++) {
-      left = ra_forward_gen[index * RA_BITCOUNT + bit];
+      left = ctx->ra_forward_gen[index * RA_BITCOUNT + bit];
       left = ra_llr_min(left, accu[bit]);
 
-      data = ra_dataword_gen[pos * RA_BITCOUNT + bit];
+      data = ctx->ra_dataword_gen[pos * RA_BITCOUNT + bit];
       accu[bit] = ra_llr_min(accu[bit], data);
 
       if (half)
         data *= 0.5f;
 
       left += data;
-      ra_dataword_gen[pos * RA_BITCOUNT + bit] = left;
+      ctx->ra_dataword_gen[pos * RA_BITCOUNT + bit] = left;
     }
 
-    pos = ra_lfsr_prev();
+    pos = ra_lfsr_prev(ctx);
   }
 }
 
-void ra_decide_gen(ra_word_t *packet) {
+void ra_decide_gen(struct ra_context *ctx, ra_word_t *packet) {
   int index, bit;
   ra_word_t word;
   float data;
 
-  for (index = 0; index < ra_data_length; index++) {
+  for (index = 0; index < ctx->ra_data_length; index++) {
     word = 0;
 
     for (bit = 0; bit < RA_BITCOUNT; bit++) {
-      data = ra_dataword_gen[index * RA_BITCOUNT + bit];
+      data = ctx->ra_dataword_gen[index * RA_BITCOUNT + bit];
       word |= (data < 0.0f) << bit;
     }
 
@@ -135,23 +132,23 @@ void ra_decide_gen(ra_word_t *packet) {
   }
 }
 
-void ra_decoder_gen(float *softbits, ra_word_t *packet, int passes) {
+void ra_decoder_gen(struct ra_context *ctx, float *softbits, ra_word_t *packet, int passes) {
   int count, seqno;
   float *codeword;
 
-  ra_prepare_gen(softbits);
+  ra_prepare_gen(ctx, softbits);
 
   for (count = 0; count < passes; count++) {
-    codeword = ra_codeword_gen;
+    codeword = ctx->ra_codeword_gen;
 
     for (seqno = 0; seqno < 4; seqno++) {
-      ra_lfsr_init(seqno);
-      ra_improve_gen(codeword, seqno == 0 ? 1 : RA_PUNCTURE_RATE, count > 0);
-      codeword += (seqno == 0 ? ra_data_length : ra_chck_length) * RA_BITCOUNT;
+      ra_lfsr_init(ctx, seqno);
+      ra_improve_gen(ctx, codeword, seqno == 0 ? 1 : RA_PUNCTURE_RATE, count > 0);
+      codeword += (seqno == 0 ? ctx->ra_data_length : ctx->ra_chck_length) * RA_BITCOUNT;
     }
 
-    assert(ra_codeword_gen + ra_code_length * RA_BITCOUNT == codeword);
+    assert(ctx->ra_codeword_gen + ctx->ra_code_length * RA_BITCOUNT == codeword);
   }
 
-  ra_decide_gen(packet);
+  ra_decide_gen(ctx, packet);
 }

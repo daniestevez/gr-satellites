@@ -1,5 +1,6 @@
 /*
  * Copyright 2015-2019 Miklos Maroti.
+ * Copyright 2019 Daniel Estevez <daniel@destevez.net> (reentrant version)
  *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,50 +22,46 @@
 #include "ra_lfsr.h"
 #include <assert.h>
 
-static ra_index_t ra_lfsr_mask;
-static ra_index_t ra_lfsr_state;
-static ra_index_t ra_lfsr_offset;
-
 /* last element returned will be seqno */
-void ra_lfsr_init(uint8_t seqno) {
+void ra_lfsr_init(struct ra_context *ctx, uint8_t seqno) {
   /* make sure that ra_length_init is called */
-  assert(ra_data_length > 0);
+  assert(ctx->ra_data_length > 0);
 
-  ra_lfsr_mask = ra_lfsr_masks[seqno];
-  ra_lfsr_offset = ra_data_length >> (1 + seqno);
-  ra_lfsr_state = 1 + seqno + ra_lfsr_offset;
+  ctx->ra_lfsr_mask = ctx->ra_lfsr_masks[seqno];
+  ctx->ra_lfsr_offset = ctx->ra_data_length >> (1 + seqno);
+  ctx->ra_lfsr_state = 1 + seqno + ctx->ra_lfsr_offset;
 }
 
-ra_index_t ra_lfsr_next(void) {
+ra_index_t ra_lfsr_next(struct ra_context *ctx) {
   ra_index_t b;
 
   /* this loop runs at most twice on average */
   do {
-    b = ra_lfsr_state & 0x1;
-    ra_lfsr_state >>= 1;
-    ra_lfsr_state ^= (-b) & ra_lfsr_mask;
-  } while (ra_lfsr_state > ra_data_length);
+    b = ctx->ra_lfsr_state & 0x1;
+    ctx->ra_lfsr_state >>= 1;
+    ctx->ra_lfsr_state ^= (-b) & ctx->ra_lfsr_mask;
+  } while (ctx->ra_lfsr_state > ctx->ra_data_length);
 
-  b = ra_lfsr_state - 1;
-  if (b < ra_lfsr_offset)
-    b += ra_data_length;
-  b -= ra_lfsr_offset;
+  b = ctx->ra_lfsr_state - 1;
+  if (b < ctx->ra_lfsr_offset)
+    b += ctx->ra_data_length;
+  b -= ctx->ra_lfsr_offset;
   return b;
 }
 
-ra_index_t ra_lfsr_prev(void) {
+ra_index_t ra_lfsr_prev(struct ra_context *ctx) {
   ra_index_t b;
 
   /* this loop runs at most twice on average */
   do {
-    b = ra_lfsr_state >> ra_lfsr_highbit;
-    ra_lfsr_state <<= 1;
-    ra_lfsr_state ^= (-b) & (0x01 | ra_lfsr_mask << 1);
-  } while (ra_lfsr_state > ra_data_length);
+    b = ctx->ra_lfsr_state >> ctx->ra_lfsr_highbit;
+    ctx->ra_lfsr_state <<= 1;
+    ctx->ra_lfsr_state ^= (-b) & (0x01 | ctx->ra_lfsr_mask << 1);
+  } while (ctx->ra_lfsr_state > ctx->ra_data_length);
 
-  b = ra_lfsr_state - 1;
-  if (b < ra_lfsr_offset)
-    b += ra_data_length;
-  b -= ra_lfsr_offset;
+  b = ctx->ra_lfsr_state - 1;
+  if (b < ctx->ra_lfsr_offset)
+    b += ctx->ra_data_length;
+  b -= ctx->ra_lfsr_offset;
   return b;
 }

@@ -1,5 +1,6 @@
 /*
  * Copyright 2015-2019 Miklos Maroti.
+ * Copyright 2019 Daniel Estevez <daniel@destevez.net> (reentrant version)
  *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +22,7 @@
 #include <assert.h>
 
 /* masks selected from http://users.ece.cmu.edu/~koopman/lfsr/index.html */
-static uint16_t ra_lfsr_masks_table[9][4] = {
+static const uint16_t ra_lfsr_masks_table[9][4] = {
     {0x12, 0x17, 0x1B, 0x1E},         // highbit 4, data_length <= 31
     {0x21, 0x2D, 0x30, 0x39},         // highbit 5, data_length <= 63
     {0x41, 0x53, 0x69, 0x7B},         // highbit 6, data_length <= 127
@@ -33,30 +34,24 @@ static uint16_t ra_lfsr_masks_table[9][4] = {
     {0x1013, 0x109D, 0x117D, 0x1271}, // highbit 12, data_length <= 8191
 };
 
-ra_index_t ra_data_length = 0;
-ra_index_t ra_code_length = 0;
-ra_index_t ra_chck_length = 0;
-uint16_t ra_lfsr_masks[4];
-uint8_t ra_lfsr_highbit;
-
-void ra_length_init(ra_index_t data_length) {
+void ra_length_init(struct ra_context *ctx, ra_index_t data_length) {
   assert(4 <= data_length && data_length <= RA_MAX_DATA_LENGTH);
 
-  ra_data_length = data_length;
-  ra_chck_length = (data_length + RA_PUNCTURE_RATE - 1) / RA_PUNCTURE_RATE;
-  ra_code_length = data_length + ra_chck_length * 3;
-  assert(ra_code_length <= RA_MAX_CODE_LENGTH);
+  ctx->ra_data_length = data_length;
+  ctx->ra_chck_length = (data_length + RA_PUNCTURE_RATE - 1) / RA_PUNCTURE_RATE;
+  ctx->ra_code_length = data_length + ctx->ra_chck_length * 3;
+  assert(ctx->ra_code_length <= RA_MAX_CODE_LENGTH);
 
-  ra_lfsr_highbit = 4;
+  ctx->ra_lfsr_highbit = 4;
   while (data_length >= 32) {
     data_length /= 2;
-    ra_lfsr_highbit += 1;
+    ctx->ra_lfsr_highbit += 1;
   }
-  assert(4 <= ra_lfsr_highbit && ra_lfsr_highbit <= 12);
+  assert(4 <= ctx->ra_lfsr_highbit && ctx->ra_lfsr_highbit <= 12);
 
-  ra_lfsr_masks[0] = ra_lfsr_masks_table[ra_lfsr_highbit - 4][0];
-  ra_lfsr_masks[1] = ra_lfsr_masks_table[ra_lfsr_highbit - 4][1];
-  ra_lfsr_masks[2] = ra_lfsr_masks_table[ra_lfsr_highbit - 4][2];
-  ra_lfsr_masks[3] = ra_lfsr_masks_table[ra_lfsr_highbit - 4][3];
+  ctx->ra_lfsr_masks[0] = ra_lfsr_masks_table[ctx->ra_lfsr_highbit - 4][0];
+  ctx->ra_lfsr_masks[1] = ra_lfsr_masks_table[ctx->ra_lfsr_highbit - 4][1];
+  ctx->ra_lfsr_masks[2] = ra_lfsr_masks_table[ctx->ra_lfsr_highbit - 4][2];
+  ctx->ra_lfsr_masks[3] = ra_lfsr_masks_table[ctx->ra_lfsr_highbit - 4][3];
 
 }
