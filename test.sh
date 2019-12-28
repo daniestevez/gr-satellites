@@ -36,3 +36,7 @@ echo AAUSAT-4
 gr_satellites AAUSAT-4 --wavfile ~/satellite-recordings/aausat_4.wav --samp_rate 48e3
 echo Floripasat-1
 gr_satellites FloripaSat-1 --wavfile ~/satellite-recordings/floripasat_1.wav --samp_rate 48e3
+echo SMOG-P
+gr_satellites SMOG-P --wavfile ~/satellite-recordings/smog_p_5k.wav --samp_rate 48e3 --input_gain 10
+gr_satellites SMOG-P --wavfile ~/satellite-recordings/smog_p_long.wav --samp_rate 48e3
+gr_satellites SMOG-P --wavfile ~/satellite-recordings/smog_p.wav --samp_rate 48e3

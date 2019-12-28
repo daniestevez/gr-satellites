@@ -19,11 +19,12 @@
 # Boston, MA 02110-1301, USA.
 
 from gnuradio import gr, digital, fec, blocks
-from ... import distributed_syncframe_soft, matrix_deinterleaver_soft, ao40_rs_decoder
+from ... import distributed_syncframe_soft, matrix_deinterleaver_soft, ao40_rs_decoder, decode_rs
 from ...hier.ccsds_descrambler import ccsds_descrambler
 from ...utils.options_block import options_block
 
 _syncword = '11111110000111011110010110010010000001000100110001011101011011000'
+_syncword_short = '1111111000011101111001011001001000000100010011000101'
 
 class ao40_fec_deframer(gr.hier_block2, options_block):
     """
@@ -34,9 +35,10 @@ class ao40_fec_deframer(gr.hier_block2, options_block):
 
     Args:
         syncword_threshold: number of bit errors allowed in syncword (int)
+        short_frames: use short frames (used in SMOG-P) (bool)
         options: Options from argparse
     """
-    def __init__(self, syncword_threshold = None, options = None):
+    def __init__(self, syncword_threshold = None, short_frames = False, options = None):
         gr.hier_block2.__init__(self, "ao40_fec_deframer",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
@@ -47,12 +49,15 @@ class ao40_fec_deframer(gr.hier_block2, options_block):
         if syncword_threshold is None:
             syncword_threshold = self.options.syncword_threshold
 
-        self.deframer = distributed_syncframe_soft(syncword_threshold, _syncword, 80)
-        self.deinterleaver = matrix_deinterleaver_soft(80, 65, 5132, 65)
-        self.viterbi = fec.cc_decoder.make(5132,7, 2, [79,-109], 0, -1, fec.CC_TERMINATED, False)
-        self.viterbi_decoder = fec.async_decoder(self.viterbi, False, False, int(5132/8))
+        self.deframer = distributed_syncframe_soft(syncword_threshold,\
+                                                   _syncword_short if short_frames else _syncword,\
+                                                   51 if short_frames else 80)
+        self.deinterleaver = matrix_deinterleaver_soft(51 if short_frames else 80, 52 if short_frames else 65,
+                                                       2572 if short_frames else 5132, 80 if short_frames else 65)
+        self.viterbi = fec.cc_decoder.make(2572 if short_frames else 5132, 7, 2, [79,-109], 0, -1, fec.CC_TERMINATED, False)
+        self.viterbi_decoder = fec.async_decoder(self.viterbi, False, False, 2572//8 if short_frames else 5132//8)
         self.scrambler = ccsds_descrambler()
-        self.rs = ao40_rs_decoder(self.options.verbose_rs)
+        self.rs = decode_rs(self.options.verbose_rs, 0) if short_frames else ao40_rs_decoder(self.options.verbose_rs)
 
         self.connect(self, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.deinterleaver, 'in'))
