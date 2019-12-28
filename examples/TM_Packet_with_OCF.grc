@@ -1,0 +1,159 @@
+options:
+  parameters:
+    author: ''
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: no_gui
+    hier_block_src_path: '.:'
+    id: tm_packet_ocf
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: run
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: ''
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: blocks_message_strobe_0
+  id: blocks_message_strobe
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    msg: pmt.intern("TEST")
+    period: '1000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [280, 36]
+    rotation: 0
+    state: enabled
+- name: blocks_random_pdu_0
+  id: blocks_random_pdu
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    length_modulo: '2'
+    mask: '0xFF'
+    maxoutbuf: '0'
+    maxsize: '2'
+    minoutbuf: '0'
+    minsize: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 28]
+    rotation: 0
+    state: enabled
+- name: satellites_telemetry_ocf_adder_0
+  id: satellites_telemetry_ocf_adder
+  parameters:
+    affinity: ''
+    alias: ''
+    clcw_version_number: '0'
+    comment: ''
+    control_word_type: '0'
+    cop_in_effect: '1'
+    farmb_counter: '0'
+    lockout: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    no_bit_lock: '0'
+    no_rf_avail: '0'
+    report_value: '0'
+    retransmit: '0'
+    rsvd_spare1: '0'
+    rsvd_spare2: '0'
+    status_field: '0'
+    virtual_channel_identification: '0'
+    wait: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 284]
+    rotation: 0
+    state: enabled
+- name: satellites_telemetry_parser_0
+  id: satellites_telemetry_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1056, 348]
+    rotation: 0
+    state: enabled
+- name: satellites_telemetry_primaryheader_adder_0
+  id: satellites_telemetry_primaryheader_adder
+  parameters:
+    I: '0'
+    affinity: ''
+    alias: ''
+    coding: '1'
+    comment: ''
+    e: '0'
+    first_header_pointer: '0'
+    ldpc_tf: '0'
+    ldpc_tf_size: '128'
+    master_channel_frame_count: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    ocf_flag: '1'
+    packet_order_flag: '1'
+    q: '0'
+    reed_solomon_concat: '0'
+    segment_length_id: '0'
+    size: '10'
+    spacecraft_id: '25'
+    synch_flag: '1'
+    transfer_frame_secondary_header_flag: '1'
+    transfer_frame_version_number: '0'
+    turbo: '223'
+    virtual_channel_frame_count: '1'
+    virtual_channel_id: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [88, 252]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_message_strobe_0, strobe, blocks_random_pdu_0, generate]
+- [blocks_random_pdu_0, pdus, satellites_telemetry_primaryheader_adder_0, in]
+- [satellites_telemetry_ocf_adder_0, out, satellites_telemetry_parser_0, in]
+- [satellites_telemetry_primaryheader_adder_0, out, satellites_telemetry_ocf_adder_0,
+  in]
+
+metadata:
+  file_format: 1

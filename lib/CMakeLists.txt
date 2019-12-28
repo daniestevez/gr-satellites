@@ -36,11 +36,16 @@ list(APPEND satellites_sources
     varlen_packet_framer_impl.cc
     viterbi.c
     nusat_decoder_impl.cc
-    ao40_syncframe_soft_impl.cc
-    ao40_deinterleaver_soft_impl.cc
     descrambler308_impl.cc
     decode_rs_general_impl.cc
     decode_rs_interleaved_impl.cc
+    distributed_syncframe_soft_impl.cc
+    matrix_deinterleaver_soft_impl.cc
+    radecoder/ra_config.c
+    radecoder/ra_decoder.c
+    radecoder/ra_decoder_gen.c
+    radecoder/ra_lfsr.c
+    decode_ra_code_impl.cc
 )
 
 set(satellites_sources "${satellites_sources}" PARENT_SCOPE)

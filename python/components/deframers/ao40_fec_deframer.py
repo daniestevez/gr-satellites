@@ -19,9 +19,11 @@
 # Boston, MA 02110-1301, USA.
 
 from gnuradio import gr, digital, fec, blocks
-from ... import ao40_syncframe_soft, ao40_deinterleaver_soft, ao40_rs_decoder
+from ... import distributed_syncframe_soft, matrix_deinterleaver_soft, ao40_rs_decoder
 from ...hier.ccsds_descrambler import ccsds_descrambler
 from ...utils.options_block import options_block
+
+_syncword = '11111110000111011110010110010010000001000100110001011101011011000'
 
 class ao40_fec_deframer(gr.hier_block2, options_block):
     """
@@ -32,10 +34,9 @@ class ao40_fec_deframer(gr.hier_block2, options_block):
 
     Args:
         syncword_threshold: number of bit errors allowed in syncword (int)
-        inverted: bitstream is inverted
         options: Options from argparse
     """
-    def __init__(self, syncword_threshold = None, inverted = False, options = None):
+    def __init__(self, syncword_threshold = None, options = None):
         gr.hier_block2.__init__(self, "ao40_fec_deframer",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
@@ -46,18 +47,14 @@ class ao40_fec_deframer(gr.hier_block2, options_block):
         if syncword_threshold is None:
             syncword_threshold = self.options.syncword_threshold
 
-        self.deframer = ao40_syncframe_soft(syncword_threshold)
-        self.deinterleaver = ao40_deinterleaver_soft()
+        self.deframer = distributed_syncframe_soft(syncword_threshold, _syncword, 80)
+        self.deinterleaver = matrix_deinterleaver_soft(80, 65, 5132, 65)
         self.viterbi = fec.cc_decoder.make(5132,7, 2, [79,-109], 0, -1, fec.CC_TERMINATED, False)
         self.viterbi_decoder = fec.async_decoder(self.viterbi, False, False, int(5132/8))
         self.scrambler = ccsds_descrambler()
         self.rs = ao40_rs_decoder(self.options.verbose_rs)
 
-        if inverted:
-            self.invert = blocks.multiply_const_ff(-1, 1)
-            self.connect(self, self.invert, self.deframer)
-        else:
-            self.connect(self, self.deframer)
+        self.connect(self, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.deinterleaver, 'in'))
         self.msg_connect((self.deinterleaver, 'out'), (self.viterbi_decoder, 'in'))
         self.msg_connect((self.viterbi_decoder, 'out'), (self.scrambler, 'in'))

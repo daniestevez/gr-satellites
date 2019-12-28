@@ -1,0 +1,228 @@
+options:
+  parameters:
+    author: ''
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: no_gui
+    hier_block_src_path: '.:'
+    id: space_packet_pathID_demux
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: ''
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: blocks_message_strobe_0
+  id: blocks_message_strobe
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    msg: pmt.intern("TEST")
+    period: '1000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [80, 116]
+    rotation: 0
+    state: enabled
+- name: blocks_random_pdu_0
+  id: blocks_random_pdu
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    length_modulo: '4'
+    mask: '0xFF'
+    maxoutbuf: '0'
+    maxsize: '4'
+    minoutbuf: '0'
+    minsize: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [384, 60]
+    rotation: 0
+    state: enabled
+- name: satellites_pathID_demultiplexer_0
+  id: satellites_pathID_demultiplexer
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    pathID_outputs: 0,1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [520, 300]
+    rotation: 0
+    state: enabled
+- name: satellites_space_packet_parser_0
+  id: satellites_space_packet_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    id_time: '''default_value'''
+    pfield: '1'
+    time_format: '0'
+    time_header: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 260]
+    rotation: 0
+    state: enabled
+- name: satellites_space_packet_parser_0_1
+  id: satellites_space_packet_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    id_time: '''default_value'''
+    pfield: '1'
+    time_format: '0'
+    time_header: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 316]
+    rotation: 0
+    state: enabled
+- name: satellites_space_packet_parser_0_2
+  id: satellites_space_packet_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    id_time: '''default_value'''
+    pfield: '1'
+    time_format: '0'
+    time_header: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 372]
+    rotation: 0
+    state: enabled
+- name: satellites_space_packet_primaryheader_adder_0
+  id: satellites_space_packet_primaryheader_adder
+  parameters:
+    AP_ID: '10'
+    affinity: ''
+    alias: ''
+    ccsds_version: '0'
+    comment: ''
+    count_or_name: '0'
+    data_length: '40000'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packet_sequence_count: '0'
+    packet_sequence_name: '0'
+    packet_type: '0'
+    secondary_header_flag: '1'
+    sequence_flags: '3'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 488]
+    rotation: 0
+    state: enabled
+- name: satellites_space_packet_primaryheader_adder_0_0
+  id: satellites_space_packet_primaryheader_adder
+  parameters:
+    AP_ID: '1'
+    affinity: ''
+    alias: ''
+    ccsds_version: '0'
+    comment: ''
+    count_or_name: '0'
+    data_length: '40000'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packet_sequence_count: '0'
+    packet_sequence_name: '0'
+    packet_type: '0'
+    secondary_header_flag: '1'
+    sequence_flags: '3'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 240]
+    rotation: 0
+    state: enabled
+- name: satellites_space_packet_primaryheader_adder_0_1
+  id: satellites_space_packet_primaryheader_adder
+  parameters:
+    AP_ID: '3'
+    affinity: ''
+    alias: ''
+    ccsds_version: '0'
+    comment: ''
+    count_or_name: '0'
+    data_length: '40000'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packet_sequence_count: '0'
+    packet_sequence_name: '0'
+    packet_type: '0'
+    secondary_header_flag: '1'
+    sequence_flags: '3'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 360]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_message_strobe_0, strobe, blocks_random_pdu_0, generate]
+- [blocks_random_pdu_0, pdus, satellites_space_packet_primaryheader_adder_0, in]
+- [blocks_random_pdu_0, pdus, satellites_space_packet_primaryheader_adder_0_0, in]
+- [blocks_random_pdu_0, pdus, satellites_space_packet_primaryheader_adder_0_1, in]
+- [satellites_pathID_demultiplexer_0, discarded, satellites_space_packet_parser_0_2,
+  in]
+- [satellites_pathID_demultiplexer_0, out0, satellites_space_packet_parser_0, in]
+- [satellites_pathID_demultiplexer_0, out1, satellites_space_packet_parser_0_1, in]
+- [satellites_space_packet_primaryheader_adder_0, out, satellites_pathID_demultiplexer_0,
+  in]
+- [satellites_space_packet_primaryheader_adder_0_0, out, satellites_pathID_demultiplexer_0,
+  in]
+- [satellites_space_packet_primaryheader_adder_0_1, out, satellites_pathID_demultiplexer_0,
+  in]
+
+metadata:
+  file_format: 1

@@ -41,3 +41,19 @@ class UNIXTimestampAdapter(Adapter):
         return round(obj.timestamp())
     def _decode(self, obj, context, path = None):
         return datetime.datetime.utcfromtimestamp(obj)
+
+class TableAdapter(Adapter):
+    def __init__(self, table, *args, **kwargs):
+        self.table = table
+        return Adapter.__init__(self, *args, **kwargs)
+    def _encode(self, obj, context, path = None):
+        try:
+            return self.table.index(obj)
+        except ValueError:
+            return None
+    def _decode(self, obj, context, path = None):
+        try:
+            return self.table[obj]
+        except IndexError:
+            return None
+

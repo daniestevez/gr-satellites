@@ -6,7 +6,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Support for SMOG-P and ATL-1
+- Support for DUCHIFAT-3
+- Support for OPS-SAT
+- Standanlone decoder for AAUSAT-4
+- Support for FloripaSat-1
+- BME telemetry forwarder
+### Changed
+- Replaced AO-40 synchronizer by more general distributed synchronizer
+- Replaced AO-40 deinterleaver by more general matrix deinterleaver
+
+### [2.1.0] - 2019-11-01
+### Added
+- Support for Luojia-1
+### Fixed
+- Corrected FACSAT NORAD ID
+
+## [2.0.0] - 2019-10-10
+### Added
+- Support for GNU Radio 3.8
+- Support for 4k8 in ESEO decoder
+
+### Removed
+- Support for GNU Radio 3.7
+
+## [1.8.1] - 2019-10-07
+### Fixed
+- Bug with FUNcube telemetry submitter in some flowgraphs
+
+## [1.8.0] - 2019-10-04
+### Added
 - Światowid image decoder
+- Support for Taurus-1
+- CCSDS blocks from SOCIS
+
+### Fixed
+- KISS and HDLC blocks from gr-kiss in some flowgraphs
 
 ## [1.7.0] - 2019-08-31
 ### Added
@@ -101,7 +136,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v1.7.0...HEAD
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v2.1.0...maint-3.8
+[2.1.0]: https://github.com/daniestevez/gr-satellites/compare/v2.0.0...v2.1.0
+[2.0.0]: https://github.com/daniestevez/gr-satellites/compare/v1.8.1...v2.0.0
+[1.8.1]: https://github.com/daniestevez/gr-satellites/compare/v1.8.0...v1.8.1
+[1.8.0]: https://github.com/daniestevez/gr-satellites/compare/v1.7.0...v1.8.0
 [1.7.0]: https://github.com/daniestevez/gr-satellites/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/daniestevez/gr-satellites/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/daniestevez/gr-satellites/compare/v1.4.0...v1.5.0

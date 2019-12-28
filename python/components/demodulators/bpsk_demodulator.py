@@ -102,7 +102,8 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         if differential:
             self.delay = blocks.delay(gr.sizeof_gr_complex, 1)
             self.multiply_conj = blocks.multiply_conjugate_cc(1)
-            self.multiply_const = blocks.multiply_const_ff(-1/agc_ref**2, 1) # -1 since inversion is needed
+            sign = -1 if manchester else 1
+            self.multiply_const = blocks.multiply_const_ff(sign/agc_ref**2, 1) # take care about inverion in Manchester
             self.connect(self.manchester, (self.multiply_conj, 0))
             self.connect(self.manchester, self.delay, (self.multiply_conj, 1))
             self.connect(self.multiply_conj, self.complex_to_real, self.multiply_const, self)

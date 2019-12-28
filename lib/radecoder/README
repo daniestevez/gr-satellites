@@ -1,0 +1,7 @@
+RA codes decoder by Miklos Maroti
+----------------------------------
+
+This decoder is used to decode the RA codes used by SMOG-P and ATL-1. The
+decoder source is taken from:
+
+https://github.com/szlldm/smogp_atl1_gndsw

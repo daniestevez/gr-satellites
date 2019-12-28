@@ -1,0 +1,31 @@
+id: satellites_distributed_syncframe_soft
+label: Distributed synchronize frame (soft symbols)
+category: '[Satellites]/Packet'
+
+parameters:
+-   id: threshold
+    label: Threshold
+    dtype: int
+    default: '0'
+-   id: syncword
+    label: Syncword
+    dtype: string
+    default: '11111110000111011110010110010010000001000100110001011101011011000'
+-   id: step
+    label: Step
+    dtype: int
+    default: '80'
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites
+    make: satellites.distributed_syncframe_soft(${threshold}, ${syncword}, ${step})
+
+file_format: 1

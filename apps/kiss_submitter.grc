@@ -8,7 +8,7 @@ options:
     description: KISS client telemetry submitter
     gen_cmake: 'On'
     gen_linking: dynamic
-    generate_options: no_gui
+    generate_options: qt_gui
     hier_block_src_path: '.:'
     id: kiss_submitter
     max_nouts: '0'
@@ -32,6 +32,19 @@ options:
     state: enabled
 
 blocks:
+- name: blocks_message_debug_0
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1152, 240.0]
+    rotation: 0
+    state: enabled
 - name: blocks_pdu_to_tagged_stream_0
   id: blocks_pdu_to_tagged_stream
   parameters:
@@ -46,7 +59,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [264, 356]
+    coordinate: [224, 204.0]
     rotation: 0
     state: enabled
 - name: blocks_socket_pdu_0
@@ -61,12 +74,32 @@ blocks:
     mtu: '10000'
     port: port
     tcp_no_delay: 'False'
+    type: TCP_CLIENT
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 132.0]
+    rotation: 0
+    state: enabled
+- name: blocks_socket_pdu_0_0
+  id: blocks_socket_pdu
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    host: localhost
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mtu: '10000'
+    port: '52002'
+    tcp_no_delay: 'True'
     type: TCP_SERVER
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [96, 336]
+    coordinate: [888, 316.0]
     rotation: 0
     state: enabled
 - name: callsign
@@ -83,7 +116,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [512, 15]
+    coordinate: [680, 108.0]
     rotation: 0
     state: enabled
 - name: host
@@ -94,13 +127,13 @@ blocks:
     hide: none
     label: Host
     short_id: ''
-    type: ''
+    type: str
     value: localhost
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 144]
+    coordinate: [256, 12.0]
     rotation: 0
     state: enabled
 - name: latitude
@@ -117,7 +150,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [512, 119]
+    coordinate: [656, 12.0]
     rotation: 0
     state: enabled
 - name: longitude
@@ -134,7 +167,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [720, 119]
+    coordinate: [816, 12.0]
     rotation: 0
     state: enabled
 - name: norad
@@ -151,9 +184,48 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [944, 8]
+    coordinate: [1152, 12.0]
     rotation: 0
     state: enabled
+- name: note_0
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: IP of SoundModem Source
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [216, 108.0]
+    rotation: 0
+    state: true
+- name: note_1
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: KISS port in SoundModem
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 124.0]
+    rotation: 0
+    state: true
+- name: note_3
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: Output to GETKISS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1048, 380.0]
+    rotation: 0
+    state: true
 - name: port
   id: parameter
   parameters:
@@ -162,13 +234,13 @@ blocks:
     hide: none
     label: Port
     short_id: p
-    type: ''
+    type: str
     value: '8001'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [176, 144]
+    coordinate: [472, 12.0]
     rotation: 0
     state: enabled
 - name: recstart
@@ -185,7 +257,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [720, 15]
+    coordinate: [976, 12.0]
     rotation: 0
     state: enabled
 - name: satellites_kiss_to_pdu_0
@@ -201,7 +273,39 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [504, 356]
+    coordinate: [472, 180.0]
+    rotation: 0
+    state: enabled
+- name: satellites_pdu_to_kiss_0
+  id: satellites_pdu_to_kiss
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [688, 336.0]
+    rotation: 0
+    state: enabled
+- name: satellites_print_timestamp_0
+  id: satellites_print_timestamp
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    count: 'True'
+    fmt: '%Y-%m-%d %H:%M:%S'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [720, 244.0]
     rotation: 0
     state: enabled
 - name: satellites_submit_0
@@ -220,14 +324,18 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [720, 320]
+    coordinate: [1000, 108.0]
     rotation: 0
-    state: enabled
+    state: disabled
 
 connections:
 - [blocks_pdu_to_tagged_stream_0, '0', satellites_kiss_to_pdu_0, '0']
 - [blocks_socket_pdu_0, pdus, blocks_pdu_to_tagged_stream_0, pdus]
-- [satellites_kiss_to_pdu_0, out, satellites_submit_0, in]
+- [satellites_kiss_to_pdu_0, out, satellites_pdu_to_kiss_0, in]
+- [satellites_kiss_to_pdu_0, out, satellites_print_timestamp_0, in]
+- [satellites_pdu_to_kiss_0, out, blocks_socket_pdu_0_0, pdus]
+- [satellites_print_timestamp_0, out, blocks_message_debug_0, print_pdu]
+- [satellites_print_timestamp_0, out, satellites_submit_0, in]
 
 metadata:
   file_format: 1

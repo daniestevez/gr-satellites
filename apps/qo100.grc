@@ -741,16 +741,16 @@ blocks:
 
 connections:
 - [blocks_complex_to_real_0, '0', blocks_multiply_const_vxx_0, '0']
-- [blocks_complex_to_real_0, '0', satellites_ao40_fec_decoder_soft_0, '0']
 - [blocks_complex_to_real_0_0, '0', blocks_multiply_const_vxx_0_0, '0']
-- [blocks_complex_to_real_0_0, '0', satellites_ao40_fec_decoder_soft_0_0, '0']
 - [blocks_delay_0, '0', blocks_multiply_conjugate_cc_0, '1']
 - [blocks_delay_0_0, '0', blocks_multiply_conjugate_cc_0_0, '1']
 - [blocks_delay_1, '0', rational_resampler_base_xxx_0_0, '0']
 - [blocks_multiply_conjugate_cc_0, '0', blocks_complex_to_real_0, '0']
 - [blocks_multiply_conjugate_cc_0_0, '0', blocks_complex_to_real_0_0, '0']
 - [blocks_multiply_const_vxx_0, '0', digital_binary_slicer_fb_0, '0']
+- [blocks_multiply_const_vxx_0, '0', satellites_ao40_fec_decoder_soft_0, '0']
 - [blocks_multiply_const_vxx_0_0, '0', digital_binary_slicer_fb_0_0, '0']
+- [blocks_multiply_const_vxx_0_0, '0', satellites_ao40_fec_decoder_soft_0_0, '0']
 - [blocks_pdu_to_tagged_stream_0, '0', blocks_tcp_server_sink_0, '0']
 - [blocks_short_to_float_0, '0', freq_xlating_fir_filter_xxx_0, '0']
 - [blocks_udp_source_0, '0', blocks_short_to_float_0, '0']

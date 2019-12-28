@@ -1,0 +1,17 @@
+id: satellites_ngham_remove_padding
+label: NGHam Remove Padding
+category: '[Satellites]/NGHam'
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites
+    make: satellites.ngham_remove_padding()
+
+file_format: 1

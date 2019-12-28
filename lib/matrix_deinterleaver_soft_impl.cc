@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2018 Daniel Estevez <daniel@destevez.net>.
+ * Copyright 2019 Daniel Estevez <daniel@destevez.net>.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,50 +21,50 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include "ao40_deinterleaver_soft_impl.h"
-
-#define ROWS 80
-#define COLS 65
-#define OUT_SIZE 5132
+#include "matrix_deinterleaver_soft_impl.h"
 
 namespace gr {
   namespace satellites {
 
-    ao40_deinterleaver_soft::sptr
-    ao40_deinterleaver_soft::make()
+    matrix_deinterleaver_soft::sptr
+    matrix_deinterleaver_soft::make(int rows, int cols, int output_size, int output_skip)
     {
       return gnuradio::get_initial_sptr
-        (new ao40_deinterleaver_soft_impl());
+        (new matrix_deinterleaver_soft_impl(rows, cols, output_size, output_skip));
     }
 
     /*
      * The private constructor
      */
-    ao40_deinterleaver_soft_impl::ao40_deinterleaver_soft_impl()
-      : gr::block("ao40_deinterleaver_soft",
+    matrix_deinterleaver_soft_impl::matrix_deinterleaver_soft_impl(int rows, int cols, int output_size, int output_skip)
+      : gr::block("matrix_deinterleaver_soft",
               gr::io_signature::make(0, 0, 0),
               gr::io_signature::make(0, 0, 0))
     {
+      d_rows = rows;
+      d_cols = cols;
+      d_output_size = output_size;
+      d_output_skip = output_skip;
       message_port_register_out(pmt::mp("out"));
       message_port_register_in(pmt::mp("in"));
       set_msg_handler(pmt::mp("in"),
-		      boost::bind(&ao40_deinterleaver_soft_impl::msg_handler, this, _1));
+		      boost::bind(&matrix_deinterleaver_soft_impl::msg_handler, this, _1));
     }
 
     /*
      * Our virtual destructor.
      */
-    ao40_deinterleaver_soft_impl::~ao40_deinterleaver_soft_impl()
+    matrix_deinterleaver_soft_impl::~matrix_deinterleaver_soft_impl()
     {
     }
 
     void
-    ao40_deinterleaver_soft_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
+    matrix_deinterleaver_soft_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
     {
     }
 
     int
-    ao40_deinterleaver_soft_impl::general_work (int noutput_items,
+    matrix_deinterleaver_soft_impl::general_work (int noutput_items,
                        gr_vector_int &ninput_items,
                        gr_vector_const_void_star &input_items,
                        gr_vector_void_star &output_items)
@@ -74,19 +74,21 @@ namespace gr {
 
 
     void
-    ao40_deinterleaver_soft_impl::msg_handler (pmt::pmt_t pmt_msg) {
+    matrix_deinterleaver_soft_impl::msg_handler (pmt::pmt_t pmt_msg) {
       pmt::pmt_t msg = pmt::cdr(pmt_msg);
       size_t offset(0);
       const float *data = (const float *) pmt::uniform_vector_elements(msg, offset);
-      float out[OUT_SIZE];
+      float *out = new float [d_rows * d_cols];
 
-      for (int i = 0; i < OUT_SIZE; i++) {
-	out[i] = data[ROWS*(i % COLS) + i/COLS + 1];
+      // Full matrix deinterleave, ignoring output cropping
+      for (int i = 0; i < d_rows * d_cols; i++) {
+	out[i] = data[d_rows*(i % d_cols) + i/d_cols];
       }
 
+      // Output cropping
       message_port_pub(pmt::mp("out"),
 		       pmt::cons(pmt::PMT_NIL,
-				 pmt::init_f32vector(OUT_SIZE, out)));
+				 pmt::init_f32vector(d_output_size, out + d_output_skip)));
       
     }
     

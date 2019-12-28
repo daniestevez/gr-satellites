@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2018 Daniel Estevez <daniel@destevez.net>.
+ * Copyright 2019 Daniel Estevez <daniel@destevez.net>.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,25 +16,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INCLUDED_SATELLITES_AO40_SYNCFRAME_SOFT_IMPL_H
-#define INCLUDED_SATELLITES_AO40_SYNCFRAME_SOFT_IMPL_H
+#ifndef INCLUDED_SATELLITES_DISTRIBUTED_SYNCFRAME_SOFT_IMPL_H
+#define INCLUDED_SATELLITES_DISTRIBUTED_SYNCFRAME_SOFT_IMPL_H
 
-#include <satellites/ao40_syncframe_soft.h>
-
-#define SYNCLEN 65
+#include <satellites/distributed_syncframe_soft.h>
 
 namespace gr {
   namespace satellites {
 
-    class ao40_syncframe_soft_impl : public ao40_syncframe_soft
+    class distributed_syncframe_soft_impl : public distributed_syncframe_soft
     {
      private:
       int d_threshold;
-      static const uint8_t d_syncword[SYNCLEN];
+      int d_synclen;
+      int d_step;
+      uint8_t *d_syncword;
             
      public:
-      ao40_syncframe_soft_impl(int threshold);
-      ~ao40_syncframe_soft_impl();
+      distributed_syncframe_soft_impl(int threshold, const std::string& syncword, int step);
+      ~distributed_syncframe_soft_impl();
 
       // Where all the action really happens
       int work(int noutput_items,
@@ -45,5 +45,4 @@ namespace gr {
   } // namespace satellites
 } // namespace gr
 
-#endif /* INCLUDED_SATELLITES_AO40_SYNCFRAME_SOFT_IMPL_H */
-
+#endif /* INCLUDED_SATELLITES_DISTRIBUTED_SYNCFRAME_SOFT_IMPL_H */

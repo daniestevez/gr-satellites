@@ -5,7 +5,7 @@ gr-satellites is a GNU Radio out-of-tree module encompassing a collection of
 telemetry decoders that supports many different Amateur satellites. This
 open-source project started in 2015 with the goal of providing telemetry
 decoders for all the satellites that transmit on the Amateur radio bands. It
-suports most popular protocols, such as AX.25, the GOMspace NanoCom U482C and
+supports most popular protocols, such as AX.25, the GOMspace NanoCom U482C and
 AX100 modems, an important part of the CCSDS stack, the AO-40 protocol used in
 the FUNcube satellites, and several ad-hoc protocols used in other satellites.
 
@@ -94,16 +94,14 @@ An older version may be used, but note the following:
 Required dependencies:
 
   * Phil Karn's KA9Q `libfec`. A fork that builds in modern linux systems can be found
-    [here](https://github.com/daniestevez/libfec).
+    [here](https://github.com/quiet/libfec).
   * [construct](https://construct.readthedocs.io/en/latest/), at least version 2.9.
-  * [requests](https://pypi.org/project/requests/2.7.0/).
+  * [requests](https://pypi.org/project/requests/).
   * [swig](http://www.swig.org/)
 
 The following GNUradio out-of-tree modules are only required for the decoder of
 one particular satellite. You may install only the ones you're interested in.
 
-  * [gr-aausat](https://github.com/daniestevez/gr-aausat) AAUSAT-4 decoder and
-    telemetry parser
   * [beesat-sdr](https://github.com/daniestevez/beesat-sdr) BEESAT and TECHNOSAT decoder and TNC. It is also used for D-STAR One.
   * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) This only needs to be installed
   if you want to submit telemetry to HIT. A complete decoder which does not use gr-lilacsat
@@ -176,6 +174,18 @@ telemetry packet in the terminal as soon as it receives it.
     which
     transmits 9k6 AX.25 BPSK telemetry in the 2m band. You must use wide SSB
     mode to receive this satellite.
+  * `aausat_4`
+    [AAUSAT-4](http://www.space.aau.dk/aausat4/), which transmits 2k4 or 9k6 GFSK
+    telemetry in the 70cm band. It uses the CSP protocol and FEC with an r=1/2, k=7
+    convolutional code and a (255,223) Reed-Solomon code. You must use FM mode
+    to receive this satellite (437.425MHz).
+  * `aisat`
+    [AISAT](https://directory.eoportal.org/web/eoportal/satellite-missions/a/aisat),
+    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
+    U482C transceiver with the CSP protocol and FEC with a (255,223)
+    Reed-Solomon code. It also uses a CCSDS scrambler. There is no telemetry
+    parser yet, as the beacon format is unknown. This satellite has an AIS
+    receiver on board. You must use FM mode to receive this satellite.
   * `aistechsat2`
     [AISTECHSAT-2](https://space.skyrocket.de/doc_sdat/aistechsat-1.htm),
     which transmits
@@ -198,22 +208,6 @@ telemetry packet in the terminal as soon as it receives it.
     error detection.
     The decoder requires the [beesat-sdr](https://github.com/daniestevez/beesat-sdr) OOT module.
     You must use FM mode to receive this satellite (436.250MHz).
-  * `astrocast`, `astrocast_old`, `astrocast_9k6`
-    [Astrocast 0.1](https://space.skyrocket.de/doc_sdat/astrocast-0.htm), which
-    transmits 1k2 FSK telemetry in the 70cm band. It uses
-    the FX.25 protocol with a (255,223) CCSDS Reed-Solomon code.
-    The `astrocast_old` decoder is for the protocol variant used until 2019-02-13, which
-    wast not completely compatible with AX.25.
-    The `astrocast_9k6` decoder is for the 9k6 FSK protocol used for data download. This
-    uses five interleaved (255,223) CCSDS Reed-Solomon codewords following the CCSDS
-    standard.
-    You must use FM mode
-    to receive this satellite (437.150MHz).
-  * `aausat_4`
-    [AAUSAT-4](http://www.space.aau.dk/aausat4/), which transmits 2k4 or 9k6 GFSK
-    telemetry in the 70cm band. It uses the CSP protocol and FEC with an r=1/2, k=7
-    convolutional code and a (255,223) Reed-Solomon code. You must use FM mode
-    to receive this satellite (437.425MHz).
   * `ao40_uncoded`
     [AO-40](https://en.wikipedia.org/wiki/OSCAR_40) *(inactive)*,
     which transmitted 400bps BPSK
@@ -228,13 +222,17 @@ telemetry packet in the terminal as soon as it receives it.
     block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
     two interleaved (160,128) Reed-Solomon codes. You must use SSB mode to
     receive this satellite (145.935MHz).
-  * `aisat`
-    [AISAT](https://directory.eoportal.org/web/eoportal/satellite-missions/a/aisat),
-    which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
-    U482C transceiver with the CSP protocol and FEC with a (255,223)
-    Reed-Solomon code. It also uses a CCSDS scrambler. There is no telemetry
-    parser yet, as the beacon format is unknown. This satellite has an AIS
-    receiver on board. You must use FM mode to receive this satellite.
+  * `astrocast`, `astrocast_old`, `astrocast_9k6`
+    [Astrocast 0.1](https://space.skyrocket.de/doc_sdat/astrocast-0.htm), which
+    transmits 1k2 FSK telemetry in the 70cm band. It uses
+    the FX.25 protocol with a (255,223) CCSDS Reed-Solomon code.
+    The `astrocast_old` decoder is for the protocol variant used until 2019-02-13, which
+    wast not completely compatible with AX.25.
+    The `astrocast_9k6` decoder is for the 9k6 FSK protocol used for data download. This
+    uses five interleaved (255,223) CCSDS Reed-Solomon codewords following the CCSDS
+    standard.
+    You must use FM mode
+    to receive this satellite (437.150MHz).
   * `at03`
     [QB50 AT03 (PEGASUS)](https://spacedatacenter.at/pegasus/),
     which transmits 9k6 GFSK telemetry in the 70cm band. It uses the TT-64
@@ -250,6 +248,12 @@ telemetry packet in the terminal as soon as it receives it.
     parser yet, as the beacon format is unknown. This satellite is on a low
     inclination orbit, so it can only be received near the equator. You must
     use FM mode to receive this satellite (437.485MHz).
+  * `atl_1`
+    [ATL-1](https://space.skyrocket.de/doc_sdat/atl-1.htm), which
+    transmits 1.25k FSK telemetry in the 70cm band. It uses the AO-40 FEC protocol, which includes
+    block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
+    two interleaved (160,128) Reed-Solomon codes. You must use FM mode
+    to receive this satellite (437.175MHz).
   * `au02`
     [QB50 AU02 (UNSW-EC0)](http://www.acser.unsw.edu.au/QB50),
     which transmits 4k8 AF GMSK telemetry in the 70cm band. It uses a NanoCom
@@ -316,6 +320,10 @@ telemetry packet in the terminal as soon as it receives it.
     error detection.
     The decoder requires the [beesat-sdr](https://github.com/daniestevez/beesat-sdr) OOT module.
     You must use FM mode to receive this satellite (435.700MHz).
+  * `duchifat_3`
+    [DUCHIFAT-3](https://space.skyrocket.de/doc_sdat/duchifat-3.htm),
+    which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
+    scrambler. You must use wide SSB mode to receive this satellite (436.400MHz).
   * `entrysat`
     [EntrySat](https://websites.isae-supaero.fr/entrysat/),
     which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
@@ -330,7 +338,7 @@ telemetry packet in the terminal as soon as it receives it.
     and see below for how to submit to the telemetry database.
   * `eseo`
     [ESEO](https://www.esa.int/Education/ESEO),
-    which transmits 9k6 GFSK telemetry in the 70cm band. It uses a custom protocol
+    which transmits 9k6 or 4k8 GFSK telemetry in the 70cm band. It uses a custom protocol
     vaguely similar to AX.25 with some form of G3RUH scrambling and a
     (255,239) Reed-Solomon code. You must use FM mode to receive this satellite (437.000MHz).
   * `facsat_1`,
@@ -339,6 +347,14 @@ telemetry packet in the terminal as soon as it receives it.
     transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
     Reed-Solomon code. The telemetry format is unknown. You must use FM mode to
     receive this satellite (437.350MHz).
+  * `floripasat_1`,
+    [FloripaSat-1](https://floripasat.ufsc.br/), which transmits 1k2 FSK
+    telemetry in the 2m band (beacon) and 2k4 FSK telemetry in the 70cm band
+    (downlink). It uses the
+    [NGHam](https://github.com/skagmo/ngham) protocol and AX.25, but the
+    Reed-Solomon of NGHam and the complete AX.25 seem to be not correctly
+    implemented. You must use FM mode to receive this satellite (145.900MHz for
+    beacon and 436.1MHz for downlink).
   * `fmn1`
     [FMN-1](https://space.skyrocket.de/doc_sdat/fengmaniu-1.htm),
     which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
@@ -453,6 +469,12 @@ telemetry packet in the terminal as soon as it receives it.
     4k8 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
     transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
     Reed-Solomon code. You must use FM mode to receive this satellite (437.060MHz).
+  * `luojia_1`
+    [Luojia-1](https://space.skyrocket.de/doc_sdat/luojia-1.htm),
+    which transmits
+    4k8 GMSK telemetry in the 70cm band. It uses the GomSpace NanoCom AX100
+    transceiver in ASM+Golay mode. This uses a CCSDS scrambler and a (255,223)
+    Reed-Solomon code. You must use FM mode to receive this satellite (437.250 MHz).
   * `mysat1`
     [MYSAT 1](https://space.skyrocket.de/doc_sdat/mysat-1.htm),
     which transmits 1k2 or 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
@@ -477,6 +499,11 @@ telemetry packet in the terminal as soon as it receives it.
     [rscode](http://rscode.sourceforge.net/) library.
     A sample IQ recording is
     included in [satellite-recordings](https://github.com/daniestevez/satellite-recordings).
+  * `ops_sat`
+    [OPS-SAT](https://opssat1.esoc.esa.int/),
+    which transmits 9k6 AX.25 telemetry in the 70cm band. It uses a G3RUH
+    scrambler and the frames are encoded using a CCSDS Reed-Solomon code and a
+    CCSDS scrambler. You must use FM mode to receive this satellite (437.200 MHz).
   * `picsat`
     [PicSat](http://picsat.obspm.fr/),
     which transmits 1k2 or 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
@@ -512,6 +539,12 @@ telemetry packet in the terminal as soon as it receives it.
     [Shaonian Xing (MXSat-1)](https://space.skyrocket.de/doc_sdat/shaonian-xing.htm),
     which transmits 9k6 AX.25 BPSK telemetry in the 70cm band. It uses a G3RUH
     scrambler. You must use wide SSB mode to receive this satellite (436.375MHz).
+  * `smog_p`
+    [SMOG-P](https://space.skyrocket.de/doc_sdat/smog-p.htm), which
+    transmits 1.25k or 5k FSK telemetry in the 70cm band. It uses the AO-40 FEC protocol, which includes
+    block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
+    two interleaved (160,128) Reed-Solomon codes. You must use FM mode
+    to receive this satellite (437.150MHz).
   * `snet`
     [S-NET A,B,C,D](http://www.raumfahrttechnik.tu-berlin.de/menue/forschung/aktuelle_projekte/s-net/),
     which transmit 1k2 AFSK telemetry in the 70cm band. They use a custom coding
@@ -552,7 +585,7 @@ telemetry packet in the terminal as soon as it receives it.
     phase modulation packets. For the AFSK packets you can use any regular
     packet decoder such as direwolf. You must use FM mode to receive this
     satellite (437.050MHz).
-  *`taurus1`
+  * `taurus1`
     [Taurus-1](https://space.skyrocket.de/doc_sdat/taurus-1.htm),
     which transmits 9k6
     BPSK telemetry in the 70cm band. It uses FEC with an r=1/2, k=7
@@ -609,6 +642,9 @@ radio. Additionally, there is `generic_1k2_afsk_ax25` for 1k2 AFSK AX.25 packet
 radio. Note that the performance of the AFSK decoder may not be optimal due to
 improvable aspects in the signal processing (designing a good AGC is a
 challenge, for instance).
+
+## CCSDS Basic Blue Books
+Descriptions for these blocks have been added in [CCSDS_README.md](https://github.com/athatheo/gr-satellites/blob/master/CCSDS_README.md) file.
 
 ## Submitting telemetry to SatNOGS
 
@@ -675,6 +711,12 @@ the lower right corner of the flowgraph). This block is disabled by default
 because when it is enabled the flowgraph won't run unless `proxy_publish.py` is
 running. Also see [this information](http://lilacsat.hit.edu.cn/?p=559) about
 how to set the proper ports in `proxy_publish.py`.
+
+## Submitting telemetry to BME (SMOG-P, ATL-1, SMOG-1)
+
+To submit telemetry to the [BME server](https://gnd.bme.hu:8080/) you first need
+to register an account there. Then modify the "BME Telemetry Forwarder" in the
+GRC flowgraph to include your username and password.
 
 ## Submitting telemetry from EQUiSat
 

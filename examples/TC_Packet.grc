@@ -1,0 +1,115 @@
+options:
+  parameters:
+    author: ''
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: no_gui
+    hier_block_src_path: '.:'
+    id: tc_packet
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: run
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: ''
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: blocks_message_strobe_0
+  id: blocks_message_strobe
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    msg: pmt.intern("TEST")
+    period: '1000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [88, 160]
+    rotation: 0
+    state: enabled
+- name: blocks_random_pdu_0
+  id: blocks_random_pdu
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    length_modulo: '4'
+    mask: '0xFF'
+    maxoutbuf: '0'
+    maxsize: '8'
+    minoutbuf: '0'
+    minsize: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [400, 136]
+    rotation: 0
+    state: enabled
+- name: satellites_telecommand_parser_0
+  id: satellites_telecommand_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [544, 400]
+    rotation: 0
+    state: enabled
+- name: satellites_telecommand_primaryheader_adder_0
+  id: satellites_telecommand_primaryheader_adder
+  parameters:
+    affinity: ''
+    alias: ''
+    bypass: '0'
+    comment: ''
+    control: '0'
+    frame_length: '0'
+    frame_sequence_number: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    rsvd_space: '0'
+    spacecraft_id: '0'
+    transfer_frame_version: '0'
+    virtual_channel_id: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [120, 356]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_message_strobe_0, strobe, blocks_random_pdu_0, generate]
+- [blocks_random_pdu_0, pdus, satellites_telecommand_primaryheader_adder_0, in]
+- [satellites_telecommand_primaryheader_adder_0, out, satellites_telecommand_parser_0,
+  in]
+
+metadata:
+  file_format: 1

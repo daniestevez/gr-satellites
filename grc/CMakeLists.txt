@@ -34,8 +34,6 @@ install(FILES
     satellites_submit.block.yml
     satellites_print_timestamp.block.yml
     satellites_sat3cat2_telemetry_parser.block.yml
-    satellites_ao40_syncframe.block.yml
-    satellites_ao40_deinterleaver.block.yml
     satellites_ao40_rs_decoder.block.yml
     satellites_funcube_telemetry_parser.block.yml
     satellites_gomx3_beacon_parser.block.yml
@@ -63,8 +61,6 @@ install(FILES
     satellites_strip_ax25_header.block.yml
     satellites_picsat_telemetry_parser.block.yml
     satellites_snet_deframer.block.yml
-    satellites_ao40_syncframe_soft.block.yml
-    satellites_ao40_deinterleaver_soft.block.yml
     satellites_beesat_classifier.block.yml
     satellites_snet_classifier.block.yml
     satellites_sat_1kuns_pf_telemetry_parser.block.yml
@@ -98,6 +94,32 @@ install(FILES
     satellites_taurus1_telemetry_parser.block.yml
     satellites_manchester_sync.block.yml
     satellites_header_remover.block.yml
+    satellites_distributed_syncframe_soft.block.yml
+    satellites_matrix_deinterleaver_soft.block.yml
+    satellites_smogp_signalling.block.yml
+    satellites_decode_ra_code.block.yml
+    satellites_smogp_packet_filter.block.yml
+    satellites_smogp_telemetry_parser.block.yml
+    satellites_smogp_spectrum_save.block.yml
+    satellites_aausat4_remove_fsm.block.yml
+    satellites_aausat4_telemetry_parser.block.yml
+    satellites_ngham_packet_crop.block.yml
+    satellites_ngham_remove_padding.block.yml
+    satellites_ngham_check_crc.block.yml
+    satellites_floripasat_telemetry_parser.block.yml
+    satellites_bme_submitter.block.yml
+    CCSDS/satellites_space_packet_parser.block.yml
+    CCSDS/satellites_telemetry_parser.block.yml
+    CCSDS/satellites_telecommand_parser.block.yml
+    CCSDS/satellites_space_packet_primaryheader_adder.block.yml
+    CCSDS/satellites_telemetry_primaryheader_adder.block.yml
+    CCSDS/satellites_telecommand_primaryheader_adder.block.yml
+    CCSDS/satellites_pathID_demultiplexer.block.yml
+    CCSDS/satellites_virtual_channel_demultiplexer.block.yml
+    CCSDS/satellites_telemetry_ocf_adder.block.yml
+    CCSDS/satellites_space_packet_time_stamp_adder.block.yml
+    CCSDS/variable_time_format_parameters.block.yml
+    CCSDS/satellites_telemetry_packet_reconstruction.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )
 

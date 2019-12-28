@@ -1,0 +1,885 @@
+options:
+  parameters:
+    author: Daniel Estevez
+    category: Custom
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ATL-1 decoder
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: no_gui
+    hier_block_src_path: '.:'
+    id: atl_1
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: run
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: ATL-1 decoder
+    window_size: (1280, 1024)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: gain_mu
+  id: variable
+  parameters:
+    comment: ''
+    value: 0.175*3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1044, 150]
+    rotation: 0
+    state: enabled
+- name: blocks_add_const_vxx_0
+  id: blocks_add_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: 1e-20
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [433, 530]
+    rotation: 0
+    state: enabled
+- name: blocks_add_const_vxx_0_0
+  id: blocks_add_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: 1e-20
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [426, 1355]
+    rotation: 0
+    state: enabled
+- name: blocks_divide_xx_0
+  id: blocks_divide_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [649, 467]
+    rotation: 0
+    state: enabled
+- name: blocks_divide_xx_0_0
+  id: blocks_divide_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [494, 1250]
+    rotation: 0
+    state: enabled
+- name: blocks_message_debug_0
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [905, 824]
+    rotation: 0
+    state: disabled
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: invert*10
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 260]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '1.0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 530]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0_0_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '1.0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [249, 1355]
+    rotation: 0
+    state: enabled
+- name: blocks_rms_xx_0
+  id: blocks_rms_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.01'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [111, 530]
+    rotation: 0
+    state: enabled
+- name: blocks_rms_xx_0_0
+  id: blocks_rms_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.01'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [104, 1355]
+    rotation: 0
+    state: enabled
+- name: blocks_short_to_float_0
+  id: blocks_short_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: '32767.0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 260]
+    rotation: 0
+    state: enabled
+- name: blocks_udp_source_0
+  id: blocks_udp_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    eof: 'False'
+    ipaddr: ip
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    port: port
+    psize: '1472'
+    type: short
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 236]
+    rotation: 0
+    state: enabled
+- name: callsign
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: your callsign
+    short_id: ''
+    type: str
+    value: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [512, 15]
+    rotation: 0
+    state: enabled
+- name: dc_blocker_xx_0
+  id: dc_blocker_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    length: 8*16
+    long_form: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: ff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [895, 252]
+    rotation: 0
+    state: enabled
+- name: dc_blocker_xx_0_0
+  id: dc_blocker_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    length: 8*16
+    long_form: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: ff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [276, 1228]
+    rotation: 0
+    state: enabled
+- name: digital_binary_slicer_fb_0
+  id: digital_binary_slicer_fb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [239, 622]
+    rotation: 0
+    state: enabled
+- name: digital_clock_recovery_mm_xx_0
+  id: digital_clock_recovery_mm_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    gain_mu: gain_mu
+    gain_omega: 0.25*gain_mu*gain_mu
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mu: '0.5'
+    omega: '7.68'
+    omega_relative_limit: '0.001'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [795, 447]
+    rotation: 0
+    state: enabled
+- name: digital_clock_recovery_mm_xx_0_0
+  id: digital_clock_recovery_mm_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    gain_mu: gain_mu
+    gain_omega: 0.25*gain_mu*gain_mu
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mu: '0.5'
+    omega: 48000.0/5000
+    omega_relative_limit: '0.001'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [625, 1229]
+    rotation: 0
+    state: enabled
+- name: invert
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: invert the waveform (-1 to invert)
+    short_id: i
+    type: intx
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 128]
+    rotation: 0
+    state: enabled
+- name: ip
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: UDP listen IP
+    short_id: ''
+    type: str
+    value: '::'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 15]
+    rotation: 0
+    state: enabled
+- name: latitude
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: latitude (format 00.000 or -00.000)
+    short_id: ''
+    type: eng_float
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [512, 119]
+    rotation: 0
+    state: enabled
+- name: longitude
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: longitude (format 00.000 or -00.000)
+    short_id: ''
+    type: eng_float
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [720, 119]
+    rotation: 0
+    state: enabled
+- name: low_pass_filter_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: '700'
+    decim: '5'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: '48000'
+    type: fir_filter_fff
+    width: '50'
+    win: firdes.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [680, 212]
+    rotation: 0
+    state: enabled
+- name: low_pass_filter_0_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: 700*4
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: '48000'
+    type: fir_filter_fff
+    width: 50*4
+    win: firdes.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [63, 1188]
+    rotation: 0
+    state: enabled
+- name: note_0
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: 1250 baud
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [66, 654]
+    rotation: 0
+    state: enabled
+- name: note_0_0
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: 5000 baud
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [741, 1378]
+    rotation: 0
+    state: enabled
+- name: port
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: UDP port
+    short_id: ''
+    type: intx
+    value: '7355'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [392, 15]
+    rotation: 0
+    state: enabled
+- name: recstart
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: start of recording, if processing a recording (format YYYY-MM-DD HH:MM:SS)
+    short_id: ''
+    type: str
+    value: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [720, 15]
+    rotation: 0
+    state: enabled
+- name: satellites_ao40_fec_decoder_soft_0
+  id: satellites_ao40_fec_decoder_soft
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [92, 718]
+    rotation: 0
+    state: enabled
+- name: satellites_ao40_fec_decoder_soft_0_0
+  id: satellites_ao40_fec_decoder_soft
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [845, 1272]
+    rotation: 0
+    state: enabled
+- name: satellites_bme_submitter_0
+  id: satellites_bme_submitter
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    password: ''
+    satellite: atl1
+    user: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [994, 555]
+    rotation: 0
+    state: true
+- name: satellites_decode_ra_code_0
+  id: satellites_decode_ra_code
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    size: '128'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [463, 864]
+    rotation: 0
+    state: enabled
+- name: satellites_decode_ra_code_0_0
+  id: satellites_decode_ra_code
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    size: '256'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [469, 966]
+    rotation: 0
+    state: enabled
+- name: satellites_print_timestamp_0
+  id: satellites_print_timestamp
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    count: 'True'
+    fmt: '%Y-%m-%d %H:%M:%S'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [593, 708]
+    rotation: 0
+    state: enabled
+- name: satellites_smogp_packet_filter_0
+  id: satellites_smogp_packet_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [605, 829]
+    rotation: 0
+    state: enabled
+- name: satellites_smogp_short_fec_decoder_soft_0
+  id: satellites_smogp_short_fec_decoder_soft
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [85, 785]
+    rotation: 0
+    state: enabled
+- name: satellites_smogp_short_fec_decoder_soft_0_0
+  id: satellites_smogp_short_fec_decoder_soft
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [838, 1339]
+    rotation: 0
+    state: enabled
+- name: satellites_smogp_signalling_0
+  id: satellites_smogp_signalling
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [762, 622]
+    rotation: 0
+    state: true
+- name: satellites_smogp_spectrum_save_0
+  id: satellites_smogp_spectrum_save
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    path: /tmp/
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [910, 981]
+    rotation: 0
+    state: true
+- name: satellites_smogp_telemetry_parser_0
+  id: satellites_smogp_telemetry_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [907, 934]
+    rotation: 0
+    state: enabled
+- name: satellites_submit_0
+  id: satellites_submit
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    latitude: latitude
+    longitude: longitude
+    noradID: '44830'
+    source: callsign
+    tstamp: recstart
+    url: https://db.satnogs.org/api/telemetry/
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [905, 676]
+    rotation: 0
+    state: enabled
+- name: sync_to_pdu_packed_0
+  id: sync_to_pdu_packed
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packlen: 64-6+6
+    sync: '''0010110111010100100101111111110111010011011110110000111100011111'''
+    threshold: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [466, 602]
+    rotation: 0
+    state: true
+- name: sync_to_pdu_soft_0_0
+  id: sync_to_pdu_soft
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packlen: 260 * 8
+    sync: '''0010110111010100'''
+    threshold: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [125, 846]
+    rotation: 0
+    state: enabled
+- name: sync_to_pdu_soft_0_0_0
+  id: sync_to_pdu_soft
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packlen: 514 * 8
+    sync: '''0010110111010100'''
+    threshold: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [129, 944]
+    rotation: 0
+    state: enabled
+- name: sync_to_pdu_soft_0_0_0_0
+  id: sync_to_pdu_soft
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packlen: 514 * 8
+    sync: '''0010110111010100'''
+    threshold: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [941, 1169]
+    rotation: 0
+    state: enabled
+- name: sync_to_pdu_soft_0_0_1
+  id: sync_to_pdu_soft
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packlen: 260 * 8
+    sync: '''0010110111010100'''
+    threshold: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [937, 1071]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_add_const_vxx_0, '0', blocks_divide_xx_0, '1']
+- [blocks_add_const_vxx_0_0, '0', blocks_divide_xx_0_0, '1']
+- [blocks_divide_xx_0, '0', digital_clock_recovery_mm_xx_0, '0']
+- [blocks_divide_xx_0_0, '0', digital_clock_recovery_mm_xx_0_0, '0']
+- [blocks_multiply_const_vxx_0, '0', low_pass_filter_0, '0']
+- [blocks_multiply_const_vxx_0, '0', low_pass_filter_0_0, '0']
+- [blocks_multiply_const_vxx_0_0, '0', blocks_add_const_vxx_0, '0']
+- [blocks_multiply_const_vxx_0_0_0, '0', blocks_add_const_vxx_0_0, '0']
+- [blocks_rms_xx_0, '0', blocks_multiply_const_vxx_0_0, '0']
+- [blocks_rms_xx_0_0, '0', blocks_multiply_const_vxx_0_0_0, '0']
+- [blocks_short_to_float_0, '0', blocks_multiply_const_vxx_0, '0']
+- [blocks_udp_source_0, '0', blocks_short_to_float_0, '0']
+- [dc_blocker_xx_0, '0', blocks_divide_xx_0, '0']
+- [dc_blocker_xx_0, '0', blocks_rms_xx_0, '0']
+- [dc_blocker_xx_0_0, '0', blocks_divide_xx_0_0, '0']
+- [digital_binary_slicer_fb_0, '0', sync_to_pdu_packed_0, '0']
+- [digital_clock_recovery_mm_xx_0, '0', digital_binary_slicer_fb_0, '0']
+- [digital_clock_recovery_mm_xx_0, '0', satellites_ao40_fec_decoder_soft_0, '0']
+- [digital_clock_recovery_mm_xx_0, '0', satellites_smogp_short_fec_decoder_soft_0,
+  '0']
+- [digital_clock_recovery_mm_xx_0, '0', sync_to_pdu_soft_0_0, '0']
+- [digital_clock_recovery_mm_xx_0, '0', sync_to_pdu_soft_0_0_0, '0']
+- [digital_clock_recovery_mm_xx_0_0, '0', satellites_ao40_fec_decoder_soft_0_0, '0']
+- [digital_clock_recovery_mm_xx_0_0, '0', satellites_smogp_short_fec_decoder_soft_0_0,
+  '0']
+- [digital_clock_recovery_mm_xx_0_0, '0', sync_to_pdu_soft_0_0_0_0, '0']
+- [digital_clock_recovery_mm_xx_0_0, '0', sync_to_pdu_soft_0_0_1, '0']
+- [low_pass_filter_0, '0', dc_blocker_xx_0, '0']
+- [low_pass_filter_0_0, '0', blocks_rms_xx_0_0, '0']
+- [low_pass_filter_0_0, '0', dc_blocker_xx_0_0, '0']
+- [satellites_ao40_fec_decoder_soft_0, out, satellites_print_timestamp_0, in]
+- [satellites_ao40_fec_decoder_soft_0_0, out, satellites_print_timestamp_0, in]
+- [satellites_decode_ra_code_0, out, satellites_smogp_packet_filter_0, in]
+- [satellites_decode_ra_code_0_0, out, satellites_smogp_packet_filter_0, in]
+- [satellites_print_timestamp_0, out, blocks_message_debug_0, print_pdu]
+- [satellites_print_timestamp_0, out, satellites_bme_submitter_0, in]
+- [satellites_print_timestamp_0, out, satellites_smogp_spectrum_save_0, in]
+- [satellites_print_timestamp_0, out, satellites_smogp_telemetry_parser_0, in]
+- [satellites_print_timestamp_0, out, satellites_submit_0, in]
+- [satellites_smogp_packet_filter_0, out, satellites_print_timestamp_0, in]
+- [satellites_smogp_short_fec_decoder_soft_0, out, satellites_print_timestamp_0, in]
+- [satellites_smogp_short_fec_decoder_soft_0_0, out, satellites_print_timestamp_0,
+  in]
+- [sync_to_pdu_packed_0, out, satellites_smogp_signalling_0, in]
+- [sync_to_pdu_soft_0_0, out, satellites_decode_ra_code_0, in]
+- [sync_to_pdu_soft_0_0_0, out, satellites_decode_ra_code_0_0, in]
+- [sync_to_pdu_soft_0_0_0_0, out, satellites_decode_ra_code_0_0, in]
+- [sync_to_pdu_soft_0_0_1, out, satellites_decode_ra_code_0, in]
+
+metadata:
+  file_format: 1

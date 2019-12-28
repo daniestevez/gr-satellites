@@ -1,37 +1,39 @@
 /* -*- c++ -*- */
-/*
- * Copyright 2017 Daniel Estevez <daniel@destevez.net>.
- *
- * This program is free software; you can redistribute it and/or modify
+/* 
+ * Copyright 2019 Daniel Estevez <daniel@destevez.net>.
+ * 
+ * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- *
- * This program is distributed in the hope that it will be useful,
+ * 
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this software; see the file COPYING.  If not, write to
+ * the Free Software Foundation, Inc., 51 Franklin Street,
+ * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_SATELLITES_AO40_DEINTERLEAVER_SOFT_IMPL_H
-#define INCLUDED_SATELLITES_AO40_DEINTERLEAVER_SOFT_IMPL_H
+#ifndef INCLUDED_SATELLITES_DECODE_RA_CODE_IMPL_H
+#define INCLUDED_SATELLITES_DECODE_RA_CODE_IMPL_H
 
-#include <satellites/ao40_deinterleaver_soft.h>
+#include <satellites/decode_ra_code.h>
 
 namespace gr {
   namespace satellites {
 
-    class ao40_deinterleaver_soft_impl : public ao40_deinterleaver_soft
+    class decode_ra_code_impl : public decode_ra_code
     {
      private:
-      // Nothing to declare in this block.
-
+      int d_size;
+      
      public:
-      ao40_deinterleaver_soft_impl();
-      ~ao40_deinterleaver_soft_impl();
+      decode_ra_code_impl(int size);
+      ~decode_ra_code_impl();
 
       // Where all the action really happens
       void forecast (int noutput_items, gr_vector_int &ninput_items_required);
@@ -41,11 +43,11 @@ namespace gr {
            gr_vector_const_void_star &input_items,
            gr_vector_void_star &output_items);
 
-      void msg_handler (pmt::pmt_t pmt_msg);
+      void msg_handler(pmt::pmt_t pmt_msg);
     };
 
   } // namespace satellites
 } // namespace gr
 
-#endif /* INCLUDED_SATELLITES_AO40_DEINTERLEAVER_SOFT_IMPL_H */
+#endif /* INCLUDED_SATELLITES_DECODE_RA_CODE_IMPL_H */
 

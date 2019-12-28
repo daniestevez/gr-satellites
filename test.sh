@@ -30,3 +30,5 @@ echo BY70-1
 gr_satellites BY70-1 --wavfile ~/satellite-recordings/by701.wav --samp_rate 48e3
 echo LilacSat-1
 gr_satellites LilacSat-1 --wavfile ~/satellite-recordings/lilacsat1.wav --samp_rate 48e3
+echo QO-100
+gr_satellites QO-100 --wavfile ~/satellite-recordings/qo100.wav --samp_rate 48e3

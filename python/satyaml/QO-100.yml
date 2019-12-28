@@ -17,6 +17,6 @@ transmitters:
     frequency: 10489.800e+6
     modulation: DBPSK Manchester
     baudrate: 400
-    framing: AO-40 FEC inverted
+    framing: AO-40 FEC
     data:
     - *tlm

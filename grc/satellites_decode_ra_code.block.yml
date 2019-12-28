@@ -1,0 +1,22 @@
+id: satellites_decode_ra_code
+label: RA decoder
+category: '[Satellites]/FEC'
+
+parameters:
+-   id: size
+    label: Size
+    dtype: int
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites
+    make: satellites.decode_ra_code(${size})
+
+file_format: 1
