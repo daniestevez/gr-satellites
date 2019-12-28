@@ -1,5 +1,6 @@
 /*
  * Copyright 2015-2019 Miklos Maroti.
+ * Copyright 2019 Daniel Estevez <daniel@destevez.net> (reentrant version)
  *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,9 +28,9 @@
 extern "C" {
 #endif
 
-void ra_lfsr_init(uint8_t seqno);
-ra_index_t ra_lfsr_next(void);
-ra_index_t ra_lfsr_prev(void);
+void ra_lfsr_init(struct ra_context *ctx, uint8_t seqno);
+ra_index_t ra_lfsr_next(struct ra_context *ctx);
+ra_index_t ra_lfsr_prev(struct ra_context *ctx);
 
 #ifdef __cplusplus
 }

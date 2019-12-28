@@ -42,7 +42,6 @@ list(APPEND satellites_sources
     distributed_syncframe_soft_impl.cc
     matrix_deinterleaver_soft_impl.cc
     radecoder/ra_config.c
-    radecoder/ra_decoder.c
     radecoder/ra_decoder_gen.c
     radecoder/ra_lfsr.c
     decode_ra_code_impl.cc

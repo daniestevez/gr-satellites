@@ -1,5 +1,6 @@
 /*
  * Copyright 2015-2019 Miklos Maroti.
+ * Copyright 2019 Daniel Estevez <daniel@destevez.net> (reentrant version)
  *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +28,7 @@
 extern "C" {
 #endif
 
-void ra_decoder_gen(float *softbits, ra_word_t *packet, int passes);
+void ra_decoder_gen(struct ra_context *ctx, float *softbits, ra_word_t *packet, int passes);
 
 #ifdef __cplusplus
 }

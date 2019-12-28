@@ -1,5 +1,6 @@
 /*
  * Copyright 2015-2019 Miklos Maroti.
+ * Copyright 2019 Daniel Estevez <daniel@destevez.net> (reentrant version)
  *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,16 +41,28 @@ enum {
   RA_MAX_CODE_LENGTH = RA_MAX_DATA_LENGTH * 2 + 3,
 };
 
-extern ra_index_t ra_data_length;
-extern ra_index_t ra_code_length;
-extern ra_index_t ra_chck_length;
-extern uint16_t ra_lfsr_masks[4];
-extern uint8_t ra_lfsr_highbit;
+enum { RA_BITCOUNT = 8 * sizeof(ra_word_t), RA_BITSHIFT = RA_BITCOUNT - 1 };
+
+struct ra_context {
+  ra_index_t ra_data_length;
+  ra_index_t ra_code_length;
+  ra_index_t ra_chck_length;
+  uint16_t ra_lfsr_masks[4];
+  uint8_t ra_lfsr_highbit;
+
+  // for ra_lfsr
+  ra_index_t ra_lfsr_mask;
+  ra_index_t ra_lfsr_state;
+  ra_index_t ra_lfsr_offset;
+
+  // for ra_decoder_gen
+  float ra_dataword_gen[RA_MAX_DATA_LENGTH * RA_BITCOUNT];
+  float ra_codeword_gen[RA_MAX_CODE_LENGTH * RA_BITCOUNT];
+  float ra_forward_gen[RA_MAX_DATA_LENGTH * RA_BITCOUNT];
+};
 
 /* data length in words */
-void ra_length_init(ra_index_t data_length);
-
-enum { RA_BITCOUNT = 8 * sizeof(ra_word_t), RA_BITSHIFT = RA_BITCOUNT - 1 };
+void ra_length_init(struct ra_context *ctx, ra_index_t data_length);
 
 #ifdef __cplusplus
 }
