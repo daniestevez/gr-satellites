@@ -37,6 +37,7 @@ GR_PYTHON_INSTALL(
     si4463_scrambler.py
     sync_to_pdu.py
     sync_to_pdu_packed.py
+    sync_to_pdu_soft.py
     rms_agc.py
     pn9_scrambler.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/hier

@@ -1,0 +1,20 @@
+name: AAUSAT-4
+norad: 41460
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  2k4 FSK downlink:
+    frequency: 437.425e+6
+    modulation: FSK
+    baudrate: 2400
+    framing: AAUSAT-4
+    data:
+    - *tlm
+  9k6 FSK downlink:
+    frequency: 437.425e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AAUSAT-4
+    data:
+    - *tlm

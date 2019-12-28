@@ -266,6 +266,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'CCSDS Concatenated differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True),
         'CCSDS Concatenated dual differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True, dual_basis = True),
         'LilacSat-1' : deframers.lilacsat_1_deframer,
+        'AAUSAT-4' : deframers.aausat4_deframer,
     }
     _transport_hooks = {
         'KISS' : transports.kiss_transport,

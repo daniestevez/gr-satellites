@@ -39,6 +39,7 @@ GR_PYTHON_INSTALL(
 install(FILES
     1KUNS-PF.yml
     3CAT-1.yml
+    AAUSAT-4.yml
     AO-73.yml
     Astrocast_0_1.yml
     AT03.yml

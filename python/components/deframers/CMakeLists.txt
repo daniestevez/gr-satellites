@@ -32,6 +32,7 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
+    aausat4_deframer.py
     ao40_fec_deframer.py
     ao40_uncoded_deframer.py
     astrocast_9k6_deframer.py
