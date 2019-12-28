@@ -22,7 +22,7 @@
 from gnuradio import gr
 import pmt
 
-from  . import floripasat_telemetry
+from  .telemetry import floripasat
 
 class floripasat_telemetry_parser(gr.basic_block):
     """
@@ -45,7 +45,7 @@ class floripasat_telemetry_parser(gr.basic_block):
         packet = bytes(pmt.u8vector_elements(msg))
 
 #        try:
-        data = floripasat_telemetry.Packet.parse(packet)
+        data = floripasat.parse(packet)
 #        except:
 #            print("Could not decode telemetry beacon")
 #            return

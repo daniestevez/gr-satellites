@@ -20,7 +20,7 @@
 # 
 
 from construct import *
-from .adapters import AffineAdapter, LinearAdapter
+from ..adapters import AffineAdapter, LinearAdapter
 
 Id = Enum(Int8ub,\
               beacon_ngham_obdh_data = 0x00,\
@@ -89,7 +89,7 @@ OBDH = Struct(
     'odbh_resets' / Int8ub
     )
 
-Packet = Struct(
+floripasat = Struct(
     'ngham_padding' / Int8ub,
     'id' / Id,
     'callsign' / Bytes(7),

@@ -37,6 +37,7 @@ GR_PYTHON_INSTALL(
     by70_1.py
     csp.py
     eseo.py
+    floripasat.py
     gomx_1.py
     gomx_3.py
     sat_1kuns_pf.py

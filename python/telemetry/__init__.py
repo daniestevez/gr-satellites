@@ -32,6 +32,7 @@ from .by70_1 import by70_1
 from .csp import csp
 from .csp import csp_swapped
 from .eseo import eseo
+from .floripasat import floripasat
 from .gomx_1 import gomx_1
 from .gomx_3 import gomx_3
 from .sat_1kuns_pf import sat_1kuns_pf

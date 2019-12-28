@@ -2,9 +2,9 @@ name: FloripaSat-1
 norad: 44885
 data:
   &beacon Beacon:
-    unknown
+    telemetry: floripasat
   &downlink Downlink:
-    unknown
+    telemetry: floripasat
 transmitters:
   1k2 FSK beacon:
     frequency: 145.900e+6
