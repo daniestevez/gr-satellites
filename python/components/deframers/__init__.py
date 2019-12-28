@@ -45,6 +45,7 @@ from .ngham_deframer import ngham_deframer
 from .nusat_deframer import nusat_deframer
 from .reaktor_hello_world_deframer import reaktor_hello_world_deframer
 from .sat_3cat_1_deframer import sat_3cat_1_deframer
+from .smogp_ra_deframer import smogp_ra_deframer
 from .snet_deframer import snet_deframer
 from .swiatowid_deframer import swiatowid_deframer
 from .tt64_deframer import tt64_deframer

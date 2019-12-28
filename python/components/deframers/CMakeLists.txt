@@ -49,6 +49,7 @@ GR_PYTHON_INSTALL(
     nusat_deframer.py
     reaktor_hello_world_deframer.py
     sat_3cat_1_deframer.py
+    smogp_ra_deframer.py
     snet_deframer.py
     swiatowid_deframer.py
     tt64_deframer.py

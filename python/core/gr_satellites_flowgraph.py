@@ -270,6 +270,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'AAUSAT-4' : deframers.aausat4_deframer,
         'NGHam' : set_options(deframers.ngham_deframer, decode_rs = True),
         'NGHam no Reed Solomon' : set_options(deframers.ngham_deframer, decode_rs = False),
+        'SMOG-P RA' : deframers.smogp_ra_deframer,
     }
     _transport_hooks = {
         'KISS' : transports.kiss_transport,

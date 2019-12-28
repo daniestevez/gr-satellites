@@ -1,0 +1,27 @@
+id: satellites_smogp_ra_deframer
+label: SMOG-P RA Deframer
+category: '[Satellites]/Deframers'
+
+parameters:
+-   id: frame_size
+    label: Frame size (bytes)
+    dtype: int
+    default: 128
+-   id: threshold
+    label: Syncword threshold
+    dtype: int
+    default: 0
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.deframers
+    make: satellites.components.deframers.smogp_ra_deframer(frame_size = ${frame_size}, syncword_threshold = ${threshold})
+
+file_format: 1

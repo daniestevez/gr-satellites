@@ -18,6 +18,22 @@ transmitters:
     framing: AO-40 FEC short
     data:
     - *tlm
+  1k25 FSK long RA FEC:
+    frequency: 437.150e+6
+    modulation: FSK
+    baudrate: 1250
+    framing: SMOG-P RA
+    frame size: 256
+    data:
+    - *tlm
+  1k25 FSK short RA FEC:
+    frequency: 437.150e+6
+    modulation: FSK
+    baudrate: 1250
+    framing: SMOG-P RA
+    frame size: 128
+    data:
+    - *tlm
   5k FSK long concatenated FEC:
     frequency: 436.100e+6
     modulation: FSK
@@ -30,5 +46,21 @@ transmitters:
     modulation: FSK
     baudrate: 5000
     framing: AO-40 FEC short
+    data:
+    - *tlm
+  5k FSK long RA FEC:
+    frequency: 437.150e+6
+    modulation: FSK
+    baudrate: 5000
+    framing: SMOG-P RA
+    frame size: 256
+    data:
+    - *tlm
+  5k FSK short RA FEC:
+    frequency: 437.150e+6
+    modulation: FSK
+    baudrate: 5000
+    framing: SMOG-P RA
+    frame size: 128
     data:
     - *tlm
