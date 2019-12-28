@@ -32,3 +32,7 @@ echo LilacSat-1
 gr_satellites LilacSat-1 --wavfile ~/satellite-recordings/lilacsat1.wav --samp_rate 48e3
 echo QO-100
 gr_satellites QO-100 --wavfile ~/satellite-recordings/qo100.wav --samp_rate 48e3
+echo AAUSAT-4
+gr_satellites AAUSAT-4 --wavfile ~/satellite-recordings/aausat_4.wav --samp_rate 48e3
+echo Floripasat-1
+gr_satellites FloripaSat-1 --wavfile ~/satellite-recordings/floripasat_1.wav --samp_rate 48e3

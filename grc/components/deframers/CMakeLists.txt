@@ -31,6 +31,7 @@ install(FILES
     satellites_eseo_deframer.block.yml
     satellites_k2sat_deframer_component.block.yml
     satellites_lucky7_deframer.block.yml
+    satellites_ngham_deframer.block.yml
     satellites_nusat_deframer.block.yml
     satellites_reaktor_hello_world_deframer.block.yml
     satellites_sat_3cat_1_deframer.block.yml

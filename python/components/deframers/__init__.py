@@ -41,6 +41,7 @@ from .eseo_deframer import eseo_deframer
 from .k2sat_deframer import k2sat_deframer
 from .lilacsat_1_deframer import lilacsat_1_deframer
 from .lucky7_deframer import lucky7_deframer
+from .ngham_deframer import ngham_deframer
 from .nusat_deframer import nusat_deframer
 from .reaktor_hello_world_deframer import reaktor_hello_world_deframer
 from .sat_3cat_1_deframer import sat_3cat_1_deframer

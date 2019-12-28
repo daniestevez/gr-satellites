@@ -46,6 +46,7 @@ install(FILES
     BY70-1.yml
     EntrySat.yml
     ESEO.yml
+    FloripaSat-1.yml
     GOMX-3.yml
     KS-1Q.yml
     LilacSat-1.yml

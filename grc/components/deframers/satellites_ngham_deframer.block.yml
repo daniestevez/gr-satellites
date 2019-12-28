@@ -1,0 +1,28 @@
+id: satellites_ngham_deframer
+label: NGHam Deframer
+category: '[Satellites]/Deframers'
+
+parameters:
+-   id: decode_rs
+    label: Use Reed-Solomon
+    dtype: bool
+    default: 'False'
+    options: ['True', 'False']
+-   id: threshold
+    label: Syncword threshold
+    dtype: int
+    default: 0
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.deframers
+    make: satellites.components.deframers.ngham_deframer(decode_rs = ${decode_rs}, syncword_threshold = ${threshold})
+
+file_format: 1
