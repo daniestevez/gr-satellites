@@ -2,7 +2,7 @@ name: AAUSAT-4
 norad: 41460
 data:
   &tlm Telemetry:
-    unknown
+    telemetry: aausat4
 transmitters:
   2k4 FSK downlink:
     frequency: 437.425e+6

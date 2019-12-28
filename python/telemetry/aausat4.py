@@ -20,7 +20,8 @@
 # 
 
 from construct import *
-from .adapters import LinearAdapter
+from ..adapters import LinearAdapter
+from .csp import CSPHeader
 
 EPS = Struct(
     'boot_count' / Int16ub,
@@ -73,7 +74,10 @@ Valid = BitStruct(
     'com' / Flag,
     'eps' / Flag
     )
-Beacon = Struct(
+
+aausat4 = Struct(
+    'frame_length' / Int16ub,
+    'csp_header' / CSPHeader,
     'valid' / Valid,
     'eps' / EPS,
     'com' / COM,

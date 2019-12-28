@@ -23,7 +23,7 @@ import numpy
 from gnuradio import gr
 import pmt
 
-from . import aausat4_telemetry
+from .telemetry import aausat4
 
 class aausat4_telemetry_parser(gr.basic_block):
     """
@@ -46,7 +46,7 @@ class aausat4_telemetry_parser(gr.basic_block):
         packet = bytes(pmt.u8vector_elements(msg))
 
         try:
-            data = aausat4_telemetry.Beacon.parse(packet[6:]) # 2 bytes length + 4 bytes CSP header
+            data = aausat4.parse(packet) # 2 bytes length + 4 bytes CSP header
         except:
             print("Could not decode telemetry beacon")
             return

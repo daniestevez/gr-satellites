@@ -32,6 +32,7 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
+    aausat4.py
     ax25.py
     by70_1.py
     csp.py

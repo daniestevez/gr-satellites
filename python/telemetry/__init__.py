@@ -26,6 +26,7 @@ object, but in more complex cases, another class supporting the
 .parse method and relying on construct is used.
 '''
 
+from .aausat4 import aausat4
 from .ax25 import ax25
 from .by70_1 import by70_1
 from .csp import csp

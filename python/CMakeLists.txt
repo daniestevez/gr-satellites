@@ -121,7 +121,6 @@ GR_PYTHON_INSTALL(
     smogp_telemetry_parser.py
     smogp_spectrum_save.py
     aausat4_remove_fsm.py
-    aausat4_telemetry.py
     aausat4_telemetry_parser.py
     ngham_packet_crop.py
     ngham_remove_padding.py
