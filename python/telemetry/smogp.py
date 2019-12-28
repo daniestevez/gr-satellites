@@ -20,7 +20,7 @@
 # 
 
 from construct import *
-from .adapters import AffineAdapter, LinearAdapter, UNIXTimestampAdapter, TableAdapter
+from ..adapters import AffineAdapter, LinearAdapter, UNIXTimestampAdapter, TableAdapter
 
 Timestamp = UNIXTimestampAdapter(Int32sl)
 
@@ -387,7 +387,7 @@ SMOGPTelemetry1 = Struct(
     'current_scheduled_datalog' / Int16ul
     )
 
-Frame = Struct(
+smogp = Struct(
     'type' / Int8ul,
     'payload' / Switch(this.type, {
         1 : Telemetry1,

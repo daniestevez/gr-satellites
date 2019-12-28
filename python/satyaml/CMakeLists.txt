@@ -55,6 +55,7 @@ install(FILES
     PW-Sat2.yml
     QO-100.yml
     Reaktor_Hello_World.yml
+    SMOG-P.yml
     S-NET_A.yml
     Swiatowid.yml
     US01.yml

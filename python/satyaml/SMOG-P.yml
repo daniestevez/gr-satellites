@@ -1,0 +1,20 @@
+name: SMOG-P
+norad: 44832
+data:
+  &tlm Telemetry:
+    telemetry: smogp
+transmitters:
+  1k25 FSK long FEC:
+    frequency: 437.150e+6
+    modulation: FSK
+    baudrate: 1250
+    framing: AO-40 FEC
+    data:
+    - *tlm
+  5k FSK long FEC:
+    frequency: 436.100e+6
+    modulation: FSK
+    baudrate: 5000
+    framing: AO-40 FEC
+    data:
+    - *tlm

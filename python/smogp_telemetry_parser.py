@@ -25,7 +25,7 @@ import pmt
 
 import traceback
 
-from . import smogp_telemetry
+from .telemetry import smogp
 
 class smogp_telemetry_parser(gr.basic_block):
     """
@@ -48,7 +48,7 @@ class smogp_telemetry_parser(gr.basic_block):
         packet = bytes(pmt.u8vector_elements(msg))
 
         try:
-            data = smogp_telemetry.Frame.parse(packet)
+            data = smogp.parse(packet)
         except:
             print("Error decoding telemetry")
             traceback.print_exc()

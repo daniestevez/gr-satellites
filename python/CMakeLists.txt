@@ -117,7 +117,6 @@ GR_PYTHON_INSTALL(
     header_remover.py
     smogp_signalling.py
     smogp_packet_filter.py
-    smogp_telemetry.py
     smogp_telemetry_parser.py
     smogp_spectrum_save.py
     aausat4_remove_fsm.py
