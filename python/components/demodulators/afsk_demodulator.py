@@ -36,7 +36,7 @@ class afsk_demodulator(gr.hier_block2):
         sample_rate: Sample rate in samples per second (float)
         iq: Whether the input is IQ or real (bool)
         af_carrier: Audio frequency carrier in Hz (float)
-        deviation: Deviation in Hz (float)
+        deviation: Deviation in Hz, negative inverts the sidebands (float)
         options: Options from argparse
     """
     def __init__(self, baudrate, samp_rate, iq, af_carrier, deviation, options = None):
@@ -50,8 +50,8 @@ class afsk_demodulator(gr.hier_block2):
         else:
             self.demod = self
 
-        filter_cutoff = 2 * deviation
-        filter_transition = 0.1 * deviation
+        filter_cutoff = 2 * abs(deviation)
+        filter_transition = 0.1 * abs(deviation)
         taps = firdes.low_pass(1, samp_rate, filter_cutoff, filter_transition)
         self.xlating = filter.freq_xlating_fir_filter_fcf(1, taps, af_carrier, samp_rate)
 

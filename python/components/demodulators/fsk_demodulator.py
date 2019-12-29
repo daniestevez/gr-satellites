@@ -36,7 +36,7 @@ class fsk_demodulator(gr.hier_block2, options_block):
         baudrate: Baudrate in symbols per second (float)
         sample_rate: Sample rate in samples per second (float)
         iq: Whether the input is IQ or real (bool)
-        deviation: Deviation in Hz (float)
+        deviation: Deviation in Hz, negative inverts sidebands (float)
         options: Options from argparse
     """
     def __init__(self, baudrate, samp_rate, iq, deviation = None, options = None):
