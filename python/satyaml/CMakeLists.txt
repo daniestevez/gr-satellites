@@ -53,6 +53,7 @@ install(FILES
     LilacSat-1.yml
     Lucky-7.yml
     NuSat_1.yml
+    OPS-SAT.yml
     PW-Sat2.yml
     QO-100.yml
     Reaktor_Hello_World.yml

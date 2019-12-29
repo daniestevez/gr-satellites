@@ -40,3 +40,5 @@ echo SMOG-P
 gr_satellites SMOG-P --wavfile ~/satellite-recordings/smog_p_5k.wav --samp_rate 48e3 --input_gain 10
 gr_satellites SMOG-P --wavfile ~/satellite-recordings/smog_p_long.wav --samp_rate 48e3
 gr_satellites SMOG-P --wavfile ~/satellite-recordings/smog_p.wav --samp_rate 48e3
+echo OPS-SAT
+gr_satellites OPS-SAT --wavfile ~/satellite-recordings/ops_sat.wav --samp_rate 48e3
