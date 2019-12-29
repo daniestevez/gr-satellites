@@ -3,6 +3,8 @@ norad: 44832
 data:
   &tlm Telemetry:
     telemetry: smogp
+  &signalling Signalling:
+    decoder: smogp_signalling
 transmitters:
   1k25 FSK long concatenated FEC:
     frequency: 437.150e+6
@@ -34,6 +36,13 @@ transmitters:
     frame size: 128
     data:
     - *tlm
+  1k25 FSK signalling:
+    frequency: 437.150e+6
+    modulation: FSK
+    baudrate: 1250
+    framing: SMOG-P Signalling
+    data:
+    - *signalling
   5k FSK long concatenated FEC:
     frequency: 436.100e+6
     modulation: FSK

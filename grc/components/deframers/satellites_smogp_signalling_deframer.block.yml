@@ -1,0 +1,23 @@
+id: satellites_smogp_signalling_deframer
+label: SMOG-P Signalling Deframer
+category: '[Satellites]/Deframers'
+
+parameters:
+-   id: threshold
+    label: Syncword threshold
+    dtype: int
+    default: 0
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.deframers
+    make: satellites.components.deframers.smogp_signalling_deframer(syncword_threshold = ${threshold})
+
+file_format: 1

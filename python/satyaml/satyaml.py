@@ -39,7 +39,8 @@ class SatYAML:
                 'CCSDS Reed-Solomon', 'CCSDS Reed-Solomon dual', 'CCSDS Reed-Solomon differential',\
                 'CCSDS Reed-Solomon dual differential', 'CCSDS Concatenated', 'CCSDS Concatenated dual',\
                 'CCSDS Concatenated differential', 'CCSDS Concatenated dual differential',\
-                'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon', 'SMOG-P RA']
+                'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon', 'SMOG-P RA',\
+                'SMOG-P Signalling']
     transports = ['KISS', 'KISS no control byte', 'KISS KS-1Q']
     
     def check_yaml(self, yml):
