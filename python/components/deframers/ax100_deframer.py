@@ -19,7 +19,7 @@
 # Boston, MA 02110-1301, USA.
 
 from gnuradio import gr, digital
-from ... import nrzi_decode, hdlc_deframer, ax100_decode, u482c_decode
+from ... import ax100_decode, u482c_decode
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
 
