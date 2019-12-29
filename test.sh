@@ -42,3 +42,5 @@ gr_satellites SMOG-P --wavfile ~/satellite-recordings/smog_p_long.wav --samp_rat
 gr_satellites SMOG-P --wavfile ~/satellite-recordings/smog_p.wav --samp_rate 48e3
 echo OPS-SAT
 gr_satellites OPS-SAT --wavfile ~/satellite-recordings/ops_sat.wav --samp_rate 48e3
+echo AISAT
+gr_satellites AISAT --wavfile ~/satellite-recordings/aisat.wav --samp_rate 48e3
