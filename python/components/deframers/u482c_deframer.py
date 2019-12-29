@@ -49,7 +49,7 @@ class u482c_deframer(gr.hier_block2, options_block):
 
         self.slicer = digital.binary_slicer_fb()
         self.deframer = sync_to_pdu_packed(packlen = 258, sync = _syncword, threshold = syncword_threshold)
-        self.fec = u482c_decode(False, -1, -1, -1)
+        self.fec = u482c_decode(self.options.verbose_fec, -1, -1, -1)
 
         self.connect(self, self.slicer, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.fec, 'in'))
@@ -63,3 +63,4 @@ class u482c_deframer(gr.hier_block2, options_block):
         Adds U482C deframer specific options to the argparse parser
         """
         parser.add_argument('--syncword_threshold', type = int, default = cls._default_sync_threshold, help = 'Syncword bit errors [default=%(default)r]')
+        parser.add_argument('--verbose_fec', action = 'store_true', help = 'Verbose FEC decoder')

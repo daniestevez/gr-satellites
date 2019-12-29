@@ -57,8 +57,8 @@ class ax100_deframer(gr.hier_block2, options_block):
         self.deframer = sync_to_pdu_packed(packlen = 256 if mode == 'RS' else 255,\
                                            sync = _syncword,\
                                            threshold = syncword_threshold)
-        self.fec = ax100_decode(False) if mode == 'RS' else u482c_decode(False, 0, 1, 1)
-                                        
+        self.fec = ax100_decode(self.options.verbose_fec) if mode == 'RS'\
+          else u482c_decode(self.options.verbose_fec, 0, 1, 1)
 
         self._blocks = [self, self.slicer]
         if mode == 'RS':
@@ -77,3 +77,4 @@ class ax100_deframer(gr.hier_block2, options_block):
         Adds AX100 deframer specific options to the argparse parser
         """
         parser.add_argument('--syncword_threshold', type = int, default = cls._default_sync_threshold, help = 'Syncword bit errors [default=%(default)r]')
+        parser.add_argument('--verbose_fec', action = 'store_true', help = 'Verbose FEC decoder')
