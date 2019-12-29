@@ -52,10 +52,23 @@ install(FILES
     AU02.yml
     AU03.yml
     BY70-1.yml
+    CA03.yml
+    CZ02.yml
+    Delphini-1.yml
+    D-SAT.yml
+    DUCHIFAT-3.yml
     EntrySat.yml
     ESEO.yml
+    FACSAT-1.yml
+    FMN-1.yml
     FloripaSat-1.yml
+    GALASSIA.yml
+    GOMX-1.yml
     GOMX-3.yml
+    GR01.yml
+    IL01.yml
+    INNOSAT-2.yml
+    ITASAT_1.yml
     KS-1Q.yml
     LilacSat-1.yml
     Lucky-7.yml

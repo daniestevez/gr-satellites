@@ -1,0 +1,15 @@
+name: GALASSIA
+norad: 41170
+data:
+  &tlm Telemetry:
+    telemetry: csp
+transmitters:
+  4k8 AFSK downlink:
+    frequency: 436.400e+6
+    modulation: AFSK
+    baudrate: 4800
+    af_carrier: 3600
+    deviation: -1200
+    framing: U482C
+    data:
+    - *tlm

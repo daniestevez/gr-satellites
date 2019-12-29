@@ -13,3 +13,10 @@ transmitters:
     framing: ESEO
     data:
     - *tlm
+  4k8 FSK downlink:
+    frequency: 437.000e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: ESEO
+    data:
+    - *tlm

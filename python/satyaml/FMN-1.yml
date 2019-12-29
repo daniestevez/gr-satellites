@@ -1,0 +1,15 @@
+name: FMN-1
+alternative_names:
+  - FengMaNiu-1
+norad: 43192 
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  9k6 BPSK downlink:
+    frequency: 435.350e+6
+    modulation: BPSK
+    baudrate: 9600
+    framing: AX.25 G3RUH
+    data:
+    - *tlm

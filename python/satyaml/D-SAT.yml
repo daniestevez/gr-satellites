@@ -1,0 +1,15 @@
+name: D-SAT
+norad: 42794
+data:
+  &tlm Telemetry:
+    telemetry: csp
+transmitters:
+  4k8 AFSK downlink:
+    frequency: 437.505e+6
+    modulation: AFSK
+    baudrate: 4800
+    af_carrier: 3600
+    deviation: -1200
+    framing: U482C
+    data:
+    - *tlm

@@ -1,0 +1,23 @@
+name: CA03
+alternative_names:
+  - QB50 CA03
+  - ExAlta-1
+norad: 42734
+data:
+  &tlm Telemetry:
+    telemetry: csp
+transmitters:
+  4k8 FSK downlink:
+    frequency: 436.705e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: AX100 Reed Solomon
+    data:
+    - *tlm
+  9k6 FSK downlink:
+    frequency: 436.705e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX100 Reed Solomon
+    data:
+    - *tlm

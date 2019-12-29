@@ -54,3 +54,26 @@ echo AU02
 gr_satellites AU02 --wavfile ~/satellite-recordings/au02.wav --samp_rate 48e3   --gain_mu 0.1
 echo AU03
 gr_satellites AU03 --wavfile ~/satellite-recordings/au03.wav --samp_rate 48e3
+echo CA03
+gr_satellites CA03 --wavfile ~/satellite-recordings/ca03.wav --samp_rate 48e3
+gr_satellites CA03 --wavfile ~/satellite-recordings/ca03_9k6.wav --samp_rate 48e3
+echo CZ02
+gr_satellites CZ02 --wavfile ~/satellite-recordings/cz02.wav --samp_rate 48e3
+echo D-SAT
+gr_satellites D-SAT --wavfile ~/satellite-recordings/dsat.wav --samp_rate 48e3
+echo DUCHIFAT-3
+gr_satellites DUCHIFAT-3 --wavfile ~/satellite-recordings/duchifat_3.wav --samp_rate 48e3 --clk_limit 0.05 --clk_bw 0.05
+echo FACSAT-1
+gr_satellites FACSAT-1 --wavfile ~/satellite-recordings/facsat_1.wav --samp_rate 48e3
+echo FMN-1
+gr_satellites FMN-1 --wavfile ~/satellite-recordings/fmn1.wav --samp_rate 48e3 --clk_limit 0.05
+echo GALASSIA
+gr_satellites GALASSIA --wavfile ~/satellite-recordings/galassia.wav --samp_rate 48e3
+echo GOMX-1
+gr_satellites GOMX-1 --wavfile ~/satellite-recordings/gomx_1.wav --samp_rate 48e3
+echo IL01
+gr_satellites IL01 --wavfile ~/satellite-recordings/il01.wav --samp_rate 48e3 --clk_limit 0.05 --clk_bw 0.2
+echo INNOSAT-2
+gr_satellites INNOSAT-2 --wavfile ~/satellite-recordings/innosat_2.wav --samp_rate 48e3
+echo ITASAT 1
+gr_satellites "ITASAT 1" --wavfile ~/satellite-recordings/itasat1.wav --samp_rate 48e3 --f_offset 1500 --fll_bw 10

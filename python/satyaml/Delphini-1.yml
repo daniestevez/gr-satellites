@@ -1,0 +1,13 @@
+name: Delphini-1
+norad: 44030
+data:
+  &tlm Telemetry:
+    telemetry: csp
+transmitters:
+  4k8 FSK downlink:
+    frequency: 437.500e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: AX100 Reed Solomon
+    data:
+    - *tlm
