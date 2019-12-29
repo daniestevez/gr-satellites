@@ -46,6 +46,9 @@ class header_remover(gr.basic_block):
             return
         packet = bytes(pmt.u8vector_elements(msg))
 
+        if len(packet) <= self.length:
+            return
+
         data = packet[self.length:]
         self.message_port_pub(pmt.intern('out'),
                                   pmt.cons(pmt.car(msg_pmt),
