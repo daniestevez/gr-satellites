@@ -46,3 +46,11 @@ echo AISAT
 gr_satellites AISAT --wavfile ~/satellite-recordings/aisat.wav --samp_rate 48e3
 echo AISTECHSAT-3
 gr_satellites AISTECHSAT-3 --wavfile ~/satellite-recordings/aistechsat3.wav --samp_rate 48e3
+echo AO-40
+gr_satellites AO-40 --wavfile ~/satellite-recordings/ao40_uncoded.wav --samp_rate 48e3
+echo ATHENOXAT-1
+gr_satellites ATHENOXAT-1 --wavfile ~/satellite-recordings/athenoxat_1.wav --samp_rate 48e3
+echo AU02
+gr_satellites AU02 --wavfile ~/satellite-recordings/au02.wav --samp_rate 48e3   --gain_mu 0.1
+echo AU03
+gr_satellites AU03 --wavfile ~/satellite-recordings/au03.wav --samp_rate 48e3

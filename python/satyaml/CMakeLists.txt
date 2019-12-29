@@ -43,10 +43,14 @@ install(FILES
     AISAT.yml
     AISTECHSAT-2.yml
     AISTECHSAT-3.yml
+    AO-40.yml
     AO-73.yml
     Astrocast_0_1.yml
     AT03.yml
+    ATHENOXAT-1.yml
     ATL-1.yml
+    AU02.yml
+    AU03.yml
     BY70-1.yml
     EntrySat.yml
     ESEO.yml

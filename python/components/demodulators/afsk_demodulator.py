@@ -21,8 +21,9 @@
 from gnuradio import gr, filter
 from gnuradio.filter import firdes
 from .fsk_demodulator import fsk_demodulator
+from ...utils.options_block import options_block
 
-class afsk_demodulator(gr.hier_block2):
+class afsk_demodulator(gr.hier_block2, options_block):
     """
     Hierarchical block to demodulate AFSK.
 
@@ -43,6 +44,7 @@ class afsk_demodulator(gr.hier_block2):
         gr.hier_block2.__init__(self, "afsk_demodulator",
             gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
             gr.io_signature(1, 1, gr.sizeof_float))
+        options_block.__init__(self, options)
         
         if iq:
             self.demod = analog.quadrature_demod_cf(1)
@@ -55,6 +57,13 @@ class afsk_demodulator(gr.hier_block2):
         taps = firdes.low_pass(1, samp_rate, filter_cutoff, filter_transition)
         self.xlating = filter.freq_xlating_fir_filter_fcf(1, taps, af_carrier, samp_rate)
 
-        self.fsk = fsk_demodulator(baudrate, samp_rate, deviation = deviation, iq = True)
+        self.fsk = fsk_demodulator(baudrate, samp_rate, deviation = deviation, iq = True, options = options)
 
         self.connect(self.demod, self.xlating, self.fsk, self)
+
+    @classmethod
+    def add_options(cls, parser):
+        """
+        Adds CCSDS concatenated deframer specific options to the argparse parser
+        """
+        fsk_demodulator.add_options(parser)

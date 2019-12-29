@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # 
-# Copyright 2017 Daniel Estevez <daniel@destevez.net>
+# Copyright 2017,2019 Daniel Estevez <daniel@destevez.net>
 # 
 # This is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,7 +22,8 @@
 import datetime
 
 from construct import *
-from .adapters import UNIXTimestampAdapter
+from ..adapters import UNIXTimestampAdapter
+from .csp import CSPHeader
 
 Timestamp = UNIXTimestampAdapter(Int32sb)
 
@@ -61,7 +62,8 @@ class Curr5Adapter(Adapter):
         return obj * 4500.0 / 255.0
 Curr5 = Curr5Adapter(Int8ub)
                       
-Beacon = Struct(
+au03 = Struct(
+        'csp_header' / CSPHeader,
         'timestamp' / Timestamp,
         'callsign' / Bytes(6),
         'flags' / Byte,

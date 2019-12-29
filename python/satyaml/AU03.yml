@@ -1,0 +1,18 @@
+name: AU03
+alternative_names:
+  - QB50 AU03
+  - i-INSPIRE II
+norad: 42731
+data:
+  &tlm Telemetry:
+    telemetry: au03
+transmitters:
+  4k8 AFSK downlink:
+    frequency: 436.330e+6
+    modulation: AFSK
+    baudrate: 4800
+    af_carrier: 3600
+    deviation: -1200
+    framing: U482C
+    data:
+    - *tlm

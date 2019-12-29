@@ -1,0 +1,20 @@
+name: AO-40
+norad: 26609
+data:
+  &tlm Telemetry:
+    decoder: qo100_telemetry_print
+transmitters:
+  400baud uncoded BPSK beacon:
+    frequency: 2400.2e+6
+    modulation: DBPSK Manchester
+    baudrate: 400
+    framing: AO-40 uncoded
+    data:
+    - *tlm
+  400baud FEC BPSK beacon:
+    frequency: 2400.2e+6
+    modulation: DBPSK Manchester
+    baudrate: 400
+    framing: AO-40 FEC
+    data:
+    - *tlm

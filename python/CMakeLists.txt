@@ -69,7 +69,6 @@ GR_PYTHON_INSTALL(
     check_ao40_uncoded_crc.py
     lilacsat1_gps_kml.py
     au03_telemetry_parser.py
-    au03_telemetry.py
     check_tt64_crc.py
     append_crc32c.py
     dsat_image_decoder.py
