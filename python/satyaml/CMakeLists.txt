@@ -43,6 +43,7 @@ install(FILES
     AO-73.yml
     Astrocast_0_1.yml
     AT03.yml
+    ATL-1.yml
     BY70-1.yml
     EntrySat.yml
     ESEO.yml
