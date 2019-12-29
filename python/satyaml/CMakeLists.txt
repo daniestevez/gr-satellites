@@ -41,6 +41,8 @@ install(FILES
     3CAT-1.yml
     AAUSAT-4.yml
     AISAT.yml
+    AISTECHSAT-2.yml
+    AISTECHSAT-3.yml
     AO-73.yml
     Astrocast_0_1.yml
     AT03.yml

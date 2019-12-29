@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # 
-# Copyright 2018 Daniel Estevez <daniel@destevez.net>
+# Copyright 2018-2019 Daniel Estevez <daniel@destevez.net>
 # 
 # This is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,10 +20,12 @@
 # 
 
 from construct import *
-from . import space_packet as ccsds_space_packet
-from . import ecss_pus
+from .. import space_packet as ccsds_space_packet
+from .. import ecss_pus
 
-from .adapters import LinearAdapter
+from ..adapters import LinearAdapter
+
+from .csp import CSPHeader
 
 TMHeader = BitStruct(
     'version' / BitsInteger(2),
@@ -173,7 +175,8 @@ UserData = Struct(
     'data' / Switch(this.id, payloads, default = Bytes(this._.space_packet_header.data_length-16))
     )
 
-Beacon = Struct(
+lume = Struct(
+    'csp_header' / CSPHeader,
     'tm_header' / TMHeader,
     'space_packet_header' / ccsds_space_packet.PrimaryHeader,
     'pus_header' / ecss_pus.TMSecondaryHeader,

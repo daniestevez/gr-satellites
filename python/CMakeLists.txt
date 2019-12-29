@@ -105,7 +105,6 @@ GR_PYTHON_INSTALL(
     reflect_bytes.py
     check_astrocast_crc.py
     lume1_telemetry_parser.py
-    lume1_telemetry.py
     ecss_pus.py
     qo100_telemetry_print.py
     swiatowid_packet_crop.py

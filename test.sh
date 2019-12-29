@@ -44,3 +44,5 @@ echo OPS-SAT
 gr_satellites OPS-SAT --wavfile ~/satellite-recordings/ops_sat.wav --samp_rate 48e3
 echo AISAT
 gr_satellites AISAT --wavfile ~/satellite-recordings/aisat.wav --samp_rate 48e3
+echo AISTECHSAT-3
+gr_satellites AISTECHSAT-3 --wavfile ~/satellite-recordings/aistechsat3.wav --samp_rate 48e3
