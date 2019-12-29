@@ -47,14 +47,13 @@ class snet_deframer(gr.hier_block2, options_block):
         if syncword_threshold is None:
             syncword_threshold = self.options.syncword_threshold
 
-        self.invert = blocks.multiply_const_ff(-1, 1)
         self.slicer = digital.binary_slicer_fb()
         self.deframer = sync_to_pdu(packlen = 8 * 512,\
                                     sync = _syncword,\
                                     threshold = syncword_threshold)
         self.fec = deframer(self.options.verbose_fec)
         
-        self.connect(self, self.invert, self.slicer, self.deframer)
+        self.connect(self, self.slicer, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.fec, 'in'))
         self.msg_connect((self.fec, 'out'), (self, 'out'))
 

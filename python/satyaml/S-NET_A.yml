@@ -11,7 +11,7 @@ transmitters:
     modulation: AFSK
     baudrate: 1200
     af_carrier: 1500
-    deviation: 1200
+    deviation: -600
     framing: S-NET
     data:
     - *tlm
