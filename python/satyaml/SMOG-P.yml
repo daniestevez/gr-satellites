@@ -1,5 +1,7 @@
 name: SMOG-P
 norad: 44832
+telemetry_servers:
+  - BME
 data:
   &tlm Telemetry:
     telemetry: smogp

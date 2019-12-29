@@ -65,6 +65,11 @@ def write_default_config(file):
         'credentials_file' : '',
     }
 
+    config['BME'] = {
+        'user' : '',
+        'password' : '',
+    }
+
     with open(file, 'w') as f:
         config.write(f)
 

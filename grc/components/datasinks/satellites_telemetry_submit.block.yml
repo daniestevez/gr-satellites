@@ -7,13 +7,13 @@ parameters:
     label: Server
     dtype: enum
     default: '"SatNOGS"'
-    options: ['"SatNOGS"', '"FUNcube"', '"PWSat"']
-    option_labels: [SatNOGS DB, AMSAT-UK Data Warehouse, PW-Sat2 Ground Station]
+    options: ['"SatNOGS"', '"FUNcube"', '"PWSat"', '"BME"']
+    option_labels: [SatNOGS DB, AMSAT-UK Data Warehouse, PW-Sat2 Ground Station, BME Ground Station]
 -   id: norad
     label: NORAD ID
     dtype: int
     default: 0
-    hide: ${ 'all' if server != 'SatNOGS' else 'none' }
+    hide: ${ 'all' if server not in ['SatNOGS', 'BME'] else 'none' }
 
 inputs:
 -   domain: message

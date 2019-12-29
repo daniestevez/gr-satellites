@@ -19,7 +19,7 @@
 # Boston, MA 02110-1301, USA.
 
 from gnuradio import gr, blocks
-from ... import submit, funcube_submit, pwsat2_submitter
+from ... import submit, funcube_submit, pwsat2_submitter, bme_submitter
 
 class telemetry_submit(gr.hier_block2):
     """
@@ -30,7 +30,7 @@ class telemetry_submit(gr.hier_block2):
     These are submitted to a telemetry server
 
     Args:
-        server: 'SatNOGS', 'FUNcube' or 'PWSat' (string)
+        server: 'SatNOGS', 'FUNcube', 'PWSat' or 'BME' (string)
         norad: NORAD ID (int)
         config: configuration file from configparser
     """
@@ -51,6 +51,10 @@ class telemetry_submit(gr.hier_block2):
             self.submit = funcube_submit(url, config['FUNcube']['site_id'], config['FUNcube']['auth_code'])
         elif server == 'PWSat':
             self.submit = pwsat2_submitter(config['PW-Sat2']['credentials_file'], '')
+        elif server == 'BME':
+            satellites = {44830 : 'atl1', 44832 : 'smogp'}
+            satellite = satellites[norad]
+            self.submit = bme_submitter(config['BME']['user'], config['BME']['password'], satellite)
         else:
             raise ValueError('Unsupported telemetry server')
 

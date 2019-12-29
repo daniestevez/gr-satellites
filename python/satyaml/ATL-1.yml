@@ -1,5 +1,7 @@
 name: ATL-1
 norad: 44830
+telemetry_servers:
+  - BME
 data:
   &tlm Telemetry:
     telemetry: smogp
