@@ -19,7 +19,7 @@
 # Boston, MA 02110-1301, USA.
 
 from gnuradio import gr, digital
-from ... import nrzi_decode, hdlc_deframer, ax100_decode, u482c_decode
+from ... import u482c_decode
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
 
@@ -37,7 +37,7 @@ class u482c_deframer(gr.hier_block2, options_block):
         options: Options from argparse
     """
     def __init__(self, syncword_threshold = None, options = None):
-        gr.hier_block2.__init__(self, "ax100_deframer",
+        gr.hier_block2.__init__(self, "u428c_deframer",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
         options_block.__init__(self, options)
@@ -60,6 +60,6 @@ class u482c_deframer(gr.hier_block2, options_block):
     @classmethod
     def add_options(cls, parser):
         """
-        Adds AX100 deframer specific options to the argparse parser
+        Adds U482C deframer specific options to the argparse parser
         """
         parser.add_argument('--syncword_threshold', type = int, default = cls._default_sync_threshold, help = 'Syncword bit errors [default=%(default)r]')
