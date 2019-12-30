@@ -168,11 +168,11 @@ class gr_satellites_flowgraph(gr.hier_block2):
                         if 'transports' in transmitter:
                             for transport in transmitter['transports']:
                                 self.msg_connect((deframer, 'out'), (self._transports[transport], 'in'))
+                        if 'additional_data' in transmitter:
+                            for k, v in transmitter['additional_data'].items():
+                                self.msg_connect((deframer, k), (self._datasinks[v], 'in'))
                     for s in self._additional_datasinks:
                         self.msg_connect((deframer, 'out'), (s, 'in'))
-                    if 'additional_data' in transmitter:
-                        for k, v in transmitter['additional_data'].items():
-                            self.msg_connect((deframer, k), (self._datasinks[v], 'in'))
 
     def get_telemetry_submitters(self, satyaml, config):
         """
