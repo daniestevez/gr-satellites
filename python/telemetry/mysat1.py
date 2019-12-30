@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # 
-# Copyright 2018 Daniel Estevez <daniel@destevez.net>
+# Copyright 2018-2019 Daniel Estevez <daniel@destevez.net>
 # 
 # This is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,8 @@
 # 
 
 from construct import *
-from .adapters import *
+from ..adapters import *
+from .ax25 import Header
 
 Timestamp = UNIXTimestampAdapter(Int32ul)
 
@@ -77,7 +78,8 @@ EPS_Currents = Struct(
 'eps_total_pv_current' / LinearAdapter(1000.0, Int16ul),
 'eps_total_system_current' / LinearAdapter(1000.0, Int16ul))
 
-Beacon0 = Struct(
+mysat1 = Struct(
+    'header' / Header,
     'callsign' / Callsign,
     'obc' / OBC,
     'gyro' / Gyro,
@@ -93,5 +95,3 @@ Beacon0 = Struct(
     'eps_batt_voltage' / EPS_Batt_Voltage,
     'obc_current' / OBC_Current,
     'eps_currents' / EPS_Currents)
-
-Beacon = Select(Beacon0)

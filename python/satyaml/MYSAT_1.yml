@@ -1,20 +1,18 @@
-name: PW-Sat2
-norad: 43814
-telemetry_servers:
-  - PWSat
+name: MYSAT 1
+norad: 44045 
 data:
   &tlm Telemetry:
-    telemetry: ax25
+    telemetry: mysat1
 transmitters:
   1k2 BPSK downlink:
-    frequency: 435.275e+6
+    frequency: 435.775e+6
     modulation: BPSK
     baudrate: 1200
     framing: AX.25 G3RUH
     data:
     - *tlm
   9k6 BPSK downlink:
-    frequency: 435.275e+6
+    frequency: 435.775e+6
     modulation: BPSK
     baudrate: 9600
     framing: AX.25 G3RUH

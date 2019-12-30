@@ -1,15 +1,16 @@
-name: AO-73
+name: Nayif-1
 alternative_names:
-  - FUNcube-1
-norad: 39444
-telemetry_servers:
+  - FUNcube-5
+  - EO-88
+norad: 42017
+telmetry_servers:
   - FUNcube
 data:
   &tlm Telemetry:
     unknown
 transmitters:
   1k2 BPSK downlink:
-    frequency: 145.935e+6
+    frequency: 145.940e+6
     modulation: DBPSK
     baudrate: 1200
     framing: AO-40 FEC

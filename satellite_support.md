@@ -46,4 +46,33 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 | IL01 (DUCHIFAT-2) |		  | AX.25 addr. check.	|		  |
 | INNOSAT-2	    |		  | 	  		| x		  |
 | ITASAT 1	    |		  |			| x		  |
+| JY1-Sat	    |		  | Tlm decode miss.	| 		  |
+| K2SAT		    |		  | 	       		| In examples/	  |
+| KR01 (LINK)	    |		  | AX.25 addr. check.	|    		  |
+| KS-1Q		    |		  | CSP CRC check miss.	| 		  |
+| LilacSat-1	    |		  | Image dec. miss.	|		  |
+| LilacSat-2	    |		  | Subaudio dec. miss.	|		  |
+| Lucky-7	    |		  | 	     	  	| x		  |
+| LUME-1	    |		  |			| Untested	  |
+| Luojia-1	    |		  |			| x		  |
+| MYSAT 1	    |		  | AX.25 addr. check.	| 		  |
+| Nayif-1	    |		  | Tlm decode miss.	|		  |
+| ÑuSat 1, 2	    |		  | 	       		| x		  |
+| OPS-SAT  	    |		  |			| x		  |
+| PicSat	    |		  | AX.25 addr. check.	| 		  |
+| PW-Sat2	    |		  | AX.25 addr. check.	|		  |
+| QO-100	    |		  | 	  		| x		  |
+| Reaktor Hello W   |		  |			| x		  |
+| Shaonian Xing	    |		  | AX.25 addr. check.	| 		  |
+| SMOG-P   	    |		  | Spectrum save miss.	|		  |
+| S-NET		    |		  | classifier miss.	|		  |
+| Sokrat	    | x		  | 	       		|		  |
+| SpooQy-1	    | 		  |			| x		  |
+| Suomi 100	    |		  |			| x		  |
+| Światowid	    |		  | Image dec. miss.	| 		  |
+| TANUSHA-3	    | x		  | 	       		|		  |
+| Taurus-1	    | 		  |			| Untested	  |
 
+
+
+Satellites starting by sat_N ...

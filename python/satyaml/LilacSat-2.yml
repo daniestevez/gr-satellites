@@ -1,0 +1,31 @@
+name: LilacSat-2
+norad: 40908
+data:
+  &tlm Telemetry:
+    unknown
+transports:
+  &kiss KISS:
+    protocol: KISS no control byte
+    data:
+    - *tlm
+  &kiss2 KISS2:
+    protocol: KISS no control byte
+    data:
+    - *tlm
+transmitters:
+  9k6 BPSK downlink:
+    frequency: 437.200e+6
+    modulation: BPSK
+    baudrate: 9600
+    framing: CCSDS Concatenated differential
+    frame size: 114
+    transports:
+    - *kiss
+  4k8 FSK downlink:
+    frequency: 437.225e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: CCSDS Concatenated
+    frame size: 114
+    transports:
+    - *kiss2

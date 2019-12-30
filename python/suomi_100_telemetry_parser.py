@@ -23,7 +23,7 @@ import numpy
 from gnuradio import gr
 import pmt
 
-from . import suomi_100_telemetry
+from .telemetry import suomi100
 
 class suomi_100_telemetry_parser(gr.basic_block):
     """
@@ -46,7 +46,7 @@ class suomi_100_telemetry_parser(gr.basic_block):
         packet = bytes(pmt.u8vector_elements(msg))
 
         try:
-            data = suomi_100_telemetry.Beacon.parse(packet[4:])
+            data = suomi100.parse(packet)
         except:
             print("Could not decode telemetry beacon")
             return

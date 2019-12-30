@@ -1,0 +1,13 @@
+name: Suomi 100
+norad: 43804
+data:
+  &tlm Telemetry:
+    telemetry: suomi100
+transmitters:
+  9k6 FSK downlink:
+    frequency: 437.775e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm

@@ -1,15 +1,16 @@
-name: AO-73
+name: JY1-Sat
 alternative_names:
-  - FUNcube-1
-norad: 39444
-telemetry_servers:
+  - FUNcube-6
+  - JO-97
+norad: 43803
+telmetry_servers:
   - FUNcube
 data:
   &tlm Telemetry:
     unknown
 transmitters:
   1k2 BPSK downlink:
-    frequency: 145.935e+6
+    frequency: 145.840e+6
     modulation: DBPSK
     baudrate: 1200
     framing: AO-40 FEC

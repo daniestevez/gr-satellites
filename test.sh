@@ -76,4 +76,16 @@ gr_satellites IL01 --wavfile ~/satellite-recordings/il01.wav --samp_rate 48e3 --
 echo INNOSAT-2
 gr_satellites INNOSAT-2 --wavfile ~/satellite-recordings/innosat_2.wav --samp_rate 48e3
 echo ITASAT 1
-gr_satellites "ITASAT 1" --wavfile ~/satellite-recordings/itasat1.wav --samp_rate 48e3 --f_offset 1500 --fll_bw 10
+gr_satellites "ITASAT 1" --wavfile ~/satellite-recordings/itasat1.wav --samp_rate 48e3 --fll_bw 10
+echo KR01
+gr_satellites KR01 --wavfile ~/satellite-recordings/kr01.wav --samp_rate 48e3  --clk_limit 0.05
+echo Luojia-1
+gr_satellites Luojia-1 --wavfile ~/satellite-recordings/luojia-1.wav --samp_rate 48e3
+echo "MYSAT 1"
+gr_satellites "MYSAT 1" --wavfile ~/satellite-recordings/mysat1.wav --samp_rate 48e3  --f_offset 2000 --clk_limit 0.1 --fll_bw 10
+echo PW-Sat2
+gr_satellites PW-Sat2 --wavfile ~/satellite-recordings/pwsat2.wav --samp_rate 48e3 --clk_limit 0.05
+echo "Shaonian Xing"
+gr_satellites "Shaonian Xing" --wavfile ~/satellite-recordings/shaonian_xing.wav --samp_rate 48e3 --clk_limit 0.05
+echo "Suomi 100"
+gr_satellites "Suomi 100" --wavfile ~/satellite-recordings/suomi_100.wav --samp_rate 48e3

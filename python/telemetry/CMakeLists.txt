@@ -41,11 +41,15 @@ GR_PYTHON_INSTALL(
     floripasat.py
     gomx_1.py
     gomx_3.py
+    kr01.py
     lume.py
+    mysat1.py
+    picsat.py
     sat_1kuns_pf.py
     sat_3cat_1.py
     smogp.py
     snet.py
+    suomi100.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/telemetry
 )
 

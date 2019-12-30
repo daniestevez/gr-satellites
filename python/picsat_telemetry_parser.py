@@ -25,7 +25,7 @@ import pmt
 
 import traceback
 
-from . import picsat_telemetry
+from .telemetry import picsat
 
 class picsat_telemetry_parser(gr.basic_block):
     """
@@ -48,7 +48,7 @@ class picsat_telemetry_parser(gr.basic_block):
         packet = bytes(pmt.u8vector_elements(msg))
 
         try:
-            print((picsat_telemetry.Packet.parse(packet)))
+            print((picsat.parse(packet)))
             print()
         except Exception:
             print("Error decoding telemetry")

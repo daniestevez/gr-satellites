@@ -63,7 +63,6 @@ GR_PYTHON_INSTALL(
     by701_telemetry_parser.py
     by701_camera_telemetry_parser.py
     by701_telemetry.py
-    kr01_telemetry.py
     kr01_telemetry_parser.py
     ao40_uncoded_crc.py
     check_ao40_uncoded_crc.py
@@ -73,7 +72,6 @@ GR_PYTHON_INSTALL(
     append_crc32c.py
     dsat_image_decoder.py
     strip_ax25_header.py
-    picsat_telemetry.py
     picsat_telemetry_parser.py
     snet_deframer.py
     bch15.py
@@ -89,9 +87,7 @@ GR_PYTHON_INSTALL(
     cc11xx_packet_crop.py
     check_cc11xx_crc.py
     cc11xx_remove_length.py
-    suomi_100_telemetry.py
     suomi_100_telemetry_parser.py
-    mysat1_telemetry.py
     mysat1_telemetry_parser.py
     pwsat2_telemetry_parser.py
     pwsat2_submitter.py

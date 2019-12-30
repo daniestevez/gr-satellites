@@ -23,7 +23,7 @@ import numpy
 from gnuradio import gr
 import pmt
 
-from . import kr01_telemetry
+from .telemetry import kr01
 
 class kr01_telemetry_parser(gr.basic_block):
     """
@@ -46,7 +46,7 @@ class kr01_telemetry_parser(gr.basic_block):
         packet = bytes(pmt.u8vector_elements(msg))
 
         try:
-            data = kr01_telemetry.Beacon.parse(packet[0x23:])
+            data = kr01.parse(packet[0x23:])
         except:
             print("Could not parse telemetry beacon")
             return

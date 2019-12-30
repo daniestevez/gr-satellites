@@ -1,0 +1,13 @@
+name: LUME-1
+norad: 43908
+data:
+  &tlm Telemetry:
+    telemetry: lume
+transmitters:
+  4k8 FSK downlink:
+    frequency: 437.060e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm

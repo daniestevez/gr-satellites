@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # 
-# Copyright 2017 Daniel Estevez <daniel@destevez.net>
+# Copyright 2017,2019 Daniel Estevez <daniel@destevez.net>
 # 
 # This is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -64,7 +64,8 @@ SpacecraftMode = Enum(Int8ub,\
                       Debug = 19,\
                       Standby = 32)
 
-Beacon = Struct(
+kr01 = Struct(
+        'header' / Bytes(0x23),
         'mode' / Mode,
         'batvoltage' / BatVoltage,
         'batcurrent' / BatCurrent,

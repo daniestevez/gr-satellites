@@ -23,7 +23,7 @@ import numpy
 from gnuradio import gr
 import pmt
 
-from . import mysat1_telemetry
+from .telemetry import mysat1
 
 class mysat1_telemetry_parser(gr.basic_block):
     """
@@ -47,7 +47,7 @@ class mysat1_telemetry_parser(gr.basic_block):
         packet = bytes(pmt.u8vector_elements(msg))
 
         try:
-            data = mysat1_telemetry.Beacon.parse(packet[16:])
+            data = mysat1.parse(packet)
         except:
             print("Could not decode telemetry beacon")
             return

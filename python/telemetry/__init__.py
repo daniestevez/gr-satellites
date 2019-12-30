@@ -36,8 +36,13 @@ from .eseo import eseo
 from .floripasat import floripasat
 from .gomx_1 import gomx_1
 from .gomx_3 import gomx_3
+from .kr01 import kr01
 from .lume import lume
+from .mysat1 import mysat1
+from .picsat import picsat
 from .sat_1kuns_pf import sat_1kuns_pf
 from .sat_3cat_1 import sat_3cat_1
 from .smogp import smogp
 from .snet import snet
+from .suomi100 import suomi100
+from .by70_1 import taurus1

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # 
-# Copyright 2018 Daniel Estevez <daniel@destevez.net>
+# Copyright 2018-2019 Daniel Estevez <daniel@destevez.net>
 # 
 # This is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,8 @@
 # 
 
 from construct import *
-from .adapters import UNIXTimestampAdapter
+from ..adapters import UNIXTimestampAdapter
+from .csp import CSPHeader
 
 Timestamp = UNIXTimestampAdapter(Int32ub)
 
@@ -97,4 +98,7 @@ Beacon1 = Struct(
     'com' / Beacon1COM,
     'obc' / Beacon1OBC)
 
-Beacon = Select(Beacon0, Beacon1)
+suomi100 = Struct(
+    'header' / CSPHeader,
+    'payload' / Select(Beacon0, Beacon1)
+    )

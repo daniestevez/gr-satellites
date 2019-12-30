@@ -402,14 +402,21 @@ ImageData = Struct(
     'index' / Int24ul,
     'data' / Bytes(64)
     )
-                   
+    
+Frame = Select(Hk_STM32, Cfg, Hk_AVR, LilacSat1Tlm, Hk_OBC, ADCS_Par, Orbit_Par,\
+               OBC_Threshold, Orbital_Par, Hk_EPS, EPS_Onboard, EPS_Reboot, EPS_Command,\
+               EPS_Error)
+
 by70_1 = Struct(
     'csp_header' / ByteSwapped(CSPHeader),
-    'beacon' / If(this.csp_header.destination == 5,
-                      Select(Hk_STM32, Cfg, Hk_AVR, LilacSat1Tlm, Hk_OBC, ADCS_Par, Orbit_Par,\
-                      OBC_Threshold, Orbital_Par, Hk_EPS, EPS_Onboard, EPS_Reboot, EPS_Command,\
-                      EPS_Error)),
+    'beacon' / If(this.csp_header.destination == 5, Frame),
     'camera' / If(this.csp_header.destination == 6, ImageData),
     'packet_count' / Int32ul,
     'crc' / Hex(Int32ul)
     )
+
+taurus1 = Struct(
+    'header' / Bytes(5+7), # This is a CCSDS header of some sort
+    'beacon' / Frame
+    )
+

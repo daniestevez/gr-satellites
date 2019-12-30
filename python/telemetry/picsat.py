@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # 
-# Copyright 2018 Daniel Estevez <daniel@destevez.net>
+# Copyright 2018-2019 Daniel Estevez <daniel@destevez.net>
 # 
 # This is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 # 
 
 from construct import *
-
+from .ax25 import Header
 import datetime
 
 # An adapted version of Space Packet primary header
@@ -166,7 +166,8 @@ PayloadBeacon = Struct(
     'roll' / Int16sb,
     'yaw' / Int16sb)
 
-Packet = Struct(
+picsat = Struct(
+    'ax25_header' / Header,
     'primary_header' / PrimaryHeader,
     'secondary_header' / IfThenElse(lambda c: c.primary_header.packet_type, SecondaryHeaderTC, SecondaryHeaderTM),
     'packet' / Switch(lambda c: (c.primary_header.payload_flag, c.primary_header.packet_category), {

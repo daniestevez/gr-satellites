@@ -69,17 +69,29 @@ install(FILES
     IL01.yml
     INNOSAT-2.yml
     ITASAT_1.yml
+    JY1-Sat.yml
+    KR01.yml
     KS-1Q.yml
     LilacSat-1.yml
+    LilacSat-2.yml
     Lucky-7.yml
+    LUME-1.yml
+    Luojia-1.yml
+    MYSAT_1.yml
+    Nayif-1.yml
     NuSat_1.yml
     OPS-SAT.yml
+    PicSat.yml
     PW-Sat2.yml
     QO-100.yml
     Reaktor_Hello_World.yml
+    Shaonian_Xing.yml
     SMOG-P.yml
     S-NET_A.yml
+    SpooQy-1.yml
+    Suomi_100.yml
     Swiatowid.yml
+    Taurus-1.yml
     US01.yml
     DESTINATION ${GR_PYTHON_DIR}/satellites/satyaml
 )
