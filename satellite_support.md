@@ -8,6 +8,9 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 
 | Satellite 	    | Unsupported | Partially supported | Fully supported |
 | ----------------- |:-----------:|:-------------------:|:---------------:|
+| 1KUNS-PF	    |		  | Image dec. miss.	|		  |
+| 3CAT-1	    |		  | 	       		| x		  |
+| 3CAT-2	    |		  | Tlm decode miss.	| 		  |
 | AAUSAT-4          |             |                     | x               |
 | AISAT		    |		  | CSP CRC check miss.	| 		  |
 | AISTECHSAT-2      |             | 	    	  	| Untested  	  |
@@ -72,7 +75,8 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 | Światowid	    |		  | Image dec. miss.	| 		  |
 | TANUSHA-3	    | x		  | 	       		|		  |
 | Taurus-1	    | 		  |			| Untested	  |
-
-
-
-Satellites starting by sat_N ...
+| TW-1A, B, C	    |		  |			| x		  |
+| TY-2, TY 4-01,... |		  |			| x		  |
+| UA01	   	    | x		  |			| 		  |
+| UKube-1	    | 		  | Tlm decode miss.	|		  |
+| Zhou Enlai	    |		  | AX.25 addr. check.	|		  |

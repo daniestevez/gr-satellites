@@ -89,3 +89,11 @@ echo "Shaonian Xing"
 gr_satellites "Shaonian Xing" --wavfile ~/satellite-recordings/shaonian_xing.wav --samp_rate 48e3 --clk_limit 0.05
 echo "Suomi 100"
 gr_satellites "Suomi 100" --wavfile ~/satellite-recordings/suomi_100.wav --samp_rate 48e3
+echo TW-1B
+gr_satellites TW-1B --wavfile ~/satellite-recordings/tw_1b.wav --samp_rate 48e3
+echo TW-1C
+gr_satellites TW-1C --wavfile ~/satellite-recordings/tw_1c.wav --samp_rate 48e3
+echo TY-2
+gr_satellites TY-2 --wavfile ~/satellite-recordings/ty_2.wav --samp_rate 48e3
+echo "TY 4-01"
+gr_satellites "TY 4-01" --wavfile ~/satellite-recordings/ty_4.wav --samp_rate 48e3

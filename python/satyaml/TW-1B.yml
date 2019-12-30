@@ -1,0 +1,13 @@
+name: TW-1B
+norad: 40927
+data:
+  &tlm Telemetry:
+    telemetry: csp
+transmitters:
+  4k8 FSK downlink:
+    frequency: 437.645e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: AX100 Reed Solomon
+    data:
+    - *tlm

@@ -1,0 +1,13 @@
+name: TW-1C
+norad: 40926
+data:
+  &tlm Telemetry:
+    telemetry: csp
+transmitters:
+  4k8 FSK downlink:
+    frequency: 435.645e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: AX100 Reed Solomon
+    data:
+    - *tlm

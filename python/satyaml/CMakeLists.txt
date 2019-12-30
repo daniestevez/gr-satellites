@@ -39,6 +39,7 @@ GR_PYTHON_INSTALL(
 install(FILES
     1KUNS-PF.yml
     3CAT-1.yml
+    3CAT-2.yml
     AAUSAT-4.yml
     AISAT.yml
     AISTECHSAT-2.yml
@@ -92,7 +93,15 @@ install(FILES
     Suomi_100.yml
     Swiatowid.yml
     Taurus-1.yml
+    TW-1A.yml
+    TW-1B.yml
+    TW-1C.yml
+    TY-2.yml
+    TY_4-01.yml
+    TY-6.yml
+    UKube-1.yml
     US01.yml
+    Zhou_Enlai.yml
     DESTINATION ${GR_PYTHON_DIR}/satellites/satyaml
 )
 

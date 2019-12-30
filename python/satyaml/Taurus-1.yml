@@ -1,0 +1,22 @@
+name: Taurus-1
+norad: 44530
+data:
+  &tlm Telemetry:
+    telemetry: taurus1
+  &codec2 Codec2:
+    decoder: codec2_udp_sink
+transports:
+  &kiss KISS:
+    protocol: KISS no control byte
+    data:
+    - *tlm
+transmitters:
+  9k6 BPSK downlink:
+    frequency: 435.840e+6
+    modulation: BPSK
+    baudrate: 9600
+    framing: LilacSat-1
+    transports:
+    - *kiss
+    additional_data:
+      codec2: *codec2

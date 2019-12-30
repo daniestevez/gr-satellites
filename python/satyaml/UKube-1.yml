@@ -1,0 +1,17 @@
+name: UKube-1
+alternative_names:
+  - FUNcube-2
+norad: 40074
+telemetry_servers:
+  - FUNcube
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  1k2 BPSK downlink:
+    frequency: 145.840e+6
+    modulation: DBPSK
+    baudrate: 1200
+    framing: AO-40 FEC
+    data:
+    - *tlm
