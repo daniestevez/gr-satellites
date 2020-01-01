@@ -41,9 +41,8 @@ There are currently three development branches of gr-satellites:
   changes is being done. Active development is happening, but there are still
   several months of until the `next` branch is fully usable.
 
-Currently, `master` is set equal  to `maint-3.7`, as it seems that most people
-still use GNU Radio 3.7. When GNU Radio 3.8 becomes more popular, `master` will
-be set to `maint-3.8`.
+Starting in 2020, `master` is set equal to `maint-3.8` (before this, it was set
+equal to `maint-3.7`).
 
 Regarding the numbered releases, the `1.x.y` series is used for stable releases
 on the `maint-3.7` branch (and so, releases supporting GNU Radio 3.7), the
