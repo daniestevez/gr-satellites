@@ -71,7 +71,7 @@ gr-satellites (see below).
 
 ## Dependencies
 
-gr-satellites v3 requires GNU Radio version 3.8.
+gr-satellites v2 requires GNU Radio version 3.8.
 
 Required dependencies:
 
