@@ -69,24 +69,7 @@ sudo ldconfig
 
 ## Dependencies
 
-gr-satellites requires GNU Radio version 3.7.12.0 or new.
-An older version may be used, but note the following:
-
-  * The "Correlate Access Code - Tag" block has changed slightly in the 3.7.12.0
-    version (it now allows floats as well as bytes). The new block is
-    incompatible with the older one, so the flowgraphs using "Correlate Access
-    Code - Tag" will complain of missing blocks when using an older version of
-    GNU Radio. It is possible to replace the "Correlate Access Code - Tag" block
-    by hand with the older version and the flowgraphs should then
-    work. Especially, you have to look at the hierarchical blocks
-    `sync_to_pdu.grc` and `sync_to_pdu_packed.grc` in gr-satellites.
-  * There is a bug in the "Additive scrambler" block. The
-    [bug fix](https://github.com/gnuradio/gnuradio/commit/e3ad82e6d93ea05d3b096673abf609f9e146f578)
-    was introduced in version 3.7.12.0 of GNU Radio.
-    If using an older release of GNU Radio, do not
-    expect this block to work completely. However, the "Additive scrambler" is only used to
-    decode CCSDS scrambling. Decoders using G3RUH scrambling or no scrambler
-    should work fine.
+gr-satellites v3 requires GNU Radio version 3.8.
 
 Required dependencies:
 
