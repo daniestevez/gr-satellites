@@ -67,9 +67,6 @@ sudo make install
 sudo ldconfig
 ```
 
-Finally, you need to compile the hierarchical flowgraphs include in
-gr-satellites (see below).
-
 ## Dependencies
 
 gr-satellites requires GNU Radio version 3.7.12.0 or new.
@@ -113,15 +110,6 @@ one particular satellite. You may install only the ones you're interested in.
 
 If you want to use any of the realtime image decoders, you also need to install
 [feh](https://feh.finalrewind.org/).
-
-## Hierarchichal flowgraphs
-
-Some of the decoders use hierarchichal flowgraphs. These are placed in the
-folder `apps/hierarchical`. The hierarchical flowgraphs must be compiled and
-installed before using any of the flowgraphs which include them.
-
-To compile and install the hierarchical flowgraphs, the script
-`compile_hierarchical.sh` in the root folder can be used.
 
 ## Usage
 
