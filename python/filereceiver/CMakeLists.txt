@@ -32,6 +32,8 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
+    by70_1.py
+    dsat.py
     filereceiver.py
     sat_1kuns_pf.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/filereceiver

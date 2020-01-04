@@ -7,6 +7,8 @@ norad: 42725
 data:
   &tlm Telemetry:
     telemetry: by70_1
+  &image Image:
+    files: by70_1
   &codec2 Codec2:
     decoder: codec2_udp_sink
 transports:
@@ -14,6 +16,7 @@ transports:
     protocol: KISS no control byte
     data:
     - *tlm
+    - *image
 transmitters:
   9k6 BPSK downlink:
     frequency: 436.510e+6

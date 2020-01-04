@@ -396,10 +396,10 @@ EPS_Error = Struct(Const(b'\x1e\xa5'),\
                    'error' / Error[4])
 
 ImageData = Struct(
-    'image_id' / Int32ul,
+    'file_id' / Int32ul,
     'flag' / Int8sb,
-    'length' / Int24ul,
-    'index' / Int24ul,
+    'filesize' / Int24ul,
+    'offset' / Int24ul,
     'data' / Bytes(64)
     )
     

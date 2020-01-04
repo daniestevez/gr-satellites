@@ -25,4 +25,6 @@ This module contains the File Receiver class and child classes
 This class is used to reassemble files transmitted in chunks
 '''
 
+from .by70_1 import by70_1
+from .dsat import dsat
 from .sat_1kuns_pf import sat_1kuns_pf

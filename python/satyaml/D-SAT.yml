@@ -3,6 +3,8 @@ norad: 42794
 data:
   &tlm Telemetry:
     telemetry: csp
+  &image Image:
+    files: dsat
 transmitters:
   4k8 AFSK downlink:
     frequency: 437.505e+6
@@ -13,3 +15,4 @@ transmitters:
     framing: U482C
     data:
     - *tlm
+    - *image

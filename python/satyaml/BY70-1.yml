@@ -3,11 +3,14 @@ norad: 41909
 data:
   &tlm Telemetry:
     telemetry: by70_1
+  &image Image:
+    files: by70_1
 transports:
   &kiss KISS:
     protocol: KISS no control byte
     data:
     - *tlm
+    - *image
 transmitters:
   9k6 BPSK downlink:
     frequency: 436.200e+6

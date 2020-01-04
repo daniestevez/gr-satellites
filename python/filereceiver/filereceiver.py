@@ -221,7 +221,7 @@ class FileReceiver:
         if f.chunks is None:
             f.chunks = self.file_chunks(chunk)
 
-    def _log(self, message):
+    def log(self, message):
         if self._verbose:
             print(f'{self._name}: {message}')
             
@@ -250,7 +250,7 @@ class FileReceiver:
         try:
             f = self._files[fid]
         except KeyError:
-            self._log(f'new file {fid}')
+            self.log(f'new file {fid}')
             f = self._new_file(fid)
 
         seq = self.chunk_sequence(chunk)
@@ -258,15 +258,17 @@ class FileReceiver:
         # detect a new file if sequence has decreased
         if self.file_id(chunk) is None and seq is not None and seq < f.expected_seq:
             # f is finished
-            self._log(f'file {fid} is finished')
+            self.log(f'file {fid} is finished')
             fid = self._next_fid
             self._next_fid += 1
             f = self._new_file(fid)
-            self._log(f'receiving new file {fid}')
+            self.log(f'receiving new file {fid}')
         self._current_file = fid
 
+        self._fill_file_data(f, chunk)
+
         if seq is not None:
-            self._log(f'received sequence {seq} for file {fid}')
+            self.log(f'received sequence {seq} for file {fid}')
 
         if f.broken:
             # file is broken, nothing can be done with the chunk
@@ -275,30 +277,37 @@ class FileReceiver:
         # try to determine offset
         offset = self.chunk_offset(chunk)
         if seq is None and offset is not None:
-            self._log(f'received offset {offset} for file {fid}')
+            self.log(f'received offset {offset} for file {fid}')
         if offset is None:
             # check sequence continuity
             if seq is None:
                 raise Exception('FileReceiver unable to compute chunk_offset() nor chunk_sequence()')
             if seq != f.expected_seq:
-                self._log(f'received sequence {seq} != expected sequence {f.expected_seq}. File reception is broken.')
+                self.log(f'received sequence {seq} != expected sequence {f.expected_seq}. File reception is broken.')
                 f.broken = True
                 return
             offset = f.write_pointer
+            
+        data = self.chunk_data(chunk)
+        new_write_pointer = offset + len(data)
+
+        # check offset within size
+        if f.size is not None and new_write_pointer > f.size:
+            self.log(f'invalid offset {offset} (chunk size is {len(data)}, file size is {f.size})')
+            return
 
         # write chunk at offset
         f.f.seek(offset)
-        data = self.chunk_data(chunk)
         f.f.write(data)
         f.f.flush()
 
         # update pointers
-        f.write_pointer = offset + len(data)
+        f.write_pointer = new_write_pointer
         f.expected_seq = seq + 1 if seq is not None else None
 
         # check if file is complete
         if (f.size is not None and f.write_pointer >= f.size) or \
           (f.chunks is not None and f.expected_seq >= f.chunks):
-          self._log(f'file {fid} complete')
+          self.log(f'file {fid} complete')
           self.on_completion(f)
           self._current_file = None
