@@ -32,13 +32,9 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
-    codec2_udp_sink.py
-    file_receiver.py
-    hexdump_sink.py
-    kiss_file_sink.py
-    telemetry_parser.py
-    telemetry_submit.py
-    DESTINATION ${GR_PYTHON_DIR}/satellites/components/datasinks
+    filereceiver.py
+    sat_1kuns_pf.py
+    DESTINATION ${GR_PYTHON_DIR}/satellites/filereceiver
 )
 
 ########################################################################

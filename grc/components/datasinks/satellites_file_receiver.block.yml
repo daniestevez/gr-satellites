@@ -1,0 +1,26 @@
+id: satellites_file_receiver
+label: File Receiver
+category: '[Satellites]/Data sinks'
+
+parameters:
+-   id: receiver
+    label: FileReceiver class
+    dtype: string
+-   id: path
+    label: Path
+    dtype: string
+-   id: verbose
+    label: Verbose
+    dtype: bool
+    default: False
+    hide: part
+
+inputs:
+-   domain: message
+    id: in
+
+templates:
+    imports: import satellites.components.datasinks
+    make: satellites.components.datasinks.file_receiver(${receiver}, ${path}, ${verbose})
+
+file_format: 1

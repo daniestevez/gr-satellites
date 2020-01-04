@@ -140,6 +140,7 @@ GR_PYTHON_INSTALL(
 add_subdirectory(components)
 add_subdirectory(core)
 add_subdirectory(hier)
+add_subdirectory(filereceiver)
 add_subdirectory(satyaml)
 add_subdirectory(telemetry)
 add_subdirectory(utils)

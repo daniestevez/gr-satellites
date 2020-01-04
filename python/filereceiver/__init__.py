@@ -19,23 +19,10 @@
 # The presence of this file turns this directory into a Python package
 
 '''
-gr-satellites datasink components
+gr-satellites utils
 
-The datasinks consume frames or packets in order to do something
-useful with them (printing telemetry, reconstructing images,
-storing to file, etc.)
-
-The input to these blocks are PDUs with the frames.
+This module contains the File Receiver class and child classes
+This class is used to reassemble files transmitted in chunks
 '''
 
-# Temporary hacks: This should become full-fledged data sinks
-from ... import sat_1kuns_pf_image_decoder
-from ... import qo100_telemetry_print
-from ... import smogp_signalling
-
-from .codec2_udp_sink import codec2_udp_sink
-from .file_receiver import file_receiver
-from .hexdump_sink import hexdump_sink
-from .kiss_file_sink import kiss_file_sink
-from .telemetry_submit import telemetry_submit
-from .telemetry_parser import telemetry_parser
+from .sat_1kuns_pf import sat_1kuns_pf

@@ -5,7 +5,7 @@ data:
   &tlm Telemetry:
     telemetry: sat_1kuns_pf
   &image JPEG Images:
-    decoder: sat_1kuns_pf_image_decoder
+    files: sat_1kuns_pf
 transmitters:
   1k2 FSK downlink:
     frequency: 437.300e+6
