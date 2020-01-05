@@ -29,4 +29,5 @@ class FehOpener():
         p = ['-F'] if self.fullscreen else []
         return p + ['-R', str(self.interval)]
     def open(self, filename):
-        subprocess.Popen(['feh'] + self.__params() + [filename])
+        subprocess.Popen(['feh'] + self.__params() + [filename],\
+                             stdin = subprocess.DEVNULL)
