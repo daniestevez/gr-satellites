@@ -37,6 +37,7 @@ GR_PYTHON_INSTALL(
     k2sat.py
     filereceiver.py
     sat_1kuns_pf.py
+    swiatowid.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/filereceiver
 )
 
