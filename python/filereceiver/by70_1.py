@@ -24,9 +24,6 @@ from .filereceiver import FileReceiver
 from ..telemetry import by70_1 as tlm
 
 class FileReceiverBY701(FileReceiver):
-    def __init__(self, *args, **kwargs):
-        FileReceiver.__init__(self, *args, **kwargs)
-        
     def filename(self, fid):
         return f'{fid}.jpg'
 

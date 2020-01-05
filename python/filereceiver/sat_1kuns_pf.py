@@ -23,9 +23,6 @@ import struct
 from .filereceiver import FileReceiver
 
 class FileReceiver1KUNSPF(FileReceiver):
-    def __init__(self, *args, **kwargs):
-        FileReceiver.__init__(self, *args, **kwargs)
-        
     def chunk_sequence(self, chunk):
         return struct.unpack('>H', chunk[4:6])[0]
 
