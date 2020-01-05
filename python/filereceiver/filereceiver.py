@@ -32,7 +32,8 @@ class File:
             path: path of the file (pathlib.Path)
         """
         self.path = path
-        self.f = open(path, 'wb')
+        mode = 'r+b' if path.exists() else 'wb'
+        self.f = open(path, mode)
         self.broken = False
         self.expected_seq = 0
         self.write_pointer = 0
