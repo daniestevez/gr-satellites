@@ -34,6 +34,7 @@ GR_PYTHON_INSTALL(
     __init__.py
     by70_1.py
     dsat.py
+    k2sat.py
     filereceiver.py
     sat_1kuns_pf.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/filereceiver

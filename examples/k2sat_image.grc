@@ -356,6 +356,22 @@ blocks:
     coordinate: [702, 164]
     rotation: 0
     state: enabled
+- name: satellites_file_receiver_0
+  id: satellites_file_receiver
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    path: /tmp/
+    receiver: k2sat
+    verbose: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [701, 436]
+    rotation: 0
+    state: true
 - name: satellites_k2sat_deframer_component_0
   id: satellites_k2sat_deframer_component
   parameters:
@@ -372,22 +388,6 @@ blocks:
     coordinate: [471, 444]
     rotation: 0
     state: true
-- name: satellites_k2sat_image_decoder_0
-  id: satellites_k2sat_image_decoder
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    display: 'True'
-    fullscreen: 'True'
-    path: /tmp/
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [700, 428]
-    rotation: 0
-    state: enabled
 
 connections:
 - [blocks_complex_to_float_0, '0', blocks_interleave_0, '0']
@@ -400,7 +400,7 @@ connections:
 - [digital_pfb_clock_sync_xxx_0_0, '0', qtgui_const_sink_x_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', rms_agc_0, '0']
 - [rms_agc_0, '0', digital_costas_loop_cc_1, '0']
-- [satellites_k2sat_deframer_component_0, out, satellites_k2sat_image_decoder_0, in]
+- [satellites_k2sat_deframer_component_0, out, satellites_file_receiver_0, in]
 
 metadata:
   file_format: 1

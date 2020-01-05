@@ -160,6 +160,21 @@ class FileReceiver:
         """
         return getattr(chunk, 'filesize', None)
 
+    def is_last_chunk(self, chunk):
+        """
+        Returns whether this is the last chunk in the file
+
+        The default implementation returns None
+
+        Args:
+            chunk: a file chunk (parsed by parse_chunk())
+        Returns:
+            True if this is is the last chunk, False if this is not
+            the last chunk, None if it is unknown whether this is the
+            last chunk.
+        """
+        return None
+    
     def parse_chunk(self, chunk):
         """
         Parses the chunk into an object which is easier to handle
@@ -307,7 +322,8 @@ class FileReceiver:
 
         # check if file is complete
         if (f.size is not None and f.write_pointer >= f.size) or \
-          (f.chunks is not None and f.expected_seq >= f.chunks):
+          (f.chunks is not None and f.expected_seq >= f.chunks) or \
+          self.is_last_chunk(chunk) is True:
           self.log(f'file {fid} complete')
           self.on_completion(f)
           self._current_file = None
