@@ -8,7 +8,7 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 
 | Satellite 	    | Unsupported | Partially supported | Fully supported |
 | ----------------- |:-----------:|:-------------------:|:---------------:|
-| 1KUNS-PF	    |		  | Image dec. miss.	|		  |
+| 1KUNS-PF	    |		  |			|		  |
 | 3CAT-1	    |		  | 	       		| x		  |
 | 3CAT-2	    |		  | Tlm decode miss.	| 		  |
 | AAUSAT-4          |             |                     | x               |
@@ -29,11 +29,11 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 | BEESAT-3	    | x		  |			| 		  |
 | BEESAT-4	    | x		  |			| 		  |
 | TECHNOSAT	    | x		  |			| 		  |
-| BY70-1	    | 		  | Image dec. miss.	|		  |
+| BY70-1	    | 		  | 			|		  |
 | CA03 (ExAlta-1)   |		  | 	       		| x		  |
 | CZ02 (VZLUSAT-1)  |		  |			| x		  |
 | Delphini-1	    |		  |			| Untested	  |
-| D-SAT		    |		  | Image dec. miss.	| 		  |
+| D-SAT		    |		  | 			| 		  |
 | D-STAR One	    | x		  | 	       		|		  |
 | DUCHIFAT-3	    | 		  | AX.25 addr. check.	| 		  |
 | EntrySat	    |		  | AX.25 addr. check.	| 		  |
@@ -53,7 +53,7 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 | K2SAT		    |		  | 	       		| In examples/	  |
 | KR01 (LINK)	    |		  | AX.25 addr. check.	|    		  |
 | KS-1Q		    |		  | CSP CRC check miss.	| 		  |
-| LilacSat-1	    |		  | Image dec. miss.	|		  |
+| LilacSat-1	    |		  | 	    	  	|		  |
 | LilacSat-2	    |		  | Subaudio dec. miss.	|		  |
 | Lucky-7	    |		  | 	     	  	| x		  |
 | LUME-1	    |		  |			| Untested	  |
@@ -72,7 +72,7 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 | Sokrat	    | x		  | 	       		|		  |
 | SpooQy-1	    | 		  |			| x		  |
 | Suomi 100	    |		  |			| x		  |
-| Światowid	    |		  | Image dec. miss.	| 		  |
+| Światowid	    |		  | 			| 		  |
 | TANUSHA-3	    | x		  | 	       		|		  |
 | Taurus-1	    | 		  |			| Untested	  |
 | TW-1A, B, C	    |		  |			| x		  |
