@@ -20,11 +20,11 @@
 
 import struct
 
-from .filereceiver import FileReceiver
+from .imagereceiver import ImageReceiver
 
-class FileReceiverK2SAT(FileReceiver):
+class ImageReceiverK2SAT(ImageReceiver):
     def __init__(self, *args, **kwargs):
-        FileReceiver.__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
         self._last_frame_count = None
         self._unwrap = 0
         self._first_header_frame_count = None
@@ -65,4 +65,4 @@ class FileReceiverK2SAT(FileReceiver):
     def parse_chunk(self, chunk):
         return chunk if len(chunk) > 16 + 4 + 1 else None
 
-k2sat = FileReceiverK2SAT
+k2sat = ImageReceiverK2SAT

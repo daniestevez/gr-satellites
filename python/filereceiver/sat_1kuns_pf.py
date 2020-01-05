@@ -20,9 +20,9 @@
 
 import struct
 
-from .filereceiver import FileReceiver
+from .imagereceiver import ImageReceiver
 
-class FileReceiver1KUNSPF(FileReceiver):
+class ImageReceiver1KUNSPF(ImageReceiver):
     def chunk_sequence(self, chunk):
         return struct.unpack('>H', chunk[4:6])[0]
 
@@ -38,4 +38,4 @@ class FileReceiver1KUNSPF(FileReceiver):
         else:
             return chunk
 
-sat_1kuns_pf = FileReceiver1KUNSPF
+sat_1kuns_pf = ImageReceiver1KUNSPF

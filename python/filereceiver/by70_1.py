@@ -20,10 +20,10 @@
 
 from construct.core import ConstructError
 
-from .filereceiver import FileReceiver
+from .imagereceiver import ImageReceiver
 from ..telemetry import by70_1 as tlm
 
-class FileReceiverBY701(FileReceiver):
+class ImageReceiverBY701(ImageReceiver):
     def filename(self, fid):
         return f'{fid}.jpg'
 
@@ -34,4 +34,4 @@ class FileReceiverBY701(FileReceiver):
             return None
         return frame.camera
 
-by70_1 = FileReceiverBY701
+by70_1 = ImageReceiverBY701

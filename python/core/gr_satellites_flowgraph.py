@@ -119,6 +119,9 @@ class gr_satellites_flowgraph(gr.hier_block2):
                         datasink = datasinks.telemetry_parser(info['telemetry'], options = options)
                     elif 'files' in info:
                         datasink = datasinks.file_receiver(info['files'], options = options)
+                    elif 'image' in info:
+                        datasink = datasinks.file_receiver(info['image'], options = options,\
+                                                               display = True)
                     else:
                         datasink = datasinks.hexdump_sink()
                     self._datasinks[key] = datasink
@@ -226,7 +229,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
                 try_add_options(getattr(datasinks, info['decoder']), data_options)
             if 'telemetry' in info:
                 try_add_options(datasinks.telemetry_parser, data_options)
-            if 'files' in info:
+            if 'files' in info or 'image' in info:
                 try_add_options(datasinks.file_receiver, data_options)
     
         for transmitter in satyaml['transmitters'].values():

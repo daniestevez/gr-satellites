@@ -4,7 +4,7 @@ data:
   &tlm Telemetry:
     telemetry: csp
   &image Image:
-    files: dsat
+    image: dsat
 transmitters:
   4k8 AFSK downlink:
     frequency: 437.505e+6

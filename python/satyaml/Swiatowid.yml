@@ -4,7 +4,7 @@ data:
   &tlm Telemetry:
     telemetry: ax25
   &image Image:
-    files: swiatowid
+    image: swiatowid
 transmitters:
   1k2 AFSK telemetry downlink:
     frequency: 435.500e+6

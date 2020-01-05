@@ -24,7 +24,7 @@ from ... import filereceiver
 
 class file_receiver(gr.basic_block):
     """
-    Block for telemetry parsing
+    Block for file reception
 
     The input are PDUs with frames
 
@@ -36,8 +36,9 @@ class file_receiver(gr.basic_block):
         path: path to save files to (str)
         verbose: use verbose messages in FileReceiver (bool)
         options: options from argparse
+        **kwargs: these are passed straight to the FileReceiver object
     """
-    def __init__(self, receiver, path = None, verbose = None, options = None):
+    def __init__(self, receiver, path = None, verbose = None, options = None, **kwargs):
         gr.basic_block.__init__(self, "file_receiver",
             in_sig = [],
             out_sig = [])
@@ -53,7 +54,7 @@ class file_receiver(gr.basic_block):
                 raise ValueError('Must indicate path in function arguments or options')
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
-        self.receiver = getattr(filereceiver, receiver)(path, verbose)
+        self.receiver = getattr(filereceiver, receiver)(path, verbose, **kwargs)
 
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)

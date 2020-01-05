@@ -20,7 +20,7 @@
 
 from construct import *
 
-from .filereceiver import FileReceiver
+from .imagereceiver import ImageReceiver
 
 block_size = 46
 
@@ -29,7 +29,7 @@ swiatowid_image_block = Struct(
     'data' / Bytes(block_size)
     )
 
-class FileReceiverSwiatowid(FileReceiver):
+class ImageReceiverSwiatowid(ImageReceiver):
     def filename(self, fid):
         return f'{fid}.jpg'
 
@@ -45,4 +45,4 @@ class FileReceiverSwiatowid(FileReceiver):
             return None
         return frame
 
-swiatowid = FileReceiverSwiatowid
+swiatowid = ImageReceiverSwiatowid

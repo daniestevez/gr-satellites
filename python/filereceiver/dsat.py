@@ -22,12 +22,12 @@ import struct
 import datetime
 import types
 
-from .filereceiver import FileReceiver
+from .imagereceiver import ImageReceiver
 from ..telemetry.csp import CSPHeader
 
-class FileReceiverDSAT(FileReceiver):
+class ImageReceiverDSAT(ImageReceiver):
     def __init__(self, *args, **kwargs):
-        FileReceiver.__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
         self._dsat_reset_segments()
 
     def _dsat_reset_segments(self):
@@ -93,4 +93,4 @@ class FileReceiverDSAT(FileReceiver):
         self._watch_file_announcements(chunk)
         super().push_chunk(chunk)
 
-dsat = FileReceiverDSAT
+dsat = ImageReceiverDSAT

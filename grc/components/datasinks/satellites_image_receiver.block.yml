@@ -1,0 +1,35 @@
+id: satellites_image_receiver
+label: Image Receiver
+category: '[Satellites]/Data sinks'
+
+parameters:
+-   id: receiver
+    label: ImageReceiver class
+    dtype: string
+-   id: path
+    label: Path
+    dtype: string
+-   id: verbose
+    label: Verbose
+    dtype: bool
+    default: False
+    hide: part
+-   id: display
+    label: Display
+    dtype: bool
+    default: True
+    hide: part
+-   id: fullscreen
+    label: Fullscreen
+    dtype: bool
+    default: True
+
+inputs:
+-   domain: message
+    id: in
+
+templates:
+    imports: import satellites.components.datasinks
+    make: satellites.components.datasinks.file_receiver(${receiver}, ${path}, ${verbose}, display=${display}, fullscreen=${fullscreen})
+
+file_format: 1

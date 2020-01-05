@@ -8,7 +8,7 @@ data:
   &tlm Telemetry:
     telemetry: by70_1
   &image Image:
-    files: by70_1
+    image: by70_1
   &codec2 Codec2:
     decoder: codec2_udp_sink
 transports:
