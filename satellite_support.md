@@ -21,7 +21,7 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 | Astrocast 0.1	    |		  | 	       		| x		  |
 | AT03 Pegasus	    |		  |			| x		  |
 | ATHENOXAT-1	    | 		  |			| x		  |
-| ATL-1		    |		  | Spectrum save miss.	| 		  |
+| ATL-1		    |		  | 			| 		  |
 | AU02 (UNSW-EC0)   |		  | 	     	  	| x		  |
 | AU03 		    |		  |			| x		  |
 | BEESAT-1	    | x		  |			| 		  |
@@ -67,7 +67,7 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 | QO-100	    |		  | 	  		| x		  |
 | Reaktor Hello W   |		  |			| x		  |
 | Shaonian Xing	    |		  | AX.25 addr. check.	| 		  |
-| SMOG-P   	    |		  | Spectrum save miss.	|		  |
+| SMOG-P   	    |		  | 	  		|		  |
 | S-NET		    |		  | classifier miss.	|		  |
 | Sokrat	    | x		  | 	       		|		  |
 | SpooQy-1	    | 		  |			| x		  |

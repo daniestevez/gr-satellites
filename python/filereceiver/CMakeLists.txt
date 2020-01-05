@@ -38,6 +38,7 @@ GR_PYTHON_INSTALL(
     filereceiver.py
     imagereceiver.py
     sat_1kuns_pf.py
+    smogp.py
     swiatowid.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/filereceiver
 )
