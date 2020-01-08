@@ -1,0 +1,17 @@
+name: ZACUBE-1
+alternative_names:
+  - South Africa CubeSat-1
+  - TshepisoSat
+  - ZA003
+norad: 39417
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  9k6 FSK downlink:
+    frequency: 437.356e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX.25 G3RUH
+    data:
+    - *tlm

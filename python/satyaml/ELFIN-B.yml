@@ -1,0 +1,23 @@
+name: ELFIN-B
+alternative_names:
+  - ELFIN-STAR
+  - WJ2XOX
+norad: 43616
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  19k2 FSK downlink:
+    frequency: 437.475e+6
+    modulation: FSK
+    baudrate: 19200
+    framing: AX.25 G3RUH
+    data:
+    - *tlm
+  9k6 FSK downlink:
+    frequency: 437.475e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX.25 G3RUH
+    data:
+    - *tlm

@@ -1,0 +1,15 @@
+name: XW-2A
+alternative_names:
+  - CAS-3A
+norad: 40903
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  9k6 FSK downlink:
+    frequency: 145.640e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX.25 G3RUH
+    data:
+    - *tlm

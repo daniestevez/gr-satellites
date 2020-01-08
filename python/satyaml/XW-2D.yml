@@ -1,0 +1,15 @@
+name: XW-2D
+alternative_names:
+  - CAS-3D
+norad: 40907
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  9k6 FSK downlink:
+    frequency: 145.835e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX.25 G3RUH
+    data:
+    - *tlm

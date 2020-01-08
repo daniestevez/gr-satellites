@@ -1,0 +1,20 @@
+name: CHOMPTT
+norad: 43855
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  9k6 FSK downlink:
+    frequency: 437.560e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX.25 G3RUH
+    data:
+    - *tlm
+  1k2 AFSK downlink:
+    frequency: 437.560e+6
+    modulation: AFSK
+    baudrate: 1200
+    framing: AX.25
+    data:
+    - *tlm

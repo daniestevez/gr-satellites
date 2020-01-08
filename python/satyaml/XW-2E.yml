@@ -1,0 +1,15 @@
+name: XW-2E
+alternative_names:
+  - CAS-3E
+norad: 40909
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  9k6 FSK downlink:
+    frequency: 145.890e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX.25 G3RUH
+    data:
+    - *tlm

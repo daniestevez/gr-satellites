@@ -1,0 +1,15 @@
+name: O/OREOS
+alternative_names:
+  - USA 219
+norad: 37224
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  1k2 AFSK downlink:
+    frequency: 437.305e+6
+    modulation: AFSK
+    baudrate: 1200
+    framing: AX.25
+    data:
+    - *tlm
