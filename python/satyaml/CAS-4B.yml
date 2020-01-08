@@ -11,10 +11,3 @@ transmitters:
     framing: AX.25 G3RUH
     data:
     - *tlm
-  4k8 FSK downlink:
-    frequency: 145.893e+6
-    modulation: FSK
-    baudrate: 4800
-    framing: AX.25 G3RUH
-    data:
-    - *tlm

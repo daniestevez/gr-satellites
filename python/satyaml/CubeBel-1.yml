@@ -7,37 +7,9 @@ data:
     telemetry: ax25
 transmitters:
   9k6 FSK downlink:
-    frequency: 436.200e+6
-    modulation: FSK
-    baudrate: 9600
-    framing: AX.25 G3RUH
-    data:
-    - *tlm
-  4k8 FSK downlink:
-    frequency: 436.990e+6
-    modulation: FSK
-    baudrate: 4800
-    framing: AX.25 G3RUH
-    data:
-    - *tlm
-  9k6 FSK downlink:
     frequency: 436.990e+6
     modulation: FSK
     baudrate: 9600
-    framing: AX.25 G3RUH
-    data:
-    - *tlm
-  9k6 FSK downlink:
-    frequency: 436.990e+6
-    modulation: FSK
-    baudrate: 9600
-    framing: AX.25 G3RUH
-    data:
-    - *tlm
-  4k8 FSK downlink:
-    frequency: 436.990e+6
-    modulation: FSK
-    baudrate: 4800
     framing: AX.25 G3RUH
     data:
     - *tlm

@@ -14,10 +14,3 @@ transmitters:
     framing: AX.25
     data:
     - *tlm
-  1k2 AFSK downlink:
-    frequency: 145.825e+6
-    modulation: AFSK
-    baudrate: 1200
-    framing: AX.25
-    data:
-    - *tlm
