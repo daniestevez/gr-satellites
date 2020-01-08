@@ -36,72 +36,10 @@ GR_PYTHON_INSTALL(
     DESTINATION ${GR_PYTHON_DIR}/satellites/satyaml
 )
 
+file(GLOB satyamls *.yml)
+
 install(FILES
-    1KUNS-PF.yml
-    3CAT-1.yml
-    3CAT-2.yml
-    AAUSAT-4.yml
-    AISAT.yml
-    AISTECHSAT-2.yml
-    AISTECHSAT-3.yml
-    AO-40.yml
-    AO-73.yml
-    Astrocast_0_1.yml
-    AT03.yml
-    ATHENOXAT-1.yml
-    ATL-1.yml
-    AU02.yml
-    AU03.yml
-    BY70-1.yml
-    CA03.yml
-    CZ02.yml
-    Delphini-1.yml
-    D-SAT.yml
-    DUCHIFAT-3.yml
-    EntrySat.yml
-    ESEO.yml
-    FACSAT-1.yml
-    FMN-1.yml
-    FloripaSat-1.yml
-    GALASSIA.yml
-    GOMX-1.yml
-    GOMX-3.yml
-    GR01.yml
-    IL01.yml
-    INNOSAT-2.yml
-    ITASAT_1.yml
-    JY1-Sat.yml
-    KR01.yml
-    KS-1Q.yml
-    LilacSat-1.yml
-    LilacSat-2.yml
-    Lucky-7.yml
-    LUME-1.yml
-    Luojia-1.yml
-    MYSAT_1.yml
-    Nayif-1.yml
-    NuSat_1.yml
-    OPS-SAT.yml
-    PicSat.yml
-    PW-Sat2.yml
-    QO-100.yml
-    Reaktor_Hello_World.yml
-    Shaonian_Xing.yml
-    SMOG-P.yml
-    S-NET_A.yml
-    SpooQy-1.yml
-    Suomi_100.yml
-    Swiatowid.yml
-    Taurus-1.yml
-    TW-1A.yml
-    TW-1B.yml
-    TW-1C.yml
-    TY-2.yml
-    TY_4-01.yml
-    TY-6.yml
-    UKube-1.yml
-    US01.yml
-    Zhou_Enlai.yml
+    ${satyamls}
     DESTINATION ${GR_PYTHON_DIR}/satellites/satyaml
 )
 
