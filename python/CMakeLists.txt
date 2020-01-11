@@ -50,7 +50,6 @@ GR_PYTHON_INSTALL(
     swap_header.py
     submit.py
     print_timestamp.py
-    sat3cat2_telemetry_parser.py
     funcube_telemetry_parser.py
     gomx3_beacon.py
     gomx1_beacon.py

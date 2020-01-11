@@ -8,20 +8,20 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 
 | Satellite 	    | Unsupported | Partially supported | Fully supported |
 | ----------------- |:-----------:|:-------------------:|:---------------:|
-| 1KUNS-PF	    |		  |			|		  |
+| 1KUNS-PF	    |		  |			| x		  |
 | 3CAT-1	    |		  | 	       		| x		  |
-| 3CAT-2	    |		  | Tlm decode miss.	| 		  |
+| 3CAT-2	    |		  | 			| x		  |
 | AAUSAT-4          |             |                     | x               |
 | AISAT		    |		  | CSP CRC check miss.	| 		  |
 | AISTECHSAT-2      |             | 	    	  	| Untested  	  |
 | AISTECHSAT-3	    |		  |			| x   	  	  |
 | AmGU-1	    | x		  |			| 		  |
 | AO-40		    | 		  |			| x		  |
-| AO-73		    |		  | 			| 		  |
+| AO-73		    |		  | 			| x		  |
 | Astrocast 0.1	    |		  | 	       		| x		  |
 | AT03 Pegasus	    |		  |			| x		  |
 | ATHENOXAT-1	    | 		  |			| x		  |
-| ATL-1		    |		  | 			| 		  |
+| ATL-1		    |		  | 			| x		  |
 | AU02 (UNSW-EC0)   |		  | 	     	  	| x		  |
 | AU03 		    |		  |			| x		  |
 | BEESAT-1	    | x		  |			| 		  |
@@ -29,11 +29,11 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 | BEESAT-3	    | x		  |			| 		  |
 | BEESAT-4	    | x		  |			| 		  |
 | TECHNOSAT	    | x		  |			| 		  |
-| BY70-1	    | 		  | 			|		  |
+| BY70-1	    | 		  | 			| x		  |
 | CA03 (ExAlta-1)   |		  | 	       		| x		  |
 | CZ02 (VZLUSAT-1)  |		  |			| x		  |
 | Delphini-1	    |		  |			| Untested	  |
-| D-SAT		    |		  | 			| 		  |
+| D-SAT		    |		  | 			| x		  |
 | D-STAR One	    | x		  | 	       		|		  |
 | DUCHIFAT-3	    | 		  | AX.25 addr. check.	| 		  |
 | EntrySat	    |		  | AX.25 addr. check.	| 		  |
@@ -49,17 +49,17 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 | IL01 (DUCHIFAT-2) |		  | AX.25 addr. check.	|		  |
 | INNOSAT-2	    |		  | 	  		| x		  |
 | ITASAT 1	    |		  |			| x		  |
-| JY1-Sat	    |		  | 			| 		  |
+| JY1-Sat	    |		  | 			| x		  |
 | K2SAT		    |		  | 	       		| In examples/	  |
 | KR01 (LINK)	    |		  | AX.25 addr. check.	|    		  |
 | KS-1Q		    |		  | CSP CRC check miss.	| 		  |
-| LilacSat-1	    |		  | 	    	  	|		  |
+| LilacSat-1	    |		  | 	    	  	| x		  |
 | LilacSat-2	    |		  | Subaudio dec. miss.	|		  |
 | Lucky-7	    |		  | 	     	  	| x		  |
 | LUME-1	    |		  |			| Untested	  |
 | Luojia-1	    |		  |			| x		  |
 | MYSAT 1	    |		  | AX.25 addr. check.	| 		  |
-| Nayif-1	    |		  | 	  		|		  |
+| Nayif-1	    |		  | 	  		| x		  |
 | ÑuSat 1, 2	    |		  | 	       		| x		  |
 | OPS-SAT  	    |		  |			| x		  |
 | PicSat	    |		  | AX.25 addr. check.	| 		  |
@@ -67,16 +67,16 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 | QO-100	    |		  | 	  		| x		  |
 | Reaktor Hello W   |		  |			| x		  |
 | Shaonian Xing	    |		  | AX.25 addr. check.	| 		  |
-| SMOG-P   	    |		  | 	  		|		  |
+| SMOG-P   	    |		  | 	  		| x		  |
 | S-NET		    |		  | classifier miss.	|		  |
-| Sokrat	    | x		  | 	       		|		  |
+| Sokrat	    | x		  | 	       		| 		  |
 | SpooQy-1	    | 		  |			| x		  |
 | Suomi 100	    |		  |			| x		  |
-| Światowid	    |		  | 			| 		  |
+| Światowid	    |		  | 			| x		  |
 | TANUSHA-3	    | x		  | 	       		|		  |
 | Taurus-1	    | 		  |			| Untested	  |
 | TW-1A, B, C	    |		  |			| x		  |
 | TY-2, TY 4-01,... |		  |			| x		  |
 | UA01	   	    | x		  |			| 		  |
-| UKube-1	    | 		  | 			|		  |
+| UKube-1	    | 		  | 			| x		  |
 | Zhou Enlai	    |		  | AX.25 addr. check.	|		  |

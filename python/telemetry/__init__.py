@@ -43,6 +43,7 @@ from .mysat1 import mysat1
 from .picsat import picsat
 from .sat_1kuns_pf import sat_1kuns_pf
 from .sat_3cat_1 import sat_3cat_1
+from .sat_3cat_2 import sat_3cat_2
 from .smogp import smogp
 from .snet import snet
 from .suomi100 import suomi100

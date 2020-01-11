@@ -2,7 +2,7 @@ name: 3CAT-2
 norad: 41732
 data:
   &tlm Telemetry:
-    telemetry: ax25
+    telemetry: sat_3cat_2
 transmitters:
   9k6 BPSK downlink:
     frequency: 145.970e+6
