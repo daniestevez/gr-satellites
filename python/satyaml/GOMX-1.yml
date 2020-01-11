@@ -2,7 +2,7 @@ name: GOMX-1
 norad: 39430
 data:
   &tlm Telemetry:
-    telemetry: csp
+    telemetry: gomx_1
 transmitters:
   4k8 AFSK downlink:
     frequency: 437.250e+6
