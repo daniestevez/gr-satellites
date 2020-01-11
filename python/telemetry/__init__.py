@@ -34,6 +34,7 @@ from .csp import csp
 from .csp import csp_swapped
 from .eseo import eseo
 from .floripasat import floripasat
+from .funcube import funcube
 from .gomx_1 import gomx_1
 from .gomx_3 import gomx_3
 from .kr01 import kr01

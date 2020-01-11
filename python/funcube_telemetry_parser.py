@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2017 Daniel Estevez <daniel@destevez.net>
+# Copyright 2017, 2020 Daniel Estevez <daniel@destevez.net>
 # 
 # This is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ import numpy
 from gnuradio import gr
 import pmt
 
-from . import funcube_telemetry
+from .telemetry.funcube import Frame, Callsign, WholeOrbit
 import struct
 
 import construct
@@ -37,7 +37,7 @@ class funcube_telemetry_parser(gr.basic_block):
     """
     def __init__(self):
         gr.basic_block.__init__(self,
-            name="telemetry_parser",
+            name="funcube_telemetry_parser",
             in_sig=[],
             out_sig=[])
 
@@ -56,7 +56,11 @@ class funcube_telemetry_parser(gr.basic_block):
         if len(packet) != 256:
             return
 
-        data = funcube_telemetry.beacon_parse(packet)
+#        try:
+        data = Frame.parse(packet)
+#        except:
+#            print('Could not parse FUNcube telemetry frame')
+#            return
         if data:
             print('Frame type {}'.format(data.header.frametype))
             if isinstance(data.header.frametype, int):
@@ -96,7 +100,7 @@ class funcube_telemetry_parser(gr.basic_block):
                 else:
                     wo = data.payload[:-remaining]
                 assert len(wo) % WHOLEORBIT_SIZE == 0
-                wos = funcube_telemetry.WholeOrbit(data.header.satid)[len(wo) // WHOLEORBIT_SIZE].parse(wo)
+                wos = WholeOrbit(data.header.satid)[len(wo) // WHOLEORBIT_SIZE].parse(wo)
                 self.last_chunk = chunk
                 self.last_wo = data.payload[-remaining:]
                 self.last_seq = seq
@@ -108,7 +112,7 @@ class funcube_telemetry_parser(gr.basic_block):
                 if chunk == WHOLEORBIT_MAX:
                     print('-'*40)
                     # callsign included
-                    print('Callsign: {}'.format(funcube_telemetry.Callsign.parse(self.last_wo)))
+                    print('Callsign: {}'.format(Callsign.parse(self.last_wo)))
             print()
         else:
             print('Could not parse beacon')

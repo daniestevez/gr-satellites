@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2017 Daniel Estevez <daniel@destevez.net>
+# Copyright 2017, 2020 Daniel Estevez <daniel@destevez.net>
 # 
 # This is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -429,5 +429,4 @@ def WholeOrbit(satid):
         return WholeOrbitFC2
     return Bytes(23)
 
-def beacon_parse(data):
-    return Frame.parse(data)
+funcube = Frame

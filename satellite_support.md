@@ -17,7 +17,7 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 | AISTECHSAT-3	    |		  |			| x   	  	  |
 | AmGU-1	    | x		  |			| 		  |
 | AO-40		    | 		  |			| x		  |
-| AO-73		    |		  | Tlm decode miss.	| 		  |
+| AO-73		    |		  | 			| 		  |
 | Astrocast 0.1	    |		  | 	       		| x		  |
 | AT03 Pegasus	    |		  |			| x		  |
 | ATHENOXAT-1	    | 		  |			| x		  |
@@ -49,7 +49,7 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 | IL01 (DUCHIFAT-2) |		  | AX.25 addr. check.	|		  |
 | INNOSAT-2	    |		  | 	  		| x		  |
 | ITASAT 1	    |		  |			| x		  |
-| JY1-Sat	    |		  | Tlm decode miss.	| 		  |
+| JY1-Sat	    |		  | 			| 		  |
 | K2SAT		    |		  | 	       		| In examples/	  |
 | KR01 (LINK)	    |		  | AX.25 addr. check.	|    		  |
 | KS-1Q		    |		  | CSP CRC check miss.	| 		  |
@@ -59,7 +59,7 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 | LUME-1	    |		  |			| Untested	  |
 | Luojia-1	    |		  |			| x		  |
 | MYSAT 1	    |		  | AX.25 addr. check.	| 		  |
-| Nayif-1	    |		  | Tlm decode miss.	|		  |
+| Nayif-1	    |		  | 	  		|		  |
 | ÑuSat 1, 2	    |		  | 	       		| x		  |
 | OPS-SAT  	    |		  |			| x		  |
 | PicSat	    |		  | AX.25 addr. check.	| 		  |
@@ -78,5 +78,5 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 | TW-1A, B, C	    |		  |			| x		  |
 | TY-2, TY 4-01,... |		  |			| x		  |
 | UA01	   	    | x		  |			| 		  |
-| UKube-1	    | 		  | Tlm decode miss.	|		  |
+| UKube-1	    | 		  | 			|		  |
 | Zhou Enlai	    |		  | AX.25 addr. check.	|		  |

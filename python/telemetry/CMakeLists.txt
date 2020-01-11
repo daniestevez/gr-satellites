@@ -39,6 +39,7 @@ GR_PYTHON_INSTALL(
     csp.py
     eseo.py
     floripasat.py
+    funcube.py
     gomx_1.py
     gomx_3.py
     kr01.py

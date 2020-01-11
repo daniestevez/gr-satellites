@@ -32,6 +32,7 @@ The input to these blocks are PDUs with the frames.
 from ... import sat_1kuns_pf_image_decoder
 from ... import qo100_telemetry_print
 from ... import smogp_signalling
+from ... import funcube_telemetry_parser
 
 from .codec2_udp_sink import codec2_udp_sink
 from .file_receiver import file_receiver

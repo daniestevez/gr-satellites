@@ -6,7 +6,7 @@ telemetry_servers:
   - FUNcube
 data:
   &tlm Telemetry:
-    unknown
+    decoder: funcube_telemetry_parser
 transmitters:
   1k2 BPSK downlink:
     frequency: 145.935e+6
