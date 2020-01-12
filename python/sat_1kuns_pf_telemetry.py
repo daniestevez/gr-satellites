@@ -23,7 +23,7 @@ from construct import *
 
 from .adapters import *
 
-from .au03_telemetry import Timestamp
+Timestamp = UNIXTimestampAdapter(Int32sb)
 
 Beacon = Struct(
         'beacon_counter' / Int16ub,

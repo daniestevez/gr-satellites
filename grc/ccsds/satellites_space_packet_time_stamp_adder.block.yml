@@ -159,8 +159,8 @@ outputs:
     id: out
 
 templates:
-    imports: import satellites
-    make: satellites.space_packet_time_stamp_adder(${manual_automatic}, ${time_format},
+    imports: import satellites.ccsds
+    make: satellites.ccsds.space_packet_time_stamp_adder(${manual_automatic}, ${time_format},
         ${pfield}, ${pfield_extension}, ${time_code_identification_cuc}, ${epoch_year_cuc},
         ${epoch_month_cuc}, ${epoch_day_cuc}, ${pfield_extension_extended},  ${rsvd_cuc},
         ${time_code_identification_cds}, ${epoch_identification_cds}, ${epoch_year_cds},

@@ -118,23 +118,10 @@ GR_PYTHON_INSTALL(
     ngham_check_crc.py
     floripasat_telemetry_parser.py
     bme_submitter.py
-    CCSDS/space_packet_parser.py
-    CCSDS/space_packet.py
-    CCSDS/telemetry.py
-    CCSDS/telemetry_parser.py
-    CCSDS/telecommand.py
-    CCSDS/telecommand_parser.py
-    CCSDS/space_packet_primaryheader_adder.py
-    CCSDS/telemetry_primaryheader_adder.py
-    CCSDS/telecommand_primaryheader_adder.py
-    CCSDS/pathID_demultiplexer.py
-    CCSDS/virtual_channel_demultiplexer.py
-    CCSDS/telemetry_ocf_adder.py
-    CCSDS/space_packet_time_stamp_adder.py
-    CCSDS/telemetry_packet_reconstruction.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
+add_subdirectory(ccsds)
 add_subdirectory(components)
 add_subdirectory(core)
 add_subdirectory(hier)

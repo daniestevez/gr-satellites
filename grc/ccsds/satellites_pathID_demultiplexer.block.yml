@@ -22,7 +22,7 @@ outputs:
     id: discarded
 
 templates:
-    imports: import satellites
-    make: satellites.pathID_demultiplexer((${pathID_outputs}))
+    imports: import satellites.ccsds
+    make: satellites.ccsds.pathID_demultiplexer((${pathID_outputs}))
 
 file_format: 1

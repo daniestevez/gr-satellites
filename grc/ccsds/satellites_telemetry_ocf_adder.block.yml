@@ -85,8 +85,8 @@ outputs:
     id: out
 
 templates:
-    imports: import satellites
-    make: satellites.telemetry_ocf_adder(${control_word_type}, ${clcw_version_number},
+    imports: import satellites.ccsds
+    make: satellites.ccsds.telemetry_ocf_adder(${control_word_type}, ${clcw_version_number},
         ${status_field}, ${cop_in_effect}, ${virtual_channel_identification}, ${rsvd_spare1},
         ${no_rf_avail}, ${no_bit_lock}, ${lockout}, ${wait}, ${retransmit}, ${farmb_counter},
         ${rsvd_spare2}, ${report_value})

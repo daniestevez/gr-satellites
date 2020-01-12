@@ -24,7 +24,7 @@ from gnuradio import gr
 import pmt
 import pathlib
 
-from . import smogp_telemetry
+from .telemetry import smogp as smogp_telemetry
 
 class smogp_spectrum_save(gr.basic_block):
     """

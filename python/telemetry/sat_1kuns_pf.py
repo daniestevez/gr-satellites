@@ -21,8 +21,9 @@
 
 from construct import *
 from ..adapters import *
-from ..au03_telemetry import Timestamp
 from .csp import CSPHeader
+
+Timestamp = UNIXTimestampAdapter(Int32sb)
 
 Beacon = Struct(
     'csp_header' / CSPHeader,

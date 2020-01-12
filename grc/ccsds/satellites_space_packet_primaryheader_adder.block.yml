@@ -65,8 +65,8 @@ outputs:
     id: out
 
 templates:
-    imports: import satellites
-    make: satellites.space_packet_primaryheader_adder(${packet_type}, ${secondary_header_flag},
+    imports: import satellites.ccsds
+    make: satellites.ccsds.space_packet_primaryheader_adder(${packet_type}, ${secondary_header_flag},
         ${AP_ID}, ${count_or_name}, ${packet_sequence_name})
 
 file_format: 1

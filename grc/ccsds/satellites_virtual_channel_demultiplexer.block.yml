@@ -22,7 +22,7 @@ outputs:
     id: discarded
 
 templates:
-    imports: import satellites
-    make: satellites.virtual_channel_demultiplexer((${vc_outputs}))
+    imports: import satellites.ccsds
+    make: satellites.ccsds.virtual_channel_demultiplexer((${vc_outputs}))
 
 file_format: 1

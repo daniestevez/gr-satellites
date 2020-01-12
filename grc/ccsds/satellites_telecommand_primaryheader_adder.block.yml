@@ -55,8 +55,8 @@ outputs:
     id: out
 
 templates:
-    imports: import satellites
-    make: satellites.telecommand_primaryheader_adder(${bypass}, ${control}, ${spacecraft_id},
+    imports: import satellites.ccsds
+    make: satellites.ccsds.telecommand_primaryheader_adder(${bypass}, ${control}, ${spacecraft_id},
         ${virtual_channel_id})
 
 file_format: 1

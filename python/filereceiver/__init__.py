@@ -19,7 +19,7 @@
 # The presence of this file turns this directory into a Python package
 
 '''
-gr-satellites utils
+gr-satellites filereceiver
 
 This module contains the File Receiver class and child classes
 This class is used to reassemble files transmitted in chunks

@@ -10,7 +10,7 @@ options:
     gen_linking: dynamic
     generate_options: no_gui
     hier_block_src_path: '.:'
-    id: tm_packet_vc_demux
+    id: tm_packet_ocf
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -46,7 +46,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 28]
+    coordinate: [280, 36]
     rotation: 0
     state: enabled
 - name: blocks_random_pdu_0
@@ -65,11 +65,40 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [672, 32]
+    coordinate: [672, 28]
     rotation: 0
     state: enabled
-- name: satellites_telemetry_parser_0
-  id: satellites_telemetry_parser
+- name: satellites_telemetry_ocf_adder_0
+  id: satellites_telemetry_ocf_adder
+  parameters:
+    affinity: ''
+    alias: ''
+    clcw_version_number: '0'
+    comment: ''
+    control_word_type: '0'
+    cop_in_effect: '1'
+    farmb_counter: '0'
+    lockout: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    no_bit_lock: '0'
+    no_rf_avail: '0'
+    report_value: '0'
+    retransmit: '0'
+    rsvd_spare1: '0'
+    rsvd_spare2: '0'
+    status_field: '0'
+    virtual_channel_identification: '0'
+    wait: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 284]
+    rotation: 0
+    state: enabled
+- name: satellites_ccsds_telemetry_parser_0
+  id: satellites_ccsds_telemetry_parser
   parameters:
     affinity: ''
     alias: ''
@@ -80,37 +109,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1016, 328]
-    rotation: 0
-    state: enabled
-- name: satellites_telemetry_parser_0_0
-  id: satellites_telemetry_parser
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1016, 448]
-    rotation: 0
-    state: enabled
-- name: satellites_telemetry_parser_0_1
-  id: satellites_telemetry_parser
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1016, 384]
+    coordinate: [1056, 348]
     rotation: 0
     state: enabled
 - name: satellites_telemetry_primaryheader_adder_0
@@ -128,42 +127,7 @@ blocks:
     master_channel_frame_count: '1'
     maxoutbuf: '0'
     minoutbuf: '0'
-    ocf_flag: '0'
-    packet_order_flag: '1'
-    q: '0'
-    reed_solomon_concat: '0'
-    segment_length_id: '0'
-    size: '10'
-    spacecraft_id: '25'
-    synch_flag: '1'
-    transfer_frame_secondary_header_flag: '1'
-    transfer_frame_version_number: '0'
-    turbo: '223'
-    virtual_channel_frame_count: '1'
-    virtual_channel_id: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [88, 108]
-    rotation: 0
-    state: enabled
-- name: satellites_telemetry_primaryheader_adder_0_0
-  id: satellites_telemetry_primaryheader_adder
-  parameters:
-    I: '0'
-    affinity: ''
-    alias: ''
-    coding: '1'
-    comment: ''
-    e: '0'
-    first_header_pointer: '0'
-    ldpc_tf: '0'
-    ldpc_tf_size: '128'
-    master_channel_frame_count: '1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    ocf_flag: '0'
+    ocf_flag: '1'
     packet_order_flag: '1'
     q: '0'
     reed_solomon_concat: '0'
@@ -180,39 +144,15 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [88, 396]
-    rotation: 0
-    state: enabled
-- name: satellites_virtual_channel_demultiplexer_0
-  id: satellites_virtual_channel_demultiplexer
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    vc_outputs: 0,2
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [584, 344]
+    coordinate: [88, 252]
     rotation: 0
     state: enabled
 
 connections:
 - [blocks_message_strobe_0, strobe, blocks_random_pdu_0, generate]
 - [blocks_random_pdu_0, pdus, satellites_telemetry_primaryheader_adder_0, in]
-- [blocks_random_pdu_0, pdus, satellites_telemetry_primaryheader_adder_0_0, in]
-- [satellites_telemetry_primaryheader_adder_0, out, satellites_virtual_channel_demultiplexer_0,
-  in]
-- [satellites_telemetry_primaryheader_adder_0_0, out, satellites_virtual_channel_demultiplexer_0,
-  in]
-- [satellites_virtual_channel_demultiplexer_0, discarded, satellites_telemetry_parser_0_0,
-  in]
-- [satellites_virtual_channel_demultiplexer_0, out0, satellites_telemetry_parser_0,
-  in]
-- [satellites_virtual_channel_demultiplexer_0, out1, satellites_telemetry_parser_0_1,
+- [satellites_telemetry_ocf_adder_0, out, satellites_ccsds_telemetry_parser_0, in]
+- [satellites_telemetry_primaryheader_adder_0, out, satellites_telemetry_ocf_adder_0,
   in]
 
 metadata:

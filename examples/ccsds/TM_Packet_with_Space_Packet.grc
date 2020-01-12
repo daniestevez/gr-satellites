@@ -10,7 +10,7 @@ options:
     gen_linking: dynamic
     generate_options: no_gui
     hier_block_src_path: '.:'
-    id: tm_packet
+    id: tm_packet_with_space_packet
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -27,7 +27,7 @@ options:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 6]
+    coordinate: [8, 8]
     rotation: 0
     state: enabled
 
@@ -46,7 +46,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 36]
+    coordinate: [80, 132]
     rotation: 0
     state: enabled
 - name: blocks_random_pdu_0
@@ -55,21 +55,62 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    length_modulo: '4'
+    length_modulo: '2'
     mask: '0xFF'
     maxoutbuf: '0'
-    maxsize: '4'
+    maxsize: '2'
     minoutbuf: '0'
-    minsize: '4'
+    minsize: '2'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [672, 28]
+    coordinate: [384, 36]
     rotation: 0
     state: enabled
-- name: satellites_telemetry_parser_0
-  id: satellites_telemetry_parser
+- name: satellites_space_packet_parser_0
+  id: satellites_space_packet_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    id_time: '''default_value'''
+    pfield: '1'
+    time_format: '0'
+    time_header: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [880, 412]
+    rotation: 0
+    state: enabled
+- name: satellites_space_packet_primaryheader_adder_0
+  id: satellites_space_packet_primaryheader_adder
+  parameters:
+    AP_ID: '3'
+    affinity: ''
+    alias: ''
+    ccsds_version: '0'
+    comment: ''
+    count_or_name: '0'
+    data_length: '40000'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packet_sequence_count: '0'
+    packet_sequence_name: '0'
+    packet_type: '0'
+    secondary_header_flag: '1'
+    sequence_flags: '3'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [376, 192]
+    rotation: 0
+    state: enabled
+- name: satellites_telemetry_packet_reconstruction_0
+  id: satellites_telemetry_packet_reconstruction
   parameters:
     affinity: ''
     alias: ''
@@ -80,7 +121,22 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [704, 348]
+    coordinate: [712, 360]
+    rotation: 0
+    state: enabled
+- name: satellites_ccsds_telemetry_parser_0
+  id: satellites_ccsds_telemetry_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 424]
     rotation: 0
     state: enabled
 - name: satellites_telemetry_primaryheader_adder_0
@@ -95,7 +151,7 @@ blocks:
     first_header_pointer: '0'
     ldpc_tf: '0'
     ldpc_tf_size: '128'
-    master_channel_frame_count: '1'
+    master_channel_frame_count: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
     ocf_flag: '0'
@@ -103,26 +159,32 @@ blocks:
     q: '0'
     reed_solomon_concat: '0'
     segment_length_id: '0'
-    size: '10'
-    spacecraft_id: '25'
+    size: '4'
+    spacecraft_id: '0'
     synch_flag: '1'
     transfer_frame_secondary_header_flag: '1'
     transfer_frame_version_number: '0'
     turbo: '223'
-    virtual_channel_frame_count: '1'
-    virtual_channel_id: '2'
+    virtual_channel_frame_count: '0'
+    virtual_channel_id: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [88, 252]
+    coordinate: [80, 308]
     rotation: 0
     state: enabled
 
 connections:
 - [blocks_message_strobe_0, strobe, blocks_random_pdu_0, generate]
-- [blocks_random_pdu_0, pdus, satellites_telemetry_primaryheader_adder_0, in]
-- [satellites_telemetry_primaryheader_adder_0, out, satellites_telemetry_parser_0,
+- [blocks_random_pdu_0, pdus, satellites_space_packet_primaryheader_adder_0, in]
+- [satellites_space_packet_primaryheader_adder_0, out, satellites_telemetry_primaryheader_adder_0,
+  in]
+- [satellites_telemetry_packet_reconstruction_0, out, satellites_space_packet_parser_0,
+  in]
+- [satellites_ccsds_telemetry_parser_0, out, satellites_telemetry_packet_reconstruction_0,
+  in]
+- [satellites_telemetry_primaryheader_adder_0, out, satellites_ccsds_telemetry_parser_0,
   in]
 
 metadata:

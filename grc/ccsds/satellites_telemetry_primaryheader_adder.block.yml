@@ -133,8 +133,8 @@ outputs:
     id: out
 
 templates:
-    imports: import satellites
-    make: satellites.telemetry_primaryheader_adder(${transfer_frame_version_number},
+    imports: import satellites.ccsds
+    make: satellites.ccsds.telemetry_primaryheader_adder(${transfer_frame_version_number},
         ${spacecraft_id}, ${virtual_channel_id}, ${ocf_flag}, ${master_channel_frame_count},
         ${virtual_channel_frame_count}, ${transfer_frame_secondary_header_flag}, ${synch_flag},
         ${packet_order_flag}, ${segment_length_id}, ${first_header_pointer}, ${coding},

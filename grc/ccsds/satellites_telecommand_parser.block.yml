@@ -9,7 +9,7 @@ inputs:
     id: in
 
 templates:
-    imports: import satellites
-    make: satellites.telecommand_parser()
+    imports: import satellites.ccsds
+    make: satellites.ccsds.telecommand_parser()
 
 file_format: 1

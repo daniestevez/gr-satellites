@@ -13,7 +13,7 @@ outputs:
     id: out
 
 templates:
-    imports: import satellites
-    make: satellites.telemetry_packet_reconstruction()
+    imports: import satellites.ccsds
+    make: satellites.ccsds.telemetry_packet_reconstruction()
 
 file_format: 1

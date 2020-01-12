@@ -36,8 +36,8 @@ inputs:
     id: in
 
 templates:
-    imports: import satellites
-    make: satellites.space_packet_parser(${time_header}, ${time_format}, ${pfield},
+    imports: import satellites.ccsds
+    make: satellites.ccsds.space_packet_parser(${time_header}, ${time_format}, ${pfield},
         ${id_time})
 
 file_format: 1

@@ -106,8 +106,6 @@ from .cc11xx_packet_crop import cc11xx_packet_crop
 from .check_cc11xx_crc import check_cc11xx_crc
 from .cc11xx_remove_length import cc11xx_remove_length
 
-from .sat_3cat_1_telemetry_parser import sat_3cat_1_telemetry_parser
-
 from .suomi_100_telemetry_parser import suomi_100_telemetry_parser
 
 from .mysat1_telemetry_parser import mysat1_telemetry_parser
@@ -141,18 +139,6 @@ from .taurus1_telemetry_parser import taurus1_telemetry_parser
 from .manchester_sync import manchester_sync
 
 from .header_remover import header_remover
-
-from .space_packet_parser import space_packet_parser
-from .telemetry_parser import telemetry_parser
-from .telecommand_parser import telecommand_parser
-from .space_packet_primaryheader_adder import space_packet_primaryheader_adder
-from .telemetry_primaryheader_adder import telemetry_primaryheader_adder
-from .telecommand_primaryheader_adder import telecommand_primaryheader_adder
-from .pathID_demultiplexer import pathID_demultiplexer
-from .virtual_channel_demultiplexer import virtual_channel_demultiplexer
-from .telemetry_ocf_adder import telemetry_ocf_adder
-from .space_packet_time_stamp_adder import space_packet_time_stamp_adder
-from .telemetry_packet_reconstruction import telemetry_packet_reconstruction
 
 from .smogp_signalling import smogp_signalling
 from .smogp_packet_filter import smogp_packet_filter

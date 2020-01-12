@@ -108,20 +108,9 @@ install(FILES
     satellites_ngham_check_crc.block.yml
     satellites_floripasat_telemetry_parser.block.yml
     satellites_bme_submitter.block.yml
-    CCSDS/satellites_space_packet_parser.block.yml
-    CCSDS/satellites_telemetry_parser.block.yml
-    CCSDS/satellites_telecommand_parser.block.yml
-    CCSDS/satellites_space_packet_primaryheader_adder.block.yml
-    CCSDS/satellites_telemetry_primaryheader_adder.block.yml
-    CCSDS/satellites_telecommand_primaryheader_adder.block.yml
-    CCSDS/satellites_pathID_demultiplexer.block.yml
-    CCSDS/satellites_virtual_channel_demultiplexer.block.yml
-    CCSDS/satellites_telemetry_ocf_adder.block.yml
-    CCSDS/satellites_space_packet_time_stamp_adder.block.yml
-    CCSDS/variable_time_format_parameters.block.yml
-    CCSDS/satellites_telemetry_packet_reconstruction.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )
 
+add_subdirectory(ccsds)
 add_subdirectory(components)
 add_subdirectory(core)

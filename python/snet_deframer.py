@@ -23,7 +23,7 @@ import numpy as np
 from gnuradio import gr
 import pmt
 
-from .snet_telemetry import LTUFrameHeader
+from .telemetry.snet import LTUFrameHeader
 
 from .bch15 import decode_bch15
 

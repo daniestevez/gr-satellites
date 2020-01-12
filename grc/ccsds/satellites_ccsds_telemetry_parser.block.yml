@@ -1,0 +1,18 @@
+id: satellites_ccsds_telemetry_parser
+label: CCSDS Telemetry Parser
+category: '[Satellites]/CCSDS'
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: out
+    optional: true
+
+templates:
+    imports: import satellites.ccsds
+    make: satellites.ccsds.telemetry_parser()
+
+file_format: 1
