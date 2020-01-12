@@ -43,7 +43,7 @@ can decode packets). Unsupported means there is no decoder in v3 yet.
 | FloripaSat-1	    |		  |			| x		  |
 | FMN-1		    |		  |			| x		  |
 | GALASSIA	    |		  |			| x		  |
-| GOMX-1	    |		  | Tlm decode miss.	| 		  |
+| GOMX-1	    |		  | 			| x		  |
 | GOMX-3	    |		  | 	       		| x		  |
 | GR01 (DUTHSat)    |		  | AX.25 addr. check.	|  		  |
 | IL01 (DUCHIFAT-2) |		  | AX.25 addr. check.	|		  |
