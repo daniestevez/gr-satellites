@@ -29,7 +29,6 @@ The input to these blocks are PDUs with the frames.
 '''
 
 # Temporary hacks: This should become full-fledged data sinks
-from ... import sat_1kuns_pf_image_decoder
 from ... import qo100_telemetry_print
 from ... import smogp_signalling
 from ... import funcube_telemetry_parser

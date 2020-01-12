@@ -23,8 +23,7 @@ import numpy
 from gnuradio import gr
 import pmt
 
-from .csp_header import CSP
-from . import by701_telemetry
+from .telemetry import by70_1
 
 class lilacsat1_gps_kml(gr.basic_block):
     """
@@ -49,13 +48,14 @@ class lilacsat1_gps_kml(gr.basic_block):
 
         if len(packet) <= 4+8:
             return
-        csp = CSP(packet[:4])
+
+        frame = by70_1.parse(packet)
 
         # destination 5 is used for telemetry
-        if csp.destination != 5:
+        if frame.csp_header.destination != 5:
             return
 
-        data = by701_telemetry.beacon_parse(packet[4:])
+        data = by70_1.beacon
 
         if not data or 'latitude' not in data:
             return

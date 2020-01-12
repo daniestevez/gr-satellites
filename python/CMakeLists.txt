@@ -51,42 +51,24 @@ GR_PYTHON_INSTALL(
     submit.py
     print_timestamp.py
     funcube_telemetry_parser.py
-    gomx3_beacon.py
-    gomx1_beacon.py
-    gomx3_beacon_parser.py
     adsb_kml.py
-    gomx1_beacon_parser.py
     ks1q_header_remover.py
-    by701_image_decoder.py
-    by701_telemetry_parser.py
-    by701_camera_telemetry_parser.py
-    by701_telemetry.py
-    kr01_telemetry_parser.py
     ao40_uncoded_crc.py
     check_ao40_uncoded_crc.py
     lilacsat1_gps_kml.py
-    au03_telemetry_parser.py
     check_tt64_crc.py
     append_crc32c.py
-    dsat_image_decoder.py
     strip_ax25_header.py
-    picsat_telemetry_parser.py
     snet_deframer.py
     bch15.py
     beesat_classifier.py
     adapters.py
     snet_classifier.py
-    sat_1kuns_pf_telemetry.py
-    sat_1kuns_pf_telemetry_parser.py
-    sat_1kuns_pf_image_decoder.py
     k2sat_deframer.py
-    k2sat_image_decoder.py
     feh.py
     cc11xx_packet_crop.py
     check_cc11xx_crc.py
     cc11xx_remove_length.py
-    suomi_100_telemetry_parser.py
-    mysat1_telemetry_parser.py
     pwsat2_telemetry_parser.py
     pwsat2_submitter.py
     eseo_packet_crop.py
@@ -97,26 +79,19 @@ GR_PYTHON_INSTALL(
     dstar_one_telemetry_parser.py
     reflect_bytes.py
     check_astrocast_crc.py
-    lume1_telemetry_parser.py
     ecss_pus.py
     qo100_telemetry_print.py
     swiatowid_packet_crop.py
     check_swiatowid_crc.py
     swiatowid_packet_split.py
-    swiatowid_image_decoder.py
-    taurus1_telemetry_parser.py
     manchester_sync.py
     header_remover.py
     smogp_signalling.py
     smogp_packet_filter.py
-    smogp_telemetry_parser.py
-    smogp_spectrum_save.py
     aausat4_remove_fsm.py
-    aausat4_telemetry_parser.py
     ngham_packet_crop.py
     ngham_remove_padding.py
     ngham_check_crc.py
-    floripasat_telemetry_parser.py
     bme_submitter.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )

@@ -33,46 +33,31 @@ install(FILES
     satellites_swap_header.block.yml
     satellites_submit.block.yml
     satellites_print_timestamp.block.yml
-    satellites_sat3cat2_telemetry_parser.block.yml
     satellites_ao40_rs_decoder.block.yml
     satellites_funcube_telemetry_parser.block.yml
-    satellites_gomx3_beacon_parser.block.yml
     satellites_adsb_kml.block.yml
     satellites_ax100_decode.block.yml
     satellites_u482c_decode.block.yml
-    satellites_gomx1_beacon_parser.block.yml
     satellites_ks1q_header_remover.block.yml
     satellites_decode_rs.block.yml
     satellites_encode_rs.block.yml
     satellites_lilacsat1_demux.block.yml
-    satellites_by701_image_decoder.block.yml
-    satellites_by701_telemetry_parser.block.yml
-    satellites_by701_camera_telemetry_parser.block.yml
-    satellites_kr01_telemetry_parser.block.yml
     satellites_check_ao40_uncoded_crc.block.yml
     satellites_lilacsat1_gps_kml.block.yml
-    satellites_au03_telemetry_parser.block.yml
     satellites_check_tt64_crc.block.yml
     satellites_varlen_packet_tagger.block.yml
     satellites_varlen_packet_framer.block.yml
     satellites_append_crc32c.block.yml
-    satellites_dsat_image_decoder.block.yml
     satellites_nusat_decoder.block.yml
     satellites_strip_ax25_header.block.yml
-    satellites_picsat_telemetry_parser.block.yml
     satellites_snet_deframer.block.yml
     satellites_beesat_classifier.block.yml
     satellites_snet_classifier.block.yml
-    satellites_sat_1kuns_pf_telemetry_parser.block.yml
-    satellites_sat_1kuns_pf_image_decoder.block.yml
     satellites_k2sat_deframer.block.yml
-    satellites_k2sat_image_decoder.block.yml
     satellites_descrambler308.block.yml
     satellites_cc11xx_packet_crop.block.yml
     satellites_check_cc11xx_crc.block.yml
     satellites_cc11xx_remove_length.block.yml
-    satellites_suomi_100_telemetry_parser.block.yml
-    satellites_mysat1_telemetry_parser.block.yml
     satellites_pwsat2_telemetry_parser.block.yml
     satellites_pwsat2_submitter.block.yml
     satellites_eseo_packet_crop.block.yml
@@ -80,18 +65,14 @@ install(FILES
     satellites_check_eseo_crc.block.yml
     satellites_decode_rs_general.block.yml
     satellites_funcube_submit.block.yml
-    satellites_eseo_telemetry_parser.block.yml
     satellites_dstar_one_telemetry_parser.block.yml
     satellites_reflect_bytes.block.yml
     satellites_check_astrocast_crc.block.yml
-    satellites_lume1_telemetry_parser.block.yml
     satellites_qo100_telemetry_print.block.yml
     satellites_decode_rs_interleaved.block.yml
     satellites_swiatowid_packet_crop.block.yml
     satellites_check_swiatowid_crc.block.yml
     satellites_swiatowid_packet_split.block.yml
-    satellites_swiatowid_image_decoder.block.yml
-    satellites_taurus1_telemetry_parser.block.yml
     satellites_manchester_sync.block.yml
     satellites_header_remover.block.yml
     satellites_distributed_syncframe_soft.block.yml
@@ -99,14 +80,10 @@ install(FILES
     satellites_smogp_signalling.block.yml
     satellites_decode_ra_code.block.yml
     satellites_smogp_packet_filter.block.yml
-    satellites_smogp_telemetry_parser.block.yml
-    satellites_smogp_spectrum_save.block.yml
     satellites_aausat4_remove_fsm.block.yml
-    satellites_aausat4_telemetry_parser.block.yml
     satellites_ngham_packet_crop.block.yml
     satellites_ngham_remove_padding.block.yml
     satellites_ngham_check_crc.block.yml
-    satellites_floripasat_telemetry_parser.block.yml
     satellites_bme_submitter.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )

@@ -23,8 +23,7 @@ import numpy
 from gnuradio import gr
 import pmt
 
-from .csp_header import CSP
-from . import gomx3_beacon
+from .telemetry import gomx_3 as tlm
 
 class adsb_kml(gr.basic_block):
     """
@@ -46,18 +45,16 @@ class adsb_kml(gr.basic_block):
             return
 
         packet = bytes(pmt.u8vector_elements(msg))
-        header = CSP(packet[:4])
+        beacon = tlm.parse(packet)
+        
         # check that message is beacon
-        if header.destination != 10 or header.dest_port != 30:
+        if beacon.csp_header.destination != 10 or beacon.csp_header.destination_port != 30:
             return
 
-        beacon_type = packet[4]
-        payload = packet[4:]
-
-        if header.source != 1 or beacon_type != 0 or len(payload) != 140:
+        if beacon.csp_header.source != 1 or beacon.beacon_type != 0:
             return
 
-        beacon = gomx3_beacon.beacon_1_0(payload)
+        adsb = beacon.beacon.adsb
 
         
         print("""<Placemark>
@@ -65,8 +62,8 @@ class adsb_kml(gr.basic_block):
         <description>Altitude: {}ft Time: {}</description>
         <styleUrl>#plane</styleUrl>
         <Point><coordinates>{},{}</coordinates></Point>
-</Placemark>""".format(hex(beacon.adsb_last_icao), beacon.adsb_last_alt,
-                        beacon.adsb_last_time,
-                        beacon.adsb_last_lon if beacon.adsb_last_lon <= 180 else beacon.adsb_last_lon - 360,
-                        beacon.adsb_last_lat))
+</Placemark>""".format(hex(adsb.last_icao), adsb.last_alt,
+                        adsb.last_time,
+                        adsb.last_lon if adsb.last_lon <= 180 else adsb.last_lon - 360,
+                        adsb.last_lat))
 

@@ -62,33 +62,20 @@ from .print_timestamp import print_timestamp
 
 from .funcube_telemetry_parser import funcube_telemetry_parser
 
-from .gomx3_beacon_parser import gomx3_beacon_parser
 from .adsb_kml import adsb_kml
-from .gomx1_beacon_parser import gomx1_beacon_parser
 
 from .ks1q_header_remover import ks1q_header_remover
 
-from .by701_image_decoder import by701_image_decoder
-from .by701_telemetry_parser import by701_telemetry_parser
-from .by701_camera_telemetry_parser import by701_camera_telemetry_parser
-
-from .kr01_telemetry_parser import kr01_telemetry_parser
 
 from .check_ao40_uncoded_crc import check_ao40_uncoded_crc
 
 from .lilacsat1_gps_kml import lilacsat1_gps_kml
 
-from .au03_telemetry_parser import au03_telemetry_parser
-
 from .check_tt64_crc import check_tt64_crc
 
 from .append_crc32c import append_crc32c
 
-from .dsat_image_decoder import dsat_image_decoder
-
 from .strip_ax25_header import strip_ax25_header
-
-from .picsat_telemetry_parser import picsat_telemetry_parser
 
 from .snet_deframer import snet_deframer
 
@@ -96,19 +83,11 @@ from .beesat_classifier import beesat_classifier
 
 from .snet_classifier import snet_classifier
 
-from .sat_1kuns_pf_telemetry_parser import sat_1kuns_pf_telemetry_parser
-from .sat_1kuns_pf_image_decoder import sat_1kuns_pf_image_decoder
-
 from .k2sat_deframer import k2sat_deframer
-from .k2sat_image_decoder import k2sat_image_decoder
 
 from .cc11xx_packet_crop import cc11xx_packet_crop
 from .check_cc11xx_crc import check_cc11xx_crc
 from .cc11xx_remove_length import cc11xx_remove_length
-
-from .suomi_100_telemetry_parser import suomi_100_telemetry_parser
-
-from .mysat1_telemetry_parser import mysat1_telemetry_parser
 
 from .pwsat2_telemetry_parser import pwsat2_telemetry_parser
 from .pwsat2_submitter import pwsat2_submitter
@@ -125,16 +104,11 @@ from .reflect_bytes import reflect_bytes
 
 from .check_astrocast_crc import check_astrocast_crc
 
-from .lume1_telemetry_parser import lume1_telemetry_parser
-
 from .qo100_telemetry_print import qo100_telemetry_print
 
 from .swiatowid_packet_crop import swiatowid_packet_crop
 from .check_swiatowid_crc import check_swiatowid_crc
 from .swiatowid_packet_split import swiatowid_packet_split
-from .swiatowid_image_decoder import swiatowid_image_decoder
-
-from .taurus1_telemetry_parser import taurus1_telemetry_parser
 
 from .manchester_sync import manchester_sync
 
@@ -142,16 +116,11 @@ from .header_remover import header_remover
 
 from .smogp_signalling import smogp_signalling
 from .smogp_packet_filter import smogp_packet_filter
-from .smogp_telemetry_parser import smogp_telemetry_parser
-from .smogp_spectrum_save import smogp_spectrum_save
 
 from .aausat4_remove_fsm import aausat4_remove_fsm
-from .aausat4_telemetry_parser import aausat4_telemetry_parser
 
 from .ngham_packet_crop import ngham_packet_crop
 from .ngham_remove_padding import ngham_remove_padding
 from .ngham_check_crc import ngham_check_crc
-
-from .floripasat_telemetry_parser import floripasat_telemetry_parser
 
 from .bme_submitter import bme_submitter
