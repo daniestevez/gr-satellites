@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Support for SMOG-P and ATL-1 at 2500 and 12500 baud
+- Support for construct 2.10
 ### Fixed
 - Bug with DC block and AGC of SMOG-P and ATL-1 potentially causing crashes
 

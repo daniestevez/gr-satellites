@@ -133,7 +133,7 @@ BeaconD = Struct(
     'sat_mode' / Int8ub,
     'tc_sequence_count' / Int16ub)
 
-Beacon = Struct(Padding(3), BeaconA, Embedded(BeaconB), BeaconC, Embedded(BeaconD))
+Beacon = Struct(Padding(3), BeaconA, BeaconB, BeaconC, BeaconD)
 
 PayloadBeaconFlags = BitStruct(
     'hk_flag' / Flag,
