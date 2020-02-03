@@ -85,7 +85,14 @@ ENDIF()
 ########################################################################
 # Install directories
 ########################################################################
-find_package(Gnuradio "3.8" REQUIRED)
+find_package(Gnuradio "3.8")
+if(NOT Gnuradio_FOUND)
+    message(WARNING "GNU Radio 3.8 not found. Trying to find GNU Radio 3.9 (note this is not officially supported by gr-satellites)")
+    find_package(Gnuradio "3.9")
+	if(NOT Gnuradio_FOUND)
+	    message(FATAL_ERROR "Unable to find GNU Radio 3.8 or 3.9")
+	ENDIF(NOT Gnuradio_FOUND)
+ENDIF(NOT Gnuradio_FOUND)
 include(GrVersion)
 
 include(GrPlatform) #define LIB_SUFFIX
