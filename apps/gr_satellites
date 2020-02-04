@@ -35,6 +35,7 @@ def argument_parser():
     p_input = p.add_argument_group('input')
     p_input.add_argument('--wavfile', help = 'WAV input file')
     p_input.add_argument('--rawfile', help = 'RAW input file (float32 or complex64)')
+    p_input.add_argument('--rawint16', help = 'RAW input file (int16)')
     p_input.add_argument('--samp_rate', type = float, help = 'Sample rate (Hz)')
     p_input.add_argument('--udp', action = 'store_true', help = 'Use UDP input')
     p_input.add_argument('--udp_ip', default = '::', help = 'UDP input listen IP [default=%(default)r]')
@@ -50,8 +51,8 @@ def argument_parser():
     return p
 
 def check_options(options, parser):
-    if sum([bool(x) for x in [options.wavfile, options.rawfile, options.udp, options.kiss_in]]) != 1:
-        print('Need to specify exactly one of the following input sources: {--wavfile, --rawfile, --udp, --kiss_in}', file = sys.stderr)
+    if sum([bool(x) for x in [options.wavfile, options.rawfile, options.rawint16, options.udp, options.kiss_in]]) != 1:
+        print('Need to specify exactly one of the following input sources: {--wavfile, --rawfile, --rawint16, --udp, --kiss_in}', file = sys.stderr)
         parser.print_usage(file = sys.stderr)
         sys.exit(1)
     if options.kiss_in is None and options.samp_rate is None:
@@ -98,6 +99,8 @@ class gr_satellites_top_block(gr.top_block):
             return self.setup_wavfile_input()
         elif self.options.rawfile is not None:
             return self.setup_rawfile_input()
+        elif self.options.rawint16 is not None:
+            return self.setup_rawint16_input()
         elif self.options.udp is True:
             return self.setup_udp_input()
         elif self.options.kiss_in is not None:
@@ -119,10 +122,17 @@ class gr_satellites_top_block(gr.top_block):
         size = gr.sizeof_gr_complex if self.options.iq else gr.sizeof_float
         self.input = blocks.file_source(size, self.options.rawfile, False, 0, 0)
 
+    def setup_rawint16_input(self):
+        self.input_int16 = blocks.file_source(gr.sizeof_short, self.options.rawint16, False, 0, 0)
+        self.setup_input_int16()
+
     def setup_udp_input(self):
-        self.udp = blocks.udp_source(gr.sizeof_short, self.options.udp_ip, self.options.udp_port, 1472, False)
+        self.input_int16 = blocks.udp_source(gr.sizeof_short, self.options.udp_ip, self.options.udp_port, 1472, False)
+        self.setup_input_int16()
+
+    def setup_input_int16(self):
         self.short_to_float = blocks.short_to_float(1, 32767)
-        self.connect(self.udp, self.short_to_float)
+        self.connect(self.input_int16, self.short_to_float)
         if self.options.iq:
             self.deinterleave = blocks.deinterleave(gr.sizeof_float, 1)
             self.float_to_complex = blocks.float_to_complex(1)
