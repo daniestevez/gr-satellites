@@ -321,14 +321,10 @@ WholeOrbitFC1 = BitStruct(
 
 Callsign = Bytes(8)
 
-FC2BatteryCommon = Struct(
-    'current' / Octet,
-    'voltage' / Octet,
-    )
-
 FC2Battery = Struct(
     'direction' / Flag,
-    Embedded(FC2BatteryCommon),
+    'current' / Octet,
+    'voltage' / Octet,
     'temp' / Octet,
     )
 
@@ -372,13 +368,15 @@ RealTimeFC2 = BitStruct(
     )
 
 FC2Battery0 = Struct(
-    Embedded(FC2BatteryCommon),
+    'current' / Octet,
+    'voltage' / Octet,
     'temp' / Octet,
     )
 
 FC2Battery2 = Struct(
     'direction' / Flag,
-    Embedded(FC2BatteryCommon),
+    'current' / Octet,
+    'voltage' / Octet,
     )
 
 WholeOrbitFC2 = BitStruct(
