@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.3.0] - 2020-02-05
 ### Added
 - Support for SMOG-P and ATL-1 at 2500 and 12500 baud
 - Support for construct 2.10
@@ -143,7 +145,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v2.2.0...master
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v2.3.0...master
+[2.3.0]: https://github.com/daniestevez/gr-satellites/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/daniestevez/gr-satellites/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/daniestevez/gr-satellites/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/daniestevez/gr-satellites/compare/v1.8.1...v2.0.0
