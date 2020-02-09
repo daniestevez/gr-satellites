@@ -24,6 +24,7 @@ from math import ceil, pi
 from ...hier.rms_agc import rms_agc
 from ...utils.options_block import options_block
 from ... import manchester_sync
+import pathlib
 
 class bpsk_demodulator(gr.hier_block2, options_block):
     """
@@ -38,13 +39,17 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         f_offset: Frequency offset in Hz (float)
         differential: Perform non-coherent DBPSK decoding (bool)
         manchester: Use Manchester coding (bool)
+        dump_path: Path to dump internal signals to files (str)
         options: Options from argparse
     """
-    def __init__(self, baudrate, samp_rate, iq, f_offset = None, differential = False, manchester = False, options = None):
+    def __init__(self, baudrate, samp_rate, iq, f_offset = None, differential = False, manchester = False, dump_path = None, options = None):
         gr.hier_block2.__init__(self, "bpsk_demodulator",
             gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
             gr.io_signature(1, 1, gr.sizeof_float))
         options_block.__init__(self, options)
+
+        if dump_path is not None:
+            dump_path = pathlib.Path(dump_path)
 
         if manchester:
             baudrate *= 2
@@ -76,8 +81,20 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         agc_ref = 0.5
         self.agc = rms_agc(1e-2, agc_ref)
 
+        if dump_path is not None:
+            self.agc_out = blocks.file_sink(gr.sizeof_gr_complex, str(dump_path / 'agc_out.c64'), False)
+            self.connect(self.agc, self.agc_out)
+
         fll_bw = 2*pi*decimation/samp_rate*self.options.fll_bw
         self.fll = digital.fll_band_edge_cc(sps, self.options.rrc_alpha, 100, fll_bw)
+
+        if dump_path is not None:
+            self.fll_freq = blocks.file_sink(gr.sizeof_float, str(dump_path / 'fll_freq.f32'), False)
+            self.fll_phase = blocks.file_sink(gr.sizeof_float, str(dump_path / 'fll_phase.f32'), False)
+            self.fll_error = blocks.file_sink(gr.sizeof_float, str(dump_path / 'fll_error.f32'), False)
+            self.connect((self.fll, 1), self.fll_freq)
+            self.connect((self.fll, 2), self.fll_phase)
+            self.connect((self.fll, 3), self.fll_error)            
 
         filter_cutoff2 = baudrate * 1.0
         filter_transition2 = baudrate * 0.1
@@ -88,6 +105,16 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), self.options.rrc_alpha, int(ceil(11*sps*nfilts)))
         clk_bw = 2*pi/sps*self.options.clk_bw
         self.clock_recovery = digital.pfb_clock_sync_ccf(sps, clk_bw, rrc_taps, nfilts, nfilts//2, self.options.clk_limit, 1)
+
+        if dump_path is not None:
+            self.clock_recovery_out = blocks.file_sink(gr.sizeof_gr_complex, str(dump_path / 'clock_recovery_out.c64'), False)
+            self.clock_recovery_err = blocks.file_sink(gr.sizeof_float, str(dump_path / 'clock_recover_err.f32'), False)
+            self.clock_recovery_rate = blocks.file_sink(gr.sizeof_float, str(dump_path / 'clock_recover_rate.f32'), False)
+            self.clock_recovery_phase = blocks.file_sink(gr.sizeof_float, str(dump_path / 'clock_recover_phase.f32'), False)
+            self.connect(self.clock_recovery, self.clock_recovery_out)
+            self.connect((self.clock_recovery, 1), self.clock_recovery_err)
+            self.connect((self.clock_recovery, 2), self.clock_recovery_rate)
+            self.connect((self.clock_recovery, 3), self.clock_recovery_phase)
 
         self.connect(self, self.xlating, self.agc, self.fll, self.lowpass, self.clock_recovery)
 
@@ -110,6 +137,17 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         else:
             costas_bw = 2*pi/baudrate*self.options.costas_bw
             self.costas = digital.costas_loop_cc(costas_bw, 2, False)
+
+            if dump_path is not None:
+                self.costas_out = blocks.file_sink(gr.sizeof_gr_complex, str(dump_path / 'costas_out.c64'), False)
+                self.costas_frequency = blocks.file_sink(gr.sizeof_float, str(dump_path / 'costas_frequency.f32'), False)
+                self.costas_phase = blocks.file_sink(gr.sizeof_float, str(dump_path / 'costas_phase.f32'), False)
+                self.costas_error = blocks.file_sink(gr.sizeof_float, str(dump_path / 'costas_error.f32'), False)
+                self.connect(self.costas, self.costas_out)
+                self.connect((self.costas, 1), self.costas_frequency)
+                self.connect((self.costas, 2), self.costas_phase)
+                self.connect((self.costas, 3), self.costas_error)
+            
             self.multiply_const = blocks.multiply_const_ff(1/agc_ref, 1)
             self.connect(self.manchester, self.costas, self.complex_to_real, self.multiply_const, self)
 
