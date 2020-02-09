@@ -59,7 +59,7 @@ Header16 = Struct(
     )
 
 Frame = Struct(
-    Embedded(Header),
+    'header' / Header,
     'info' / GreedyBytes
     )
 
