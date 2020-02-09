@@ -20,7 +20,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-from gnuradio import gr, digital, blocks, channels
+from gnuradio import gr, digital, blocks, channels, analog
 from satellites.components.demodulators import bpsk_demodulator
 
 RAND_SEED = 42
@@ -46,7 +46,8 @@ class BPSK(gr.hier_block2):
             gr.io_signature(1, 1, gr.sizeof_char),
             gr.io_signature(1, 1, gr.sizeof_float))
 
-        f_offset = 0
+        f_offset = 500
+        packet_length = 0.2
         
         self.pack = blocks.pack_k_bits_bb(8)
         self.bpsk_constellation = digital.constellation_bpsk().base()
@@ -58,13 +59,19 @@ class BPSK(gr.hier_block2):
             excess_bw = 0.35,
             verbose = False,
             log = False)
+
+        self.packet_tx = analog.sig_source_f(samp_rate, analog.GR_SQR_WAVE, 1/packet_length,
+                                            1, 0, 0)
+        self.packet_tx_c = blocks.float_to_complex(1)
+        self.tx = blocks.multiply_vcc(1)
         
         spb = sps
         self.channel = channels.channel_model(np.sqrt(spb)/10**(ebn0/20), f_offset/samp_rate, 1.0, [1], RAND_SEED, False)
 
         self.demod = bpsk_demodulator(samp_rate/sps, samp_rate, iq = True, dump_path = '/tmp')
 
-        self.connect(self, self.pack, self.modulator, self.channel, self.demod, self)
+        self.connect(self, self.pack, self.modulator, self.tx, self.channel, self.demod, self)
+        self.connect(self.packet_tx, self.packet_tx_c, (self.tx, 1))
 
 if __name__ == '__main__':
     fg = LockInSim(BPSK(10), 1)

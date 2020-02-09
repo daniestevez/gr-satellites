@@ -78,11 +78,13 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         f = filter.freq_xlating_fir_filter_ccf if iq else filter.freq_xlating_fir_filter_fcf
         self.xlating = f(decimation, taps, f_offset, samp_rate)
 
-        agc_ref = 0.5
-        self.agc = rms_agc(1e-2, agc_ref)
+        agc_constant = 2e-2 / sps # This gives a time constant of 50 symbols
+        self.agc = rms_agc(agc_constant, 1)
 
         if dump_path is not None:
+            self.agc_in = blocks.file_sink(gr.sizeof_gr_complex, str(dump_path / 'agc_in.c64'), False)
             self.agc_out = blocks.file_sink(gr.sizeof_gr_complex, str(dump_path / 'agc_out.c64'), False)
+            self.connect(self.xlating, self.agc_in)
             self.connect(self.agc, self.agc_out)
 
         fll_bw = 2*pi*decimation/samp_rate*self.options.fll_bw
@@ -108,9 +110,9 @@ class bpsk_demodulator(gr.hier_block2, options_block):
 
         if dump_path is not None:
             self.clock_recovery_out = blocks.file_sink(gr.sizeof_gr_complex, str(dump_path / 'clock_recovery_out.c64'), False)
-            self.clock_recovery_err = blocks.file_sink(gr.sizeof_float, str(dump_path / 'clock_recover_err.f32'), False)
-            self.clock_recovery_rate = blocks.file_sink(gr.sizeof_float, str(dump_path / 'clock_recover_rate.f32'), False)
-            self.clock_recovery_phase = blocks.file_sink(gr.sizeof_float, str(dump_path / 'clock_recover_phase.f32'), False)
+            self.clock_recovery_err = blocks.file_sink(gr.sizeof_float, str(dump_path / 'clock_recovery_err.f32'), False)
+            self.clock_recovery_rate = blocks.file_sink(gr.sizeof_float, str(dump_path / 'clock_recovery_rate.f32'), False)
+            self.clock_recovery_phase = blocks.file_sink(gr.sizeof_float, str(dump_path / 'clock_recovery_phase.f32'), False)
             self.connect(self.clock_recovery, self.clock_recovery_out)
             self.connect((self.clock_recovery, 1), self.clock_recovery_err)
             self.connect((self.clock_recovery, 2), self.clock_recovery_rate)
@@ -130,7 +132,7 @@ class bpsk_demodulator(gr.hier_block2, options_block):
             self.delay = blocks.delay(gr.sizeof_gr_complex, 1)
             self.multiply_conj = blocks.multiply_conjugate_cc(1)
             sign = -1 if manchester else 1
-            self.multiply_const = blocks.multiply_const_ff(sign/agc_ref**2, 1) # take care about inverion in Manchester
+            self.multiply_const = blocks.multiply_const_ff(sign, 1) # take care about inverion in Manchester
             self.connect(self.manchester, (self.multiply_conj, 0))
             self.connect(self.manchester, self.delay, (self.multiply_conj, 1))
             self.connect(self.multiply_conj, self.complex_to_real, self.multiply_const, self)
@@ -148,14 +150,13 @@ class bpsk_demodulator(gr.hier_block2, options_block):
                 self.connect((self.costas, 2), self.costas_phase)
                 self.connect((self.costas, 3), self.costas_error)
             
-            self.multiply_const = blocks.multiply_const_ff(1/agc_ref, 1)
-            self.connect(self.manchester, self.costas, self.complex_to_real, self.multiply_const, self)
+            self.connect(self.manchester, self.costas, self.complex_to_real, self)
 
     _default_rrc_alpha = 0.35
-    _default_fll_bw = 100
-    _default_clk_rel_bw = 0.1
-    _default_clk_limit = 0.01
-    _default_costas_bw = 150
+    _default_fll_bw = 250
+    _default_clk_rel_bw = 0.04
+    _default_clk_limit = 0.05
+    _default_costas_bw = 300
     _default_manchester_history = 32
     
     @classmethod
