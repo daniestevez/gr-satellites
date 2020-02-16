@@ -411,7 +411,7 @@ Frame = Struct(
             0x08 : RealTimeNayif1,
             }, default = Bytes(54)),
         }),
-    'payload' / If(not isinstance(this.header.frametype, int),
+    'payload' / If(lambda c: hasattr(c.header.frametype, '__getitem__'),
                    Switch(lambda c: c.header.frametype[:2], {
                     'WO' : Bytes(200),
                     'HR' : HRPayload,
