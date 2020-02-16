@@ -87,16 +87,17 @@ class bpsk_demodulator(gr.hier_block2, options_block):
             self.connect(self.xlating, self.agc_in)
             self.connect(self.agc, self.agc_out)
 
-        fll_bw = 2*pi*decimation/samp_rate*self.options.fll_bw
-        self.fll = digital.fll_band_edge_cc(sps, self.options.rrc_alpha, 100, fll_bw)
+        if not self.options.disable_fll:
+            fll_bw = 2*pi*decimation/samp_rate*self.options.fll_bw
+            self.fll = digital.fll_band_edge_cc(sps, self.options.rrc_alpha, 100, fll_bw)
 
-        if dump_path is not None:
-            self.fll_freq = blocks.file_sink(gr.sizeof_float, str(dump_path / 'fll_freq.f32'), False)
-            self.fll_phase = blocks.file_sink(gr.sizeof_float, str(dump_path / 'fll_phase.f32'), False)
-            self.fll_error = blocks.file_sink(gr.sizeof_float, str(dump_path / 'fll_error.f32'), False)
-            self.connect((self.fll, 1), self.fll_freq)
-            self.connect((self.fll, 2), self.fll_phase)
-            self.connect((self.fll, 3), self.fll_error)            
+            if dump_path is not None:
+                self.fll_freq = blocks.file_sink(gr.sizeof_float, str(dump_path / 'fll_freq.f32'), False)
+                self.fll_phase = blocks.file_sink(gr.sizeof_float, str(dump_path / 'fll_phase.f32'), False)
+                self.fll_error = blocks.file_sink(gr.sizeof_float, str(dump_path / 'fll_error.f32'), False)
+                self.connect((self.fll, 1), self.fll_freq)
+                self.connect((self.fll, 2), self.fll_phase)
+                self.connect((self.fll, 3), self.fll_error)            
 
         filter_cutoff2 = baudrate * 1.0
         filter_transition2 = baudrate * 0.1
@@ -106,19 +107,36 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         nfilts = 16
         rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), self.options.rrc_alpha, int(ceil(11*sps*nfilts)))
         clk_bw = 2*pi/sps*self.options.clk_bw
-        self.clock_recovery = digital.pfb_clock_sync_ccf(sps, clk_bw, rrc_taps, nfilts, nfilts//2, self.options.clk_limit, 1)
-
+        ted_gain = 0.5/sps # "empiric" formula for TED gain of a PFB MF TED for complex BPSK
+        damping = 1.0
+        self.clock_recovery = digital.symbol_sync_cc(digital.TED_SIGNAL_TIMES_SLOPE_ML,
+                                                     sps,
+                                                     clk_bw,
+                                                     damping,
+                                                     ted_gain,
+                                                     self.options.clk_limit,
+                                                     1,
+                                                     digital.constellation_bpsk().base(),
+                                                     digital.IR_PFB_MF,
+                                                     nfilts,
+                                                     rrc_taps)
+        
         if dump_path is not None:
             self.clock_recovery_out = blocks.file_sink(gr.sizeof_gr_complex, str(dump_path / 'clock_recovery_out.c64'), False)
             self.clock_recovery_err = blocks.file_sink(gr.sizeof_float, str(dump_path / 'clock_recovery_err.f32'), False)
-            self.clock_recovery_rate = blocks.file_sink(gr.sizeof_float, str(dump_path / 'clock_recovery_rate.f32'), False)
-            self.clock_recovery_phase = blocks.file_sink(gr.sizeof_float, str(dump_path / 'clock_recovery_phase.f32'), False)
+            self.clock_recovery_T_inst = blocks.file_sink(gr.sizeof_float, str(dump_path / 'clock_recovery_T_inst.f32'), False)
+            self.clock_recovery_T_avg = blocks.file_sink(gr.sizeof_float, str(dump_path / 'clock_recovery_T_avg.f32'), False)
             self.connect(self.clock_recovery, self.clock_recovery_out)
             self.connect((self.clock_recovery, 1), self.clock_recovery_err)
-            self.connect((self.clock_recovery, 2), self.clock_recovery_rate)
-            self.connect((self.clock_recovery, 3), self.clock_recovery_phase)
+            self.connect((self.clock_recovery, 2), self.clock_recovery_T_inst)
+            self.connect((self.clock_recovery, 3), self.clock_recovery_T_avg)
 
-        self.connect(self, self.xlating, self.agc, self.fll, self.lowpass, self.clock_recovery)
+        self.connect(self, self.xlating, self.agc)
+        if self.options.disable_fll:
+            self.connect(self.agc, self.lowpass)
+        else:
+            self.connect(self.agc, self.fll, self.lowpass)
+        self.connect(self.lowpass, self.clock_recovery)
 
         self.complex_to_real = blocks.complex_to_real(1)
 
@@ -153,10 +171,10 @@ class bpsk_demodulator(gr.hier_block2, options_block):
             self.connect(self.manchester, self.costas, self.complex_to_real, self)
 
     _default_rrc_alpha = 0.35
-    _default_fll_bw = 250
-    _default_clk_rel_bw = 0.04
-    _default_clk_limit = 0.05
-    _default_costas_bw = 300
+    _default_fll_bw = 25
+    _default_clk_rel_bw = 0.02
+    _default_clk_limit = 0.02
+    _default_costas_bw = 50
     _default_manchester_history = 32
     
     @classmethod
@@ -166,6 +184,7 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         """
         parser.add_argument('--f_offset', type = float, default = None, help = 'Frequency offset (Hz) [default=1500 or 12000]')
         parser.add_argument('--rrc_alpha', type = float, default = cls._default_rrc_alpha, help = 'RRC roll-off (Hz) [default=%(default)r]')
+        parser.add_argument('--disable_fll', action = 'store_true', help = 'Disable FLL')
         parser.add_argument('--fll_bw', type = float, default = cls._default_fll_bw, help = 'FLL bandwidth (Hz) [default=%(default)r]')
         parser.add_argument('--clk_bw', type = float, default = cls._default_clk_rel_bw, help = 'Clock recovery bandwidth (relative to baudrate) [default=%(default)r]')
         parser.add_argument('--clk_limit', type = float, default = cls._default_clk_limit, help = 'Clock recovery limit (relative to baudrate) [default=%(default)r]')

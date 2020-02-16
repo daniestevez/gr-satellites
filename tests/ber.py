@@ -92,7 +92,7 @@ class BPSK(gr.hier_block2):
                          self.demod, self.slice, self)
 
 def compute_ber(ber_block_class, ebn0, drop_correlations = 2):
-    ncorrelations = 1000
+    ncorrelations = 10
     nbits = int(ncorrelations * 2**16 * 1.1) # 1.1 to add a bit of margin
     fg = BERSim(ber_block_class(ebn0, nbits), ncorrelations)
     print(f'Computing BPSK BER for EbN0 = {ebn0:.01f} dB')

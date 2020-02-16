@@ -46,7 +46,7 @@ class BPSK(gr.hier_block2):
             gr.io_signature(1, 1, gr.sizeof_char),
             gr.io_signature(1, 1, gr.sizeof_float))
 
-        f_offset = 500
+        f_offset = 50
         packet_length = 0.2
         
         self.pack = blocks.pack_k_bits_bb(8)
@@ -66,7 +66,7 @@ class BPSK(gr.hier_block2):
         self.tx = blocks.multiply_vcc(1)
         
         spb = sps
-        self.channel = channels.channel_model(np.sqrt(spb)/10**(ebn0/20), f_offset/samp_rate, 1.0, [1], RAND_SEED, False)
+        self.channel = channels.channel_model(np.sqrt(spb)/10**(ebn0/20), f_offset/samp_rate, 1.0, [0,0,1], RAND_SEED, False)
 
         self.demod = bpsk_demodulator(samp_rate/sps, samp_rate, iq = True, dump_path = '/tmp')
 
