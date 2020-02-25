@@ -8,6 +8,6 @@ transmitters:
     frequency: 437.300e+6
     modulation: FSK
     baudrate: 9600
-    framing: AX.25 G3RUH
+    framing: AX100 ASM+Golay
     data:
     - *tlm
