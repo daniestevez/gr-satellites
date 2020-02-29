@@ -85,8 +85,7 @@ class fsk_demodulator(gr.hier_block2, options_block):
         if dump_path is not None:
             self.waveform = blocks.file_sink(gr.sizeof_float, str(dump_path / 'waveform.f32'))
 
-        ted_gain = 1.47/2.0 # "empric" formula for TED gain of Gardner detector:
-                            # 1.47 symbol^{-1} / 2.0 samples/symbol for TED
+        ted_gain = 1.47 # "empiric" formula for TED gain of Gardner detector 1.47 symbol^{-1}
         damping = 1.0
         self.clock_recovery = digital.symbol_sync_ff(digital.TED_GARDNER,
                                                      sps,
