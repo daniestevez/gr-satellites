@@ -5,7 +5,7 @@ gr_satellites 1KUNS-PF --sa 48e3 --wavfile ~/satellite-recordings/1kuns_pf.wav
 echo 3CAT-1
 gr_satellites 3CAT-1 --wavfile ~/satellite-recordings/sat_3cat_1.wav --samp_rate 48000 --hexdump
 echo "Astrocast 0.1"
-gr_satellites "Astrocast 0.1" --samp_rate 48e3 --wav ~/satellite-recordings/astrocast.wav --gain_mu 10 --verbose_rs
+gr_satellites "Astrocast 0.1" --samp_rate 48e3 --wav ~/satellite-recordings/astrocast.wav --verbose_rs
 echo EntrySat
 gr_satellites EntrySat --samp_rate 48e3 --wav ~/satellite-recordings/entrysat.wav
 echo GOMX-3
@@ -23,9 +23,9 @@ gr_satellites "S-NET A" --wavfile ~/satellite-recordings/snet_a.wav --samp_rate 
 echo "Swiatowid"
 gr_satellites Swiatowid --wavfile ~/satellite-recordings/swiatowid.wav --samp_rate 48e3
 echo "NuSat"
-gr_satellites "NuSat 1" --wavfile ~/satellite-recordings/nusat.wav --iq --samp_rate 192e3 --gain_mu 0.1
+gr_satellites "NuSat 1" --wavfile ~/satellite-recordings/nusat.wav --iq --samp_rate 192e3
 echo KS-1Q
-gr_satellites KS-1Q --wavfile ~/satellite-recordings/ks_1q.wav --samp_rate 48e3 --clock_offset_limit 0.005 --gain_mu 0.175 --input_gain 10
+gr_satellites KS-1Q --wavfile ~/satellite-recordings/ks_1q.wav --samp_rate 48e3 --clk_bw 0.02
 echo BY70-1
 gr_satellites BY70-1 --wavfile ~/satellite-recordings/by701.wav --samp_rate 48e3
 echo LilacSat-1
@@ -37,7 +37,7 @@ gr_satellites AAUSAT-4 --wavfile ~/satellite-recordings/aausat_4.wav --samp_rate
 echo Floripasat-1
 gr_satellites FloripaSat-1 --wavfile ~/satellite-recordings/floripasat_1.wav --samp_rate 48e3
 echo SMOG-P
-gr_satellites SMOG-P --wavfile ~/satellite-recordings/smog_p_5k.wav --samp_rate 48e3 --input_gain 10
+gr_satellites SMOG-P --wavfile ~/satellite-recordings/smog_p_5k.wav --samp_rate 48e3
 gr_satellites SMOG-P --wavfile ~/satellite-recordings/smog_p_long.wav --samp_rate 48e3
 gr_satellites SMOG-P --wavfile ~/satellite-recordings/smog_p.wav --samp_rate 48e3
 echo OPS-SAT
@@ -51,14 +51,14 @@ gr_satellites AO-40 --wavfile ~/satellite-recordings/ao40_uncoded.wav --samp_rat
 echo ATHENOXAT-1
 gr_satellites ATHENOXAT-1 --wavfile ~/satellite-recordings/athenoxat_1.wav --samp_rate 48e3
 echo AU02
-gr_satellites AU02 --wavfile ~/satellite-recordings/au02.wav --samp_rate 48e3   --gain_mu 0.1
+gr_satellites AU02 --wavfile ~/satellite-recordings/au02.wav --samp_rate 48e3   
 echo AU03
 gr_satellites AU03 --wavfile ~/satellite-recordings/au03.wav --samp_rate 48e3
 echo CA03
 gr_satellites CA03 --wavfile ~/satellite-recordings/ca03.wav --samp_rate 48e3
 gr_satellites CA03 --wavfile ~/satellite-recordings/ca03_9k6.wav --samp_rate 48e3
 echo CZ02
-gr_satellites CZ02 --wavfile ~/satellite-recordings/cz02.wav --samp_rate 48e3
+gr_satellites CZ02 --wavfile ~/satellite-recordings/cz02.wav --samp_rate 48e3 --clk_bw 0.001
 echo D-SAT
 gr_satellites D-SAT --wavfile ~/satellite-recordings/dsat.wav --samp_rate 48e3
 echo DUCHIFAT-3
@@ -66,7 +66,7 @@ gr_satellites DUCHIFAT-3 --wavfile ~/satellite-recordings/duchifat_3.wav --samp_
 echo FACSAT-1
 gr_satellites FACSAT-1 --wavfile ~/satellite-recordings/facsat_1.wav --samp_rate 48e3
 echo FMN-1
-gr_satellites FMN-1 --wavfile ~/satellite-recordings/fmn1.wav --samp_rate 48e3 --clk_limit 0.05
+gr_satellites FMN-1 --wavfile ~/satellite-recordings/fmn1.wav --samp_rate 48e3
 echo GALASSIA
 gr_satellites GALASSIA --wavfile ~/satellite-recordings/galassia.wav --samp_rate 48e3
 echo GOMX-1
@@ -78,13 +78,13 @@ gr_satellites INNOSAT-2 --wavfile ~/satellite-recordings/innosat_2.wav --samp_ra
 echo ITASAT 1
 gr_satellites "ITASAT 1" --wavfile ~/satellite-recordings/itasat1.wav --samp_rate 48e3
 echo KR01
-gr_satellites KR01 --wavfile ~/satellite-recordings/kr01.wav --samp_rate 48e3
+gr_satellites KR01 --wavfile ~/satellite-recordings/kr01.wav --samp_rate 48e3 --clk_limit 0.1
 echo Luojia-1
 gr_satellites Luojia-1 --wavfile ~/satellite-recordings/luojia-1.wav --samp_rate 48e3
 echo "MYSAT 1"
-gr_satellites "MYSAT 1" --wavfile ~/satellite-recordings/mysat1.wav --samp_rate 48e3  --f_offset 2000 --disable_fll
+gr_satellites "MYSAT 1" --wavfile ~/satellite-recordings/mysat1.wav --samp_rate 48e3  --f_offset 2000 --disable_fll --clk_limit 0.1
 echo PW-Sat2
-gr_satellites PW-Sat2 --wavfile ~/satellite-recordings/pwsat2.wav --samp_rate 48e3
+gr_satellites PW-Sat2 --wavfile ~/satellite-recordings/pwsat2.wav --samp_rate 48e3 --clk_limit 0.1
 echo "Shaonian Xing"
 gr_satellites "Shaonian Xing" --wavfile ~/satellite-recordings/shaonian_xing.wav --samp_rate 48e3
 echo "Suomi 100"

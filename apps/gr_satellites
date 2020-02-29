@@ -48,6 +48,7 @@ def argument_parser():
     p_output.add_argument('--kiss_out', help = 'KISS output file')
     p_output.add_argument('--kiss_append', action = 'store_true', help = 'Append to KISS output file')
     p_output.add_argument('--hexdump', action = 'store_true', help = 'Hexdump instead of telemetry parse')
+    p_output.add_argument('--dump_path', help = 'Path to dump internal signals')
     return p
 
 def check_options(options, parser):
@@ -82,9 +83,9 @@ class gr_satellites_top_block(gr.top_block):
 
         self.config = open_config()
         
-        self.flowgraph = satellites.core.gr_satellites_flowgraph(samp_rate = options.samp_rate, iq = self.options.iq,\
-                                                                 pdu_in = pdu_in, options = options, config = self.config,\
-                                                                 **sat)
+        self.flowgraph = satellites.core.gr_satellites_flowgraph(samp_rate = options.samp_rate, iq = self.options.iq,
+                                                                 pdu_in = pdu_in, options = options, config = self.config,
+                                                                 dump_path = options.dump_path, **sat)
         self.setup_input()
         if pdu_in:
             self.msg_connect((self.input, 'out'), (self.flowgraph, 'in'))

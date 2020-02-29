@@ -24,7 +24,7 @@ import scipy.signal
 import scipy.special
 from gnuradio import gr, digital, analog, blocks, fft, channels
 from gnuradio.fft import window
-from satellites.components.demodulators import bpsk_demodulator
+from satellites.components.demodulators import bpsk_demodulator, fsk_demodulator
 
 RAND_SEED = 42
 
@@ -91,8 +91,36 @@ class BPSK(gr.hier_block2):
         self.connect(self, self.head, self.pack, self.modulator, self.channel,
                          self.demod, self.slice, self)
 
+class FSK(gr.hier_block2):
+    def __init__(self, ebn0, nbits):
+        gr.hier_block2.__init__(self, 'FSK',
+            gr.io_signature(1, 1, gr.sizeof_char),
+            gr.io_signature(1, 1, gr.sizeof_char))
+
+        samp_rate = 48e3
+        sps = 5
+        deviation = 5000
+        bt = 1.0
+        self.head = blocks.head(gr.sizeof_char, nbits)
+        self.pack = blocks.pack_k_bits_bb(8)
+        self.modulator = digital.gfsk_mod(
+            samples_per_symbol = sps,
+            sensitivity = 2*np.pi*deviation/samp_rate,
+            bt = bt,
+            verbose = False,
+            log = False)
+        
+        spb = sps
+        self.channel = channels.channel_model(np.sqrt(spb)/10**(ebn0/20), 0, 1.0, [1], RAND_SEED, False)
+
+        self.demod = fsk_demodulator(samp_rate/sps, samp_rate, deviation = deviation, iq = True)
+        self.slice = digital.binary_slicer_fb()
+
+        self.connect(self, self.head, self.pack, self.modulator, self.channel,
+                         self.demod, self.slice, self)
+
 def compute_ber(ber_block_class, ebn0, drop_correlations = 2):
-    ncorrelations = 1000
+    ncorrelations = 100
     nbits = int(ncorrelations * 2**16 * 1.1) # 1.1 to add a bit of margin
     fg = BERSim(ber_block_class(ebn0, nbits), ncorrelations)
     print(f'Computing BPSK BER for EbN0 = {ebn0:.01f} dB')
@@ -103,18 +131,39 @@ def ber_bpsk_awgn(ebn0):
     """Calculates theoretical bit error rate in AWGN (for BPSK and given Eb/N0)"""
     return 0.5 * scipy.special.erfc(10**(ebn0/20))
 
+def ber_fsk_awgn(ebn0):
+    """Calculates theoretical bit error rate in AWGN (for FPSK and given Eb/N0)"""
+    return 0.5 * np.exp(-0.5*10**(ebn0/10))
+
 if __name__ == '__main__':
+    print('Computing BPSK BER')
     ebn0s = np.arange(-2, 10.5, 0.5)
     bers = [compute_ber(BPSK, ebn0) for ebn0 in ebn0s]
     bers_theory = [ber_bpsk_awgn(ebn0) for ebn0 in ebn0s]
 
     fig, ax = plt.subplots()
-    ax.semilogy(ebn0s, bers_theory, '.-', label = 'Theoretical BER')
+    ax.semilogy(ebn0s, bers_theory, '.-', label = 'Theoretical BPSK BER')
     ax.semilogy(ebn0s, bers, '.-', label = 'gr-satellites demodulator')
     ax.set_title('BPSK BER')
     ax.set_xlabel('Eb/N0 (dB)')
     ax.set_ylabel('BER')
     ax.legend()
     ax.grid()
-    fig.savefig('ber.png')
-    print('Saved output to ber.png')
+    fig.savefig('ber_bpsk.png')
+    print('Saved output to ber_bpsk.png')
+    exit(1)
+    print('Computing FSK BER')
+    ebn0s = np.arange(-2, 17.5, 0.5)
+    bers = [compute_ber(FSK, ebn0) for ebn0 in ebn0s]
+    bers_theory = [ber_fsk_awgn(ebn0) for ebn0 in ebn0s]
+
+    fig, ax = plt.subplots()
+    ax.semilogy(ebn0s, bers_theory, '.-', label = 'Theoretical non-coherent FSK BER')
+    ax.semilogy(ebn0s, bers, '.-', label = 'gr-satellites demodulator')
+    ax.set_title('FSK BER deviation 5kHz, GFSK BT = 1')
+    ax.set_xlabel('Eb/N0 (dB)')
+    ax.set_ylabel('BER')
+    ax.legend()
+    ax.grid()
+    fig.savefig('ber_fsk.png')
+    print('Saved output to ber_fsk.png')

@@ -38,9 +38,10 @@ class afsk_demodulator(gr.hier_block2, options_block):
         iq: Whether the input is IQ or real (bool)
         af_carrier: Audio frequency carrier in Hz (float)
         deviation: Deviation in Hz, negative inverts the sidebands (float)
+        dump_path: Path to dump internal signals to files (str)
         options: Options from argparse
     """
-    def __init__(self, baudrate, samp_rate, iq, af_carrier, deviation, options = None):
+    def __init__(self, baudrate, samp_rate, iq, af_carrier, deviation, dump_path = None, options = None):
         gr.hier_block2.__init__(self, "afsk_demodulator",
             gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
             gr.io_signature(1, 1, gr.sizeof_float))
@@ -57,7 +58,7 @@ class afsk_demodulator(gr.hier_block2, options_block):
         taps = firdes.low_pass(1, samp_rate, filter_cutoff, filter_transition)
         self.xlating = filter.freq_xlating_fir_filter_fcf(1, taps, af_carrier, samp_rate)
 
-        self.fsk = fsk_demodulator(baudrate, samp_rate, deviation = deviation, iq = True, options = options)
+        self.fsk = fsk_demodulator(baudrate, samp_rate, deviation = deviation, iq = True, dump_path = dump_path, options = options)
 
         self.connect(self.demod, self.xlating, self.fsk, self)
 

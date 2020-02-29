@@ -106,12 +106,11 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         
         nfilts = 16
         rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), self.options.rrc_alpha, int(ceil(11*sps*nfilts)))
-        clk_bw = 2*pi/sps*self.options.clk_bw
-        ted_gain = 0.5/sps # "empiric" formula for TED gain of a PFB MF TED for complex BPSK
+        ted_gain = 0.5 # "empiric" formula for TED gain of a PFB MF TED for complex BPSK 0.5 sample^{-1}
         damping = 1.0
         self.clock_recovery = digital.symbol_sync_cc(digital.TED_SIGNAL_TIMES_SLOPE_ML,
                                                      sps,
-                                                     clk_bw,
+                                                     self.options.clk_bw,
                                                      damping,
                                                      ted_gain,
                                                      self.options.clk_limit,
@@ -172,7 +171,7 @@ class bpsk_demodulator(gr.hier_block2, options_block):
 
     _default_rrc_alpha = 0.35
     _default_fll_bw = 25
-    _default_clk_rel_bw = 0.02
+    _default_clk_rel_bw = 0.06
     _default_clk_limit = 0.02
     _default_costas_bw = 50
     _default_manchester_history = 32

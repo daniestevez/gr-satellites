@@ -82,11 +82,12 @@ class gr_satellites_flowgraph(gr.hier_block2):
         options: options from argparser
         config: configuration file from configparser
         pdu_in: use PDU input instead of samples (bool)
+        dump_path: Path to dump internal signals to files (str)
 
     Note that exactly one of file, name and norad should be specified
     """
     def __init__(self, file = None, name = None, norad = None, samp_rate = None, iq = False,\
-                 grc_block = False, options = None, config = None, pdu_in = False):
+                 grc_block = False, options = None, config = None, pdu_in = False, dump_path = None):
         gr.hier_block2.__init__(self, "gr_satellites_flowgraph",
             gr.io_signature(0, 0, 0) if pdu_in else \
               gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
@@ -152,7 +153,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
                     demodulator_additional_options['af_carrier'] = transmitter['af_carrier']
                 except KeyError:
                     pass
-                demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate, iq = iq, options = options, **demodulator_additional_options)
+                demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate, iq = iq, dump_path = dump_path, options = options, **demodulator_additional_options)
                 deframer_additional_options = dict()
                 try:
                     deframer_additional_options['frame_size'] = transmitter['frame size']
