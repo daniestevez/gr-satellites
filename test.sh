@@ -13,7 +13,7 @@ gr_satellites GOMX-3 --samp_rate 48e3 --wav ~/satellite-recordings/gomx_3.wav
 echo US01
 gr_satellites US01 --samp_rate 48e3 --wav ~/satellite-recordings/us01.wav
 echo "Astrocast 0.1 9k6"
-gr_satellites "Astrocast 0.1" --samp_rate 48e3 --wav ~/satellite-recordings/astrocast_9k6.wav  --input_gain -1
+gr_satellites "Astrocast 0.1" --samp_rate 48e3 --wav ~/satellite-recordings/astrocast_9k6.wav  --input_gain -1 --clk_limit 0.05
 echo AO-73
 gr_satellites FUNcube-1 --wavfile ~/satellite-recordings/ao73.wav --samp_rate 48e3
 echo "Reaktor Hello World"
@@ -51,7 +51,7 @@ gr_satellites AO-40 --wavfile ~/satellite-recordings/ao40_uncoded.wav --samp_rat
 echo ATHENOXAT-1
 gr_satellites ATHENOXAT-1 --wavfile ~/satellite-recordings/athenoxat_1.wav --samp_rate 48e3
 echo AU02
-gr_satellites AU02 --wavfile ~/satellite-recordings/au02.wav --samp_rate 48e3   
+gr_satellites AU02 --wavfile ~/satellite-recordings/au02.wav --samp_rate 48e3 --clk_bw 0.1 
 echo AU03
 gr_satellites AU03 --wavfile ~/satellite-recordings/au03.wav --samp_rate 48e3
 echo CA03
