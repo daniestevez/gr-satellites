@@ -37,7 +37,7 @@ from .satellites_swig import *
 # import any pure python here
 #
 
-__all__ = ['components']
+__all__ = ['ccsds', 'components', 'core', 'hier', 'filereceiver', 'satyaml', 'telemetry', 'utils']
 
 from .kiss_to_pdu import kiss_to_pdu
 from .pdu_to_kiss import pdu_to_kiss
