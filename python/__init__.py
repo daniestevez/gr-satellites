@@ -31,11 +31,8 @@ ad-hoc protocols used in other satellites.
 
 
 # import swig generated symbols into the satellites namespace
-try:
-    # this might fail if the module is python-only
-    from .satellites_swig import *
-except ImportError:
-    pass
+# this shouldn't fail, since the module is not python-only
+from .satellites_swig import *
 
 # import any pure python here
 #
