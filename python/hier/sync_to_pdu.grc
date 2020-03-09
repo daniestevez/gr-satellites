@@ -1,476 +1,188 @@
-<?xml version='1.0' encoding='utf-8'?>
-<?grc format='1' created='3.7.10'?>
-<flow_graph>
-  <timestamp>Mon Jan  2 21:16:18 2017</timestamp>
-  <block>
-    <key>options</key>
-    <param>
-      <key>author</key>
-      <value>Daniel Estevez</value>
-    </param>
-    <param>
-      <key>window_size</key>
-      <value></value>
-    </param>
-    <param>
-      <key>category</key>
-      <value>[gr-satellites]</value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>description</key>
-      <value>Finds syncword and creates a PDU of fixed size</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(8, 8)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>generate_options</key>
-      <value>hb</value>
-    </param>
-    <param>
-      <key>hier_block_src_path</key>
-      <value>.:</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>sync_to_pdu</value>
-    </param>
-    <param>
-      <key>max_nouts</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>qt_qss_theme</key>
-      <value></value>
-    </param>
-    <param>
-      <key>realtime_scheduling</key>
-      <value></value>
-    </param>
-    <param>
-      <key>run_command</key>
-      <value>{python} -u {filename}</value>
-    </param>
-    <param>
-      <key>run_options</key>
-      <value>prompt</value>
-    </param>
-    <param>
-      <key>run</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>thread_safe_setters</key>
-      <value></value>
-    </param>
-    <param>
-      <key>title</key>
-      <value>Sync and create PDU</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_tagged_stream_to_pdu</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(704, 148)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_tagged_stream_to_pdu_0_0_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>tag</key>
-      <value>packet_len</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>digital_correlate_access_code_tag_xx</key>
-    <param>
-      <key>access_code</key>
-      <value>sync</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(184, 132)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>digital_correlate_access_code_tag_bb_0_0_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>tagname</key>
-      <value>syncword</value>
-    </param>
-    <param>
-      <key>threshold</key>
-      <value>threshold</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(424, 16)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>packlen</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>Packet length (bits)</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>intx</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>pad_sink</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1040, 148)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>pad_sink_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>message</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>out</value>
-    </param>
-    <param>
-      <key>num_streams</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>optional</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>pad_source</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(8, 148)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>pad_source_0</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>in</value>
-    </param>
-    <param>
-      <key>num_streams</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>optional</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(616, 16)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>sync</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>Syncword</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>string</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>"00011010110011111111110000011101"</value>
-    </param>
-  </block>
-  <block>
-    <key>satellites_fixedlen_tagger</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(440, 132)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>satellites_fixedlen_tagger_0_0_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>packetlen_tag</key>
-      <value>packet_len</value>
-    </param>
-    <param>
-      <key>packet_len</key>
-      <value>packlen</value>
-    </param>
-    <param>
-      <key>stream_type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>syncword_tag</key>
-      <value>syncword</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(232, 16)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>threshold</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>Syncword threshold</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>intx</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>4</value>
-    </param>
-  </block>
-  <connection>
-    <source_block_id>blocks_tagged_stream_to_pdu_0_0_0</source_block_id>
-    <sink_block_id>pad_sink_0</sink_block_id>
-    <source_key>pdus</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>digital_correlate_access_code_tag_bb_0_0_0</source_block_id>
-    <sink_block_id>satellites_fixedlen_tagger_0_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>pad_source_0</source_block_id>
-    <sink_block_id>digital_correlate_access_code_tag_bb_0_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>satellites_fixedlen_tagger_0_0_0</source_block_id>
-    <sink_block_id>blocks_tagged_stream_to_pdu_0_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-</flow_graph>
+options:
+  parameters:
+    author: Daniel Estevez
+    category: '[Satellites]/Packet Operators'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: Finds syncword and creates a PDU of fixed size
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: sync_to_pdu
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Sync and create PDU
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: blocks_tagged_stream_to_pdu_0_0_0
+  id: blocks_tagged_stream_to_pdu
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    tag: packet_len
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [704, 148]
+    rotation: 0
+    state: enabled
+- name: digital_correlate_access_code_tag_bb_0_0_0
+  id: digital_correlate_access_code_tag_xx
+  parameters:
+    access_code: sync
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    tagname: syncword
+    threshold: threshold
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 132]
+    rotation: 0
+    state: enabled
+- name: packlen
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Packet length (bits)
+    short_id: ''
+    type: intx
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [424, 16]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: message
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1040, 148]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 148]
+    rotation: 0
+    state: enabled
+- name: satellites_fixedlen_tagger_0_0_0
+  id: satellites_fixedlen_tagger
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packet_len: packlen
+    packetlen_tag: packet_len
+    stream_type: byte
+    syncword_tag: syncword
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [440, 132]
+    rotation: 0
+    state: enabled
+- name: sync
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Syncword
+    short_id: ''
+    type: ''
+    value: '"00011010110011111111110000011101"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [616, 16]
+    rotation: 0
+    state: enabled
+- name: threshold
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Syncword threshold
+    short_id: ''
+    type: intx
+    value: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [232, 16]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_tagged_stream_to_pdu_0_0_0, pdus, pad_sink_0, in]
+- [digital_correlate_access_code_tag_bb_0_0_0, '0', satellites_fixedlen_tagger_0_0_0,
+  '0']
+- [pad_source_0, '0', digital_correlate_access_code_tag_bb_0_0_0, '0']
+- [satellites_fixedlen_tagger_0_0_0, '0', blocks_tagged_stream_to_pdu_0_0_0, '0']
+
+metadata:
+  file_format: 1
