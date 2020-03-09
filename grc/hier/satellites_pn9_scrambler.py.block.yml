@@ -1,0 +1,20 @@
+id: satellites_pn9_scrambler
+label: PN9 scrambler
+category: '[Satellites]/Scrambling'
+
+inputs:
+-   label: in
+    domain: message
+    dtype: message
+
+outputs:
+-   label: out
+    domain: message
+    dtype: message
+
+templates:
+    imports: import satellites.hier
+    make: satellites.hier.pn9_scrambler()
+    callbacks: []
+
+file_format: 1

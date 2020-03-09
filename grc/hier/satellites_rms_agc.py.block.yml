@@ -1,0 +1,34 @@
+id: satellites_rms_agc
+label: RMS AGC
+category: '[Satellites]/Level Controllers'
+
+parameters:
+-   id: alpha
+    label: Alpha
+    dtype: real
+    default: 1e-2
+    hide: none
+-   id: reference
+    label: Reference
+    dtype: real
+    default: '1.0'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: import satellites.hier
+    make: satellites.hier.rms_agc(alpha=${ alpha }, reference=${ reference })
+    callbacks:
+    - set_alpha(${ alpha })
+    - set_reference(${ reference })
+
+file_format: 1

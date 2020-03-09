@@ -91,3 +91,4 @@ install(FILES
 add_subdirectory(ccsds)
 add_subdirectory(components)
 add_subdirectory(core)
+add_subdirectory(hier)

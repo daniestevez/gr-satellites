@@ -1,0 +1,41 @@
+id: satellites_sync_to_pdu_soft
+label: Sync and create PDU soft
+category: '[Satellites]/Packet Operators'
+
+parameters:
+-   id: packlen
+    label: Packet length (bits)
+    dtype: int
+    default: '0'
+    hide: none
+-   id: sync
+    label: Syncword
+    dtype: raw
+    default: '"00011010110011111111110000011101"'
+    hide: none
+-   id: threshold
+    label: Syncword threshold
+    dtype: int
+    default: '4'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: float
+    vlen: 1
+
+outputs:
+-   label: out
+    domain: message
+    dtype: message
+
+templates:
+    imports: import satellites.hier
+    make: "satellites.hier.sync_to_pdu_soft(\n    packlen=${ packlen },\n    sync=${ sync },\n   \
+        \ threshold=${ threshold },\n)"
+    callbacks:
+    - set_packlen(${ packlen })
+    - set_sync(${ sync })
+    - set_threshold(${ threshold })
+
+file_format: 1

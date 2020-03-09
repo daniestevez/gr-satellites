@@ -1,0 +1,19 @@
+id: satellites_ccsds_descrambler
+label: CCSDS descrambler
+category: '[Satellites]/Scrambling'
+
+inputs:
+-   label: in
+    domain: message
+    dtype: message
+
+outputs:
+-   label: out
+    domain: message
+    dtype: message
+
+templates:
+    imports: import satellites.hier
+    make: satellites.hier.ccsds_descrambler()
+
+file_format: 1

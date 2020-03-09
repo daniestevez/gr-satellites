@@ -1,0 +1,20 @@
+id: satellites_ccsds_viterbi
+label: CCSDS/NASA-GSFC Viterbi decoder
+category: '[Satellites]/FEC'
+
+inputs:
+-   label: in
+    dtype: float
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: byte
+    vlen: 1
+
+templates:
+    imports: import satellites.hier
+    make: satellites.hier.ccsds_viterbi()
+    callbacks: []
+
+file_format: 1
