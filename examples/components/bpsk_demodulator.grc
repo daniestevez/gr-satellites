@@ -202,7 +202,7 @@ blocks:
     alias: ''
     baudrate: '9600'
     comment: ''
-    differential: 'True'
+    differential: 'False'
     f_offset: '12000'
     iq: 'False'
     manchester: 'False'
