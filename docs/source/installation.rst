@@ -13,7 +13,7 @@ gr-satellites requires `GNU Radio`_ version at least 3.8.
 
 
 .. warning::
-   There are somebuild dependencies for GNU Radio out-of-tree modules that
+   There are some build dependencies for GNU Radio out-of-tree modules that
    are not required to run GNU Radio, so some distributions might not install them
    by default when GNU Radio is installed. The main ones that may cause problems
    are:
