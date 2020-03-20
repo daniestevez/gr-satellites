@@ -28,7 +28,7 @@ Additionally, the following libraries are required:
 * `requests`_
 
 .. note::
-   libfec can be build and installed from its git repository by doing
+   libfec can be built and installed from its git repository by doing
 
    .. code-block:: console
 
