@@ -12,7 +12,10 @@ It will be released together with gr-satellites v3.0.0 (currently in beta in
    
    introduction.rst
    installation.rst
-
+   overview.rst
+   command_line.rst
+   components.rst
+   low_level.rst
 
 Indices and tables
 ==================
