@@ -81,4 +81,31 @@ gr-satellites can be built and installed using cmake:
 After running ``make``, you can run the tests by doing ``make test`` in the
 ``build/`` directory.
 
-		
+.. _Downloading sample recordings:
+
+Downloading sample recordings
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``satellite-recordings/`` directory is a `git submodule`_ that contains many
+short sample recordings of different satellites that can be used to test the
+decoders. The submodule can be clone (downloaded) by running
+
+.. code-block:: console
+
+   $ git submodule update --init
+
+inside the ``gr-satellites/`` directory.
+
+Alternatively, it is possible to run
+
+.. code-block:: console
+
+   $ git clone --recursive https://github.com/daniestevez/gr-satellites
+
+when cloning the gr-satellites repository to download both gr-satellites and the
+satellite-recordings submodule.
+
+The satellite-recordings sample recordings can also be downloaded from its
+`own git repository <https://github.com/daniestevez/satellite-recordings/>`_.
+
+.. _git submodule: https://git-scm.com/book/en/v2/Git-Tools-Submodules

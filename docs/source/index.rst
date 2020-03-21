@@ -18,6 +18,7 @@ It will be released together with gr-satellites v3.0.0 (currently in beta in
    components.rst
    satyaml.rst
    low_level.rst
+   supported_satellites.rst
 
 Indices and tables
 ==================
