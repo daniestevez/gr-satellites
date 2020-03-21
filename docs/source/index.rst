@@ -14,6 +14,7 @@ It will be released together with gr-satellites v3.0.0 (currently in beta in
    installation.rst
    overview.rst
    command_line.rst
+   satellite_decoder.rst
    components.rst
    satyaml.rst
    low_level.rst
