@@ -5,11 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Support for construct 2.10
+
 ### Fixed
 - Bug in FUNcube telemetry parser
-
-## [1.8.3] - 2020-02-05
-- Support for construct 2.10 (followed master branch 2dcf92beb727542a9153da923735c1614653b177)
 
 ## [1.8.2] - 2019-11-01
 ### Fixed
