@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Bug in telemetry submitter caused by HTTP 400 error
+	
 ## [2.3.1] - 2020-04-11
 ### Fixed
 - Bug in FUNcube telemetry parser
