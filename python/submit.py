@@ -73,7 +73,11 @@ class submit(gr.basic_block):
         self.request['timestamp'] = timestamp.isoformat()[:-3] + 'Z'
 
         params = urllib.urlencode(self.request)
-        f = urllib.urlopen('{}?{}'.format(self.url, params), data=params)
+        try:
+            f = urllib.urlopen('{}?{}'.format(self.url, params), data=params)
+        except Exception as e:
+            print('Error while submitting telemetry:', e)
+            return
         reply = f.read()
         code = f.getcode()
         if code < 200 or code >= 300:

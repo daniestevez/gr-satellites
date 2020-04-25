@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Fixed
+- Bug in telemetry submitter caused by HTTP 400 error
+
 ## [1.8.3] - 2020-04-11
 ### Added
 - Support for construct 2.10
