@@ -4,25 +4,30 @@ GNU Radio decoders for Amateur satellites.
 gr-satellites is a GNU Radio out-of-tree module encompassing a collection of
 telemetry decoders that supports many different Amateur satellites. This
 open-source project started in 2015 with the goal of providing telemetry
-decoders for all the satellites that transmit on the Amateur radio bands. It
-supports most popular protocols, such as AX.25, the GOMspace NanoCom U482C and
-AX100 modems, an important part of the CCSDS stack, the AO-40 protocol used in
-the FUNcube satellites, and several ad-hoc protocols used in other satellites.
+decoders for all the satellites that transmit on the Amateur radio bands.
 
-The decoders don't need a graphical interface to run, so they can be used in an
-embedded or remote computer. They are designed to run in real time and
-print the telemetry packets to the terminal as they are received. Optionally,
-the telemetry packets can be uploaded in real time to the [SatNOGS
-database](http://db.satnogs.org/) or any other telemetry server that implements
-the SiDS (Simple Downlink Sharing Convention) protocol.
+It supports most popular protocols, such as AX.25, the GOMspace NanoCom U482C
+and AX100 modems, an important part of the CCSDS stack, the AO-40 protocol used
+in the FUNcube satellites, and several ad-hoc protocols used in other
+satellites.
 
-It is also possible to use the decoder with a recording (audio WAV or IQ file),
-in case that the telemetry wasn't processed in real time. To do this, one has to
-know the time and date at which the recording was started and the recording has
-to be played back at normal speed. This allows the decoder to compute the
-correct timestamps for the packets when uploading them to the telemetry
-server. It also simplifies Doppler correction of the recording with Gpredict if
-the recording was not Doppler corrected.
+This out-of-tree module can be used to decode frames transmitted from most
+Amateur satellites in orbit, performing demodulation, forward error correction,
+etc. Decoded frames can be saved to a file or displayed in hex format. For some
+satellites the telemetry format definition is included in gr-satellites, so the
+decoded telemetry frames can be printed out as human-readable values such as bus
+voltages and currents. Additionally, some satellites transmit files such as JPEG
+images. gr-satellites can be used to reassemble these files and even display the
+images in real-time as they are being received.
+
+gr-satellites can be used as a set of building blocks to implement decoders for
+other satellites or other groundstation solutions. Some of the low level blocks
+in gr-satellites are also useful for other kinds RF communications protocols.
+
+## Documentation
+
+gr-satellites [documentation](https://gr-satellites.readthedocs.io/) is hosted in
+[reathedocs.io](https://gr-satellites.readthedocs.io/).
 
 ## Branches and releases
 
@@ -53,46 +58,16 @@ showcasing some of the latest developments.
 
 ## Installation
 
-First you need to install the dependencies (see below).
+The installation procedure of gr-satellites is roughly the usual of a GNU Radio
+out-of-tree module. Detailed instructions about the required dependencies and
+how to build and install gr-satellites are given in the
+[documentation](https://gr-satellites.readthedocs.io/).
 
-After this, gr-satellites must be installed as any other GNU Radio out-of-tree
-module. The producedure usually boils down to doing the following:
+## Note
 
-```bash
-mkdir build
-cd build
-cmake ..
-make
-sudo make install
-sudo ldconfig
-```
-
-## Dependencies
-
-gr-satellites v3 requires GNU Radio version 3.8.
-
-Required dependencies:
-
-  * Phil Karn's KA9Q `libfec`. A fork that builds in modern linux systems can be found
-    [here](https://github.com/quiet/libfec).
-  * [construct](https://construct.readthedocs.io/en/latest/), at least version 2.9.
-  * [requests](https://pypi.org/project/requests/).
-  * [swig](http://www.swig.org/)
-
-The following GNUradio out-of-tree modules are only required for the decoder of
-one particular satellite. You may install only the ones you're interested in.
-
-  * [beesat-sdr](https://github.com/daniestevez/beesat-sdr) BEESAT and TECHNOSAT decoder and TNC. It is also used for D-STAR One.
-  * [gr-lilacsat](https://github.com/bg2bhc/gr-lilacsat) This only needs to be installed
-  if you want to submit telemetry to HIT. A complete decoder which does not use gr-lilacsat
-  is already included in gr-satellites.
-  * [PW-Sat2 FramePayloadDecoder](https://github.com/PW-Sat2/FramePayloadDecoder) This only
-  needs to be installed if you want to parse frames from PW-Sat2. See the instructions
-  [here](https://destevez.net/2018/12/decoding-pw-sat2-with-gr-satellites/).
-  * [gr-equisat_decoder](https://github.com/BrownSpaceEngineering/gr-equisat_decoder) EQUiSat decoder blocks, telemetry parser, and submitter.
-
-If you want to use any of the realtime image decoders, you also need to install
-[feh](https://feh.finalrewind.org/).
+Most of the information below in the README will disappear and be moved in some
+way or another to the documentation. It is currently kept for reference until
+the documentation is finished.
 
 ## Usage
 
