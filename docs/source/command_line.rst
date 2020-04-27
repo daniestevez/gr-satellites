@@ -123,7 +123,7 @@ Besides specifying the satellite to use for decoding, it is mandatory to specify
 the input source by using exactly one of the following options:
 
 * ``--wavfile`` can be used to read a recording in WAV format. The sample rate
-  of the recording needs to be specified with the ``--samprate`` argument.
+  of the recording needs to be specified with the ``--samp_rate`` argument.
 
   By default, the WAV file is interpreted as a one-channel file containing real
   RF samples. To read a two-channel file containing IQ RF samples, the ``--iq``
@@ -132,17 +132,17 @@ the input source by using exactly one of the following options:
   .. note::
      All the :ref:`sample recordings <Downloading sample recordings>` in
      the ``satellite-recordings/`` are real 48kHz WAV files and can be read with
-     the ``--wavfile file --samprate 48e3`` arguments.
+     the ``--wavfile file --samp_rate 48e3`` arguments.
 
      For example, this will decode some frames from FUNcube-1:
      
      .. code-block:: console
 
-        $ gr_satellites FUNcube-1 --wavfile satellite-recordings/ao73.wav --samprate 48e3
+        $ gr_satellites FUNcube-1 --wavfile satellite-recordings/ao73.wav --samp_rate 48e3
   
 * ``--rawfile`` can be used to read a recording in ``complex64`` or ``float32``
   format (depending on whether the ``--iq`` argument is used or not). The sample rate
-  of the recording needs to be specified with the ``--samprate`` argument.
+  of the recording needs to be specified with the ``--samp_rate`` argument.
 
   .. note::
      Files in ``complex64`` format contain a sequence of 32-bit floating point numbers in
@@ -159,7 +159,7 @@ the input source by using exactly one of the following options:
 * ``--rawint16`` can be used to read a recording in ``int16`` format. The file
   is interpreted as IQ or real data according as to whether the ``--iq``
   argument is used or not.  The sample rate of the recording needs to be
-  specified with the ``--samprate`` argument.
+  specified with the ``--samp_rate`` argument.
 
   .. note::
      Files in ``int16`` format contain a sequence of 16-bit integers in
@@ -167,7 +167,7 @@ the input source by using exactly one of the following options:
      blocks when their type is set to *short*.
 
 * ``--udp`` can be used to received RF samples streamed in real-time. The sample rate
-  of the recording needs to be specified with the ``--samprate`` argument.
+  of the recording needs to be specified with the ``--samp_rate`` argument.
 
   The streaming format is the same as for the ``--rawint16`` and both real
   samples (by default) and IQ samples (using the ``--iq`` argument) are
@@ -185,7 +185,7 @@ the input source by using exactly one of the following options:
 
      .. code-block:: console
 
-	$ gr_satellites FUNcube-1 --udp --samprate 48e3
+	$ gr_satellites FUNcube-1 --udp --samp_rate 48e3
 
      This is recommended as a simple way of interfacing ``gr_satellites`` with
      SDR hardware for beginner users.
@@ -280,6 +280,8 @@ For example, this shows all the options allowed by the FUNcube-1 decoder:
    The satellite parameter can be specified using name, NORAD ID or path to YAML
    file
 
+.. _Output:
+
 Output
 """"""
 
@@ -308,17 +310,190 @@ how to run ``gr_satellites``.
 
 Ouput options
 ^^^^^^^^^^^^^
-   
-.. _GQRX: https://gqrx.dk/
-.. _gr-frontends: https://github.com/daniestevez/gr-frontends
-	
+
+This subsection explains in detail the different output options that can be used
+with the ``gr_satellites`` command line tool. The default behaviour when no
+options are specified has been described in the :ref:`Output` subsection above.
+
+Hex dump
+""""""""
+
+By using the option ``--hexdump``, it is possible to make ``gr_satellites``
+print the received frames in hexadecimal format, regardless of whether there is
+a telemetry decoder available or not. The format used to print the frames is the
+same used by the GNU Radio block `Message Debug`_ ``print_pdu`` input.
+
+An example of the use of this option can be seen here:
+
+.. code-block:: console
+
+    $ gr_satellites FUNcube-1 --wavfile ~/gr-satellites/satellite-recordings/ao73.wav \
+             --samp_rate 48e3 --hexdump
+    * MESSAGE DEBUG PRINT PDU VERBOSE *
+    ()
+    pdu_length = 256
+    contents = 
+    0000: 89 00 00 00 00 00 00 00 00 1f cc 00 ce 02 d1 00 
+    0010: 00 07 08 09 09 00 00 05 01 01 00 40 13 2f c8 f2 
+    0020: 5c 8f 34 23 f3 ba 0b 5d 62 74 51 c7 ea fa 69 4a 
+    0030: 9a 9f 00 09 ef a0 1f f4 a7 ea 4a c6 8f 11 40 11 
+    0040: 1e 10 f7 01 3e 20 64 00 d7 8b f8 d7 94 c8 93 a8 
+    0050: 2a da 52 a6 0e 58 0e c8 0f 4e 01 1d 20 5a 00 db 
+    0060: 94 a8 aa 8a 98 13 ac 69 0a a6 a8 10 e6 10 92 0f 
+    0070: b8 01 50 20 64 00 d7 96 a8 c1 8b 48 25 ab a9 ca 
+    0080: ce 9d 10 76 0f c9 10 55 01 3a 20 5a 00 d7 97 29 
+    0090: 08 8c 48 4f a9 6a 5a f2 a4 10 39 0f 7b 0f 86 01 
+    00a0: 49 20 64 00 d7 94 08 d0 8a d8 2a ad 6a 5a 7e b4 
+    00b0: 0e 53 0e 9b 0e b7 01 09 20 5a 00 db 99 a8 f2 8f 
+    00c0: e8 38 af aa 8a c2 9e 0e de 0f 48 0e 31 01 31 20 
+    00d0: 5a 00 ce 9b c8 ff 88 68 1b b2 6a 5a ca a7 0f c3 
+    00e0: 0e 74 0e 58 01 34 20 5a 00 d7 9b 39 1b 97 b8 c5 
+    00f0: b0 2b 3a d6 b5 01 6b 00 6a 02 9e 00 03 20 13 00 
+    ***********************************
+
+KISS output
+"""""""""""
+
+Decoded frames can be saved to a file in `KISS format`_. This is a simple format
+that serves to delimit frames stored in a file or sent over a serial bus, and it
+is frequently used to store telemetry frames.
+
+To enable KISS output, the ``--kiss_out`` parameter followed by the path of the
+output file should be used. By default ``gr_satellites`` would overwrite the
+file if it already exists. To append to the file instead, the option
+``--kiss_append`` can be used in addition to the ``--kiss_out``
+option. Appending can be used to concatenate frames obtained in several decoding
+runs.
+
+Files in KISS format can be read with ``gr_satellites`` as indicated above or
+with other software tools.
+
+Dump internal signals
+"""""""""""""""""""""
+
+For advanced users and developers, the demodulators used in ``gr_satellites``
+can dump the internal signals used inside the demodulator. This option can be
+enabled by using the ``--dump_path`` parameter followed by a path to the
+directory where the different files are created. It is recommended using this
+option with a short recording, to avoid creating very large files. The details
+of each of these files are best studied in the Python source code of the
+demodulator.
+
+Telemetry submission
+^^^^^^^^^^^^^^^^^^^^
+
+TODO
+
+File receiver
+^^^^^^^^^^^^^
+
+TODO
+
 Other topics
 ^^^^^^^^^^^^
+
+This subsection deals with other topics which are relevant to the usage of ``gr_satellites``.
 
 Real or IQ input
 """"""""""""""""
 
-(also speak about FSK pre-demod / post-demod)
+The ``gr_satellites`` command line tool supports both real (one-channel) input
+and IQ input (which consists of two channels: in-phase and quadrature). A
+detailed desciption of these two ways to represent a signal is out of the scope
+of this document. This subsection gives some practical advice regarding the
+difference between real and IQ input.
+
+By default ``gr_satellites`` will assume that its input is real. To use IQ
+input, the ``--iq`` option must be used.
+
+When using the audio output of either a conventional radio or an SDR software
+performing SSB or FM demodulation, ``gr_satellites`` should be used with the
+real input option. Likewise, recordings produced from this kind of audio output, such
+as one-channel WAV recordings should also be used with the real input option.
+
+However, most SDR softwares will also have an option to save raw samples to a
+file. These files are almost always IQ, and can be either a two-channel WAV file
+or a file in raw format. The IQ input option must be used when using
+``gr_satellites`` to read these files. Additionally, some
+SDR software may support streaming IQ data by UDP. These can also be used in
+``gr_satellites`` with the IQ input option.
+
+FSK demodulation and IQ input
+"""""""""""""""""""""""""""""
+
+When using an FSK demodulator, the usage of the ``--iq`` option has an
+additional effect. Since FSK is a mode based on frequency modulation, it is
+common to use either a conventional FM radio or an SDR software performing FM
+demodulation to receive FSK. Audio recordings obtained in this manner are also
+common. Therefore, when ``gr_satellites`` is run without the ``--iq`` signal, it
+will expect that FSK signals have already been FM-demodulated in this way.
+
+When the ``--iq`` option is used, ``gr_satellites`` expects an FSK signal that
+has not been FM-demodulated, and so it will perform FM-demodulation first. This
+is the kind of procedure that should be employed with inputs such as raw IQ
+recordings of an SDR, since the FSK signals present in this kind of recordings
+have not been FM-demodulated.
+
+.. note::
+   The output of the radio or SDR software when running in FM mode to
+   receive an FSK signal is actually an NRZ signal. Therefore, when
+   ``gr_satellites`` is run without the ``--iq`` option, it will expect an NRZ
+   signal instead of the FSK signals. When ``gr_satellites`` is run with the ``--iq``
+   option, it will expect FSK signals.
+
+   Note that this behaviour is what the user wants in most cases, but it also
+   means that it is not possible to run ``gr_satellites`` on an FSK signal which
+   is represented in intermediate frequency as a real signal.
 
 Frequency offsets for BPSK
 """"""""""""""""""""""""""
+
+A usual way of receiving a BPSK signal is to use either a conventional radio or
+an SDR software in SSB mode (USB mode, normally) and tune the BPSK signal in the
+middle of the audio passband. Audio recordings obtained in this manner are also
+common.
+
+.. note::
+   The SSB filter of a conventional radio is often approximately 3kHz
+   wide. For this reason, only BPSK signals with a baudrate of 2400 baud or
+   lower can be received with a conventional SSB radio. For BPSK signals with larger
+   baudrate, an SDR receiver should be used.
+
+The ``gr_satellites`` command line tool needs to know the frequency at which the
+BPSK signal is tuned within the audio passband. If necessary, this can be specified with the
+``--f_offset`` parameter, followed by the frequency in Hz. There are the
+following defaults:
+
+* For signals with a baudrate of 2400 baud or less, a frequency offset of 1500
+  Hz is used. This follows the common practice of using a regular 3kHz SSB
+  bandwidth and tuning the signal in the middle of the passband.
+  
+* For signals with a baudrate larger than 2400, a frequency offset of 12000 Hz
+  is used. The rationale is that, for best results, a passband of 24000 Hz
+  should be used, since this is the
+  largest that fits in a 48kHz audio signal, and the signal should be tuned in
+  the middle of this 24000 Hz passband. This kind of usage is sometimes called
+  "wide SSB mode".
+
+These settings only apply for a real input. When ``gr_satellites`` is used with
+IQ input, the default is to expect the BPSK signal tuned at 0Hz (i.e., at
+baseband). A different frequency can still be selected with the ``--f_offset``
+parameter.
+
+FSK signal polarity
+"""""""""""""""""""
+
+A conventional FM radio, or even an SDR software running in FM mode might invert
+the polarity of the output signal, since the polarity is not relevant for audio
+signals. However, the polarity is relevant when receiving an FSK signal that
+does not use differential coding.
+
+An input with the inverted polarity will cause decoding to fail. In this case,
+the input can be inverted again by using the ``--input_gain -1`` parameter,
+which has the effect of multiplying the input signal by -1 before it is
+processed, thus restoring the correct polarity.
+
+.. _GQRX: https://gqrx.dk/
+.. _gr-frontends: https://github.com/daniestevez/gr-frontends
+.. _Message Debug: https://wiki.gnuradio.org/index.php/Message_Debug
+.. _KISS format: http://www.ax25.net/kiss.aspx

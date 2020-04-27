@@ -81,6 +81,34 @@ gr-satellites can be built and installed using cmake:
 After running ``make``, you can run the tests by doing ``make test`` in the
 ``build/`` directory.
 
+PYTHONPATH
+^^^^^^^^^^
+
+After installing gr-satellites, it is necessary to ensure that Python is able
+to locate the gr-satellites Python module. Depending on the configuration of
+Python on and the location where gr-satellites has been installed, it might be
+necessary to set the ``PYTHONPATH`` environment variable.
+
+If Python is not able to locate the gr-satellites module, it will produce an
+error like this:
+
+.. code-block:: python
+
+   ModuleNotFoundError: No module named 'satellites'
+
+Often, gr-satellites is installed into ``/usr/local/lib/python3/dist-packages/``
+or a similar directory, in a subdirectory called ``satellites``. Therefore,
+
+.. code-block:: console
+
+   $ export PYTHONPATH=/usr/local/lib/python3/dist-packages/
+
+can be used to allow Python to find the gr-satellites module. More information
+about the ``PYTHONPATH`` can be found in Python's documentation description of
+the `PYTHONPATH`_.
+
+.. _PYTHONPATH: https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH
+
 .. _Downloading sample recordings:
 
 Downloading sample recordings
