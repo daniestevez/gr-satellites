@@ -368,6 +368,14 @@ runs.
 Files in KISS format can be read with ``gr_satellites`` as indicated above or
 with other software tools.
 
+Telemetry output
+""""""""""""""""
+
+For satellites supporting telemetry parsing, ``gr_satellites`` will default to
+printing the decoded telemetry values to the standard output. It is possible to
+write these messages to a file instead by using the ``--telemetry_output``
+parameter followed by the path of the output file.
+
 Dump internal signals
 """""""""""""""""""""
 
@@ -382,12 +390,89 @@ demodulator.
 Telemetry submission
 ^^^^^^^^^^^^^^^^^^^^
 
-TODO
+The ``gr_satellites`` command line tool can be used to submit decoded telemetry
+to online database server, such as `SatNOGS DB`_ and these others servers used by
+certain satellite projects:
 
-File receiver
-^^^^^^^^^^^^^
+* `FUNcube Warehouse`_, which is used by the FUNcube payloads on FUNcube-1, UKube-1,
+  Nayif-1 and JY1Sat.
 
-TODO
+* `PW-Sat2 Groundstation`_, which is used by PW-Sat2.
+
+* The `BME telemetry server`_, which is used by SMOG-P, ATL-1 and SMOG-1.
+
+To enable telemetry submission, it is necessary to edit some parameters in
+``gr_satellites``'s config file, which is located in
+``~/.gr_satellites/config.ini``. If this file does not exist, it will be created
+with a template when ``gr_satellites`` is first run. The template looks like
+this:
+
+.. code-block::
+
+    [Groundstation]
+    callsign = 
+    latitude = 0
+    longitude = 0
+    submit_tlm = no
+
+    [FUNcube]
+    site_id = 
+    auth_code = 
+
+    [PW-Sat2]
+    credentials_file = 
+
+    [BME]
+    user =
+    password =
+
+To enable telemetry submission, the ``submit_tlm`` parameter must be set to
+``yes``. Additionally, the receiving stations ``callsign`` as well as its
+location (``latitude`` and ``longitude``) need to be set. Since some of the
+servers need these parameters. Once this is done, telemetry submission to
+SatNOGS DB will be enabled for all satellites.
+
+To enable telemetry submission to the FUNcube warehouse, it is necessary to fill
+in the ``site_id`` and ``auth_code``. These can be obtained by
+`registering in the warehouse`_.
+
+To enable telemetry submission to the PW-Sat2 server, it is necessary to enter
+the path to the credentials file in the ``credentials_file`` parameter. This
+file is a JSON file that is generated and downloaded in the
+"`Your credentials`_" section of the server web interface. It is necessary to
+have an account registered in the server to obtain the credentials file.
+
+To enable telemetry submission to the BME server, it is necessary to
+`register an account in the BME server`_. The user and password should be
+entered into the gr_satellites ``.ini`` file.
+
+For some telemetry servers, including SatNOGS DB, the frames are submitted
+together with a timestamp of reception. This timestamp is taken from the
+computer's clock by ``gr_satellites`` at the moment when it decodes the
+frame. This means that, in order to use telemetry submission appropriately, the
+computer's clock should be set accurately and live signal rather than a
+recording should be decoded.
+
+File and image receiver
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Some satellites transmit files (especially image files) by splitting the files
+into many telemetry packets. The ``gr_satellites`` decoder supports reassembling
+and storing these files into a directory. Additionally, image files are automatically
+displayed in real time as they are being received.
+
+Currently the satellites that have decoders supporting file reception are ATL-1
+and SMOG-P (they transmit RF spectrum data), and the satellites that have
+decoders supporting image reception are 1KUNS-PF, BY70-1, D-SAT, LilacSat-1 and
+Światowid.
+
+For satellites supporting file reception, the ``--file_output_path`` parameter
+can be used to set the directory that is used to store received files. The
+filenames of the received files will be automatically created using metadata or
+a counter. By default, received files are stored in ``/tmp/``.
+
+The ``--verbose_file_receiver`` parameter can be used to enable additional
+debugging information about the functionality of the file receiver.
 
 Other topics
 ^^^^^^^^^^^^
@@ -497,3 +582,10 @@ processed, thus restoring the correct polarity.
 .. _gr-frontends: https://github.com/daniestevez/gr-frontends
 .. _Message Debug: https://wiki.gnuradio.org/index.php/Message_Debug
 .. _KISS format: http://www.ax25.net/kiss.aspx
+.. _SatNOGS DB: https://db.satnogs.org/
+.. _FUNcube Warehouse: http://warehouse.funcube.org.uk/
+.. _PW-Sat2 Groundstation: https://radio.pw-sat.pl/
+.. _BME telemetry server: https://gnd.bme.hu:8080/
+.. _registering in the warehouse: http://warehouse.funcube.org.uk/registration
+.. _Your credentials: https://radio.pw-sat.pl/communication/yourcredentials
+.. _register an account in the BME server: https://gnd.bme.hu:8080/auth/register
