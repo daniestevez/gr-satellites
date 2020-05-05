@@ -46,6 +46,7 @@ GR_PYTHON_INSTALL(
     lume.py
     mysat1.py
     picsat.py
+    quetzal1.py
     sat_1kuns_pf.py
     sat_3cat_1.py
     sat_3cat_2.py

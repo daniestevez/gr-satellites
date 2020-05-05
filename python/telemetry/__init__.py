@@ -41,6 +41,7 @@ from .kr01 import kr01
 from .lume import lume
 from .mysat1 import mysat1
 from .picsat import picsat
+from .quetzal1 import quetzal1
 from .sat_1kuns_pf import sat_1kuns_pf
 from .sat_3cat_1 import sat_3cat_1
 from .sat_3cat_2 import sat_3cat_2
