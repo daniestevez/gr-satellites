@@ -25,6 +25,8 @@ basic information about the arguments it allows.
                                   [--kiss_append] [--hexdump]
                                   [--dump_path DUMP_PATH]
 
+.. _Specifying the satellite:
+
 Specifying the satellite
 """"""""""""""""""""""""
 
@@ -478,6 +480,8 @@ Other topics
 ^^^^^^^^^^^^
 
 This subsection deals with other topics which are relevant to the usage of ``gr_satellites``.
+
+.. _Real or IQ input:
 
 Real or IQ input
 """"""""""""""""
