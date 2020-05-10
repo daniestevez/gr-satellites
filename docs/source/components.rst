@@ -161,6 +161,55 @@ IQ input is selected.
 AFSK demodulator
 """"""""""""""""
 
+The APSK demodulator expects an input which consists of RF samples of an AFSK
+signal, and outputs the demodulated AFSK soft symbols.  Both real and IQ (complex)
+input are suported, but the semantics are different: with real input, the AFSK
+demodulator expects an FM-demodulated signal; with IQ input, the AFSK demodulator
+expects the signal before FM demodulation (see :ref:`FSK demodulation and IQ input`).
+
+The figure below shows the example flowgraph which can be found in
+``examples/components/afsk_demodulator.grc``. This reads a WAV file from
+:ref:`satellite-recordings<Downloading sample recordings>` which contains a
+single AFSK packet from GOMX-1 and uses the AFSK demodulator to obtain the
+symbols. The "Head" block is used to select a portion of the output, which
+is then plotted using the "QT GUI Time Sink".
+
+.. figure:: images/afsk_demodulator_flowgraph.png
+    :alt: Usage of AFSK demodulator in a flowgraph
+
+    Usage of AFSK demodulator in a flowgraph
+
+When this example flowgraph is run, it displays the output shown in the figure
+below. There we can see the AFSK packet, surrounded by noise on both sides.
+    
+.. figure:: images/afsk_demodulator_output.png
+    :alt: Output of the AFSK demodulator example flowgraph
+
+    Output of the AFSK demodulator example flowgraph
+
+The figure below shows the options allowed by the AFSK demodulator block. The
+Baudrate option is used to set the baudrate in symbols per second. The Sample
+rate option specifies the sample rate of the input.
+
+The AF carrier option specifies the audio frequency in Hz on which the FSK tones
+are centred. The Deviation option specifies the separation in Hz between each
+of the tones and the AF carrier. If the deviation is positive, the high tone is
+interpreted as representing the symbol 1, while the low tone is interpreted as
+representing the symbol 0 (or -1 in bipolar representation). If the deviation is
+negative, the low tone is interpreted as representing the symbol 1 and the high
+tone is interpreted as representing the symbol 0.
+
+In this example, the AF carrier is 3600 Hz and the deviation is -1200 Hz. This
+means that the tone representing 1 is at 2400 Hz, while the tone representing 0
+is at 4800 Hz (the signal is actually 4800 baud GMSK).
+
+The IQ input option enables IQ (complex) input.
+    
+.. figure:: images/afsk_demodulator_options.png
+    :alt: Options of AFSK demodulator
+
+    Options of AFSK demodulator
+
 Deframers
 ^^^^^^^^^
 

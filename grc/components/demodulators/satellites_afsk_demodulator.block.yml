@@ -34,4 +34,20 @@ templates:
     imports: import satellites.components.demodulators
     make: satellites.components.demodulators.afsk_demodulator(baudrate = ${baudrate}, samp_rate = ${samp_rate}, iq = ${iq}, af_carrier = ${af_carrier}, deviation = ${deviation})
 
+documentation: |-
+    Demodulates an AFSK signal
+
+    Input:
+        A stream of samples containing an AFSK signal. If real input is used, the signal is expected to be already FM-demodulated. If IQ (complex) input is used, the signal should not be FM-demodulated.
+
+    Output:
+        The demodulated AFSK soft symbols, normalized to amplitude one
+
+    Parameters:
+        Baudrate: The FSK baudrate in symbols per second
+        Sample rate: The input sample rate in samples per second
+        AF carrier: The audio frequency in Hz at which the FSK tones are centred
+        Deviation: The separation in Hz between the tones and the AF carrier. A negative value indicates that the low tone represents the symbol 1.
+        IQ input: enables IQ (complex) input
+
 file_format: 1

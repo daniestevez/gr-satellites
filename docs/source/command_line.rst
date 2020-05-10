@@ -512,28 +512,34 @@ SDR software may support streaming IQ data by UDP. These can also be used in
 FSK demodulation and IQ input
 """""""""""""""""""""""""""""
 
-When using an FSK demodulator, the usage of the ``--iq`` option has an
-additional effect. Since FSK is a mode based on frequency modulation, it is
+When using an AFSK or FSK demodulator, the usage of the ``--iq`` option has an
+additional effect. Since (A)FSK is a mode based on frequency modulation, it is
 common to use either a conventional FM radio or an SDR software performing FM
-demodulation to receive FSK. Audio recordings obtained in this manner are also
+demodulation to receive (A)FSK. Audio recordings obtained in this manner are also
 common. Therefore, when ``gr_satellites`` is run without the ``--iq`` signal, it
-will expect that FSK signals have already been FM-demodulated in this way.
+will expect that (A)FSK signals have already been FM-demodulated in this way.
 
-When the ``--iq`` option is used, ``gr_satellites`` expects an FSK signal that
+When the ``--iq`` option is used, ``gr_satellites`` expects an (A)FSK signal that
 has not been FM-demodulated, and so it will perform FM-demodulation first. This
 is the kind of procedure that should be employed with inputs such as raw IQ
-recordings of an SDR, since the FSK signals present in this kind of recordings
+recordings of an SDR, since the (A)FSK signals present in this kind of recordings
 have not been FM-demodulated.
 
 .. note::
    The output of the radio or SDR software when running in FM mode to
    receive an FSK signal is actually an NRZ signal. Therefore, when
    ``gr_satellites`` is run without the ``--iq`` option, it will expect an NRZ
-   signal instead of the FSK signals. When ``gr_satellites`` is run with the ``--iq``
-   option, it will expect FSK signals.
+   signal instead of an FSK signal. When ``gr_satellites`` is run with the ``--iq``
+   option, it will expect an FSK signal.
+
+   Similarly, the output of the radio or SDR software when running in FM mode to
+   receive an AFSK signal is actually an audio-frequency FSK signal. Therefore,
+   when ``gr_satellites`` is run without the ``--iq`` option, it will expect an
+   audio-frequency FSK signal instead of an AFSK signal. When ``gr_satellites``
+   is run with the ``--iq`` option, it will expect an AFSK signal.
 
    Note that this behaviour is what the user wants in most cases, but it also
-   means that it is not possible to run ``gr_satellites`` on an FSK signal which
+   means that it is not possible to run ``gr_satellites`` on an (A)FSK signal which
    is represented in intermediate frequency as a real signal.
 
 .. _Frequency offsets for BPSK:
