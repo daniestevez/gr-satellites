@@ -26,4 +26,17 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.ax100_deframer(mode = ${mode}, syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes a signal using one of the two protocols of the GOMspace NanoCom AX100
+
+    Input:
+        A stream of soft symbols containing packets from the AX100 transceiver
+
+    Output:
+        PDUs with the deframed packets
+
+    Parameters:
+        Mode: indicates the AX100 mode (protocol), which can be ASM+Golay or Reed Solomon
+        Syncword threshold: number of bit errors to allow in the detection of the 32 bit syncword
+
 file_format: 1

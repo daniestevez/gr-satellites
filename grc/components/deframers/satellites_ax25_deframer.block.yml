@@ -21,4 +21,18 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.ax25_deframer(g3ruh_scrambler=${g3ruh_scrambler})
 
+documentation: |-
+    Deframes AX.25 packets
+
+    This block performs NRZ-I decoding, frame boundary detection, bit de-stuffing, and CRC-16 checking.
+
+    Input:
+        A stream of soft symbols containing AX.25 packets
+
+    Output:
+        PDUs with the deframed AX.25 packets
+
+    Parameters:
+        G3RUH scrambling: Perform G3RUH descrambling
+
 file_format: 1

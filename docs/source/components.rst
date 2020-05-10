@@ -213,8 +213,93 @@ The IQ input option enables IQ (complex) input.
 Deframers
 ^^^^^^^^^
 
+Deframer components can be found under *Satellites > Deframers* in GNU
+Radio companion. There is a large number of deframer component blocks, since
+many satellites use ad-hoc protocols for framing, so a custom deframer is used
+for those satellites.
+
+Deframers take soft symbols, produced as the output of one of the demodulator
+components, and detect frame boundaries, perform as necessary descrambling,
+deinterleaving, FEC decoding, CRC checking, etc.
+
+Here, the most popular deframers are described. For ad-hoc deframers that are
+used in few satellites, the reader is referred to the documentation of each of
+the blocks in GNU Radio companion.
+
+AX.25 deframer
+""""""""""""""
+
+The AX.25 deframer implements the `AX.25`_ protocol. It performs NRZ-I decoding,
+frame boundary detection, bit de-stuffing, and CRC-16 checking. Optionally, it
+can also perform G3RUH descrambling. G3RUH scrambling is typically used for
+faster baudrates, such as 9k6 FSK packet radio, but not for slower baudrates,
+such as 1k2 AFSK packet radio.
+
+The figure below shows an example flowgraph of the AX.25 deframer block. This
+example can be found in ``examples/components/ax25_deframer.grc``. The example
+reads a WAV file from :ref:`satellite-recordings<Downloading sample recordings>`
+containing 9k6 FSK AX.25 packets from US01, demodulates them
+with the FSK demodulator block, deframes tham with AX.25 deframer, and prints
+the output with the Message Debug block.
+
+.. figure:: images/ax25_deframer_flowgraph.png
+    :alt: Usage of AX.25 deframer in a flowgraph
+
+    Usage of AX.25 deframer in a flowgraph
+
+The AX.25 deframer block has a single parameter that indicates whether G3RUH
+descrambling should be performed or not.
+
+GOMspace AX100 deframer
+"""""""""""""""""""""""
+
+The GOMspace AX100 deframer implements two different protocols used by the popular
+`GOMspace NanoCom AX100`_ transceiver. These two protocols are:
+
+* ASM+Golay. This uses a header encoded with a Golay(24,12) code that indicates
+  the packet length. The payload is Reed-Solomon encoded with a (255,223) CCSDS
+  code and scrambled with the CCSDS synchronous scrambler.
+
+* Reed Solomon. This uses a G3RUH asynchronous scrambler. The first byte of the
+  packets indicates the length of the payload and is sent unprotected. The
+  packet payload is Reed-Solomon encoded with a (255,223) CCSDS code.
+
+The figure below shows an example flowgraph of the AX100 deframer block running
+in both modes. This example can be found in
+``examples/components/ax100_deframer.grc``. For ASM+Golay decoding the example
+reads a WAV file from :ref:`satellite-recordings<Downloading sample recordings>`
+containing packets from 1KUNS-PF. For Reed Solomon decoding the
+example reads a WAV file from
+:ref:`satellite-recordings<Downloading sample recordings>`
+which contains packets from TW-1B. The output frames are printed with Message
+Debug blocks.
+  
+.. figure:: images/ax100_deframer_flowgraph.png
+    :alt: Usage of AX100 deframer in a flowgraph
+
+    Usage of AX100 deframer in a flowgraph
+
+The AX100 deframer only has two parameters, the Mode parameter indicates the
+mode, as described above, and the Syncword threshold parameters specifies how
+many bit errors are allowed in the detection of the 32 bit syncword.
+
+GOMspace U482C deframer
+"""""""""""""""""""""""
+
+AO-40 FEC deframer
+""""""""""""""""""
+
+CCSDS Reed-Solomon deframer
+"""""""""""""""""""""""""""
+
+CCSDS Concatenated deframer
+"""""""""""""""""""""""""""
+
 Transports
 ^^^^^^^^^^
 
 Data sinks
 ^^^^^^^^^^
+
+.. _AX.25: http://www.ax25.net/
+.. _GOMspace NanoCom AX100: https://gomspace.com/shop/subsystems/communication-systems/nanocom-ax100.aspx
