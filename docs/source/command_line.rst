@@ -534,6 +534,8 @@ have not been FM-demodulated.
    means that it is not possible to run ``gr_satellites`` on an FSK signal which
    is represented in intermediate frequency as a real signal.
 
+.. _Frequency offsets for BPSK:
+   
 Frequency offsets for BPSK
 """"""""""""""""""""""""""
 

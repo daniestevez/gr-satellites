@@ -40,4 +40,21 @@ templates:
     imports: import satellites.components.demodulators
     make: satellites.components.demodulators.bpsk_demodulator(baudrate = ${baudrate}, samp_rate = ${samp_rate}, f_offset = ${f_offset}, differential = ${differential}, manchester = ${manchester}, iq = ${iq})
 
+documentation: |-
+    Demodulates a BPSK signal
+
+    Input:
+        A stream of RF samples containing a real or IQ (complex) BPSK signal
+
+    Output:
+        The demodulated BPSK soft symbols, normalized to amplitude one
+
+    Parameters:
+        Baudrate: The BPSK baudrate in symbols per second
+        Sample rate: The input sample rate in samples per second
+        Frequency offset: The centre frequency of the BPSK signal in the input in Hz
+        Differential: Enables non-coherent differential demodulation of DBPSK
+        Manchester: Enables Manchester decoding
+        IQ input: enables IQ (complex) input
+
 file_format: 1

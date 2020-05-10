@@ -50,6 +50,78 @@ GNU Radio blocks.
 Demodulators
 ^^^^^^^^^^^^
 
+Demodulator components can be found under *Satellites > Demodulators* in GNU
+Radio companion. There are currently three demodulator component block:
+
+* BPSK demodulator
+
+* FSK demodulator
+
+* AFSK demodulator
+
+They take RF signal samples as input, and output soft symbols, as a stream of
+``float`` normalized with amplitude one. The input can be either real or IQ
+(complex). See :ref:`Real or IQ input` for more information.
+
+The demodulator blocks and their parameters are described below.
+
+BPSK demodulator
+""""""""""""""""
+
+The BPSK demodulator expects an input which consists of RF samples of a BPSK
+signal, and outputs the demodulated BPSK soft symbols. The BPSK signal can
+optionally be DBPSK or Manchester encoded.
+
+The figure below shows the example flowgraph which can be found in
+``examples/components/bpsk_demodulator.grc``. This reads a WAV file from
+:ref:`satellite-recordings<Downloading sample recordings>` which contains some
+BPSK packets from LilacSat-1 and uses the BPSK demodulator to obtain the
+symbols. The "Skip Head" and "Head" blocks are used to select a portion of the
+output, which is then plotted using the "QT GUI Time Sink".
+
+.. figure:: images/bpsk_demodulator_flowgraph.png
+    :alt: Usage of BPSK demodulator in a flowgraph
+
+    Usage of BPSK demodulator in a flowgraph
+
+When this example flowgraph is run, it displays the output shown in the figure
+below. There we can see the start of the BPSK packet. On the left side of the
+plot we have noise, before the packet starts, then the packet starts, and the
+clock and carrier recovery take some time to sync. After this, then symbols are
+demodulated properly. This can be seen because the +1 and -1 symbols are well
+separated.
+    
+.. figure:: images/bpsk_demodulator_output.png
+    :alt: Output of the BPSK demodulator example flowgraph
+
+    Output of the BPSK demodulator example flowgraph
+
+The figure below shows the options allowed by the BPSK demodulator block. The
+Baudrate option is used to set the baudrate in symbols per second. The Sample
+rate option specifies the sample rate of the input. The Frequency offset
+specifies at which frequency the BPSK signal is centred
+(see :ref:`Frequency offsets for BPSK`).
+
+The Differential option enables differential decoding of DBPSK. For differential
+decoding, the phase recovery using a Costas loop is disabled and non-coherent
+demodulation is used.
+
+The Manchester option enables Manchester decoding. A Manchester encoded BPSK
+signal is decoded as if it had twice the baudrate, and then the phase of the
+Manchester clock is searched in the symbols and the Manchester clock is
+"wiped-off", multiplying symbols by the clock and accumulating them by pairs.
+    
+.. figure:: images/bpsk_demodulator_options.png
+    :alt: Options of BPSK demodulator
+
+    Options of BPSK demodulator
+    
+FSK demodulator
+"""""""""""""""
+
+AFSK demodulator
+""""""""""""""""
+
 Deframers
 ^^^^^^^^^
 
