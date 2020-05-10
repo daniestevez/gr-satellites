@@ -55,4 +55,22 @@ templates:
         % endif
         % endif
 
+documentation: |-
+    This block brings into gnuradio-companion most of the functionality of the gr_satellites command line tool
+
+    Input:
+        A stream of samples, which can be either real or complex (for IQ input)
+    Output:
+        PDUs with decoded frames
+
+    The block performs demodulation, deframing and FEC according to the protocols used by the satellite specified.
+
+    Parameters:
+        Satellite definition: Selects the method to specify the satellite to use
+        File: Path to a YAML file with the SatYAML file describing the satellite, if using the YAML file definition method
+        Satellite name: Name of the satellite, if using the satellite name definition method
+        NORAD ID: NORAD ID of the satellite, if using the NORAD ID definition method
+        Sample Rate: sample rate in sps of the input stream
+        IQ input: selects whether IQ or real input is used
+
 file_format: 1
