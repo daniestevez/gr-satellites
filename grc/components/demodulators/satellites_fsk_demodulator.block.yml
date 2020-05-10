@@ -28,4 +28,18 @@ templates:
     imports: import satellites.components.demodulators
     make: satellites.components.demodulators.fsk_demodulator(baudrate = ${baudrate}, samp_rate = ${samp_rate}, iq = ${iq})
 
+documentation: |-
+    Demodulates an FSK signal
+
+    Input:
+        A stream of samples containing an FSK signal. If real input is used, the signal is expected to be already FM-demodulated. If IQ (complex) input is used, the signal should not be FM-demodulated.
+
+    Output:
+        The demodulated FSK soft symbols, normalized to amplitude one
+
+    Parameters:
+        Baudrate: The FSK baudrate in symbols per second
+        Sample rate: The input sample rate in samples per second
+        IQ input: enables IQ (complex) input
+
 file_format: 1

@@ -110,6 +110,8 @@ The Manchester option enables Manchester decoding. A Manchester encoded BPSK
 signal is decoded as if it had twice the baudrate, and then the phase of the
 Manchester clock is searched in the symbols and the Manchester clock is
 "wiped-off", multiplying symbols by the clock and accumulating them by pairs.
+
+The IQ input option enables IQ (complex) input.
     
 .. figure:: images/bpsk_demodulator_options.png
     :alt: Options of BPSK demodulator
@@ -118,6 +120,43 @@ Manchester clock is searched in the symbols and the Manchester clock is
     
 FSK demodulator
 """""""""""""""
+
+The FSK demodulator expects an input which consists of RF samples of an FSK
+signal, and outputs the demodulated FSK soft symbols. Both real and IQ (complex)
+input are suported, but the semantics are different: with real input, the FSK
+demodulator expects an FM-demodulated signal; with IQ input, the FSK demodulator
+expects the signal before FM demodulation
+(see :ref:`FSK demodulation and IQ input`).
+
+The figure below shows the example flowgraph which can be found in
+``examples/components/fsk_demodulator.grc``. This reads a WAV file from
+:ref:`satellite-recordings<Downloading sample recordings>` which contains a single
+FSK packets from AAUSAT-4 and uses the FSK demodulator to obtain the
+symbols. The is plotted using the "QT GUI Time Sink".
+
+.. figure:: images/fsk_demodulator_flowgraph.png
+    :alt: Usage of FSK demodulator in a flowgraph
+
+    Usage of FSK demodulator in a flowgraph
+
+When this example flowgraph is run, it displays the output shown in the figure
+below. There we can see the FSK packet, surrounded by noise on both sides.
+    
+.. figure:: images/fsk_demodulator_output.png
+    :alt: Output of the FSK demodulator example flowgraph
+
+    Output of the FSK demodulator example flowgraph
+
+The figure below shows the options allowed by the FSK demodulator block. The
+Baudrate option is used to set the baudrate in symbols per second. The Sample
+rate option specifies the sample rate of the input. The IQ input option enables
+IQ (complex) input. The signal is expected to be centred at baseband (0Hz) when
+IQ input is selected.
+    
+.. figure:: images/bpsk_demodulator_options.png
+    :alt: Options of FSK demodulator
+
+    Options of FSK demodulator
 
 AFSK demodulator
 """"""""""""""""

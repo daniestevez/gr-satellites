@@ -507,6 +507,8 @@ or a file in raw format. The IQ input option must be used when using
 SDR software may support streaming IQ data by UDP. These can also be used in
 ``gr_satellites`` with the IQ input option.
 
+.. _FSK demodulation and IQ input:
+
 FSK demodulation and IQ input
 """""""""""""""""""""""""""""
 
