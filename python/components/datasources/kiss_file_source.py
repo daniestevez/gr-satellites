@@ -30,7 +30,7 @@ class kiss_file_source(gr.hier_block2):
     These are read from a KISS file.
 
     Args:
-        file: output filename (string)
+        file: input filename (string)
     """
     def __init__(self, file, append = False):
         gr.hier_block2.__init__(self, "kiss_file_source",

@@ -15,4 +15,13 @@ templates:
     imports: import satellites.components.datasources
     make: satellites.components.datasources.kiss_file_source(${file})
 
+documentation: |-
+    Reads a file in KISS format, outputing PDUs
+
+    Output:
+        The frames stored in the KISS file, as PDUs
+
+    Parameters:
+         File: the file to read from
+
 file_format: 1
