@@ -118,7 +118,7 @@ blocks:
     name: '""'
     nconnections: '1'
     size: '12000'
-    srate: samp_rate
+    srate: '4800'
     stemplot: 'False'
     style1: '0'
     style10: '1'

@@ -154,7 +154,7 @@ blocks:
     name: '""'
     nconnections: '1'
     size: '20000'
-    srate: samp_rate
+    srate: '9600'
     stemplot: 'False'
     style1: '0'
     style10: '1'
