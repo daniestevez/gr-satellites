@@ -286,14 +286,33 @@ many bit errors are allowed in the detection of the 32 bit syncword.
 GOMspace U482C deframer
 """""""""""""""""""""""
 
+.. figure:: images/u482c_deframer_flowgraph.png
+    :alt: Usage of U482C deframer in a flowgraph
+
+    Usage of U482C deframer in a flowgraph
+
+
 AO-40 FEC deframer
 """"""""""""""""""
 
-CCSDS Reed-Solomon deframer
-"""""""""""""""""""""""""""
+.. figure:: images/ao40_fec_deframer_flowgraph.png
+    :alt: Usage of AO-40 FEC deframer in a flowgraph
 
-CCSDS Concatenated deframer
-"""""""""""""""""""""""""""
+    Usage of AO-40 FEC deframer in a flowgraph
+
+
+CCSDS deframers
+"""""""""""""""
+
+.. figure:: images/ccsds_deframer_flowgraph.png
+    :alt: Usage of CCSDS Concatenated deframer in a flowgraph
+
+    Usage of CCSDS Concatenated deframer in a flowgraph
+
+.. figure:: images/ccsds_deframer_options.png
+    :alt: Options of CCSDS Concatenated deframer
+
+    Options of CCSDS Concatenated deframer
 
 Transports
 ^^^^^^^^^^
