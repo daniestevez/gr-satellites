@@ -1,0 +1,123 @@
+options:
+  parameters:
+    author: Daniel Estevez
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: no_gui
+    hier_block_src_path: '.:'
+    id: ao40_fec_deframer
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: run
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: AO-40 FEC deframer component example
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [208, 12]
+    rotation: 0
+    state: enabled
+- name: blocks_message_debug_0
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [790, 165]
+    rotation: 0
+    state: enabled
+- name: blocks_wavfile_source_0
+  id: blocks_wavfile_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    file: ../../satellite-recordings/ao73.wav
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+    repeat: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [53, 217]
+    rotation: 0
+    state: enabled
+- name: satellites_ao40_fec_deframer_0
+  id: satellites_ao40_fec_deframer
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    short_frames: 'False'
+    threshold: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [497, 217]
+    rotation: 0
+    state: true
+- name: satellites_bpsk_demodulator_0
+  id: satellites_bpsk_demodulator
+  parameters:
+    affinity: ''
+    alias: ''
+    baudrate: '1200'
+    comment: ''
+    differential: 'True'
+    f_offset: '1500'
+    iq: 'False'
+    manchester: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [276, 193]
+    rotation: 0
+    state: true
+
+connections:
+- [blocks_wavfile_source_0, '0', satellites_bpsk_demodulator_0, '0']
+- [satellites_ao40_fec_deframer_0, out, blocks_message_debug_0, print_pdu]
+- [satellites_bpsk_demodulator_0, '0', satellites_ao40_fec_deframer_0, '0']
+
+metadata:
+  file_format: 1
