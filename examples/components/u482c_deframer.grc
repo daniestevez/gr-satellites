@@ -1,0 +1,121 @@
+options:
+  parameters:
+    author: Daniel Estevez
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: no_gui
+    hier_block_src_path: '.:'
+    id: u482c_deframer
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: run
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: GOMspace U482C deframer component example
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [208, 12]
+    rotation: 0
+    state: enabled
+- name: blocks_message_debug_0
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [790, 165]
+    rotation: 0
+    state: enabled
+- name: blocks_wavfile_source_0
+  id: blocks_wavfile_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    file: ../../satellite-recordings/gomx_1.wav
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+    repeat: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [53, 217]
+    rotation: 0
+    state: enabled
+- name: satellites_afsk_demodulator_0_0
+  id: satellites_afsk_demodulator
+  parameters:
+    af_carrier: '3600'
+    affinity: ''
+    alias: ''
+    baudrate: '4800'
+    comment: ''
+    deviation: '-1200'
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [290, 201]
+    rotation: 0
+    state: true
+- name: satellites_u482c_deframer_0
+  id: satellites_u482c_deframer
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    threshold: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [494, 225]
+    rotation: 0
+    state: true
+
+connections:
+- [blocks_wavfile_source_0, '0', satellites_afsk_demodulator_0_0, '0']
+- [satellites_afsk_demodulator_0_0, '0', satellites_u482c_deframer_0, '0']
+- [satellites_u482c_deframer_0, out, blocks_message_debug_0, print_pdu]
+
+metadata:
+  file_format: 1
