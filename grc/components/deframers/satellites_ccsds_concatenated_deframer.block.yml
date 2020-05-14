@@ -34,4 +34,19 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.ccsds_concatenated_deframer(frame_size = ${frame_size}, differential = ${differential}, dual_basis = ${dual_basis}, syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes a signal using the CCSDS concatenated TM protocol
+
+    Input:
+        A stream of soft symbols containing packets using the CCSDS concatenated TM protocol
+
+    Output:
+        PDUs with the deframed packets
+
+    Parameters:
+        Frame size (bytes): the size of the frame in bytes, after Reed-Solomon decoding
+        Differential encoding: toggles the usage of differential decoding
+        Use RS dual basis: toggles the usage of the dual basis definition for the Reed-Solomon code
+        Syncword threshold: number of bit errors to allow in the detection of the 32 bit syncword
+
 file_format: 1

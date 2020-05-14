@@ -352,11 +352,41 @@ Reed-Solomon codeword and is used by SMOG-P and ATL-1.
 CCSDS deframers
 """""""""""""""
 
+The CCSDS Concatenated deframer and CCSDS Reed-Solomon deframer blocks implement
+some of the CCSDS protocols defined in the TM Synchronization and Channel Coding
+Blue Book (see the `CCSDS Blue Books`_).
+
+The CCSDS Reed-Solomon deframer implements Reed-Solomon TM frames, which use a
+Reed-Solmon (255, 223) code (or a shortened version of this code) and the CCSDS
+synchronous scrambler. The CCSDS Concatenated deframer implements
+concatenated TM frames, which add an r=1/2, k=7 convolutional code as an inner
+coding to the Reed-Solomon frames. The usage of both deframers is very similar.
+
+The figure below shows an example flowgraph of the CCSDS Concatenated deframer
+block. This example can be found in
+``examples/components/ccsds_deframer.grc``. It reads a WAV file from
+:ref:`satellite-recordings<Downloading sample recordings>` containing some
+packets from BY70-1. These are concatenated TM frames with a frame size of 114
+bytes and differential encoding (to solve the BPSK phase ambiguity). The packet
+is first BPSK demodulated and then deframed. The output is printed using the
+Message Debug block.
+
 .. figure:: images/ccsds_deframer_flowgraph.png
     :alt: Usage of CCSDS Concatenated deframer in a flowgraph
 
     Usage of CCSDS Concatenated deframer in a flowgraph
 
+The figure below shows the parameters used by the CCSDS Concatenated
+deframer. The CCSDS Reed-Solomon deframer block allows exactly the same options,
+since none of the options refer to the convolutional inner code.
+
+The Frame size parameter indicates the size of the frame in bytes (after
+Reed-Solomon decoding). The Differential encoding parameter enables differential
+decoding, which is often used to solve the BPSK 180º phase ambiguity. The Use
+RS dual basis enables the usage of the dual basis definition for the Reed-Solmon
+code. The Synchword threshold parameter can be used to choose the number of bit
+errors that are allowed in the detection of the syncword.
+    
 .. figure:: images/ccsds_deframer_options.png
     :alt: Options of CCSDS Concatenated deframer
 
@@ -371,3 +401,4 @@ Data sinks
 .. _AX.25: http://www.ax25.net/
 .. _GOMspace NanoCom AX100: https://gomspace.com/shop/subsystems/communication-systems/nanocom-ax100.aspx
 .. _AO-40 FEC beacon: http://www.ka9q.net/papers/ao40tlm.html
+.. _CCSDS Blue Books: https://public.ccsds.org/Publications/BlueBooks.aspx
