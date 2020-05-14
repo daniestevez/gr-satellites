@@ -286,10 +286,37 @@ many bit errors are allowed in the detection of the 32 bit syncword.
 GOMspace U482C deframer
 """""""""""""""""""""""
 
+The GOMsace U482C deframer implements the protocol used by the GOMspace NanoCom
+U482C tranceiver, which is an older transceiver from GOMspace that is still seen
+in some satellites.
+
+The protocol used by the U482C is similar to the ASM+Golay mode used by the
+AX100. The packet payload can be optionally:
+
+* Encoded with the CCSDS r=1/2, k=7 convolutional encoder
+
+* Scrambled with the CCSDS synchronous scrambler
+
+* Encoded with a CCSDS (255,223) Reed-Solomon code
+
+The packet header has flags that indicate which of this options are in use, in
+addition to the length field.
+
+The U482C modem uses AFSK with a 4800 baud audio-frequency GMSK waveform.
+
+The figure below shows an example flowgraph of the U482C deframer block. This
+example can be found in ``examples/components/u482c_deframer.grc``. The example
+reads a WAV file from :ref:`satellite-recordings<Downloading sample recordings>`
+containing a packet from GOMX-1. The packet is demodulated and deframed, and the
+output is printed in hex using the Message Debug block.
+
 .. figure:: images/u482c_deframer_flowgraph.png
     :alt: Usage of U482C deframer in a flowgraph
 
     Usage of U482C deframer in a flowgraph
+
+The U482C deframer has a single parameter, which indicates the number of bit
+errors that are allowed in the syncword detection.
 
 
 AO-40 FEC deframer

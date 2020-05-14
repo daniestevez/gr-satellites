@@ -20,4 +20,16 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.u482c_deframer(syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes a signal using the protocol of the GOMspace NanoCom U482C
+
+    Input:
+        A stream of soft symbols containing packets from the U482C transceiver
+
+    Output:
+        PDUs with the deframed packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in the detection of the 32 bit syncword
+
 file_format: 1
