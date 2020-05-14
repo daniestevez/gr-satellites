@@ -322,11 +322,32 @@ errors that are allowed in the syncword detection.
 AO-40 FEC deframer
 """"""""""""""""""
 
+The AO-40 FEC deframer implements the protocol designed by Phil Karn KA9Q for
+the `AO-40 FEC beacon`_. This protocol is currently used in the FUNcube
+satellites and others.
+
+The FEC is based on CCSDS recommendations and uses a pair of interleaved
+Reed-Solomon (160,128) codes, the CCSDS synchronous scrambler, the CCSDS r=1/2,
+k=7 convolutional code, interleaving and a distributed syncword.
+
+The figure below shows an example flowgraph of the AO-40 FEC deframer
+block. This example can be found in
+``examples/components/ao40_fec_deframer.grc``. It reads a WAV file from
+:ref:`satellite-recordings<Downloading sample recordings>` containing a packet
+from AO-73 (FUNcube-1). The packet is first BPSK demodulated and then deframed
+with the AO-40 FEC deframer. The output is printed out using the Message
+Debug block.
+
 .. figure:: images/ao40_fec_deframer_flowgraph.png
     :alt: Usage of AO-40 FEC deframer in a flowgraph
 
     Usage of AO-40 FEC deframer in a flowgraph
 
+The AO-40 FEC deframer blocks has two parameters. The Syncword threshold
+parameter indicates the number of bit errors to allow in the syncword
+detection. The Use short frames parameter toggles the usage of short
+frames. This is a variant of the AO-40 FEC protocol which is based on a single
+Reed-Solomon codeword and is used by SMOG-P and ATL-1.
 
 CCSDS deframers
 """""""""""""""
@@ -349,3 +370,4 @@ Data sinks
 
 .. _AX.25: http://www.ax25.net/
 .. _GOMspace NanoCom AX100: https://gomspace.com/shop/subsystems/communication-systems/nanocom-ax100.aspx
+.. _AO-40 FEC beacon: http://www.ka9q.net/papers/ao40tlm.html

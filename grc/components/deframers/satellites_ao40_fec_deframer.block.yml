@@ -25,4 +25,17 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.ao40_fec_deframer(syncword_threshold = ${threshold}, short_frames = ${short_frames})
 
+documentation: |-
+    Deframes a signal using the AO-40 FEC protocol
+
+    Input:
+        A stream of soft symbols containing packets using the AO-40 FEC protocol
+
+    Output:
+        PDUs with the deframed packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in the detection of the 32 bit syncword
+        Use short frames (SMOG-P): enable usage of short frames, which is a variant employed by SMOG-P and ATL-1
+
 file_format: 1
