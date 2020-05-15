@@ -395,6 +395,77 @@ errors that are allowed in the detection of the syncword.
 Transports
 ^^^^^^^^^^
 
+Transport components can be found under *Satellites > Transports* in GNU Radio
+companion. Transports are designed to implement upper layer protocols. They take
+as input the output of a demodulator, which contains physical layer or link
+layer frames and process it to obtain upper layer packets. Some of the typical
+functionalities implemented by these upper layer protocols include
+fragmentation/defragmentation.
+
+The only transport available so far in gr-satellites is the KISS transport.
+
+KISS transport
+""""""""""""""
+
+The KISS tranport implements fragmentation/defragmentation according to the KISS
+protocol for packet boundary detection. Its input should be PDUs containing
+the bytes of a KISS stream. The frames are joined and the KISS stream is
+followed, detecting packet boundaries and extracting the packets. The packets
+are output as PDUs.
+
+The figure below shows an example flowgraph of the KISS transport, which can be
+found in ``examples/components/kiss_transport.grc``. It is based
+on the CCSDS Concatenated deframer example described above. BY70-1 sends frames
+which contain the bytes of a KISS stream, so the KISS transport can be used to
+extract the packets from this stream. There are two Message Debug blocks that
+can be enabled or disabled in order to see the input or the output of the KISS
+transport block.
+
+.. figure:: images/kiss_transport_flowgraph.png
+    :alt: Usage of KISS transport in a flowgraph
+
+    Usage of KISS transport in a flowgraph
+
+When the example is run, the frames at the input of the input of the KISS
+transport look like the one below. We see that there is a single packet embedded
+into the 114 byte Reed-Solomon frame, using ``c0`` KISS idle bytes for padding.
+
+.. code-block:: none
+
+   pdu_length = 114
+   contents = 
+   0000: c0 b8 64 3d 00 12 00 00 00 00 c8 3a 00 80 00 00 
+   0010: 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 
+   0020: 32 32 32 32 32 32 32 32 32 32 32 32 32 32 ff c4 
+   0030: 00 1f 00 00 01 05 01 01 01 01 01 01 00 00 00 00 
+   0040: 00 00 00 00 01 02 03 04 05 06 07 08 09 0a 0b ff 
+   0050: 18 21 00 00 db dc 4b f7 07 c0 c0 c0 c0 c0 c0 c0 
+   0060: c0 c0 c0 c0 c0 c0 c0 c0 c0 c0 c0 c0 c0 c0 c0 c0 
+   0070: c0 c0 
+
+The frames at the output of the KISS transport look like the following. We see
+that the ``c0`` KISS idle bytes have been stripped. The KISS transport would
+also handled the case when a packet is longer than 114 bytes and has been
+fragmented into several 114 byte frames.
+   
+.. code-block:: none
+
+   pdu_length = 87
+   contents = 
+   0000: b8 64 3d 00 12 00 00 00 00 c8 3a 00 80 00 00 32 
+   0010: 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 
+   0020: 32 32 32 32 32 32 32 32 32 32 32 32 32 ff c4 00 
+   0030: 1f 00 00 01 05 01 01 01 01 01 01 00 00 00 00 00 
+   0040: 00 00 00 01 02 03 04 05 06 07 08 09 0a 0b ff 18 
+   0050: 21 00 00 c0 4b f7 07 
+
+The KISS transport has a single parameter, called Expect control byte. When it
+is set to ``True``, the first byte before the packet payload is interpreted as a
+control byte according to the KISS protocol. If it is set to ``False``, it is
+assumed that there is no control byte preceeding the packet payload. When using
+KISS as a means to fragment/defragment upper layer packets it is more common not
+to use control bytes.
+
 Data sinks
 ^^^^^^^^^^
 
@@ -402,3 +473,4 @@ Data sinks
 .. _GOMspace NanoCom AX100: https://gomspace.com/shop/subsystems/communication-systems/nanocom-ax100.aspx
 .. _AO-40 FEC beacon: http://www.ka9q.net/papers/ao40tlm.html
 .. _CCSDS Blue Books: https://public.ccsds.org/Publications/BlueBooks.aspx
+.. _KISS protocol: http://www.ax25.net/kiss.aspx

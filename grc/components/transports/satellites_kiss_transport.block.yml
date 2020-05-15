@@ -21,4 +21,16 @@ templates:
     imports: import satellites.components.transports
     make: satellites.components.transports.kiss_transport(control_byte=${use_control})
 
+documentation: |-
+    Implements fragmentation/defragmentation using the KISS protocol
+
+    Input:
+        PDUs containing consecutive bytes of a KISS stream
+
+    Output:
+        PDUs with the packets contained inside the KISS stream
+
+    Parameters:
+        Expect control byte: specifies whether the KISS stream uses a control byte before the packet payload
+
 file_format: 1
