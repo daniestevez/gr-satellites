@@ -25,4 +25,15 @@ templates:
         import satellites.utils.config
     make: satellites.components.datasinks.telemetry_submit(${server}, ${norad}, satellites.utils.config.open_config())
 
+documentation: |-
+    Sends telemetry frames to an online telemetry data base server
+
+    This block uses the gr-satellites config file at ~/.gr_satellites/config.ini to set up the server configuration
+
+    Input:
+        PDUs with telemetry frames
+
+    Parameters:
+        Server: selects the server to submit telemetry to
+
 file_format: 1

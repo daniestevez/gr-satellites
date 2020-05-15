@@ -534,12 +534,25 @@ The beginning of the ouptut produced by the Telemetry parser block can be seen b
 The parameters used by the Telemetry parser are the following. The Telemetry
 definition parameter indicates the telemetry definition object, which must be an
 object in the ``satellites.telemetry`` module as described above. The Output
-drop down menu can be used to select the standard output or a file as the
+drop down list can be used to select the standard output or a file as the
 destination for the parser's output. If a file is selected, an additional
 parameter to select the file path appears. 
 
 Telemetry submit
 """"""""""""""""
+
+The telemetry submit block implements :ref:`Telemetry submission` to several
+different online telemetry servers. Its input consists of PDUs with frames,
+which are then submitted to the selected telemetry server.
+
+This block uses the gr-satellites config file located in
+``~/.gr_satellites/config.ini`` to configure the different options of the
+telemetry servers, such as the login credentials. See the
+:ref:`information regarding the command line tool<Telemetry submission>` for how
+to set up this configuration file.
+
+The telemetry submit block has only one parameter, which is a drop down list
+that is used to select the telemetry server to use.
 
 Hexdump sink
 """"""""""""

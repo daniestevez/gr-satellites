@@ -389,6 +389,8 @@ option with a short recording, to avoid creating very large files. The details
 of each of these files are best studied in the Python source code of the
 demodulator.
 
+.. _Telemetry submission:
+
 Telemetry submission
 ^^^^^^^^^^^^^^^^^^^^
 
