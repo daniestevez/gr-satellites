@@ -581,6 +581,50 @@ overwrite or append to the output file.
 File and Image receivers
 """"""""""""""""""""""""
 
+The File and Image receiver blocks are used to reassemble files transmitted in
+chunks, using a variety of different formats. The only difference between the
+File receiver and the Image receiver is that the Image receiver is able to
+display image files in realtime using `feh`_ as they are being received.
+
+These receiver blocks use *filereceiver definitions*, which are
+classes derived from ``FileReceiver``. The list of available definitions can be
+seen in ``python/filereceiver/__index__.py``, or by calling
+``import satellites.filreceiver; help(satellites.filereceiver)`` in
+``python3``. Classes used by the Image receiver must be derived from ``ImageReceiver``.
+
+The figure below shows an example flowgraph of the Image receiver block, which can be
+found in ``examples/components/image_receiver.grc``. The example
+reads a WAV file from :ref:`satellite-recordings<Downloading sample recordings>`
+containing an image transfer from LilacSat-1. The WAV file is played back in
+real time using the Throttle block. The Satellite decoder block is used to
+demodulate and deframe the packets. Since these packets contain a KISS stream,
+the KISS transport is used to obtain the image packets. These are sent into the
+Image receiver block, which will print some information to the standard output
+and when the beginning of the image is receive, will launch feh to display the image.
+
+.. figure:: images/image_receiver_flowgraph.png
+    :alt: Usage of Image receiver in a flowgraph
+
+    Usage of Image receiver in a flowgraph
+
+The figure below shows the parameters of the Image receiver block. The parameter
+ImageReceiver class indicates the definition to use for reassembling the image
+(which is implemented by a class derived from ``ImageReceiver``). The Path
+parameter specifies the path of the directory where received files are saved
+to. The names of the files depends on metadata in the image packets. The Verbose
+parameter enables printing information to the standard output, such as the
+frames being received. The Display parameter enables the use of feh to display
+the image. The Fullscreen parameter is used to run feh in fullscreen.
+    
+.. figure:: images/image_receiver_options.png
+    :alt: Options of Image receiver
+
+    Options of Image receiver
+
+The parameters of the File receiver block are the same as those of the Image
+receiver block, except for the Display and Fullscreen parameters, which are
+specific to image reception.
+
 Codec2 UDP sink
 """""""""""""""
 
@@ -590,3 +634,4 @@ Codec2 UDP sink
 .. _CCSDS Blue Books: https://public.ccsds.org/Publications/BlueBooks.aspx
 .. _KISS protocol: http://www.ax25.net/kiss.aspx
 .. _construct: https://construct.readthedocs.io/
+.. _feh: https://feh.finalrewind.org/

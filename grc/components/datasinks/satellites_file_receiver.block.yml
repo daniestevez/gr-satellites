@@ -23,4 +23,15 @@ templates:
     imports: import satellites.components.datasinks
     make: satellites.components.datasinks.file_receiver(${receiver}, ${path}, ${verbose})
 
+documentation: |-
+    Reassembles a files transmitted in chunks and saves them
+
+    Input:
+        PDUs with packets containing file chunks
+
+    Parameters:
+        FileReceiver class: chunk format definition, which is a class in satellites.filereceiver
+        Path: path of the directory to save files to
+        Verbose: print additional information to the standard output
+
 file_format: 1

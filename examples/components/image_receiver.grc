@@ -1,0 +1,147 @@
+options:
+  parameters:
+    author: Daniel Estevez
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: no_gui
+    hier_block_src_path: '.:'
+    id: image_receiver
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: run
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Image receiver component example
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [208, 12]
+    rotation: 0
+    state: enabled
+- name: blocks_throttle_0
+  id: blocks_throttle
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [273, 225]
+    rotation: 0
+    state: true
+- name: blocks_wavfile_source_0
+  id: blocks_wavfile_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    file: ../../satellite-recordings/lilacsat1-image.wav
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+    repeat: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [53, 217]
+    rotation: 0
+    state: enabled
+- name: satellites_image_receiver_0
+  id: satellites_image_receiver
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    display: 'True'
+    fullscreen: 'True'
+    path: /tmp/
+    receiver: by70_1
+    verbose: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [939, 209]
+    rotation: 0
+    state: true
+- name: satellites_kiss_transport_0
+  id: satellites_kiss_transport
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    use_control: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [711, 225]
+    rotation: 0
+    state: true
+- name: satellites_satellite_decoder_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: name
+    file: ''
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: LilacSat-1
+    norad: ''
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [453, 209]
+    rotation: 0
+    state: true
+
+connections:
+- [blocks_throttle_0, '0', satellites_satellite_decoder_0, '0']
+- [blocks_wavfile_source_0, '0', blocks_throttle_0, '0']
+- [satellites_kiss_transport_0, out, satellites_image_receiver_0, in]
+- [satellites_satellite_decoder_0, out, satellites_kiss_transport_0, in]
+
+metadata:
+  file_format: 1
