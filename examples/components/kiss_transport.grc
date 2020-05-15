@@ -1,0 +1,156 @@
+options:
+  parameters:
+    author: Daniel Estevez
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: no_gui
+    hier_block_src_path: '.:'
+    id: kiss_transport
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: run
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: KISS Transport component example
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [208, 12]
+    rotation: 0
+    state: enabled
+- name: blocks_message_debug_0
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1047, 165]
+    rotation: 0
+    state: enabled
+- name: blocks_message_debug_0_0
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [851, 305]
+    rotation: 0
+    state: disabled
+- name: blocks_wavfile_source_0
+  id: blocks_wavfile_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    file: ../../satellite-recordings/by701.wav
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+    repeat: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [53, 217]
+    rotation: 0
+    state: enabled
+- name: satellites_bpsk_demodulator_0
+  id: satellites_bpsk_demodulator
+  parameters:
+    affinity: ''
+    alias: ''
+    baudrate: '9600'
+    comment: ''
+    differential: 'False'
+    f_offset: '12000'
+    iq: 'False'
+    manchester: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [276, 193]
+    rotation: 0
+    state: true
+- name: satellites_ccsds_concatenated_deframer_0
+  id: satellites_ccsds_concatenated_deframer
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    differential: 'True'
+    dual_basis: 'False'
+    frame_size: '114'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    threshold: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [517, 201]
+    rotation: 0
+    state: true
+- name: satellites_kiss_transport_0
+  id: satellites_kiss_transport
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    use_control: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [780, 225]
+    rotation: 0
+    state: true
+
+connections:
+- [blocks_wavfile_source_0, '0', satellites_bpsk_demodulator_0, '0']
+- [satellites_bpsk_demodulator_0, '0', satellites_ccsds_concatenated_deframer_0, '0']
+- [satellites_ccsds_concatenated_deframer_0, out, blocks_message_debug_0_0, print_pdu]
+- [satellites_ccsds_concatenated_deframer_0, out, satellites_kiss_transport_0, in]
+- [satellites_kiss_transport_0, out, blocks_message_debug_0, print_pdu]
+
+metadata:
+  file_format: 1
