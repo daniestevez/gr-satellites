@@ -628,6 +628,17 @@ specific to image reception.
 Codec2 UDP sink
 """""""""""""""
 
+The Codec2 UDP sink is used internally by the ``gr_satellites`` command line
+tool when decoding LilacSat-1. The LilacSat-1 decoder supports outputting Codec2
+digital voice frames by UDP. These frames can then be fed into the Codec2
+command line decoder.
+
+The Codec2 frames are 7 bytes long, and each is sent in a different UDP packet
+to ensure minimum latency.
+
+The Codec2 UDP sink has two parameters, which indicate the IP and port to send
+the frames to.
+
 .. _AX.25: http://www.ax25.net/
 .. _GOMspace NanoCom AX100: https://gomspace.com/shop/subsystems/communication-systems/nanocom-ax100.aspx
 .. _AO-40 FEC beacon: http://www.ka9q.net/papers/ao40tlm.html

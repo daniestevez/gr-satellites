@@ -20,4 +20,16 @@ templates:
     imports: import satellites.components.datasinks
     make: satellites.components.datasinks.codec2_udp_sink(ip=${ip}, port=${port}) 
 
+documentation: |-
+    Sends Codec2 digital voice frames by UDP
+
+    Each 7 byte frame is sent in a different UDP packet to ensure minimum latency
+
+    Input:
+        A stream of PDUs containing Codec2 frames
+
+    Parameters:
+        IP: destination IP to send the UDP packets to
+        Port: destination port to send the UDP packets to
+
 file_format: 1
