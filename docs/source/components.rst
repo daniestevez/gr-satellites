@@ -557,6 +557,12 @@ that is used to select the telemetry server to use.
 Hexdump sink
 """"""""""""
 
+The hexdump sink prints PDUs in hex to the standard output. It is a wrapper over
+the Message Debug standard GNU Radio block, so it uses the same output
+format. This block is used internally by the ``gr_satellites`` command line tool
+(see :ref:`Hex dump`), and can also be used in custom flowgraphs instead of
+Message Debug.
+
 KISS file sink
 """"""""""""""
 

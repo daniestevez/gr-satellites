@@ -317,6 +317,8 @@ This subsection explains in detail the different output options that can be used
 with the ``gr_satellites`` command line tool. The default behaviour when no
 options are specified has been described in the :ref:`Output` subsection above.
 
+.. _Hex dump:
+
 Hex dump
 """"""""
 

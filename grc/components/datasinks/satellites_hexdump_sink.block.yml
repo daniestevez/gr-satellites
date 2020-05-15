@@ -10,4 +10,12 @@ templates:
     imports: import satellites.components.datasinks
     make: satellites.components.datasinks.hexdump_sink()
 
+documentation: |-
+    Prints PDUs in hex to the standard output
+
+    This block is a wrapper over the Message Debug block
+
+    Input:
+        PDUs
+
 file_format: 1
