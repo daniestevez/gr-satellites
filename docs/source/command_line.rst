@@ -118,6 +118,8 @@ specify the ``satellite`` to be used as an argument immediately following
 				    
 .. _NORAD ID: https://en.wikipedia.org/wiki/Satellite_Catalog_Number
 
+.. _Specifying the input source:
+
 Specifying the input source
 """""""""""""""""""""""""""
 

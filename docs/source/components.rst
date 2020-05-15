@@ -32,6 +32,8 @@ pass their output to the input of the next step. These are the following:
 
 Below, the main component blocks in each category are described.
 
+.. _Data sources:
+
 Data sources
 ^^^^^^^^^^^^
 
@@ -565,6 +567,16 @@ Message Debug.
 
 KISS file sink
 """"""""""""""
+
+The KISS file sink can be used to store PDUs in a file using the
+`KISS protocol`_. This protocol is a simple format to mark frame
+boundaries. Files containing frames with the KISS protocol can then be read with
+the KISS file datasource (see :ref:`Data sources`) and with the
+``gr_satellites`` command line tool (see :ref:`Specifying the input source`).
+
+The KISS file sink block has two parameters. The File parameter is used to
+select the path of the output file. The Append file parameter can be used to
+overwrite or append to the output file.
 
 File and Image receivers
 """"""""""""""""""""""""

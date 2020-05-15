@@ -21,4 +21,14 @@ templates:
     imports: import satellites.components.datasinks
     make: satellites.components.datasinks.kiss_file_sink(${file}, append = ${append})
 
+documentation: |-
+    Saves PDUs to a file using the KISS protocol/format
+
+    Input:
+        PDUs with packets
+
+    Parameters:
+        File: path of the output file
+        Append file: selects whether the output file should be overwritten or appended to
+
 file_format: 1
