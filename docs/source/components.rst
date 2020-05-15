@@ -469,8 +469,93 @@ to use control bytes.
 Data sinks
 ^^^^^^^^^^
 
+Data sink components are the final consumers of the PDUs that contain the
+decoded frames. They can be used for several things, such as printing telemetry
+values, saving frames to a file, sending frames to an online telemetry database
+server, and reassembling files and images. The different data sinks available in
+gr-satellites are described below.
+
+Telemetry parser
+""""""""""""""""
+
+The telemetry parser uses `construct`_ to parse a PDU containing a telemetry
+frame into the different fields and prints the parsed values to the standard
+output or a file.
+
+The parser uses *telemetry definitions*, which are either ``Construct`` objects
+(typically a ``Struct``) or any other object supporting the ``parse()`` method in
+case more complex parsing behaviour is needed. The list of available telemetry
+definitions can be seen in ``python/telemetry/__index__.py``, or by calling
+``import satellites.telemetry; help(satellites.telemetry)`` in ``python3``.
+
+The figure below shows an example flowgraph of the Telemetry parser block, which can be
+found in ``examples/components/telemetry_paser.grc``. It is based
+on the U482C example described above. The packets sent by GOMX-1 are deframed
+and the the Telemetry parser is used to print out the telemetry values to the
+standard output.
+
+.. figure:: images/telemetry_parser_flowgraph.png
+    :alt: Usage of Telemetry parser in a flowgraph
+
+    Usage of Telemetry parser in a flowgraph
+
+The beginning of the ouptut produced by the Telemetry parser block can be seen below.
+
+.. code-block:: none
+
+   Container: 
+    csp_header = Container: 
+        priority = 2
+        source = 1
+        destination = 10
+        destination_port = 30
+        source_port = 0
+        reserved = 0
+        hmac = False
+        xtea = False
+        rdp = False
+        crc = False
+    beacon_time = 2015-03-31 20:57:01
+    beacon_flags = 121
+    beacon = Container: 
+        obc = Container: 
+            boot_count = 573
+            temp = ListContainer: 
+                -6.0
+                -4.0
+            panel_temp = ListContainer: 
+                0.0
+                -28.5
+                -26.75
+                -13.25
+                -28.25
+                -20.0
+
+The parameters used by the Telemetry parser are the following. The Telemetry
+definition parameter indicates the telemetry definition object, which must be an
+object in the ``satellites.telemetry`` module as described above. The Output
+drop down menu can be used to select the standard output or a file as the
+destination for the parser's output. If a file is selected, an additional
+parameter to select the file path appears. 
+
+Telemetry submit
+""""""""""""""""
+
+Hexdump sink
+""""""""""""
+
+KISS file sink
+""""""""""""""
+
+File and Image receivers
+""""""""""""""""""""""""
+
+Codec2 UDP sink
+"""""""""""""""
+
 .. _AX.25: http://www.ax25.net/
 .. _GOMspace NanoCom AX100: https://gomspace.com/shop/subsystems/communication-systems/nanocom-ax100.aspx
 .. _AO-40 FEC beacon: http://www.ka9q.net/papers/ao40tlm.html
 .. _CCSDS Blue Books: https://public.ccsds.org/Publications/BlueBooks.aspx
 .. _KISS protocol: http://www.ax25.net/kiss.aspx
+.. _construct: https://construct.readthedocs.io/

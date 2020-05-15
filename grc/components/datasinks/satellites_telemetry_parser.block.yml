@@ -31,4 +31,17 @@ templates:
         satellites.components.datasinks.telemetry_parser(${definition}, file = ${file})
         % endif
 
+documentation: |-
+    Parses telemetry frames according to a construct telemetry definition
+
+    The parser prints the output to the standard output or a file
+
+    Input:
+        PDUs containing telemetry frames
+
+    Parameters:
+        Telemetry Definition: the telemetry definition to use for parsing, which must be an object of satellites.telemetry supporting the parse() method
+        Output: selects standard output or file as output destination
+        File: selects the path of the output file
+
 file_format: 1
