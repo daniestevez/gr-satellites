@@ -101,8 +101,6 @@ from .reflect_bytes import reflect_bytes
 
 from .check_astrocast_crc import check_astrocast_crc
 
-from .qo100_telemetry_print import qo100_telemetry_print
-
 from .swiatowid_packet_crop import swiatowid_packet_crop
 from .check_swiatowid_crc import check_swiatowid_crc
 from .swiatowid_packet_split import swiatowid_packet_split

@@ -80,7 +80,6 @@ GR_PYTHON_INSTALL(
     reflect_bytes.py
     check_astrocast_crc.py
     ecss_pus.py
-    qo100_telemetry_print.py
     swiatowid_packet_crop.py
     check_swiatowid_crc.py
     swiatowid_packet_split.py

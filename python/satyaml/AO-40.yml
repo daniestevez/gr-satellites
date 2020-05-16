@@ -2,7 +2,7 @@ name: AO-40
 norad: 26609
 data:
   &tlm Telemetry:
-    decoder: qo100_telemetry_print
+    telemetry: qo100
 transmitters:
   400baud uncoded BPSK beacon:
     frequency: 2400.2e+6

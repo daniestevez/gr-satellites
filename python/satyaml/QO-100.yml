@@ -4,7 +4,7 @@ alternative_names:
 norad: 43700
 data:
   &tlm Telemetry:
-    decoder: qo100_telemetry_print
+    telemetry: qo100
 transmitters:
   400baud uncoded BPSK beacon:
     frequency: 10489.800e+6

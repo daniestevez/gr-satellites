@@ -68,7 +68,6 @@ install(FILES
     satellites_dstar_one_telemetry_parser.block.yml
     satellites_reflect_bytes.block.yml
     satellites_check_astrocast_crc.block.yml
-    satellites_qo100_telemetry_print.block.yml
     satellites_decode_rs_interleaved.block.yml
     satellites_swiatowid_packet_crop.block.yml
     satellites_check_swiatowid_crc.block.yml
