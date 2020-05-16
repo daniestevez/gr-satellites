@@ -27,7 +27,7 @@ in gr-satellites are also useful for other kinds RF communications protocols.
 ## Documentation
 
 gr-satellites [documentation](https://gr-satellites.readthedocs.io/) is hosted in
-[reathedocs.io](https://gr-satellites.readthedocs.io/).
+[reathedocs.io](https://readthedocs.io/).
 
 ## Branches and releases
 
