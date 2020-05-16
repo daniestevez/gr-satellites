@@ -6,10 +6,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0-rc1] - 2020-05-17
+
+Large refactor release bringing new functionality and improvements. This is an overview of the main changes:
+
+### Added
+- gr_satellites command line tool
+- Satellite decoder block
+- Components
+- SatYAML files
+- File and image receiver
+- Sphinx Documentation
+
+### Changed
+- Performance improvements to the demodulators
+
+### Removed
+- A number of deprecated low level blocks
+
 ## [2.3.2] - 2020-05-16
 ### Fixed
 - Bug in telemetry submitter caused by HTTP 400 error
-	
+
 ## [2.3.1] - 2020-04-11
 ### Fixed
 - Bug in FUNcube telemetry parser
@@ -153,7 +171,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v2.3.2...maint-3.8
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.0.0...master
+[3.0.0-rc1]: https://github.com/daniestevez/gr-satellites/compare/v2.3.2...v3.0.0-rc1
 [2.3.2]: https://github.com/daniestevez/gr-satellites/compare/v2.3.1...v2.3.2
 [2.3.1]: https://github.com/daniestevez/gr-satellites/compare/v2.3.0...v2.3.1
 [2.3.0]: https://github.com/daniestevez/gr-satellites/compare/v2.2.0...v2.3.0
