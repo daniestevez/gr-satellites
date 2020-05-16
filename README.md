@@ -68,6 +68,13 @@ Support for gr-satellites is handled only through
 so that the whole community can benefit, rather than through private
 channels such as email. Please understand this when asking for support.
 
+## Satellite teams
+
+Satellite teams interested in using gr-satellites for you groundstation
+solution, please read
+[this note](https://github.com/daniestevez/gr-satellites/blob/master/satellite_teams.md),
+especially if you will be using Amateur radio spectrum.
+
 ## Note
 
 Most of the information below in the README will disappear and be moved in some
