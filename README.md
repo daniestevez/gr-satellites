@@ -62,6 +62,13 @@ out-of-tree module. Detailed instructions about the required dependencies and
 how to build and install gr-satellites are given in the
 [documentation](https://gr-satellites.readthedocs.io/).
 
+## Support
+
+Support for gr-satellites is handled only through
+[Github issues](https://github.com/daniestevez/gr-satellites/issues)
+so that the whole community can benefit, rather than through private
+channels such as email. Please understand this when asking for support.
+
 ## Note
 
 Most of the information below in the README will disappear and be moved in some
