@@ -15,6 +15,10 @@ parameters:
     dtype: bool
     default: False
     hide: part
+-   id: subaudio
+    label: Subaudio
+    dtype: bool
+    default: False
 
 inputs:
 -   domain: stream
@@ -26,7 +30,7 @@ outputs:
 
 templates:
     imports: import satellites.components.demodulators
-    make: satellites.components.demodulators.fsk_demodulator(baudrate = ${baudrate}, samp_rate = ${samp_rate}, iq = ${iq})
+    make: satellites.components.demodulators.fsk_demodulator(baudrate = ${baudrate}, samp_rate = ${samp_rate}, iq = ${iq}, subaudio = ${subaudio})
 
 documentation: |-
     Demodulates an FSK signal
@@ -41,5 +45,6 @@ documentation: |-
         Baudrate: The FSK baudrate in symbols per second
         Sample rate: The input sample rate in samples per second
         IQ input: enables IQ (complex) input
+        Subaudio: use subaudio demodulation
 
 file_format: 1

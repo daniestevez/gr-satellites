@@ -170,11 +170,12 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_rate: samp_rate
+    subaudio: 'False'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [362, 217]
+    coordinate: [361, 209]
     rotation: 0
     state: true
 

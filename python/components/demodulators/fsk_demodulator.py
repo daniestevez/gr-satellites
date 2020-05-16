@@ -30,10 +30,12 @@ class fsk_demodulator(gr.hier_block2, options_block):
         sample_rate: Sample rate in samples per second (float)
         iq: Whether the input is IQ or real (bool)
         deviation: Deviation in Hz, negative inverts sidebands (float)
+        subaudio: Use subaudio demodulation (bool)
         dump_path: Path to dump internal signals to files (str)
         options: Options from argparse
     """
-    def __init__(self, baudrate, samp_rate, iq, deviation = None, dump_path = None, options = None):
+    def __init__(self, baudrate, samp_rate, iq, deviation = None, subaudio = False,
+                     dump_path = None, options = None):
         gr.hier_block2.__init__(self, "fsk_demodulator",
             gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
             gr.io_signature(1, 1, gr.sizeof_float))
@@ -62,6 +64,13 @@ class fsk_demodulator(gr.hier_block2, options_block):
             decimation = 1
         sps /= decimation
 
+        if subaudio:
+            # some not-so-bad filter parameters for subaudio processing
+            subaudio_cutoff = 2.0/3.0 * baudrate
+            subaudio_transition = subaudio_cutoff / 4.0
+            subaudio_taps = firdes.low_pass(1, samp_rate, subaudio_cutoff, subaudio_transition)
+            self.subaudio_lowpass = filter.fir_filter_fff(1, subaudio_taps)
+        
         # square pulse filter
         sqfilter_len = int(samp_rate / baudrate)
         taps = np.ones(sqfilter_len)/sqfilter_len
@@ -97,8 +106,11 @@ class fsk_demodulator(gr.hier_block2, options_block):
             self.connect((self.clock_recovery, 1), self.clock_recovery_err)
             self.connect((self.clock_recovery, 2), self.clock_recovery_T_inst)
             self.connect((self.clock_recovery, 3), self.clock_recovery_T_avg)
-        
-        self.connect(self.demod, self.lowpass, self.dcblock)
+
+        if subaudio:
+            self.connect(self.demod, self.subaudio_lowpass, self.lowpass, self.dcblock)
+        else:
+            self.connect(self.demod, self.lowpass, self.dcblock)
         if use_agc:
             self.connect(self.dcblock, self.agc, self.clock_recovery)
             if dump_path is not None:

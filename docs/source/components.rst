@@ -157,7 +157,9 @@ The figure below shows the options allowed by the FSK demodulator block. The
 Baudrate option is used to set the baudrate in symbols per second. The Sample
 rate option specifies the sample rate of the input. The IQ input option enables
 IQ (complex) input. The signal is expected to be centred at baseband (0Hz) when
-IQ input is selected.
+IQ input is selected. The Subaudio option enables subaudio demodulation, which
+is intended for subaudio telemetry under FM voice and includes an additional
+lowpass filter to filter out the voice.
     
 .. figure:: images/bpsk_demodulator_options.png
     :alt: Options of FSK demodulator

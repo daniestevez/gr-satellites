@@ -86,8 +86,12 @@ The modulations allowed in the ``modulation`` field are the following:
 
 * ``AFSK``, for which the :ref:`AFSK demodulator` is used
 
-* ``FSK``, for which the :ref:`FSK demodulator` is used
+* ``FSK``, for which the :ref:`FSK demodulator` with Subaudio set to ``False``
+  is used
 
+* ``FSK subaudio``, for which the :ref:`FSK demodulator` with Subaudio set to
+  ``True`` is used
+  
 * ``BPSK``. Coherent BPSK, for which the :ref:`BPSK demodulator` with
   Differential and Manchester set to ``False`` is used
 

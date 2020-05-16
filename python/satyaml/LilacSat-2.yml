@@ -12,6 +12,10 @@ transports:
     protocol: KISS no control byte
     data:
     - *tlm
+  &kiss3 KISS3:
+    protocol: KISS no control byte
+    data:
+    - *tlm
 transmitters:
   9k6 BPSK downlink:
     frequency: 437.200e+6
@@ -29,3 +33,11 @@ transmitters:
     frame size: 114
     transports:
     - *kiss2
+  300baud subaudio downlink:
+    frequency: 437.200e+6
+    modulation: FSK subaudio
+    baudrate: 300
+    framing: CCSDS Reed-Solomon
+    frame size: 114
+    transports:
+    - *kiss3

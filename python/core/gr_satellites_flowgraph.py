@@ -235,6 +235,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'BPSK Manchester' : set_options(demodulators.bpsk_demodulator, manchester = True),
         'DBPSK' : set_options(demodulators.bpsk_demodulator, differential = True),
         'DBPSK Manchester' : set_options(demodulators.bpsk_demodulator, differential = True, manchester = True),
+        'FSK subaudio' : set_options(demodulators.fsk_demodulator, subaudio = True),
     }
     _deframer_hooks = {
         'AX.25' : set_options(deframers.ax25_deframer, g3ruh_scrambler = False),
