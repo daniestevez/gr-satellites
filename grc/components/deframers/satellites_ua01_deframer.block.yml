@@ -1,0 +1,28 @@
+id: satellites_ua01_deframer
+label: UA01 Deframer
+category: '[Satellites]/Deframers'
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.deframers
+    make: satellites.components.deframers.ua01_deframer()
+
+documentation: |-
+    Deframes UA01 non-conformant AX.25 packets
+
+    This block performs two layers of NRZ-I decoding, G3RUH descrambling, frame boundary detection, bit de-stuffing, and CRC-16 checking.
+
+    Input:
+        A stream of soft symbols containing UA01 packets
+
+    Output:
+        PDUs with the deframed AX.25 packets
+
+file_format: 1

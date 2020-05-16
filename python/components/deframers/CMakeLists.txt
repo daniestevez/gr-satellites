@@ -56,6 +56,7 @@ GR_PYTHON_INSTALL(
     swiatowid_deframer.py
     tt64_deframer.py
     u482c_deframer.py
+    ua01_deframer.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/components/deframers
 )
 

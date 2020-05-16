@@ -98,4 +98,6 @@ gr_satellites TY-2 --wavfile ~/satellite-recordings/ty_2.wav --samp_rate 48e3
 echo "TY 4-01"
 gr_satellites "TY 4-01" --wavfile ~/satellite-recordings/ty_4.wav --samp_rate 48e3
 echo "Quetzal-1"
-gr_satellites Quetzal-1 --wavfile quetzal1.wav --samp_rate 48e3
+gr_satellites Quetzal-1 --wavfile ~/satellite-recordings/quetzal1.wav --samp_rate 48e3
+echo "UA01"
+gr_satellites UA01 --wavfile ~/satellite-recordings/ua01.wav --samp_rate 48e3  --costas_bw 150

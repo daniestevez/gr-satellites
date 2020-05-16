@@ -1,0 +1,16 @@
+name: UA01
+alternative_names:
+  - PolyITAN 2-SAU
+  - QB50 UA01
+norad: 42732
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  9k6 FSK downlink:
+    frequency: 436.600e+6
+    modulation: BPSK
+    baudrate: 9600
+    framing: UA01
+    data:
+    - *tlm

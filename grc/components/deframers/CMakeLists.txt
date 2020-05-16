@@ -42,5 +42,6 @@ install(FILES
     satellites_swiatowid_deframer.block.yml
     satellites_tt64_deframer.block.yml
     satellites_u482c_deframer.block.yml
+    satellites_ua01_deframer.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )

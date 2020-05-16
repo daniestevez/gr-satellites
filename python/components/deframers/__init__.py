@@ -52,3 +52,4 @@ from .snet_deframer import snet_deframer
 from .swiatowid_deframer import swiatowid_deframer
 from .tt64_deframer import tt64_deframer
 from .u482c_deframer import u482c_deframer
+from .ua01_deframer import ua01_deframer

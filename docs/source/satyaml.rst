@@ -206,6 +206,9 @@ The framings allowed in the ``framing`` field are the following:
 * ``OPS-SAT``, custom framing used by OPS-SAT, which consists of AX.25 frames
   with CCSDS Reed-Solomon codewords as payload
 
+* ``UA01``, non-AX.25 compliant framing used by QB50 UA01, which is like regular
+  AX.25 but with two layers of NRZ-I encoding
+  
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.
 
