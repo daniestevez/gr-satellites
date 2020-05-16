@@ -1,10 +1,8 @@
 gr-satellites's documentation
 =============================
 
-gr-satellites documentation is still in preparation...
-
-It will be released together with gr-satellites v3.0.0 (currently in beta in
-"next" branch)
+gr-satellites is a GNU Radio out-of-tree module with a collection of telemetry
+decoders for Amateur satellites.
 
 .. toctree::
    :maxdepth: 2
