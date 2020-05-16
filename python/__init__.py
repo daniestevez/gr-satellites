@@ -19,6 +19,11 @@ stack, the AO-40 protocol used in the FUNcube satellites, and several
 ad-hoc protocols used in other satellites.
 '''
 
+__version__ = 'v3.0.0-git'
+__author__ = 'Daniel Estevez'
+__copyright__ = 'Copyright 2016-2020 Daniel Estevez'
+__email__ = 'daniel@destevez.net'
+__license__ = 'GPL-3.0'
 
 # import swig generated symbols into the satellites namespace
 # this shouldn't fail, since the module is not python-only
