@@ -28,31 +28,38 @@ in gr-satellites are also useful for other kinds RF communications protocols.
 gr-satellites [documentation](https://gr-satellites.readthedocs.io/) is hosted in
 [reathedocs.io](https://readthedocs.io/).
 
-## Branches and releases
+## Releases and branches
 
-There are currently three development branches of gr-satellites:
+Currently there are the following series of releases in the history of
+gr-satellites:
 
-* `maint-3.7` Compatible with GNU Radio 3.7 only. No future development will be
-  done on this branch. Perhaps important changes, such as very popular
-  satellites, will be backported from the `maint-3.8` branch.
+* `v3.x.y` is the result of a large rearchitecture that introduces a lot of
+  new functionality and improvements. The rearchitecture started on September
+  2019 and was finished in May 2020.
 
-* `maint-3.8` Compatible with GNU Radio 3.8 only. Future development is being
-  doing in this branch, adding support to new satellites as they get
-  launched. If contributing to gr-satellites, please send pull requests to
-  `maint-3.8` if in doubt.
+* `v2.x.y` is a series of releases compatible with GNU Radio 3.8 that existed
+  between September 2019 and May 2020. The functionality in this series is
+  equivalent to the `v1.x.y` series.
 
-* `next` Branch where a large refactor of gr-satellites bringing important
-  changes is being done. Active development is happening, but there are still
-  several months of until the `next` branch is fully usable.
+* `v1.x.y` the original series of releases, which was compatible with GNU Radio
+  3.7. Development in this series stopped on September 2019 with the appearance
+  of the `v2.x.y` line, but some bugfix releases have been published afterward.
 
-Starting in 2020, `master` is set equal to `maint-3.8` (before this, it was set
-equal to `maint-3.7`).
+The repository is organized in the following branches:
 
-Regarding the numbered releases, the `1.x.y` series is used for stable releases
-on the `maint-3.7` branch (and so, releases supporting GNU Radio 3.7), the
-`2.x.y` series is used for stable releases on the `maint-3.8` (and so, releases
-supporting GNU Radio 3.8), and alpha releases are done on the `next` branch
-showcasing some of the latest developments.
+* `master` is where the active development happens. From time to time, features
+  will be frozen in a new release.
+
+* `maint-3.8` is the branch where releases in the current `v3.x.y` line are
+  published. This branch is compatible with GNU Radio 3.8.
+
+* `maint-3.8-v2` is the branch where releases in the `v2.x.y` line are
+  published. This branch is compatible with GNU Radio 3.8.
+
+* `maint-3.7` is the branch where releases in the `v1.x.y` line are
+  published. This branch is compatible with GNU Radio 3.7.
+
+In general, pull requests should be submitted to `master`.
 
 ## Installation
 
