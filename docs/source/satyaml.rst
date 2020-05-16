@@ -2,3 +2,253 @@
 
 SatYAML files
 =============
+
+SatYAML files are used by gr-satellites to describe the properties of each
+specific satellite, such as what kind of protocols and telemetry formats it
+uses. They are `YAML`_ files and are based around the concept of
+components. Using SatYAML files, the ``gr_satellites`` command line tool and the
+Satellite decoder block can figure out which components to put together to
+decode a particular satellite.
+
+
+SatYAML files are stored in the ``python/satyaml`` directory. Below we show the
+SatYAML file ``1KUNS-PF.yml`` to give an overall idea of the format of these
+files.
+
+.. code-block:: none
+
+   name: 1KUNS-PF
+   alternative_names:
+   norad: 43466
+   data:
+     &tlm Telemetry:
+       telemetry: sat_1kuns_pf
+     &image JPEG Images:
+       image: sat_1kuns_pf
+   transmitters:
+     1k2 FSK downlink:
+       frequency: 437.300e+6
+       modulation: FSK
+       baudrate: 1200
+       framing: AX100 ASM+Golay
+       data:
+       - *tlm
+       - *image
+     9k6 FSK downlink:
+       frequency: 437.300e+6
+       modulation: FSK
+       baudrate: 9600
+       framing: AX100 ASM+Golay
+       data:
+       - *tlm
+       - *image
+
+First we can see some fields that give basic information about the
+satellite. The ``name`` field indicates the main name of the satellite, which is
+used by ``gr_satellites`` and the Satellite decoder block when calling up the
+satellite by name. There is an optional list of ``alternative_names`` which can
+also be used to call up the satellite by name. The ``norad`` field gives the
+NORAD ID of the satellite and it is used when calling up the satellite by
+NORAD ID.
+
+Additional telemetry servers used for this satellite can be specified with the
+``telemetry_servers`` field (see ``python/satyaml/PW-Sat2.yml`` for an example).
+
+The ``data`` section indicates the different kinds of data transmissions that
+the satellite makes, and gives the decoders for them. The following can be used:
+
+* ``telemetry``, which specifies a telemetry decoder giving out the telemetry
+  definition (see :ref:`Telemetry parser`)
+
+* ``file`` or ``image``, which specify a file receiver or image receiver giving
+  out the ``FileReceiver`` or ``ImageReceiver`` class (see :ref:`File and Image receivers`)
+
+* ``decoder``, which specifies a custom decoder from
+  ``satellites.components.datasinks``. This is used for more complex decoders
+  not covered by the above.
+
+* ``unknown``, which specifies that the data format is not known, so hex dump
+  should be used to show the data to the user
+
+The ``transmitters`` section lists the different transmitters used by the
+satellite (a transmitter is understood as a specific combination of a frequency,
+modulation and coding), their properties, and ties them to the entries in the
+``data`` section according as to which data is sent by each of the transmitters.
+
+Each transmitter has a name (such as ``1k2 FSK downlink``) which is currently
+used only for documentation purposes, a ``frequency``, which gives the downlink
+frequency in Hz (currently used only for documentation), a ``modulation``, that
+specifies the demodulator component to use, a ``baudrate``, in symbols per
+second, a ``framing``, that specifies the deframer to use, and a list of
+``data`` that has entries referring to the items in the ``data`` section.
+
+The modulations allowed in the ``modulation`` field are the following:
+
+* ``AFSK``, for which the :ref:`AFSK demodulator` is used
+
+* ``FSK``, for which the :ref:`FSK demodulator` is used
+
+* ``BPSK``. Coherent BPSK, for which the :ref:`BPSK demodulator` with
+  Differential and Manchester set to ``False`` is used
+
+* ``BPSK Manchester``. Coherent Manchester-encoded BPSK, for which the
+  :ref:`BPSK demodulator` with Differential set to ``False`` and Manchester set
+  to ``True`` is used
+
+* ``DBPSK``. Differentially-encoded BPSK, for which the :ref:`BPSK demodulator`
+  with Differential set to ``True`` and Manchester set to ``False`` is used to
+  perform non-coherent demodulation
+
+* ``DBPSK Manchester``. Differentially-encoded and Manchester-encoded BPSK, for
+  which the :ref:`BPSK demodulator` with Differential and Manchester set to
+  ``True`` is used to perform non-coherent demodulation
+
+The ``AFSK`` modulation also needs the ``deviation`` and ``af_carrier`` fields
+that indicate the AFSK tone frequencies in Hz, as in the AFSK demodulator.
+  
+The framings allowed in the ``framing`` field are the following:
+
+* ``AX.25``, `AX.25`_ with no scrambling (see :ref:`AX.25 deframer`)
+
+* ``AX.25 G3RUH``, `AX.25`_ with G3RUH scrambling (see :ref:`AX.25 deframer`)
+
+* ``AX100 ASM+Golay``, GOMspace NanoCom AX100 in ASM+Golay mode (see
+  :ref:`GOMspace AX100 deframer`)
+
+* ``AX100 Reed Solomon``, GOMspace NanoCom AX100 in Reed-Solomon mode (see
+  :ref:`GOMspace AX100 deframer`)
+
+* ``U482C``, the GOMspace NanoCom U482C (see :ref:`GOMspace U482C deframer`)
+
+* ``AO-40 FEC``, the AO-40 FEC protocol (see :ref:`AO-40 FEC deframer`)
+
+* ``AO-40 FEC short``, AO-40 FEC protocol with short frames, as used by SMOG-P
+  and ATL-1
+
+* ``CCSDS Reed-Solomon``, CCSDS Reed-Solomon TM codewords with conventional RS
+  basis (see :ref:`CCSDS deframers`)
+
+* ``CCSDS Reed-Solomon dual``, CCSDS Reed-Solomon TM codewords with dual RS
+  basis (see :ref:`CCSDS deframers`)
+
+* ``CCSDS Reed-Solomon differential``, CCSDS Reed-Solomon TM codewords with
+  differential encoding and conventional RS basis (see :ref:`CCSDS deframers`)
+
+* ``CCSDS Reed-Solomon dual differential``, CCSDS Reed-Solomon TM codewords with
+  differential encoding and dual RS basis (see :ref:`CCSDS deframers`)
+
+* ``CCSDS Concatenated``, CCSDS Concatenated TM codewords with conventional RS
+  basis (see :ref:`CCSDS deframers`)
+
+* ``CCSDS Concatenated dual``, CCSDS concatenated TM codewords with dual RS
+  basis (see :ref:`CCSDS deframers`)
+
+* ``CCSDS Concatenated differential``, CCSDS Concatenated TM codewords with
+  differential encoding and conventional RS basis (see :ref:`CCSDS deframers`)
+
+* ``CCSDS Concatenated dual differential``, CCSDS Concatenated TM codewords with
+  differential encoding and dual RS basis (see :ref:`CCSDS deframers`)
+
+* ``3CAT-1``, custom framing used by 3CAT-1. This uses a CC1101 chip with PN9
+  scrambler and a (255,223) Reed-Solomon code for the payload
+
+* ``Astrocast FX.25 NRZ-I``, custom framing used by Astrocast 0.1. This is a
+  somewhat non compliant `FX.25`_ variant.
+
+* ``Astrocast FX.25 NRZ``, custom framing used by Astrocast 0.1. This is a
+  somewhat non compliant `FX.25`_ variant that is identical to the FX.25 NRZ-I
+  mode except that NRZ is used instead of NRZ-I.
+
+* ``Astrocast 9k6``, custom framing used by Astrocast 0.1. It uses five
+  interleaved Reed-Solomon (255,223) codewords and the CCSDS synchronous scrambler.
+
+* ``AO-40 uncoded``, uncoded AO-40 beacon. It uses 512 byte frames and a CRC-16
+
+* ``TT-64``, custom framing used by QB50 AT03, which uses a Reed-Solomon (64,48)
+  code and CRC16-ARC
+
+* ``ESEO``, custom framing used by ESEO. It uses a custom protocol vaguely
+  similar to AX.25 with some form of G3RUH scrambling and a (255,239)
+  Reed-Solomon code
+
+* ``Lucky-7``, custom framing used by Lucky-7, which uses a SiLabs Si4463
+  transceiver with a PN9 scrambler and a CRC-16
+
+* ``Reaktor Hello World``, custom framing used by Reaktor Hello World. It uses a
+  Texas Intruments CC1125 transceiver with a PN9 scrambler and a CRC-16
+
+* ``S-NET``, custom framing used by S-NET, which uses BCH FEC and interleaving
+
+* ``Swiatowid``, custom framing used by Swiatowid for image transmission, which
+  includes a (58,48) Reed-Solomon code and a CRC-16CCITT.
+
+* ``NuSat``, custom framing used by ÑuSat with a (64, 60) Reed-Solomon code and a CRC-8
+
+* ``K2SAT``, custom framing used by K2SAT for image transmission. This uses the
+  CCSDS r=1/2, k=7 convolutional code and the IESS-308 (V.35) asynchronous scrambler.
+
+* ``LilacSat-1``, low latency decoder for LilacSat-1 codec2 digital voice and
+  image data. This uses the CCSDS r=1/2, k=7 convolutional code and interleaved
+  telemetry and Codec2 digital voice
+
+* ``AAUSAT-4``, custom framing used by AAUSAT-4, which is similar to the CCSDS
+  Concatenated coding
+
+* ``NGHam``, `NGHam`_ protocol
+
+* ``NGHam no Reed Solomon``, `NGHam`_ protocol without Reed-Solomon, as used by
+  FloripaSat-1
+
+* ``SMOG-P RA``, Repeat-Accumulate FEC as used by SMOG-P and ATL-1
+
+* ``SMOG-P Signalling``, custom signalling frames as used by SMOG-P and ATL-1
+
+* ``OPS-SAT``, custom framing used by OPS-SAT, which consists of AX.25 frames
+  with CCSDS Reed-Solomon codewords as payload
+
+Some framings, such as the CCSDS protocols need the additional field
+``frame size`` to indicate the frame size.
+
+The following example shows how transports are indicated in SatYAML files.
+
+.. code-block:: none
+
+   name: KS-1Q
+   norad: 41845
+   data:
+     &tlm Telemetry:
+       telemetry: csp
+   transports:
+     &kiss KISS:
+       protocol: KISS KS-1Q
+       data:
+       - *tlm
+   transmitters:
+     20k FSK downlink:
+       frequency: 436.500e+6
+       modulation: FSK
+       baudrate: 20000
+       framing: CCSDS Concatenated dual
+       frame size: 223
+       transports:
+      - *kiss
+
+Instead of specifying a ``data`` entry in the transmitter, a ``transports``
+entry is used instead. Transports are defined in a section above. They have a
+name, used for documentation purposes, a ``protocol``, and a list of ``data``
+entries to tie them with the appropriate data decoders.
+
+The allowable transport protocols are the following:
+
+* ``KISS``, KISS protocol with a control byte (see :ref:`KISS transport`)
+
+* ``KISS no control byte``, KISS protocol with no control byte (see
+  :ref:`KISS transport`)
+
+* ``KISS KS-1Q``, KISS variant used by KS-1Q, which includes a header before the
+  KISS bytes
+  
+.. _YAML: https://yaml.org/
+.. _AX.25: http://www.ax25.net/
+.. _FX.25: https://en.wikipedia.org/wiki/FX.25_Forward_Error_Correction
+.. _NGHam: https://github.com/skagmo/ngham

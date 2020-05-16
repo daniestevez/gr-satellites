@@ -67,6 +67,8 @@ They take RF signal samples as input, and output soft symbols, as a stream of
 
 The demodulator blocks and their parameters are described below.
 
+.. _BPSK demodulator:
+
 BPSK demodulator
 """"""""""""""""
 
@@ -119,7 +121,9 @@ The IQ input option enables IQ (complex) input.
     :alt: Options of BPSK demodulator
 
     Options of BPSK demodulator
-    
+
+.. _FSK demodulator:
+
 FSK demodulator
 """""""""""""""
 
@@ -160,6 +164,8 @@ IQ input is selected.
 
     Options of FSK demodulator
 
+.. _AFSK demodulator:
+    
 AFSK demodulator
 """"""""""""""""
 
@@ -228,6 +234,8 @@ Here, the most popular deframers are described. For ad-hoc deframers that are
 used in few satellites, the reader is referred to the documentation of each of
 the blocks in GNU Radio companion.
 
+.. _AX.25 deframer:
+
 AX.25 deframer
 """"""""""""""
 
@@ -251,6 +259,8 @@ the output with the Message Debug block.
 
 The AX.25 deframer block has a single parameter that indicates whether G3RUH
 descrambling should be performed or not.
+
+.. _GOMspace AX100 deframer:
 
 GOMspace AX100 deframer
 """""""""""""""""""""""
@@ -284,6 +294,8 @@ Debug blocks.
 The AX100 deframer only has two parameters, the Mode parameter indicates the
 mode, as described above, and the Syncword threshold parameters specifies how
 many bit errors are allowed in the detection of the 32 bit syncword.
+
+.. _GOMspace U482C deframer:
 
 GOMspace U482C deframer
 """""""""""""""""""""""
@@ -320,6 +332,7 @@ output is printed in hex using the Message Debug block.
 The U482C deframer has a single parameter, which indicates the number of bit
 errors that are allowed in the syncword detection.
 
+.. _AO-40 FEC deframer:
 
 AO-40 FEC deframer
 """"""""""""""""""
@@ -350,6 +363,8 @@ parameter indicates the number of bit errors to allow in the syncword
 detection. The Use short frames parameter toggles the usage of short
 frames. This is a variant of the AO-40 FEC protocol which is based on a single
 Reed-Solomon codeword and is used by SMOG-P and ATL-1.
+
+.. _CCSDS deframers:
 
 CCSDS deframers
 """""""""""""""
@@ -405,6 +420,8 @@ functionalities implemented by these upper layer protocols include
 fragmentation/defragmentation.
 
 The only transport available so far in gr-satellites is the KISS transport.
+
+.. _KISS transport:
 
 KISS transport
 """"""""""""""
@@ -476,6 +493,8 @@ decoded frames. They can be used for several things, such as printing telemetry
 values, saving frames to a file, sending frames to an online telemetry database
 server, and reassembling files and images. The different data sinks available in
 gr-satellites are described below.
+
+.. _Telemetry parser:
 
 Telemetry parser
 """"""""""""""""
@@ -577,6 +596,8 @@ the KISS file datasource (see :ref:`Data sources`) and with the
 The KISS file sink block has two parameters. The File parameter is used to
 select the path of the output file. The Append file parameter can be used to
 overwrite or append to the output file.
+
+.. _File and Image receivers:
 
 File and Image receivers
 """"""""""""""""""""""""
