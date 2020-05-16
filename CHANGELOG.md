@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.8.4] - 2020-05-16
 ## Fixed
 - Bug in telemetry submitter caused by HTTP 400 error
 
@@ -126,7 +127,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v1.8.3...HEAD
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v1.8.4...maint-3.7
+[1.8.4]: https://github.com/daniestevez/gr-satellites/compare/v1.8.3..v1.8.4
 [1.8.3]: https://github.com/daniestevez/gr-satellites/compare/v1.8.2..v1.8.3
 [1.8.2]: https://github.com/daniestevez/gr-satellites/compare/v1.8.1...v1.8.2
 [1.8.1]: https://github.com/daniestevez/gr-satellites/compare/v1.8.0...v1.8.1
