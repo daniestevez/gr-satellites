@@ -1,5 +1,4 @@
 # gr-satellites
-GNU Radio decoders for Amateur satellites.
 
 gr-satellites is a GNU Radio out-of-tree module encompassing a collection of
 telemetry decoders that supports many different Amateur satellites. This
