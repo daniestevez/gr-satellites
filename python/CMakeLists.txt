@@ -85,7 +85,6 @@ GR_PYTHON_INSTALL(
     swiatowid_packet_split.py
     manchester_sync.py
     header_remover.py
-    smogp_signalling.py
     smogp_packet_filter.py
     aausat4_remove_fsm.py
     ngham_packet_crop.py

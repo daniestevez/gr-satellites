@@ -47,6 +47,7 @@ from .sat_1kuns_pf import sat_1kuns_pf
 from .sat_3cat_1 import sat_3cat_1
 from .sat_3cat_2 import sat_3cat_2
 from .smogp import smogp
+from .smogp import smogp_signalling
 from .snet import snet
 from .suomi100 import suomi100
 from .by70_1 import taurus1

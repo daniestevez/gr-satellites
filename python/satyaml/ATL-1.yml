@@ -6,7 +6,7 @@ data:
   &tlm Telemetry:
     telemetry: smogp
   &signalling Signalling:
-    decoder: smogp_signalling
+    telemetry: smogp_signalling
   &spectrum Spectrum:
     files: smogp
 transmitters:
