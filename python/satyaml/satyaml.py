@@ -91,6 +91,9 @@ class SatYAML:
         for yml in self.yaml_files():
             self.check_yaml(yml)
 
+    def load_all_yaml(self):
+        return [self.get_yamldata(f) for f in self.yaml_files()]
+            
     def yaml_files(self):
         return self._path.glob('*.yml')
 
