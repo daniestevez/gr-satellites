@@ -57,8 +57,6 @@ from .swap_header import swap_header
 from .submit import submit
 from .print_timestamp import print_timestamp
 
-from .funcube_telemetry_parser import funcube_telemetry_parser
-
 from .adsb_kml import adsb_kml
 
 from .ks1q_header_remover import ks1q_header_remover

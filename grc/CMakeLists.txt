@@ -34,7 +34,6 @@ install(FILES
     satellites_submit.block.yml
     satellites_print_timestamp.block.yml
     satellites_ao40_rs_decoder.block.yml
-    satellites_funcube_telemetry_parser.block.yml
     satellites_adsb_kml.block.yml
     satellites_ax100_decode.block.yml
     satellites_u482c_decode.block.yml

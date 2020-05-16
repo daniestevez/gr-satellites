@@ -427,4 +427,84 @@ def WholeOrbit(satid):
         return WholeOrbitFC2
     return Bytes(23)
 
-funcube = Frame
+WHOLEORBIT_SIZE = 23
+PAYLOAD_SIZE = 200
+WHOLEORBIT_MAX = 12
+
+class Funcube:
+    """Telemetry parser for FUNcube
+
+    This is a stateful parser that reassembles Whole Orbit data
+    from consecutive frames
+    """
+    def __init__(self):
+        self.last_chunk = None
+        self.last_seq = None
+
+    def parse(self, packet):
+        if len(packet) != 256:
+            return
+
+        data = Frame.parse(packet)
+
+        if not data:
+            return
+
+        out = list()
+
+        out.append(f'Frame type {data.header.frametype}')
+        if not hasattr(data.header.frametype, '__getitem__'):
+            print('Unknown frame type. Not processing frame.')
+            return
+
+        out.append('-'*40)
+        out.append('Realtime telemetry:')
+        out.append('-'*40)
+        out.append(str(data.realtime))
+        out.append('-'*40)
+        if data.header.frametype[:2] == 'FM':
+            out.append(f'Fitter Message {data.header.frametype[2]}')
+            out.append('-'*40)
+            out.append(str(data.payload))
+        elif data.header.frametype[:2] == 'HR':
+            out.append(f'High resolution {data.header.frametype[2]}')
+            out.append('-'*40)
+            out.append(str(data.payload))
+        elif data.header.frametype[:2] == 'WO':
+            chunk = int(data.header.frametype[2:])
+            try:
+                seq = data.realtime.search('seqnumber')
+            except AttributeError:
+                out.append('Unknown realtime format. Unable to get seqnumber.\n')
+                return '\n'.join(out)
+            remaining = (PAYLOAD_SIZE*chunk) % WHOLEORBIT_SIZE
+            recover = True
+            if chunk != 0:
+                if self.last_chunk == chunk - 1 and self.last_seq == seq:
+                    # can recover for last WO packet
+                    wo = self.last_wo + data.payload[:-remaining]
+                else:
+                    recover = False
+                    last_chunk_remaining = (PAYLOAD_SIZE*(chunk-1)) % WHOLEORBIT_SIZE
+                    wo = data.payload[WHOLEORBIT_SIZE-last_chunk_remaining:-remaining]
+            else:
+                wo = data.payload[:-remaining]
+            assert len(wo) % WHOLEORBIT_SIZE == 0
+            wos = WholeOrbit(data.header.satid)[len(wo) // WHOLEORBIT_SIZE].parse(wo)
+            self.last_chunk = chunk
+            self.last_wo = data.payload[-remaining:]
+            self.last_seq = seq
+            out.append(f'Whole orbit {chunk}')
+            if not recover:
+                out.append('(could not recover data from previous beacon)')
+            out.append('-'*40)
+            out.append(str(wos))
+            if chunk == WHOLEORBIT_MAX:
+                out.append('-'*40)
+                # callsign included
+                out.append(f'Callsign: {Callsign.parse(self.last_wo)}')
+        out.append('')
+
+        return '\n'.join(out)
+
+funcube = Funcube()

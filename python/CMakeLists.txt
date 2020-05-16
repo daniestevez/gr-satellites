@@ -50,7 +50,6 @@ GR_PYTHON_INSTALL(
     swap_header.py
     submit.py
     print_timestamp.py
-    funcube_telemetry_parser.py
     adsb_kml.py
     ks1q_header_remover.py
     ao40_uncoded_crc.py
