@@ -63,7 +63,8 @@ class fsk_demodulator(gr.hier_block2, options_block):
         sps /= decimation
 
         # square pulse filter
-        taps = np.ones(int(sps))/int(sps)
+        sqfilter_len = int(samp_rate / baudrate)
+        taps = np.ones(sqfilter_len)/sqfilter_len
         self.lowpass = filter.fir_filter_fff(decimation, taps)
 
         self.dcblock = filter.dc_blocker_ff(ceil(sps * 32), True)
