@@ -28,11 +28,6 @@ storing to file, etc.)
 The input to these blocks are PDUs with the frames.
 '''
 
-# Temporary hacks: This should become full-fledged data sinks
-from ... import qo100_telemetry_print
-from ... import smogp_signalling
-from ... import funcube_telemetry_parser
-
 from .codec2_udp_sink import codec2_udp_sink
 from .file_receiver import file_receiver
 from .hexdump_sink import hexdump_sink
