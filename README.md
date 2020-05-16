@@ -46,9 +46,8 @@ There are currently three development branches of gr-satellites:
   changes is being done. Active development is happening, but there are still
   several months of until the `next` branch is fully usable.
 
-Currently, `master` is set equal  to `maint-3.7`, as it seems that most people
-still use GNU Radio 3.7. When GNU Radio 3.8 becomes more popular, `master` will
-be set to `maint-3.8`.
+Starting in 2020, `master` is set equal to `maint-3.8` (before this, it was set
+equal to `maint-3.7`).
 
 Regarding the numbered releases, the `1.x.y` series is used for stable releases
 on the `maint-3.7` branch (and so, releases supporting GNU Radio 3.7), the
@@ -196,7 +195,7 @@ telemetry packet in the terminal as soon as it receives it.
     use FM mode to receive this satellite (437.485MHz).
   * `atl_1`
     [ATL-1](https://space.skyrocket.de/doc_sdat/atl-1.htm), which
-    transmits 1.25k FSK telemetry in the 70cm band. It uses the AO-40 FEC protocol, which includes
+    transmits 1.25k, 2.5k, 5k or 12.5k FSK telemetry in the 70cm band. It uses the AO-40 FEC protocol, which includes
     block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
     two interleaved (160,128) Reed-Solomon codes. You must use FM mode
     to receive this satellite (437.175MHz).
@@ -487,7 +486,7 @@ telemetry packet in the terminal as soon as it receives it.
     scrambler. You must use wide SSB mode to receive this satellite (436.375MHz).
   * `smog_p`
     [SMOG-P](https://space.skyrocket.de/doc_sdat/smog-p.htm), which
-    transmits 1.25k or 5k FSK telemetry in the 70cm band. It uses the AO-40 FEC protocol, which includes
+    transmits 1.25k, 2.5k, 5k or 12.5k FSK telemetry in the 70cm band. It uses the AO-40 FEC protocol, which includes
     block interleaving, an r=1/2, k=7 convolutional code, CCSDS scrambling and
     two interleaved (160,128) Reed-Solomon codes. You must use FM mode
     to receive this satellite (437.150MHz).

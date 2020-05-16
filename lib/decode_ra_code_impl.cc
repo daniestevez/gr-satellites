@@ -92,7 +92,7 @@ namespace gr {
       ra_code_length = d_ra_context->ra_code_length;
 
       if (pmt::length(msg) != ra_code_length * RA_BITCOUNT) {
-	fprintf(stderr, "message length: %d, expected: %d\n", pmt::length(msg), ra_code_length * RA_BITCOUNT);
+	fprintf(stderr, "message length: %ld, expected: %d\n", (long) pmt::length(msg), ra_code_length * RA_BITCOUNT);
 	GR_LOG_ERROR(d_logger, "Invalid message length");
 	return;
       }

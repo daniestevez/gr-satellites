@@ -1,7 +1,8 @@
 title: gr-satellites
-brief: Decoders for Amateur satellites
+brief: A collection of decoders for Amateur satellites
 tags:
   - satellites
+  - amateur
   - ccsds
   - fec
 author:
@@ -10,6 +11,7 @@ copyright_owner:
   - Daniel Estévez
 license: GPLv3
 repo: https://github.com/daniestevez/gr-satellites
+gr_supported_version: v3.8
 #website: <module_website> # If you have a separate project website, put it here
 #icon: <icon_url> # Put a URL to a square image here that will be used as an icon on CGRAN
 ---
