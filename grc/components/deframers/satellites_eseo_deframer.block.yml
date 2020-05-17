@@ -20,4 +20,18 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.eseo_deframer(syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes ESEO custom frames
+
+    The frames use G3RUH scrambling and Reed-Solomon
+
+    Input:
+        A stream of soft symbols containing ESEO frames
+
+    Output:
+        PDUs with the deframed ESEO frames
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+
 file_format: 1

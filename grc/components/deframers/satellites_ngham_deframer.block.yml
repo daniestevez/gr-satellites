@@ -25,4 +25,19 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.ngham_deframer(decode_rs = ${decode_rs}, syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes NGHam packets
+
+    The NGHam protocol is described in https://github.com/skagmo/ngham
+
+    Input:
+        A stream of soft symbols containing NGHam packets
+
+    Output:
+        PDUs with the deframed NGHam packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+        Use Reed-Solomon: enable or disable Reed-Solomon decoding
+
 file_format: 1

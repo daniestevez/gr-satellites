@@ -20,4 +20,18 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.swiatowid_deframer(syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes Swiatowid image packets
+
+    The frames use a (58,48) Reed-Solomon code and a CRC-16CCITT
+
+    Input:
+        A stream of soft symbols containing Swiatowid image packets
+
+    Output:
+        PDUs with the deframed Swiatowid image packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+
 file_format: 1

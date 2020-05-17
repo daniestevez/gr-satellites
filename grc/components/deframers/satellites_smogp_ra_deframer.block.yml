@@ -24,4 +24,20 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.smogp_ra_deframer(frame_size = ${frame_size}, syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes SMOG-P RA FEC frames
+
+    The frames use a Repeat-Accumulate FEC
+
+    Input:
+        A stream of soft symbols containing RA frames
+
+    Output:
+        PDUs with the decoded RA frames
+
+    Parameters:
+        Frame size: size of the decode frame in bytes
+        Syncword threshold: number of bit errors to allow in syncword detection
+
+
 file_format: 1

@@ -20,4 +20,18 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.aausat4_deframer(syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes custom packets from AAUSAT-4
+
+    The AAUSAT-4 framing is similar to the CCSDS concatenated protocol
+
+    Input:
+        A stream of soft symbols containing AAUSAT-4 packets
+
+    Output:
+        PDUs with the deframed AAUSAT-4 packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+
 file_format: 1

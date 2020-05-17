@@ -20,4 +20,19 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.snet_deframer(syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes S-NET packets
+
+    The frames use BCH FEC and interleaving
+    
+    Input:
+        A stream of soft symbols containing S-NET packets
+
+    Output:
+        PDUs with the deframed S-NET packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+
+
 file_format: 1

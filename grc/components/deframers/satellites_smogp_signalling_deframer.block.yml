@@ -20,4 +20,16 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.smogp_signalling_deframer(syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes SMOG-P signalling frames
+
+    Input:
+        A stream of soft symbols containing signalling frames
+
+    Output:
+        PDUs with the deframed signalling frames
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+
 file_format: 1

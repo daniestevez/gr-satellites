@@ -20,4 +20,18 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.astrocast_9k6_deframer(syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes Astrocast 9k6 packets
+
+    The frames use Reed-Solomon and the CCSDS synchronous scrambler
+
+    Input:
+        A stream of soft symbols containing Astrocast 9k6 packets
+
+    Output:
+        PDUs with the deframed Astrocast 9k6 packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+
 file_format: 1

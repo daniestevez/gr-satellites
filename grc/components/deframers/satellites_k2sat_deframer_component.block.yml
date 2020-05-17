@@ -20,4 +20,19 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.k2sat_deframer(syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes K2SAT image packets
+
+    The frames use the CCSDS r=1/2, k=7 convolutional code and the IESS-308 (V.35) asynchronous scrambler
+    
+    Input:
+        A stream of soft symbols containing K2SAT image packets
+
+    Output:
+        PDUs with the deframed K2SAT image packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+
+
 file_format: 1

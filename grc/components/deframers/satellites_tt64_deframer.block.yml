@@ -20,4 +20,18 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.tt64_deframer(syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes packets with the TT64 protocol
+
+    The TT64 protcol is used by QB50 AT03 and uses a Reed-Solomon (64,48) code and CRC16-ARC
+
+    Input:
+        A stream of soft symbols containing TT64 packets
+
+    Output:
+        PDUs with the deframed TT64 packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+
 file_format: 1

@@ -20,4 +20,18 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.nusat_deframer(syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes Nusat packets
+
+    The frames use a a (64, 60) Reed-Solomon code and a CRC-8
+
+    Input:
+        A stream of soft symbols containing NuSat packets
+
+    Output:
+        PDUs with the deframed NuSat packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+
 file_format: 1

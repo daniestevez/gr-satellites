@@ -20,4 +20,18 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.ao40_uncoded_deframer(syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes AO-40 uncoded packets
+
+    The packets have 512 bytes of payload and a CRC-16
+
+    Input:
+        A stream of soft symbols containing AO-40 uncoded packets
+
+    Output:
+        PDUs with the deframed AO-40 packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+
 file_format: 1
