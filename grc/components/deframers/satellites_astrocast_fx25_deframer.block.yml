@@ -26,4 +26,17 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.astrocast_fx25_deframer(nrzi = ${nrzi}, syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes Astrocast somewhat-noncompliant FX.25 packets
+
+    Input:
+        A stream of soft symbols containing Astrocast FX.25 packets
+
+    Output:
+        PDUs with the deframed Astrocast FX.25 packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+        Coding: selects NRZ-I or NRZ coding
+
 file_format: 1

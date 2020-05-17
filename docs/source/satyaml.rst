@@ -71,9 +71,10 @@ the satellite makes, and gives the decoders for them. The following can be used:
   should be used to show the data to the user
 
 The ``transmitters`` section lists the different transmitters used by the
-satellite (a transmitter is understood as a specific combination of a frequency,
-modulation and coding), their properties, and ties them to the entries in the
+satellite, their properties, and ties them to the entries in the
 ``data`` section according as to which data is sent by each of the transmitters.
+A transmitter is understood as a specific combination of a frequency,
+modulation and coding.
 
 Each transmitter has a name (such as ``1k2 FSK downlink``) which is currently
 used only for documentation purposes, a ``frequency``, which gives the downlink

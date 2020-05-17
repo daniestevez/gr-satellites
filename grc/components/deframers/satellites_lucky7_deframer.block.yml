@@ -20,4 +20,18 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.lucky7_deframer(syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes Lucky-7 packets
+
+    The frames are transmitted by a SiLabs Si4463 transceiver with a PN9 scrambler and a CRC-16
+
+    Input:
+        A stream of soft symbols containing Lucky-7 packets
+
+    Output:
+        PDUs with the deframed Lucky-7 packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+
 file_format: 1

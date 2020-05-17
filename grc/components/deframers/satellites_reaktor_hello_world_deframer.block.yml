@@ -20,4 +20,18 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.reaktor_hello_world_deframer(syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes Reaktor Hello World packets
+
+    The frames are transmitted by a Texas Intruments CC1125 transceiver with a PN9 scrambler and a CRC-16
+
+    Input:
+        A stream of soft symbols containing Reaktor Hello World packets
+
+    Output:
+        PDUs with the deframed Reaktor Hello World packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+
 file_format: 1

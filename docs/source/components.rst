@@ -17,8 +17,8 @@ pass their output to the input of the next step. These are the following:
 
 * **Deframers**. Deframers implement the lower layer protocols related to frame
   boundary detection, descrambling, deinterleaving, FEC, error checking with a
-  CRC code, etc. The output of a deframer are PDUs with the frames. An example
-  is an AX.25 deframer, or a CCSDS concatenated code deframer.
+  CRC code, etc. The output of a deframer are PDUs with the frames. Some examples
+  are an AX.25 deframer and a CCSDS concatenated code deframer.
 
 * **Transports**. Transports implement higher layer protocols that might be
   needed to get to the useful information inside the frames. For example, if
@@ -53,7 +53,7 @@ Demodulators
 ^^^^^^^^^^^^
 
 Demodulator components can be found under *Satellites > Demodulators* in GNU
-Radio companion. There are currently three demodulator component block:
+Radio companion. There are currently three demodulator component blocks:
 
 * BPSK demodulator
 
@@ -91,7 +91,7 @@ output, which is then plotted using the "QT GUI Time Sink".
 When this example flowgraph is run, it displays the output shown in the figure
 below. There we can see the start of the BPSK packet. On the left side of the
 plot we have noise, before the packet starts, then the packet starts, and the
-clock and carrier recovery take some time to sync. After this, then symbols are
+clock and carrier recovery take some time to sync. After this, the symbols are
 demodulated properly. This can be seen because the +1 and -1 symbols are well
 separated.
     
@@ -101,21 +101,21 @@ separated.
     Output of the BPSK demodulator example flowgraph
 
 The figure below shows the options allowed by the BPSK demodulator block. The
-Baudrate option is used to set the baudrate in symbols per second. The Sample
-rate option specifies the sample rate of the input. The Frequency offset
+*Baudrate* option is used to set the baudrate in symbols per second. The
+*Sample rate* option specifies the sample rate of the input. The *Frequency offset*
 specifies at which frequency the BPSK signal is centred
 (see :ref:`Frequency offsets for BPSK`).
 
-The Differential option enables differential decoding of DBPSK. For differential
+The *Differential* option enables differential decoding of DBPSK. For differential
 decoding, the phase recovery using a Costas loop is disabled and non-coherent
 demodulation is used.
 
-The Manchester option enables Manchester decoding. A Manchester encoded BPSK
+The *Manchester* option enables Manchester decoding. A Manchester encoded BPSK
 signal is decoded as if it had twice the baudrate, and then the phase of the
 Manchester clock is searched in the symbols and the Manchester clock is
 "wiped-off", multiplying symbols by the clock and accumulating them by pairs.
 
-The IQ input option enables IQ (complex) input.
+The *IQ input* option enables IQ (complex) input.
     
 .. figure:: images/bpsk_demodulator_options.png
     :alt: Options of BPSK demodulator
@@ -137,8 +137,8 @@ expects the signal before FM demodulation
 The figure below shows the example flowgraph which can be found in
 ``examples/components/fsk_demodulator.grc``. This reads a WAV file from
 :ref:`satellite-recordings<Downloading sample recordings>` which contains a single
-FSK packets from AAUSAT-4 and uses the FSK demodulator to obtain the
-symbols. The is plotted using the "QT GUI Time Sink".
+FSK packet from AAUSAT-4 and uses the FSK demodulator to obtain the
+symbols. The output is plotted using the "QT GUI Time Sink".
 
 .. figure:: images/fsk_demodulator_flowgraph.png
     :alt: Usage of FSK demodulator in a flowgraph
@@ -154,14 +154,14 @@ below. There we can see the FSK packet, surrounded by noise on both sides.
     Output of the FSK demodulator example flowgraph
 
 The figure below shows the options allowed by the FSK demodulator block. The
-Baudrate option is used to set the baudrate in symbols per second. The Sample
-rate option specifies the sample rate of the input. The IQ input option enables
+*Baudrate* option is used to set the baudrate in symbols per second. The
+*Sample rate* option specifies the sample rate of the input. The *IQ input* option enables
 IQ (complex) input. The signal is expected to be centred at baseband (0Hz) when
-IQ input is selected. The Subaudio option enables subaudio demodulation, which
+IQ input is selected. The *Subaudio* option enables subaudio demodulation, which
 is intended for subaudio telemetry under FM voice and includes an additional
-lowpass filter to filter out the voice.
+lowpass filter to filter out the voice signal.
     
-.. figure:: images/bpsk_demodulator_options.png
+.. figure:: images/fsk_demodulator_options.png
     :alt: Options of FSK demodulator
 
     Options of FSK demodulator
@@ -198,11 +198,11 @@ below. There we can see the AFSK packet, surrounded by noise on both sides.
     Output of the AFSK demodulator example flowgraph
 
 The figure below shows the options allowed by the AFSK demodulator block. The
-Baudrate option is used to set the baudrate in symbols per second. The Sample
-rate option specifies the sample rate of the input.
+*Baudrate* option is used to set the baudrate in symbols per second. The
+*Sample rate* option specifies the sample rate of the input.
 
-The AF carrier option specifies the audio frequency in Hz on which the FSK tones
-are centred. The Deviation option specifies the separation in Hz between each
+The *AF carrier* option specifies the audio frequency in Hz on which the FSK tones
+are centred. The *Deviation* option specifies the separation in Hz between each
 of the tones and the AF carrier. If the deviation is positive, the high tone is
 interpreted as representing the symbol 1, while the low tone is interpreted as
 representing the symbol 0 (or -1 in bipolar representation). If the deviation is
@@ -213,7 +213,7 @@ In this example, the AF carrier is 3600 Hz and the deviation is -1200 Hz. This
 means that the tone representing 1 is at 2400 Hz, while the tone representing 0
 is at 4800 Hz (the signal is actually 4800 baud GMSK).
 
-The IQ input option enables IQ (complex) input.
+The *IQ input* option enables IQ (complex) input.
     
 .. figure:: images/afsk_demodulator_options.png
     :alt: Options of AFSK demodulator
@@ -259,7 +259,7 @@ the output with the Message Debug block.
 
     Usage of AX.25 deframer in a flowgraph
 
-The AX.25 deframer block has a single parameter that indicates whether G3RUH
+The AX.25 deframer block has a single option that indicates whether G3RUH
 descrambling should be performed or not.
 
 .. _GOMspace AX100 deframer:
@@ -293,8 +293,8 @@ Debug blocks.
 
     Usage of AX100 deframer in a flowgraph
 
-The AX100 deframer only has two parameters, the Mode parameter indicates the
-mode, as described above, and the Syncword threshold parameters specifies how
+The AX100 deframer only has two options, the *Mode* option indicates the
+mode, as described above, and the *Syncword threshold* option specifies how
 many bit errors are allowed in the detection of the 32 bit syncword.
 
 .. _GOMspace U482C deframer:
@@ -315,7 +315,7 @@ AX100. The packet payload can be optionally:
 
 * Encoded with a CCSDS (255,223) Reed-Solomon code
 
-The packet header has flags that indicate which of this options are in use, in
+The packet header has flags that indicate which of these options are in use, in
 addition to the length field.
 
 The U482C modem uses AFSK with a 4800 baud audio-frequency GMSK waveform.
@@ -331,7 +331,7 @@ output is printed in hex using the Message Debug block.
 
     Usage of U482C deframer in a flowgraph
 
-The U482C deframer has a single parameter, which indicates the number of bit
+The U482C deframer has a single option, which indicates the number of bit
 errors that are allowed in the syncword detection.
 
 .. _AO-40 FEC deframer:
@@ -360,9 +360,9 @@ Debug block.
 
     Usage of AO-40 FEC deframer in a flowgraph
 
-The AO-40 FEC deframer blocks has two parameters. The Syncword threshold
-parameter indicates the number of bit errors to allow in the syncword
-detection. The Use short frames parameter toggles the usage of short
+The AO-40 FEC deframer block has two options. The *Syncword threshold*
+option indicates the number of bit errors to allow in the syncword
+detection. The *Use short frames* option toggles the usage of short
 frames. This is a variant of the AO-40 FEC protocol which is based on a single
 Reed-Solomon codeword and is used by SMOG-P and ATL-1.
 
@@ -395,15 +395,15 @@ Message Debug block.
 
     Usage of CCSDS Concatenated deframer in a flowgraph
 
-The figure below shows the parameters used by the CCSDS Concatenated
+The figure below shows the options used by the CCSDS Concatenated
 deframer. The CCSDS Reed-Solomon deframer block allows exactly the same options,
 since none of the options refer to the convolutional inner code.
 
-The Frame size parameter indicates the size of the frame in bytes (after
-Reed-Solomon decoding). The Differential encoding parameter enables differential
-decoding, which is often used to solve the BPSK 180º phase ambiguity. The Use
-RS dual basis enables the usage of the dual basis definition for the Reed-Solmon
-code. The Synchword threshold parameter can be used to choose the number of bit
+The *Frame size* option indicates the size of the frame in bytes (after
+Reed-Solomon decoding). The *Differential encoding* option enables differential
+decoding, which is often used to solve the BPSK 180º phase ambiguity. The
+*Use RS dual basis* option enables the usage of the dual basis definition for the Reed-Solmon
+code. The *Syncword threshold* option can be used to choose the number of bit
 errors that are allowed in the detection of the syncword.
     
 .. figure:: images/ccsds_deframer_options.png
@@ -465,8 +465,8 @@ into the 114 byte Reed-Solomon frame, using ``c0`` KISS idle bytes for padding.
    0070: c0 c0 
 
 The frames at the output of the KISS transport look like the following. We see
-that the ``c0`` KISS idle bytes have been stripped. The KISS transport would
-also handled the case when a packet is longer than 114 bytes and has been
+that the ``c0`` KISS idle bytes have been stripped. The KISS transport can
+also handle the case when a packet is longer than 114 bytes and has been
 fragmented into several 114 byte frames.
    
 .. code-block:: none
@@ -480,7 +480,7 @@ fragmented into several 114 byte frames.
    0040: 00 00 00 01 02 03 04 05 06 07 08 09 0a 0b ff 18 
    0050: 21 00 00 c0 4b f7 07 
 
-The KISS transport has a single parameter, called Expect control byte. When it
+The KISS transport has a single option, called *Expect control byte*. When it
 is set to ``True``, the first byte before the packet payload is interpreted as a
 control byte according to the KISS protocol. If it is set to ``False``, it is
 assumed that there is no control byte preceeding the packet payload. When using
@@ -554,12 +554,12 @@ The beginning of the ouptut produced by the Telemetry parser block can be seen b
                 -28.25
                 -20.0
 
-The parameters used by the Telemetry parser are the following. The Telemetry
-definition parameter indicates the telemetry definition object, which must be an
-object in the ``satellites.telemetry`` module as described above. The Output
+The options used by the Telemetry parser are the following. The
+*Telemetry definition* option indicates the telemetry definition object, which must be an
+object in the ``satellites.telemetry`` module as described above. The *Output*
 drop down list can be used to select the standard output or a file as the
 destination for the parser's output. If a file is selected, an additional
-parameter to select the file path appears. 
+option to select the file path appears. 
 
 Telemetry submit
 """"""""""""""""
@@ -574,7 +574,7 @@ telemetry servers, such as the login credentials. See the
 :ref:`information regarding the command line tool<Telemetry submission>` for how
 to set up this configuration file.
 
-The telemetry submit block has only one parameter, which is a drop down list
+The telemetry submit block has only one option, which is a drop down list
 that is used to select the telemetry server to use.
 
 Hexdump sink
@@ -593,10 +593,11 @@ The KISS file sink can be used to store PDUs in a file using the
 `KISS protocol`_. This protocol is a simple format to mark frame
 boundaries. Files containing frames with the KISS protocol can then be read with
 the KISS file datasource (see :ref:`Data sources`) and with the
-``gr_satellites`` command line tool (see :ref:`Specifying the input source`).
+``gr_satellites`` command line tool (see :ref:`Specifying the input source`),
+as well as with external tools.
 
-The KISS file sink block has two parameters. The File parameter is used to
-select the path of the output file. The Append file parameter can be used to
+The KISS file sink block has two options. The *File* option is used to
+select the path of the output file. The *Append file* option can be used to
 overwrite or append to the output file.
 
 .. _File and Image receivers:
@@ -609,7 +610,7 @@ chunks, using a variety of different formats. The only difference between the
 File receiver and the Image receiver is that the Image receiver is able to
 display image files in realtime using `feh`_ as they are being received.
 
-These receiver blocks use *filereceiver definitions*, which are
+These receiver blocks use *FileReceiver definitions*, which are
 classes derived from ``FileReceiver``. The list of available definitions can be
 seen in ``python/filereceiver/__index__.py``, or by calling
 ``import satellites.filreceiver; help(satellites.filereceiver)`` in
@@ -630,22 +631,22 @@ and when the beginning of the image is receive, will launch feh to display the i
 
     Usage of Image receiver in a flowgraph
 
-The figure below shows the parameters of the Image receiver block. The parameter
-ImageReceiver class indicates the definition to use for reassembling the image
-(which is implemented by a class derived from ``ImageReceiver``). The Path
-parameter specifies the path of the directory where received files are saved
-to. The names of the files depends on metadata in the image packets. The Verbose
-parameter enables printing information to the standard output, such as the
-frames being received. The Display parameter enables the use of feh to display
-the image. The Fullscreen parameter is used to run feh in fullscreen.
+The figure below shows the options of the Image receiver block. The option
+*ImageReceiver class* indicates the definition to use for reassembling the image
+(which is implemented by a class derived from ``ImageReceiver``). The *Path*
+option specifies the path of the directory where received files are saved
+to. The names of the files depend on metadata in the image packets. The *Verbose*
+option enables printing information to the standard output, such as the
+frames being received. The *Display* option enables the use of feh to display
+the image. The *Fullscreen* option is used to run feh in fullscreen.
     
 .. figure:: images/image_receiver_options.png
     :alt: Options of Image receiver
 
     Options of Image receiver
 
-The parameters of the File receiver block are the same as those of the Image
-receiver block, except for the Display and Fullscreen parameters, which are
+The options of the File receiver block are the same as those of the Image
+receiver block, except for the *Display* and *Fullscreen* options, which are
 specific to image reception.
 
 Codec2 UDP sink
@@ -659,7 +660,7 @@ command line decoder.
 The Codec2 frames are 7 bytes long, and each is sent in a different UDP packet
 to ensure minimum latency.
 
-The Codec2 UDP sink has two parameters, which indicate the IP and port to send
+The Codec2 UDP sink has two options, which indicate the IP and port to send
 the frames to.
 
 .. _AX.25: http://www.ax25.net/

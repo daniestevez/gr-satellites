@@ -20,4 +20,18 @@ templates:
     imports: import satellites.components.deframers
     make: satellites.components.deframers.ops_sat_deframer(syncword_threshold = ${threshold})
 
+documentation: |-
+    Deframes OPS-SAT packets
+
+    The frames are AX.25 with CCSDS Reed-Solomon codewords as payload
+
+    Input:
+        A stream of soft symbols containing OPS-SAT packets
+
+    Output:
+        PDUs with the deframed OPS-SAT packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+
 file_format: 1
