@@ -44,7 +44,7 @@ Additionally, the following libraries are required:
 
    .. code-block:: console
 
-      $ pip install --user --upgrade construct requests
+      $ pip3 install --user --upgrade construct requests
 
    Alternatively, construct and requests can be installed from your
    distribution's package manager
@@ -86,7 +86,7 @@ PYTHONPATH
 
 After installing gr-satellites, it is necessary to ensure that Python is able
 to locate the gr-satellites Python module. Depending on the configuration of
-Python on and the location where gr-satellites has been installed, it might be
+Python and the location where gr-satellites has been installed, it might be
 necessary to set the ``PYTHONPATH`` environment variable.
 
 If Python is not able to locate the gr-satellites module, it will produce an
@@ -116,7 +116,7 @@ Downloading sample recordings
 
 The ``satellite-recordings/`` directory is a `git submodule`_ that contains many
 short sample recordings of different satellites that can be used to test the
-decoders. The submodule can be clone (downloaded) by running
+decoders. The submodule can be cloned (downloaded) by running
 
 .. code-block:: console
 

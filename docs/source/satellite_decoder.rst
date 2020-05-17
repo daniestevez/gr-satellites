@@ -11,7 +11,7 @@ than what is possible with the command line tool.
 
 The input of the Satellite decoder block is a stream of samples, which can be
 either real or complex, for IQ input (see :ref:`Real or IQ input`). The output
-of the block are PDUs with the decoded frames. The figure below shows a very
+of the block is PDUs with the decoded frames. The figure below shows a very
 basic use of the Satellite decoder block, where the input is taken from a WAV
 recording using the Wav File Source block and the output is printed using the
 Message Debug block. This example can be found in gr-satellites in
@@ -34,7 +34,7 @@ and the "IQ input" field selects real or IQ input.
 
     Options of Satellite decoder
 
-Here are a few ideas of how the Satellite decoder block can be employed by end
+Here are a few ideas of how the Satellite decoder block can be employed by
 users to build custom decoders which are not possible with the command line
 tool.
 

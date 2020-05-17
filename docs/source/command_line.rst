@@ -4,7 +4,7 @@ gr_satellites command line tool
 ===============================
 
 The ``gr_satellites`` command line tool is a complete solution that can decode
-frames using either real-time RF samples from an SDR or conventional radio or a
+frames using either real-time RF samples from an SDR or conventional radio, or a
 recording.
 
 Basic usage
@@ -31,7 +31,7 @@ Specifying the satellite
 """"""""""""""""""""""""
 
 The arguments that ``gr_satellites`` allows depend on the satellite that has
-been selected. Therefore, to use ``gr_satellites`` is always necessary to
+been selected. Therefore, to use ``gr_satellites`` it is always necessary to
 specify the ``satellite`` to be used as an argument immediately following
 ``gr_satellites``. There are three different ways to specify the satellite:
 
@@ -57,8 +57,8 @@ specify the ``satellite`` to be used as an argument immediately following
                                     [--syncword_threshold SYNCWORD_THRESHOLD]
                                     [--verbose_rs]
 
-   A satellite may have several different names, known as *alternative
-   names*. For example, FUNcube-1 is both known as AO-73 and FUNcube-1.
+ A satellite may have several different names, known as *alternative
+ names*. For example, FUNcube-1 is both known as AO-73 and FUNcube-1.
 				    
 * Using the satellite `NORAD ID`_. This can bue used with any
   :ref:`satellite officially supported by gr-satellites<Supported satellites>`,
@@ -197,7 +197,7 @@ the input source by using exactly one of the following options:
      It is also possible to use the example GNU Radio companion flographs in
      `gr-frontends`_ to stream samples by UDP from different sources.
 
-     For advanced users, ``nc`` can also be a very useful tool for streaming.
+     For more advanced users, ``nc`` can also be a very useful tool for streaming.
 
 * ``--kiss_in`` can be used to process a file containing already decoded frames
   in KISS format. All the demodulation steps are skipped and only telemetry
@@ -289,7 +289,7 @@ For example, this shows all the options allowed by the FUNcube-1 decoder:
 Output
 """"""
 
-By default, ``gr_satellites`` will "do its best" to provide the user the output
+By default, ``gr_satellites`` will "do its best" to show the user the output
 for the decoded frames. If the telemetry format for the satellite is implemented
 in gr-satellites, the telemetry frames will be printed to the standard output in
 human-readable format. Otherwise, the raw frames will be printed out in hex
@@ -307,7 +307,7 @@ Examples
 The ``test.sh`` script in the ``gr-satellites/`` directory runs
 ``gr_satellites`` on several of the
 :ref:`sample recordings <Downloading sample recordings>` in
-``satellite-recordings/``. This script can be used as a series of examples on
+``satellite-recordings/``. This script can be used as a series of examples of
 how to run ``gr_satellites``.
 
 .. _Output options:
@@ -327,7 +327,7 @@ Hex dump
 By using the option ``--hexdump``, it is possible to make ``gr_satellites``
 print the received frames in hexadecimal format, regardless of whether there is
 a telemetry decoder available or not. The format used to print the frames is the
-same used by the GNU Radio block `Message Debug`_ ``print_pdu`` input.
+same as used by the GNU Radio block `Message Debug`_ ``print_pdu`` input.
 
 An example of the use of this option can be seen here:
 
@@ -365,7 +365,7 @@ that serves to delimit frames stored in a file or sent over a serial bus, and it
 is frequently used to store telemetry frames.
 
 To enable KISS output, the ``--kiss_out`` parameter followed by the path of the
-output file should be used. By default ``gr_satellites`` would overwrite the
+output file should be used. By default ``gr_satellites`` will overwrite the
 file if it already exists. To append to the file instead, the option
 ``--kiss_append`` can be used in addition to the ``--kiss_out``
 option. Appending can be used to concatenate frames obtained in several decoding
@@ -388,10 +388,10 @@ Dump internal signals
 For advanced users and developers, the demodulators used in ``gr_satellites``
 can dump the internal signals used inside the demodulator. This option can be
 enabled by using the ``--dump_path`` parameter followed by a path to the
-directory where the different files are created. It is recommended using this
+directory where the different files are created. It is recommended to use this
 option with a short recording, to avoid creating very large files. The details
 of each of these files are best studied in the Python source code of the
-demodulator.
+demodulators (see ``python/components/demodulators/``).
 
 .. _Telemetry submission:
 
@@ -399,7 +399,7 @@ Telemetry submission
 ^^^^^^^^^^^^^^^^^^^^
 
 The ``gr_satellites`` command line tool can be used to submit decoded telemetry
-to online database server, such as `SatNOGS DB`_ and these others servers used by
+to an online database server, such as `SatNOGS DB`_ and these others servers used by
 certain satellite projects:
 
 * `FUNcube Warehouse`_, which is used by the FUNcube payloads on FUNcube-1, UKube-1,
@@ -436,7 +436,7 @@ this:
 
 To enable telemetry submission, the ``submit_tlm`` parameter must be set to
 ``yes``. Additionally, the receiving stations ``callsign`` as well as its
-location (``latitude`` and ``longitude``) need to be set. Since some of the
+location (``latitude`` and ``longitude``) need to be set, since some of the
 servers need these parameters. Once this is done, telemetry submission to
 SatNOGS DB will be enabled for all satellites.
 
@@ -452,13 +452,13 @@ have an account registered in the server to obtain the credentials file.
 
 To enable telemetry submission to the BME server, it is necessary to
 `register an account in the BME server`_. The user and password should be
-entered into the gr_satellites ``.ini`` file.
+entered into the gr-satellites ``.ini`` file.
 
 For some telemetry servers, including SatNOGS DB, the frames are submitted
 together with a timestamp of reception. This timestamp is taken from the
 computer's clock by ``gr_satellites`` at the moment when it decodes the
 frame. This means that, in order to use telemetry submission appropriately, the
-computer's clock should be set accurately and live signal rather than a
+computer's clock should be set accurately and a live signal rather than a
 recording should be decoded.
 
 File and image receiver
@@ -467,7 +467,7 @@ File and image receiver
 Some satellites transmit files (especially image files) by splitting the files
 into many telemetry packets. The ``gr_satellites`` decoder supports reassembling
 and storing these files into a directory. Additionally, image files are automatically
-displayed in real time as they are being received.
+displayed in real time as they are being received, using `feh`_.
 
 Currently the satellites that have decoders supporting file reception are ATL-1
 and SMOG-P (they transmit RF spectrum data), and the satellites that have
@@ -477,7 +477,8 @@ decoders supporting image reception are 1KUNS-PF, BY70-1, D-SAT, LilacSat-1 and
 For satellites supporting file reception, the ``--file_output_path`` parameter
 can be used to set the directory that is used to store received files. The
 filenames of the received files will be automatically created using metadata or
-a counter. By default, received files are stored in ``/tmp/``.
+a counter (if no metadata is transmitted). By default, received files are stored
+in ``/tmp/``.
 
 The ``--verbose_file_receiver`` parameter can be used to enable additional
 debugging information about the functionality of the file receiver.
@@ -510,7 +511,7 @@ However, most SDR softwares will also have an option to save raw samples to a
 file. These files are almost always IQ, and can be either a two-channel WAV file
 or a file in raw format. The IQ input option must be used when using
 ``gr_satellites`` to read these files. Additionally, some
-SDR software may support streaming IQ data by UDP. These can also be used in
+SDR software may support streaming IQ data by UDP. This can also be used in
 ``gr_satellites`` with the IQ input option.
 
 .. _FSK demodulation and IQ input:
@@ -545,7 +546,7 @@ have not been FM-demodulated.
    is run with the ``--iq`` option, it will expect an AFSK signal.
 
    Note that this behaviour is what the user wants in most cases, but it also
-   means that it is not possible to run ``gr_satellites`` on an (A)FSK signal which
+   means that it is not possible to run ``gr_satellites`` directly on an (A)FSK signal which
    is represented in intermediate frequency as a real signal.
 
 .. _Frequency offsets for BPSK:
@@ -609,3 +610,4 @@ processed, thus restoring the correct polarity.
 .. _registering in the warehouse: http://warehouse.funcube.org.uk/registration
 .. _Your credentials: https://radio.pw-sat.pl/communication/yourcredentials
 .. _register an account in the BME server: https://gnd.bme.hu:8080/auth/register
+.. _feh: https://feh.finalrewind.org/
