@@ -12,6 +12,15 @@ from gnuradio import gr, blocks, gr_unittest
 import pmt
 import numpy as np
 
+# bootstrap satellites module, even from build dir
+try:
+    import python as satellites
+except ImportError:
+    pass
+else:
+    import sys
+    sys.modules['satellites'] = satellites
+
 from satellites.components.deframers import ao40_fec_deframer
 
 class qa_ao40_fec_deframer(gr_unittest.TestCase):
