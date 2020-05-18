@@ -495,7 +495,7 @@ Real or IQ input
 
 The ``gr_satellites`` command line tool supports both real (one-channel) input
 and IQ input (which consists of two channels: in-phase and quadrature). A
-detailed desciption of these two ways to represent a signal is out of the scope
+detailed description of these two ways to represent a signal is out of the scope
 of this document. This subsection gives some practical advice regarding the
 difference between real and IQ input.
 
