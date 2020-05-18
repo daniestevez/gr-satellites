@@ -38,6 +38,7 @@ Additionally, the following libraries are required:
       $ cmake ..
       $ make
       $ sudo make install
+      $ sudo ldconfig
 
    construct and requests are Python packages and can be installed with `pip`_
    by doing
