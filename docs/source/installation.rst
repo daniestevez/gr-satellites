@@ -66,6 +66,26 @@ To use the realtime image decoders, gr-satellites needs `feh`_
 .. note::
    feh is best installed through your distribution's package manager
 
+Downloading
+^^^^^^^^^^^
+
+gr-satellites is developed in the `daniestevez/gr-satellites`_ Github
+repository. It is recommended that you download the `latest stable release`_
+(note that currently v3.0.0 is not stable yet, so the latest stable release is
+indeed v2.3.2, which is completely different to what is described in this
+documentation). You can also browse the list of `all releases`_ to see older
+vesions and pre-releases (such as v3.0.0-rc1, which is the release described in
+this documentation).
+
+Users interested in collaborating with testing or developing gr-satellites can
+clone the git repository and use the master branch. There is more information
+about the organization in branches in the `README`_.
+
+.. _daniestevez/gr-satellites: https://github.com/daniestevez/gr-satellites/
+.. _latest stable release: https://github.com/daniestevez/gr-satellites/releases/latest
+.. _all releases: https://github.com/daniestevez/gr-satellites/releases
+.. _README: https://github.com/daniestevez/gr-satellites/blob/master/README.md
+
 Building and installing
 ^^^^^^^^^^^^^^^^^^^^^^^
 
