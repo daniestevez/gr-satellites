@@ -1,0 +1,18 @@
+name: AO-27
+alternative_names:
+  - EYESAT-1
+  - AO27
+norad: 22825
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  1k2 AFSK telemetry downlink:
+    frequency: 436.795e+6
+    modulation: AFSK
+    baudrate: 1240
+    af_carrier: 1700
+    deviation: 500
+    framing: AX.25
+    data:
+    - *tlm
