@@ -35,6 +35,7 @@ Additionally, the following libraries are required:
       $ git clone https://github.com/quiet/libfec
       $ cd libfec
       $ mkdir build
+      $ cd build
       $ cmake ..
       $ make
       $ sudo make install
