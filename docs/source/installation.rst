@@ -19,7 +19,7 @@ gr-satellites requires `GNU Radio`_ version at least 3.8.
    are:
 
    * swig
-   * liborc (in Debian-based distributions ``liborc-0.4-0-dev`` is needed)
+   * liborc (in Debian-based distributions ``liborc-0.4-dev`` is needed)
 
 Additionally, the following libraries are required:
 
