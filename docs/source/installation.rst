@@ -32,7 +32,7 @@ Additionally, the following libraries are required:
 
    .. code-block:: console
 
-      $ git checkout https://github.com/quiet/libfec
+      $ git clone https://github.com/quiet/libfec
       $ cd libfec
       $ mkdir build
       $ cmake ..
