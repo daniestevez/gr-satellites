@@ -3,7 +3,7 @@ alternative_names:
   - FUNcube-5
   - EO-88
 norad: 42017
-telmetry_servers:
+telemetry_servers:
   - FUNcube
 data:
   &tlm Telemetry:

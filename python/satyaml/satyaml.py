@@ -32,9 +32,13 @@ class SatYAML:
                 'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon', 'SMOG-P RA',\
                 'SMOG-P Signalling', 'OPS-SAT', 'U482C', 'UA01']
     transports = ['KISS', 'KISS no control byte', 'KISS KS-1Q']
+    top_level_words = ['name', 'alternative_names', 'norad', 'telemetry_servers', 'data', 'transports', 'transmitters']
     
     def check_yaml(self, yml):
         d = self.get_yamldata(yml)
+        for word in d:
+            if word not in self.top_level_words:
+                raise YAMLError(f'Unknown word {word} in {yml}')
         if 'name' not in d:
             raise YAMLError(f'Missing name field in {yml}')
         if 'norad' not in d:
