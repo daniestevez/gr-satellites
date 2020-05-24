@@ -8,7 +8,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-from gnuradio import gr, filter
+from gnuradio import gr, filter, analog
 from gnuradio.filter import firdes
 from .fsk_demodulator import fsk_demodulator
 from ...utils.options_block import options_block
