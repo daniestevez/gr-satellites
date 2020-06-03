@@ -6,6 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2020-06-03
+
+Changes from 3.0.0-rc1
+
+### Added
+- Download instructions in documentation
+- Support for AO-27
+- Support for FALCONSAT-3
+- Test for unknown keywords in SatYAML files
+
+### Fixed
+- Test execution in gr-satellites is not yet installed
+- Minor typos in documentation
+- Added missing af_carrier to AFSK SatYAML files
+- swig and PythonLibs are now mandatory when running cmake
+- Missing import in AFSK demodulator
+
+### Removed
+- Deprecated LilacSat-2 flowgraphs in apps/
+
 ## [3.0.0-rc1] - 2020-05-17
 
 Large refactor release bringing new functionality and improvements. This is an overview of the main changes:
@@ -172,6 +192,7 @@ Large refactor release bringing new functionality and improvements. This is an o
 First gr-satellites release using semantic versioning
 
 [Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.0.0...master
+[3.0.0]: https://github.com/daniestevez/gr-satellites/compare/v3.0.0-rc1...v3.0.0
 [3.0.0-rc1]: https://github.com/daniestevez/gr-satellites/compare/v2.3.2...v3.0.0-rc1
 [2.3.2]: https://github.com/daniestevez/gr-satellites/compare/v2.3.1...v2.3.2
 [2.3.1]: https://github.com/daniestevez/gr-satellites/compare/v2.3.0...v2.3.1
