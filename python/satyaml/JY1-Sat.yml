@@ -3,7 +3,7 @@ alternative_names:
   - FUNcube-6
   - JO-97
 norad: 43803
-telmetry_servers:
+telemetry_servers:
   - FUNcube
 data:
   &tlm Telemetry:

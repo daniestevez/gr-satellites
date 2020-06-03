@@ -1,5 +1,9 @@
 # gr-satellites
 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/daniestevez/gr-satellites)
+![Read the Docs](https://img.shields.io/readthedocs/gr-satellites)
+[![GitHub license](https://img.shields.io/github/license/daniestevez/gr-satellites)](https://github.com/daniestevez/gr-satellites/blob/master/LICENSE)
+
 gr-satellites is a GNU Radio out-of-tree module encompassing a collection of
 telemetry decoders that supports many different Amateur satellites. This
 open-source project started in 2015 with the goal of providing telemetry

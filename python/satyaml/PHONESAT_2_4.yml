@@ -8,6 +8,8 @@ transmitters:
     frequency: 437.425e+6
     modulation: AFSK
     baudrate: 1200
+    af_carrier: 1700
+    deviation: 500
     framing: AX.25
     data:
     - *tlm

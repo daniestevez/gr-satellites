@@ -26,8 +26,11 @@ __email__ = 'daniel@destevez.net'
 __license__ = 'GPL-3.0'
 
 # import swig generated symbols into the satellites namespace
-# this shouldn't fail, since the module is not python-only
-from .satellites_swig import *
+# this would fail if we are being imported from the build dir
+try:
+    from .satellites_swig import *
+except ImportError:
+    from satellites_swig import *
 
 # import any pure python here
 #

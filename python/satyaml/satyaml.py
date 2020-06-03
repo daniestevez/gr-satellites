@@ -32,9 +32,13 @@ class SatYAML:
                 'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon', 'SMOG-P RA',\
                 'SMOG-P Signalling', 'OPS-SAT', 'U482C', 'UA01']
     transports = ['KISS', 'KISS no control byte', 'KISS KS-1Q']
+    top_level_words = ['name', 'alternative_names', 'norad', 'telemetry_servers', 'data', 'transports', 'transmitters']
     
     def check_yaml(self, yml):
         d = self.get_yamldata(yml)
+        for word in d:
+            if word not in self.top_level_words:
+                raise YAMLError(f'Unknown word {word} in {yml}')
         if 'name' not in d:
             raise YAMLError(f'Missing name field in {yml}')
         if 'norad' not in d:
@@ -68,6 +72,15 @@ class SatYAML:
                 raise YAMLError(f'Missing baudrate field in {key} in {yml}')
             if type(transmitter['baudrate']) not in [float, int]:
                 raise YAMLError(f'Baudrate field does not contain a float in {key} in {yml}')
+            if transmitter['modulation'] == 'AFSK':
+                if 'af_carrier' not in transmitter:
+                    raise YAMLError(f'Missing af_carrier field for AFSK in {key} in {yml}')
+                if 'deviation' not in transmitter:
+                    raise YAMLError(f'Missing deviation field for AFSK in {key} in {yml}')
+            if 'af_carrier' in transmitter and type(transmitter['af_carrier']) not in [float, int]:
+                raise YAMLError(f'af_carrier field does not contain a float in {key} in {yml}')
+            if 'deviation' in transmitter and type(transmitter['deviation']) not in [float, int]:
+                raise YAMLError(f'Deviation field does not contain a float in {key} in {yml}')
             if 'framing' not in transmitter:
                 raise YAMLError(f'Missing framing field in {key} in {yml}')
             if transmitter['framing'] not in self.framings:
@@ -87,10 +100,6 @@ class SatYAML:
                     if dd not in d['data']:
                         raise YAMLError(f'Additional data entry {dd} used in {key} is not defined in data field in {yml}')
             
-    def check_all_yaml(self):
-        for yml in self.yaml_files():
-            self.check_yaml(yml)
-
     def load_all_yaml(self):
         return [self.get_yamldata(f) for f in self.yaml_files()]
             

@@ -66,5 +66,5 @@ GR_PYTHON_INSTALL(
 include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-satellites)
-set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)
+set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/swig)
 GR_ADD_TEST(qa_ao40_fec_deframer ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ao40_fec_deframer.py)

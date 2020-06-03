@@ -1,13 +1,16 @@
-name: E-ST@R-II
-norad: 41459
+name: AO-27
+alternative_names:
+  - EYESAT-1
+  - AO27
+norad: 22825
 data:
   &tlm Telemetry:
     telemetry: ax25
 transmitters:
-  1k2 AFSK downlink:
-    frequency: 437.485e+6
+  1k2 AFSK telemetry downlink:
+    frequency: 436.795e+6
     modulation: AFSK
-    baudrate: 1200
+    baudrate: 1240
     af_carrier: 1700
     deviation: 500
     framing: AX.25
