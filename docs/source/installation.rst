@@ -99,6 +99,7 @@ gr-satellites can be built and installed using cmake:
    $ cmake ..
    $ make
    $ sudo make install
+   $ sudo ldconfig
 
 After running ``make``, you can run the tests by doing ``make test`` in the
 ``build/`` directory.
