@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Do not use DC-block in AFSK demodulator
+- Remove second lowpass filter in BPSK demodulator
 
 ### Fixed
 - Cmake warning when searching for libfec
