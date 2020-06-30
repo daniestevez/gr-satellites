@@ -17,7 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Cmake warning when searching for libfec
 - Minor corrections to documentation
-	
+- Bug in HDLC Framer
+
 ## [3.0.0] - 2020-06-03
 
 Changes from 3.0.0-rc1
