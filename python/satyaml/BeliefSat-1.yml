@@ -1,0 +1,14 @@
+name: BeliefSat-1
+norad: 99999
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  1k2 FSK downlink:
+    frequency: 435.000e+6
+    modulation: FSK
+    baudrate: 1200
+    framing: CCSDS Reed-Solomon no-scrambler
+    frame size: 58
+    data:
+    - *tlm
