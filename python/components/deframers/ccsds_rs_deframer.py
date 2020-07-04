@@ -11,6 +11,7 @@
 from gnuradio import gr, digital
 from ... import decode_rs
 from ...hier.sync_to_pdu import sync_to_pdu
+from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...hier.ccsds_descrambler import ccsds_descrambler
 from ...utils.options_block import options_block
 
@@ -46,9 +47,11 @@ class ccsds_rs_deframer(gr.hier_block2, options_block):
         self.slicer = digital.binary_slicer_fb()
         if differential:
             self.differential = digital.diff_decoder_bb(2)
-        self.deframer = sync_to_pdu(packlen = (frame_size + 32) * 8,\
-                                    sync = _syncword,\
-                                    threshold = syncword_threshold)
+        deframe_func = sync_to_pdu if use_scrambler else sync_to_pdu_packed
+        packlen_mult = 8 if use_scrambler else 1
+        self.deframer = deframe_func(packlen = (frame_size + 32) * packlen_mult,
+                                        sync = _syncword,
+                                        threshold = syncword_threshold)
         if use_scrambler:
             self.scrambler = ccsds_descrambler()
         self.fec = decode_rs(self.options.verbose_rs, 1 if dual_basis else 0)
