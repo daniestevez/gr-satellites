@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Example flowgraphs from gr-kiss
 - Support for CAS-6
+- Option to disable scrambler in CCSDS deframers	
 
 ### Changed
 - Do not use DC-block in AFSK demodulator

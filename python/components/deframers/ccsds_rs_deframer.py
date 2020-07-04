@@ -27,10 +27,12 @@ class ccsds_rs_deframer(gr.hier_block2, options_block):
         frame_size: frame size (not including parity check bytes) (int)
         differential: whether to use differential coding (bool)
         dual_basis: use dual basis instead of conventional (bool)
+        use_scrambler: use CCSDS synchronous scrambler (bool)
         syncword_threshold: number of bit errors allowed in syncword (int)
         options: Options from argparse
     """
-    def __init__(self, frame_size = 223, differential = False, dual_basis = False, syncword_threshold = None, options = None):
+    def __init__(self, frame_size = 223, differential = False, dual_basis = False,
+                     use_scrambler = True, syncword_threshold = None, options = None):
         gr.hier_block2.__init__(self, "ccsds_rs_deframer",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
@@ -47,7 +49,8 @@ class ccsds_rs_deframer(gr.hier_block2, options_block):
         self.deframer = sync_to_pdu(packlen = (frame_size + 32) * 8,\
                                     sync = _syncword,\
                                     threshold = syncword_threshold)
-        self.scrambler = ccsds_descrambler()
+        if use_scrambler:
+            self.scrambler = ccsds_descrambler()
         self.fec = decode_rs(self.options.verbose_rs, 1 if dual_basis else 0)
 
         self._blocks = [self, self.slicer]
@@ -56,8 +59,11 @@ class ccsds_rs_deframer(gr.hier_block2, options_block):
         self._blocks += [self.deframer]
 
         self.connect(*self._blocks)
-        self.msg_connect((self.deframer, 'out'), (self.scrambler, 'in'))
-        self.msg_connect((self.scrambler, 'out'), (self.fec, 'in'))
+        if use_scrambler:
+            self.msg_connect((self.deframer, 'out'), (self.scrambler, 'in'))
+            self.msg_connect((self.scrambler, 'out'), (self.fec, 'in'))
+        else:
+            self.msg_connect((self.deframer, 'out'), (self.fec, 'in'))
         self.msg_connect((self.fec, 'out'), (self, 'out'))
 
     _default_sync_threshold = 4

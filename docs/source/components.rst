@@ -403,7 +403,9 @@ The *Frame size* option indicates the size of the frame in bytes (after
 Reed-Solomon decoding). The *Differential encoding* option enables differential
 decoding, which is often used to solve the BPSK 180º phase ambiguity. The
 *Use RS dual basis* option enables the usage of the dual basis definition for the Reed-Solmon
-code. The *Syncword threshold* option can be used to choose the number of bit
+code. The *Use scrambler* option enables or disables the use of the CCSDS synchronous
+descrambler. Most satellites using CCSDS frames use scrambling.
+The *Syncword threshold* option can be used to choose the number of bit
 errors that are allowed in the detection of the syncword.
     
 .. figure:: images/ccsds_deframer_options.png

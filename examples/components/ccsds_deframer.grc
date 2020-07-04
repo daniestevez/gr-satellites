@@ -54,7 +54,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [840, 165]
+    coordinate: [824, 168.0]
     rotation: 0
     state: enabled
 - name: blocks_wavfile_source_0
@@ -72,7 +72,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [53, 217]
+    coordinate: [48, 220.0]
     rotation: 0
     state: enabled
 - name: satellites_bpsk_demodulator_0
@@ -93,7 +93,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [276, 193]
+    coordinate: [280, 196.0]
     rotation: 0
     state: true
 - name: satellites_ccsds_concatenated_deframer_0
@@ -108,11 +108,12 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     threshold: '4'
+    use_scrambler: 'True'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [517, 201]
+    coordinate: [520, 196.0]
     rotation: 0
     state: true
 
