@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for CAS-6
 - Option to disable scrambler in CCSDS deframers	
 - Note about volk_profile in the documentation
+- Missing .yml grc file for LilacSat-1 deframer
 
 ### Changed
 - Do not use DC-block in AFSK demodulator
