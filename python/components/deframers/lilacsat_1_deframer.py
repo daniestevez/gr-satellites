@@ -9,7 +9,7 @@
 #
 
 from gnuradio import gr, blocks, digital
-from .ccsds_rs_deframer import ccsds_rs_deframer, _syncword
+from .ccsds_rs_deframer import _syncword
 from ...hier.ccsds_viterbi import ccsds_viterbi
 from ...utils.options_block import options_block
 from ... import lilacsat1_demux
