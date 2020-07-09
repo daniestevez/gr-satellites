@@ -104,6 +104,14 @@ gr-satellites can be built and installed using cmake:
 After running ``make``, you can run the tests by doing ``make test`` in the
 ``build/`` directory.
 
+.. note::
+   There are systems where the AO-73 and similar decoders fail if
+   ``volk_profile`` has not been run ever in the system. This seems to be caused
+   by the Viterbi decoder chosen by Volk by default when there is no
+   ``~/.volk/volk_config`` file. If problems with these decoders are seen, it
+   is recommended to run ``volk_profile`` to see if it fixes the problems.
+
+
 PYTHONPATH
 ^^^^^^^^^^
 
