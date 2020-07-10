@@ -89,9 +89,9 @@ namespace gr {
 
       float *ra_in = new float [ra_code_length * RA_BITCOUNT];
       // Weird bit organization: see radecoder/ra_decoder.c
-      for (int i = 0; i < ra_code_length * RA_BITCOUNT / 8; i++) {
+      for (int i = 0; i < ra_code_length * RA_BITCOUNT; i += 8) {
 	for (int j = 0; j < 8; j++) {
-	  ra_in[8 * i + j] = -soft_bits[8 * i + 7 - j];
+	  ra_in[i + j] = -soft_bits[i + 7 - j];
 	}
       }
 
