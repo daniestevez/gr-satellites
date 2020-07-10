@@ -9,7 +9,7 @@
 #
 
 from gnuradio import gr, digital
-from ... import decode_ra_code, smogp_packet_filter
+from ... import decode_ra_code
 from ...hier.sync_to_pdu_soft import sync_to_pdu_soft
 from ...utils.options_block import options_block
 
