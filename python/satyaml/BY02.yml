@@ -1,0 +1,19 @@
+name: BY02
+alternative_names:
+  - BY70-2
+norad: 45857
+data:
+  &tlm Telemetry:
+    telemetry: by02
+  &codec2 Codec2:
+    decoder: codec2_udp_sink
+transmitters:
+  9k6 BPSK downlink:
+    frequency: 436.200e+6
+    modulation: BPSK
+    baudrate: 9600
+    framing: LilacSat-1
+    data:
+    - *tlm
+    additional_data:
+      codec2: *codec2
