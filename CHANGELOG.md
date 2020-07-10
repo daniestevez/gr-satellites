@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Example flowgraphs from gr-kiss
 - Support for CAS-6
-- Option to disable scrambler in CCSDS deframers	
+- Option to disable scrambler in CCSDS deframers
 - Note about volk_profile in the documentation
 - Missing .yml grc file for LilacSat-1 deframer
 - Support for BY02
@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Do not use DC-block in AFSK demodulator
 - Remove second lowpass filter in BPSK demodulator
 - Improvements in LilacSat-1 demuxer and deframer
+- Ported NRZI encoder and decoder to C++
 
 ### Fixed
 - Cmake warning when searching for libfec
