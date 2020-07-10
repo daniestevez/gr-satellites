@@ -23,6 +23,8 @@
 #include "satellites/distributed_syncframe_soft.h"
 #include "satellites/matrix_deinterleaver_soft.h"
 #include "satellites/decode_ra_code.h"
+#include "satellites/nrzi_encode.h"
+#include "satellites/nrzi_decode.h"
 %}
 
 %include "satellites/decode_rs.h"
@@ -55,3 +57,7 @@ GR_SWIG_BLOCK_MAGIC2(satellites, distributed_syncframe_soft);
 GR_SWIG_BLOCK_MAGIC2(satellites, matrix_deinterleaver_soft);
 %include "satellites/decode_ra_code.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, decode_ra_code);
+%include "satellites/nrzi_decode.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, nrzi_decode);
+%include "satellites/nrzi_encode.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, nrzi_encode);

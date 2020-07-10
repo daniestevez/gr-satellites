@@ -38,5 +38,7 @@ install(FILES
     distributed_syncframe_soft.h
     matrix_deinterleaver_soft.h
     decode_ra_code.h
+    nrzi_decode.h
+    nrzi_encode.h
     DESTINATION include/satellites
 )
