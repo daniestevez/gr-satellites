@@ -76,7 +76,6 @@ install(FILES
     satellites_distributed_syncframe_soft.block.yml
     satellites_matrix_deinterleaver_soft.block.yml
     satellites_decode_ra_code.block.yml
-    satellites_smogp_packet_filter.block.yml
     satellites_aausat4_remove_fsm.block.yml
     satellites_ngham_packet_crop.block.yml
     satellites_ngham_remove_padding.block.yml

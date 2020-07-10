@@ -43,12 +43,10 @@ class smogp_ra_deframer(gr.hier_block2, options_block):
                                          sync = _syncword,\
                                          threshold = syncword_threshold)
         self.fec = decode_ra_code(frame_size)
-        self.filter = smogp_packet_filter()
 
         self.connect(self, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.fec, 'in'))
-        self.msg_connect((self.fec, 'out'), (self.filter, 'in'))
-        self.msg_connect((self.filter, 'out'), (self, 'out'))
+        self.msg_connect((self.fec, 'out'), (self, 'out'))
 
     _default_sync_threshold = 0
         

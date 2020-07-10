@@ -19,11 +19,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove second lowpass filter in BPSK demodulator
 - Improvements in LilacSat-1 demuxer and deframer
 - Ported NRZI encoder and decoder to C++
+- Re-encode frame in SMOG-P RA decoder to check decoding correctness
 
 ### Fixed
 - Cmake warning when searching for libfec
 - Minor corrections to documentation
 - Bug in HDLC Framer
+
+### Removed
+- Deprecated SMOG-P packet filter block
 
 ## [3.0.0] - 2020-06-03
 

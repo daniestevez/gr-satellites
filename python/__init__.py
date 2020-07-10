@@ -103,8 +103,6 @@ from .manchester_sync import manchester_sync
 
 from .header_remover import header_remover
 
-from .smogp_packet_filter import smogp_packet_filter
-
 from .aausat4_remove_fsm import aausat4_remove_fsm
 
 from .ngham_packet_crop import ngham_packet_crop
