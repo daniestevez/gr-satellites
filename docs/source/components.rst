@@ -30,6 +30,11 @@ pass their output to the input of the next step. These are the following:
 * **Data sinks**. Data sinks are the consumers of packets. They might store
   them, send them to another software, or parse telemetry values.
 
+All the component blocks support :ref:`Command line options` in the same way as
+the satellite decoder block. The set of available options for each component
+block is different. It is possible to use the ``"--help"`` as the options of a
+particular block in order to print out the available options for that block.
+  
 Below, the main component blocks in each category are described.
 
 .. _Data sources:
