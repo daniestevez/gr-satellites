@@ -71,12 +71,9 @@ Downloading
 ^^^^^^^^^^^
 
 gr-satellites is developed in the `daniestevez/gr-satellites`_ Github
-repository. It is recommended that you download the `latest stable release`_
-(note that currently v3.0.0 is not stable yet, so the latest stable release is
-indeed v2.3.2, which is completely different to what is described in this
-documentation). You can also browse the list of `all releases`_ to see older
-vesions and pre-releases (such as v3.0.0-rc1, which is the release described in
-this documentation).
+repository. It is recommended that you download the `latest stable release`_.
+You can also browse the list of `all releases`_ to see older vesions
+and pre-releases.
 
 Users interested in collaborating with testing or developing gr-satellites can
 clone the git repository and use the master branch. There is more information
