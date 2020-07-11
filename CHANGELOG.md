@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Missing .yml grc file for LilacSat-1 deframer
 - Support for BY02
 - Command line options for satellite decoder block and components
+- More documentation about --dump_path
 
 ### Changed
 - Do not use DC-block in AFSK demodulator
