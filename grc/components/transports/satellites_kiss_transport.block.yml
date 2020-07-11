@@ -8,6 +8,11 @@ parameters:
     dtype: bool
     default: 'True'
     options: ['True', 'False']
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
 
 inputs:
 -   domain: message
@@ -19,7 +24,7 @@ outputs:
 
 templates:
     imports: import satellites.components.transports
-    make: satellites.components.transports.kiss_transport(control_byte=${use_control})
+    make: satellites.components.transports.kiss_transport(control_byte=${use_control}, options=${options})
 
 documentation: |-
     Implements fragmentation/defragmentation using the KISS protocol
@@ -32,5 +37,6 @@ documentation: |-
 
     Parameters:
         Expect control byte: specifies whether the KISS stream uses a control byte before the packet payload
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 
 file_format: 1

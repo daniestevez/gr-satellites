@@ -6,6 +6,11 @@ parameters:
 -   id: file
     label: File
     dtype: file_open
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
 
 outputs:
 -   domain: message
@@ -13,7 +18,7 @@ outputs:
 
 templates:
     imports: import satellites.components.datasources
-    make: satellites.components.datasources.kiss_file_source(${file})
+    make: satellites.components.datasources.kiss_file_source(${file}, options=${options})
 
 documentation: |-
     Reads a file in KISS format, outputing PDUs
@@ -23,5 +28,6 @@ documentation: |-
 
     Parameters:
          File: the file to read from
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 
 file_format: 1

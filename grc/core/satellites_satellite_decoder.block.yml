@@ -29,6 +29,11 @@ parameters:
     dtype: bool
     default: False
     hide: part
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
 
 inputs:
 -   domain: stream
@@ -42,13 +47,13 @@ templates:
     imports: import satellites.core
     make: |
         % if context.get('definition')() == 'file':
-        satellites.core.gr_satellites_flowgraph(file = ${file}, samp_rate = ${samp_rate}, grc_block = True, iq = ${iq})
+        satellites.core.gr_satellites_flowgraph(file = ${file}, samp_rate = ${samp_rate}, grc_block = True, iq = ${iq}, options = ${options})
         % else:
         % if context.get('definition')() == 'name':
-        satellites.core.gr_satellites_flowgraph(name = ${name}, samp_rate = ${samp_rate}, grc_block = True, iq = ${iq})
+        satellites.core.gr_satellites_flowgraph(name = ${name}, samp_rate = ${samp_rate}, grc_block = True, iq = ${iq}, options = ${options})
         % else:
         % if context.get('definition')() == 'norad':
-        satellites.core.gr_satellites_flowgraph(norad = ${norad}, samp_rate = ${samp_rate}, grc_block = True, iq = ${iq})
+        satellites.core.gr_satellites_flowgraph(norad = ${norad}, samp_rate = ${samp_rate}, grc_block = True, iq = ${iq}, options = ${options})
         % else:
         raise ValueError('Unspecified satellite type')
         % endif
@@ -72,5 +77,6 @@ documentation: |-
         NORAD ID: NORAD ID of the satellite, if using the NORAD ID definition method
         Sample Rate: sample rate in sps of the input stream
         IQ input: selects whether IQ or real input is used
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 
 file_format: 1

@@ -14,6 +14,11 @@ parameters:
     dtype: int
     default: 0
     hide: ${ 'all' if server not in ['SatNOGS', 'BME'] else 'none' }
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
 
 inputs:
 -   domain: message
@@ -23,7 +28,7 @@ templates:
     imports: |-
         import satellites.components.datasinks
         import satellites.utils.config
-    make: satellites.components.datasinks.telemetry_submit(${server}, ${norad}, satellites.utils.config.open_config())
+    make: satellites.components.datasinks.telemetry_submit(${server}, ${norad}, satellites.utils.config.open_config(), options=${options})
 
 documentation: |-
     Sends telemetry frames to an online telemetry data base server
@@ -35,5 +40,6 @@ documentation: |-
 
     Parameters:
         Server: selects the server to submit telemetry to
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 
 file_format: 1

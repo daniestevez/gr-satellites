@@ -20,6 +20,7 @@ import functools
 import yaml
 import argparse
 import itertools
+import shlex
 
 def set_options(cl, *args, **kwargs):
     """
@@ -83,6 +84,13 @@ class gr_satellites_flowgraph(gr.hier_block2):
               gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
             gr.io_signature(0, 0, 0))
 
+        # load up options, similarly to option block
+        if type(options) is str:
+            p = argparse.ArgumentParser(prog = self.__class__.__name__,
+                                            conflict_handler = 'resolve')
+            gr_satellites_flowgraph.add_options(p, file, name, norad)
+            options = p.parse_args(shlex.split(options))
+        
         if pdu_in:
             self.message_port_register_hier_in('in')
         elif samp_rate is None:

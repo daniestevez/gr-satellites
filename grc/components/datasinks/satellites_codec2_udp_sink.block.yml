@@ -11,6 +11,11 @@ parameters:
     label: Port
     dtype: int
     default: 7000
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
 
 inputs:
 -   domain: message
@@ -18,7 +23,7 @@ inputs:
 
 templates:
     imports: import satellites.components.datasinks
-    make: satellites.components.datasinks.codec2_udp_sink(ip=${ip}, port=${port}) 
+    make: satellites.components.datasinks.codec2_udp_sink(ip=${ip}, port=${port}, options=${options}) 
 
 documentation: |-
     Sends Codec2 digital voice frames by UDP
@@ -31,5 +36,6 @@ documentation: |-
     Parameters:
         IP: destination IP to send the UDP packets to
         Port: destination port to send the UDP packets to
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 
 file_format: 1

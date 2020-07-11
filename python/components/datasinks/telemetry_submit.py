@@ -23,8 +23,9 @@ class telemetry_submit(gr.hier_block2):
         server: 'SatNOGS', 'FUNcube', 'PWSat' or 'BME' (string)
         norad: NORAD ID (int)
         config: configuration file from configparser
+        options: options from argparse
     """
-    def __init__(self, server, norad = None, config = None):
+    def __init__(self, server, norad = None, config = None, options = None):
         gr.hier_block2.__init__(self, "telemetry_submit",
             gr.io_signature(0, 0, 0),
             gr.io_signature(0, 0, 0))

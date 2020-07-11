@@ -22,8 +22,9 @@ class kiss_file_sink(gr.hier_block2):
     Args:
         file: output filename (string)
         append: append to file (bool)
+        options: options from argparse
     """
-    def __init__(self, file, append = False):
+    def __init__(self, file, append = False, options = None):
         gr.hier_block2.__init__(self, "kiss_file_sink",
             gr.io_signature(0, 0, 0),
             gr.io_signature(0, 0, 0))
