@@ -144,7 +144,8 @@ Downloading sample recordings
 
 The ``satellite-recordings/`` directory is a `git submodule`_ that contains many
 short sample recordings of different satellites that can be used to test the
-decoders. The submodule can be cloned (downloaded) by running
+decoders. From a clone of the gr-satellites git repository, the submodule can
+be cloned (downloaded) by running
 
 .. code-block:: console
 
@@ -162,6 +163,7 @@ when cloning the gr-satellites repository to download both gr-satellites and the
 satellite-recordings submodule.
 
 The satellite-recordings sample recordings can also be downloaded from its
-`own git repository <https://github.com/daniestevez/satellite-recordings/>`_.
+`own git repository <https://github.com/daniestevez/satellite-recordings/>`_,
+which is necessary if gr-satellite has not been installed from the git repository.
 
 .. _git submodule: https://git-scm.com/book/en/v2/Git-Tools-Submodules
