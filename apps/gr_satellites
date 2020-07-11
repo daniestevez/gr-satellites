@@ -33,14 +33,17 @@ def argument_parser():
     p = argparse.ArgumentParser(description = description, conflict_handler = 'resolve', prog = f'gr_satellites satellite', epilog = info)
 
     p_input = p.add_argument_group('input')
-    p_input.add_argument('--wavfile', help = 'WAV input file')
-    p_input.add_argument('--rawfile', help = 'RAW input file (float32 or complex64)')
-    p_input.add_argument('--rawint16', help = 'RAW input file (int16)')
+
+    p_sources = p_input.add_mutually_exclusive_group(required = True)
+    p_sources.add_argument('--wavfile', help = 'WAV input file')
+    p_sources.add_argument('--rawfile', help = 'RAW input file (float32 or complex64)')
+    p_sources.add_argument('--rawint16', help = 'RAW input file (int16)')
+    p_sources.add_argument('--udp', action = 'store_true', help = 'Use UDP input')
+    p_sources.add_argument('--kiss_in', help = 'KISS input file')
+
     p_input.add_argument('--samp_rate', type = float, help = 'Sample rate (Hz)')
-    p_input.add_argument('--udp', action = 'store_true', help = 'Use UDP input')
     p_input.add_argument('--udp_ip', default = '::', help = 'UDP input listen IP [default=%(default)r]')
     p_input.add_argument('--udp_port', default = '7355', type = int, help = 'UDP input listen port [default=%(default)r]')
-    p_input.add_argument('--kiss_in', help = 'KISS input file')
     p_input.add_argument('--iq', action = 'store_true', help = 'Use IQ input')
     p_input.add_argument('--input_gain', type = float, default = 1, help = 'Input gain (can be negative to invert signal) [default=%(default)r]')    
     
@@ -52,10 +55,6 @@ def argument_parser():
     return p
 
 def check_options(options, parser):
-    if sum([bool(x) for x in [options.wavfile, options.rawfile, options.rawint16, options.udp, options.kiss_in]]) != 1:
-        print('Need to specify exactly one of the following input sources: {--wavfile, --rawfile, --rawint16, --udp, --kiss_in}', file = sys.stderr)
-        parser.print_usage(file = sys.stderr)
-        sys.exit(1)
     if options.kiss_in is None and options.samp_rate is None:
         print('Need to specify --samp_rate unless --kiss_in is used', file = sys.stderr)
         parser.print_usage(file = sys.stderr)
