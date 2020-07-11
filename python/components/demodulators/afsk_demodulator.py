@@ -48,7 +48,8 @@ class afsk_demodulator(gr.hier_block2, options_block):
         taps = firdes.low_pass(1, samp_rate, filter_cutoff, filter_transition)
         self.xlating = filter.freq_xlating_fir_filter_fcf(1, taps, af_carrier, samp_rate)
 
-        self.fsk = fsk_demodulator(baudrate, samp_rate, deviation = deviation, iq = True, dump_path = dump_path, options = options)
+        self.fsk = fsk_demodulator(baudrate, samp_rate, deviation = deviation, iq = True,
+                                    dc_block = False, dump_path = dump_path, options = options)
 
         self.connect(self.demod, self.xlating, self.fsk, self)
 

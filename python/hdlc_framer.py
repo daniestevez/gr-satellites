@@ -42,7 +42,7 @@ class hdlc_framer(gr.basic_block):
         data.append(crc & 0xff)
         data.append((crc >> 8) & 0xff)
                 
-        buff = hdlc.flag * self.preamble_bytes
+        buff = list(hdlc.flag * self.preamble_bytes)
         ones = 0 # number of consecutive ones
         for byte in data:
             for _ in range(8):

@@ -44,7 +44,10 @@ list(APPEND satellites_sources
     radecoder/ra_config.c
     radecoder/ra_decoder_gen.c
     radecoder/ra_lfsr.c
+    radecoder/ra_encoder.c
     decode_ra_code_impl.cc
+    nrzi_encode_impl.cc
+    nrzi_decode_impl.cc
 )
 
 set(satellites_sources "${satellites_sources}" PARENT_SCOPE)

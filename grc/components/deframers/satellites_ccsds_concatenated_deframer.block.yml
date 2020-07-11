@@ -17,10 +17,20 @@ parameters:
     dtype: bool
     default: 'False'
     options: ['True', 'False']
+-   id: use_scrambler
+    label: Use scrambler
+    dtype: bool
+    default: 'True'
+    options: ['True', 'False']
 -   id: threshold
     label: Syncword threshold
     dtype: int
     default: 0
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
 
 inputs:
 -   domain: stream
@@ -32,7 +42,7 @@ outputs:
 
 templates:
     imports: import satellites.components.deframers
-    make: satellites.components.deframers.ccsds_concatenated_deframer(frame_size = ${frame_size}, differential = ${differential}, dual_basis = ${dual_basis}, syncword_threshold = ${threshold})
+    make: satellites.components.deframers.ccsds_concatenated_deframer(frame_size = ${frame_size}, differential = ${differential}, dual_basis = ${dual_basis}, use_scrambler = ${use_scrambler}, syncword_threshold = ${threshold}, options=${options})
 
 documentation: |-
     Deframes a signal using the CCSDS concatenated TM protocol
@@ -48,5 +58,6 @@ documentation: |-
         Differential encoding: toggles the usage of differential decoding
         Use RS dual basis: toggles the usage of the dual basis definition for the Reed-Solomon code
         Syncword threshold: number of bit errors to allow in the detection of the 32 bit syncword
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 
 file_format: 1

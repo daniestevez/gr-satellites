@@ -6,6 +6,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Example flowgraphs from gr-kiss
+- Support for CAS-6
+- Option to disable scrambler in CCSDS deframers
+- Note about volk_profile in the documentation
+- Missing .yml grc file for LilacSat-1 deframer
+- Support for BY02
+- Command line options for satellite decoder block and components
+- More documentation about --dump_path
+
+### Changed
+- Do not use DC-block in AFSK demodulator
+- Remove second lowpass filter in BPSK demodulator
+- Improvements in LilacSat-1 demuxer and deframer
+- Ported NRZI encoder and decoder to C++
+- Re-encode frame in SMOG-P RA decoder to check decoding correctness
+
+### Fixed
+- Cmake warning when searching for libfec
+- Minor corrections to documentation
+- Bug in HDLC Framer
+
+### Removed
+- Deprecated SMOG-P packet filter block
+
 ## [3.0.0] - 2020-06-03
 
 Changes from 3.0.0-rc1

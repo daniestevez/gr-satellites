@@ -27,8 +27,13 @@ class SatYAML:
                 'AO-40 FEC', 'AO-40 FEC short', 'AO-40 uncoded', 'TT-64', 'ESEO', 'Lucky-7',\
                 'Reaktor Hello World', 'S-NET', 'Swiatowid', 'NuSat', 'K2SAT',\
                 'CCSDS Reed-Solomon', 'CCSDS Reed-Solomon dual', 'CCSDS Reed-Solomon differential',\
+                'CCSDS Reed-Solomon no-scrambler', 'CCSDS Reed-Solomon dual no-scrambler',\
+                'CCSDS Reed-Solomon differential no-scrambler',\
                 'CCSDS Reed-Solomon dual differential', 'CCSDS Concatenated', 'CCSDS Concatenated dual',\
+                'CCSDS Reed-Solomon dual differential no-scrambler',\
+                'CCSDS Concatenated no-scrambler', 'CCSDS Concatenated dual no-scrambler',\
                 'CCSDS Concatenated differential', 'CCSDS Concatenated dual differential',\
+                'CCSDS Concatenated differential no-scrambler', 'CCSDS Concatenated dual differential no-scrambler',\
                 'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon', 'SMOG-P RA',\
                 'SMOG-P Signalling', 'OPS-SAT', 'U482C', 'UA01']
     transports = ['KISS', 'KISS no control byte', 'KISS KS-1Q']

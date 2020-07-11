@@ -89,11 +89,6 @@ class bpsk_demodulator(gr.hier_block2, options_block):
                 self.connect((self.fll, 2), self.fll_phase)
                 self.connect((self.fll, 3), self.fll_error)            
 
-        filter_cutoff2 = baudrate * 1.0
-        filter_transition2 = baudrate * 0.1
-        taps2 = firdes.low_pass(1, samp_rate/decimation, filter_cutoff2, filter_transition2)
-        self.lowpass = filter.fir_filter_ccf(1, taps2)
-        
         nfilts = 16
         rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), self.options.rrc_alpha, int(ceil(11*sps*nfilts)))
         ted_gain = 0.5 # "empiric" formula for TED gain of a PFB MF TED for complex BPSK 0.5 sample^{-1}
@@ -122,10 +117,9 @@ class bpsk_demodulator(gr.hier_block2, options_block):
 
         self.connect(self, self.xlating, self.agc)
         if self.options.disable_fll:
-            self.connect(self.agc, self.lowpass)
+            self.connect(self.agc, self.clock_recovery)
         else:
-            self.connect(self.agc, self.fll, self.lowpass)
-        self.connect(self.lowpass, self.clock_recovery)
+            self.connect(self.agc, self.fll, self.clock_recovery)
 
         self.complex_to_real = blocks.complex_to_real(1)
 

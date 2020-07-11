@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2017 Daniel Estevez <daniel@destevez.net>
+ * Copyright 2017,2020 Daniel Estevez <daniel@destevez.net>
  *
  * This file is part of gr-satellites
  *
@@ -24,6 +24,8 @@ namespace gr {
      private:
       int d_position;
       pmt::pmt_t d_tag;
+      uint8_t *d_frame; // Current frame without codec2 bytes
+      uint8_t *d_codec2; // Current codec2 frame
 
      public:
       lilacsat1_demux_impl(std::string tag);

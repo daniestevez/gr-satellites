@@ -23,6 +23,11 @@ parameters:
     label: Fullscreen
     dtype: bool
     default: True
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
 
 inputs:
 -   domain: message
@@ -30,7 +35,7 @@ inputs:
 
 templates:
     imports: import satellites.components.datasinks
-    make: satellites.components.datasinks.file_receiver(${receiver}, ${path}, ${verbose}, display=${display}, fullscreen=${fullscreen})
+    make: satellites.components.datasinks.file_receiver(${receiver}, ${path}, ${verbose}, display=${display}, fullscreen=${fullscreen}, options=${options})
 
 documentation: |-
     Reassembles images transmitted in chunks and displays them in real time
@@ -46,5 +51,6 @@ documentation: |-
         Verbose: print additional information to the standard output
         Display: show the image in real time using feh
         Fullscreen: run feh in fullscreen
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 
 file_format: 1

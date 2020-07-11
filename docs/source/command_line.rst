@@ -393,6 +393,47 @@ option with a short recording, to avoid creating very large files. The details
 of each of these files are best studied in the Python source code of the
 demodulators (see ``python/components/demodulators/``).
 
+The following example show how to use ``--dump_path`` to plot the symbols with
+`Numpy`_ and `Matplotlib`_ and optimize the decoding parameters for a particular
+recording. We first run the following to dump to the path ``/tmp/fsk`` the
+internal signals produced by decoding a sample recording of AU02.
+
+.. code-block:: console
+
+    $ mkdir -p /tmp/fsk
+    $ gr_satellites AU02 --wavfile satellite-recordings/au02.wav \
+         --samp_rate 48e3 --dump_path /tmp/fsk
+
+We see that we do not get any decoded packets. Then, we can plot the FSK symbols
+with the following Python code:
+
+.. code-block:: python
+
+     import numpy as np
+     import matplotlib.pyplot as plt
+
+     x = np.fromfile('/tmp/fsk/clock_recovery_out.f32', dtype = 'float32')
+     plt.plot(x, '.')
+     plt.show()
+
+This produces the figure below, which shows that there has been a clock cycle
+slip mid packet, which prevents correct decoding.
+
+.. figure:: images/au02_default.png
+    :alt: FSK symbols with default parameters
+
+    FSK symbols with default parameters
+
+We can run ``gr_satellites`` again adding the parameter ``--clk_bw 0.1`` to
+increase the clock recovery loop bandwidth. With this parameter we get a
+successful decode and if we plot the FSK symbols again, we get the figure below,
+which shows that the clock recovery is working much better than before.
+
+.. figure:: images/au02_nondefault.png
+    :alt: FSK symbols with non-default parameters
+
+    FSK symbols with non-default parameters
+
 .. _Telemetry submission:
 
 Telemetry submission
@@ -611,3 +652,5 @@ processed, thus restoring the correct polarity.
 .. _Your credentials: https://radio.pw-sat.pl/communication/yourcredentials
 .. _register an account in the BME server: https://gnd.bme.hu:8080/auth/register
 .. _feh: https://feh.finalrewind.org/
+.. _NumPy: https://numpy.org/
+.. _Matplotlib: https://matplotlib.org/

@@ -21,8 +21,9 @@ class kiss_transport(gr.hier_block2):
     Args:
         control_byte: Expect KISS control byte (bool)
         header_remove_bytes: Remove this many bytes from header (int)
+        options: options from argparse
     """
-    def __init__(self, control_byte = True, header_remove_bytes = 0):
+    def __init__(self, control_byte = True, header_remove_bytes = 0, options = None):
         gr.hier_block2.__init__(self, "kiss_transport",
             gr.io_signature(0, 0, 0),
             gr.io_signature(0, 0, 0))

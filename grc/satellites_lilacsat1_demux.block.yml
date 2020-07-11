@@ -16,7 +16,7 @@ inputs:
 
 outputs:
 -   domain: message
-    id: kiss
+    id: frame
 -   domain: message
     id: codec2
 

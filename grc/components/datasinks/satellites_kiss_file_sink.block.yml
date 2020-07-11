@@ -12,6 +12,11 @@ parameters:
     default: 'False'
     options: ['True', 'False']
     option_labels: [Append, Overwrite]
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
 
 inputs:
 -   domain: message
@@ -19,7 +24,7 @@ inputs:
 
 templates:
     imports: import satellites.components.datasinks
-    make: satellites.components.datasinks.kiss_file_sink(${file}, append = ${append})
+    make: satellites.components.datasinks.kiss_file_sink(${file}, append = ${append}, options=${options})
 
 documentation: |-
     Saves PDUs to a file using the KISS protocol/format
@@ -30,5 +35,6 @@ documentation: |-
     Parameters:
         File: path of the output file
         Append file: selects whether the output file should be overwritten or appended to
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 
 file_format: 1

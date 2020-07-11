@@ -9,6 +9,7 @@
 #
 
 import argparse
+import shlex
 
 class options_block:
     """
@@ -30,10 +31,10 @@ class options_block:
         options: options from argparse
     """
     def __init__(self, options):
-        if options is not None:
+        if options is not None and type(options) is not str:
             self.options = options
             return
 
-        p = argparse.ArgumentParser()
+        p = argparse.ArgumentParser(prog = self.__class__.__name__)
         self.add_options(p)
-        self.options = p.parse_args([])
+        self.options = p.parse_args(shlex.split(options) if options else [])

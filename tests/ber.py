@@ -151,7 +151,7 @@ if __name__ == '__main__':
     ax.grid()
     fig.savefig('ber_bpsk.png')
     print('Saved output to ber_bpsk.png')
-    exit(1)
+    
     print('Computing FSK BER')
     ebn0s = np.arange(-2, 17.5, 0.5)
     bers = [compute_ber(FSK, ebn0) for ebn0 in ebn0s]

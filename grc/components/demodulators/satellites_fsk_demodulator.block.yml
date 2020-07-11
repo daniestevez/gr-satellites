@@ -19,6 +19,11 @@ parameters:
     label: Subaudio
     dtype: bool
     default: False
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
 
 inputs:
 -   domain: stream
@@ -30,7 +35,7 @@ outputs:
 
 templates:
     imports: import satellites.components.demodulators
-    make: satellites.components.demodulators.fsk_demodulator(baudrate = ${baudrate}, samp_rate = ${samp_rate}, iq = ${iq}, subaudio = ${subaudio})
+    make: satellites.components.demodulators.fsk_demodulator(baudrate = ${baudrate}, samp_rate = ${samp_rate}, iq = ${iq}, subaudio = ${subaudio}, options=${options})
 
 documentation: |-
     Demodulates an FSK signal
@@ -46,5 +51,6 @@ documentation: |-
         Sample rate: The input sample rate in samples per second
         IQ input: enables IQ (complex) input
         Subaudio: use subaudio demodulation
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 
 file_format: 1

@@ -20,6 +20,7 @@ import functools
 import yaml
 import argparse
 import itertools
+import shlex
 
 def set_options(cl, *args, **kwargs):
     """
@@ -83,6 +84,13 @@ class gr_satellites_flowgraph(gr.hier_block2):
               gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
             gr.io_signature(0, 0, 0))
 
+        # load up options, similarly to option block
+        if type(options) is str:
+            p = argparse.ArgumentParser(prog = self.__class__.__name__,
+                                            conflict_handler = 'resolve')
+            gr_satellites_flowgraph.add_options(p, file, name, norad)
+            options = p.parse_args(shlex.split(options))
+        
         if pdu_in:
             self.message_port_register_hier_in('in')
         elif samp_rate is None:
@@ -265,6 +273,14 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'CCSDS Concatenated dual' : set_options(deframers.ccsds_concatenated_deframer, dual_basis = True),
         'CCSDS Concatenated differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True),
         'CCSDS Concatenated dual differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True, dual_basis = True),
+        'CCSDS Reed-Solomon no-scrambler' : set_options(deframers.ccsds_rs_deframer, use_scrambler = False),
+        'CCSDS Reed-Solomon dual no-scrambler' : set_options(deframers.ccsds_rs_deframer, dual_basis = True, use_scrambler = False),
+        'CCSDS Reed-Solomon differential no-scrambler' : set_options(deframers.ccsds_rs_deframer, differential = True, use_scrambler = False),
+        'CCSDS Reed-Solomon dual differential no-scrambler' : set_options(deframers.ccsds_rs_deframer, differential = True, dual_basis = True, use_scrambler = False),
+        'CCSDS Concatenated no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, use_scrambler = False),
+        'CCSDS Concatenated dual no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, dual_basis = True, use_scrambler = False),
+        'CCSDS Concatenated differential no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, differential = True, use_scrambler = False),
+        'CCSDS Concatenated dual differential no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, differential = True, dual_basis = True, use_scrambler = False),
         'LilacSat-1' : deframers.lilacsat_1_deframer,
         'AAUSAT-4' : deframers.aausat4_deframer,
         'NGHam' : set_options(deframers.ngham_deframer, decode_rs = True),

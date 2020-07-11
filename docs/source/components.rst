@@ -30,6 +30,11 @@ pass their output to the input of the next step. These are the following:
 * **Data sinks**. Data sinks are the consumers of packets. They might store
   them, send them to another software, or parse telemetry values.
 
+All the component blocks support :ref:`Command line options` in the same way as
+the satellite decoder block. The set of available options for each component
+block is different. It is possible to use the ``"--help"`` as the options of a
+particular block in order to print out the available options for that block.
+  
 Below, the main component blocks in each category are described.
 
 .. _Data sources:
@@ -403,7 +408,9 @@ The *Frame size* option indicates the size of the frame in bytes (after
 Reed-Solomon decoding). The *Differential encoding* option enables differential
 decoding, which is often used to solve the BPSK 180º phase ambiguity. The
 *Use RS dual basis* option enables the usage of the dual basis definition for the Reed-Solmon
-code. The *Syncword threshold* option can be used to choose the number of bit
+code. The *Use scrambler* option enables or disables the use of the CCSDS synchronous
+descrambler. Most satellites using CCSDS frames use scrambling.
+The *Syncword threshold* option can be used to choose the number of bit
 errors that are allowed in the detection of the syncword.
     
 .. figure:: images/ccsds_deframer_options.png
@@ -661,8 +668,17 @@ The Codec2 frames are 7 bytes long, and each is sent in a different UDP packet
 to ensure minimum latency.
 
 The Codec2 UDP sink has two options, which indicate the IP and port to send
-the frames to.
+the frames to. By default, address ``127.0.0.1`` and port ``7000`` are used.
 
+The Codec2 frames can be decoded and played in real time by the Codec2 decoder as shown here.
+
+.. code-block:: console
+
+   $ nc -lu 7000 | c2dec 1300 - -  | play -t raw -r 8000 -e signed-integer -b 16 -c 1 -
+
+The ``c2dec`` command line decoder can be obtained by building from source the
+`codec2 library`_
+   
 .. _AX.25: http://www.ax25.net/
 .. _GOMspace NanoCom AX100: https://gomspace.com/shop/subsystems/communication-systems/nanocom-ax100.aspx
 .. _AO-40 FEC beacon: http://www.ka9q.net/papers/ao40tlm.html
@@ -670,3 +686,4 @@ the frames to.
 .. _KISS protocol: http://www.ax25.net/kiss.aspx
 .. _construct: https://construct.readthedocs.io/
 .. _feh: https://feh.finalrewind.org/
+.. _codec2 library: https://github.com/drowe67/codec2/

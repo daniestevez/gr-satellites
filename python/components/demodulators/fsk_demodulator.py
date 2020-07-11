@@ -31,10 +31,12 @@ class fsk_demodulator(gr.hier_block2, options_block):
         iq: Whether the input is IQ or real (bool)
         deviation: Deviation in Hz, negative inverts sidebands (float)
         subaudio: Use subaudio demodulation (bool)
+        dc_block: Use DC-block (bool)
         dump_path: Path to dump internal signals to files (str)
         options: Options from argparse
     """
     def __init__(self, baudrate, samp_rate, iq, deviation = None, subaudio = False,
+                     dc_block = True,
                      dump_path = None, options = None):
         gr.hier_block2.__init__(self, "fsk_demodulator",
             gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
@@ -76,7 +78,10 @@ class fsk_demodulator(gr.hier_block2, options_block):
         taps = np.ones(sqfilter_len)/sqfilter_len
         self.lowpass = filter.fir_filter_fff(decimation, taps)
 
-        self.dcblock = filter.dc_blocker_ff(ceil(sps * 32), True)
+        if dc_block:
+            self.dcblock = filter.dc_blocker_ff(ceil(sps * 32), True)
+        else:
+            self.dcblock = self.lowpass # to simplify connections below
 
         if use_agc:
             agc_constant = 2e-2 / sps # This gives a time constant of 50 symbols
@@ -107,10 +112,13 @@ class fsk_demodulator(gr.hier_block2, options_block):
             self.connect((self.clock_recovery, 2), self.clock_recovery_T_inst)
             self.connect((self.clock_recovery, 3), self.clock_recovery_T_avg)
 
+        conns = [self.demod]
         if subaudio:
-            self.connect(self.demod, self.subaudio_lowpass, self.lowpass, self.dcblock)
-        else:
-            self.connect(self.demod, self.lowpass, self.dcblock)
+            conns.append(self.subaudio_lowpass)
+        conns.append(self.lowpass)
+        if dc_block:
+            conns.append(self.dcblock)
+        self.connect(*conns)
         if use_agc:
             self.connect(self.dcblock, self.agc, self.clock_recovery)
             if dump_path is not None:

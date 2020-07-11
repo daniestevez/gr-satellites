@@ -50,6 +50,11 @@ struct ra_context {
   float ra_dataword_gen[RA_MAX_DATA_LENGTH * RA_BITCOUNT];
   float ra_codeword_gen[RA_MAX_CODE_LENGTH * RA_BITCOUNT];
   float ra_forward_gen[RA_MAX_DATA_LENGTH * RA_BITCOUNT];
+
+  // for ra_encoder
+  const ra_word_t *ra_packet;
+  ra_word_t ra_nextword;
+  uint8_t ra_passno;
 };
 
 /* data length in words */

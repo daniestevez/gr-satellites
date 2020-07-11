@@ -2,13 +2,20 @@ id: satellites_hexdump_sink
 label: Hexdump Sink
 category: '[Satellites]/Data sinks'
 
+parameters:
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
+
 inputs:
 -   domain: message
     id: in
 
 templates:
     imports: import satellites.components.datasinks
-    make: satellites.components.datasinks.hexdump_sink()
+    make: satellites.components.datasinks.hexdump_sink(options=${options})
 
 documentation: |-
     Prints PDUs in hex to the standard output
@@ -18,4 +25,6 @@ documentation: |-
     Input:
         PDUs
 
+    Parameters:
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 file_format: 1

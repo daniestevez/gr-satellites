@@ -40,8 +40,6 @@ __all__ = ['ccsds', 'components', 'core', 'hier', 'filereceiver', 'satyaml', 'te
 from .kiss_to_pdu import kiss_to_pdu
 from .pdu_to_kiss import pdu_to_kiss
 from .hdlc_framer import hdlc_framer
-from .nrzi_encode import nrzi_encode
-from .nrzi_decode import nrzi_decode
 from .hdlc_deframer import hdlc_deframer
 from .check_address import check_address
 
@@ -104,8 +102,6 @@ from .swiatowid_packet_split import swiatowid_packet_split
 from .manchester_sync import manchester_sync
 
 from .header_remover import header_remover
-
-from .smogp_packet_filter import smogp_packet_filter
 
 from .aausat4_remove_fsm import aausat4_remove_fsm
 

@@ -25,10 +25,12 @@ class ccsds_concatenated_deframer(gr.hier_block2, options_block):
         frame_size: frame size (not including parity check bytes) (int)
         differential: whether to use differential coding (bool)
         dual_basis: use dual basis instead of conventional (bool)
+        use_scrambler: use CCSDS synchronous scrambler (bool)
         syncword_threshold: number of bit errors allowed in syncword (int)
         options: Options from argparse
     """
-    def __init__(self, frame_size = 223, differential = False, dual_basis = False, syncword_threshold = None, options = None):
+    def __init__(self, frame_size = 223, differential = False, dual_basis = False,
+                     use_scrambler = True, syncword_threshold = None, options = None):
         gr.hier_block2.__init__(self, "ccsds_concatenated_deframer",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
@@ -43,8 +45,10 @@ class ccsds_concatenated_deframer(gr.hier_block2, options_block):
         self.char2float1 = blocks.char_to_float(1, 1)
         self.addconst0 = blocks.add_const_ff(-0.5)
         self.addconst1 = blocks.add_const_ff(-0.5)
-        self.rs0 = ccsds_rs_deframer(frame_size, differential, dual_basis, syncword_threshold, options)
-        self.rs1 = ccsds_rs_deframer(frame_size, differential, dual_basis, syncword_threshold, options)
+        self.rs0 = ccsds_rs_deframer(frame_size, differential, dual_basis,
+                                         use_scrambler, syncword_threshold, options)
+        self.rs1 = ccsds_rs_deframer(frame_size, differential, dual_basis,
+                                         use_scrambler, syncword_threshold, options)
 
         self.connect(self, self.viterbi0, self.char2float0, self.addconst0, self.rs0)
         self.connect(self, self.delay1, self.viterbi1, self.char2float1, self.addconst1, self.rs1)

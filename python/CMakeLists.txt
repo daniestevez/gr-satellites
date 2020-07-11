@@ -37,8 +37,6 @@ GR_PYTHON_INSTALL(
     kiss_to_pdu.py
     pdu_to_kiss.py
     hdlc_framer.py
-    nrzi_encode.py
-    nrzi_decode.py
     hdlc_deframer.py
     check_address.py
     fixedlen_tagger.py
@@ -84,7 +82,6 @@ GR_PYTHON_INSTALL(
     swiatowid_packet_split.py
     manchester_sync.py
     header_remover.py
-    smogp_packet_filter.py
     aausat4_remove_fsm.py
     ngham_packet_crop.py
     ngham_remove_padding.py
@@ -108,4 +105,6 @@ add_subdirectory(utils)
 include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-satellites)
-set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)
+set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/swig)
+GR_ADD_TEST(qa_hdlc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_hdlc.py)
+GR_ADD_TEST(qa_nrzi ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_nrzi.py)

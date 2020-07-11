@@ -22,7 +22,7 @@ images in real-time as they are being received.
 
 gr-satellites can be used as a set of building blocks to implement decoders for
 other satellites or other groundstation solutions. Some of the low level blocks
-in gr-satellites are also useful for other kinds RF communications protocols.
+in gr-satellites are also useful for other kinds of RF communications protocols.
 
 .. _GNU Radio: https://gnuradio.org
 .. _Amateur satellites: https://en.wikipedia.org/wiki/Amateur_radio_satellite

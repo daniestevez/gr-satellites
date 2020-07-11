@@ -17,6 +17,11 @@ parameters:
     label: File
     dtype: file_save
     hide: ${ 'all' if output == 'stdout' else 'none' }
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
 
 inputs:
 -   domain: message
@@ -26,9 +31,9 @@ templates:
     imports: import satellites.components.datasinks
     make: |
         % if context.get('output')() == 'stdout':
-        satellites.components.datasinks.telemetry_parser(${definition})
+        satellites.components.datasinks.telemetry_parser(${definition}, options=${options})
         % else:
-        satellites.components.datasinks.telemetry_parser(${definition}, file = ${file})
+        satellites.components.datasinks.telemetry_parser(${definition}, file = ${file}, options=${options})
         % endif
 
 documentation: |-
@@ -43,5 +48,6 @@ documentation: |-
         Telemetry Definition: the telemetry definition to use for parsing, which must be an object of satellites.telemetry supporting the parse() method
         Output: selects standard output or file as output destination
         File: selects the path of the output file
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 
 file_format: 1

@@ -154,6 +154,30 @@ The framings allowed in the ``framing`` field are the following:
 * ``CCSDS Concatenated dual differential``, CCSDS Concatenated TM codewords with
   differential encoding and dual RS basis (see :ref:`CCSDS deframers`)
 
+* ``CCSDS Reed-Solomon no-scrambler``, CCSDS Reed-Solomon TM codewords with conventional RS
+  basis and scrambler disabled (see :ref:`CCSDS deframers`)
+
+* ``CCSDS Reed-Solomon dual no-scrambler``, CCSDS Reed-Solomon TM codewords with dual RS
+  basis and scrambler disabled (see :ref:`CCSDS deframers`)
+
+* ``CCSDS Reed-Solomon differential no-scrambler``, CCSDS Reed-Solomon TM codewords with
+  differential encoding, conventional RS basis and scrambler disabled (see :ref:`CCSDS deframers`)
+
+* ``CCSDS Reed-Solomon dual differential no-scrambler``, CCSDS Reed-Solomon TM codewords with
+  differential encoding, dual RS basis and scrambler disabled (see :ref:`CCSDS deframers`)
+
+* ``CCSDS Concatenated no-scrambler``, CCSDS Concatenated TM codewords with conventional RS
+  basis and scrambler disabled (see :ref:`CCSDS deframers`)
+
+* ``CCSDS Concatenated dual no-scrambler``, CCSDS concatenated TM codewords with dual RS
+  basis and scrambler disabled (see :ref:`CCSDS deframers`)
+
+* ``CCSDS Concatenated differential no-scrambler``, CCSDS Concatenated TM codewords with
+  differential encoding, conventional RS basis and scrambler disabled (see :ref:`CCSDS deframers`)
+
+* ``CCSDS Concatenated dual differential no-scrambler``, CCSDS Concatenated TM codewords with
+  differential encoding, dual RS basis and scrambler disabled (see :ref:`CCSDS deframers`)
+
 * ``3CAT-1``, custom framing used by 3CAT-1. This uses a CC1101 chip with PN9
   scrambler and a (255,223) Reed-Solomon code for the payload
 

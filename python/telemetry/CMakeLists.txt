@@ -35,6 +35,7 @@ GR_PYTHON_INSTALL(
     aausat4.py
     au03.py
     ax25.py
+    by02.py
     by70_1.py
     csp.py
     eseo.py
@@ -63,4 +64,5 @@ GR_PYTHON_INSTALL(
 include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-satellites)
-set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)
+set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/swig)
+GR_ADD_TEST(qa_by02 ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_by02.py)

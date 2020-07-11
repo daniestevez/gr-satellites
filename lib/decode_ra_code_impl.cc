@@ -20,7 +20,10 @@
 
 extern "C" {
 #include "radecoder/ra_decoder_gen.h"
+#include "radecoder/ra_encoder.h"
 }
+
+#define ERROR_THRESHOLD 0.35f
 
 namespace gr {
   namespace satellites {
@@ -89,19 +92,33 @@ namespace gr {
 
       float *ra_in = new float [ra_code_length * RA_BITCOUNT];
       // Weird bit organization: see radecoder/ra_decoder.c
-      for (int i = 0; i < ra_code_length * RA_BITCOUNT / 8; i++) {
+      for (int i = 0; i < ra_code_length * RA_BITCOUNT; i += 8) {
 	for (int j = 0; j < 8; j++) {
-	  ra_in[8 * i + j] = -soft_bits[8 * i + 7 - j];
+	  ra_in[i + j] = -soft_bits[i + 7 - j];
 	}
       }
 
       ra_decoder_gen(d_ra_context, ra_in, (ra_word_t *) ra_out, 20);
 
+      ra_word_t *ra_recode = new ra_word_t [ra_code_length];
+      ra_encoder(d_ra_context, (const ra_word_t *) ra_out, ra_recode);
+
+      unsigned errors = 0;
+      for (int i = 0; i < ra_code_length; i++) {
+	for (int j = 0; j < RA_BITCOUNT; j++) {
+	  bool bit = (ra_recode[i] & (1 << j)) != 0;
+	  errors += (ra_in[i * RA_BITCOUNT + j] >= 0) ? bit : !bit;
+	}
+      }
+
+      delete[] ra_recode;
       delete[] ra_in;
 
-      message_port_pub(pmt::mp("out"),
-		       pmt::cons(pmt::PMT_NIL,
+      if ((float) errors / (ra_code_length * RA_BITCOUNT) < ERROR_THRESHOLD) {
+	message_port_pub(pmt::mp("out"),
+			 pmt::cons(pmt::PMT_NIL,
 				   pmt::init_u8vector(d_size, ra_out)));
+      }
     }
     
   } /* namespace satellites */
