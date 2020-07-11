@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0] - 2020-07-11
+
 ### Added
 - Example flowgraphs from gr-kiss
 - Support for CAS-6
@@ -216,7 +218,8 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.0.0...master
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.1.0...master
+[3.1.0]: https://github.com/daniestevez/gr-satellites/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/daniestevez/gr-satellites/compare/v3.0.0-rc1...v3.0.0
 [3.0.0-rc1]: https://github.com/daniestevez/gr-satellites/compare/v2.3.2...v3.0.0-rc1
 [2.3.2]: https://github.com/daniestevez/gr-satellites/compare/v2.3.1...v2.3.2
