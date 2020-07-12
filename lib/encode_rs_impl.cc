@@ -18,10 +18,13 @@
 #include <cstdio>
 
 extern "C" {
-#include <fec.h>
+#include <gnuradio/fec/rs.h>
 }
 
 #include "rs.h"
+
+// This should be included in <gnuradio/fec/rs.h>
+extern int encode_rs_ccsds(unsigned char *data,unsigned char *parity);
 
 namespace gr {
   namespace satellites {
@@ -79,19 +82,23 @@ namespace gr {
 
       assert(frame_len <= MAX_FRAME_LEN - PARITY_BYTES);
 
-      memcpy(data, pmt::uniform_vector_elements(msg, offset), frame_len);
+      // Add zero padding to the beginning of the message
+      // This is discarded after RS encoding
+      int padding = MAX_FRAME_LEN - frame_len - PARITY_BYTES;
+      std::memset(data, 0, padding);
+      std::memcpy(data + padding, pmt::uniform_vector_elements(msg, offset), frame_len);
 
       if (d_basis == BASIS_CONVENTIONAL) {
-	encode_rs_8(data, data + frame_len, MAX_FRAME_LEN - frame_len - PARITY_BYTES);
+	encode_rs_8(data, data + padding + frame_len);
       }
       else {
-	encode_rs_ccsds(data, data + frame_len, MAX_FRAME_LEN - frame_len - PARITY_BYTES);
+	encode_rs_ccsds(data, data + padding + frame_len);
       }
 
       // Send by GNUradio message
       message_port_pub(pmt::mp("out"),
 		       pmt::cons(pmt::PMT_NIL,
-				 pmt::init_u8vector(frame_len + PARITY_BYTES, data)));
+				 pmt::init_u8vector(frame_len + PARITY_BYTES, data + padding)));
     }
   } /* namespace satellites */
 } /* namespace gr */

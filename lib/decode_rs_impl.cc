@@ -18,10 +18,13 @@
 #include <cstdio>
 
 extern "C" {
-#include <fec.h>
+#include <gnuradio/fec/rs.h>
 }
 
 #include "rs.h"
+
+// This should be included in <gnuradio/fec/rs.h>
+extern int decode_rs_ccsds(unsigned char *data,int *eras_pos,int no_eras);
 
 namespace gr {
   namespace satellites {
@@ -85,14 +88,18 @@ namespace gr {
 	  return;
 	}
       }
-      
-      memcpy(data, pmt::uniform_vector_elements(msg, offset), frame_len);
+
+      // Add zero padding to the beginning of the message
+      // This is discarded after RS decoding
+      int padding = MAX_FRAME_LEN - frame_len;
+      std::memset(data, 0, padding);
+      std::memcpy(data + padding, pmt::uniform_vector_elements(msg, offset), frame_len);
 
       if (d_basis == BASIS_CONVENTIONAL) {
-	rs_res = decode_rs_8(data, NULL, 0, MAX_FRAME_LEN - frame_len);
+	rs_res = decode_rs_8(data, NULL, 0);
       }
       else {
-	rs_res = decode_rs_ccsds(data, NULL, 0, MAX_FRAME_LEN - frame_len);
+	rs_res = decode_rs_ccsds(data, NULL, 0);
       }
 
       // Send via GNUradio message if RS ok
@@ -106,7 +113,7 @@ namespace gr {
 	// Send by GNUradio message
 	message_port_pub(pmt::mp("out"),
 			 pmt::cons(pmt::PMT_NIL,
-				   pmt::init_u8vector(frame_len, data)));
+				   pmt::init_u8vector(frame_len, data + padding)));
       }
       else if (d_verbose) {
 	std::printf("Reed-Solomon decode failed.\n");

@@ -19,7 +19,6 @@
 #include "varlen_packet_framer_impl.h"
 
 extern "C" {
-#include <fec.h>
 #include "golay24.h"
 }
 

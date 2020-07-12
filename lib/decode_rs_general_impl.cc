@@ -22,7 +22,7 @@
 #include "rs.h"
 
 extern "C" {
-#include <fec.h>
+#include <gnuradio/fec/rs.h>
 }
 
 namespace gr {
@@ -46,7 +46,7 @@ namespace gr {
       d_verbose = verbose;
 
       d_nroots = nroots;
-      d_rs = init_rs_char(8, gfpoly, fcr, prim, nroots, 0); // TODO handle error
+      d_rs = init_rs_char(8, gfpoly, fcr, prim, nroots); // TODO handle error
 
       message_port_register_out(pmt::mp("out"));
       message_port_register_in(pmt::mp("in"));

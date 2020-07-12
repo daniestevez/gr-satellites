@@ -18,11 +18,12 @@
 #include <cstdio>
 
 extern "C" {
-#include <fec.h>
+#include <gnuradio/fec/rs.h>
 }
 
 #define N (128 + 32)
 #define K 128
+#define PADDING (255 - N)
 
 namespace gr {
   namespace satellites {
@@ -77,18 +78,21 @@ namespace gr {
       pmt::pmt_t msg = pmt::cdr(pmt_msg);
       size_t offset(0);
       const uint8_t *data = (const uint8_t *) pmt::uniform_vector_elements(msg, offset);
-      uint8_t scratch[N];
+      uint8_t scratch[255];
       uint8_t message[2*K];
       int i;
       int rs_res[2];
 
       if (pmt::length(msg) != 2*N) return;
 
+      // Add zero padding to the beginning of the RS frame
+      // This discarded after RS decoding
+      std::memset(scratch, 0, PADDING);
       for (int dec = 0; dec < 2; dec++) {
 	for (i = 0; i < N; i++) {
-	  scratch[i] = data[2*i + dec];
+	  scratch[PADDING + i] = data[2*i + dec];
 	}
-	rs_res[dec] = decode_rs_8(scratch, NULL, 0, 255 - N);
+	rs_res[dec] = decode_rs_8(scratch, NULL, 0);
 	if (rs_res[0] == -1) {
 	  if (d_verbose) {
 	    printf("Reed-Solomon decode failed (%dst decoder).\n", dec + 1);
@@ -97,7 +101,7 @@ namespace gr {
 	}
 	else {
 	  for (i = 0; i < K; i++) {
-	    message[2*i + dec] = scratch[i];
+	    message[2*i + dec] = scratch[PADDING + i];
 	  }
 	}
       }

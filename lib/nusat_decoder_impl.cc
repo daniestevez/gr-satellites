@@ -22,7 +22,7 @@
 #include "rs.h"
 
 extern "C" {
-#include <fec.h>
+#include <gnuradio/fec/rs.h>
 }
 
 namespace gr {
@@ -70,7 +70,7 @@ namespace gr {
               gr::io_signature::make(0, 0, 0),
 	      gr::io_signature::make(0, 0, 0))
     {
-      d_rs = init_rs_char(8, 0x11d, 1, 1, 4, 0);
+      d_rs = init_rs_char(8, 0x11d, 1, 1, 4);
       
       message_port_register_out(pmt::mp("out"));
       message_port_register_in(pmt::mp("in"));

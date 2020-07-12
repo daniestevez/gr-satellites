@@ -30,7 +30,7 @@
 #include "ax100_decode_impl.h"
 
 extern "C" {
-#include <fec.h>
+#include <gnuradio/fec/rs.h>
 }
 
 namespace gr {
@@ -86,6 +86,7 @@ namespace gr {
     ax100_decode_impl::msg_handler (pmt::pmt_t pmt_msg) {
       pmt::pmt_t msg = pmt::cdr(pmt_msg);
       uint8_t data[256];
+      uint8_t scratch[255];
       int data_len;
       uint8_t tmp;
       int rs_res;
@@ -93,9 +94,14 @@ namespace gr {
       size_t offset(0);
 
       data_len = std::min(pmt::length(msg), sizeof(data));
-      memcpy(data, pmt::uniform_vector_elements(msg, offset), data_len);
+      std::memcpy(data, pmt::uniform_vector_elements(msg, offset), data_len);
 
-      rs_res = decode_rs_8(data + 1, NULL, 0, 255 - data[0] + 1);
+      // Add zero padding to the beginning of the message
+      // This is discarded after RS decoding
+      int padding = 255 - data[0] + 1;
+      std::memset(scratch, 0, padding);
+      std::memcpy(scratch + padding, data, 255 - padding);
+      rs_res = decode_rs_8(scratch, NULL, 0);
 
       // Send via GNUradio message if RS ok
       if (rs_res >= 0) {
@@ -117,7 +123,7 @@ namespace gr {
 	// Send by GNUradio message
 	message_port_pub(pmt::mp("out"),
 			 pmt::cons(pmt::PMT_NIL,
-				   pmt::init_u8vector(frame_len,data+1)));
+				   pmt::init_u8vector(frame_len, scratch + padding + 1)));
       }
       else if (d_verbose) {
 	std::printf("RS decode failed.\n");

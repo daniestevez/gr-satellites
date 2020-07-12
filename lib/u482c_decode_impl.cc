@@ -20,7 +20,7 @@
 #include "u482c_decode_impl.h"
 
 extern "C" {
-#include <fec.h>
+#include <gnuradio/fec/rs.h>
 #include "randomizer.h"
 #include "golay24.h"
 #include "viterbi.h"
@@ -157,8 +157,16 @@ namespace gr {
       // RS decoding
       doing_rs = (d_rs == ON) || (d_rs == AUTO && rs_flag);
       if (doing_rs) {
-	rs_res = decode_rs_8(packet, NULL, 0, RS_LEN - rx_len);
+	uint8_t scratch[RS_LEN];
+
+	// Add zero padding to the beginning of the message
+	// This is discarded after RS decoding
+	int padding = RS_LEN - rx_len;
+	std::memset(scratch, 0, padding);
+	std::memcpy(scratch + padding, packet, rx_len);
+	rs_res = decode_rs_8(packet, NULL, 0);
 	rx_len -= 32;
+	std::memcpy(packet, scratch + padding, rx_len);
 
 	if (rs_res < 0) {
 	  if (d_verbose) {

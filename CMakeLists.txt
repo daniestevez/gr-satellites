@@ -85,7 +85,7 @@ ENDIF()
 ########################################################################
 # Install directories
 ########################################################################
-find_package(Gnuradio "3.8" REQUIRED)
+find_package(Gnuradio "3.8" REQUIRED COMPONENTS blocks fec)
 include(GrVersion)
 
 include(GrPlatform) #define LIB_SUFFIX
@@ -122,19 +122,12 @@ if(APPLE)
 endif(APPLE)
 
 ########################################################################
-# Find libfec
-########################################################################
-find_package(Fec REQUIRED)
-
-if(NOT FEC_FOUND)
-	    message(FATAL_ERROR "libfec required to compile satellites")
-    endif()
- 
-
-########################################################################
 # Find gnuradio build dependencies
 ########################################################################
 find_package(Doxygen)
+
+# Required by gr-fec
+find_package(GSL REQUIRED)
 
 ########################################################################
 # Setup doxygen option

@@ -18,10 +18,13 @@
 #include <cstdio>
 
 extern "C" {
-#include <fec.h>
+#include <gnuradio/fec/rs.h>
 }
 
 #include "rs.h"
+
+// This should be included in <gnuradio/fec/rs.h>
+extern int decode_rs_ccsds(unsigned char *data,int *eras_pos,int no_eras);
 
 namespace gr {
   namespace satellites {
@@ -97,10 +100,10 @@ namespace gr {
 	}
 	
 	if (d_basis == BASIS_CONVENTIONAL) {
-	  rs_res = decode_rs_8(codeword, NULL, 0, 0);
+	  rs_res = decode_rs_8(codeword, NULL, 0);
 	}
 	else {
-	  rs_res = decode_rs_ccsds(codeword, NULL, 0, 0);
+	  rs_res = decode_rs_ccsds(codeword, NULL, 0);
 	}
 
 	if (rs_res < 0) {
