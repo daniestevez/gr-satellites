@@ -450,6 +450,9 @@ certain satellite projects:
 
 * The `BME telemetry server`_, which is used by SMOG-P, ATL-1 and SMOG-1.
 
+* `Harbin Institute of Technology`_, which connects to the telemetry proxy included in
+  `gr-lilacsat`_ and `gr-dslwp`_.
+  
 To enable telemetry submission, it is necessary to edit some parameters in
 ``gr_satellites``'s config file, which is located in
 ``~/.gr_satellites/config.ini``. If this file does not exist, it will be created
@@ -494,6 +497,21 @@ have an account registered in the server to obtain the credentials file.
 To enable telemetry submission to the BME server, it is necessary to
 `register an account in the BME server`_. The user and password should be
 entered into the gr-satellites ``.ini`` file.
+
+To use the Harbin Institute of Technology proxy to submit telemetry, the proxy
+needs to be run and started in the local computer before running
+``gr_satellites``. The command line tool will connect to the correct port where
+the proxy is listening (this is specified in the SatYAML file of each
+satellite). All the configuration regarding the station and the operator is done
+in the proxy itself. When ``gr_satellites`` starts, it will attempt to connect
+to the proxy, and print a warning if unable (in which case telemetry submission
+through the proxy is disabled for this run).
+
+.. note::
+   The Harbin Institute of Technology proxy is a Python2 application that uses
+   PyQt4. Users having more modern sytems may find useful the PyQt5 version that
+   can be found in the `pyqt5 branch of gr-lilacsat`_. This requires ``tornado`` version
+   4.5.3. It will not work with more recent versions of ``tornado``. 
 
 For some telemetry servers, including SatNOGS DB, the frames are submitted
 together with a timestamp of reception. This timestamp is taken from the
@@ -654,3 +672,7 @@ processed, thus restoring the correct polarity.
 .. _feh: https://feh.finalrewind.org/
 .. _NumPy: https://numpy.org/
 .. _Matplotlib: https://matplotlib.org/
+.. _Harbin Institute of Technology: http://lilacsat.hit.edu.cn/
+.. _gr-lilacsat: https://github.com/bg2bhc/gr-lilacsat
+.. _gr-dslwp: https://github.com/bg2bhc/gr-dslwp
+.. _pyqt5 branch of gr-lilacsat: https://github.com/daniestevez/gr-lilacsat/tree/pyqt5
