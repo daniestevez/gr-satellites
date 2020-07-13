@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Option not to add a control byte in PDU to KISS
+
 ## [3.1.0] - 2020-07-11
 
 ### Added

@@ -19,11 +19,12 @@ class pdu_to_kiss(gr.basic_block):
     """
     docstring for block pdu_to_kiss
     """
-    def __init__(self):
+    def __init__(self, control_byte = False):
         gr.basic_block.__init__(self,
             name="pdu_to_kiss",
             in_sig=None,
             out_sig=None)
+        self.control_byte = control_byte
 
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
@@ -37,7 +38,8 @@ class pdu_to_kiss(gr.basic_block):
 
         buff = list()
         buff.append(FEND)
-        buff.append(numpy.uint8(0))
+        if self.control_byte:
+            buff.append(numpy.uint8(0))
         for x in pmt.u8vector_elements(msg):
             if x == FESC:
                 buff.append(FESC)
