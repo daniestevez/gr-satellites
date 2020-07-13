@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Option not to add a control byte in PDU to KISS
+- Connection to the Harbin Institute of Technology telemetry proxy from Telemetry Submit
 
 ### Fixed
 - Bug that prevented the NORAD field from appearing in Telemetry Submit

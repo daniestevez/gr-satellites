@@ -2,6 +2,8 @@ name: BY02
 alternative_names:
   - BY70-2
 norad: 45857
+telemetry_servers:
+  - HIT 8001
 data:
   &tlm Telemetry:
     telemetry: by02

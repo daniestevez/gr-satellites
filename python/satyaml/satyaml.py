@@ -52,7 +52,8 @@ class SatYAML:
             raise YAMLError(f'NORAD field does not contain a number in {yml}')
         if 'telemetry_servers' in d:
             for server in d['telemetry_servers']:
-                if server not in ['SatNOGS', 'FUNcube', 'PWSat', 'BME']:
+                if server not in ['SatNOGS', 'FUNcube', 'PWSat', 'BME'] and\
+                  not server.startswith('HIT '):
                     raise YAMLError(f'Unknown telemetry server {server}')
         if 'data' not in d:
             raise YAMLError(f'Missing data field in {yml}')

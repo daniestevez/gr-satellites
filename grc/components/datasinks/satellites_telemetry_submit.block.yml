@@ -7,13 +7,18 @@ parameters:
     label: Server
     dtype: enum
     default: '"SatNOGS"'
-    options: ['"SatNOGS"', '"FUNcube"', '"PWSat"', '"BME"']
-    option_labels: [SatNOGS DB, AMSAT-UK Data Warehouse, PW-Sat2 Ground Station, BME Ground Station]
+    options: ['"SatNOGS"', '"FUNcube"', '"PWSat"', '"BME"', '"HIT"']
+    option_labels: [SatNOGS DB, AMSAT-UK Data Warehouse, PW-Sat2 Ground Station, BME Ground Station, Harbin Institute of Technology]
 -   id: norad
     label: NORAD ID
     dtype: int
     default: 0
     hide: ${ 'all' if server not in ['"SatNOGS"', '"BME"'] else 'none' }
+-   id: port
+    label: TCP server port
+    dtype: int
+    default: 0
+    hide: ${ 'none' if server == '"HIT"' else 'all' }
 -   id: options
     label: Command line options
     dtype: string
@@ -28,7 +33,7 @@ templates:
     imports: |-
         import satellites.components.datasinks
         import satellites.utils.config
-    make: satellites.components.datasinks.telemetry_submit(${server}, ${norad}, satellites.utils.config.open_config(), options=${options})
+    make: satellites.components.datasinks.telemetry_submit(${server}, norad=${norad}, port='${port}', config=satellites.utils.config.open_config(), options=${options})
 
 documentation: |-
     Sends telemetry frames to an online telemetry data base server
@@ -40,6 +45,8 @@ documentation: |-
 
     Parameters:
         Server: selects the server to submit telemetry to
+        NORAD ID: NORAD ID of the satellite (for SatNOGS and BME)
+        TCP server port: TCP port where the proxy is listening (for HIT)
         Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 
 file_format: 1
