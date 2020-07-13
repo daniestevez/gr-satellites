@@ -19,7 +19,7 @@ class pdu_to_kiss(gr.basic_block):
     """
     docstring for block pdu_to_kiss
     """
-    def __init__(self, control_byte = False):
+    def __init__(self, control_byte = True):
         gr.basic_block.__init__(self,
             name="pdu_to_kiss",
             in_sig=None,
