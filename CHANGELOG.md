@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Option not to add a control byte in PDU to KISS
 
+### Fixed
+- Bug that prevented the NORAD field from appearing in Telemetry Submit
+
 ## [3.1.0] - 2020-07-11
 
 ### Added

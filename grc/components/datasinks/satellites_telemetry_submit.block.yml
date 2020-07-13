@@ -13,7 +13,7 @@ parameters:
     label: NORAD ID
     dtype: int
     default: 0
-    hide: ${ 'all' if server not in ['SatNOGS', 'BME'] else 'none' }
+    hide: ${ 'all' if server not in ['"SatNOGS"', '"BME"'] else 'none' }
 -   id: options
     label: Command line options
     dtype: string
