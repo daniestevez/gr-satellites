@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.0] - 2020-07-14
+
+### Added
+- Option not to add a control byte in PDU to KISS
+- Connection to the Harbin Institute of Technology telemetry proxy from Telemetry Submit
+
+### Fixed
+- Bug that prevented the NORAD field from appearing in Telemetry Submit
+
 ## [3.1.0] - 2020-07-11
 
 ### Added
@@ -218,7 +227,8 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.1.0...master
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.2.0...master
+[3.2.0]: https://github.com/daniestevez/gr-satellites/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/daniestevez/gr-satellites/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/daniestevez/gr-satellites/compare/v3.0.0-rc1...v3.0.0
 [3.0.0-rc1]: https://github.com/daniestevez/gr-satellites/compare/v2.3.2...v3.0.0-rc1

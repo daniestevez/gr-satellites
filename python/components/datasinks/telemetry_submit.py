@@ -9,7 +9,7 @@
 #
 
 from gnuradio import gr, blocks
-from ... import submit, funcube_submit, pwsat2_submitter, bme_submitter
+from ... import submit, funcube_submit, pwsat2_submitter, bme_submitter, pdu_to_kiss
 
 class telemetry_submit(gr.hier_block2):
     """
@@ -22,10 +22,11 @@ class telemetry_submit(gr.hier_block2):
     Args:
         server: 'SatNOGS', 'FUNcube', 'PWSat' or 'BME' (string)
         norad: NORAD ID (int)
+        port: TCP port to connect to (used by HIT) (str)
         config: configuration file from configparser
         options: options from argparse
     """
-    def __init__(self, server, norad = None, config = None, options = None):
+    def __init__(self, server, norad = None, port = None, config = None, options = None):
         gr.hier_block2.__init__(self, "telemetry_submit",
             gr.io_signature(0, 0, 0),
             gr.io_signature(0, 0, 0))
@@ -46,6 +47,15 @@ class telemetry_submit(gr.hier_block2):
             satellites = {44830 : 'atl1', 44832 : 'smogp'}
             satellite = satellites[norad]
             self.submit = bme_submitter(config['BME']['user'], config['BME']['password'], satellite)
+        elif server == 'HIT':
+            try:
+                self.tcp = blocks.socket_pdu('TCP_CLIENT', '127.0.0.1', port, 10000, False)
+            except RuntimeError as e:
+                print('Could not connect to telemetry proxy:', e)
+                print('Disabling telemetry submission...')
+                return
+            self.submit = pdu_to_kiss(control_byte = False)
+            self.msg_connect((self.submit, 'out'), (self.tcp, 'pdus'))
         else:
             raise ValueError('Unsupported telemetry server')
 

@@ -187,9 +187,16 @@ class gr_satellites_flowgraph(gr.hier_block2):
             config: configuration file from configparser
         """
         norad = satyaml['norad']
-        submitters = [datasinks.telemetry_submit('SatNOGS', norad, config)]
+        submitters = [datasinks.telemetry_submit('SatNOGS', norad = norad, config = config)]
         for server in satyaml.get('telemetry_servers', []):
-            submitters.append(datasinks.telemetry_submit(server, norad, config))
+            port = None
+            if server.startswith('HIT '):
+                port = server.split()[1]
+                server = 'HIT'
+            submitters.append(datasinks.telemetry_submit(server,
+                                                             norad = norad,
+                                                             port = port,
+                                                             config = config))
         return submitters
 
     def get_demodulator(self, modulation):

@@ -30,7 +30,7 @@ class telemetry_parser(gr.basic_block):
         options: options from argparse
     """
     def __init__(self, definition, file = sys.stdout, options = None):
-        gr.basic_block.__init__(self, "telemetry_submit",
+        gr.basic_block.__init__(self, "telemetry_parser",
             in_sig = [],
             out_sig = [])
         self.message_port_register_in(pmt.intern('in'))
