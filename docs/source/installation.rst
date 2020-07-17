@@ -1,8 +1,14 @@
-Installation
-============
+Installing from source
+======================
 
-gr-satellites is a GNU Radio out-of-tree module, and it should be installed as
-such. The general steps for installing gr-satellites include making sure that
+gr-satellites is a GNU Radio out-of-tree module, and can be installed as
+such, by building it from source in a system where GNU Radio is already
+installed. Alternatively, it is possible to
+:ref:`install gr-satellites and GNU Radio <Installing using conda>`, and this
+might provide an easier or quicker way of installation, especially in
+Linux distributions where GNU Radio is not so easy to install, or in macOS.
+
+The general steps for installing gr-satellites from source include making sure that
 all the dependencies are installed and then building and installing the
 out-of-tree module.
 

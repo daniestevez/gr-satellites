@@ -10,6 +10,7 @@ decoders for Amateur satellites.
    
    introduction.rst
    installation.rst
+   installation_conda.rst
    overview.rst
    command_line.rst
    satellite_decoder.rst
