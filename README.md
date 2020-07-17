@@ -1,6 +1,7 @@
 # gr-satellites
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/daniestevez/gr-satellites)
+![Conda](https://img.shields.io/conda/v/petrush/gnuradio-satellites)
 ![Read the Docs](https://img.shields.io/readthedocs/gr-satellites)
 [![GitHub license](https://img.shields.io/github/license/daniestevez/gr-satellites)](https://github.com/daniestevez/gr-satellites/blob/master/LICENSE)
 
