@@ -9,6 +9,7 @@
 #
 
 from construct import *
+from ..adapters import AffineAdapter, LinearAdapter
 
 TMPrimaryHeader = BitStruct(
     'transfer_frame_version_number' / BitsInteger(2),
@@ -25,21 +26,31 @@ syncA = bytes([0x55, 0x55, 0x55, 0x55, 0x55, 0x55,
 
 syncB = bytes([0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x00, 0x26])
 
+IVbat = LinearAdapter(2.5, Int16sb)
+UVbat = LinearAdapter(2000.0, Int16sb)
+
+Id = BitStruct(
+    'other' / BitsInteger(13),
+    'transponder' / Flag,
+    'beacon' / Flag,
+    'telemetry' / Flag
+    )
+
 hk_STM32_first_half = Struct(
-    'id' / Bytes(2),
+    'id' / Id,
     'config' / Int8ub,
     'last_command' / Int8ub,
     'payload_mode' / Int8ub,
     'tx_mode' / Int8ub,
     'gain_tx' / Int16sb,
-    'i_3v3' / Int16sb,
-    'u_3v3' / Int16sb,
-    'i_vbat_tx' / Int16sb,
-    'u_vbat_tx' / Int16sb,
-    'i_vbat_rx' / Int16sb,
-    'u_vbat_rx' / Int16sb,
-    't_stm32' / Int16sb,
-    't_pa' / Int16sb,
+    'i_3v3' / LinearAdapter(10.0, Int16sb),
+    'u_3v3' / LinearAdapter(2000.0, Int16sb),
+    'i_vbat_tx' / IVbat,
+    'u_vbat_tx' / UVbat,
+    'i_vbat_rx' / IVbat,
+    'u_vbat_rx' / UVbat,
+    't_stm32' / AffineAdapter(1.0/0.29296875, (304.0 - 25.0)/0.29296875, Int16sb),
+    't_pa' / LinearAdapter(8.0*16.0, Int16sb),
     'n_tx_rf' / Int16ub,
     'n_rx_rf' / Int16ub,
     'n_tx_err_rf' / Int16ub,
