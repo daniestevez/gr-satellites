@@ -27,10 +27,18 @@ import signal
 import argparse
 import sys
 
+version = f"""gr_satellites {satellites.__version__}
+Copyright (C) 2020 Daniel Estevez
+License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law."""
+
 def argument_parser():
     description = 'gr-satellites - GNU Radio decoders for Amateur satellites'
     info = 'The satellite parameter can be specified using name, NORAD ID or path to YAML file'
-    p = argparse.ArgumentParser(description = description, conflict_handler = 'resolve', prog = f'gr_satellites satellite', epilog = info)
+    p = argparse.ArgumentParser(description = description, conflict_handler = 'resolve', prog = f'gr_satellites satellite', epilog = info, formatter_class = argparse.RawTextHelpFormatter)
+
+    p.add_argument('--version', action = 'version', version = version)
 
     p_input = p.add_argument_group('input')
 
@@ -67,13 +75,17 @@ def parse_satellite(satellite):
         return {'norad' : int(satellite)}
     else:
         return {'name' : satellite}
-    
+
 class gr_satellites_top_block(gr.top_block):
     def __init__(self, parser):
         gr.top_block.__init__(self, 'gr-satellites top block')
         sat = parse_satellite(sys.argv[1])
         satellites.core.gr_satellites_flowgraph.add_options(parser, **sat)
         options = parser.parse_args(sys.argv[2:])
+        print(options)
+        if options.version:
+            print_version(file = sys.stdout)
+            exit(0)
         check_options(options, parser)
         
         self.options = options
