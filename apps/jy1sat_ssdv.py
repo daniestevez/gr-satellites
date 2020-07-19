@@ -1,14 +1,47 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# Copyright 2019-2020 Daniel Estevez <daniel@destevez.net>
+#
+# This file is part of gr-satellites
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
 
 import numpy as np
 import subprocess
 import sys
 
+from satellites.kiss import *
+
 def print_usage():
-    print(f'Usage {sys.argv[0]} <jy1sat_frames.bin> <output_path>')
+    print(f'Usage {sys.argv[0]} <jy1sat_frames.kss> <output_path>')
 
 def seqnum(packet):
     return packet[3]*256 + packet[4]
+
+def read_kiss_file(path):
+    frames = list()
+    frame = list()
+    framesize = 256
+    transpose = False
+    with open(path, 'rb') as f:
+        for c in f.read():
+            if c == FEND:
+                if len(frame) == framesize + 1 and (frame[0] & 0x0f) == 0:
+                    frames.append(frame[1:])
+                frame = list()
+            elif transpose:
+                if c == TFEND:
+                    frame.append(FEND)
+                elif c == TFESC:
+                    frame.append(FESC)
+                transpose = False
+            elif c == FESC:
+                transpose = True
+            else:
+                frame.append(c)
+    return np.array(frames, dtype = 'uint8')
 
 def main():
     if len(sys.argv) != 3:
@@ -19,7 +52,7 @@ def main():
     output_file = sys.argv[2]
 
     # Read 256 byte frames
-    x = np.fromfile(input_file, dtype='uint8').reshape((-1,256))
+    x = read_kiss_file(input_file)
 
     # Filter out by frame id and trim to payload
     x = x[((x[:,0] == 0xe0) | (x[:,0] == 0xe1)) & (x[:,1] == 0x10), 56:]
