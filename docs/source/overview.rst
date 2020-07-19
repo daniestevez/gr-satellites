@@ -69,3 +69,10 @@ Finally, gr-satellites has a large number of lower level GNU Radio Companion
 blocks that may be useful in many different situations. Usage of these low level
 blocks is recommended only for users already familiar with gr-satellites or GNU
 Radio.
+
+Utilities
+^^^^^^^^^
+
+Besides the ``gr_satellites`` command line tool and the GNU Radio blocks,
+gr-satellites also contains a few :ref:`Miscellaneous utilities` that can be
+used with some of the satellites.

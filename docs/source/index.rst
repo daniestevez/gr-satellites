@@ -17,6 +17,7 @@ decoders for Amateur satellites.
    components.rst
    satyaml.rst
    low_level.rst
+   utilities.rst
    supported_satellites.rst
 
 Indices and tables
