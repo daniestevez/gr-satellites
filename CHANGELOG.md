@@ -8,12 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - SatYAML file for GO-32
+- KISS output from gr_satellites and the KISS file sink includes timestamps
 
 ### Changed
 
 - Telemetry conversion formulas for BY02
-- JY1SAT SSDV decoder utility now uses KISS files as input	
-
+- JY1SAT SSDV decoder utility now uses KISS files as input
+	
 ## [3.2.0] - 2020-07-14
 
 ### Added

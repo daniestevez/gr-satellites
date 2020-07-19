@@ -32,7 +32,7 @@ class qa_kiss(gr_unittest.TestCase):
 
     def test_encoder_decoder(self):
         """Connects a PDU to KISS and KISS to PDU and tries to send some PDUs through"""
-        pdu2kiss = pdu_to_kiss()
+        pdu2kiss = pdu_to_kiss(include_timestamp = True)
         kiss2pdu = kiss_to_pdu()
         pdu2tag = blocks.pdu_to_tagged_stream(blocks.byte_t)
         dbg = blocks.message_debug()
