@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Telemetry conversion formulas for BY02
+- JY1SAT SSDV decoder utility now uses KISS files as input	
 
 ## [3.2.0] - 2020-07-14
 
