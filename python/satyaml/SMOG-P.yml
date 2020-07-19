@@ -1,4 +1,6 @@
 name: SMOG-P
+alternative_names:
+  - MO-105
 norad: 44832
 telemetry_servers:
   - BME
