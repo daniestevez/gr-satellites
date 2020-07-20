@@ -82,10 +82,6 @@ class gr_satellites_top_block(gr.top_block):
         sat = parse_satellite(sys.argv[1])
         satellites.core.gr_satellites_flowgraph.add_options(parser, **sat)
         options = parser.parse_args(sys.argv[2:])
-        print(options)
-        if options.version:
-            print_version(file = sys.stdout)
-            exit(0)
         check_options(options, parser)
         
         self.options = options
