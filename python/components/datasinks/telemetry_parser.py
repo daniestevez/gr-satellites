@@ -36,7 +36,7 @@ class telemetry_parser(gr.basic_block):
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
         self.format = getattr(telemetry, definition)
-        if options is not None and options.telemetry_output:
+        if getattr(options, 'telemetry_output', None):
             file = options.telemetry_output
         if type(file) in [str, bytes] or isinstance(file, os.PathLike):
             file = open(file, 'a')
