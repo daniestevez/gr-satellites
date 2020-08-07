@@ -8,6 +8,13 @@ transmitters:
     frequency: 437.500e+6
     modulation: FSK
     baudrate: 4800
-    framing: AX100 Reed Solomon
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
+  9k6 FSK downlink:
+    frequency: 437.500e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX100 ASM+Golay
     data:
     - *tlm

@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Bug in Telemetry parser block when used from GRC
+- Delphini-1 SatYAML file
 
 ## [3.2.0] - 2020-07-14
 
