@@ -22,7 +22,7 @@
 #include "rs.h"
 
 extern "C" {
-#include <fec.h>
+#include "libfec/fec.h"
 }
 
 namespace gr {

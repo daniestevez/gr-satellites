@@ -48,6 +48,15 @@ list(APPEND satellites_sources
     decode_ra_code_impl.cc
     nrzi_encode_impl.cc
     nrzi_decode_impl.cc
+    libfec/decode_rs_8.c
+    libfec/decode_rs_ccsds.c
+    libfec/decode_rs_char.c
+    libfec/encode_rs_8.c
+    libfec/encode_rs_ccsds.c
+    libfec/encode_rs_char.c
+    libfec/taltab.c
+    libfec/ccsds.c
+    libfec/init_rs_char.c
 )
 
 set(satellites_sources "${satellites_sources}" PARENT_SCOPE)
@@ -57,7 +66,7 @@ if(NOT satellites_sources)
 endif(NOT satellites_sources)
 
 add_library(gnuradio-satellites SHARED ${satellites_sources})
-target_link_libraries(gnuradio-satellites ${FEC_LIBRARIES} gnuradio::gnuradio-runtime)
+target_link_libraries(gnuradio-satellites gnuradio::gnuradio-runtime)
 target_include_directories(gnuradio-satellites
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PUBLIC $<INSTALL_INTERFACE:include>

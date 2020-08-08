@@ -122,16 +122,6 @@ if(APPLE)
 endif(APPLE)
 
 ########################################################################
-# Find libfec
-########################################################################
-find_package(Fec REQUIRED)
-
-if(NOT FEC_FOUND)
-	    message(FATAL_ERROR "libfec required to compile satellites")
-    endif()
- 
-
-########################################################################
 # Find gnuradio build dependencies
 ########################################################################
 find_package(Doxygen)
