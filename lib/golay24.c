@@ -25,8 +25,8 @@ extern "C" {
 
 // Replacement for __builtin_parity in compilers other than GCC
 #ifndef __GNUC__
-static inline int __builtin_parity(unsigned int x) {
-  int p;
+static inline uint32_t __builtin_parity(uint32_t x) {
+  uint32_t p;
   volk_32u_popcnt(&p, x);
   return p & 1;
 }
