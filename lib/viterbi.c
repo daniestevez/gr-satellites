@@ -25,7 +25,7 @@
 #define unlikely(x)     (x)
 #endif
 
-#define get_bit(_p, _n) ({_p[(_n) / (uint8_t)BITS_PER_BYTE] >> ((uint8_t)BITS_PER_BYTE - 1 - ((_n) % (uint8_t)BITS_PER_BYTE)) & (uint8_t)0x01;})
+#define get_bit(_p, _n) (_p[(_n) / (uint8_t)BITS_PER_BYTE] >> ((uint8_t)BITS_PER_BYTE - 1 - ((_n) % (uint8_t)BITS_PER_BYTE)) & (uint8_t)0x01)
 
 typedef union { uint8_t w[64]; } metric_t;
 typedef union { uint8_t w[8];} decision_t;
