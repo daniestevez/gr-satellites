@@ -17,6 +17,10 @@
 
 #include <volk/volk.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 #include "golay24.h"
 
 #define N 12
@@ -110,3 +114,7 @@ int decode_golay24(uint32_t *data) {
   volk_32u_popcnt(&popcount, e);
   return popcount;
 }
+
+#ifdef __cplusplus
+} /* extern "C" */
+#endif /* __cplusplus */

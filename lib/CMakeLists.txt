@@ -23,6 +23,12 @@
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
 
+if(MSVC)
+    # compile the golay24.c as C++ due to the lack of complex.h under MSVC
+    # this is required by Volk, so we do the same trick as in Volk
+    set_source_files_properties(golay24.c PROPERTIES LANGUAGE CXX)
+endif()
+
 list(APPEND satellites_sources
     decode_rs_impl.cc
     encode_rs_impl.cc
