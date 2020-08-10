@@ -17,8 +17,13 @@
 #define BITS_PER_BYTE 8
 #endif
 
+#ifdef __GNUC__
 #define likely(x)       __builtin_expect((x),1)
 #define unlikely(x)     __builtin_expect((x),0)
+#else
+#define likely(x)       (x)
+#define unlikely(x)     (x)
+#endif
 
 #define get_bit(_p, _n) ({_p[(_n) / (uint8_t)BITS_PER_BYTE] >> ((uint8_t)BITS_PER_BYTE - 1 - ((_n) % (uint8_t)BITS_PER_BYTE)) & (uint8_t)0x01;})
 
