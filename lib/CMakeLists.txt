@@ -29,6 +29,19 @@ if(MSVC)
     set_source_files_properties(golay24.c PROPERTIES LANGUAGE CXX)
 endif()
 
+# This workaround is taken from GNU Radio
+# gr-fec/lib/reed-solomon/CMakeLists.txt
+#MSVC workaround: we can't have dynamically sized arrays.
+#So ifdef a max array bounds that is larger than NN and NROOTS
+#Its a bit of a hack, but if you look at the code, its so full of ifdefs,
+#and lacks optimization where it should be pre-allocating these arrays.
+if(MSVC)
+    set_source_files_properties(
+        ${CMAKE_CURRENT_SOURCE_DIR}/libfec/decode_rs_char.c
+        PROPERTIES COMPILE_DEFINITIONS "MAX_ARRAY=256;"
+    )
+endif(MSVC)
+
 list(APPEND satellites_sources
     decode_rs_impl.cc
     encode_rs_impl.cc

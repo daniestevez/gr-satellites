@@ -72,10 +72,17 @@
   int deg_lambda, el, deg_omega;
   int i, j, r,k;
   data_t u,q,tmp,num1,num2,den,discr_r;
+#ifdef MAX_ARRAY
+  data_t lambda[MAX_ARRAY], s[MAX_ARRAY]; /* Err+Eras Locator poly
+					   * and syndrome poly */
+  data_t b[MAX_ARRAY], t[MAX_ARRAY], omega[MAX_ARRAY];
+  data_t root[MAX_ARRAY], reg[MAX_ARRAY], loc[MAX_ARRAY];
+#else /* MAX_ARRAY */
   data_t lambda[NROOTS+1], s[NROOTS];	/* Err+Eras Locator poly
 					 * and syndrome poly */
   data_t b[NROOTS+1], t[NROOTS+1], omega[NROOTS+1];
   data_t root[NROOTS], reg[NROOTS+1], loc[NROOTS];
+#endif /* MAX_ARRAY */
   int syn_error, count;
 
   /* form the syndromes; i.e., evaluate data(x) at roots of g(x) */
