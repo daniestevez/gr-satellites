@@ -6,6 +6,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.3.0] - 2020-08-11
+
+### Added
+- Documentation for installing with conda
+- SatYAML file for GO-32
+- KISS output from gr_satellites and the KISS file sink includes timestamps
+- Support for building with MSVC in Windows
+
+### Changed
+- Telemetry conversion formulas for BY02
+- JY1SAT SSDV decoder utility now uses KISS files as input
+- Removed dependence on libfec. The Reed-Solomon codes from libfec are now included in gr-satellites.
+- Added 4k8 modulation to SpooQy-1
+
+### Fixed
+- Bug in Telemetry parser block when used from GRC
+- Delphini-1 SatYAML file
+- Stray line in Lucky7 deframer GRC block
+
 ## [3.2.0] - 2020-07-14
 
 ### Added
@@ -227,7 +246,8 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.2.0...master
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.3.0...master
+[3.3.0]: https://github.com/daniestevez/gr-satelliites/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/daniestevez/gr-satellites/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/daniestevez/gr-satellites/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/daniestevez/gr-satellites/compare/v3.0.0-rc1...v3.0.0

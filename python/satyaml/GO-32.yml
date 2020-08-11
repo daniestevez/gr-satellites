@@ -1,0 +1,22 @@
+name: GO-32
+alternative_names:
+  - TECHSAT-1B
+norad: 25397
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  9k6 FSK downlink A:
+    frequency: 435.325e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX.25 G3RUH
+    data:
+    - *tlm
+  9k6 FSK downlink B:
+    frequency: 435.225e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX.25 G3RUH
+    data:
+    - *tlm

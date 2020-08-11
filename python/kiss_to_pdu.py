@@ -25,7 +25,6 @@ class kiss_to_pdu(gr.sync_block):
             in_sig=[numpy.uint8],
             out_sig=[])
 
-        self.kiss = collections.deque()
         self.pdu = list()
         self.transpose = False
         self.control_byte = control_byte
@@ -33,10 +32,7 @@ class kiss_to_pdu(gr.sync_block):
         self.message_port_register_out(pmt.intern('out'))
 
     def work(self, input_items, output_items):
-        self.kiss.extend(input_items[0])
-        
-        while self.kiss:
-            c = self.kiss.popleft()
+        for c in input_items[0]:
             if c == FEND:
                 if self.pdu and (not self.control_byte or not self.pdu[0] & 0x0f):
                     msg = bytes(self.pdu[1:] if self.control_byte else self.pdu)

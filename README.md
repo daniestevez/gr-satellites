@@ -1,7 +1,8 @@
 # gr-satellites
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/daniestevez/gr-satellites)
-![Read the Docs](https://img.shields.io/readthedocs/gr-satellites)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/daniestevez/gr-satellites)](https://github.com/daniestevez/gr-satellites/releases/latest)
+[![Conda](https://img.shields.io/conda/v/petrush/gnuradio-satellites)](https://anaconda.org/petrush/gnuradio-satellites)
+[![Read the Docs](https://img.shields.io/readthedocs/gr-satellites)](https://gr-satellites.readthedocs.io/)
 [![GitHub license](https://img.shields.io/github/license/daniestevez/gr-satellites)](https://github.com/daniestevez/gr-satellites/blob/master/LICENSE)
 
 gr-satellites is a GNU Radio out-of-tree module encompassing a collection of

@@ -18,7 +18,7 @@
 #include <cstdio>
 
 extern "C" {
-#include <fec.h>
+#include "libfec/fec.h"
 }
 
 #include "rs.h"
@@ -75,9 +75,9 @@ namespace gr {
     void
     decode_rs_interleaved_impl::msg_handler (pmt::pmt_t pmt_msg) {
       pmt::pmt_t msg = pmt::cdr(pmt_msg);
-      uint8_t codeword[MAX_FRAME_LEN];
-      uint8_t data_in[MAX_FRAME_LEN * d_codewords];
-      uint8_t data_out[(MAX_FRAME_LEN - 32) * d_codewords];
+      uint8_t* codeword = new uint8_t[MAX_FRAME_LEN];
+      uint8_t* data_in = new uint8_t[MAX_FRAME_LEN * d_codewords];
+      uint8_t* data_out = new uint8_t[(MAX_FRAME_LEN - 32) * d_codewords];
       int rs_res, total_errors = 0;
       int frame_len = pmt::length(msg);
       size_t offset(0);

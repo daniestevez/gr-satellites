@@ -18,7 +18,7 @@
 #include <cstdio>
 
 extern "C" {
-#include <fec.h>
+#include "libfec/fec.h"
 }
 
 #define N (128 + 32)

@@ -11,6 +11,12 @@ parameters:
     default: 'True'
     options: ['True', 'False']
     option_labels: ['Yes', 'No']
+-   id: include_timestamp
+    label: Include timestamp
+    dtype: bool
+    default: 'False'
+    options: ['True', 'False']
+    option_labels: ['Yes', 'No']
 
 inputs:
 -   domain: message
@@ -22,6 +28,6 @@ outputs:
 
 templates:
     imports: import satellites
-    make: satellites.pdu_to_kiss(${control_byte})
+    make: satellites.pdu_to_kiss(control_byte = ${control_byte}, include_timestamp = ${include_timestamp})
 
 file_format: 1

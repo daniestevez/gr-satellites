@@ -357,6 +357,8 @@ An example of the use of this option can be seen here:
     00f0: b0 2b 3a d6 b5 01 6b 00 6a 02 9e 00 03 20 13 00 
     ***********************************
 
+.. _KISS output:
+
 KISS output
 """""""""""
 
@@ -373,6 +375,19 @@ runs.
 
 Files in KISS format can be read with ``gr_satellites`` as indicated above or
 with other software tools.
+
+.. note::
+   KISS files produced with ``gr_satellites`` use an extension proposed by `Mike
+   Rupprecht`_ to store the reception timestamp of the frames. Before each
+   data frame, a KISS control frame using the control byte ``0x09`` and storing
+   a timestamp with UNIX timestamp in milliseconds stored as a big-endian 64 bit
+   integer is included in the file.
+
+   Some software, including the decoders by Mike Rupprecht, will be able to read
+   and use these timestamps. Other software that processes KISS will ignore the
+   timestamps.
+
+.. _Mike Rupprecht: http://dk3wn.info/
 
 Telemetry output
 """"""""""""""""

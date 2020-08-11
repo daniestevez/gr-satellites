@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import pathlib
 
 def usage():
-    print(f'Usage: sys.argv[0] input_file', file = sys.stderr)
+    print(f'Usage: {sys.argv[0]} input_file', file = sys.stderr)
     sys.exit(1)
 
 def main():

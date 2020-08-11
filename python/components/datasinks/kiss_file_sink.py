@@ -30,7 +30,7 @@ class kiss_file_sink(gr.hier_block2):
             gr.io_signature(0, 0, 0))
         self.message_port_register_hier_in('in')
 
-        self.kiss = pdu_to_kiss()
+        self.kiss = pdu_to_kiss(include_timestamp = True)
         self.pdu2tag = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
         self.filesink = blocks.file_sink(gr.sizeof_char, file, append)
 

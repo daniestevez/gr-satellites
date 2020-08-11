@@ -17,8 +17,21 @@
 
 #include <volk/volk.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 #include "golay24.h"
 
+// Replacement for __builtin_parity in compilers other than GCC
+#ifndef __GNUC__
+static inline uint32_t __builtin_parity(uint32_t x) {
+  uint32_t p;
+  volk_32u_popcnt(&p, x);
+  return p & 1;
+}
+#endif /* __GNUC__ */
+  
 #define N 12
 
 static const uint32_t H[N] = { 0x8008ed, 0x4001db, 0x2003b5, 0x100769,
@@ -110,3 +123,7 @@ int decode_golay24(uint32_t *data) {
   volk_32u_popcnt(&popcount, e);
   return popcount;
 }
+
+#ifdef __cplusplus
+} /* extern "C" */
+#endif /* __cplusplus */

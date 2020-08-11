@@ -38,7 +38,6 @@ documentation: |-
 
     Parameters:
         Syncword threshold: number of bit errors to allow in syncword detection
-d
         Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 
 file_format: 1

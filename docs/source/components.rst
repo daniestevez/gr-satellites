@@ -607,6 +607,9 @@ The KISS file sink block has two options. The *File* option is used to
 select the path of the output file. The *Append file* option can be used to
 overwrite or append to the output file.
 
+The KISS files produced by the KISS file sink store timestamps as described in the
+:ref:`KISS output` of the ``gr_satellites`` command line tool.
+
 .. _File and Image receivers:
 
 File and Image receivers

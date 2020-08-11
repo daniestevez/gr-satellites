@@ -1,4 +1,6 @@
 name: ATL-1
+alternative_names:
+  - MO-106
 norad: 44830
 telemetry_servers:
   - BME

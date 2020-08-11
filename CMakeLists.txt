@@ -43,7 +43,7 @@ list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
 # Set the version information here
 set(VERSION_MAJOR 3)
-set(VERSION_API 2)
+set(VERSION_API 3)
 set(VERSION_ABI 0)
 
 cmake_policy(SET CMP0011 NEW)
@@ -119,16 +119,6 @@ if(APPLE)
             BOOL "Do Build Using Library Install RPath" FORCE)
     endif(NOT CMAKE_BUILD_WITH_INSTALL_RPATH)
 endif(APPLE)
-
-########################################################################
-# Find libfec
-########################################################################
-find_package(Fec REQUIRED)
-
-if(NOT FEC_FOUND)
-	    message(FATAL_ERROR "libfec required to compile satellites")
-    endif()
- 
 
 ########################################################################
 # Find gnuradio build dependencies

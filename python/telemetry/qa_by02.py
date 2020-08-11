@@ -9,8 +9,19 @@
 #
 
 from gnuradio import gr_unittest
-from by02 import frameB
 
+# bootstrap satellites module, even from build dir
+try:
+    import python as satellites
+except ImportError:
+    pass
+else:
+    import sys
+    sys.modules['satellites'] = satellites
+
+from satellites.telemetry.by02 import frameB
+
+    
 class qa_by02(gr_unittest.TestCase):
     def test_frameB(self):
         """Tries to parse a frameB"""

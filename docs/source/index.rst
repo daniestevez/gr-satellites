@@ -10,12 +10,14 @@ decoders for Amateur satellites.
    
    introduction.rst
    installation.rst
+   installation_conda.rst
    overview.rst
    command_line.rst
    satellite_decoder.rst
    components.rst
    satyaml.rst
    low_level.rst
+   utilities.rst
    supported_satellites.rst
 
 Indices and tables

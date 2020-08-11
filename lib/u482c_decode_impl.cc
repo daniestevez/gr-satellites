@@ -20,7 +20,7 @@
 #include "u482c_decode_impl.h"
 
 extern "C" {
-#include <fec.h>
+#include "libfec/fec.h"
 #include "randomizer.h"
 #include "golay24.h"
 #include "viterbi.h"

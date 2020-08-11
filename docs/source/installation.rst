@@ -1,8 +1,14 @@
-Installation
-============
+Installing from source
+======================
 
-gr-satellites is a GNU Radio out-of-tree module, and it should be installed as
-such. The general steps for installing gr-satellites include making sure that
+gr-satellites is a GNU Radio out-of-tree module, and can be installed as
+such, by building it from source in a system where GNU Radio is already
+installed. Alternatively, it is possible to
+:ref:`install gr-satellites and GNU Radio <Installing using conda>`, and this
+might provide an easier or quicker way of installation, especially in
+Linux distributions where GNU Radio is not so easy to install, or in macOS.
+
+The general steps for installing gr-satellites from source include making sure that
 all the dependencies are installed and then building and installing the
 out-of-tree module.
 
@@ -23,24 +29,10 @@ gr-satellites requires `GNU Radio`_ version at least 3.8.
 
 Additionally, the following libraries are required:
 
-* `libfec`_
 * `construct`_, at least version 2.9.
 * `requests`_
 
 .. note::
-   libfec can be built and installed from its git repository by doing
-
-   .. code-block:: console
-
-      $ git clone https://github.com/quiet/libfec
-      $ cd libfec
-      $ mkdir build
-      $ cd build
-      $ cmake ..
-      $ make
-      $ sudo make install
-      $ sudo ldconfig
-
    construct and requests are Python packages and can be installed with `pip`_
    by doing
 
@@ -52,7 +44,6 @@ Additionally, the following libraries are required:
    distribution's package manager
  
 .. _GNU Radio: https://gnuradio.org/
-.. _libfec: https://github.com/quiet/libfec
 .. _construct: https://construct.readthedocs.io/en/latest/
 .. _requests: https://pypi.org/project/requests/
 .. _pip: https://pypi.org/project/pip/
