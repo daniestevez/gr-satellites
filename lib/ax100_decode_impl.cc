@@ -30,7 +30,7 @@
 #include "ax100_decode_impl.h"
 
 extern "C" {
-#include <fec.h>
+#include "libfec/fec.h"
 }
 
 namespace gr {

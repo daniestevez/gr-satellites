@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Telemetry conversion formulas for BY02
 - JY1SAT SSDV decoder utility now uses KISS files as input
+- Removed dependence on libfec. The Reed-Solomon codes from libfec are now included in gr-satellites.
 
 ### Fixed
 - Bug in Telemetry parser block when used from GRC

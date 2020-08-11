@@ -29,24 +29,10 @@ gr-satellites requires `GNU Radio`_ version at least 3.8.
 
 Additionally, the following libraries are required:
 
-* `libfec`_
 * `construct`_, at least version 2.9.
 * `requests`_
 
 .. note::
-   libfec can be built and installed from its git repository by doing
-
-   .. code-block:: console
-
-      $ git clone https://github.com/quiet/libfec
-      $ cd libfec
-      $ mkdir build
-      $ cd build
-      $ cmake ..
-      $ make
-      $ sudo make install
-      $ sudo ldconfig
-
    construct and requests are Python packages and can be installed with `pip`_
    by doing
 
@@ -58,7 +44,6 @@ Additionally, the following libraries are required:
    distribution's package manager
  
 .. _GNU Radio: https://gnuradio.org/
-.. _libfec: https://github.com/quiet/libfec
 .. _construct: https://construct.readthedocs.io/en/latest/
 .. _requests: https://pypi.org/project/requests/
 .. _pip: https://pypi.org/project/pip/
