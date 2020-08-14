@@ -13,16 +13,17 @@
 
 #include <satellites/distributed_syncframe_soft.h>
 
+#include <vector>
+
 namespace gr {
   namespace satellites {
 
     class distributed_syncframe_soft_impl : public distributed_syncframe_soft
     {
      private:
-      int d_threshold;
-      int d_synclen;
-      int d_step;
-      uint8_t *d_syncword;
+      const int d_threshold;
+      const int d_step;
+      std::vector<uint8_t> d_syncword;
             
      public:
       distributed_syncframe_soft_impl(int threshold, const std::string& syncword, int step);

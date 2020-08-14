@@ -13,6 +13,11 @@
 
 #include <satellites/decode_rs_interleaved.h>
 
+#include <array>
+#include <vector>
+
+#include "rs.h"
+
 namespace gr {
   namespace satellites {
 
@@ -22,6 +27,8 @@ namespace gr {
       bool d_verbose;
       int d_basis;
       int d_codewords;
+      std::array<uint8_t, MAX_FRAME_LEN> d_codeword;
+      std::vector<uint8_t> d_out;
 
      public:
       decode_rs_interleaved_impl(bool verbose, int basis, int codewords);

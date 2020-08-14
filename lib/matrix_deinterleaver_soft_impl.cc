@@ -15,6 +15,8 @@
 #include <gnuradio/io_signature.h>
 #include "matrix_deinterleaver_soft_impl.h"
 
+#include <stdexcept>
+
 namespace gr {
   namespace satellites {
 
@@ -31,12 +33,18 @@ namespace gr {
     matrix_deinterleaver_soft_impl::matrix_deinterleaver_soft_impl(int rows, int cols, int output_size, int output_skip)
       : gr::block("matrix_deinterleaver_soft",
               gr::io_signature::make(0, 0, 0),
-              gr::io_signature::make(0, 0, 0))
+	      gr::io_signature::make(0, 0, 0)),
+	d_rows(rows),
+	d_cols(cols),
+	d_output_size(output_size),
+	d_output_skip(output_skip)
     {
-      d_rows = rows;
-      d_cols = cols;
-      d_output_size = output_size;
-      d_output_skip = output_skip;
+      if (d_output_size + d_output_skip > d_rows * d_cols) {
+	throw std::runtime_error("Invalid size parameters for matrix deinterleave");
+      }
+      
+      d_out.resize(d_rows * d_cols);
+      
       message_port_register_out(pmt::mp("out"));
       message_port_register_in(pmt::mp("in"));
       set_msg_handler(pmt::mp("in"),
@@ -67,20 +75,20 @@ namespace gr {
 
     void
     matrix_deinterleaver_soft_impl::msg_handler (pmt::pmt_t pmt_msg) {
-      pmt::pmt_t msg = pmt::cdr(pmt_msg);
-      size_t offset(0);
-      const float *data = (const float *) pmt::uniform_vector_elements(msg, offset);
-      float *out = new float [d_rows * d_cols];
+      size_t length(0);
+      auto data = pmt::f32vector_elements(pmt::cdr(pmt_msg), length);
 
+      if (length != d_rows * d_cols) return;
+      
       // Full matrix deinterleave, ignoring output cropping
-      for (int i = 0; i < d_rows * d_cols; i++) {
-	out[i] = data[d_rows*(i % d_cols) + i/d_cols];
+      for (int i = 0; i < length; ++i) {
+	d_out[i] = data[d_rows*(i % d_cols) + i/d_cols];
       }
 
       // Output cropping
       message_port_pub(pmt::mp("out"),
 		       pmt::cons(pmt::PMT_NIL,
-				 pmt::init_f32vector(d_output_size, out + d_output_skip)));
+				 pmt::init_f32vector(d_output_size, &d_out[d_output_skip])));
       
     }
     

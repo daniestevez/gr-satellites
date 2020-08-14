@@ -175,7 +175,7 @@ int chainback_viterbi_packed(void *p, unsigned char *data, unsigned int nbits, u
 }
 
 /* Delete instance of a Viterbi decoder */
-void delete_viterbi(void *p)
+void delete_viterbi_packed(void *p)
 {
     struct v27 *vp = p;
 

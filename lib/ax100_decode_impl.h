@@ -23,13 +23,16 @@
 
 #include <satellites/ax100_decode.h>
 
+#include <array>
+
 namespace gr {
   namespace satellites {
 
     class ax100_decode_impl : public ax100_decode
     {
      private:
-      bool d_verbose;
+      std::array<uint8_t, 256> d_data;
+      const bool d_verbose;
 
      public:
       ax100_decode_impl(bool verbose);

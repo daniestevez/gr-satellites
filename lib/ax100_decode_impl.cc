@@ -23,8 +23,10 @@
 #endif
 
 #include <algorithm>
+#include <utility>
 
 #include <cstdio>
+#include <cstring>
 
 #include <gnuradio/io_signature.h>
 #include "ax100_decode_impl.h"
@@ -49,16 +51,13 @@ namespace gr {
     ax100_decode_impl::ax100_decode_impl(bool verbose)
       : gr::block("ax100_decode",
 	      gr::io_signature::make(0, 0, 0),
-	      gr::io_signature::make(0, 0, 0))
+	      gr::io_signature::make(0, 0, 0)),
+	d_verbose(verbose)
     {
-      d_verbose = verbose;
-
       message_port_register_out(pmt::mp("out"));
       message_port_register_in(pmt::mp("in"));
       set_msg_handler(pmt::mp("in"),
 		      boost::bind(&ax100_decode_impl::msg_handler, this, _1));
-
-      
     }
 
     /*
@@ -84,31 +83,25 @@ namespace gr {
 
     void
     ax100_decode_impl::msg_handler (pmt::pmt_t pmt_msg) {
-      pmt::pmt_t msg = pmt::cdr(pmt_msg);
-      uint8_t data[256];
-      int data_len;
-      uint8_t tmp;
-      int rs_res;
-      int frame_len;
-      size_t offset(0);
+      size_t length(0);
+      auto msg = pmt::u8vector_elements(pmt::cdr(pmt_msg), length);
 
-      data_len = std::min(pmt::length(msg), sizeof(data));
-      memcpy(data, pmt::uniform_vector_elements(msg, offset), data_len);
+      length = std::min(length, d_data.size());
+      std::memcpy(d_data.data(), msg, length);
 
-      rs_res = decode_rs_8(data + 1, NULL, 0, 255 - data[0] + 1);
+      auto rs_res = decode_rs_8(&d_data[1], NULL, 0, 255 - d_data[0] + 1);
 
       // Send via GNUradio message if RS ok
       if (rs_res >= 0) {
 	// Swap CSP header
-	tmp = data[4];
-	data[4] = data[1];
-	data[1] = tmp;
-	tmp = data[3];
-	data[3] = data[2];
-	data[2] = tmp;
+	std::swap(d_data[1], d_data[4]);
+	std::swap(d_data[2], d_data[3]);
 
 	// 32 RS parity symbols, 1 includes the length byte
-	frame_len = data[0] - 32 - 1;
+	auto frame_len = d_data[0] - 32 - 1;
+	if (frame_len < 0) {
+	  return;
+	}
 
 	if (d_verbose) {
 	  std::printf("RS decode OK. Length: %d. Bytes corrected: %d.\n", frame_len, rs_res);
@@ -117,7 +110,7 @@ namespace gr {
 	// Send by GNUradio message
 	message_port_pub(pmt::mp("out"),
 			 pmt::cons(pmt::PMT_NIL,
-				   pmt::init_u8vector(frame_len,data+1)));
+				   pmt::init_u8vector(frame_len, &d_data[1])));
       }
       else if (d_verbose) {
 	std::printf("RS decode failed.\n");

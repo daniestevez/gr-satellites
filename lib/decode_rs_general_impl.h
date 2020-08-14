@@ -13,6 +13,10 @@
 
 #include <satellites/decode_rs_general.h>
 
+#include <array>
+
+#include "rs.h"
+
 namespace gr {
   namespace satellites {
 
@@ -22,6 +26,7 @@ namespace gr {
       bool d_verbose;
       void *d_rs;
       int d_nroots;
+      std::array<uint8_t, MAX_FRAME_LEN> d_data;
 
      public:
       decode_rs_general_impl(int gfpoly, int fcr, int prim, int nroots, bool verbose);

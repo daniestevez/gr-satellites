@@ -13,6 +13,9 @@
 
 #include <satellites/decode_ra_code.h>
 
+#include <vector>
+#include <memory>
+
 extern "C" {
 #include "radecoder/ra_config.h"
 }
@@ -23,8 +26,12 @@ namespace gr {
     class decode_ra_code_impl : public decode_ra_code
     {
      private:
+      constexpr static float d_error_threshold = 0.35f;
       int d_size;
-      struct ra_context *d_ra_context;
+      std::unique_ptr<struct ra_context> d_ra_context;
+      std::vector<float> d_ra_in;
+      std::vector<uint8_t> d_ra_out;
+      std::vector<ra_word_t> d_ra_recode;
       
      public:
       decode_ra_code_impl(int size);

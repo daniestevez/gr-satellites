@@ -16,6 +16,9 @@
 
 #include <cstdio>
 
+#include <new>
+#include <utility>
+
 #include <gnuradio/io_signature.h>
 #include "u482c_decode_impl.h"
 
@@ -46,22 +49,22 @@ namespace gr {
     u482c_decode_impl::u482c_decode_impl(bool verbose, int viterbi, int scrambler, int rs)
       : gr::block("u482c_decode",
               gr::io_signature::make(0, 0, 0),
-	      gr::io_signature::make(0, 0, 0))
+	      gr::io_signature::make(0, 0, 0)),
+	d_verbose(verbose),
+	d_viterbi(viterbi),
+	d_scrambler(scrambler),
+	d_rs(rs)
     {
-      int16_t polys[2] = {V27POLYA, V27POLYB};
-      d_verbose = verbose;
-      d_viterbi = viterbi;
-      d_scrambler = scrambler;
-      d_rs = rs;
-
       // init FEC
       if (d_viterbi != OFF) {
+	int16_t polys[2] = {V27POLYA, V27POLYB};
 	set_viterbi_polynomial_packed(polys);
-	d_vp = create_viterbi_packed(RS_LEN * 8);
+	d_vp = create_viterbi_packed(d_rs_len * 8);
+	if (!d_vp) throw std::bad_alloc();
       }
 
       if (d_scrambler != OFF) {
-	ccsds_generate_sequence(d_ccsds_sequence, RS_LEN);
+	ccsds_generate_sequence(d_ccsds_sequence.data(), d_ccsds_sequence.size());
       }
       
       message_port_register_out(pmt::mp("out"));
@@ -75,6 +78,7 @@ namespace gr {
      */
     u482c_decode_impl::~u482c_decode_impl()
     {
+      if (d_vp) delete_viterbi_packed(d_vp);
     }
 
     void
@@ -93,25 +97,15 @@ namespace gr {
 
     void
     u482c_decode_impl::msg_handler (pmt::pmt_t pmt_msg) {
-      pmt::pmt_t msg = pmt::cdr(pmt_msg);
-      uint8_t data[HEADER_LEN + RS_LEN];
-      int data_len;
-      uint8_t * const packet = data + HEADER_LEN;
-      uint8_t tmp;
-      int rs_res, viterbi_res, golay_res;
-      int rx_len, frame_len = -1;
-      size_t offset(0);
-      register uint32_t length_field;
-      bool viterbi_flag, scrambler_flag, rs_flag;
-      bool doing_rs;
-      int i;
+      size_t length(0);
+      auto msg = pmt::u8vector_elements(pmt::cdr(pmt_msg), length);
 
-      data_len = std::min(pmt::length(msg), sizeof(data));
-      memcpy(data, pmt::uniform_vector_elements(msg, offset), data_len);
+      auto data_len = std::min(length, d_data.size());
+      memcpy(d_data.data(), msg, data_len);
 
       // decode length field
-      length_field = (data[0] << 16) | (data[1] << 8) | data[2];
-      golay_res = decode_golay24(&length_field);
+      uint32_t length_field = (d_data[0] << 16) | (d_data[1] << 8) | d_data[2];
+      auto golay_res = decode_golay24(&length_field);
       if (golay_res < 0) {
 	if (d_verbose) {
 	  std::printf("Golay decode failed.\n");
@@ -119,16 +113,18 @@ namespace gr {
 	return;
       }
 
-      frame_len = length_field & 0xff;
-      viterbi_flag = length_field & 0x100;
-      scrambler_flag = length_field & 0x200;
-      rs_flag = length_field & 0x400;
+      auto frame_len = length_field & 0xff;
+      bool viterbi_flag = length_field & 0x100;
+      bool scrambler_flag = length_field & 0x200;
+      bool rs_flag = length_field & 0x400;
 
       if (d_verbose) {
 	std::printf("Golay decode OK. Bit errors: %d, Frame length: %d, Viterbi: %d, Scrambler %d, Reed-Solomon: %d.\n",
 		    golay_res, frame_len, viterbi_flag, scrambler_flag, rs_flag);
       }
 
+      size_t rx_len;
+      auto packet = &d_data[d_header_len];
       // Viterbi decoding
       if ((d_viterbi == ON) || (d_viterbi == AUTO && viterbi_flag)) {
 	rx_len = frame_len / VITERBI_RATE - VITERBI_TAIL;
@@ -140,7 +136,7 @@ namespace gr {
 	}
 	init_viterbi_packed(d_vp, 0);
 	update_viterbi_packed(d_vp, packet, rx_len * 8 + VITERBI_CONSTRAINT - 1);
-	viterbi_res = chainback_viterbi_packed(d_vp, packet, rx_len * 8, 0);
+	auto viterbi_res = chainback_viterbi_packed(d_vp, packet, rx_len * 8, 0);
 	if (d_verbose) {
 	  std::printf("Viterbi decode bit errors: %d\n", viterbi_res);
 	}
@@ -151,13 +147,12 @@ namespace gr {
 
       // Descrambling
       if ((d_scrambler == ON) || (d_scrambler == AUTO && scrambler_flag)) {
-	ccsds_xor_sequence(packet, d_ccsds_sequence, rx_len);
+	ccsds_xor_sequence(packet, d_ccsds_sequence.data(), rx_len);
       }
       
       // RS decoding
-      doing_rs = (d_rs == ON) || (d_rs == AUTO && rs_flag);
-      if (doing_rs) {
-	rs_res = decode_rs_8(packet, NULL, 0, RS_LEN - rx_len);
+      if ((d_rs == ON) || (d_rs == AUTO && rs_flag)) {
+	auto rs_res = decode_rs_8(packet, NULL, 0, RS_LEN - rx_len);
 	rx_len -= 32;
 
 	if (rs_res < 0) {
@@ -174,12 +169,8 @@ namespace gr {
 
       // Send via GNU Radio message
       // Swap CSP header
-      tmp = packet[0];
-      packet[0] = packet[3];
-      packet[3] = tmp;
-      tmp = packet[1];
-      packet[1] = packet[2];
-      packet[2] = tmp;
+      std::swap(packet[0], packet[3]);
+      std::swap(packet[1], packet[2]);
 
       // Send by GNUradio message
       message_port_pub(pmt::mp("out"),

@@ -13,16 +13,19 @@
 
 #include <satellites/matrix_deinterleaver_soft.h>
 
+#include <vector>
+
 namespace gr {
   namespace satellites {
 
     class matrix_deinterleaver_soft_impl : public matrix_deinterleaver_soft
     {
      private:
-      int d_rows;
-      int d_cols;
-      int d_output_size;
-      int d_output_skip;
+      const int d_rows;
+      const int d_cols;
+      const int d_output_size;
+      const int d_output_skip;
+      std::vector<float> d_out;
 
      public:
       matrix_deinterleaver_soft_impl(int rows, int cols, int output_size, int output_skip);
