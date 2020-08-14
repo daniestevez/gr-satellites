@@ -50,16 +50,16 @@ namespace gr {
                         io_signature::make(1, 1, sizeof(char)),
                         io_signature::make(1, 1, sizeof(char))),
       d_header_length(length_field_size),
-      d_endianness(endianness),
       d_use_golay(use_golay),
       d_sync_word(sync_word),
+      d_endianness(endianness),
       d_ninput_items_required(1)
     {
       d_packet_tag = pmt::string_to_symbol(packet_key);
 
       set_tag_propagation_policy(TPP_DONT);
 
-      for (int ii; ii<d_sync_word.size(); ii++) {
+      for (size_t ii = 0; ii<d_sync_word.size(); ii++) {
         d_sync_word.at(ii) = d_sync_word[ii] & 0x01;
       }
 
@@ -111,7 +111,7 @@ namespace gr {
         // check for packet size
         packet_len = to_uint64(tags[0].value);
 
-        if (noutput_items < packet_len + d_header_length + asm_len) {
+        if ((unsigned) noutput_items < packet_len + d_header_length + asm_len) {
           set_min_noutput_items(packet_len + d_header_length + asm_len);
 #ifdef VLPF_DEBUG_TIMING
           if (std::time(NULL) - d_last_debug1 > 1) {

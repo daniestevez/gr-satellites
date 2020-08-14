@@ -55,13 +55,13 @@ namespace gr {
         gr_vector_const_void_star &input_items,
         gr_vector_void_star &output_items)
     {
-      int match;
+      size_t match;
 
       const float *in = (const float *) input_items[0];
 
       for (int i = 0; i < noutput_items; i++) {
 	match = 0;
-	for (int j = 0; j < d_syncword.size(); j++) {
+	for (size_t j = 0; j < d_syncword.size(); ++j) {
 	  match += (in[i + j * d_step] < 0.0) ^ d_syncword[j];
 	}
 	if (match >= d_syncword.size() - d_threshold) {

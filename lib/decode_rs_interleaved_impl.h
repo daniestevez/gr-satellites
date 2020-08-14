@@ -24,9 +24,9 @@ namespace gr {
     class decode_rs_interleaved_impl : public decode_rs_interleaved
     {
      private:
-      bool d_verbose;
-      int d_basis;
-      int d_codewords;
+      const bool d_verbose;
+      const int d_basis;
+      const size_t d_codewords;
       std::array<uint8_t, MAX_FRAME_LEN> d_codeword;
       std::vector<uint8_t> d_out;
 

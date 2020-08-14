@@ -81,7 +81,7 @@ namespace gr {
       if (length != d_rows * d_cols) return;
       
       // Full matrix deinterleave, ignoring output cropping
-      for (int i = 0; i < length; ++i) {
+      for (size_t i = 0; i < length; ++i) {
 	d_out[i] = data[d_rows*(i % d_cols) + i/d_cols];
       }
 

@@ -21,8 +21,8 @@ namespace gr {
     class distributed_syncframe_soft_impl : public distributed_syncframe_soft
     {
      private:
-      const int d_threshold;
-      const int d_step;
+      const size_t d_threshold;
+      const size_t d_step;
       std::vector<uint8_t> d_syncword;
             
      public:

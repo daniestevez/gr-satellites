@@ -21,10 +21,10 @@ namespace gr {
     class matrix_deinterleaver_soft_impl : public matrix_deinterleaver_soft
     {
      private:
-      const int d_rows;
-      const int d_cols;
-      const int d_output_size;
-      const int d_output_skip;
+      const size_t d_rows;
+      const size_t d_cols;
+      const size_t d_output_size;
+      const size_t d_output_skip;
       std::vector<float> d_out;
 
      public:

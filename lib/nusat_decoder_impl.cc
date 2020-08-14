@@ -138,7 +138,7 @@ namespace gr {
 
       auto packet = &d_data[d_header_len];
       // Descramble
-      for (int i = 0; i < length; ++i) {
+      for (size_t i = 0; i < length; ++i) {
 	packet[i] ^= d_scrambler_sequence[i];
       }
 

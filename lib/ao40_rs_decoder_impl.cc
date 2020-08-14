@@ -79,19 +79,19 @@ namespace gr {
 
       if (length != 2 * d_n) return;
 
-      for (int dec = 0; dec < 2; ++dec) {
-	for (int i = 0; i < d_scratch.size(); ++i) {
+      for (size_t dec = 0; dec < 2; ++dec) {
+	for (size_t i = 0; i < d_scratch.size(); ++i) {
 	  d_scratch[i] = data[2*i + dec];
 	}
 	rs_res[dec] = decode_rs_8(d_scratch.data(), NULL, 0, 255 - d_n);
 	if (rs_res[dec] == -1) {
 	  if (d_verbose) {
-	    std::printf("Reed-Solomon decode failed (%dst decoder).\n", dec + 1);
+	    std::printf("Reed-Solomon decode failed (%dst decoder).\n", int(dec + 1));
 	  }
 	  return;
 	}
 	else {
-	  for (int i = 0; i < d_k; ++i) {
+	  for (size_t i = 0; i < d_k; ++i) {
 	    d_message[2*i + dec] = d_scratch[i];
 	  }
 	}

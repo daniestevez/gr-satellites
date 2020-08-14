@@ -40,7 +40,7 @@ static inline float ra_llr_min(float a, float b) {
 }
 
 void ra_improve_gen(struct ra_context *ctx, float *codeword, int puncture, bool half) {
-  int index, bit, pos;
+  int index, bit, pos = 0; /* to avoid pos uninitialized warning */
   float accu[RA_BITCOUNT];
   float data, left;
 

@@ -23,9 +23,9 @@ namespace gr {
     class decode_rs_general_impl : public decode_rs_general
     {
      private:
-      bool d_verbose;
+      const bool d_verbose;
       void *d_rs;
-      int d_nroots;
+      const unsigned d_nroots;
       std::array<uint8_t, MAX_FRAME_LEN> d_data;
 
      public:

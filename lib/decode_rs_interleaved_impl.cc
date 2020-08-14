@@ -88,8 +88,8 @@ namespace gr {
 	return;
       }
 
-      for (int j = 0; j < d_codewords; ++j) {
-	for (int k = 0; k < d_codeword.size(); ++k) {
+      for (size_t j = 0; j < d_codewords; ++j) {
+	for (size_t k = 0; k < d_codeword.size(); ++k) {
 	  d_codeword[k] = data[j + d_codewords * k];
 	}
 	
@@ -109,7 +109,7 @@ namespace gr {
 
 	total_errors += rs_res;
 
-	for (int k = 0; k < d_codeword.size() - PARITY_BYTES; ++k) {
+	for (size_t k = 0; k < d_codeword.size() - PARITY_BYTES; ++k) {
 	  d_out[j + d_codewords * k] = d_codeword[k];
 	}
       }
