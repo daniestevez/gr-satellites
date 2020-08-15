@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2018 Daniel Estevez <daniel@destevez.net>
+ * Copyright 2018,2020 Daniel Estevez <daniel@destevez.net>
  *
  * This file is part of gr-satellites
  *
