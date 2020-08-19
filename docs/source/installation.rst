@@ -126,7 +126,18 @@ can be used to allow Python to find the gr-satellites module. More information
 about the ``PYTHONPATH`` can be found in Python's documentation description of
 the `PYTHONPATH`_.
 
+.. note::
+   A permanent configuration of the ``PYTHONPATH`` can be added to a script such as
+   ``~/.bashrc`` or ``~/.bash_profile``. This applies the correct
+   ``PYTHONPATH`` when ``gr_satellites`` or ``gnuradio-companion`` are run from
+   a ``bash`` session. If ``gnuradio-companion`` is run directly from the
+   graphical environment, then it is necessary to set the ``PYTHONPATH`` in
+   xinitrc or xprofile. See the
+   `Arch Linux documentation on environment variables`_
+   for more information,
+
 .. _PYTHONPATH: https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH
+.. _Arch Linux documentation on environment variables: https://wiki.archlinux.org/index.php/Environment_variables
 
 .. _Downloading sample recordings:
 
