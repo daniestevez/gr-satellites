@@ -156,6 +156,10 @@ class gr_satellites_top_block(gr.top_block):
 
 def main():
     parser = argument_parser()
+    if len(sys.argv) >= 1 and sys.argv[1] == '--version':
+        parser.parse_args()
+        sys.exit(0)
+    
     if len(sys.argv) <= 1 or sys.argv[1][0] == '-':
         parser.print_usage(file = sys.stderr)
         sys.exit(1)
