@@ -4,11 +4,12 @@ Installing using conda
 ======================
 
 gr-satellites and GNU Radio can also be installed using
-`conda`_, both in Linux and in macOS
-(support for installing gr-satellites on Windows through conda might be available in
-the future). Conda is an open-source package management for Linux, macOS and
-Windows that can install packets and their dependencies in different virtual
+`conda`_, in Linux, macOS, and Windows.
+Conda is a multiplatform open-source package management system
+that can install packages and their dependencies in different virtual
 environments, independently from the rest of the packets installed in the OS.
+Using conda is the easiest and recommended way of installing gr-satellites in Windows.
+
 This section shows how to install `miniconda`_, GNU Radio, and
 gr-satellites from scratch.
 
@@ -80,7 +81,7 @@ instructions here). To install gr-satellites and its dependecies, we do
 
 .. code-block:: console
 
-   $ conda install -c conda-forge -c petrush gnuradio-satellites
+   $ conda install -c conda-forge gnuradio-satellites
 
 After installation, the ``gr_satellites`` command line tool might be run as
 
@@ -97,9 +98,9 @@ It might be convenient to download the
 Acknowledgments
 ^^^^^^^^^^^^^^^
 
-Thanks to `Ryan Volz`_ for packaging GNU Radio for Conda and to `Petrus Hyvönen`_
-for putting together recipies to install gr-satellites and its dependencies
-through Conda.
+Thanks to `Ryan Volz`_ and `Petrus Hyvönen`_ for their work in
+putting together recipies to install gr-satellites and its dependencies
+through Conda and for helping me make gr-satellites build on Windows.
 
 .. _conda: https://docs.conda.io/en/latest/
 .. _miniconda: https://docs.conda.io/en/latest/miniconda.html
