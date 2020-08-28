@@ -78,7 +78,8 @@ about the organization in branches in the `README`_.
 Building and installing
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-gr-satellites can be built and installed using cmake:
+gr-satellites can be built and installed using cmake. The following can be run
+inside the directory containing the gr-satellites sources:
 
 .. code-block:: console
 
