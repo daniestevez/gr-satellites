@@ -16,14 +16,14 @@ basic information about the arguments it allows.
 
 .. code-block:: console
 
-   $ gr_satellites 
-   usage: gr_satellites satellite [-h] [--wavfile WAVFILE] [--rawfile RAWFILE]
-		                  [--rawint16 RAWINT16] [--samp_rate SAMP_RATE]
-                                  [--udp] [--udp_ip UDP_IP] [--udp_port UDP_PORT]
-                                  [--kiss_in KISS_IN] [--iq]
-                                  [--input_gain INPUT_GAIN] [--kiss_out KISS_OUT]
-                                  [--kiss_append] [--hexdump]
-                                  [--dump_path DUMP_PATH]
+   $ gr_satellites
+   usage: gr_satellites satellite [-h] [--version]
+                               (--wavfile WAVFILE | --rawfile RAWFILE | --rawint16 RAWINT16 | --audio [DEVICE] | --udp | --kiss_in KISS_IN)
+                               [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
+                               [--udp_port UDP_PORT] [--iq]
+                               [--input_gain INPUT_GAIN] [--kiss_out KISS_OUT]
+                               [--kiss_append] [--hexdump]
+                               [--dump_path DUMP_PATH]
 
 .. _Specifying the satellite:
 
@@ -42,20 +42,22 @@ specify the ``satellite`` to be used as an argument immediately following
   .. code-block:: console
 
      $ gr_satellites FUNcube-1
-     Need to specify exactly one of the following input sources: {--wavfile, --rawfile, --rawint16, --udp, --kiss_in}
-     usage: gr_satellites satellite [-h] [--wavfile WAVFILE] [--rawfile RAWFILE]
-                                    [--rawint16 RAWINT16] [--samp_rate SAMP_RATE]
-                                    [--udp] [--udp_ip UDP_IP] [--udp_port UDP_PORT]
-                                    [--kiss_in KISS_IN] [--iq]
-                                    [--input_gain INPUT_GAIN] [--kiss_out KISS_OUT]
-                                    [--kiss_append] [--hexdump]
-                                    [--dump_path DUMP_PATH] [--f_offset F_OFFSET]
-                                    [--rrc_alpha RRC_ALPHA] [--disable_fll]
-                                    [--fll_bw FLL_BW] [--clk_bw CLK_BW]
-                                    [--clk_limit CLK_LIMIT] [--costas_bw COSTAS_BW]
-                                    [--manchester_history MANCHESTER_HISTORY]
-                                    [--syncword_threshold SYNCWORD_THRESHOLD]
-                                    [--verbose_rs]
+     usage: gr_satellites satellite [-h] [--version]
+                               (--wavfile WAVFILE | --rawfile RAWFILE | --rawint16 RAWINT16 | --audio [DEVICE] | --udp | --kiss_in KISS_IN)
+                               [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
+                               [--udp_port UDP_PORT] [--iq]
+                               [--input_gain INPUT_GAIN] [--kiss_out KISS_OUT]
+                               [--kiss_append] [--hexdump]
+                               [--dump_path DUMP_PATH]
+                               [--telemetry_output TELEMETRY_OUTPUT]
+                               [--f_offset F_OFFSET] [--rrc_alpha RRC_ALPHA]
+                               [--disable_fll] [--fll_bw FLL_BW]
+                               [--clk_bw CLK_BW] [--clk_limit CLK_LIMIT]
+                               [--costas_bw COSTAS_BW]
+                               [--manchester_history MANCHESTER_HISTORY]
+                               [--syncword_threshold SYNCWORD_THRESHOLD]
+                               [--verbose_rs]
+     gr_satellites satellite: error: one of the arguments --wavfile --rawfile --rawint16 --audio --udp --kiss_in is required
 
  A satellite may have several different names, known as *alternative
  names*. For example, FUNcube-1 is both known as AO-73 and FUNcube-1.
@@ -71,20 +73,22 @@ specify the ``satellite`` to be used as an argument immediately following
   .. code-block:: console
 
      $ gr_satellites 39444
-     Need to specify exactly one of the following input sources: {--wavfile, --rawfile, --rawint16, --udp, --kiss_in}
-     usage: gr_satellites satellite [-h] [--wavfile WAVFILE] [--rawfile RAWFILE]
-                                    [--rawint16 RAWINT16] [--samp_rate SAMP_RATE]
-                                    [--udp] [--udp_ip UDP_IP] [--udp_port UDP_PORT]
-                                    [--kiss_in KISS_IN] [--iq]
-                                    [--input_gain INPUT_GAIN] [--kiss_out KISS_OUT]
-                                    [--kiss_append] [--hexdump]
-                                    [--dump_path DUMP_PATH] [--f_offset F_OFFSET]
-                                    [--rrc_alpha RRC_ALPHA] [--disable_fll]
-                                    [--fll_bw FLL_BW] [--clk_bw CLK_BW]
-                                    [--clk_limit CLK_LIMIT] [--costas_bw COSTAS_BW]
-                                    [--manchester_history MANCHESTER_HISTORY]
-                                    [--syncword_threshold SYNCWORD_THRESHOLD]
-                                    [--verbose_rs]
+     usage: gr_satellites satellite [-h] [--version]
+                               (--wavfile WAVFILE | --rawfile RAWFILE | --rawint16 RAWINT16 | --audio [DEVICE] | --udp | --kiss_in KISS_IN)
+                               [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
+                               [--udp_port UDP_PORT] [--iq]
+                               [--input_gain INPUT_GAIN] [--kiss_out KISS_OUT]
+                               [--kiss_append] [--hexdump]
+                               [--dump_path DUMP_PATH]
+                               [--telemetry_output TELEMETRY_OUTPUT]
+                               [--f_offset F_OFFSET] [--rrc_alpha RRC_ALPHA]
+                               [--disable_fll] [--fll_bw FLL_BW]
+                               [--clk_bw CLK_BW] [--clk_limit CLK_LIMIT]
+                               [--costas_bw COSTAS_BW]
+                               [--manchester_history MANCHESTER_HISTORY]
+                               [--syncword_threshold SYNCWORD_THRESHOLD]
+                               [--verbose_rs]
+     gr_satellites satellite: error: one of the arguments --wavfile --rawfile --rawint16 --audio --udp --kiss_in is required
   
 * Using a path to an ``.yml`` SatYAML file. SatYAML files are used by
   gr-satellites to specify the decoding parameters and configuration
@@ -101,20 +105,22 @@ specify the ``satellite`` to be used as an argument immediately following
     .. code-block:: console
 
      $ gr_satellites python/satyaml/AO-73.yml
-     Need to specify exactly one of the following input sources: {--wavfile, --rawfile, --rawint16, --udp, --kiss_in}
-     usage: gr_satellites satellite [-h] [--wavfile WAVFILE] [--rawfile RAWFILE]
-                                    [--rawint16 RAWINT16] [--samp_rate SAMP_RATE]
-                                    [--udp] [--udp_ip UDP_IP] [--udp_port UDP_PORT]
-                                    [--kiss_in KISS_IN] [--iq]
-                                    [--input_gain INPUT_GAIN] [--kiss_out KISS_OUT]
-                                    [--kiss_append] [--hexdump]
-                                    [--dump_path DUMP_PATH] [--f_offset F_OFFSET]
-                                    [--rrc_alpha RRC_ALPHA] [--disable_fll]
-                                    [--fll_bw FLL_BW] [--clk_bw CLK_BW]
-                                    [--clk_limit CLK_LIMIT] [--costas_bw COSTAS_BW]
-                                    [--manchester_history MANCHESTER_HISTORY]
-                                    [--syncword_threshold SYNCWORD_THRESHOLD]
-                                    [--verbose_rs]
+     usage: gr_satellites satellite [-h] [--version]
+                               (--wavfile WAVFILE | --rawfile RAWFILE | --rawint16 RAWINT16 | --audio [DEVICE] | --udp | --kiss_in KISS_IN)
+                               [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
+                               [--udp_port UDP_PORT] [--iq]
+                               [--input_gain INPUT_GAIN] [--kiss_out KISS_OUT]
+                               [--kiss_append] [--hexdump]
+                               [--dump_path DUMP_PATH]
+                               [--telemetry_output TELEMETRY_OUTPUT]
+                               [--f_offset F_OFFSET] [--rrc_alpha RRC_ALPHA]
+                               [--disable_fll] [--fll_bw FLL_BW]
+                               [--clk_bw CLK_BW] [--clk_limit CLK_LIMIT]
+                               [--costas_bw COSTAS_BW]
+                               [--manchester_history MANCHESTER_HISTORY]
+                               [--syncword_threshold SYNCWORD_THRESHOLD]
+                               [--verbose_rs]
+     gr_satellites satellite: error: one of the arguments --wavfile --rawfile --rawint16 --audio --udp --kiss_in is required
 				    
 .. _NORAD ID: https://en.wikipedia.org/wiki/Satellite_Catalog_Number
 
@@ -170,6 +176,22 @@ the input source by using exactly one of the following options:
      host endianness. This format is used by GNU Radio File Source and File Sink
      blocks when their type is set to *short*.
 
+* ``--audio`` can be used to read samples from the soundcard, using GNU Radio's
+  `Audio Source`_. This can be used to receive audio from a conventional radio
+  by using the soundcard or from another application via a "virtual audio
+  cable".
+
+  The sample rate to use needs to be specified with the ``--samp_rate``
+  argument. A sample rate of 48000 is typical with audio devices.
+
+  Both real samples (by default) and IQ samples (using the ``--iq`` argument)
+  are supported. IQ samples use two audio channels (stereo).
+
+  The ``--audio`` argument can optionally be followed by the name of the audio
+  device to use. Details about how to specify the device name vary between
+  plaform and are described in the `Audio Source`_ documentation. If no device
+  name is entered, the default audio device will be chosen.
+     
 * ``--udp`` can be used to received RF samples streamed in real-time. The sample rate
   of the recording needs to be specified with the ``--samp_rate`` argument.
 
@@ -219,70 +241,74 @@ For example, this shows all the options allowed by the FUNcube-1 decoder:
 .. code-block:: console
 
    $ gr_satellites FUNcube-1 --help
-   usage: gr_satellites satellite [-h] [--wavfile WAVFILE] [--rawfile RAWFILE]
-                                  [--rawint16 RAWINT16] [--samp_rate SAMP_RATE]
-                                  [--udp] [--udp_ip UDP_IP] [--udp_port UDP_PORT]
-                                  [--kiss_in KISS_IN] [--iq]
-                                  [--input_gain INPUT_GAIN] [--kiss_out KISS_OUT]
-                                  [--kiss_append] [--hexdump]
-                                  [--dump_path DUMP_PATH] [--f_offset F_OFFSET]
-                                  [--rrc_alpha RRC_ALPHA] [--disable_fll]
-                                  [--fll_bw FLL_BW] [--clk_bw CLK_BW]
-                                  [--clk_limit CLK_LIMIT] [--costas_bw COSTAS_BW]
-                                  [--manchester_history MANCHESTER_HISTORY]
-                                  [--syncword_threshold SYNCWORD_THRESHOLD]
-                                  [--verbose_rs]
+   usage: gr_satellites satellite [-h] [--version]
+                               (--wavfile WAVFILE | --rawfile RAWFILE | --rawint16 RAWINT16 | --audio [DEVICE] | --udp | --kiss_in KISS_IN)
+                               [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
+                               [--udp_port UDP_PORT] [--iq]
+                               [--input_gain INPUT_GAIN] [--kiss_out KISS_OUT]
+                               [--kiss_append] [--hexdump]
+                               [--dump_path DUMP_PATH]
+                               [--telemetry_output TELEMETRY_OUTPUT]
+                               [--f_offset F_OFFSET] [--rrc_alpha RRC_ALPHA]
+                               [--disable_fll] [--fll_bw FLL_BW]
+                               [--clk_bw CLK_BW] [--clk_limit CLK_LIMIT]
+                               [--costas_bw COSTAS_BW]
+                               [--manchester_history MANCHESTER_HISTORY]
+                               [--syncword_threshold SYNCWORD_THRESHOLD]
+                               [--verbose_rs]
 
-   gr-satellites - GNU Radio decoders for Amateur satellites
+    gr-satellites - GNU Radio decoders for Amateur satellites
 
-   optional arguments:
-     -h, --help            show this help message and exit
+    optional arguments:
+       -h, --help            show this help message and exit
+       --version             show program's version number and exit
 
-   input:
-     --wavfile WAVFILE     WAV input file
-     --rawfile RAWFILE     RAW input file (float32 or complex64)
-     --rawint16 RAWINT16   RAW input file (int16)
-     --samp_rate SAMP_RATE
-                        Sample rate (Hz)
-     --udp                 Use UDP input
-     --udp_ip UDP_IP       UDP input listen IP [default='::']
-     --udp_port UDP_PORT   UDP input listen port [default='7355']
-     --kiss_in KISS_IN     KISS input file
-     --iq                  Use IQ input
-     --input_gain INPUT_GAIN
-                        Input gain (can be negative to invert signal)
-                        [default=1]
+    input:
+      --wavfile WAVFILE     WAV input file
+      --rawfile RAWFILE     RAW input file (float32 or complex64)
+      --rawint16 RAWINT16   RAW input file (int16)
+      --audio [DEVICE]      Soundcard device input
+      --udp                 Use UDP input
+      --kiss_in KISS_IN     KISS input file
+      --samp_rate SAMP_RATE
+                            Sample rate (Hz)
+      --udp_ip UDP_IP       UDP input listen IP [default='::']
+      --udp_port UDP_PORT   UDP input listen port [default='7355']
+      --iq                  Use IQ input
+      --input_gain INPUT_GAIN
+                            Input gain (can be negative to invert signal) [default=1]
 
-   output:
-     --kiss_out KISS_OUT   KISS output file
-     --kiss_append         Append to KISS output file
-     --hexdump             Hexdump instead of telemetry parse
-     --dump_path DUMP_PATH
-                           Path to dump internal signals
+    output:
+      --kiss_out KISS_OUT   KISS output file
+      --kiss_append         Append to KISS output file
+      --hexdump             Hexdump instead of telemetry parse
+      --dump_path DUMP_PATH
+                            Path to dump internal signals
 
-   demodulation:
-     --f_offset F_OFFSET   Frequency offset (Hz) [default=1500 or 12000]
-     --rrc_alpha RRC_ALPHA
-                           RRC roll-off (Hz) [default=0.35]
-     --disable_fll         Disable FLL
-     --fll_bw FLL_BW       FLL bandwidth (Hz) [default=25]
-     --clk_bw CLK_BW       Clock recovery bandwidth (relative to baudrate)
-                           [default=0.06]
-     --clk_limit CLK_LIMIT
-                           Clock recovery limit (relative to baudrate)
-                           [default=0.02]
-     --costas_bw COSTAS_BW
-                           Costas loop bandwidth (Hz) [default=50]
-     --manchester_history MANCHESTER_HISTORY
-                           Manchester recovery history (symbols) [default=32]
+    demodulation:
+      --f_offset F_OFFSET   Frequency offset (Hz) [default=1500 or 12000]
+      --rrc_alpha RRC_ALPHA
+                            RRC roll-off (Hz) [default=0.35]
+      --disable_fll         Disable FLL
+      --fll_bw FLL_BW       FLL bandwidth (Hz) [default=25]
+      --clk_bw CLK_BW       Clock recovery bandwidth (relative to baudrate) [default=0.06]
+      --clk_limit CLK_LIMIT
+                            Clock recovery limit (relative to baudrate) [default=0.02]
+      --costas_bw COSTAS_BW
+                            Costas loop bandwidth (Hz) [default=50]
+      --manchester_history MANCHESTER_HISTORY
+                            Manchester recovery history (symbols) [default=32]
 
-   deframing:
-     --syncword_threshold SYNCWORD_THRESHOLD
-                           Syncword bit errors [default=8]
-     --verbose_rs          Verbose RS decoder
+    deframing:
+      --syncword_threshold SYNCWORD_THRESHOLD
+                            Syncword bit errors [default=8]
+      --verbose_rs          Verbose RS decoder
 
-   The satellite parameter can be specified using name, NORAD ID or path to YAML
-   file
+    data sink:
+      --telemetry_output TELEMETRY_OUTPUT
+                            Telemetry output file [default=stdout]
+
+    The satellite parameter can be specified using name, NORAD ID or path to YAML file
 
 .. _Output:
 
@@ -691,3 +717,4 @@ processed, thus restoring the correct polarity.
 .. _gr-lilacsat: https://github.com/bg2bhc/gr-lilacsat
 .. _gr-dslwp: https://github.com/bg2bhc/gr-dslwp
 .. _pyqt5 branch of gr-lilacsat: https://github.com/daniestevez/gr-lilacsat/tree/pyqt5
+.. _Audio Source: https://wiki.gnuradio.org/index.php/Audio_Source

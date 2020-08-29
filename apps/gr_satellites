@@ -21,7 +21,7 @@
 import satellites.core
 from satellites.utils.config import open_config
 import satellites.components.datasources as datasources
-from gnuradio import gr, blocks
+from gnuradio import gr, blocks, audio
 
 import signal
 import argparse
@@ -46,6 +46,7 @@ def argument_parser():
     p_sources.add_argument('--wavfile', help = 'WAV input file')
     p_sources.add_argument('--rawfile', help = 'RAW input file (float32 or complex64)')
     p_sources.add_argument('--rawint16', help = 'RAW input file (int16)')
+    p_sources.add_argument('--audio', const = '', nargs = '?', metavar = 'DEVICE',  help = 'Soundcard device input')
     p_sources.add_argument('--udp', action = 'store_true', help = 'Use UDP input')
     p_sources.add_argument('--kiss_in', help = 'KISS input file')
 
@@ -109,6 +110,8 @@ class gr_satellites_top_block(gr.top_block):
             return self.setup_rawfile_input()
         elif self.options.rawint16 is not None:
             return self.setup_rawint16_input()
+        elif self.options.audio is not None:
+            return self.setup_audio_input()
         elif self.options.udp is True:
             return self.setup_udp_input()
         elif self.options.kiss_in is not None:
@@ -134,6 +137,16 @@ class gr_satellites_top_block(gr.top_block):
         self.input_int16 = blocks.file_source(gr.sizeof_short, self.options.rawint16, False, 0, 0)
         self.setup_input_int16()
 
+    def setup_audio_input(self):
+        self.audio_source = audio.source(self.options.samp_rate, self.options.audio, True)
+        if self.options.iq:
+            self.float_to_complex = blocks.float_to_complex(1)
+            self.connect((self.audio_source, 0), (self.float_to_complex, 0))
+            self.connect((self.audio_source, 1), (self.float_to_complex, 1))
+            self.input = self.float_to_complex
+        else:
+            self.input = self.audio_source
+        
     def setup_udp_input(self):
         self.input_int16 = blocks.udp_source(gr.sizeof_short, self.options.udp_ip, self.options.udp_port, 1472, False)
         self.setup_input_int16()
