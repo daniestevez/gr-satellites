@@ -10,7 +10,7 @@
 
   rs = NULL;
   /* Check parameter ranges */
-  if(symsize < 0 || symsize > 8*sizeof(data_t)){
+  if(symsize < 0 || (unsigned) symsize > 8*sizeof(data_t)){
     goto done;
   }
 

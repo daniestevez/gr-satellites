@@ -127,8 +127,9 @@ namespace gr {
       auto packet = &d_data[d_header_len];
       // Viterbi decoding
       if ((d_viterbi == ON) || (d_viterbi == AUTO && viterbi_flag)) {
-	rx_len = frame_len / VITERBI_RATE - VITERBI_TAIL;
-	if (rx_len < 0) {
+        int len = frame_len / VITERBI_RATE - VITERBI_TAIL;
+	rx_len = len; // rx_len is unsigned
+	if (len < 0) {
 	  if (d_verbose) {
 	    std::printf("Frame too short for Viterbi decoder.\n");
 	  }
