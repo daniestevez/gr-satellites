@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - SatYAML file for STRAND-1
 - Audio source in gr_satellites
+- SatYAML file for AmicalSat
 
 ## [3.3.0] - 2020-08-11
 
