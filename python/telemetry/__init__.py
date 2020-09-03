@@ -16,6 +16,9 @@ object, but in more complex cases, another class supporting the
 .parse method and relying on construct is used.
 '''
 
+import construct
+construct.setGlobalPrintFullStrings(True)
+
 from .aausat4 import aausat4
 from .amicalsat import amicalsat
 from .au03 import au03
