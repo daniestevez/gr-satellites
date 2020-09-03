@@ -2,7 +2,7 @@ name: AmicalSat
 norad: 99836
 data:
   &tlm Telemetry:
-    telemetry: ax25
+    telemetry: amicalsat
 transmitters:
   1k2 AFSK telemetry downlink:
     frequency: 436.100e+6

@@ -17,6 +17,7 @@ object, but in more complex cases, another class supporting the
 '''
 
 from .aausat4 import aausat4
+from .amicalsat import amicalsat
 from .au03 import au03
 from .ax25 import ax25
 from .by02 import by02
