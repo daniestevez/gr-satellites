@@ -26,11 +26,13 @@ class ccsds_concatenated_deframer(gr.hier_block2, options_block):
         differential: whether to use differential coding (bool)
         dual_basis: use dual basis instead of conventional (bool)
         use_scrambler: use CCSDS synchronous scrambler (bool)
+        nasa_dsn: use NASA-DSN instead of CCSDS/NASA-GSFC convolutional code (bool)
         syncword_threshold: number of bit errors allowed in syncword (int)
         options: Options from argparse
     """
     def __init__(self, frame_size = 223, differential = False, dual_basis = False,
-                     use_scrambler = True, syncword_threshold = None, options = None):
+                     use_scrambler = True, nasa_dsn = False,
+                     syncword_threshold = None, options = None):
         gr.hier_block2.__init__(self, "ccsds_concatenated_deframer",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
@@ -39,8 +41,8 @@ class ccsds_concatenated_deframer(gr.hier_block2, options_block):
         self.message_port_register_hier_out('out')
 
         self.delay1 =  blocks.delay(gr.sizeof_float, 1)
-        self.viterbi0 = ccsds_viterbi()
-        self.viterbi1 = ccsds_viterbi()
+        self.viterbi0 = ccsds_viterbi(nasa_dsn = nasa_dsn)
+        self.viterbi1 = ccsds_viterbi(nasa_dsn = nasa_dsn)
         self.char2float0 = blocks.char_to_float(1, 1)
         self.char2float1 = blocks.char_to_float(1, 1)
         self.addconst0 = blocks.add_const_ff(-0.5)

@@ -402,7 +402,8 @@ Message Debug block.
 
 The figure below shows the options used by the CCSDS Concatenated
 deframer. The CCSDS Reed-Solomon deframer block allows exactly the same options,
-since none of the options refer to the convolutional inner code.
+except for the *Convolutional code* option,
+since all the other options refer to the convolutional inner code.
 
 The *Frame size* option indicates the size of the frame in bytes (after
 Reed-Solomon decoding). The *Differential encoding* option enables differential
@@ -410,6 +411,8 @@ decoding, which is often used to solve the BPSK 180º phase ambiguity. The
 *Use RS dual basis* option enables the usage of the dual basis definition for the Reed-Solmon
 code. The *Use scrambler* option enables or disables the use of the CCSDS synchronous
 descrambler. Most satellites using CCSDS frames use scrambling.
+The *Convolutional code* can be used to toggle between the CCSDS/NASA-GSFC
+(most usual and default) and NASA-DSN conventions for the convolutional code.
 The *Syncword threshold* option can be used to choose the number of bit
 errors that are allowed in the detection of the syncword.
     

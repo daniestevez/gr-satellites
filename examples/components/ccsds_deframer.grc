@@ -88,6 +88,7 @@ blocks:
     manchester: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
+    options: '""'
     samp_rate: samp_rate
   states:
     bus_sink: false
@@ -107,13 +108,15 @@ blocks:
     frame_size: '114'
     maxoutbuf: '0'
     minoutbuf: '0'
+    nasa_dsn: 'False'
+    options: '""'
     threshold: '4'
     use_scrambler: 'True'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [520, 196.0]
+    coordinate: [520, 188.0]
     rotation: 0
     state: true
 

@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Audio source in gr_satellites
 - SatYAML file for AmicalSat
 - SatYAML file for UPMSat 2
+- Support for NASA-DSN convention in CCSDS concatenated frames
 
 ## Changed
 - Enable full printing of construct strings

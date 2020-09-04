@@ -178,6 +178,30 @@ The framings allowed in the ``framing`` field are the following:
 * ``CCSDS Concatenated dual differential no-scrambler``, CCSDS Concatenated TM codewords with
   differential encoding, dual RS basis and scrambler disabled (see :ref:`CCSDS deframers`)
 
+* ``NASA-DSN Concatenated``, CCSDS Concatenated TM codewords with conventional RS
+  basis and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
+
+* ``NASA-DSN Concatenated dual``, CCSDS concatenated TM codewords with dual RS
+  basis and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
+
+* ``NASA-DSN Concatenated differential``, CCSDS Concatenated TM codewords with
+  differential encoding, conventional RS basis and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
+
+* ``NASA-DSN Concatenated dual differential``, CCSDS Concatenated TM codewords with
+  differential encoding, dual RS basis and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
+
+* ``NASA-DSN Concatenated no-scrambler``, CCSDS Concatenated TM codewords with conventional RS
+  basis, scrambler disabled and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
+
+* ``NASA-DSN Concatenated dual no-scrambler``, CCSDS concatenated TM codewords with dual RS
+  basis, scrambler disabled and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
+
+* ``NASA-DSN Concatenated differential no-scrambler``, CCSDS Concatenated TM codewords with
+  differential encoding, conventional RS basis, scrambler disabled and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
+
+* ``NASA-DSN Concatenated dual differential no-scrambler``, CCSDS Concatenated TM codewords with
+  differential encoding, dual RS basis, scrambler disabled and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
+  
 * ``3CAT-1``, custom framing used by 3CAT-1. This uses a CC1101 chip with PN9
   scrambler and a (255,223) Reed-Solomon code for the payload
 
