@@ -105,3 +105,5 @@ echo "BY02"
 gr_satellites BY02 --wavfile satellite-recordings/by02.wav --samp_rate 48e3
 echo "UPMSat 2"
 gr_satellites "UPMSat 2" --wavfile satellite-recordings/upmsat_2.wav --samp_rate 48e3 --clk_bw 0.1
+echo "TRISAT"
+gr_satellites TRISAT --wavfile satellite-recordings/trisat.wav --samp_rate 48e3
