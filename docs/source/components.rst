@@ -411,7 +411,7 @@ decoding, which is often used to solve the BPSK 180º phase ambiguity. The
 *Use RS dual basis* option enables the usage of the dual basis definition for the Reed-Solmon
 code. The *Use scrambler* option enables or disables the use of the CCSDS synchronous
 descrambler. Most satellites using CCSDS frames use scrambling.
-The *Convolutional code* can be used to toggle between the CCSDS/NASA-GSFC
+The *Convolutional code* option can be used to toggle between the CCSDS/NASA-GSFC
 (most usual and default) and NASA-DSN conventions for the convolutional code.
 The *Syncword threshold* option can be used to choose the number of bit
 errors that are allowed in the detection of the syncword.
