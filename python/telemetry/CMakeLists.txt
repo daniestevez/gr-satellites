@@ -56,6 +56,7 @@ GR_PYTHON_INSTALL(
     smogp.py
     snet.py
     suomi100.py
+    trisat.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/telemetry
 )
 
