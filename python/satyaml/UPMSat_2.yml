@@ -1,5 +1,5 @@
 name: UPMSat 2
-norad: 99799
+norad: 46277
 data:
   &tlm Telemetry:
     telemetry: ax25
