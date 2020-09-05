@@ -24,6 +24,7 @@ install(FILES
     satellites_hexdump_sink.block.yml
     satellites_image_receiver.block.yml
     satellites_kiss_file_sink.block.yml
+    satellites_kiss_server_sink.block.yml
     satellites_telemetry_parser.block.yml
     satellites_telemetry_submit.block.yml
     DESTINATION share/gnuradio/grc/blocks

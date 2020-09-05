@@ -126,6 +126,8 @@ class gr_satellites_flowgraph(gr.hier_block2):
                     self._datasinks[key] = datasink
             if options is not None and options.kiss_out:
                 self._additional_datasinks.append(datasinks.kiss_file_sink(options.kiss_out, bool(options.kiss_append)))
+            if options is not None and options.kiss_server:
+                self._additional_datasinks.append(datasinks.kiss_server_sink(options.kiss_server))
             if config.getboolean('Groundstation', 'submit_tlm'):
                 self._additional_datasinks.extend(self.get_telemetry_submitters(satyaml, config))
             self._transports = dict()

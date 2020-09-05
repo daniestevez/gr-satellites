@@ -22,5 +22,6 @@ from .codec2_udp_sink import codec2_udp_sink
 from .file_receiver import file_receiver
 from .hexdump_sink import hexdump_sink
 from .kiss_file_sink import kiss_file_sink
+from .kiss_server_sink import kiss_server_sink
 from .telemetry_submit import telemetry_submit
 from .telemetry_parser import telemetry_parser
