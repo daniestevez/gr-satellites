@@ -59,7 +59,7 @@ def argument_parser():
     p_output = p.add_argument_group('output')
     p_output.add_argument('--kiss_out', help = 'KISS output file')
     p_output.add_argument('--kiss_append', action = 'store_true', help = 'Append to KISS output file')
-    p_output.add_argument('--kiss_server', const = '8100', nargs = '?', metavar = 'PORT', help = 'KISS server port [default=%(default)r]')
+    p_output.add_argument('--kiss_server', const = '8100', nargs = '?', metavar = 'PORT', help = 'Enable KISS server [default port=%(default)r]')
     p_output.add_argument('--hexdump', action = 'store_true', help = 'Hexdump instead of telemetry parse')
     p_output.add_argument('--dump_path', help = 'Path to dump internal signals')
     return p
