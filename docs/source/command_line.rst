@@ -22,7 +22,8 @@ basic information about the arguments it allows.
                                [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
                                [--udp_port UDP_PORT] [--iq]
                                [--input_gain INPUT_GAIN] [--kiss_out KISS_OUT]
-                               [--kiss_append] [--hexdump]
+                               [--kiss_append] [--hexdump] [--kiss_server [PORT]]
+                               [--zmq_pub [ADDRESS]] [--hexdump]
                                [--dump_path DUMP_PATH]
 
 .. _Specifying the satellite:
@@ -47,7 +48,8 @@ specify the ``satellite`` to be used as an argument immediately following
                                [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
                                [--udp_port UDP_PORT] [--iq]
                                [--input_gain INPUT_GAIN] [--kiss_out KISS_OUT]
-                               [--kiss_append] [--hexdump]
+                               [--kiss_append] [--kiss_server [PORT]]
+                               [--zmq_pub [ADDRESS]] [--hexdump]
                                [--dump_path DUMP_PATH]
                                [--telemetry_output TELEMETRY_OUTPUT]
                                [--f_offset F_OFFSET] [--rrc_alpha RRC_ALPHA]
@@ -78,7 +80,8 @@ specify the ``satellite`` to be used as an argument immediately following
                                [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
                                [--udp_port UDP_PORT] [--iq]
                                [--input_gain INPUT_GAIN] [--kiss_out KISS_OUT]
-                               [--kiss_append] [--hexdump]
+                               [--kiss_append] [--kiss_server [PORT]]
+                               [--zmq_pub [ADDRESS]] [--hexdump]
                                [--dump_path DUMP_PATH]
                                [--telemetry_output TELEMETRY_OUTPUT]
                                [--f_offset F_OFFSET] [--rrc_alpha RRC_ALPHA]
@@ -110,7 +113,8 @@ specify the ``satellite`` to be used as an argument immediately following
                                [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
                                [--udp_port UDP_PORT] [--iq]
                                [--input_gain INPUT_GAIN] [--kiss_out KISS_OUT]
-                               [--kiss_append] [--hexdump]
+                               [--kiss_append] [--kiss_server [PORT]]
+                               [--zmq_pub [ADDRESS]] [--hexdump]
                                [--dump_path DUMP_PATH]
                                [--telemetry_output TELEMETRY_OUTPUT]
                                [--f_offset F_OFFSET] [--rrc_alpha RRC_ALPHA]
@@ -246,7 +250,8 @@ For example, this shows all the options allowed by the FUNcube-1 decoder:
                                [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
                                [--udp_port UDP_PORT] [--iq]
                                [--input_gain INPUT_GAIN] [--kiss_out KISS_OUT]
-                               [--kiss_append] [--hexdump]
+                               [--kiss_append] [--kiss_server [PORT]]
+                               [--zmq_pub [ADDRESS]] [--hexdump]
                                [--dump_path DUMP_PATH]
                                [--telemetry_output TELEMETRY_OUTPUT]
                                [--f_offset F_OFFSET] [--rrc_alpha RRC_ALPHA]
@@ -281,6 +286,8 @@ For example, this shows all the options allowed by the FUNcube-1 decoder:
     output:
       --kiss_out KISS_OUT   KISS output file
       --kiss_append         Append to KISS output file
+      --kiss_server [PORT]  Enable KISS server [default port=8100]
+      --zmq_pub [ADDRESS]   Enable ZMQ PUB socket [default address=tcp://*:5555]
       --hexdump             Hexdump instead of telemetry parse
       --dump_path DUMP_PATH
                             Path to dump internal signals
@@ -414,6 +421,24 @@ with other software tools.
    timestamps.
 
 .. _Mike Rupprecht: http://dk3wn.info/
+
+KISS server
+"""""""""""
+
+A KISS TCP server can be enabled with the ``--kiss_server`` parameter,
+optionally followed by the TCP port to listen on (by default port 8100 is
+used). This allows other applications to connect to ``gr_satellites`` and
+receive decoded frames using the KISS protocol.
+
+ZMQ PUB socket
+""""""""""""""
+
+Decoded frames can also be sent to other applications by using a `ZeroMQ`_ PUB
+socket. Several applications can connect to the PUB socket using SUB
+sockets. The frames are sent using the *ZMQ PUB Message Sink* GNU Radio block,
+and can be received using the *ZMQ SUB Message Source* GNU Radio block.
+
+.. _ZeroMQ: https://zeromq.org/
 
 Telemetry output
 """"""""""""""""

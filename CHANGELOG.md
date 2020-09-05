@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SatYAML file for UPMSat 2
 - Support for NASA-DSN convention in CCSDS concatenated frames
 - Support for TRISAT
+- TCP KISS server and ZMQ PUB socket to send decoded frames	
 
 ## Changed
 - Enable full printing of construct strings

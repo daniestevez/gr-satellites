@@ -613,6 +613,18 @@ overwrite or append to the output file.
 The KISS files produced by the KISS file sink store timestamps as described in the
 :ref:`KISS output` of the ``gr_satellites`` command line tool.
 
+KISS server sink
+""""""""""""""""
+
+The KISS server sink spawns a TCP server that sends decoded PDUs to connected
+clients using the `KISS protocol`_. A number of tools can act as clients using
+this protocol.
+
+The KISS file sink block has a *Port* option to specify the TCP port to listen on.
+
+The KISS server sink sends timestamps as described in the
+:ref:`KISS output` of the ``gr_satellites`` command line tool.
+
 .. _File and Image receivers:
 
 File and Image receivers
