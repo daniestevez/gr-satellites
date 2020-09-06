@@ -3,6 +3,10 @@ label: KISS Server Sink
 category: '[Satellites]/Data sinks'
 
 parameters:
+-   id: address
+    label: Address
+    dtype: string
+    default: '""'
 -   id: port
     label: Port
     dtype: int
@@ -19,7 +23,7 @@ inputs:
 
 templates:
     imports: import satellites.components.datasinks
-    make: satellites.components.datasinks.kiss_server_sink(${port}, options=${options})
+    make: satellites.components.datasinks.kiss_server_sink(${address}, ${port}, options=${options})
 
 documentation: |-
     Saves PDUs using the KISS protocol to clients connected to this TCP server
@@ -28,6 +32,7 @@ documentation: |-
         PDUs with packets
 
     Parameters:
+        Address: Address to bind to. Use "" to bind on all addresses.
         Port: Port to listen on
         Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 

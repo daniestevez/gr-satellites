@@ -127,7 +127,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
             if options is not None and options.kiss_out:
                 self._additional_datasinks.append(datasinks.kiss_file_sink(options.kiss_out, bool(options.kiss_append)))
             if options is not None and options.kiss_server:
-                self._additional_datasinks.append(datasinks.kiss_server_sink(options.kiss_server))
+                self._additional_datasinks.append(datasinks.kiss_server_sink(options.kiss_server_address, options.kiss_server))
             if options is not None and options.zmq_pub:
                 self._additional_datasinks.append(zeromq.pub_msg_sink(options.zmq_pub))
             if config.getboolean('Groundstation', 'submit_tlm'):

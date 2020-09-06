@@ -21,17 +21,18 @@ class kiss_server_sink(gr.hier_block2):
     TCP server
 
     Args:
+        address: address to bind to, use '' for all (str)
         port: port to listen on (int)
         options: options from argparse
     """
-    def __init__(self, port, options = None):
+    def __init__(self, address, port, options = None):
         gr.hier_block2.__init__(self, "kiss_file_sink",
             gr.io_signature(0, 0, 0),
             gr.io_signature(0, 0, 0))
         self.message_port_register_hier_in('in')
 
         self.kiss = pdu_to_kiss(include_timestamp = True)
-        self.server = blocks.socket_pdu('TCP_SERVER', '' , port, 10000, False)
+        self.server = blocks.socket_pdu('TCP_SERVER', address, port, 10000, False)
 
         self.msg_connect((self, 'in'), (self.kiss, 'in'))
         self.msg_connect((self.kiss, 'out'), (self.server, 'pdus'))
