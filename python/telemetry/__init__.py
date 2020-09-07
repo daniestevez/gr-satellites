@@ -47,3 +47,4 @@ from .snet import snet
 from .suomi100 import suomi100
 from .by70_1 import taurus1
 from .trisat import trisat
+from .upmsat_2 import upmsat_2
