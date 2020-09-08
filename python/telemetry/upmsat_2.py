@@ -31,11 +31,9 @@ class TemperatureAdapter(Adapter):
     def __init__(self, *args, **kwargs):
         return Adapter.__init__(self, *args, **kwargs)
     def _decode(self, obj, context, path = None):
-        return 0,336*(obj - 1708.1) if obj >= 1707.0 else \
+        return 0.336*(obj - 1708.1) if obj >= 1707.0 else \
           6.41 * (4.15 - math.sqrt(17.24 - 0.31 * (obj - 1712.2)))
-# temporarily disabled since the formula above does not seem correct
-#TemperatureAdapter(BitsInteger(12))
-Temperature = BitsInteger(12)
+Temperature = TemperatureAdapter(BitsInteger(12))
           
 class BatteryTempAdapter(Adapter):
     def __init__(self, *args, **kwargs):
