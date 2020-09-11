@@ -1,5 +1,5 @@
 name: AmicalSat
-norad: 99836
+norad: 46287
 data:
   &tlm Telemetry:
     telemetry: amicalsat
