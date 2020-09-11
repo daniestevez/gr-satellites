@@ -1,5 +1,5 @@
 name: TRISAT
-norad: 99798
+norad: 46280
 data:
   &tlm Telemetry:
     telemetry: trisat
