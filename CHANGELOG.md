@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for TRISAT
 - TCP KISS server and ZMQ PUB socket to send decoded frames	
 - CSP fragmentation flag
+- SatYAML file for ION-MK01
 
 ## Changed
 - Enable full printing of construct strings
