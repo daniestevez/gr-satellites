@@ -13,13 +13,19 @@
 
 #include <satellites/ao40_rs_decoder.h>
 
+#include <array>
+
 namespace gr {
   namespace satellites {
 
     class ao40_rs_decoder_impl : public ao40_rs_decoder
     {
      private:
-      bool d_verbose;
+      const bool d_verbose;
+      constexpr static std::size_t d_k = 128;
+      constexpr static std::size_t d_n = d_k + 32;
+      std::array<uint8_t, d_n> d_scratch;
+      std::array<uint8_t, 2 * d_k> d_message;
 
      public:
       ao40_rs_decoder_impl(bool verbose);

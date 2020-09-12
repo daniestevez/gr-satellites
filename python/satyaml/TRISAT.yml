@@ -1,0 +1,14 @@
+name: TRISAT
+norad: 46280
+data:
+  &tlm Telemetry:
+    telemetry: trisat
+transmitters:
+  9766 baud FSK downlink:
+    frequency: 435.6125e+6
+    modulation: FSK
+    baudrate: 9766
+    framing: NASA-DSN Concatenated dual
+    frame size: 223
+    data:
+    - *tlm

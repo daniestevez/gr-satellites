@@ -16,10 +16,9 @@
 
 #include <stdint.h>
 
-#define MSG_LEN 64
-#define HEADER_LEN 2
-#define LEN_BYTE 0
-#define CRC_BYTE 1
+#include <array>
+
+#include "rs.h"
 
 namespace gr {
   namespace satellites {
@@ -27,9 +26,15 @@ namespace gr {
     class nusat_decoder_impl : public nusat_decoder
     {
      private:
+      constexpr static size_t d_msg_len = 64;
+      constexpr static size_t d_header_len = 2;
+      constexpr static size_t d_len_byte = 0;
+      constexpr static size_t d_crc_byte = 1;
       static const uint8_t d_scrambler_sequence[];
       static const uint_fast8_t crc8_table[];
       void *d_rs;
+      std::array<uint8_t, MAX_FRAME_LEN> d_data;
+      
       uint_fast8_t crc8(const uint8_t *data, size_t data_len);
       
      public:

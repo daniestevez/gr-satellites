@@ -16,7 +16,11 @@ object, but in more complex cases, another class supporting the
 .parse method and relying on construct is used.
 '''
 
+import construct
+construct.setGlobalPrintFullStrings(True)
+
 from .aausat4 import aausat4
+from .amicalsat import amicalsat
 from .au03 import au03
 from .ax25 import ax25
 from .by02 import by02
@@ -42,3 +46,5 @@ from .smogp import smogp_signalling
 from .snet import snet
 from .suomi100 import suomi100
 from .by70_1 import taurus1
+from .trisat import trisat
+from .upmsat_2 import upmsat_2

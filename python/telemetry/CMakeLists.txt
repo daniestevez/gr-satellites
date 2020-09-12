@@ -33,6 +33,7 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     aausat4.py
+    amicalsat.py
     au03.py
     ax25.py
     by02.py
@@ -55,6 +56,8 @@ GR_PYTHON_INSTALL(
     smogp.py
     snet.py
     suomi100.py
+    trisat.py
+    upmsat_2.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/telemetry
 )
 

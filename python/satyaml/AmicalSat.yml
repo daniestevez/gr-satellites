@@ -1,0 +1,15 @@
+name: AmicalSat
+norad: 46287
+data:
+  &tlm Telemetry:
+    telemetry: amicalsat
+transmitters:
+  1k2 AFSK telemetry downlink:
+    frequency: 436.100e+6
+    modulation: AFSK
+    baudrate: 1200
+    af_carrier: 1700
+    deviation: 500
+    framing: AX.25
+    data:
+    - *tlm

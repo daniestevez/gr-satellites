@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2019 Daniel Estevez <daniel@destevez.net>
+ * Copyright 2019-2020 Daniel Estevez <daniel@destevez.net>
  *
  * This file is part of gr-satellites
  *
@@ -13,16 +13,17 @@
 
 #include <satellites/distributed_syncframe_soft.h>
 
+#include <vector>
+
 namespace gr {
   namespace satellites {
 
     class distributed_syncframe_soft_impl : public distributed_syncframe_soft
     {
      private:
-      int d_threshold;
-      int d_synclen;
-      int d_step;
-      uint8_t *d_syncword;
+      const size_t d_threshold;
+      const size_t d_step;
+      std::vector<uint8_t> d_syncword;
             
      public:
       distributed_syncframe_soft_impl(int threshold, const std::string& syncword, int step);

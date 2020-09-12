@@ -8,7 +8,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-from gnuradio import gr
+from gnuradio import gr, zeromq
 from ..components import demodulators
 from ..components import deframers
 from ..components import datasinks
@@ -126,6 +126,10 @@ class gr_satellites_flowgraph(gr.hier_block2):
                     self._datasinks[key] = datasink
             if options is not None and options.kiss_out:
                 self._additional_datasinks.append(datasinks.kiss_file_sink(options.kiss_out, bool(options.kiss_append)))
+            if options is not None and options.kiss_server:
+                self._additional_datasinks.append(datasinks.kiss_server_sink(options.kiss_server_address, options.kiss_server))
+            if options is not None and options.zmq_pub:
+                self._additional_datasinks.append(zeromq.pub_msg_sink(options.zmq_pub))
             if config.getboolean('Groundstation', 'submit_tlm'):
                 self._additional_datasinks.extend(self.get_telemetry_submitters(satyaml, config))
             self._transports = dict()
@@ -280,6 +284,10 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'CCSDS Concatenated dual' : set_options(deframers.ccsds_concatenated_deframer, dual_basis = True),
         'CCSDS Concatenated differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True),
         'CCSDS Concatenated dual differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True, dual_basis = True),
+        'NASA-DSN Concatenated' : set_options(deframers.ccsds_concatenated_deframer, nasa_dsn = True),
+        'NASA-DSN Concatenated dual' : set_options(deframers.ccsds_concatenated_deframer, dual_basis = True, nasa_dsn = True),
+        'NASA-DSN Concatenated differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True, nasa_dsn = True),
+        'NASA-DSN Concatenated dual differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True, dual_basis = True, nasa_dsn = True),
         'CCSDS Reed-Solomon no-scrambler' : set_options(deframers.ccsds_rs_deframer, use_scrambler = False),
         'CCSDS Reed-Solomon dual no-scrambler' : set_options(deframers.ccsds_rs_deframer, dual_basis = True, use_scrambler = False),
         'CCSDS Reed-Solomon differential no-scrambler' : set_options(deframers.ccsds_rs_deframer, differential = True, use_scrambler = False),
@@ -288,6 +296,10 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'CCSDS Concatenated dual no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, dual_basis = True, use_scrambler = False),
         'CCSDS Concatenated differential no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, differential = True, use_scrambler = False),
         'CCSDS Concatenated dual differential no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, differential = True, dual_basis = True, use_scrambler = False),
+        'NASA-DSN Concatenated no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, use_scrambler = False, nasa_dsn = True),
+        'NASA-DSN Concatenated dual no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, dual_basis = True, use_scrambler = False, nasa_dsn = True),
+        'NASA-DSN Concatenated differential no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, differential = True, use_scrambler = False, nasa_dsn = True),
+        'NASA-DSN Concatenated dual differential no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, differential = True, dual_basis = True, use_scrambler = False, nasa_dsn = True),
         'LilacSat-1' : deframers.lilacsat_1_deframer,
         'AAUSAT-4' : deframers.aausat4_deframer,
         'NGHam' : set_options(deframers.ngham_deframer, decode_rs = True),

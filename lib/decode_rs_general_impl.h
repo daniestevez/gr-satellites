@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2018 Daniel Estevez <daniel@destevez.net>
+ * Copyright 2018,2020 Daniel Estevez <daniel@destevez.net>
  *
  * This file is part of gr-satellites
  *
@@ -13,15 +13,20 @@
 
 #include <satellites/decode_rs_general.h>
 
+#include <array>
+
+#include "rs.h"
+
 namespace gr {
   namespace satellites {
 
     class decode_rs_general_impl : public decode_rs_general
     {
      private:
-      bool d_verbose;
+      const bool d_verbose;
       void *d_rs;
-      int d_nroots;
+      const unsigned d_nroots;
+      std::array<uint8_t, MAX_FRAME_LEN> d_data;
 
      public:
       decode_rs_general_impl(int gfpoly, int fcr, int prim, int nroots, bool verbose);

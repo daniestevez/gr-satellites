@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2016 Daniel Estevez <daniel@destevez.net>
+ * Copyright 2016,2020 Daniel Estevez <daniel@destevez.net>
  *
  * This file is part of gr-satellites
  *
@@ -39,11 +39,10 @@ namespace gr {
     decode_rs_impl::decode_rs_impl(bool verbose, int basis)
       : gr::block("decode_rs",
 		  gr::io_signature::make(0, 0, 0),
-		  gr::io_signature::make(0, 0, 0))
+		  gr::io_signature::make(0, 0, 0)),
+	d_verbose(verbose),
+	d_basis(basis)
     {
-      d_verbose = verbose;
-      d_basis = basis;
-
       message_port_register_out(pmt::mp("out"));
       message_port_register_in(pmt::mp("in"));
       set_msg_handler(pmt::mp("in"),
@@ -73,31 +72,29 @@ namespace gr {
 
     void
     decode_rs_impl::msg_handler (pmt::pmt_t pmt_msg) {
-      pmt::pmt_t msg = pmt::cdr(pmt_msg);
-      uint8_t data[MAX_FRAME_LEN];
-      int rs_res;
-      int frame_len = pmt::length(msg);
-      size_t offset(0);
+      size_t length(0);
+      auto msg = pmt::u8vector_elements(pmt::cdr(pmt_msg), length);
+      int rs_res;     
 
-      if (frame_len <= 32 || frame_len > MAX_FRAME_LEN) {
+      if (length <= PARITY_BYTES || length > d_data.size()) {
       	if (d_verbose) {
-	  std::printf("Reed-Solomon decoder: invalid frame length %d\n", frame_len);
-	  return;
+	  std::printf("Reed-Solomon decoder: invalid frame length %ld\n", (long) length);
 	}
+	return;
       }
       
-      memcpy(data, pmt::uniform_vector_elements(msg, offset), frame_len);
+      memcpy(d_data.data(), msg, length);
 
       if (d_basis == BASIS_CONVENTIONAL) {
-	rs_res = decode_rs_8(data, NULL, 0, MAX_FRAME_LEN - frame_len);
+	rs_res = decode_rs_8(d_data.data(), NULL, 0, MAX_FRAME_LEN - length);
       }
       else {
-	rs_res = decode_rs_ccsds(data, NULL, 0, MAX_FRAME_LEN - frame_len);
+	rs_res = decode_rs_ccsds(d_data.data(), NULL, 0, MAX_FRAME_LEN - length);
       }
 
       // Send via GNUradio message if RS ok
       if (rs_res >= 0) {
-	frame_len -= 32;
+	length -= PARITY_BYTES;
 
 	if (d_verbose) {
 	  std::printf("Reed-Solomon decode OK. Bytes corrected: %d.\n", rs_res);
@@ -106,7 +103,7 @@ namespace gr {
 	// Send by GNUradio message
 	message_port_pub(pmt::mp("out"),
 			 pmt::cons(pmt::PMT_NIL,
-				   pmt::init_u8vector(frame_len, data)));
+				   pmt::init_u8vector(length, d_data.data())));
       }
       else if (d_verbose) {
 	std::printf("Reed-Solomon decode failed.\n");

@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2017 Daniel Estevez <daniel@destevez.net>
+ * Copyright 2017,2020 Daniel Estevez <daniel@destevez.net>
  *
  * This file is part of gr-satellites
  *
@@ -113,21 +113,15 @@ namespace gr {
     
     void
     nusat_decoder_impl::msg_handler (pmt::pmt_t pmt_msg) {
-      pmt::pmt_t msg = pmt::cdr(pmt_msg);
-      uint8_t data[MAX_FRAME_LEN];
-      uint8_t * const packet = data + HEADER_LEN;
-      int length;
-      int msg_length;
-      int i;
-      size_t offset(0);
-      int rs_res;
+      size_t length(0);
+      auto msg = pmt::u8vector_elements(pmt::cdr(pmt_msg), length);
 
-      memset(data, 0, sizeof(data));
-      msg_length = std::min(pmt::length(msg), sizeof(data));
-      memcpy(data, pmt::uniform_vector_elements(msg, offset), msg_length);
+      d_data.fill(0);
+      auto msg_length = std::min(length, d_data.size());
+      memcpy(d_data.data(), msg, msg_length);
 
       // Reed-Solomon decoding
-      rs_res = decode_rs_char(d_rs, data, NULL, 0);
+      auto rs_res = decode_rs_char(d_rs, d_data.data(), NULL, 0);
       if (rs_res < 0) {
 	GR_LOG_INFO(d_logger, "Reed-Solomon decoding failed");
 	return;
@@ -136,19 +130,20 @@ namespace gr {
 	GR_LOG_INFO(d_logger, "Reed-Solomon decoding OK");
       }
             
-      length = data[LEN_BYTE];
-      if (length >= msg_length - HEADER_LEN) {
+      length = d_data[d_len_byte];
+      if (length >= msg_length - d_header_len) {
 	GR_LOG_INFO(d_logger, "Length field corrupted");
 	return;
       }
 
+      auto packet = &d_data[d_header_len];
       // Descramble
-      for (i = 0; i < length; i++) {
+      for (size_t i = 0; i < length; ++i) {
 	packet[i] ^= d_scrambler_sequence[i];
       }
 
       // Compute CRC-8
-      if (crc8(packet, length) != data[CRC_BYTE]) {
+      if (crc8(packet, length) != d_data[d_crc_byte]) {
 	GR_LOG_INFO(d_logger, "CRC-8 does not match");
 	return;
       }

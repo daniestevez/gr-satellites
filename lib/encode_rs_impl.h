@@ -13,13 +13,18 @@
 
 #include <satellites/encode_rs.h>
 
+#include <array>
+
+#include "rs.h"
+
 namespace gr {
   namespace satellites {
 
     class encode_rs_impl : public encode_rs
     {
      private:
-      int d_basis;
+      const int d_basis;
+      std::array<uint8_t, MAX_FRAME_LEN> d_data;
 
      public:
       encode_rs_impl(int basis);

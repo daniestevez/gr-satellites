@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2019 Daniel Estevez <daniel@destevez.net>
+ * Copyright 2019-2020 Daniel Estevez <daniel@destevez.net>
  *
  * This file is part of gr-satellites
  *
@@ -13,15 +13,22 @@
 
 #include <satellites/decode_rs_interleaved.h>
 
+#include <array>
+#include <vector>
+
+#include "rs.h"
+
 namespace gr {
   namespace satellites {
 
     class decode_rs_interleaved_impl : public decode_rs_interleaved
     {
      private:
-      bool d_verbose;
-      int d_basis;
-      int d_codewords;
+      const bool d_verbose;
+      const int d_basis;
+      const size_t d_codewords;
+      std::array<uint8_t, MAX_FRAME_LEN> d_codeword;
+      std::vector<uint8_t> d_out;
 
      public:
       decode_rs_interleaved_impl(bool verbose, int basis, int codewords);

@@ -29,11 +29,16 @@ class SatYAML:
                 'CCSDS Reed-Solomon', 'CCSDS Reed-Solomon dual', 'CCSDS Reed-Solomon differential',\
                 'CCSDS Reed-Solomon no-scrambler', 'CCSDS Reed-Solomon dual no-scrambler',\
                 'CCSDS Reed-Solomon differential no-scrambler',\
-                'CCSDS Reed-Solomon dual differential', 'CCSDS Concatenated', 'CCSDS Concatenated dual',\
+                'CCSDS Reed-Solomon dual differential', \
+                'CCSDS Concatenated', 'CCSDS Concatenated dual',\
+                'NASA-DSN Concatenated', 'NASA-DSN Concatenated dual',\
                 'CCSDS Reed-Solomon dual differential no-scrambler',\
                 'CCSDS Concatenated no-scrambler', 'CCSDS Concatenated dual no-scrambler',\
                 'CCSDS Concatenated differential', 'CCSDS Concatenated dual differential',\
                 'CCSDS Concatenated differential no-scrambler', 'CCSDS Concatenated dual differential no-scrambler',\
+                'NASA-DSN Concatenated no-scrambler', 'NASA-DSN Concatenated dual no-scrambler',\
+                'NASA-DSN Concatenated differential', 'NASA-DSN Concatenated dual differential',\
+                'NASA-DSN Concatenated differential no-scrambler', 'NASA-DSN Concatenated dual differential no-scrambler',\
                 'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon', 'SMOG-P RA',\
                 'SMOG-P Signalling', 'OPS-SAT', 'U482C', 'UA01']
     transports = ['KISS', 'KISS no control byte', 'KISS KS-1Q']

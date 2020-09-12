@@ -17,16 +17,23 @@
 #define RS_LEN 255
 #define HEADER_LEN 3
 
+#include <array>
+
 namespace gr {
   namespace satellites {
 
     class u482c_decode_impl : public u482c_decode
     {
      private:
-      bool d_verbose;
-      char d_ccsds_sequence[RS_LEN];
+      constexpr static size_t d_rs_len = 255;
+      constexpr static size_t d_header_len = 3;
+      const bool d_verbose;
+      std::array<char, d_rs_len> d_ccsds_sequence;
+      std::array<uint8_t, d_header_len + d_rs_len> d_data;
       void *d_vp;
-      int d_viterbi, d_scrambler, d_rs;
+      const int d_viterbi;
+      const int d_scrambler;
+      const int d_rs;
       
      public:
       u482c_decode_impl(bool verbose, int viterbi, int scrambler, int rs);

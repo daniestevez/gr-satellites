@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2018 Daniel Estevez <daniel@destevez.net>
+ * Copyright 2018,2020 Daniel Estevez <daniel@destevez.net>
  *
  * This file is part of gr-satellites
  *
@@ -31,10 +31,10 @@ namespace gr {
     descrambler308_impl::descrambler308_impl()
       : gr::sync_block("descrambler308",
               gr::io_signature::make(1, 1, sizeof(unsigned char)),
-              gr::io_signature::make(1, 1, sizeof(unsigned char)))
+              gr::io_signature::make(1, 1, sizeof(unsigned char))),
+	d_counter(0),
+        d_shift_register(0)
     {
-      d_counter = 0;
-      d_shift_register = 0;
     }
 
     /*

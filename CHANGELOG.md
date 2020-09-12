@@ -6,6 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.4.0] - 2020-09-12
+
+### Added
+- SatYAML file for STRAND-1
+- Audio source in gr_satellites
+- SatYAML file for AmicalSat
+- SatYAML file for UPMSat 2
+- Support for NASA-DSN convention in CCSDS concatenated frames
+- Support for TRISAT
+- TCP KISS server and ZMQ PUB socket to send decoded frames	
+- CSP fragmentation flag
+- SatYAML file for ION-MK01
+
+### Changed
+- Enable full printing of construct strings
+
 ## [3.3.0] - 2020-08-11
 
 ### Added
@@ -246,7 +262,8 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.3.0...master
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.4.0...master
+[3.4.0]: https://github.com/daniestevez/gr-satellites/compare/v3.3.0...v3.4.0
 [3.3.0]: https://github.com/daniestevez/gr-satelliites/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/daniestevez/gr-satellites/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/daniestevez/gr-satellites/compare/v3.0.0...v3.1.0

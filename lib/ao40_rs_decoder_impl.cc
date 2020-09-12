@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2017 Daniel Estevez <daniel@destevez.net>
+ * Copyright 2017,2020 Daniel Estevez <daniel@destevez.net>
  *
  * This file is part of gr-satellites
  *
@@ -40,10 +40,9 @@ namespace gr {
     ao40_rs_decoder_impl::ao40_rs_decoder_impl(bool verbose)
       : gr::block("ao40_rs_decoder",
 	      gr::io_signature::make(0, 0, 0),
-              gr::io_signature::make(0, 0, 0))
+	      gr::io_signature::make(0, 0, 0)),
+	d_verbose(verbose)
     {
-      d_verbose = verbose;
-
       message_port_register_out(pmt::mp("out"));
       message_port_register_in(pmt::mp("in"));
       set_msg_handler(pmt::mp("in"),
@@ -74,30 +73,26 @@ namespace gr {
 
     void
     ao40_rs_decoder_impl::msg_handler (pmt::pmt_t pmt_msg) {
-      pmt::pmt_t msg = pmt::cdr(pmt_msg);
-      size_t offset(0);
-      const uint8_t *data = (const uint8_t *) pmt::uniform_vector_elements(msg, offset);
-      uint8_t scratch[N];
-      uint8_t message[2*K];
-      int i;
+      size_t length(0);
+      auto data = pmt::u8vector_elements(pmt::cdr(pmt_msg), length);
       int rs_res[2];
 
-      if (pmt::length(msg) != 2*N) return;
+      if (length != 2 * d_n) return;
 
-      for (int dec = 0; dec < 2; dec++) {
-	for (i = 0; i < N; i++) {
-	  scratch[i] = data[2*i + dec];
+      for (size_t dec = 0; dec < 2; ++dec) {
+	for (size_t i = 0; i < d_scratch.size(); ++i) {
+	  d_scratch[i] = data[2*i + dec];
 	}
-	rs_res[dec] = decode_rs_8(scratch, NULL, 0, 255 - N);
-	if (rs_res[0] == -1) {
+	rs_res[dec] = decode_rs_8(d_scratch.data(), NULL, 0, 255 - d_n);
+	if (rs_res[dec] == -1) {
 	  if (d_verbose) {
-	    printf("Reed-Solomon decode failed (%dst decoder).\n", dec + 1);
+	    std::printf("Reed-Solomon decode failed (%dst decoder).\n", int(dec + 1));
 	  }
 	  return;
 	}
 	else {
-	  for (i = 0; i < K; i++) {
-	    message[2*i + dec] = scratch[i];
+	  for (size_t i = 0; i < d_k; ++i) {
+	    d_message[2*i + dec] = d_scratch[i];
 	  }
 	}
       }
@@ -108,7 +103,7 @@ namespace gr {
       
       message_port_pub(pmt::mp("out"),
 		       pmt::cons(pmt::PMT_NIL,
-				 pmt::init_u8vector(2*K, message)));
+				 pmt::init_u8vector(d_message.size(), d_message.data())));
       
     }
 

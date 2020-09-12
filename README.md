@@ -1,7 +1,7 @@
 # gr-satellites
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/daniestevez/gr-satellites)](https://github.com/daniestevez/gr-satellites/releases/latest)
-[![Conda](https://img.shields.io/conda/v/petrush/gnuradio-satellites)](https://anaconda.org/petrush/gnuradio-satellites)
+[![Conda](https://img.shields.io/conda/v/conda-forge/gnuradio-satellites)](https://anaconda.org/conda-forge/gnuradio-satellites)
 [![Read the Docs](https://img.shields.io/readthedocs/gr-satellites)](https://gr-satellites.readthedocs.io/)
 [![GitHub license](https://img.shields.io/github/license/daniestevez/gr-satellites)](https://github.com/daniestevez/gr-satellites/blob/master/LICENSE)
 

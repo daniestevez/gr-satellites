@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2019 Daniel Estevez <daniel@destevez.net>
+ * Copyright 2019-2020 Daniel Estevez <daniel@destevez.net>
  *
  * This file is part of gr-satellites
  *
@@ -13,16 +13,19 @@
 
 #include <satellites/matrix_deinterleaver_soft.h>
 
+#include <vector>
+
 namespace gr {
   namespace satellites {
 
     class matrix_deinterleaver_soft_impl : public matrix_deinterleaver_soft
     {
      private:
-      int d_rows;
-      int d_cols;
-      int d_output_size;
-      int d_output_skip;
+      const size_t d_rows;
+      const size_t d_cols;
+      const size_t d_output_size;
+      const size_t d_output_skip;
+      std::vector<float> d_out;
 
      public:
       matrix_deinterleaver_soft_impl(int rows, int cols, int output_size, int output_skip);

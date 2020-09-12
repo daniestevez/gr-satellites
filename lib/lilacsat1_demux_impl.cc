@@ -42,15 +42,13 @@ namespace gr {
     lilacsat1_demux_impl::lilacsat1_demux_impl(std::string tag)
       : gr::sync_block("lilacsat1_demux",
               gr::io_signature::make(1, 1, sizeof(uint8_t)),
-              gr::io_signature::make(0, 0, 0))
+	      gr::io_signature::make(0, 0, 0)),
+	d_position(-1),
+	d_tag(pmt::string_to_symbol(tag))
     {
-      d_position = -1;
-      d_tag = pmt::string_to_symbol(tag);
-      d_frame = new uint8_t[FRAME_LEN];
-      memset(d_frame, 0, FRAME_LEN);
-      d_codec2 = new uint8_t[CODEC2_FRAME_LEN];
-      memset(d_codec2, 0, CODEC2_FRAME_LEN);
-
+      d_frame.fill(0);
+      d_codec2.fill(0);
+      
       message_port_register_out(pmt::mp("frame"));
       message_port_register_out(pmt::mp("codec2"));
     }
@@ -60,7 +58,6 @@ namespace gr {
      */
     lilacsat1_demux_impl::~lilacsat1_demux_impl()
     {
-      delete[] d_frame;
     }
 
     int
@@ -68,53 +65,51 @@ namespace gr {
         gr_vector_const_void_star &input_items,
         gr_vector_void_star &output_items)
     {
-      int i;
       const uint8_t *in = (const uint8_t *) input_items[0];
       std::vector<tag_t> tags;
 
-      for (i = 0; i < noutput_items; i++) {
+      for (int i = 0; i < noutput_items; ++i) {
 	get_tags_in_window(tags, 0, i, i+1, d_tag);
 
 	if (!tags.empty()) {
 	  d_position = 0;
 	}
 
-	if (d_position == PACKET_LEN*BITS_PER_BYTE) {
+	if (d_position == d_packet_len * d_bits_per_byte) {
 	  d_position = -1;
 
 	  message_port_pub(pmt::mp("frame"),
 			   pmt::cons(pmt::PMT_NIL,
-				     pmt::init_u8vector(FRAME_LEN, d_frame)));
-	  memset(d_frame, 0, FRAME_LEN);
+				     pmt::init_u8vector(d_frame.size(), d_frame.data())));
+	  d_frame.fill(0);
 	}
 
 	if (d_position == -1) continue;
 
-	int base = d_position/BITS_PER_BYTE + HEADER_LEN;
-	int bit = BITS_PER_BYTE - 1 - d_position % BITS_PER_BYTE;
-	int idx = base % CHUNK_LEN;
-	if (idx >= CHUNK_LEN - CODEC2_FRAME_LEN) {
-	  int byte = idx - (CHUNK_LEN - CODEC2_FRAME_LEN);
-	  assert(byte < CODEC2_FRAME_LEN);
-	  d_codec2[byte] |= (in[i] & 1) << bit;
+	auto base = d_position/d_bits_per_byte + d_header_len;
+	auto bit = d_bits_per_byte - 1 - d_position % d_bits_per_byte;
+	auto idx = base % d_chunk_len;
+	if (idx >= d_chunk_len - d_codec2_frame_len) {
+	  auto byte = idx - (d_chunk_len - d_codec2_frame_len);
+	  d_codec2.at(byte) |= (in[i] & 1) << bit;
 
-	  if ((byte == CODEC2_FRAME_LEN - 1) && (bit == 0)) {
+	  if ((byte == d_codec2.size() - 1) && (bit == 0)) {
 	    message_port_pub(pmt::mp("codec2"),
 			     pmt::cons(pmt::PMT_NIL,
-				       pmt::init_u8vector(CODEC2_FRAME_LEN, d_codec2)));
-	    memset(d_codec2, 0, CODEC2_FRAME_LEN);
+				       pmt::init_u8vector(d_codec2.size(), d_codec2.data())));
+	    d_codec2.fill(0);
 	  }
 	}
-	else if (idx < CHUNK_LEN - CODEC2_FRAME_LEN) {
-	  int byte = (base / CHUNK_LEN) * (CHUNK_LEN - CODEC2_FRAME_LEN) + idx - HEADER_LEN;
-	  assert(byte < FRAME_LEN);
-	  d_frame[byte] |= (in[i] & 1) << bit;
+	else if (idx < d_chunk_len - d_codec2_frame_len) {
+	  auto byte = (base / d_chunk_len) * (d_chunk_len - d_codec2_frame_len)
+	    + idx - d_header_len;
+	  d_frame.at(byte) |= (in[i] & 1) << bit;
 	}
 
-	d_position++;
+	++d_position;
       }
 
-      return i;
+      return noutput_items;
     }
 
   } /* namespace satellites */

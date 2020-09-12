@@ -43,13 +43,22 @@ list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
 # Set the version information here
 set(VERSION_MAJOR 3)
-set(VERSION_API 3)
+set(VERSION_API 4)
 set(VERSION_ABI 0)
 
 cmake_policy(SET CMP0011 NEW)
 
 # Enable generation of compile_commands.json for code completion engines
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Add warnings
+if (MSVC)
+    # warning level 4 and all warnings as errors
+    add_compile_options(/W4)
+else()
+    # lots of warnings and all warnings as errors
+    add_compile_options(-Wall -Wextra -Wno-unused-parameter)
+endif()
 
 ########################################################################
 # Compiler specific setup

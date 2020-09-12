@@ -53,8 +53,8 @@ namespace gr {
                         io_signature::make(1, 1, sizeof(char))),
       d_header_length(length_field_size),
       d_mtu(max_packet_size),
-      d_endianness(endianness),
       d_use_golay(use_golay),
+      d_endianness(endianness),
       d_have_sync(false)
     {
       d_sync_tag = pmt::string_to_symbol(sync_key);
@@ -108,7 +108,7 @@ namespace gr {
       int packet_len = 0;
       std::vector<tag_t> tags;
 
-      register uint32_t golay_field;
+      uint32_t golay_field;
       int golay_res;
 
       if (d_have_sync) {

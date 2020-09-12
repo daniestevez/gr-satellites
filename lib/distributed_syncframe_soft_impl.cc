@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2019 Daniel Estevez <daniel@destevez.net>
+ * Copyright 2019-2020 Daniel Estevez <daniel@destevez.net>
  *
  * This file is part of gr-satellites
  *
@@ -31,19 +31,14 @@ namespace gr {
     distributed_syncframe_soft_impl::distributed_syncframe_soft_impl(int threshold, const std::string& syncword, int step)
       : gr::sync_block("distributed_syncframe_soft",
               gr::io_signature::make(1, 1, sizeof(float)),
-              gr::io_signature::make(0, 0, 0))
+	      gr::io_signature::make(0, 0, 0)),
+	d_threshold(threshold),
+	d_step(step)
     {
-      d_threshold = threshold;
-      d_step = step;
-      d_synclen = syncword.length();
-
-      d_syncword = new uint8_t [d_synclen];
-      
-      for (int i = 0; i < d_synclen; i++) {
-	d_syncword[i] = syncword[i] & 1; // look at LSB only, as in correlate_access_code_bb_impl.cc
-      }
+      // look at LSB only, as in correlate_access_code_bb_impl.cc
+      for (auto s : syncword) d_syncword.push_back(s & 1);
             
-      set_history(d_synclen * d_step);
+      set_history(d_syncword.size() * d_step);
 
       message_port_register_out(pmt::mp("out"));
     }
@@ -60,20 +55,20 @@ namespace gr {
         gr_vector_const_void_star &input_items,
         gr_vector_void_star &output_items)
     {
-      int match;
+      size_t match;
 
       const float *in = (const float *) input_items[0];
 
       for (int i = 0; i < noutput_items; i++) {
 	match = 0;
-	for (int j = 0; j < d_synclen; j++) {
+	for (size_t j = 0; j < d_syncword.size(); ++j) {
 	  match += (in[i + j * d_step] < 0.0) ^ d_syncword[j];
 	}
-	if (match >= d_synclen - d_threshold) {
+	if (match >= d_syncword.size() - d_threshold) {
 	  // sync found
 	  message_port_pub(pmt::mp("out"),
 			   pmt::cons(pmt::PMT_NIL,
-				     pmt::init_f32vector(d_synclen * d_step, in + i)));
+				     pmt::init_f32vector(d_syncword.size() * d_step, in + i)));
 	}
       }
 
