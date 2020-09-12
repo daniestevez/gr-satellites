@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CSP fragmentation flag
 - SatYAML file for ION-MK01
 
-## Changed
+### Changed
 - Enable full printing of construct strings
 
 ## [3.3.0] - 2020-08-11
