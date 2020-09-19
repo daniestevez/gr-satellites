@@ -7,12 +7,13 @@
  */
 typedef unsigned char data_t;
 
-static inline int mod255(int x){
-  while (x >= 255) {
-    x -= 255;
-    x = (x >> 8) + (x & 255);
-  }
-  return x;
+static inline int mod255(int x)
+{
+    while (x >= 255) {
+        x -= 255;
+        x = (x >> 8) + (x & 255);
+    }
+    return x;
 }
 #define MODNN(x) mod255(x)
 
@@ -30,4 +31,3 @@ extern data_t CCSDS_poly[];
 #define PRIM 11
 #define IPRIM 116
 #define PAD pad
-

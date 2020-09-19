@@ -16,27 +16,26 @@
 #include <satellites/descrambler308.h>
 
 namespace gr {
-  namespace satellites {
+namespace satellites {
 
-    class descrambler308_impl : public descrambler308
-    {
-     private:
-      uint32_t d_counter;
-      uint32_t d_shift_register;
-      unsigned char d_scramble_bit(unsigned char inbit);
+class descrambler308_impl : public descrambler308
+{
+private:
+    uint32_t d_counter;
+    uint32_t d_shift_register;
+    unsigned char d_scramble_bit(unsigned char inbit);
 
-     public:
-      descrambler308_impl();
-      ~descrambler308_impl();
+public:
+    descrambler308_impl();
+    ~descrambler308_impl();
 
-      // Where all the action really happens
-      int work(int noutput_items,
-         gr_vector_const_void_star &input_items,
-         gr_vector_void_star &output_items);
-    };
+    // Where all the action really happens
+    int work(int noutput_items,
+             gr_vector_const_void_star& input_items,
+             gr_vector_void_star& output_items);
+};
 
-  } // namespace satellites
+} // namespace satellites
 } // namespace gr
 
 #endif /* INCLUDED_SATELLITES_DESCRAMBLER308_IMPL_H */
-

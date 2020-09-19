@@ -11,34 +11,34 @@
 #ifndef INCLUDED_SATELLITES_AX100_DECODE_H
 #define INCLUDED_SATELLITES_AX100_DECODE_H
 
-#include <satellites/api.h>
 #include <gnuradio/block.h>
+#include <satellites/api.h>
 
 namespace gr {
-  namespace satellites {
+namespace satellites {
+
+/*!
+ * \brief <+description of block+>
+ * \ingroup satellites
+ *
+ */
+class SATELLITES_API ax100_decode : virtual public gr::block
+{
+public:
+    typedef boost::shared_ptr<ax100_decode> sptr;
 
     /*!
-     * \brief <+description of block+>
-     * \ingroup satellites
+     * \brief Return a shared_ptr to a new instance of satellites::ax100_decode.
      *
+     * To avoid accidental use of raw pointers, satellites::ax100_decode's
+     * constructor is in a private implementation
+     * class. satellites::ax100_decode::make is the public interface for
+     * creating new instances.
      */
-    class SATELLITES_API ax100_decode : virtual public gr::block
-    {
-     public:
-      typedef boost::shared_ptr<ax100_decode> sptr;
+    static sptr make(bool verbose);
+};
 
-      /*!
-       * \brief Return a shared_ptr to a new instance of satellites::ax100_decode.
-       *
-       * To avoid accidental use of raw pointers, satellites::ax100_decode's
-       * constructor is in a private implementation
-       * class. satellites::ax100_decode::make is the public interface for
-       * creating new instances.
-       */
-      static sptr make(bool verbose);
-    };
-
-  } // namespace satellites
+} // namespace satellites
 } // namespace gr
 
 #endif /* INCLUDED_SATELLITES_AX100_DECODE_H */

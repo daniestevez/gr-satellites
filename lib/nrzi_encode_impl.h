@@ -14,27 +14,24 @@
 #include <satellites/nrzi_encode.h>
 
 namespace gr {
-  namespace satellites {
+namespace satellites {
 
-    class nrzi_encode_impl : public nrzi_encode
-    {
-     private:
-      uint8_t d_last;
+class nrzi_encode_impl : public nrzi_encode
+{
+private:
+    uint8_t d_last;
 
-     public:
-      nrzi_encode_impl();
-      ~nrzi_encode_impl();
+public:
+    nrzi_encode_impl();
+    ~nrzi_encode_impl();
 
-      // Where all the action really happens
-      int work(
-              int noutput_items,
-              gr_vector_const_void_star &input_items,
-              gr_vector_void_star &output_items
-      );
-    };
+    // Where all the action really happens
+    int work(int noutput_items,
+             gr_vector_const_void_star& input_items,
+             gr_vector_void_star& output_items);
+};
 
-  } // namespace satellites
+} // namespace satellites
 } // namespace gr
 
 #endif /* INCLUDED_SATELLITES_NRZI_ENCODE_IMPL_H */
-

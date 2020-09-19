@@ -18,31 +18,30 @@
 #include "rs.h"
 
 namespace gr {
-  namespace satellites {
+namespace satellites {
 
-    class encode_rs_impl : public encode_rs
-    {
-     private:
-      const int d_basis;
-      std::array<uint8_t, MAX_FRAME_LEN> d_data;
+class encode_rs_impl : public encode_rs
+{
+private:
+    const int d_basis;
+    std::array<uint8_t, MAX_FRAME_LEN> d_data;
 
-     public:
-      encode_rs_impl(int basis);
-      ~encode_rs_impl();
+public:
+    encode_rs_impl(int basis);
+    ~encode_rs_impl();
 
-      // Where all the action really happens
-      void forecast (int noutput_items, gr_vector_int &ninput_items_required);
+    // Where all the action really happens
+    void forecast(int noutput_items, gr_vector_int& ninput_items_required);
 
-      int general_work(int noutput_items,
-           gr_vector_int &ninput_items,
-           gr_vector_const_void_star &input_items,
-           gr_vector_void_star &output_items);
+    int general_work(int noutput_items,
+                     gr_vector_int& ninput_items,
+                     gr_vector_const_void_star& input_items,
+                     gr_vector_void_star& output_items);
 
-      void msg_handler(pmt::pmt_t pmt_msg);
-    };
+    void msg_handler(pmt::pmt_t pmt_msg);
+};
 
-  } // namespace satellites
+} // namespace satellites
 } // namespace gr
 
 #endif /* INCLUDED_SATELLITES_ENCODE_RS_IMPL_H */
-

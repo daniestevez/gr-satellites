@@ -11,35 +11,34 @@
 #ifndef INCLUDED_SATELLITES_U482C_DECODE_H
 #define INCLUDED_SATELLITES_U482C_DECODE_H
 
-#include <satellites/api.h>
 #include <gnuradio/block.h>
+#include <satellites/api.h>
 
 namespace gr {
-  namespace satellites {
+namespace satellites {
+
+/*!
+ * \brief <+description of block+>
+ * \ingroup satellites
+ *
+ */
+class SATELLITES_API u482c_decode : virtual public gr::block
+{
+public:
+    typedef boost::shared_ptr<u482c_decode> sptr;
 
     /*!
-     * \brief <+description of block+>
-     * \ingroup satellites
+     * \brief Return a shared_ptr to a new instance of satellites::u482c_decode.
      *
+     * To avoid accidental use of raw pointers, satellites::u482c_decode's
+     * constructor is in a private implementation
+     * class. satellites::u482c_decode::make is the public interface for
+     * creating new instances.
      */
-    class SATELLITES_API u482c_decode : virtual public gr::block
-    {
-     public:
-      typedef boost::shared_ptr<u482c_decode> sptr;
+    static sptr make(bool verbose, int viterbi, int scrambler, int rs);
+};
 
-      /*!
-       * \brief Return a shared_ptr to a new instance of satellites::u482c_decode.
-       *
-       * To avoid accidental use of raw pointers, satellites::u482c_decode's
-       * constructor is in a private implementation
-       * class. satellites::u482c_decode::make is the public interface for
-       * creating new instances.
-       */
-      static sptr make(bool verbose, int viterbi, int scrambler, int rs);
-    };
-
-  } // namespace satellites
+} // namespace satellites
 } // namespace gr
 
 #endif /* INCLUDED_SATELLITES_U482C_DECODE_H */
-

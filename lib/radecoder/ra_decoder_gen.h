@@ -18,7 +18,10 @@
 extern "C" {
 #endif
 
-void ra_decoder_gen(struct ra_context *ctx, float *softbits, ra_word_t *packet, int passes);
+void ra_decoder_gen(struct ra_context* ctx,
+                    float* softbits,
+                    ra_word_t* packet,
+                    int passes);
 
 #ifdef __cplusplus
 }

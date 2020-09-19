@@ -11,35 +11,34 @@
 #ifndef INCLUDED_SATELLITES_DECODE_RS_INTERLEAVED_H
 #define INCLUDED_SATELLITES_DECODE_RS_INTERLEAVED_H
 
-#include <satellites/api.h>
 #include <gnuradio/block.h>
+#include <satellites/api.h>
 
 namespace gr {
-  namespace satellites {
+namespace satellites {
+
+/*!
+ * \brief <+description of block+>
+ * \ingroup satellites
+ *
+ */
+class SATELLITES_API decode_rs_interleaved : virtual public gr::block
+{
+public:
+    typedef boost::shared_ptr<decode_rs_interleaved> sptr;
 
     /*!
-     * \brief <+description of block+>
-     * \ingroup satellites
+     * \brief Return a shared_ptr to a new instance of satellites::decode_rs_interleaved.
      *
+     * To avoid accidental use of raw pointers, satellites::decode_rs_interleaved's
+     * constructor is in a private implementation
+     * class. satellites::decode_rs_interleaved::make is the public interface for
+     * creating new instances.
      */
-    class SATELLITES_API decode_rs_interleaved : virtual public gr::block
-    {
-     public:
-      typedef boost::shared_ptr<decode_rs_interleaved> sptr;
+    static sptr make(bool verbose, int basis, int codewords);
+};
 
-      /*!
-       * \brief Return a shared_ptr to a new instance of satellites::decode_rs_interleaved.
-       *
-       * To avoid accidental use of raw pointers, satellites::decode_rs_interleaved's
-       * constructor is in a private implementation
-       * class. satellites::decode_rs_interleaved::make is the public interface for
-       * creating new instances.
-       */
-      static sptr make(bool verbose, int basis, int codewords);
-    };
-
-  } // namespace satellites
+} // namespace satellites
 } // namespace gr
 
 #endif /* INCLUDED_SATELLITES_DECODE_RS_INTERLEAVED_H */
-
