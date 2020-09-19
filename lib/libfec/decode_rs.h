@@ -233,7 +233,7 @@
         }
         if (q != 0)
             continue; /* Not a root */
-            /* store root (index-form) and error location number */
+                      /* store root (index-form) and error location number */
 #if DEBUG >= 2
         printf("count %d root %d loc %d\n", count, i, k);
 #endif

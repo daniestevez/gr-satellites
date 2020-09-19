@@ -4,12 +4,12 @@
  * May be used under the terms of the GNU Lesser General Public License (LGPL)
  */
 
+#include <limits.h>
+#include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
-#include <stdbool.h>
 #include <string.h>
-#include <limits.h>
 
 #include "viterbi.h"
 
@@ -18,22 +18,31 @@
 #endif
 
 #ifdef __GNUC__
-#define likely(x)       __builtin_expect((x),1)
-#define unlikely(x)     __builtin_expect((x),0)
+#define likely(x) __builtin_expect((x), 1)
+#define unlikely(x) __builtin_expect((x), 0)
 #else
-#define likely(x)       (x)
-#define unlikely(x)     (x)
+#define likely(x) (x)
+#define unlikely(x) (x)
 #endif
 
-#define get_bit(_p, _n) (_p[(_n) / (uint8_t)BITS_PER_BYTE] >> ((uint8_t)BITS_PER_BYTE - 1 - ((_n) % (uint8_t)BITS_PER_BYTE)) & (uint8_t)0x01)
+#define get_bit(_p, _n)                                                   \
+    (_p[(_n) / (uint8_t)BITS_PER_BYTE] >>                                 \
+         ((uint8_t)BITS_PER_BYTE - 1 - ((_n) % (uint8_t)BITS_PER_BYTE)) & \
+     (uint8_t)0x01)
 
-typedef union { uint8_t w[64]; } metric_t;
-typedef union { uint8_t w[8];} decision_t;
-typedef union { uint8_t c[32]; } branchtab_t;
+typedef union {
+    uint8_t w[64];
+} metric_t;
+typedef union {
+    uint8_t w[8];
+} decision_t;
+typedef union {
+    uint8_t c[32];
+} branchtab_t;
 
-/* We use the CCSDS convention 
+/* We use the CCSDS convention
  * (see CCSDS 131.0-B-2 TM Synchronization and Channel Coding p3-2) */
-static int16_t polys[2] = {V27POLYB, -V27POLYA};
+static int16_t polys[2] = { V27POLYB, -V27POLYA };
 static bool init = false;
 
 static uint8_t partab[256];
@@ -41,12 +50,13 @@ static bool p_init;
 
 /* State info for Viterbi decoder instance */
 struct v27 {
-    metric_t metrics1;                  /* path metric buffer 1 */
-    metric_t metrics2;                  /* path metric buffer 2 */
-    decision_t *dp;                     /* Pointer to current decision */
-    metric_t *old_metrics,*new_metrics; /* Pointers to path metrics, swapped on every bit */
-    decision_t *decisions;              /* Beginning of decisions for block */
-    uint16_t dlen;                      /* Length of decisions array for block */
+    metric_t metrics1; /* path metric buffer 1 */
+    metric_t metrics2; /* path metric buffer 2 */
+    decision_t* dp;    /* Pointer to current decision */
+    metric_t *old_metrics,
+        *new_metrics;      /* Pointers to path metrics, swapped on every bit */
+    decision_t* decisions; /* Beginning of decisions for block */
+    uint16_t dlen;         /* Length of decisions array for block */
 };
 
 static branchtab_t branchtab[2];
@@ -94,9 +104,9 @@ static inline int parity(uint32_t x)
 }
 
 /* Initialize Viterbi decoder for start of new frame */
-int init_viterbi_packed(void *p, int starting_state)
+int init_viterbi_packed(void* p, int starting_state)
 {
-    struct v27 *vp = p;
+    struct v27* vp = p;
     int i;
 
     if (p == NULL)
@@ -109,7 +119,7 @@ int init_viterbi_packed(void *p, int starting_state)
     vp->new_metrics = &vp->metrics2;
     vp->dp = vp->decisions;
     vp->old_metrics->w[starting_state & 63] = 0; /* Bias known start state */
-    
+
     return 0;
 }
 
@@ -118,18 +128,20 @@ void set_viterbi_polynomial_packed(int16_t polys[2])
     int state;
 
     for (state = 0; state < 32; state++) {
-        branchtab[0].c[state] = (polys[0] < 0) ^ parity((2 * state) & abs(polys[0])) ? 1 : 0;
-        branchtab[1].c[state] = (polys[1] < 0) ^ parity((2 * state) & abs(polys[1])) ? 1 : 0;
+        branchtab[0].c[state] =
+            (polys[0] < 0) ^ parity((2 * state) & abs(polys[0])) ? 1 : 0;
+        branchtab[1].c[state] =
+            (polys[1] < 0) ^ parity((2 * state) & abs(polys[1])) ? 1 : 0;
     }
 
     init = true;
 }
 
 /* Create a new instance of a Viterbi decoder */
-void *create_viterbi_packed(int16_t len)
+void* create_viterbi_packed(int16_t len)
 {
     /* Keep state in internal RAM */
-    struct v27 *vp = &v27_local;
+    struct v27* vp = &v27_local;
 
     if (!init)
         set_viterbi_polynomial_packed(polys);
@@ -144,11 +156,14 @@ void *create_viterbi_packed(int16_t len)
 }
 
 /* Viterbi chainback */
-int chainback_viterbi_packed(void *p, unsigned char *data, unsigned int nbits, unsigned int endstate)
+int chainback_viterbi_packed(void* p,
+                             unsigned char* data,
+                             unsigned int nbits,
+                             unsigned int endstate)
 {
     int k;
-    struct v27 *vp = p;
-    decision_t *d;
+    struct v27* vp = p;
+    decision_t* d;
     int errors = vp->old_metrics->w[endstate];
 
     if (unlikely(p == NULL))
@@ -175,41 +190,41 @@ int chainback_viterbi_packed(void *p, unsigned char *data, unsigned int nbits, u
 }
 
 /* Delete instance of a Viterbi decoder */
-void delete_viterbi_packed(void *p)
+void delete_viterbi_packed(void* p)
 {
-    struct v27 *vp = p;
+    struct v27* vp = p;
 
     if (vp->decisions != NULL)
         free((void*)vp->decisions);
 }
 
 /* C-language butterfly */
-#define BFLY(b)                                                             \
-    do {                                                                    \
-        metric = (branchtab[0].c[b] ^ sym0) + (branchtab[1].c[b] ^ sym1);   \
-                                                                            \
-        m0 = vp->old_metrics->w[b] + metric;                                \
-        m1 = vp->old_metrics->w[b + 32] + (2 - metric);                     \
-        decision = m0 > m1;                                                 \
-        vp->new_metrics->w[(b << 1)] = decision ? m1 : m0;                  \
-        d->w[b >> 2] |= decision << (((b << 1)) & 7);                       \
-                                                                            \
-        m0 -= (metric + metric - 2);                                        \
-        m1 += (metric + metric - 2);                                        \
-        decision = m0 > m1;                                                 \
-        vp->new_metrics->w[(b << 1) + 1] = decision ? m1 : m0;              \
-        d->w[b >> 2] |= decision << (((b << 1) + 1) & 7);                   \
+#define BFLY(b)                                                           \
+    do {                                                                  \
+        metric = (branchtab[0].c[b] ^ sym0) + (branchtab[1].c[b] ^ sym1); \
+                                                                          \
+        m0 = vp->old_metrics->w[b] + metric;                              \
+        m1 = vp->old_metrics->w[b + 32] + (2 - metric);                   \
+        decision = m0 > m1;                                               \
+        vp->new_metrics->w[(b << 1)] = decision ? m1 : m0;                \
+        d->w[b >> 2] |= decision << (((b << 1)) & 7);                     \
+                                                                          \
+        m0 -= (metric + metric - 2);                                      \
+        m1 += (metric + metric - 2);                                      \
+        decision = m0 > m1;                                               \
+        vp->new_metrics->w[(b << 1) + 1] = decision ? m1 : m0;            \
+        d->w[b >> 2] |= decision << (((b << 1) + 1) & 7);                 \
     } while (0)
 
-/* 
+/*
  * Update decoder with a block of demodulated symbols
  * Note that nbits is the number of decoded data bits, not the number
  * of symbols!
  */
-int update_viterbi_packed(void *p, uint8_t *syms, uint16_t nbits)
+int update_viterbi_packed(void* p, uint8_t* syms, uint16_t nbits)
 {
-    struct v27 *vp = p;
-    void *tmp;
+    struct v27* vp = p;
+    void* tmp;
     decision_t *dp, *d = &decisions_local;
     uint16_t i = 0;
     uint8_t m0, m1, decision, metric, sym0, sym1;
@@ -225,7 +240,7 @@ int update_viterbi_packed(void *p, uint8_t *syms, uint16_t nbits)
 
         /* Read symbols */
         sym0 = get_bit(syms, i);
-        sym1 = get_bit(syms, i + 1); 
+        sym1 = get_bit(syms, i + 1);
         i += 2;
 
         /* Unrolled butterflies */
@@ -275,7 +290,7 @@ int update_viterbi_packed(void *p, uint8_t *syms, uint16_t nbits)
     return 0;
 }
 
-void encode_viterbi_packed(unsigned char *channel, unsigned char *data, int framebits)
+void encode_viterbi_packed(unsigned char* channel, unsigned char* data, int framebits)
 {
     int i;
     unsigned char bit;
@@ -289,7 +304,7 @@ void encode_viterbi_packed(unsigned char *channel, unsigned char *data, int fram
         in_sr = (in_sr << 1) | bit;
         out_sr = (out_sr << 1) | ((polys[0] < 0) ^ parity(in_sr & abs(polys[0])));
         out_sr = (out_sr << 1) | ((polys[1] < 0) ^ parity(in_sr & abs(polys[1])));
-        temp[i>>2] = out_sr;
+        temp[i >> 2] = out_sr;
     }
 
     memcpy(channel, temp, 2 * (framebits / 8) + 2);
