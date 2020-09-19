@@ -10,7 +10,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: gnuradio/clang-format-lint-action@v0.5-4
+    - uses: daniestevez/clang-format-lint-action@master
       with:
         source: '.'
         extensions: 'h,hpp,cpp,cc'
