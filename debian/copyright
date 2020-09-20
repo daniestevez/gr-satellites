@@ -13,3 +13,50 @@ License: GPL-3+
  .
  On Debian systems, the complete text of version 3 of the GNU General
  Public License can be found in '/usr/share/common-licenses/GPL-3'.
+
+Files: CMakeLists.txt cmake/* .clang-format tools/* apps/CMakeLists.txt
+ docs/CMakeLits.txt docs/doxygen/* grc/CMakeLists.txt
+ include/satellites/CMakeLists.txt include/satellites/api.txt
+ lib/CMakeLists.txt lib/qa_satellites.* python/CMakeLists.txt
+ swig/CMakeLists.txt
+Copyright: 2010-2020 Free Software Foundation, Inc.
+License: GPL-3+
+
+Files: lib/radecoder/*
+Copyright: 2015-2019 Miklos Maroti
+ Copyright 2019 Daniel Estevez <daniel@destevez.net>
+License: GPL-3+
+
+Files: include/satellites/varlen_packet_framer.h include/satellites/varlen_packet_tagger.h
+ lib/varlen_packet_framer_impl.* lib/varlen_packet_tagger_impl.*
+Copyright: 2017 Glenn Richardson <glenn@spacequest.com>
+License: GPL-3+
+
+Files: lib/randomizer.*
+Copyright: (c) 2008 Johan Christiansen
+ Copyright (c) 2012 Jeppe Ledet-Pedersen <jlp@satlab.org>
+License: Expat
+
+Files: lib/libfec/* lib/viterbi.*
+Copyright: 2006 Phil Karn <karn@ka9q.net>
+License: LGPL-2.1
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License version 2.1, as
+ published by the Free Software Foundation.  This program is
+ distributed in the hope that it will be useful, but WITHOUT ANY
+ WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.
+ See the GNU General Public  License for more details.
+ .
+ On Debian systems, the complete text of the GNU Lesser General Public
+ License (LGPL) version 2.1 can be found in the file
+ '/usr/share/common-licenses/LGPL-2.1'.
+
+Files: python/ccsds/*
+Copyright: 2019 Athanasios Theocharis <athatheoc@gmail.com>
+License: GPL-3+
+
+Files: tools/clang_format.py
+Copyright: (C) 2015,2016 MongoDB Inc.
+ Copyright (C) 2018 Free Software Foundation
+License: GPL-3+
