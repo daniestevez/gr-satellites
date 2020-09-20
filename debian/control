@@ -26,6 +26,7 @@ Depends: ${misc:Depends}, ${python3:Depends}, ${shlibs:Depends},
          gnuradio,
          python3-construct,
 	 python3-requests
+Recommends: feh
 Description:GNU Radio out-of-tree module with Amateur satellite decoders.
  gr-satellites is a GNU Radio out-of-tree module that contains a collection of
  decoders for Amateur satellites. It supports most popular protocols, such as AX.25,
