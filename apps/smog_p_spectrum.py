@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# Copyright 2019 Daniel Estevez <daniel@destevez.net>
+#
+# This file is part of gr-satellites
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
 
 """Plots SMOG-P/ATL-1 spectrum data previously saved to a file"""
 
