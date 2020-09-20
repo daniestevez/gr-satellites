@@ -3,7 +3,7 @@ Section: hamradio
 Priority: optional
 Maintainer: Daniel Estevez <daniel@destevez.net>
 Build-Depends: cmake,
-               debhelper (>= 12~),
+               debhelper (>= 13~),
                dh-python,
                doxygen,
                gnuradio-dev,
