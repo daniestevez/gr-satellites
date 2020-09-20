@@ -12,7 +12,7 @@ Build-Depends: cmake,
                python3-dev,
                python3-six,
                swig
-Standards-Version: 3.5.0
+Standards-Version: 4.5.0
 Homepage: http://github.com/daniestevez/gr-satellites
 Vcs-Git: git://github.com/daniestevez/gr-satellites.git
 Vcs-Browser: https://github.com/daniestevez/gr-satellites
