@@ -1,5 +1,5 @@
 Source: gr-satellites
-Section: comm
+Section: hamradio
 Priority: optional
 Maintainer: Daniel Estevez <daniel@destevez.net>
 Build-Depends: cmake,
