@@ -232,6 +232,9 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``S-NET``, custom framing used by S-NET, which uses BCH FEC and interleaving
 
+* ``SALSAT``, custom framing used by SALSAT. It is like ``S-NET``, but without the bugs
+  in the CRC implementation.
+
 * ``Swiatowid``, custom framing used by Swiatowid for image transmission, which
   includes a (58,48) Reed-Solomon code and a CRC-16CCITT.
 

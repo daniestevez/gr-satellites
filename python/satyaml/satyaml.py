@@ -40,7 +40,7 @@ class SatYAML:
                 'NASA-DSN Concatenated differential', 'NASA-DSN Concatenated dual differential',\
                 'NASA-DSN Concatenated differential no-scrambler', 'NASA-DSN Concatenated dual differential no-scrambler',\
                 'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon', 'SMOG-P RA',\
-                'SMOG-P Signalling', 'OPS-SAT', 'U482C', 'UA01']
+                'SMOG-P Signalling', 'OPS-SAT', 'U482C', 'UA01', 'SALSAT']
     transports = ['KISS', 'KISS no control byte', 'KISS KS-1Q']
     top_level_words = ['name', 'alternative_names', 'norad', 'telemetry_servers', 'data', 'transports', 'transmitters']
     

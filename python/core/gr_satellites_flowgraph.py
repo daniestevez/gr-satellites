@@ -273,6 +273,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'Lucky-7' : deframers.lucky7_deframer,
         'Reaktor Hello World' : deframers.reaktor_hello_world_deframer,
         'S-NET' : deframers.snet_deframer,
+        'SALSAT' : set_options(deframers.snet_deframer, buggy_crc = False),
         'Swiatowid' : deframers.swiatowid_deframer,
         'NuSat' : deframers.nusat_deframer,
         'K2SAT' : deframers.k2sat_deframer,
