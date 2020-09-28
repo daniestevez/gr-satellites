@@ -1,0 +1,132 @@
+.TH GR-SATELLITES 1 2020-09-28 gr-satellites "User commands"
+.SH NAME
+gr_satellites \- gr-satellites is a GNU Radio command line decoder for
+the telemetry of Amateur satellites.
+.SH SYNOPSIS
+.B gr_satellites
+.IR satellite
+[\fIoptions\fR]
+.SH DESCRIPTION
+.PP
+gr-satellites is a GNU Radio out-of-tree module encompassing a collection of
+telemetry decoders that supports many different Amateur satellites. It supports
+most popular protocols, such as AX.25, the GOMspace NanoCom U482C and AX100
+modems, an important part of the CCSDS stack, the AO-40 protocol used in the
+FUNcube satellites, and several ad-hoc protocols used in other satellites.
+.PP
+The
+.B gr_satellites
+command line tool can be used to decode frames from each of the supported
+satellites by using either real-time RF samples from an SDR or
+conventional radio, or a recording.
+.SH OPTIONS
+The
+.IR satellite
+parameter can be specified using name, NORAD ID or path to YAML file. The set
+of available options will change depending on the satellite, so it is mandatory
+to specify a satellite even to print the full help.
+.PP
+The options shown below are for the satellite AO-73. Other satellites have slightly
+different options.
+.SS "General options"
+.TP
+.BR \-h ", " \-\-help\fR
+show the help message and exit
+.TP
+.BR \-\-version
+show program's version number and exit
+.SS "Input options"
+.TP
+.BR \-\-wavfile\ \fIWAVFILE\fR
+WAV input file
+.TP
+.BR \-\-rawfile\ \fIRAWFILE\fR
+RAW input file (float32 or complex64)
+.TP
+.BR \-\-rawint16\ \fIRAWINT16\fR
+RAW input file (int16)
+.TP
+\fB\-\-audio\fR\ [\fIDEVICE\fR]
+Soundcard device input
+.TP
+.BR \-\-udp
+Use UDP input
+.TP
+.BR \-\-kiss_in\ \fIKISS_IN\fR
+KISS input file
+.TP
+.BR \-\-samp_rate\ \fISAMP_RATE\fR
+Sample rate (Hz)
+.TP
+.BR \-\-udp_ip\ \fIUDP_IP\fR
+UDP input listen IP [default='::']
+.TP
+.BR \-\-udp_port\ \fIUDP_PORT\fR
+UDP input listen port [default='7355']
+.TP
+.BR \-\-iq
+Use IQ input
+.TP
+.BR \-\-input_gain\ \fIINPUT_GAIN\fR
+Input gain (can be negative to invert signal) [default=1]
+.SS "Output options"
+.TP
+.BR \-\-kiss_out\ \fIKISS_OUT\fR
+KISS output file
+.TP
+.BR \-\-kiss_append
+Append to KISS output file
+.TP
+\fB\-\-kiss_server\fR\ [\fIPORT\fR]
+Enable KISS server [default port=8100]
+.TP
+.BR\-\-kiss_server_address\ \fIKISS_SERVER_ADDRESS\fR
+KISS server bind address [default='127.0.0.1']
+.TP
+\fB\-\-zmq_pub\fR\ [\fIADDRESS\fR]
+Enable ZMQ PUB socket [default address=tcp://127.0.0.1:5555]
+.TP
+.BR \-\-hexdump
+Hexdump instead of telemetry parse
+.TP
+.BR \-\-dump_path\ \fIDUMP_PATH\fR
+Path to dump internal signals
+.SS "Demodulation options"
+.TP
+.BR \-\-f_offset\ \fIF_OFFSET\fR
+Frequency offset (Hz) [default=1500 or 12000]
+.TP
+.BR \-\-rrc_alpha\ \fIRRC_ALPHA\fR
+RRC roll-off (Hz) [default=0.35]
+.TP
+.BR \-\-disable_fll
+Disable FLL
+.TP
+.BR \-\-fll_bw\ \fIFLL_BW\fR
+FLL bandwidth (Hz) [default=25]
+.TP
+.BR \-\-clk_bw\ \fICLK_BW\fR
+Clock recovery bandwidth (relative to baudrate) [default=0.06]
+.TP
+.BR \-\-clk_limit\ \fICLK_LIMIT\fR
+Clock recovery limit (relative to baudrate) [default=0.02]
+.TP
+.BR \-\-costas_bw\ \fICOSTAS_BW\fR
+Costas loop bandwidth (Hz) [default=50]
+.TP
+.BR \-\-manchester_history\ \fIMANCHESTER_HISTORY\fR
+Manchester recovery history (symbols) [default=32]
+.SS "Deframing options"
+.TP
+.BR \-\-syncword_threshold\ \fISYNCWORD_THRESHOLD\fR
+Syncword bit errors [default=8]
+.TP
+.BR \-\-verbose_rs
+Verbose RS decoder
+.SS "Data sink"
+.TP
+.BR \-\-telemetry_output\ \fITELEMETRY_OUTPUT\fR
+Telemetry output file [default=stdout]
+.SH "SEE ALSO"
+.BR jy1sat_ssdv (1),
+.BR smog_p_spectrum (1)
