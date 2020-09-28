@@ -46,6 +46,7 @@ def argument_parser():
     p_input.add_argument('--iq', action = 'store_true', help = 'Use IQ input')
     p_input.add_argument('--input_gain', type = float, default = 1, help = 'Input gain (can be negative to invert signal) [default=%(default)r]')
     p_input.add_argument('--start_time', type = str, default = '', help = 'Recording start timestamp')
+    p_input.add_argument('--throttle', action = 'store_true', help = 'Throttle recording input to 1x speed')
     
     p_output = p.add_argument_group('output')
     p_output.add_argument('--kiss_out', help = 'KISS output file')
@@ -95,7 +96,12 @@ class gr_satellites_top_block(gr.top_block):
             gain = self.options.input_gain
             self.gain = blocks.multiply_const_cc(gain) if self.options.iq else\
               blocks.multiply_const_ff(gain)
-            self.connect(self.input, self.gain, self.flowgraph)
+            if self.options.throttle:
+                size = gr.sizeof_gr_complex if self.options.iq else gr.sizeof_float
+                self.throttle = blocks.throttle(size, self.options.samp_rate, True)
+                self.connect(self.input, self.throttle, self.gain, self.flowgraph)
+            else:
+                self.connect(self.input, self.gain, self.flowgraph)
 
     def setup_input(self):
         if self.options.wavfile is not None:
