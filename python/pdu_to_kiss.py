@@ -22,13 +22,18 @@ class pdu_to_kiss(gr.basic_block):
     """
     docstring for block pdu_to_kiss
     """
-    def __init__(self, control_byte = True, include_timestamp = False):
+    def __init__(self, control_byte = True, include_timestamp = False,
+                     initial_timestamp = ''):
         gr.basic_block.__init__(self,
             name="pdu_to_kiss",
             in_sig=None,
             out_sig=None)
         self.control_byte = control_byte
         self.include_timestamp = include_timestamp
+        dtformat = '%Y-%m-%d %H:%M:%S'
+        self.initial_timestamp = datetime.datetime.strptime(initial_timestamp, dtformat) \
+            if initial_timestamp != '' else None
+        self.start_timestamp = datetime.datetime.utcnow()
 
         if not control_byte and include_timestamp:
             warnings.warn('Using no control byte and timestamps in pdu_to_kiss will usually give problems')
@@ -50,6 +55,8 @@ class pdu_to_kiss(gr.basic_block):
         # we use datetime.datetime() instead
         epoch = datetime.datetime(1970, 1, 1)
         now = datetime.datetime.utcnow()
+        if self.initial_timestamp:
+            now = now - self.start_timestamp + self.initial_timestamp
         timestamp = (now - epoch).total_seconds()
         timestamp_int = round(timestamp * 1e3)
         control = b'\x09'
