@@ -744,6 +744,20 @@ the input can be inverted again by using the ``--input_gain -1`` parameter,
 which has the effect of multiplying the input signal by -1 before it is
 processed, thus restoring the correct polarity.
 
+Multiple transmitters
+"""""""""""""""""""""
+
+Some satellites have multiple transmitters (or different types of signals)
+declared in their :ref:`SatYAML files`. When run for these satellites,
+the ``gr_satellites`` command line tool will run decoders for all the
+transmitters or signal types in parallel. Therefore, it is not necessary or
+possible to specify the transmitter to use.
+
+In the case when it is necessary to run only the decoder for a single
+transmitter, the easiest solution is to make a copy of the SatYAML file for that
+satellite, edit the copy to leave out only the desired transmitter, and then
+running ``gr_satellites`` and indicating it to use the modified SatYAML file.
+
 .. _GQRX: https://gqrx.dk/
 .. _gr-frontends: https://github.com/daniestevez/gr-frontends
 .. _Message Debug: https://wiki.gnuradio.org/index.php/Message_Debug
