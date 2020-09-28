@@ -10,8 +10,9 @@
 
 from gnuradio import gr, blocks
 from ... import submit, funcube_submit, pwsat2_submitter, bme_submitter, pdu_to_kiss
+from ...utils.options_block import options_block
 
-class telemetry_submit(gr.hier_block2):
+class telemetry_submit(gr.hier_block2, options_block):
     """
     Hierarchical block for telemetry submission
 
@@ -30,14 +31,17 @@ class telemetry_submit(gr.hier_block2):
         gr.hier_block2.__init__(self, "telemetry_submit",
             gr.io_signature(0, 0, 0),
             gr.io_signature(0, 0, 0))
+        options_block.__init__(self, options)
+        
         self.message_port_register_hier_in('in')
 
         if server == 'SatNOGS':
             url = 'https://db.satnogs.org/api/telemetry/'
+            initial_timestamp = getattr(self.options, 'start_time', '')
             self.submit = submit(url, norad, config['Groundstation']['callsign'],\
                                  float(config['Groundstation']['longitude']),\
                                  float(config['Groundstation']['latitude']),\
-                                 '')
+                                 initial_timestamp)
         elif server == 'FUNcube':
             url = 'http://data.amsat-uk.org'
             self.submit = funcube_submit(url, config['FUNcube']['site_id'], config['FUNcube']['auth_code'])
@@ -60,3 +64,11 @@ class telemetry_submit(gr.hier_block2):
             raise ValueError('Unsupported telemetry server')
 
         self.msg_connect((self, 'in'), (self.submit, 'in'))
+
+    @classmethod
+    def add_options(cls, parser):
+        """
+        Adds telemetry submit specific options to the argparse parser
+        """
+        return
+

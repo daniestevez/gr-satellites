@@ -44,7 +44,8 @@ def argument_parser():
     p_input.add_argument('--udp_ip', default = '::', help = 'UDP input listen IP [default=%(default)r]')
     p_input.add_argument('--udp_port', default = '7355', type = int, help = 'UDP input listen port [default=%(default)r]')
     p_input.add_argument('--iq', action = 'store_true', help = 'Use IQ input')
-    p_input.add_argument('--input_gain', type = float, default = 1, help = 'Input gain (can be negative to invert signal) [default=%(default)r]')    
+    p_input.add_argument('--input_gain', type = float, default = 1, help = 'Input gain (can be negative to invert signal) [default=%(default)r]')
+    p_input.add_argument('--start_time', type = str, default = '', help = 'Recording start timestamp')
     
     p_output = p.add_argument_group('output')
     p_output.add_argument('--kiss_out', help = 'KISS output file')

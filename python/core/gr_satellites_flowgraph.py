@@ -125,13 +125,13 @@ class gr_satellites_flowgraph(gr.hier_block2):
                         datasink = datasinks.hexdump_sink()
                     self._datasinks[key] = datasink
             if options is not None and options.kiss_out:
-                self._additional_datasinks.append(datasinks.kiss_file_sink(options.kiss_out, bool(options.kiss_append)))
+                self._additional_datasinks.append(datasinks.kiss_file_sink(options.kiss_out, bool(options.kiss_append), options = options))
             if options is not None and options.kiss_server:
                 self._additional_datasinks.append(datasinks.kiss_server_sink(options.kiss_server_address, options.kiss_server))
             if options is not None and options.zmq_pub:
                 self._additional_datasinks.append(zeromq.pub_msg_sink(options.zmq_pub))
             if config.getboolean('Groundstation', 'submit_tlm'):
-                self._additional_datasinks.extend(self.get_telemetry_submitters(satyaml, config))
+                self._additional_datasinks.extend(self.get_telemetry_submitters(satyaml, config, options))
             self._transports = dict()
             if 'transports' in satyaml:
                 for key, info in satyaml['transports'].items():
@@ -182,7 +182,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
                     for s in self._additional_datasinks:
                         self.msg_connect((deframer, 'out'), (s, 'in'))
 
-    def get_telemetry_submitters(self, satyaml, config):
+    def get_telemetry_submitters(self, satyaml, config, options):
         """
         Returns a list of block instances of telemetry submitters appropriate for this satellite
 
@@ -191,7 +191,8 @@ class gr_satellites_flowgraph(gr.hier_block2):
             config: configuration file from configparser
         """
         norad = satyaml['norad']
-        submitters = [datasinks.telemetry_submit('SatNOGS', norad = norad, config = config)]
+        submitters = [datasinks.telemetry_submit('SatNOGS', norad = norad, config = config,
+                                                     options = options)]
         for server in satyaml.get('telemetry_servers', []):
             port = None
             if server.startswith('HIT '):
@@ -200,7 +201,8 @@ class gr_satellites_flowgraph(gr.hier_block2):
             submitters.append(datasinks.telemetry_submit(server,
                                                              norad = norad,
                                                              port = port,
-                                                             config = config))
+                                                             config = config,
+                                                             options = options))
         return submitters
 
     def get_demodulator(self, modulation):
