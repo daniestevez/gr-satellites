@@ -11,6 +11,7 @@
 import satellites.core
 from satellites.utils.config import open_config
 import satellites.components.datasources as datasources
+from satellites.satyaml import yamlfiles
 from gnuradio import gr, blocks, audio
 
 import signal
@@ -23,12 +24,26 @@ License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law."""
 
+class ListSatellites(argparse.Action):
+    """argparse Action to list supported satellites and exit"""
+    def __call__(self, parser, namespace, values, option_string = None):
+        print(f'Satellites supported by gr_satellites {satellites.__version__}:')
+        ymls = yamlfiles.load_all_yaml()
+        for yml in sorted(ymls, key = lambda x: x['name'].casefold()):
+            self.__print(yml)
+        sys.exit(0)
+    def __print(self, yml):
+        print(f"* {yml['name']} (NORAD {yml['norad']})")
+        for name, data in yml['transmitters'].items():
+            print(f"    {name} {data['frequency']*1e-6:.3f} MHz {data['modulation']} {data['framing']}")
+
 def argument_parser():
     description = 'gr-satellites - GNU Radio decoders for Amateur satellites'
     info = 'The satellite parameter can be specified using name, NORAD ID or path to YAML file'
     p = argparse.ArgumentParser(description = description, conflict_handler = 'resolve', prog = f'gr_satellites satellite', epilog = info, formatter_class = argparse.RawTextHelpFormatter)
 
     p.add_argument('--version', action = 'version', version = version)
+    p.add_argument('--list_satellites', action = ListSatellites, nargs = 0, help = 'list supported satellites and exit')
 
     p_input = p.add_argument_group('input')
 
@@ -78,6 +93,9 @@ class gr_satellites_top_block(gr.top_block):
         sat = parse_satellite(sys.argv[1])
         satellites.core.gr_satellites_flowgraph.add_options(parser, **sat)
         options = parser.parse_args(sys.argv[2:])
+        if options.list_satellites:
+            list_satellites()
+            sys.exit(0)
         check_options(options, parser)
         
         self.options = options
@@ -169,8 +187,10 @@ class gr_satellites_top_block(gr.top_block):
 
 def main():
     parser = argument_parser()
-    if len(sys.argv) >= 2 and sys.argv[1] == '--version':
-        parser.parse_args()
+    if len(sys.argv) >= 2 and sys.argv[1] in ['--version', '--list_satellites']:
+        options = parser.parse_args()
+        if options.list_satellites:
+            list_satellites()
         sys.exit(0)
     
     if len(sys.argv) <= 1 or sys.argv[1][0] == '-':
