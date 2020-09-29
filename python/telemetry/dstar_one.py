@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2018 Daniel Estevez <daniel@destevez.net>
+# Copyright 2018,2020 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -9,7 +9,7 @@
 # 
 
 from construct import *
-from .adapters import LinearAdapter
+from ..adapters import LinearAdapter
 
 Beacon = Struct(
     Const(b'\x6c'),
@@ -43,3 +43,8 @@ Beacon = Struct(
     'mode' / Int8ub,
     'filler' / Bytes(10),
     'crc' / Int16ub)
+
+dstar_one = Struct(
+    'control' / Bytes(2),
+    'beacon' / Beacon
+    )

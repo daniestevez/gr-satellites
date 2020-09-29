@@ -39,6 +39,7 @@ GR_PYTHON_INSTALL(
     by02.py
     by70_1.py
     csp.py
+    dstar_one.py
     eseo.py
     floripasat.py
     funcube.py

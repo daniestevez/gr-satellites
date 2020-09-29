@@ -2,7 +2,7 @@ name: D-STAR ONE iSat
 norad: 43879
 data:
   &tlm Telemetry:
-    unknown
+    telemetry: dstar_one
 transmitters:
   4k8 FSK downlink:
     frequency: 435.700e+6

@@ -89,8 +89,6 @@ from .check_eseo_crc import check_eseo_crc
 
 from .funcube_submit import funcube_submit
 
-from .dstar_one_telemetry_parser import dstar_one_telemetry_parser
-
 from .reflect_bytes import reflect_bytes
 
 from .check_astrocast_crc import check_astrocast_crc
