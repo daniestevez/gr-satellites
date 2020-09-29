@@ -1,0 +1,13 @@
+name: DEKART
+norad: 99783
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  4k8 FSK downlink:
+    frequency: 437.000e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: Mobitex
+    data:
+    - *tlm

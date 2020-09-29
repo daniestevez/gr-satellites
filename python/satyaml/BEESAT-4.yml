@@ -1,0 +1,13 @@
+name: BEESAT-4
+norad: 41619
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  4k8 FSK downlink:
+    frequency: 435.950e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: Mobitex-NX
+    data:
+    - *tlm
