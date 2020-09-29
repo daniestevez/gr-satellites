@@ -293,6 +293,21 @@ blocks:
     coordinate: [720, 15]
     rotation: 0
     state: enabled
+- name: satellites_beesat_classifier_0
+  id: satellites_beesat_classifier
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [64, 592.0]
+    rotation: 0
+    state: true
 - name: satellites_print_timestamp_0
   id: satellites_print_timestamp
   parameters:
@@ -394,7 +409,7 @@ blocks:
     comment: ''
     latitude: latitude
     longitude: longitude
-    noradID: '99999'
+    noradID: '99802'
     source: callsign
     tstamp: recstart
     url: https://db.satnogs.org/api/telemetry/
@@ -403,21 +418,6 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [464, 876]
-    rotation: 0
-    state: disabled
-- name: tnc_nx_beesat_classifier_0
-  id: tnc_nx_beesat_classifier
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [64, 584]
     rotation: 0
     state: enabled
 - name: tnc_nx_nx_decoder_1_0
@@ -445,14 +445,14 @@ connections:
 - [digital_binary_slicer_fb_0, '0', tnc_nx_nx_decoder_1_0, '0']
 - [digital_clock_recovery_mm_xx_0_0, '0', digital_binary_slicer_fb_0, '0']
 - [low_pass_filter_0, '0', digital_clock_recovery_mm_xx_0_0, '0']
+- [satellites_beesat_classifier_0, BEESAT-1, satellites_submit_0, in]
+- [satellites_beesat_classifier_0, BEESAT-2, satellites_submit_0_0, in]
+- [satellites_beesat_classifier_0, BEESAT-4, satellites_submit_0_0_0, in]
+- [satellites_beesat_classifier_0, BEESAT-9, satellites_submit_0_0_0_1, in]
+- [satellites_beesat_classifier_0, TECHNOSAT, satellites_submit_0_0_0_0, in]
 - [satellites_print_timestamp_0, out, blocks_message_debug_0, print_pdu]
-- [tnc_nx_beesat_classifier_0, BEESAT-1, satellites_submit_0, in]
-- [tnc_nx_beesat_classifier_0, BEESAT-2, satellites_submit_0_0, in]
-- [tnc_nx_beesat_classifier_0, BEESAT-4, satellites_submit_0_0_0, in]
-- [tnc_nx_beesat_classifier_0, BEESAT-9, satellites_submit_0_0_0_1, in]
-- [tnc_nx_beesat_classifier_0, TECHNOSAT, satellites_submit_0_0_0_0, in]
+- [satellites_print_timestamp_0, out, satellites_beesat_classifier_0, in]
 - [tnc_nx_nx_decoder_1_0, out, satellites_print_timestamp_0, in]
-- [tnc_nx_nx_decoder_1_0, out, tnc_nx_beesat_classifier_0, in]
 
 metadata:
   file_format: 1
