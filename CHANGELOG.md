@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for SALSAT
 - Support for MEZNSAT
+- Mobitex and Mobitex-NX deframer
+- Support for satellites using Mobitex and Mobitex-NX (D-STAR ONE, BEESAT, TECHNOSAT,
+  AMGU-1, SOKRAT, DEKART)
 
 ## [3.4.0] - 2020-09-12
 

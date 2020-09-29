@@ -264,6 +264,12 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``UA01``, non-AX.25 compliant framing used by QB50 UA01, which is like regular
   AX.25 but with two layers of NRZ-I encoding
+
+* ``Mobitex``, the Mobitex protocol, used by the D-STAR ONE satellites and some
+  Russian whose communications payload has also been built by German Orbital Systems
+
+* ``Mobitex-NX``, the Mobitex-NX protocol, used by the BEESAT and TECHNOSAT satellites
+  from TU Berlin
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.

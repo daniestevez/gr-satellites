@@ -58,6 +58,12 @@ To use the realtime image decoders, gr-satellites needs `feh`_
 .. note::
    feh is best installed through your distribution's package manager
 
+The decoders that use Mobitex or Mobitex-NX require the GNU Radio out-of-tree
+module ``gr-tnc_nx``, which can be found in `beesat-sdr`_ (note that the
+``maint-3.8`` branch is the one which supports GNU Radio 3.8).
+
+.. _beesat-sdr: https://github.com/daniestevez/beesat-sdr/tree/maint-3.8
+   
 Downloading
 ^^^^^^^^^^^
 
