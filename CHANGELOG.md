@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   AMGU-1, SOKRAT, DEKART)
 - Support for NETSAT 1, 2, 3, 4
 
+### Fixed
+- Bug with Reed-Solomon decoder that prevented building on i386 since v3.3.0
+
 ## [3.4.0] - 2020-09-12
 
 ### Added
