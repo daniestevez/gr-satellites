@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for satellites using Mobitex and Mobitex-NX (D-STAR ONE, BEESAT, TECHNOSAT,
   AMGU-1, SOKRAT, DEKART)
 - Support for NETSAT 1, 2, 3, 4
+- Option for generating correct recording timestamps by playing back at 1x speed
+- Option for listing the supported satellites in gr_satellites
 
 ### Fixed
 - Bug with Reed-Solomon decoder that prevented building on i386 since v3.3.0
