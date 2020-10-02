@@ -70,5 +70,5 @@ class telemetry_submit(gr.hier_block2, options_block):
         """
         Adds telemetry submit specific options to the argparse parser
         """
-        return
+        parser.add_argument('--start_time', type = str, default = '', help = 'Recording start timestamp')
 

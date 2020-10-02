@@ -49,4 +49,4 @@ class kiss_file_sink(gr.hier_block2, options_block):
         """
         Adds KISS file sink specific options to the argparse parser
         """
-        return
+        parser.add_argument('--start_time', type = str, default = '', help = 'Recording start timestamp')
