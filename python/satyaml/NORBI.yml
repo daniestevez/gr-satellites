@@ -1,5 +1,5 @@
 name: NORBI
-norad: 99784
+norad: 46494
 data:
   &tlm Telemetry:
     telemetry: ax25

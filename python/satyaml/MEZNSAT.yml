@@ -1,5 +1,5 @@
 name: MEZNSAT
-norad: 99789
+norad: 46489
 data:
   &tlm Telemetry:
     telemetry: ax25

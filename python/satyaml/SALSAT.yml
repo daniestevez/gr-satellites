@@ -1,5 +1,5 @@
 name: SALSAT
-norad: 99826
+norad: 46495
 data:
   &tlm Telemetry:
     telemetry: snet
