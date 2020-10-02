@@ -728,7 +728,8 @@ correspond to the start of the recording.
 
 To use this functionality it is necessary to use the ``--throttle`` parameter to
 limit playback speed to 1x and use the ``--start_time`` parameter followed by the
-timestamp in ``"YYYY-MM-DD HH:MM:SS"`` format to indicate the start time of the recording.
+timestamp in ISO 8601 format (``YYYY-MM-DDTHH:MM:SS``) to indicate the start time
+of the recording.
 
 .. _GQRX: https://gqrx.dk/
 .. _gr-frontends: https://github.com/daniestevez/gr-frontends

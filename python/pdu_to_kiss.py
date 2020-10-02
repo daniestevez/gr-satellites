@@ -30,8 +30,7 @@ class pdu_to_kiss(gr.basic_block):
             out_sig=None)
         self.control_byte = control_byte
         self.include_timestamp = include_timestamp
-        dtformat = '%Y-%m-%d %H:%M:%S'
-        self.initial_timestamp = datetime.datetime.strptime(initial_timestamp, dtformat) \
+        self.initial_timestamp = datetime.datetime.fromisoformat(initial_timestamp) \
             if initial_timestamp != '' else None
         self.start_timestamp = datetime.datetime.utcnow()
 

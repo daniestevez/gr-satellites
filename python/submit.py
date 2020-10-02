@@ -31,8 +31,7 @@ class submit(gr.basic_block):
                          'longitude': str(abs(longitude)) + ('E' if longitude >= 0 else 'W'),\
                          'latitude': str(abs(latitude)) + ('N' if latitude >= 0 else 'S'),\
                          'version': '1.6.6' }
-        dtformat = '%Y-%m-%d %H:%M:%S'
-        self.initialTimestamp = datetime.datetime.strptime(initialTimestamp, dtformat) \
+        self.initialTimestamp = datetime.datetime.fromisoformat(initialTimestamp) \
             if initialTimestamp != '' else None
         self.startTimestamp = datetime.datetime.utcnow()
         
