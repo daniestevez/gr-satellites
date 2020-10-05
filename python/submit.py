@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2017 Daniel Estevez <daniel@destevez.net>
+# Copyright 2017,2020 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -13,6 +13,14 @@ from gnuradio import gr
 import pmt
 import datetime
 import urllib.request, urllib.parse, urllib.error
+
+def parse_time(time):
+    try:
+        return datetime.datetime.fromisofromat(time)
+    except AttributeError:
+        # workaround for Python version <3.7
+        # which doesn't have fromisoformat()
+        return datetime.datetime.strptime(time, '%Y-%m-%dT%H:%M:%S')
 
 class submit(gr.basic_block):
     """
@@ -31,7 +39,7 @@ class submit(gr.basic_block):
                          'longitude': str(abs(longitude)) + ('E' if longitude >= 0 else 'W'),\
                          'latitude': str(abs(latitude)) + ('N' if latitude >= 0 else 'S'),\
                          'version': '1.6.6' }
-        self.initialTimestamp = datetime.datetime.fromisoformat(initialTimestamp) \
+        self.initialTimestamp = parse_time(initialTimestamp) \
             if initialTimestamp != '' else None
         self.startTimestamp = datetime.datetime.utcnow()
         

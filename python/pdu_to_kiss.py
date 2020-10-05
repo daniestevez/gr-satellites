@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2017 Daniel Estevez <daniel@destevez.net>
+# Copyright 2017,2020 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -17,6 +17,7 @@ import struct
 import warnings
 
 from .kiss import *
+from .submit import parse_time
 
 class pdu_to_kiss(gr.basic_block):
     """
@@ -30,7 +31,7 @@ class pdu_to_kiss(gr.basic_block):
             out_sig=None)
         self.control_byte = control_byte
         self.include_timestamp = include_timestamp
-        self.initial_timestamp = datetime.datetime.fromisoformat(initial_timestamp) \
+        self.initial_timestamp = parse_time(initial_timestamp) \
             if initial_timestamp != '' else None
         self.start_timestamp = datetime.datetime.utcnow()
 
