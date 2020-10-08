@@ -9,7 +9,7 @@
  */
 
 /*
- This algorithm is based on 
+ This algorithm is based on
  R.H. Morelos-Zaragoza, The Art of Error Correcting Coding, Wiley, 2002; Section 2.2.3
 */
 
@@ -18,7 +18,7 @@
 
 #include <stdint.h>
 
-int decode_golay24(uint32_t *data);
-int encode_golay24(uint32_t *data);
+int decode_golay24(uint32_t* data);
+int encode_golay24(uint32_t* data);
 
 #endif

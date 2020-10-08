@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2018 Daniel Estevez <daniel@destevez.net>
+# Copyright 2018,2020 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -14,6 +14,9 @@ import construct
 import datetime
 
 from ..adapters import LinearAdapter
+
+# See https://www.raumfahrttechnik.tu-berlin.de/fileadmin/fg169/amateur-radio/TUBiX10-COM.pdf
+# for documentation
 
 LTUFrameHeader = BitStruct(
     'SrcId' / BitsInteger(7),
@@ -44,20 +47,36 @@ class TimeAdapter(Adapter):
         return datetime.datetime(2000, 1, 1) + datetime.timedelta(seconds=float(obj)/2.0)
 
 TimeStamp = TimeAdapter(BitsInteger(32, swapped=True))
-    
+
+
+SNETFrameHeaderExtension = BitStruct(
+    'VersNo' / BitsInteger(2),
+    'DFCID' / BitsInteger(2),
+    'ExtensionRFU' / BitsInteger(4),
+    'ChannelInfo' / BitsInteger(8),
+    'QoS' / Flag,
+    'PDUTypeID' / Flag,
+    'ARQ' / Flag,
+    'ControlRFU' / BitsInteger(5),
+    'TimeTagSub' / BitsInteger(16),
+    'SCID' / BitsInteger(10),
+    'SeqNo' / BitsInteger(14)
+    )
+
 SNETFrameHeader = BitStruct(
     Const(0b111100110101000000, BitsInteger(18)),
     'CRC' / BitsInteger(14),
     'FCIDMajor' / BitsInteger(6),
     'FCIDSub' / BitsInteger(10),
     'Urgent' / Flag,
-    'FutureUse' / Flag,
+    'Extended' / Flag,
     'CheckCRC' / Flag,
     'Multiframe' / Flag,
     'TimeTaggedSetting' / Flag,
     'TimeTagged' / Flag,
     'DataLength' / BitsInteger(10),
-    'TimeTag' / If(lambda c: c.TimeTagged, TimeStamp)
+    'TimeTag' / If(lambda c: c.TimeTagged, TimeStamp),
+    'Extension' / If(lambda c: c.Extended, SNETFrameHeaderExtension)
     )
 
 Battery = Struct(

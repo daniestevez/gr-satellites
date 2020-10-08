@@ -11,36 +11,35 @@
 #ifndef INCLUDED_SATELLITES_LILACSAT1_DEMUX_H
 #define INCLUDED_SATELLITES_LILACSAT1_DEMUX_H
 
-#include <string>
-#include <satellites/api.h>
 #include <gnuradio/sync_block.h>
+#include <satellites/api.h>
+#include <string>
 
 namespace gr {
-  namespace satellites {
+namespace satellites {
+
+/*!
+ * \brief <+description of block+>
+ * \ingroup satellites
+ *
+ */
+class SATELLITES_API lilacsat1_demux : virtual public gr::sync_block
+{
+public:
+    typedef boost::shared_ptr<lilacsat1_demux> sptr;
 
     /*!
-     * \brief <+description of block+>
-     * \ingroup satellites
+     * \brief Return a shared_ptr to a new instance of satellites::lilacsat1_demux.
      *
+     * To avoid accidental use of raw pointers, satellits::lilacsat1_demux's
+     * constructor is in a private implementation
+     * class. satellites::lilacsat1_demux::make is the public interface for
+     * creating new instances.
      */
-    class SATELLITES_API lilacsat1_demux : virtual public gr::sync_block
-    {
-     public:
-      typedef boost::shared_ptr<lilacsat1_demux> sptr;
+    static sptr make(std::string tag);
+};
 
-      /*!
-       * \brief Return a shared_ptr to a new instance of satellites::lilacsat1_demux.
-       *
-       * To avoid accidental use of raw pointers, satellits::lilacsat1_demux's
-       * constructor is in a private implementation
-       * class. satellites::lilacsat1_demux::make is the public interface for
-       * creating new instances.
-       */
-      static sptr make(std::string tag);
-    };
-
-  } // namespace satellites
+} // namespace satellites
 } // namespace gr
 
 #endif /* INCLUDED_SATELLITES_LILACSAT1_DEMUX_H */
-

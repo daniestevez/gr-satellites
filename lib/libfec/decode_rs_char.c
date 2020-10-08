@@ -12,11 +12,12 @@
 #include "char.h"
 #include "rs-common.h"
 
-int decode_rs_char(void *p, data_t *data, int *eras_pos, int no_eras){
-  int retval;
-  struct rs *rs = (struct rs *)p;
- 
+int decode_rs_char(void* p, data_t* data, int* eras_pos, int no_eras)
+{
+    int retval;
+    struct rs* rs = (struct rs*)p;
+
 #include "decode_rs.h"
-  
-  return retval;
+
+    return retval;
 }

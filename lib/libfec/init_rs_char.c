@@ -8,13 +8,14 @@
 #include "char.h"
 #include "rs-common.h"
 
-void free_rs_char(void *p){
-  struct rs *rs = (struct rs *)p;
+void free_rs_char(void* p)
+{
+    struct rs* rs = (struct rs*)p;
 
-  free(rs->alpha_to);
-  free(rs->index_of);
-  free(rs->genpoly);
-  free(rs);
+    free(rs->alpha_to);
+    free(rs->index_of);
+    free(rs->genpoly);
+    free(rs);
 }
 
 /* Initialize a Reed-Solomon codec
@@ -25,11 +26,11 @@ void free_rs_char(void *p){
  * nroots = RS code generator polynomial degree (number of roots)
  * pad = padding bytes at front of shortened block
  */
-void *init_rs_char(int symsize,int gfpoly,int fcr,int prim,
-	int nroots,int pad){
-  struct rs *rs;
+void* init_rs_char(int symsize, int gfpoly, int fcr, int prim, int nroots, int pad)
+{
+    struct rs* rs;
 
 #include "init_rs.h"
 
-  return rs;
+    return rs;
 }

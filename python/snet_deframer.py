@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2018 Daniel Estevez <daniel@destevez.net>
+# Copyright 2018,2020 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -20,12 +20,13 @@ class snet_deframer(gr.basic_block):
     """
     docstring for block snet_deframer
     """
-    def __init__(self, verbose=False):
+    def __init__(self, verbose=False, buggy_crc = True):
         gr.basic_block.__init__(self,
             name="snet_deframer",
             in_sig=[],
             out_sig=[])
         self.verbose = verbose
+        self.buggy_crc = buggy_crc
 
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
@@ -51,8 +52,9 @@ class snet_deframer(gr.basic_block):
         hdr = LTUFrameHeader.parse(np.packbits(ltu))
 
         ltu_crc = np.flipud(np.concatenate((ltu[:-5], np.array([1,0,1,1,0,1,1]))).reshape((9,8)))
-        # force CRC5 bugs
-        ltu_crc[4,:] = ltu_crc[3,:]
+        if self.buggy_crc:
+            # force CRC5 bugs
+            ltu_crc[4,:] = ltu_crc[3,:]
         # crc5
         crc = 0x1F
         for bit in ltu_crc.ravel():
@@ -130,7 +132,7 @@ class snet_deframer(gr.basic_block):
             c = crc & 0x1000 # check most significant bit in the CRC buffer and safe in a variable.
             c >>= 12 # shift variable to make the compare op. possible (see beneath).
             crc <<= 1 # shift CRC to the left and write 0 into the least significant bit.
-            if c or bit: # BUG (the correct would be c != bit)
+            if (c or bit if self.buggy_crc else c != bit):
                 crc ^= 0x1CF5 # CRC polynomial
             crc &= 0x1FFF
 

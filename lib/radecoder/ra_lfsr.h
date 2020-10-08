@@ -18,9 +18,9 @@
 extern "C" {
 #endif
 
-void ra_lfsr_init(struct ra_context *ctx, uint8_t seqno);
-ra_index_t ra_lfsr_next(struct ra_context *ctx);
-ra_index_t ra_lfsr_prev(struct ra_context *ctx);
+void ra_lfsr_init(struct ra_context* ctx, uint8_t seqno);
+ra_index_t ra_lfsr_next(struct ra_context* ctx);
+ra_index_t ra_lfsr_prev(struct ra_context* ctx);
 
 #ifdef __cplusplus
 }

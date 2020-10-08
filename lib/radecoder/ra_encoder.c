@@ -15,7 +15,7 @@
 
 /* --- REPEAT ACCUMULATE ENCODER: rate 1/4, punctured, twisted parallel --- */
 
-void ra_encoder_init(struct ra_context *ctx, const ra_word_t* packet)
+void ra_encoder_init(struct ra_context* ctx, const ra_word_t* packet)
 {
     ctx->ra_packet = packet;
     ctx->ra_nextword = 0;
@@ -23,7 +23,7 @@ void ra_encoder_init(struct ra_context *ctx, const ra_word_t* packet)
     ra_lfsr_init(ctx, 0);
 }
 
-ra_word_t ra_encoder_next(struct ra_context *ctx)
+ra_word_t ra_encoder_next(struct ra_context* ctx)
 {
     ra_index_t pos;
     ra_word_t word;
@@ -48,9 +48,9 @@ ra_word_t ra_encoder_next(struct ra_context *ctx)
     return word;
 }
 
-void ra_encoder(struct ra_context *ctx, const ra_word_t* packet, ra_word_t* output)
+void ra_encoder(struct ra_context* ctx, const ra_word_t* packet, ra_word_t* output)
 {
     ra_encoder_init(ctx, packet);
     for (ra_index_t i = 0; i < ctx->ra_code_length; i++)
-	*(output++) = ra_encoder_next(ctx);
+        *(output++) = ra_encoder_next(ctx);
 }

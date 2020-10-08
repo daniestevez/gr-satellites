@@ -11,35 +11,34 @@
 #ifndef INCLUDED_SATELLITES_DECODE_RA_CODE_H
 #define INCLUDED_SATELLITES_DECODE_RA_CODE_H
 
-#include <satellites/api.h>
 #include <gnuradio/block.h>
+#include <satellites/api.h>
 
 namespace gr {
-  namespace satellites {
+namespace satellites {
+
+/*!
+ * \brief <+description of block+>
+ * \ingroup satellites
+ *
+ */
+class SATELLITES_API decode_ra_code : virtual public gr::block
+{
+public:
+    typedef boost::shared_ptr<decode_ra_code> sptr;
 
     /*!
-     * \brief <+description of block+>
-     * \ingroup satellites
+     * \brief Return a shared_ptr to a new instance of satellites::decode_ra_code.
      *
+     * To avoid accidental use of raw pointers, satellites::decode_ra_code's
+     * constructor is in a private implementation
+     * class. satellites::decode_ra_code::make is the public interface for
+     * creating new instances.
      */
-    class SATELLITES_API decode_ra_code : virtual public gr::block
-    {
-     public:
-      typedef boost::shared_ptr<decode_ra_code> sptr;
+    static sptr make(int size);
+};
 
-      /*!
-       * \brief Return a shared_ptr to a new instance of satellites::decode_ra_code.
-       *
-       * To avoid accidental use of raw pointers, satellites::decode_ra_code's
-       * constructor is in a private implementation
-       * class. satellites::decode_ra_code::make is the public interface for
-       * creating new instances.
-       */
-      static sptr make(int size);
-    };
-
-  } // namespace satellites
+} // namespace satellites
 } // namespace gr
 
 #endif /* INCLUDED_SATELLITES_DECODE_RA_CODE_H */
-

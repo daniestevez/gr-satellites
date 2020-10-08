@@ -7,9 +7,9 @@
 #include "char.h"
 #include "rs-common.h"
 
-void encode_rs_char(void *p,data_t *data, data_t *parity){
-  struct rs *rs = (struct rs *)p;
+void encode_rs_char(void* p, data_t* data, data_t* parity)
+{
+    struct rs* rs = (struct rs*)p;
 
 #include "encode_rs.h"
-
 }

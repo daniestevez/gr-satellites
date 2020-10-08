@@ -72,8 +72,6 @@ GR_PYTHON_INSTALL(
     eseo_line_decoder.py
     check_eseo_crc.py
     funcube_submit.py
-    dstar_one_telemetry.py
-    dstar_one_telemetry_parser.py
     reflect_bytes.py
     check_astrocast_crc.py
     ecss_pus.py

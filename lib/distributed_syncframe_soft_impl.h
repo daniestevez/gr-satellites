@@ -16,26 +16,26 @@
 #include <vector>
 
 namespace gr {
-  namespace satellites {
+namespace satellites {
 
-    class distributed_syncframe_soft_impl : public distributed_syncframe_soft
-    {
-     private:
-      const size_t d_threshold;
-      const size_t d_step;
-      std::vector<uint8_t> d_syncword;
-            
-     public:
-      distributed_syncframe_soft_impl(int threshold, const std::string& syncword, int step);
-      ~distributed_syncframe_soft_impl();
+class distributed_syncframe_soft_impl : public distributed_syncframe_soft
+{
+private:
+    const size_t d_threshold;
+    const size_t d_step;
+    std::vector<uint8_t> d_syncword;
 
-      // Where all the action really happens
-      int work(int noutput_items,
-         gr_vector_const_void_star &input_items,
-         gr_vector_void_star &output_items);
-    };
+public:
+    distributed_syncframe_soft_impl(int threshold, const std::string& syncword, int step);
+    ~distributed_syncframe_soft_impl();
 
-  } // namespace satellites
+    // Where all the action really happens
+    int work(int noutput_items,
+             gr_vector_const_void_star& input_items,
+             gr_vector_void_star& output_items);
+};
+
+} // namespace satellites
 } // namespace gr
 
 #endif /* INCLUDED_SATELLITES_DISTRIBUTED_SYNCFRAME_SOFT_IMPL_H */

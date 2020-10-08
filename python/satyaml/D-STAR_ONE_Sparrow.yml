@@ -1,0 +1,13 @@
+name: D-STAR ONE Sparrow
+norad: 43881
+data:
+  &tlm Telemetry:
+    telemetry: dstar_one
+transmitters:
+  4k8 FSK downlink:
+    frequency: 435.700e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: Mobitex
+    data:
+    - *tlm

@@ -1,0 +1,13 @@
+name: SOKRAT
+norad: 44404
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  4k8 FSK downlink:
+    frequency: 436.000e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: Mobitex
+    data:
+    - *tlm

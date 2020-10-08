@@ -8,7 +8,7 @@
  * NROOTS - the number of roots in the RS code generator polynomial,
  *          which is the same as the number of parity symbols in a block.
             Integer variable or literal.
-	    * 
+            *
  * NN - the total number of symbols in a RS block. Integer variable or literal.
  * PAD - the number of pad symbols in a block. Integer variable or literal.
  * ALPHA_TO - The address of an array of NN elements to convert Galois field
@@ -16,7 +16,8 @@
  * INDEX_OF - The address of an array of NN elements to convert Galois field
  *            elements in polynomial form to index (log) form. Read only.
  * MODNN - a function to reduce its argument modulo NN. May be inline or a macro.
- * GENPOLY - an array of NROOTS+1 elements containing the generator polynomial in index form
+ * GENPOLY - an array of NROOTS+1 elements containing the generator polynomial in index
+ form
 
  * The memset() and memmove() functions are used. The appropriate header
  * file declaring these functions (usually <string.h>) must be included by the calling
@@ -31,28 +32,28 @@
 #define A0 (NN) /* Special reserved value encoding zero in index form */
 
 {
-  int i, j;
-  data_t feedback;
+    int i, j;
+    data_t feedback;
 
-  memset(parity,0,NROOTS*sizeof(data_t));
+    memset(parity, 0, NROOTS * sizeof(data_t));
 
-  for(i=0;i<NN-NROOTS-PAD;i++){
-    feedback = INDEX_OF[data[i] ^ parity[0]];
-    if(feedback != A0){      /* feedback term is non-zero */
+    for (i = 0; i < NN - NROOTS - PAD; i++) {
+        feedback = INDEX_OF[data[i] ^ parity[0]];
+        if (feedback != A0) { /* feedback term is non-zero */
 #ifdef UNNORMALIZED
-      /* This line is unnecessary when GENPOLY[NROOTS] is unity, as it must
-       * always be for the polynomials constructed by init_rs()
-       */
-      feedback = MODNN(NN - GENPOLY[NROOTS] + feedback);
+            /* This line is unnecessary when GENPOLY[NROOTS] is unity, as it must
+             * always be for the polynomials constructed by init_rs()
+             */
+            feedback = MODNN(NN - GENPOLY[NROOTS] + feedback);
 #endif
-      for(j=1;j<NROOTS;j++)
-	parity[j] ^= ALPHA_TO[MODNN(feedback + GENPOLY[NROOTS-j])];
+            for (j = 1; j < NROOTS; j++)
+                parity[j] ^= ALPHA_TO[MODNN(feedback + GENPOLY[NROOTS - j])];
+        }
+        /* Shift */
+        memmove(&parity[0], &parity[1], sizeof(data_t) * (NROOTS - 1));
+        if (feedback != A0)
+            parity[NROOTS - 1] = ALPHA_TO[MODNN(feedback + GENPOLY[0])];
+        else
+            parity[NROOTS - 1] = 0;
     }
-    /* Shift */
-    memmove(&parity[0],&parity[1],sizeof(data_t)*(NROOTS-1));
-    if(feedback != A0)
-      parity[NROOTS-1] = ALPHA_TO[MODNN(feedback + GENPOLY[0])];
-    else
-      parity[NROOTS-1] = 0;
-  }
 }

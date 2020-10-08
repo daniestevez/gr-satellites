@@ -32,6 +32,7 @@ install(FILES
     satellites_k2sat_deframer_component.block.yml
     satellites_lilacsat_1_deframer.block.yml
     satellites_lucky7_deframer.block.yml
+    satellites_mobitex_deframer.block.yml
     satellites_ngham_deframer.block.yml
     satellites_nusat_deframer.block.yml
     satellites_ops_sat_deframer.block.yml

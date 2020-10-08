@@ -1,0 +1,35 @@
+Source: gr-satellites
+Section: hamradio
+Priority: optional
+Maintainer: Daniel Estevez <daniel@destevez.net>
+Build-Depends: cmake,
+               debhelper (>= 13~),
+               dh-python,
+               doxygen,
+               gnuradio-dev,
+               liborc-0.4-dev,
+               pkg-config,
+               python3-dev,
+               python3-six,
+               swig,
+               python3-construct,
+               python3-requests
+Standards-Version: 4.5.0
+Homepage: http://github.com/daniestevez/gr-satellites
+Vcs-Git: git://github.com/daniestevez/gr-satellites.git
+Vcs-Browser: https://github.com/daniestevez/gr-satellites
+
+Package: gr-satellites
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${python3:Depends}, ${shlibs:Depends},
+         gnuradio,
+         python3-construct,
+	 python3-requests
+Recommends: feh
+Description:GNU Radio out-of-tree module with Amateur satellite decoders.
+ gr-satellites is a GNU Radio out-of-tree module that contains a collection of
+ decoders for Amateur satellites. It supports most popular protocols, such as AX.25,
+ the GOMspace NanoCom U482C and AX100 modems, an important part of the CCSDS stack,
+ the AO-40 protocol used in the FUNcube satellites, and several ad-hoc protocols
+ used in other satellites.

@@ -27,10 +27,9 @@
 
 #include "qa_satellites.h"
 
-CppUnit::TestSuite *
-qa_satellites::suite()
+CppUnit::TestSuite* qa_satellites::suite()
 {
-  CppUnit::TestSuite *s = new CppUnit::TestSuite("satellites");
+    CppUnit::TestSuite* s = new CppUnit::TestSuite("satellites");
 
-  return s;
+    return s;
 }

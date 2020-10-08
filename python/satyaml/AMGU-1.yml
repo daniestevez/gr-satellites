@@ -1,0 +1,15 @@
+name: AMGU-1
+alternative_names:
+  - AMURSAT
+norad: 44394
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  4k8 FSK downlink:
+    frequency: 436.250e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: Mobitex
+    data:
+    - *tlm

@@ -5,11 +5,11 @@
  */
 typedef unsigned char data_t;
 
-#define MODNN(x) modnn(rs,x)
+#define MODNN(x) modnn(rs, x)
 
 #define MM (rs->mm)
 #define NN (rs->nn)
-#define ALPHA_TO (rs->alpha_to) 
+#define ALPHA_TO (rs->alpha_to)
 #define INDEX_OF (rs->index_of)
 #define GENPOLY (rs->genpoly)
 #define NROOTS (rs->nroots)
@@ -18,7 +18,3 @@ typedef unsigned char data_t;
 #define IPRIM (rs->iprim)
 #define PAD (rs->pad)
 #define A0 (NN)
-
-
-
-

@@ -45,6 +45,7 @@ GR_PYTHON_INSTALL(
     k2sat_deframer.py
     lilacsat_1_deframer.py
     lucky7_deframer.py
+    mobitex_deframer.py
     ngham_deframer.py
     nusat_deframer.py
     ops_sat_deframer.py

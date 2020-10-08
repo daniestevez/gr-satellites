@@ -23,10 +23,11 @@ class snet_deframer(gr.hier_block2, options_block):
     with frames.
 
     Args:
+        buggy_crc: use buggy CRC implementation of S-NET
         syncword_threshold: number of bit errors allowed in syncword (int)
         options: Options from argparse
     """
-    def __init__(self, syncword_threshold = None, options = None):
+    def __init__(self, buggy_crc = True, syncword_threshold = None, options = None):
         gr.hier_block2.__init__(self, "snet_deframer",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
@@ -41,7 +42,8 @@ class snet_deframer(gr.hier_block2, options_block):
         self.deframer = sync_to_pdu(packlen = 8 * 512,\
                                     sync = _syncword,\
                                     threshold = syncword_threshold)
-        self.fec = deframer(self.options.verbose_fec)
+        self.fec = deframer(self.options.verbose_fec,
+                                buggy_crc = buggy_crc)
         
         self.connect(self, self.slicer, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.fec, 'in'))
