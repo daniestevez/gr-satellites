@@ -145,6 +145,15 @@ else(DOXYGEN_FOUND)
 endif(DOXYGEN_FOUND)
 
 ########################################################################
+# Setup manpage option
+########################################################################
+if(NOT WIN32)
+    option(ENABLE_MANPAGES "Build man pages for commands" ON)
+else(NOT WIN32)
+    option(ENABLE_MANPAGES "Build man pages for commands" OFF)
+endif(NOT WIN32)
+
+########################################################################
 # Create uninstall target
 ########################################################################
 configure_file(
