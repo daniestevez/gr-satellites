@@ -81,6 +81,9 @@ install(FILES
     satellites_ngham_remove_padding.block.yml
     satellites_ngham_check_crc.block.yml
     satellites_bme_submitter.block.yml
+    satellites_sx12xx_check_crc.block.yml
+    satellites_sx12xx_packet_crop.block.yml
+    satellites_sx12xx_remove_length.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )
 

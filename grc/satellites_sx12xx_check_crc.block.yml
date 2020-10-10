@@ -1,0 +1,36 @@
+id: satellites_sx12xx_check_crc
+label: Check SX12xx CRC-16
+category: '[Satellites]/SX12xx'
+
+parameters:
+-   id: verbose
+    label: Verbose
+    dtype: bool
+    options: ['True', 'False']
+    option_labels: ['Yes', 'No']
+-   id: initial
+    label: CRC Initial
+    dtype: int
+    default: '0x1D0F'
+-   id: final
+    label: CRC Final XOR
+    dtype: int
+    default: '0xFFFF'
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: ok
+    optional: true
+-   domain: message
+    id: fail
+    optional: true
+
+templates:
+    imports: import satellites
+    make: satellites.sx12xx_check_crc(${verbose}, ${initial}, ${final})
+
+file_format: 1
