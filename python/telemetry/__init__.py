@@ -30,6 +30,8 @@ from .csp import csp_swapped
 from .dstar_one import dstar_one
 from .eseo import eseo
 from .floripasat import floripasat
+from .fossasat_1b import fossasat_1b
+from .fossasat_2 import fossasat_2
 from .funcube import funcube
 from .gomx_1 import gomx_1
 from .gomx_3 import gomx_3
