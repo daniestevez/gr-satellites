@@ -87,7 +87,6 @@ GR_PYTHON_INSTALL(
     bme_submitter.py
     sx12xx_check_crc.py
     sx12xx_packet_crop.py
-    sx12xx_remove_length.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
