@@ -25,6 +25,7 @@
 #include "satellites/decode_ra_code.h"
 #include "satellites/nrzi_encode.h"
 #include "satellites/nrzi_decode.h"
+#include "satellites/pdu_head_tail.h"
 %}
 
 %include "satellites/decode_rs.h"
@@ -61,3 +62,5 @@ GR_SWIG_BLOCK_MAGIC2(satellites, decode_ra_code);
 GR_SWIG_BLOCK_MAGIC2(satellites, nrzi_decode);
 %include "satellites/nrzi_encode.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, nrzi_encode);
+%include "satellites/pdu_head_tail.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, pdu_head_tail);
