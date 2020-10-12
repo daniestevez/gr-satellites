@@ -1,0 +1,25 @@
+id: satellites_sx12xx_packet_crop
+label: SX12xx packet crop
+category: '[Satellites]/SX12xx'
+
+parameters:
+-   id: crc_len
+    label: CRC length
+    dtype: int
+    default: '2'
+    options: ['0', '1', '2']
+    option_labels: ['No CRC', 'CRC-8', 'CRC-16']
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites
+    make: satellites.sx12xx_packet_crop(${crc_len})
+
+file_format: 1

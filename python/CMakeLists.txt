@@ -85,6 +85,8 @@ GR_PYTHON_INSTALL(
     ngham_remove_padding.py
     ngham_check_crc.py
     bme_submitter.py
+    sx12xx_check_crc.py
+    sx12xx_packet_crop.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 

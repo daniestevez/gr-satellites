@@ -41,6 +41,9 @@ GR_PYTHON_INSTALL(
     csp.py
     dstar_one.py
     eseo.py
+    fossasat.py
+    fossasat_1b.py
+    fossasat_2.py
     floripasat.py
     funcube.py
     gomx_1.py
