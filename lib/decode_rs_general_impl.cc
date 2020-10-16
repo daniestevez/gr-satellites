@@ -53,8 +53,7 @@ decode_rs_general_impl::decode_rs_general_impl(
 
     message_port_register_out(pmt::mp("out"));
     message_port_register_in(pmt::mp("in"));
-    set_msg_handler(pmt::mp("in"),
-                    boost::bind(&decode_rs_general_impl::msg_handler, this, _1));
+    set_msg_handler(pmt::mp("in"), [this](pmt::pmt_t msg) { this->msg_handler(msg); });
 }
 
 /*
