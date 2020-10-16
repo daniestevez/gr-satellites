@@ -51,7 +51,11 @@ class snet_deframer(gr.basic_block):
         ltu = np.fliplr(ltu[:,-5:]).ravel()
         hdr = LTUFrameHeader.parse(np.packbits(ltu))
 
-        ltu_crc = np.flipud(np.concatenate((ltu[:-5], np.array([1,0,1,1,0,1,1]))).reshape((9,8)))
+        ltu_crc = np.concatenate((ltu[:-5], np.array([1,0,1,1,0,1,1]))).reshape((9,8))
+        if self.buggy_crc:
+            # reverse byte ordering for CRC5 calculation
+            ltu_crc = np.flipud(lut_crc)
+
         if self.buggy_crc:
             # force CRC5 bugs
             ltu_crc[4,:] = ltu_crc[3,:]
@@ -128,7 +132,8 @@ class snet_deframer(gr.basic_block):
 
         # crc13
         crc = 0x1FFF
-        for bit in np.flipud(pdu_bytes).ravel():
+        pdu_crc = np.flipud(pdu_bytes) if self.buggy_crc else pdu_bytes
+        for bit in pdu_crc.ravel():
             c = crc & 0x1000 # check most significant bit in the CRC buffer and safe in a variable.
             c >>= 12 # shift variable to make the compare op. possible (see beneath).
             crc <<= 1 # shift CRC to the left and write 0 into the least significant bit.
