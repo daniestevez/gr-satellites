@@ -48,7 +48,6 @@ install(FILES
     satellites_varlen_packet_framer.block.yml
     satellites_append_crc32c.block.yml
     satellites_nusat_decoder.block.yml
-    satellites_strip_ax25_header.block.yml
     satellites_snet_deframer.block.yml
     satellites_beesat_classifier.block.yml
     satellites_snet_classifier.block.yml
@@ -56,7 +55,6 @@ install(FILES
     satellites_descrambler308.block.yml
     satellites_cc11xx_packet_crop.block.yml
     satellites_check_cc11xx_crc.block.yml
-    satellites_cc11xx_remove_length.block.yml
     satellites_pwsat2_telemetry_parser.block.yml
     satellites_pwsat2_submitter.block.yml
     satellites_eseo_packet_crop.block.yml
@@ -72,7 +70,6 @@ install(FILES
     satellites_check_swiatowid_crc.block.yml
     satellites_swiatowid_packet_split.block.yml
     satellites_manchester_sync.block.yml
-    satellites_header_remover.block.yml
     satellites_distributed_syncframe_soft.block.yml
     satellites_matrix_deinterleaver_soft.block.yml
     satellites_decode_ra_code.block.yml

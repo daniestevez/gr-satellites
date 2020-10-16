@@ -9,7 +9,7 @@
 #
 
 from gnuradio import gr, blocks
-from ... import kiss_to_pdu, header_remover
+from ... import kiss_to_pdu, pdu_head_tail
 
 class kiss_transport(gr.hier_block2):
     """
@@ -31,7 +31,7 @@ class kiss_transport(gr.hier_block2):
         self.message_port_register_hier_out('out')
 
         if header_remove_bytes:
-            self.header = header_remover(header_remove_bytes)
+            self.header = pdu_head_tail(3, header_remove_bytes)
         self.pdu2tag = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
         self.kiss = kiss_to_pdu(control_byte)
 

@@ -55,7 +55,6 @@ GR_PYTHON_INSTALL(
     lilacsat1_gps_kml.py
     check_tt64_crc.py
     append_crc32c.py
-    strip_ax25_header.py
     snet_deframer.py
     bch15.py
     beesat_classifier.py
@@ -65,7 +64,6 @@ GR_PYTHON_INSTALL(
     feh.py
     cc11xx_packet_crop.py
     check_cc11xx_crc.py
-    cc11xx_remove_length.py
     pwsat2_telemetry_parser.py
     pwsat2_submitter.py
     eseo_packet_crop.py
@@ -79,7 +77,6 @@ GR_PYTHON_INSTALL(
     check_swiatowid_crc.py
     swiatowid_packet_split.py
     manchester_sync.py
-    header_remover.py
     aausat4_remove_fsm.py
     ngham_packet_crop.py
     ngham_remove_padding.py

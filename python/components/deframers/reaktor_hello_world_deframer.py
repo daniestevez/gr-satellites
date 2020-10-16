@@ -9,7 +9,7 @@
 #
 
 from gnuradio import gr, digital
-from ... import check_cc11xx_crc, cc11xx_packet_crop, cc11xx_remove_length
+from ... import check_cc11xx_crc, cc11xx_packet_crop, pdu_head_tail
 from ...hier.pn9_scrambler import pn9_scrambler
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
@@ -48,7 +48,7 @@ class reaktor_hello_world_deframer(gr.hier_block2, options_block):
         self.scrambler = pn9_scrambler()
         self.crop = cc11xx_packet_crop(True)
         self.crc = check_cc11xx_crc(self.options.verbose_crc)
-        self.crop2 = cc11xx_remove_length()
+        self.crop2 = pdu_head_tail(3, 1)
 
         self.connect(self, self.slicer, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.scrambler, 'in'))

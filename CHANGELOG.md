@@ -6,8 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- PDU Head/Tail block
+
 ### Changed
 - Replaced boost::bind() by C++ lambdas
+
+### Removed
+- Deprecated CC11xx remove length, Header remover and Strip AX.25 header in favour of PDU Head/Tail
 
 ## [3.5.0] - 2020-10-08
 
