@@ -39,7 +39,7 @@ Currently there are the following series of releases in the history of
 gr-satellites:
 
 * `v3.x.y` is the result of a large refactor that introduces a lot of
-  new functionality and improvements. The refactore started on September
+  new functionality and improvements. The refactor started on September
   2019 and was finished in May 2020.
 
 * `v2.x.y` is a series of releases compatible with GNU Radio 3.8 that existed
