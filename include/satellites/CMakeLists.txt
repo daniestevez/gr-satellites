@@ -33,8 +33,6 @@ install(FILES
     varlen_packet_framer.h
     nusat_decoder.h
     descrambler308.h
-    decode_rs_general.h
-    decode_rs_interleaved.h
     distributed_syncframe_soft.h
     matrix_deinterleaver_soft.h
     decode_ra_code.h
