@@ -288,7 +288,8 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.5.1...master
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.5.2...master
+[3.5.2]: https://github.com/daniestevez/gr-satellites/compare/v3.5.1...v3.5.2
 [3.5.1]: https://github.com/daniestevez/gr-satellites/compare/v3.5.0...v3.5.1
 [3.5.0]: https://github.com/daniestevez/gr-satellites/compare/v3.4.0...v3.5.0
 [3.4.0]: https://github.com/daniestevez/gr-satellites/compare/v3.3.0...v3.4.0
