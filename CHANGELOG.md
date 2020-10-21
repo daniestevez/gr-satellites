@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - Deprecated CC11xx remove length, Header remover and Strip AX.25 header in favour of PDU Head/Tail
 
+## [3.5.2] - 2020-10-21
+
+### Changed
+- Fixed bug in S-NET deframer
+
 ## [3.5.1] - 2020-10-17
 
 ### Changed

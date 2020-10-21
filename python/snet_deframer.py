@@ -54,7 +54,7 @@ class snet_deframer(gr.basic_block):
         ltu_crc = np.concatenate((ltu[:-5], np.array([1,0,1,1,0,1,1]))).reshape((9,8))
         if self.buggy_crc:
             # reverse byte ordering for CRC5 calculation
-            ltu_crc = np.flipud(lut_crc)
+            ltu_crc = np.flipud(ltu_crc)
 
         if self.buggy_crc:
             # force CRC5 bugs
