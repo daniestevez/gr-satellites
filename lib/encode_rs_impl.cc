@@ -92,7 +92,7 @@ void encode_rs_impl::check_interleave()
             boost::str(boost::format("Invalid interleave value = %d") % d_interleave));
     }
 }
-  
+
 void encode_rs_impl::set_message_ports()
 {
     message_port_register_out(pmt::mp("out"));
