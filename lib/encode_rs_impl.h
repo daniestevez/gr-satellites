@@ -34,6 +34,7 @@ private:
     constexpr static int d_ccsds_nn = 255;
     constexpr static int d_ccsds_nroots = 32;
 
+    void check_interleave();
     void set_message_ports();
 
 public:

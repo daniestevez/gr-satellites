@@ -54,7 +54,7 @@ class ccsds_rs_deframer(gr.hier_block2, options_block):
                                         threshold = syncword_threshold)
         if use_scrambler:
             self.scrambler = ccsds_descrambler()
-        self.fec = decode_rs(self.options.verbose_rs, 1 if dual_basis else 0)
+        self.fec = decode_rs(dual_basis, 1)
 
         self._blocks = [self, self.slicer]
         if differential:

@@ -55,6 +55,7 @@ encode_rs_impl::encode_rs_impl(bool dual_basis, int interleave)
     d_rs_codeword.resize(d_ccsds_nn);
     d_nroots = d_ccsds_nroots;
 
+    check_interleave();
     set_message_ports();
 }
 
@@ -80,9 +81,18 @@ encode_rs_impl::encode_rs_impl(
     d_rs_codeword.resize((1U << symsize) - 1);
     d_nroots = nroots;
 
+    check_interleave();
     set_message_ports();
 }
 
+void encode_rs_impl::check_interleave()
+{
+    if (d_interleave <= 0) {
+        throw std::runtime_error(
+            boost::str(boost::format("Invalid interleave value = %d") % d_interleave));
+    }
+}
+  
 void encode_rs_impl::set_message_ports()
 {
     message_port_register_out(pmt::mp("out"));

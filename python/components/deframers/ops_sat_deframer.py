@@ -45,7 +45,7 @@ class ops_sat_deframer(gr.hier_block2, options_block):
         self.pack = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
         self.tag2pdu = blocks.tagged_stream_to_pdu(blocks.byte_t, 'packet_len')
 
-        self.fec = decode_rs(self.options.verbose_rs, 0)
+        self.fec = decode_rs(False, 1)
 
         self.connect(self, self.slicer, self.nrzi, self.descrambler, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.strip, 'in'))

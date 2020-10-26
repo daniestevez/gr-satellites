@@ -45,7 +45,6 @@ endif(MSVC)
 list(APPEND satellites_sources
     decode_rs_impl.cc
     encode_rs_impl.cc
-    ao40_rs_decoder_impl.cc
     ax100_decode_impl.cc
     u482c_decode_impl.cc
     randomizer.c

@@ -9,7 +9,7 @@
 #
 
 from gnuradio import gr, digital
-from ... import decode_rs_general, check_tt64_crc
+from ... import decode_rs, check_tt64_crc
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
 
@@ -41,7 +41,7 @@ class tt64_deframer(gr.hier_block2, options_block):
         self.deframer = sync_to_pdu_packed(packlen = 64,\
                                     sync = _syncword,\
                                     threshold = syncword_threshold)
-        self.rs = decode_rs_general(0x11d, 1, 1, 16, self.options.verbose_rs)
+        self.rs = decode_rs(8, 0x11d, 1, 1, 16, 1)
         self.crc = check_tt64_crc(self.options.verbose_crc)
         
         self.connect(self, self.slicer, self.deframer)

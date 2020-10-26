@@ -25,7 +25,6 @@ install(FILES
     api.h
     decode_rs.h
     encode_rs.h
-    ao40_rs_decoder.h
     ax100_decode.h
     u482c_decode.h
     lilacsat1_demux.h

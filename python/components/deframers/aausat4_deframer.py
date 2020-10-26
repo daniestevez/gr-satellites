@@ -58,7 +58,7 @@ class aausat4_deframer(gr.hier_block2, options_block):
         self.tag2pdu = blocks.tagged_stream_to_pdu(blocks.byte_t, 'packet_len')
 
         self.scrambler = ccsds_descrambler()
-        self.rs = decode_rs(self.options.verbose_rs, 0)
+        self.rs = decode_rs(False, 1)
 
         self.connect(self, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.fsm, 'in'))

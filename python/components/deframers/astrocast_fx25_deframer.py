@@ -45,7 +45,7 @@ class astrocast_fx25_deframer(gr.hier_block2, options_block):
                                            sync = _syncword,\
                                            threshold = syncword_threshold)
         self.reflect = reflect_bytes()
-        self.rs = decode_rs(self.options.verbose_rs, 1)
+        self.rs = decode_rs(True, 1)
         self.crc = check_astrocast_crc(self.options.verbose_crc)
 
         blocks = [self, self.slicer]

@@ -9,7 +9,7 @@
 #
 
 from gnuradio import gr, digital
-from ... import decode_rs_interleaved
+from ... import decode_rs
 from ...hier.sync_to_pdu import sync_to_pdu
 from ...hier.ccsds_descrambler import ccsds_descrambler
 from ...utils.options_block import options_block
@@ -43,7 +43,7 @@ class astrocast_9k6_deframer(gr.hier_block2, options_block):
                                     sync = _syncword,\
                                     threshold = syncword_threshold)
         self.scrambler = ccsds_descrambler()
-        self.rs = decode_rs_interleaved(self.options.verbose_rs, 1, 5)
+        self.rs = decode_rs(True, 5)
 
         self.connect(self, self.slicer, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.scrambler, 'in'))
