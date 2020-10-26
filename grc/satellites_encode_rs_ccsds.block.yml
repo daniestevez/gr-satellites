@@ -1,0 +1,28 @@
+id: satellites_encode_rs_ccsds
+label: CCSDS Reed-Solomon Encoder
+category: '[Satellites]/FEC'
+
+parameters:
+-   id: basis
+    label: Basis
+    dtype: enum
+    options: ['True', 'False']
+    option_labels: [Conventional, Dual]
+-   id: interleave
+    label: Interleave depth
+    default: 1
+    dtype: int
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites
+    make: satellites.encode_rs(${basis}, ${interleave})
+
+file_format: 1
