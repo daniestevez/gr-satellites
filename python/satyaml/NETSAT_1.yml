@@ -1,5 +1,5 @@
 name: NETSAT 1
-norad: 99788
+norad: 46506
 data:
   &tlm Telemetry:
     telemetry: ax25
