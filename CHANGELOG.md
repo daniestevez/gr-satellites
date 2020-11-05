@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for VZLUSAT-2
 - PDU Head/Tail block
 - Support for BOBCAT-1
+- Support for SPOC
 
 ### Changed
 - Replaced boost::bind() by C++ lambdas
