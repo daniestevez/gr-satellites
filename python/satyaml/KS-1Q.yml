@@ -13,7 +13,8 @@ transmitters:
     frequency: 436.500e+6
     modulation: FSK
     baudrate: 20000
-    framing: CCSDS Concatenated dual
+    framing: CCSDS Concatenated
+    RS basis: dual
     frame size: 223
     transports:
     - *kiss
