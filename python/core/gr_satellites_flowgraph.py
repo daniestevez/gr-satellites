@@ -51,6 +51,16 @@ def try_add_options(x, parser):
     """
     if hasattr(x, 'add_options'):
         x.add_options(parser)
+
+def filter_translate_dict(d, key_translation):
+    """
+    Filter and translate the keys of a dictionary
+
+    Args:
+        d: a dictionary to filter and translate
+        keys_translation: a dictionary of key translations
+    """
+    return {key_translation[k] : v for k,v in d.items() if k in key_translation}
         
 class gr_satellites_flowgraph(gr.hier_block2):
     """
@@ -149,18 +159,12 @@ class gr_satellites_flowgraph(gr.hier_block2):
             self._deframers = dict()
             for key, transmitter in satyaml['transmitters'].items():
                 baudrate = transmitter['baudrate']
-                demodulator_additional_options = dict()
-                try:
-                    demodulator_additional_options['deviation'] = transmitter['deviation']
-                    demodulator_additional_options['af_carrier'] = transmitter['af_carrier']
-                except KeyError:
-                    pass
+                demod_options = ['deviation', 'af_carrier']
+                demod_options = {k : k for k in demod_options}
+                demodulator_additional_options = filter_translate_dict(transmitter, demod_options)
                 demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate, iq = iq, dump_path = dump_path, options = options, **demodulator_additional_options)
-                deframer_additional_options = dict()
-                try:
-                    deframer_additional_options['frame_size'] = transmitter['frame size']
-                except KeyError:
-                    pass
+                deframe_options = {'frame size' : 'frame_size'}
+                deframer_additional_options = filter_translate_dict(transmitter, deframe_options)
                 deframer = self.get_deframer(transmitter['framing'])(options = options, **deframer_additional_options)
                 self.connect(self, demodulator, deframer)
                 self._demodulators[key] = demodulator
