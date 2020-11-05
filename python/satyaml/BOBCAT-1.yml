@@ -1,0 +1,27 @@
+name: BOBCAT-1
+norad: 99837
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  9k6 FSK downlink:
+    frequency: 436.600e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
+  4k8 FSK downlink:
+    frequency: 436.600e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
+  1k2 FSK downlink:
+    frequency: 436.600e+6
+    modulation: FSK
+    baudrate: 1200
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm

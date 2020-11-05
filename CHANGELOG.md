@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for FossaSat-1B and FossaSat-2
 - Support for VZLUSAT-2
 - PDU Head/Tail block
+- Support for BOBCAT-1
 
 ### Changed
 - Replaced boost::bind() by C++ lambdas
