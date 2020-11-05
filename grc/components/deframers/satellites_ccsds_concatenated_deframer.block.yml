@@ -30,7 +30,7 @@ parameters:
     options: ['CCSDS', 'none']
     option_labels: [CCSDS, None]
 -   id: convolutional
-    label: Convoluational code
+    label: Convolutional code
     dtype: enum
     default: 'CCSDS'
     options: ['CCSDS', 'NASA-DSN', 'CCSDS uninverted', 'NASA-DSN uninverted']
