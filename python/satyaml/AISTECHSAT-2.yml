@@ -2,9 +2,16 @@ name: AISTECHSAT-2
 norad: 43768
 data:
   &tlm Telemetry:
-    telemetry: lume
+    unknown
 transmitters:
-  4k8 FSK downlink:
+  1k2 FSK downlink:
+    frequency: 436.600e+6
+    modulation: FSK
+    baudrate: 1200
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
+4k8 FSK downlink:
     frequency: 436.600e+6
     modulation: FSK
     baudrate: 4800
