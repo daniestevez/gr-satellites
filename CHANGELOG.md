@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Replaced boost::bind() by C++ lambdas
 - Definitive NORAD IDs for NETSAT 1-4
+- Updated AISTECHSAT-2 transmit frequency
 
 ### Removed
 - Deprecated CC11xx remove length, Header remover and Strip AX.25 header in favour of PDU Head/Tail
