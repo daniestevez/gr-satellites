@@ -43,29 +43,25 @@ if(MSVC)
 endif(MSVC)
 
 list(APPEND satellites_sources
-    decode_rs_impl.cc
-    encode_rs_impl.cc
     ax100_decode_impl.cc
-    u482c_decode_impl.cc
-    randomizer.c
-    golay24.c
-    lilacsat1_demux_impl.cc
-    varlen_packet_tagger_impl.cc
-    varlen_packet_framer_impl.cc
-    viterbi.c
-    nusat_decoder_impl.cc
+    decode_ra_code_impl.cc
+    decode_rs_impl.cc
     descrambler308_impl.cc
     distributed_syncframe_soft_impl.cc
+    encode_rs_impl.cc
+    golay24.c
+    lilacsat1_demux_impl.cc
     matrix_deinterleaver_soft_impl.cc
-    radecoder/ra_config.c
-    radecoder/ra_decoder_gen.c
-    radecoder/ra_lfsr.c
-    radecoder/ra_encoder.c
-    decode_ra_code_impl.cc
-    nrzi_encode_impl.cc
     nrzi_decode_impl.cc
-    pdu_head_tail_impl.cc
+    nrzi_encode_impl.cc
+    nusat_decoder_impl.cc
     pdu_add_meta_impl.cc
+    pdu_head_tail_impl.cc
+    randomizer.c
+    u482c_decode_impl.cc
+    varlen_packet_framer_impl.cc
+    varlen_packet_tagger_impl.cc
+    viterbi.c
     libfec/decode_rs_8.c
     libfec/decode_rs_ccsds.c
     libfec/decode_rs_char.c
@@ -75,6 +71,10 @@ list(APPEND satellites_sources
     libfec/taltab.c
     libfec/ccsds.c
     libfec/init_rs_char.c
+    radecoder/ra_config.c
+    radecoder/ra_decoder_gen.c
+    radecoder/ra_lfsr.c
+    radecoder/ra_encoder.c
 )
 
 set(satellites_sources "${satellites_sources}" PARENT_SCOPE)
