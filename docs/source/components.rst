@@ -382,7 +382,8 @@ Blue Book (see the `CCSDS Blue Books`_).
 
 The CCSDS Reed-Solomon deframer implements Reed-Solomon TM frames, which use a
 Reed-Solmon (255, 223) code (or a shortened version of this code) and the CCSDS
-synchronous scrambler. The CCSDS Concatenated deframer implements
+synchronous scrambler. There is support for several interleave Reed-Solomon codewords.
+The CCSDS Concatenated deframer implements
 concatenated TM frames, which add an r=1/2, k=7 convolutional code as an inner
 coding to the Reed-Solomon frames. The usage of both deframers is very similar.
 
@@ -403,16 +404,18 @@ Message Debug block.
 The figure below shows the options used by the CCSDS Concatenated
 deframer. The CCSDS Reed-Solomon deframer block allows exactly the same options,
 except for the *Convolutional code* option,
-since all the other options refer to the convolutional inner code.
+since all the other options refer to the Reed-Solomon outer code.
 
 The *Frame size* option indicates the size of the frame in bytes (after
-Reed-Solomon decoding). The *Differential encoding* option enables differential
-decoding, which is often used to solve the BPSK 180º phase ambiguity. The
-*Use RS dual basis* option enables the usage of the dual basis definition for the Reed-Solmon
-code. The *Use scrambler* option enables or disables the use of the CCSDS synchronous
-descrambler. Most satellites using CCSDS frames use scrambling.
-The *Convolutional code* option can be used to toggle between the CCSDS/NASA-GSFC
-(most usual and default) and NASA-DSN conventions for the convolutional code.
+Reed-Solomon decoding). The *Precoding* option can be used enable a differential
+decoder before the Reed-Solomon decoder.
+This is often used to solve the BPSK 180º phase ambiguity.
+The *Reed-Solomon basis* option can be used to toggle between the conventional
+and dual basis definitions of the Reed-Solomon code. The CCSDS standard
+specifies the dual basis, but the conventional basis is frequently used. The
+*Reed-Solomon interleve depth* option can be used to enable decoding of interleaved
+Reed-Solomon codewords. The *Scrambler* option can be used to enable or disable
+the CCSDS synchronous scrambler.
 The *Syncword threshold* option can be used to choose the number of bit
 errors that are allowed in the detection of the syncword.
     
