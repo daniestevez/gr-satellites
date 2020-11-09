@@ -144,9 +144,6 @@ The framings allowed in the ``framing`` field are the following:
   somewhat non compliant `FX.25`_ variant that is identical to the FX.25 NRZ-I
   mode except that NRZ is used instead of NRZ-I.
 
-* ``Astrocast 9k6``, custom framing used by Astrocast 0.1. It uses five
-  interleaved Reed-Solomon (255,223) codewords and the CCSDS synchronous scrambler.
-
 * ``AO-40 uncoded``, uncoded AO-40 beacon. It uses 512 byte frames and a CRC-16
 
 * ``TT-64``, custom framing used by QB50 AT03, which uses a Reed-Solomon (64,48)
