@@ -236,10 +236,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         self._demodulators[key] = demodulator
         self._deframers[key] = deframer
             
-        if self.grc_block:
-            self.msg_connect((deframer, 'out'), (self, 'out'))
-        else:
-            self._connect_transmitter_to_data(key, transmitter, deframer)
+        self._connect_transmitter_to_data(key, transmitter, deframer)
 
 
     def _connect_transmitter_to_data(self, key, transmitter, deframer):
@@ -259,6 +256,12 @@ class gr_satellites_flowgraph(gr.hier_block2):
         tagger = pdu_add_meta(meta)
         self._taggers[key] = tagger
         self.msg_connect((deframer, 'out'), (tagger, 'in'))
+
+        if self.grc_block:
+            # If we are a GRC block we have no datasinks
+            # so we connect directly to our output
+            self.msg_connect((tagger, 'out'), (self, 'out'))
+            return
         
         for s in self._additional_datasinks:
             self.msg_connect((tagger, 'out'), (s, 'in'))
