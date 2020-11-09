@@ -85,6 +85,20 @@ class SatYAML:
                 raise YAMLError(f'Missing framing field in {key} in {yml}')
             if transmitter['framing'] not in self.framings:
                 raise YAMLError(f'Unknown framing in {key} in {yml}')
+            if transmitter['framing'] in ['CCSDS Reed-Solomon', 'CCSDS Concatenated']:
+                if 'RS basis' not in transmitter:
+                    raise YAMLError(f'No RS basis field in {key} in {yml}')
+                if 'precoding' in transmitter and transmitter['precoding'] != 'differential':
+                    raise YAMLError(f'Invalid precoding value {transmitter["precoding"]} for {key} in {yml}')
+                if transmitter['RS basis'] not in ['conventional', 'dual']:
+                    raise YAMLError(f'Invalid RS basis value {transmitter["RS basis"]} for {key} in {yml}')
+                if 'RS interleaving' in transmitter and type(transmitter['RS interleaving']) is not int:
+                    raise YAMLError(f'RS interleaving does not contain an int in {key} in {yml}')
+                if 'scrambler' in transmitter and transmitter['scrambler'] not in ['CCSDS', 'none']:
+                    raise YAMLError(f'Invalid scrambler value {transmitter["scrambler"]} for {key} in {yml}')
+                if 'convolutional' in transmitter and transmitter['convolutional'] not in \
+                  ['CCSDS', 'NASA-DSN', 'CCSDS uninverted', 'NASA-DSN uninverted']:
+                    raise YAMLError(f'Invalid convolutional value {transmitter["convolutional"]} for {key} in {yml}')
             if 'data' not in transmitter and 'transports' not in transmitter:
                 raise YAMLError(f'No data or transport field in {key} in {yml}')
             if 'data' in transmitter:
