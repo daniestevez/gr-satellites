@@ -22,13 +22,13 @@ class SatYAML:
         self._path = pathlib.Path(path)
 
     modulations = ['AFSK', 'FSK', 'BPSK', 'BPSK Manchester', 'DBPSK', 'DBPSK Manchester', 'FSK subaudio']
-    framings = ['AX.25', 'AX.25 G3RUH', 'AX100 ASM+Golay', 'AX100 Reed Solomon',\
-                '3CAT-1', 'Astrocast FX.25 NRZ-I', 'Astrocast FX.25 NRZ',\
-                'AO-40 FEC', 'AO-40 FEC short', 'AO-40 uncoded', 'TT-64', 'ESEO', 'Lucky-7',\
-                'Reaktor Hello World', 'S-NET', 'Swiatowid', 'NuSat', 'K2SAT',\
-                'CCSDS Reed-Solomon', 'CCSDS Concatenated',\
-                'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon', 'SMOG-P RA',\
-                'SMOG-P Signalling', 'OPS-SAT', 'U482C', 'UA01', 'SALSAT',\
+    framings = ['AX.25', 'AX.25 G3RUH', 'AX100 ASM+Golay', 'AX100 Reed Solomon',
+                '3CAT-1', 'Astrocast FX.25 NRZ-I', 'Astrocast FX.25 NRZ',
+                'AO-40 FEC', 'AO-40 FEC short', 'AO-40 uncoded', 'TT-64', 'ESEO', 'Lucky-7',
+                'Reaktor Hello World', 'S-NET', 'Swiatowid', 'NuSat', 'K2SAT',
+                'CCSDS Reed-Solomon', 'CCSDS Concatenated',
+                'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon', 'SMOG-P RA',
+                'SMOG-P Signalling', 'OPS-SAT', 'U482C', 'UA01', 'SALSAT',
                 'Mobitex', 'Mobitex-NX', 'FOSSASAT']
     transports = ['KISS', 'KISS no control byte', 'KISS KS-1Q']
     top_level_words = ['name', 'alternative_names', 'norad', 'telemetry_servers', 'data', 'transports', 'transmitters']
