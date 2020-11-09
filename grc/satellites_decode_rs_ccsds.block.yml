@@ -6,7 +6,7 @@ parameters:
 -   id: basis
     label: Basis
     dtype: enum
-    options: ['True', 'False']
+    options: ['False', 'True']
     option_labels: [Conventional, Dual]
 -   id: interleave
     label: Interleave depth
