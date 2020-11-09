@@ -35,7 +35,9 @@ public:
      * class. satellites::decode_rs::make is the public interface for
      * creating new instances.
      */
-    static sptr make(bool verbose, int basis);
+    static sptr make(int dual_basis, int interleave);
+    static sptr
+    make(int symsize, int gfpoly, int fcr, int prim, int nroots, int interleave);
 };
 
 } // namespace satellites

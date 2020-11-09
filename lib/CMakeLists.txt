@@ -45,7 +45,6 @@ endif(MSVC)
 list(APPEND satellites_sources
     decode_rs_impl.cc
     encode_rs_impl.cc
-    ao40_rs_decoder_impl.cc
     ax100_decode_impl.cc
     u482c_decode_impl.cc
     randomizer.c
@@ -56,8 +55,6 @@ list(APPEND satellites_sources
     viterbi.c
     nusat_decoder_impl.cc
     descrambler308_impl.cc
-    decode_rs_general_impl.cc
-    decode_rs_interleaved_impl.cc
     distributed_syncframe_soft_impl.cc
     matrix_deinterleaver_soft_impl.cc
     radecoder/ra_config.c

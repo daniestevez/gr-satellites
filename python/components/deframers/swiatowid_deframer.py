@@ -9,7 +9,7 @@
 #
 
 from gnuradio import gr, digital
-from ... import reflect_bytes, swiatowid_packet_crop, swiatowid_packet_split, decode_rs_general
+from ... import reflect_bytes, swiatowid_packet_crop, swiatowid_packet_split, decode_rs
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
 
@@ -44,7 +44,7 @@ class swiatowid_deframer(gr.hier_block2, options_block):
         self.reflect = reflect_bytes()
         self.crop = swiatowid_packet_crop()
         self.split = swiatowid_packet_split()
-        self.rs = decode_rs_general(0x11d, 0, 1, 10, self.options.verbose_rs)
+        self.rs = decode_rs(8, 0x11d, 0, 1, 10, 1)
         
         self.connect(self, self.slicer, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.reflect, 'in'))

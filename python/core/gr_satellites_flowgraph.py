@@ -51,6 +51,16 @@ def try_add_options(x, parser):
     """
     if hasattr(x, 'add_options'):
         x.add_options(parser)
+
+def filter_translate_dict(d, key_translation):
+    """
+    Filter and translate the keys of a dictionary
+
+    Args:
+        d: a dictionary to filter and translate
+        keys_translation: a dictionary of key translations
+    """
+    return {key_translation[k] : v for k,v in d.items() if k in key_translation}
         
 class gr_satellites_flowgraph(gr.hier_block2):
     """
@@ -149,18 +159,17 @@ class gr_satellites_flowgraph(gr.hier_block2):
             self._deframers = dict()
             for key, transmitter in satyaml['transmitters'].items():
                 baudrate = transmitter['baudrate']
-                demodulator_additional_options = dict()
-                try:
-                    demodulator_additional_options['deviation'] = transmitter['deviation']
-                    demodulator_additional_options['af_carrier'] = transmitter['af_carrier']
-                except KeyError:
-                    pass
+                demod_options = ['deviation', 'af_carrier']
+                demod_options = {k : k for k in demod_options}
+                demodulator_additional_options = filter_translate_dict(transmitter, demod_options)
                 demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate, iq = iq, dump_path = dump_path, options = options, **demodulator_additional_options)
-                deframer_additional_options = dict()
-                try:
-                    deframer_additional_options['frame_size'] = transmitter['frame size']
-                except KeyError:
-                    pass
+                deframe_options = { 'frame size' : 'frame_size',
+                                    'precoding' : 'precoding',
+                                    'RS basis' : 'rs_basis',
+                                    'RS interleaving' : 'rs_interleaving',
+                                    'convolutional' : 'convolutional',
+                                    'scrambler' : 'scrambler' }
+                deframer_additional_options = filter_translate_dict(transmitter, deframe_options)
                 deframer = self.get_deframer(transmitter['framing'])(options = options, **deframer_additional_options)
                 self.connect(self, demodulator, deframer)
                 self._demodulators[key] = demodulator
@@ -266,7 +275,6 @@ class gr_satellites_flowgraph(gr.hier_block2):
         '3CAT-1' : deframers.sat_3cat_1_deframer,
         'Astrocast FX.25 NRZ-I' : set_options(deframers.astrocast_fx25_deframer, nrzi = True),
         'Astrocast FX.25 NRZ' : set_options(deframers.astrocast_fx25_deframer, nrzi = False),
-        'Astrocast 9k6' : deframers.astrocast_9k6_deframer,
         'AO-40 FEC' : deframers.ao40_fec_deframer,
         'AO-40 FEC short' : set_options(deframers.ao40_fec_deframer, short_frames = True),
         'AO-40 uncoded' : deframers.ao40_uncoded_deframer,
@@ -280,29 +288,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'NuSat' : deframers.nusat_deframer,
         'K2SAT' : deframers.k2sat_deframer,
         'CCSDS Reed-Solomon' : deframers.ccsds_rs_deframer,
-        'CCSDS Reed-Solomon dual' : set_options(deframers.ccsds_rs_deframer, dual_basis = True),
-        'CCSDS Reed-Solomon differential' : set_options(deframers.ccsds_rs_deframer, differential = True),
-        'CCSDS Reed-Solomon dual differential' : set_options(deframers.ccsds_rs_deframer, differential = True, dual_basis = True),
         'CCSDS Concatenated' : deframers.ccsds_concatenated_deframer,
-        'CCSDS Concatenated dual' : set_options(deframers.ccsds_concatenated_deframer, dual_basis = True),
-        'CCSDS Concatenated differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True),
-        'CCSDS Concatenated dual differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True, dual_basis = True),
-        'NASA-DSN Concatenated' : set_options(deframers.ccsds_concatenated_deframer, nasa_dsn = True),
-        'NASA-DSN Concatenated dual' : set_options(deframers.ccsds_concatenated_deframer, dual_basis = True, nasa_dsn = True),
-        'NASA-DSN Concatenated differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True, nasa_dsn = True),
-        'NASA-DSN Concatenated dual differential' : set_options(deframers.ccsds_concatenated_deframer, differential = True, dual_basis = True, nasa_dsn = True),
-        'CCSDS Reed-Solomon no-scrambler' : set_options(deframers.ccsds_rs_deframer, use_scrambler = False),
-        'CCSDS Reed-Solomon dual no-scrambler' : set_options(deframers.ccsds_rs_deframer, dual_basis = True, use_scrambler = False),
-        'CCSDS Reed-Solomon differential no-scrambler' : set_options(deframers.ccsds_rs_deframer, differential = True, use_scrambler = False),
-        'CCSDS Reed-Solomon dual differential no-scrambler' : set_options(deframers.ccsds_rs_deframer, differential = True, dual_basis = True, use_scrambler = False),
-        'CCSDS Concatenated no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, use_scrambler = False),
-        'CCSDS Concatenated dual no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, dual_basis = True, use_scrambler = False),
-        'CCSDS Concatenated differential no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, differential = True, use_scrambler = False),
-        'CCSDS Concatenated dual differential no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, differential = True, dual_basis = True, use_scrambler = False),
-        'NASA-DSN Concatenated no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, use_scrambler = False, nasa_dsn = True),
-        'NASA-DSN Concatenated dual no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, dual_basis = True, use_scrambler = False, nasa_dsn = True),
-        'NASA-DSN Concatenated differential no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, differential = True, use_scrambler = False, nasa_dsn = True),
-        'NASA-DSN Concatenated dual differential no-scrambler' : set_options(deframers.ccsds_concatenated_deframer, differential = True, dual_basis = True, use_scrambler = False, nasa_dsn = True),
         'LilacSat-1' : deframers.lilacsat_1_deframer,
         'AAUSAT-4' : deframers.aausat4_deframer,
         'NGHam' : set_options(deframers.ngham_deframer, decode_rs = True),

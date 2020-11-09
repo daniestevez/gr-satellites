@@ -17,9 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replaced boost::bind() by C++ lambdas
 - Definitive NORAD IDs for NETSAT 1-4
 - Updated AISTECHSAT-2 transmit frequency
+- Refactored Reed-Solomon decoder C++ blocks
+- Refactored CCSDS deframer blocks to allow more generality
 
 ### Removed
 - Deprecated CC11xx remove length, Header remover and Strip AX.25 header in favour of PDU Head/Tail
+- Deprecated Astrocast 9k6 deframer in favour of the new CCSDS Reed-Solomon deframer
 
 ## [3.5.2] - 2020-10-21
 

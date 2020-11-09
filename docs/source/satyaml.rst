@@ -130,78 +130,10 @@ The framings allowed in the ``framing`` field are the following:
 * ``AO-40 FEC short``, AO-40 FEC protocol with short frames, as used by SMOG-P
   and ATL-1
 
-* ``CCSDS Reed-Solomon``, CCSDS Reed-Solomon TM codewords with conventional RS
-  basis (see :ref:`CCSDS deframers`)
+* ``CCSDS Reed-Solomon``, CCSDS Reed-Solomon TM codewords (see :ref:`CCSDS deframers`)
 
-* ``CCSDS Reed-Solomon dual``, CCSDS Reed-Solomon TM codewords with dual RS
-  basis (see :ref:`CCSDS deframers`)
+* ``CCSDS Concatenated``, CCSDS Concatenated TM codewords (see :ref:`CCSDS deframers`)
 
-* ``CCSDS Reed-Solomon differential``, CCSDS Reed-Solomon TM codewords with
-  differential encoding and conventional RS basis (see :ref:`CCSDS deframers`)
-
-* ``CCSDS Reed-Solomon dual differential``, CCSDS Reed-Solomon TM codewords with
-  differential encoding and dual RS basis (see :ref:`CCSDS deframers`)
-
-* ``CCSDS Concatenated``, CCSDS Concatenated TM codewords with conventional RS
-  basis (see :ref:`CCSDS deframers`)
-
-* ``CCSDS Concatenated dual``, CCSDS concatenated TM codewords with dual RS
-  basis (see :ref:`CCSDS deframers`)
-
-* ``CCSDS Concatenated differential``, CCSDS Concatenated TM codewords with
-  differential encoding and conventional RS basis (see :ref:`CCSDS deframers`)
-
-* ``CCSDS Concatenated dual differential``, CCSDS Concatenated TM codewords with
-  differential encoding and dual RS basis (see :ref:`CCSDS deframers`)
-
-* ``CCSDS Reed-Solomon no-scrambler``, CCSDS Reed-Solomon TM codewords with conventional RS
-  basis and scrambler disabled (see :ref:`CCSDS deframers`)
-
-* ``CCSDS Reed-Solomon dual no-scrambler``, CCSDS Reed-Solomon TM codewords with dual RS
-  basis and scrambler disabled (see :ref:`CCSDS deframers`)
-
-* ``CCSDS Reed-Solomon differential no-scrambler``, CCSDS Reed-Solomon TM codewords with
-  differential encoding, conventional RS basis and scrambler disabled (see :ref:`CCSDS deframers`)
-
-* ``CCSDS Reed-Solomon dual differential no-scrambler``, CCSDS Reed-Solomon TM codewords with
-  differential encoding, dual RS basis and scrambler disabled (see :ref:`CCSDS deframers`)
-
-* ``CCSDS Concatenated no-scrambler``, CCSDS Concatenated TM codewords with conventional RS
-  basis and scrambler disabled (see :ref:`CCSDS deframers`)
-
-* ``CCSDS Concatenated dual no-scrambler``, CCSDS concatenated TM codewords with dual RS
-  basis and scrambler disabled (see :ref:`CCSDS deframers`)
-
-* ``CCSDS Concatenated differential no-scrambler``, CCSDS Concatenated TM codewords with
-  differential encoding, conventional RS basis and scrambler disabled (see :ref:`CCSDS deframers`)
-
-* ``CCSDS Concatenated dual differential no-scrambler``, CCSDS Concatenated TM codewords with
-  differential encoding, dual RS basis and scrambler disabled (see :ref:`CCSDS deframers`)
-
-* ``NASA-DSN Concatenated``, CCSDS Concatenated TM codewords with conventional RS
-  basis and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
-
-* ``NASA-DSN Concatenated dual``, CCSDS concatenated TM codewords with dual RS
-  basis and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
-
-* ``NASA-DSN Concatenated differential``, CCSDS Concatenated TM codewords with
-  differential encoding, conventional RS basis and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
-
-* ``NASA-DSN Concatenated dual differential``, CCSDS Concatenated TM codewords with
-  differential encoding, dual RS basis and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
-
-* ``NASA-DSN Concatenated no-scrambler``, CCSDS Concatenated TM codewords with conventional RS
-  basis, scrambler disabled and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
-
-* ``NASA-DSN Concatenated dual no-scrambler``, CCSDS concatenated TM codewords with dual RS
-  basis, scrambler disabled and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
-
-* ``NASA-DSN Concatenated differential no-scrambler``, CCSDS Concatenated TM codewords with
-  differential encoding, conventional RS basis, scrambler disabled and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
-
-* ``NASA-DSN Concatenated dual differential no-scrambler``, CCSDS Concatenated TM codewords with
-  differential encoding, dual RS basis, scrambler disabled and NASA-DSN convolutional code convention (see :ref:`CCSDS deframers`)
-  
 * ``3CAT-1``, custom framing used by 3CAT-1. This uses a CC1101 chip with PN9
   scrambler and a (255,223) Reed-Solomon code for the payload
 
@@ -211,9 +143,6 @@ The framings allowed in the ``framing`` field are the following:
 * ``Astrocast FX.25 NRZ``, custom framing used by Astrocast 0.1. This is a
   somewhat non compliant `FX.25`_ variant that is identical to the FX.25 NRZ-I
   mode except that NRZ is used instead of NRZ-I.
-
-* ``Astrocast 9k6``, custom framing used by Astrocast 0.1. It uses five
-  interleaved Reed-Solomon (255,223) codewords and the CCSDS synchronous scrambler.
 
 * ``AO-40 uncoded``, uncoded AO-40 beacon. It uses 512 byte frames and a CRC-16
 
@@ -273,6 +202,27 @@ The framings allowed in the ``framing`` field are the following:
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.
+
+The CCSDS framings need several additional fields to specify the details of the
+CCSDS protocol. These are:
+
+* ``precoding: differential`` should be used to specify differential
+  precoding. It if is not specified, differential precoding will
+  not used.
+
+* ``RS basis:`` should have the value ``conventional`` or ``dual`` to specify the
+  Reed-Solomon basis. This field is mandatory.
+
+* ``RS interleaving:`` should be used to specify interleaved Reed-Solomon
+  codewords. It defaults to 1 (i.e., no interleaving) if not specified.
+
+* ``scrambler:`` should have the value ``CCSDS`` or ``none``. This field is
+  optional and defaults to ``CCSDS`` if not specified.
+
+* ``convolutional:`` should have one of the following values: ``CCSDS``,
+  ``NASA-DSN``, ``CCSDS uninverted``, ``NASA-DSN uninverted``.  This field is
+  optional and defaults to ``CCSDS`` if not specified.
+
 
 The following example shows how transports are indicated in SatYAML files.
 

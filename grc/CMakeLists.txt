@@ -33,13 +33,14 @@ install(FILES
     satellites_swap_header.block.yml
     satellites_submit.block.yml
     satellites_print_timestamp.block.yml
-    satellites_ao40_rs_decoder.block.yml
     satellites_adsb_kml.block.yml
     satellites_ax100_decode.block.yml
     satellites_u482c_decode.block.yml
     satellites_ks1q_header_remover.block.yml
     satellites_decode_rs.block.yml
+    satellites_decode_rs_ccsds.block.yml
     satellites_encode_rs.block.yml
+    satellites_encode_rs_ccsds.block.yml
     satellites_lilacsat1_demux.block.yml
     satellites_check_ao40_uncoded_crc.block.yml
     satellites_lilacsat1_gps_kml.block.yml
@@ -60,12 +61,10 @@ install(FILES
     satellites_eseo_packet_crop.block.yml
     satellites_eseo_line_decoder.block.yml
     satellites_check_eseo_crc.block.yml
-    satellites_decode_rs_general.block.yml
     satellites_funcube_submit.block.yml
     satellites_dstar_one_telemetry_parser.block.yml
     satellites_reflect_bytes.block.yml
     satellites_check_astrocast_crc.block.yml
-    satellites_decode_rs_interleaved.block.yml
     satellites_swiatowid_packet_crop.block.yml
     satellites_check_swiatowid_crc.block.yml
     satellites_swiatowid_packet_split.block.yml

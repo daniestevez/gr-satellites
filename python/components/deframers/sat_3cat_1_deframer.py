@@ -9,7 +9,7 @@
 #
 
 from gnuradio import gr, digital
-from ... import decode_rs_general
+from ... import decode_rs
 from ...hier.pn9_scrambler import pn9_scrambler
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
@@ -46,7 +46,7 @@ class sat_3cat_1_deframer(gr.hier_block2, options_block):
                                            sync = _syncword,\
                                            threshold = syncword_threshold)
         self.scrambler = pn9_scrambler()
-        self.rs = decode_rs_general(0x11d, 1, 1, 32, self.options.verbose_rs)
+        self.rs = decode_rs(8, 0x11d, 1, 1, 32, 1)
 
         self.connect(self, self.slicer, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.scrambler, 'in'))

@@ -8,7 +8,9 @@ transmitters:
     frequency: 435.6125e+6
     modulation: FSK
     baudrate: 9766
-    framing: NASA-DSN Concatenated dual
+    framing: CCSDS Concatenated
+    RS basis: dual
+    convolutional: NASA-DSN
     frame size: 223
     data:
     - *tlm

@@ -9,7 +9,7 @@
 #
 
 from gnuradio import gr, digital
-from ... import decode_rs_general, check_eseo_crc, eseo_packet_crop, eseo_line_decoder
+from ... import decode_rs, check_eseo_crc, eseo_packet_crop, eseo_line_decoder
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
 
@@ -42,7 +42,7 @@ class eseo_deframer(gr.hier_block2, options_block):
                                     sync = _syncword,\
                                     threshold = syncword_threshold)
         self.crop = eseo_packet_crop(drop_rs = False)
-        self.rs = decode_rs_general(0x11d, 1, 1, 16, self.options.verbose_rs)
+        self.rs = decode_rs(8, 0x11d, 1, 1, 16, 1)
         self.line = eseo_line_decoder()
         self.crc = check_eseo_crc(self.options.verbose_crc)
         

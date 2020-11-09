@@ -10,7 +10,6 @@
 %{
 #include "satellites/decode_rs.h"
 #include "satellites/encode_rs.h"
-#include "satellites/ao40_rs_decoder.h"
 #include "satellites/ax100_decode.h"
 #include "satellites/u482c_decode.h"
 #include "satellites/lilacsat1_demux.h"
@@ -18,8 +17,6 @@
 #include "satellites/varlen_packet_framer.h"
 #include "satellites/nusat_decoder.h"
 #include "satellites/descrambler308.h"
-#include "satellites/decode_rs_general.h"
-#include "satellites/decode_rs_interleaved.h"
 #include "satellites/distributed_syncframe_soft.h"
 #include "satellites/matrix_deinterleaver_soft.h"
 #include "satellites/decode_ra_code.h"
@@ -32,8 +29,6 @@
 GR_SWIG_BLOCK_MAGIC2(satellites, decode_rs);
 %include "satellites/encode_rs.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, encode_rs);
-%include "satellites/ao40_rs_decoder.h"
-GR_SWIG_BLOCK_MAGIC2(satellites, ao40_rs_decoder);
 %include "satellites/ax100_decode.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, ax100_decode);
 %include "satellites/u482c_decode.h"
@@ -48,10 +43,6 @@ GR_SWIG_BLOCK_MAGIC2(satellites, varlen_packet_framer);
 GR_SWIG_BLOCK_MAGIC2(satellites, nusat_decoder);
 %include "satellites/descrambler308.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, descrambler308);
-%include "satellites/decode_rs_general.h"
-GR_SWIG_BLOCK_MAGIC2(satellites, decode_rs_general);
-%include "satellites/decode_rs_interleaved.h"
-GR_SWIG_BLOCK_MAGIC2(satellites, decode_rs_interleaved);
 %include "satellites/distributed_syncframe_soft.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, distributed_syncframe_soft);
 %include "satellites/matrix_deinterleaver_soft.h"

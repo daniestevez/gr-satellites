@@ -21,7 +21,9 @@ transmitters:
     frequency: 437.200e+6
     modulation: BPSK
     baudrate: 9600
-    framing: CCSDS Concatenated differential
+    framing: CCSDS Concatenated
+    precoding: differential
+    RS basis: conventional
     frame size: 114
     transports:
     - *kiss
@@ -30,6 +32,7 @@ transmitters:
     modulation: FSK
     baudrate: 4800
     framing: CCSDS Concatenated
+    RS basis: conventional
     frame size: 114
     transports:
     - *kiss2
@@ -38,6 +41,7 @@ transmitters:
     modulation: FSK subaudio
     baudrate: 300
     framing: CCSDS Reed-Solomon
+    RS basis: conventional
     frame size: 114
     transports:
     - *kiss3
