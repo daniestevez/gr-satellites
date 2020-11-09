@@ -4,6 +4,13 @@ data:
   &tlm Telemetry:
     unknown
 transmitters:
+  38k4 FSK downlink:
+    frequency: 436.600e+6
+    modulation: FSK
+    baudrate: 38400
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
   9k6 FSK downlink:
     frequency: 436.600e+6
     modulation: FSK
