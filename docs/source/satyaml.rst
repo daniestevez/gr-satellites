@@ -200,6 +200,8 @@ The framings allowed in the ``framing`` field are the following:
 * ``Mobitex-NX``, the Mobitex-NX protocol, used by the BEESAT and TECHNOSAT satellites
   from TU Berlin
 
+* ``FOSSATSAT``, a custom protocol used by FOSSASAT
+  
 * ``AISTECHSAT-2``, a custom CCSDS-like protocol used by AISTECHSAT-2
   
 Some framings, such as the CCSDS protocols need the additional field
