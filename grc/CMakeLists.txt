@@ -80,6 +80,7 @@ install(FILES
     satellites_sx12xx_check_crc.block.yml
     satellites_sx12xx_packet_crop.block.yml
     satellites_pdu_head_tail.block.yml
+    satellites_pdu_add_meta.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )
 

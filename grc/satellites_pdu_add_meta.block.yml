@@ -1,0 +1,34 @@
+id: satellites_pdu_add_meta
+label: PDU add metadata
+category: '[Satellites]/PDU'
+
+parameters:
+-   id: meta
+    label: Metadata
+    dtype: object
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites
+    make: satellites.pdu_add_meta(${meta})
+
+documentation: |-
+    Adds some metadata to all PDUs passing through
+
+    The metadata should be a PMT dictionary, that is used to update
+    the dictionary from the PDU car.
+
+    Output:
+        A PDU with added metadata
+
+    Parameters:
+        Meta: A PMT dicitionary
+
+file_format: 1

@@ -65,6 +65,7 @@ list(APPEND satellites_sources
     nrzi_encode_impl.cc
     nrzi_decode_impl.cc
     pdu_head_tail_impl.cc
+    pdu_add_meta_impl.cc
     libfec/decode_rs_8.c
     libfec/decode_rs_ccsds.c
     libfec/decode_rs_char.c

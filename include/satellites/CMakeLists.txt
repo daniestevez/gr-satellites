@@ -38,5 +38,6 @@ install(FILES
     nrzi_decode.h
     nrzi_encode.h
     pdu_head_tail.h
+    pdu_add_meta.h
     DESTINATION include/satellites
 )
