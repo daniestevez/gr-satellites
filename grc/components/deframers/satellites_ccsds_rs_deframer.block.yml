@@ -17,7 +17,7 @@ parameters:
     label: Reed-Solomon basis
     dtype: enum
     default: 'dual'
-    options: ['conventional', 'dual']
+    options: ['"conventional"', '"dual"']
     option_labels: [Conventional, Dual]
 -   id: rs_interleaving
     label: Reed-Solomon interleave depth
@@ -27,7 +27,7 @@ parameters:
     label: Scrambler
     dtype: enum
     default: 'CCSDS'
-    options: ['CCSDS', 'none']
+    options: ['"CCSDS"', '"none"']
     option_labels: [CCSDS, None]
 -   id: threshold
     label: Syncword threshold
