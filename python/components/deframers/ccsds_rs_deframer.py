@@ -58,7 +58,8 @@ class ccsds_rs_deframer(gr.hier_block2, options_block):
             self.differential = digital.diff_decoder_bb(2)
         deframe_func = sync_to_pdu if scrambler == 'CCSDS' else sync_to_pdu_packed
         packlen_mult = 8 if scrambler == 'CCSDS' else 1
-        self.deframer = deframe_func(packlen = (frame_size + 32) * packlen_mult,
+        self.deframer = deframe_func(packlen = (frame_size + 32 * rs_interleaving)
+                                         * packlen_mult,
                                         sync = _syncword,
                                         threshold = syncword_threshold)
         if scrambler == 'CCSDS':
