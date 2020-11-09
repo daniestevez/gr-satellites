@@ -16,7 +16,7 @@ parameters:
 -   id: rs_basis
     label: Reed-Solomon basis
     dtype: enum
-    default: 'dual'
+    default: '"dual"'
     options: ['"conventional"', '"dual"']
     option_labels: [Conventional, Dual]
 -   id: rs_interleaving
@@ -26,13 +26,13 @@ parameters:
 -   id: scrambler
     label: Scrambler
     dtype: enum
-    default: 'CCSDS'
+    default: '"CCSDS"'
     options: ['"CCSDS"', '"none"']
     option_labels: [CCSDS, None]
 -   id: convolutional
     label: Convolutional code
     dtype: enum
-    default: 'CCSDS'
+    default: '"CCSDS"'
     options: ['"CCSDS"', '"NASA-DSN"', '"CCSDS uninverted"', '"NASA-DSN uninverted"']
     option_labels: [CCSDS, NASA-DSN, CCSDS uninverted, NASA-DSN uninverted]
 -   id: threshold
