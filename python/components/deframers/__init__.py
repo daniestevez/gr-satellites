@@ -19,6 +19,7 @@ and the output are PDUs with the frames.
 '''
 
 from .aausat4_deframer import aausat4_deframer
+from .aistechsat_2_deframer import aistechsat_2_deframer
 from .ao40_fec_deframer import ao40_fec_deframer
 from .ao40_uncoded_deframer import ao40_uncoded_deframer
 from .astrocast_fx25_deframer import astrocast_fx25_deframer

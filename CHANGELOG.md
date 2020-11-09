@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for BOBCAT-1
 - Support for SPOC
 - PDU add metadata block
+- Support for AISTECHSAT-2 custom protocol
 
 ### Changed
 - Replaced boost::bind() by C++ lambdas

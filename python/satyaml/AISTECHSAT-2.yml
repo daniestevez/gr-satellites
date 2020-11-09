@@ -3,15 +3,45 @@ norad: 43768
 data:
   &tlm Telemetry:
     telemetry: lume
+  &custom Custom telemetry:
+    unknown
 transmitters:
-  4k8 FSK downlink:
+  1k2 FSK custom CCSDS downlink:
+    frequency: 436.600e+6
+    modulation: FSK
+    baudrate: 1200
+    framing: AISTECHSAT-2
+    data:
+    - *custom
+  1k2 FSK AX100 downlink:
+    frequency: 436.600e+6
+    modulation: FSK
+    baudrate: 1200
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
+  4k8 FSK custom CCSDS downlink:
+    frequency: 436.600e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: AISTECHSAT-2
+    data:
+    - *custom
+  4k8 FSK AX100 downlink:
     frequency: 436.600e+6
     modulation: FSK
     baudrate: 4800
     framing: AX100 ASM+Golay
     data:
     - *tlm
-  9k6 FSK downlink:
+  9k6 FSK custom CCSDS downlink:
+    frequency: 436.600e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AISTECHSAT-2
+    data:
+    - *custom
+  9k6 FSK AX100 downlink:
     frequency: 436.600e+6
     modulation: FSK
     baudrate: 9600
