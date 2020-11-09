@@ -9,12 +9,15 @@
 #
 
 from gnuradio import gr, zeromq
+import pmt
+
 from ..components import demodulators
 from ..components import deframers
 from ..components import datasinks
 from ..components import datasources
 from ..components import transports
 from ..satyaml import yamlfiles
+from .. import pdu_add_meta
 
 import functools
 import yaml
@@ -136,6 +139,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         else:
             self._demodulators = dict()
             self._deframers = dict()
+            self._taggers = dict()
             for key, transmitter in satyaml['transmitters'].items():
                 self._init_demodulator_deframer(key, transmitter)
 
@@ -235,10 +239,10 @@ class gr_satellites_flowgraph(gr.hier_block2):
         if self.grc_block:
             self.msg_connect((deframer, 'out'), (self, 'out'))
         else:
-            self._connect_transmitter_to_data(transmitter, deframer)
+            self._connect_transmitter_to_data(key, transmitter, deframer)
 
 
-    def _connect_transmitter_to_data(self, transmitter, deframer):
+    def _connect_transmitter_to_data(self, key, transmitter, deframer):
         """Connect a deframer to the datasinks and transports
 
         Connects a deframer to the datasinks and transports indicated in
@@ -248,17 +252,30 @@ class gr_satellites_flowgraph(gr.hier_block2):
             transmitter: the transmitter entry in SatYAML
             deframer: the deframer to connect
         """
+        # add a tagger
+        meta = pmt.make_dict()
+        meta = pmt.dict_add(meta, pmt.intern('transmitter'),
+                                pmt.intern(key))
+        tagger = pdu_add_meta(meta)
+        self._taggers[key] = tagger
+        self.msg_connect((deframer, 'out'), (tagger, 'in'))
+        
         for s in self._additional_datasinks:
-            self.msg_connect((deframer, 'out'), (s, 'in'))
+            self.msg_connect((tagger, 'out'), (s, 'in'))
         if self.options.hexdump:
             return
         for data in transmitter.get('data', []):
-            self.msg_connect((deframer, 'out'), (self._datasinks[data], 'in'))
+            self.msg_connect((tagger, 'out'), (self._datasinks[data], 'in'))
         for transport in transmitter.get('transports', []):
-            self.msg_connect((deframer, 'out'), (self._transports[transport], 'in'))
+            self.msg_connect((tagger, 'out'), (self._transports[transport], 'in'))
+        
         if 'additional_data' in transmitter:
             for k, v in transmitter['additional_data'].items():
-                self.msg_connect((deframer, k), (self._datasinks[v], 'in'))
+                # add a tagger
+                tagger = pdu_add_meta(meta)
+                self._taggers[(key,k)] = tagger
+                self.msg_connect((deframer, k), (tagger, 'in'))
+                self.msg_connect((tagger, 'out'), (self._datasinks[v], 'in'))
 
     def get_telemetry_submitters(self, satyaml, config, options):
         """

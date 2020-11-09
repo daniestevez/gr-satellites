@@ -49,6 +49,12 @@ class telemetry_parser(gr.basic_block):
             return
         packet = bytes(pmt.u8vector_elements(msg))
 
+        meta = pmt.car(msg_pmt)
+        transmitter = pmt.dict_ref(meta, pmt.intern('transmitter'), pmt.PMT_NIL)
+        if pmt.is_symbol(transmitter):
+            print('-> Packet from', pmt.symbol_to_string(transmitter),
+                      file = self.file) 
+        
         try:
             data = self.format.parse(packet)
         except ConstructError as e:
