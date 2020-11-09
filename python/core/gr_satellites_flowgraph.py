@@ -94,62 +94,41 @@ class gr_satellites_flowgraph(gr.hier_block2):
               gr.io_signature(1, 1, gr.sizeof_gr_complex if iq else gr.sizeof_float),
             gr.io_signature(0, 0, 0))
 
+        self.samp_rate = samp_rate
+        self.iq = iq
+        self.grc_block = grc_block
+        self.dump_path = dump_path
+        self.config = config
+
         # load up options, similarly to option block
         if type(options) is str:
             p = argparse.ArgumentParser(prog = self.__class__.__name__,
                                             conflict_handler = 'resolve')
             gr_satellites_flowgraph.add_options(p, file, name, norad)
             options = p.parse_args(shlex.split(options))
+
+        self.options = options
         
         if pdu_in:
             self.message_port_register_hier_in('in')
         elif samp_rate is None:
             raise ValueError('samp_rate not specified')
 
-        satyaml = self.open_satyaml(file, name, norad)
+        self.satyaml = satyaml = self.open_satyaml(file, name, norad)
 
-        # TODO: contol all sorts of lookup errors
         if grc_block:
             self.message_port_register_hier_out('out')
         else:
             self._datasinks = dict()
             self._additional_datasinks = list()
-            if options.hexdump:
-                self._additional_datasinks.append(datasinks.hexdump_sink())
-            else:
+            if not (self.options is not None and self.options.hexdump):
                 for key, info in satyaml['data'].items():
-                    if 'decoder' in info:
-                        ds = getattr(datasinks, info['decoder'])
-                        try:
-                            datasink = ds(options = options)
-                        except TypeError: # raised if ds doesn't have an options parameter
-                            datasink = ds()
-                    elif 'telemetry' in info:
-                        datasink = datasinks.telemetry_parser(info['telemetry'], options = options)
-                    elif 'files' in info:
-                        datasink = datasinks.file_receiver(info['files'], options = options)
-                    elif 'image' in info:
-                        datasink = datasinks.file_receiver(info['image'], options = options,\
-                                                               display = True)
-                    else:
-                        datasink = datasinks.hexdump_sink()
-                    self._datasinks[key] = datasink
-            if options is not None and options.kiss_out:
-                self._additional_datasinks.append(datasinks.kiss_file_sink(options.kiss_out, bool(options.kiss_append), options = options))
-            if options is not None and options.kiss_server:
-                self._additional_datasinks.append(datasinks.kiss_server_sink(options.kiss_server_address, options.kiss_server))
-            if options is not None and options.zmq_pub:
-                self._additional_datasinks.append(zeromq.pub_msg_sink(options.zmq_pub))
-            if config.getboolean('Groundstation', 'submit_tlm'):
-                self._additional_datasinks.extend(self.get_telemetry_submitters(satyaml, config, options))
+                    self._init_datasink(key, info)
+            self._init_additional_datasinks()
             self._transports = dict()
             if 'transports' in satyaml:
                 for key, info in satyaml['transports'].items():
-                    transport = self.get_transport(info['protocol'])()
-                    self._transports[key] = transport
-                    if not options.hexdump:
-                        for data in info['data']:
-                            self.msg_connect((transport, 'out'), (self._datasinks[data], 'in'))
+                    self._init_transport(key, info)
 
         if pdu_in:
             for sink in itertools.chain(self._datasinks.values(), self._additional_datasinks):
@@ -158,38 +137,128 @@ class gr_satellites_flowgraph(gr.hier_block2):
             self._demodulators = dict()
             self._deframers = dict()
             for key, transmitter in satyaml['transmitters'].items():
-                baudrate = transmitter['baudrate']
-                demod_options = ['deviation', 'af_carrier']
-                demod_options = {k : k for k in demod_options}
-                demodulator_additional_options = filter_translate_dict(transmitter, demod_options)
-                demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate, samp_rate = samp_rate, iq = iq, dump_path = dump_path, options = options, **demodulator_additional_options)
-                deframe_options = { 'frame size' : 'frame_size',
-                                    'precoding' : 'precoding',
-                                    'RS basis' : 'rs_basis',
-                                    'RS interleaving' : 'rs_interleaving',
-                                    'convolutional' : 'convolutional',
-                                    'scrambler' : 'scrambler' }
-                deframer_additional_options = filter_translate_dict(transmitter, deframe_options)
-                deframer = self.get_deframer(transmitter['framing'])(options = options, **deframer_additional_options)
-                self.connect(self, demodulator, deframer)
-                self._demodulators[key] = demodulator
-                self._deframers[key] = deframer
+                self._init_demodulator_deframer(key, transmitter)
 
-                if grc_block:
-                    self.msg_connect((deframer, 'out'), (self, 'out'))
-                else:
-                    if not options.hexdump:
-                        if 'data' in transmitter:
-                            for data in transmitter['data']:
-                                self.msg_connect((deframer, 'out'), (self._datasinks[data], 'in'))
-                        if 'transports' in transmitter:
-                            for transport in transmitter['transports']:
-                                self.msg_connect((deframer, 'out'), (self._transports[transport], 'in'))
-                        if 'additional_data' in transmitter:
-                            for k, v in transmitter['additional_data'].items():
-                                self.msg_connect((deframer, k), (self._datasinks[v], 'in'))
-                    for s in self._additional_datasinks:
-                        self.msg_connect((deframer, 'out'), (s, 'in'))
+    def _init_datasink(self, key, info): 
+        """Initialize a datasink
+
+        Initializes a datasink according to a SatYAML entry
+
+        Args:
+            key: the name of the datasink entry in SatYAML
+            info: the body of the datasink entry in SatYAML
+        """
+        if 'decoder' in info:
+            ds = getattr(datasinks, info['decoder'])
+            try:
+                datasink = ds(options = self.options)
+            except TypeError: # raised if ds doesn't have an options parameter
+                datasink = ds()
+        elif 'telemetry' in info:
+            datasink = datasinks.telemetry_parser(info['telemetry'], options = self.options)
+        elif 'files' in info:
+            datasink = datasinks.file_receiver(info['files'], options = self.options)
+        elif 'image' in info:
+            datasink = datasinks.file_receiver(info['image'], options = self.options,\
+                                                   display = True)
+        else:
+            datasink = datasinks.hexdump_sink()
+        self._datasinks[key] = datasink
+
+    def _init_additional_datasinks(self):
+        """Initialize additional datasinks
+
+        Creates all the datasinks that are not explicitly indicated
+        in the SatYAML (telemetry submit, KISS output, etc.)
+        """
+        if self.options is not None and self.options.kiss_out:
+            self._additional_datasinks.append(datasinks.kiss_file_sink(options.kiss_out,
+                                                                           bool(self.options.kiss_append), options = self.options))
+        if self.options is not None and self.options.kiss_server:
+             self._additional_datasinks.append(datasinks.kiss_server_sink(self.options.kiss_server_address,
+                                                                              self.options.kiss_server))
+        if self.options is not None and self.options.zmq_pub:
+            self._additional_datasinks.append(zeromq.pub_msg_sink(self.options.zmq_pub))
+        if self.config.getboolean('Groundstation', 'submit_tlm'):
+            self._additional_datasinks.extend(self.get_telemetry_submitters(self.satyaml, self.config, self.options))
+        if self.options is not None and self.options.hexdump:
+            self._additional_datasinks.append(datasinks.hexdump_sink())
+        
+    def _init_transport(self, key, info):
+        """Initialize a datasink
+
+        Initializes a transport according to a SatYAML entry and connects
+        it to the appropriate datasink
+
+        Args:
+            key: the name of the transport entry in SatYAML
+            info: the body of the transport entry in SatYAML
+        """
+        transport = self.get_transport(info['protocol'])()
+        self._transports[key] = transport
+        if not self.options.hexdump:
+            for data in info['data']:
+                self.msg_connect((transport, 'out'), (self._datasinks[data], 'in'))
+
+    def _init_demodulator_deframer(self, key, transmitter):
+        """Initialize a demodulator and deframer
+
+        Creates a demodulator and deframer according to a SatYAML
+        entry and connects the deframer to the data and transports
+
+        Args:
+            key: name of the transmitter entry in the SatYAML
+            transmitter: transmitter entry in the SatYAML
+        """
+        baudrate = transmitter['baudrate']
+        demod_options = ['deviation', 'af_carrier']
+        demod_options = {k : k for k in demod_options}
+        demodulator_additional_options = filter_translate_dict(transmitter, demod_options)
+        demodulator = self.get_demodulator(transmitter['modulation'])(baudrate = baudrate,
+                                                                          samp_rate = self.samp_rate,
+                                                                          iq = self.iq,
+                                                                          dump_path = self.dump_path,
+                                                                          options = self.options,
+                                                                          **demodulator_additional_options)
+        deframe_options = { 'frame size' : 'frame_size',
+                            'precoding' : 'precoding',
+                            'RS basis' : 'rs_basis',
+                            'RS interleaving' : 'rs_interleaving',
+                            'convolutional' : 'convolutional',
+                            'scrambler' : 'scrambler' }
+        deframer_additional_options = filter_translate_dict(transmitter, deframe_options)
+        deframer = self.get_deframer(transmitter['framing'])(options = self.options, **deframer_additional_options)
+        self.connect(self, demodulator, deframer)
+        self._demodulators[key] = demodulator
+        self._deframers[key] = deframer
+            
+        if self.grc_block:
+            self.msg_connect((deframer, 'out'), (self, 'out'))
+        else:
+            self._connect_transmitter_to_data(transmitter, deframer)
+
+
+    def _connect_transmitter_to_data(self, transmitter, deframer):
+        """Connect a deframer to the datasinks and transports
+
+        Connects a deframer to the datasinks and transports indicated in
+        the SatYAML file
+        
+        Args:
+            transmitter: the transmitter entry in SatYAML
+            deframer: the deframer to connect
+        """
+        for s in self._additional_datasinks:
+            self.msg_connect((deframer, 'out'), (s, 'in'))
+        if self.options.hexdump:
+            return
+        for data in transmitter.get('data', []):
+            self.msg_connect((deframer, 'out'), (self._datasinks[data], 'in'))
+        for transport in transmitter.get('transports', []):
+            self.msg_connect((deframer, 'out'), (self._transports[transport], 'in'))
+        if 'additional_data' in transmitter:
+            for k, v in transmitter['additional_data'].items():
+                self.msg_connect((deframer, k), (self._datasinks[v], 'in'))
 
     def get_telemetry_submitters(self, satyaml, config, options):
         """
