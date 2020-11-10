@@ -9,7 +9,7 @@
  */
 
 #ifndef INCLUDED_SATELLITES_U482C_DECODE_IMPL_H
-#define INCLUDED_SATELLITES_U428C_DECODE_IMPL_H
+#define INCLUDED_SATELLITES_U482C_DECODE_IMPL_H
 
 #include <pmt/pmt.h>
 #include <satellites/u482c_decode.h>
