@@ -573,8 +573,8 @@ displayed in real time as they are being received, using `feh`_.
 
 Currently the satellites that have decoders supporting file reception are ATL-1
 and SMOG-P (they transmit RF spectrum data), and the satellites that have
-decoders supporting image reception are 1KUNS-PF, BY70-1, D-SAT, LilacSat-1 and
-Światowid.
+decoders supporting image reception are 1KUNS-PF, BY70-1, D-SAT, LilacSat-1,
+Lucky-7 and Światowid.
 
 For satellites supporting file reception, the ``--file_output_path`` parameter
 can be used to set the directory that is used to store received files. The
