@@ -176,7 +176,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         in the SatYAML (telemetry submit, KISS output, etc.)
         """
         if self.options is not None and self.options.kiss_out:
-            self._additional_datasinks.append(datasinks.kiss_file_sink(options.kiss_out,
+            self._additional_datasinks.append(datasinks.kiss_file_sink(self.options.kiss_out,
                                                                            bool(self.options.kiss_append), options = self.options))
         if self.options is not None and self.options.kiss_server:
              self._additional_datasinks.append(datasinks.kiss_server_sink(self.options.kiss_server_address,
