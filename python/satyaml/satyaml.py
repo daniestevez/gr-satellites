@@ -47,7 +47,7 @@ class SatYAML:
         if 'telemetry_servers' in d:
             for server in d['telemetry_servers']:
                 if server not in ['SatNOGS', 'FUNcube', 'PWSat', 'BME'] and\
-                  not server.startswith('HIT '):
+                  not server.startswith('HIT ') and not server.startswith('SIDS '):
                     raise YAMLError(f'Unknown telemetry server {server}')
         if 'data' not in d:
             raise YAMLError(f'Missing data field in {yml}')

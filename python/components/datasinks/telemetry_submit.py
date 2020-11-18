@@ -21,13 +21,15 @@ class telemetry_submit(gr.hier_block2, options_block):
     These are submitted to a telemetry server
 
     Args:
-        server: 'SatNOGS', 'FUNcube', 'PWSat' or 'BME' (string)
+        server: 'SatNOGS', 'FUNcube', 'PWSat', 'BME' or 'SIDS' (string)
         norad: NORAD ID (int)
         port: TCP port to connect to (used by HIT) (str)
+        url: SIDS URL (used by SIDS) (str)
         config: configuration file from configparser
         options: options from argparse
     """
-    def __init__(self, server, norad = None, port = None, config = None, options = None):
+    def __init__(self, server, norad = None, port = None, url = None,
+                     config = None, options = None):
         gr.hier_block2.__init__(self, "telemetry_submit",
             gr.io_signature(0, 0, 0),
             gr.io_signature(0, 0, 0))
@@ -35,8 +37,9 @@ class telemetry_submit(gr.hier_block2, options_block):
         
         self.message_port_register_hier_in('in')
 
-        if server == 'SatNOGS':
-            url = 'https://db.satnogs.org/api/telemetry/'
+        if server in ['SatNOGS', 'SIDS']:
+            if server == 'SatNOGS':
+                url = 'https://db.satnogs.org/api/telemetry/'
             initial_timestamp = getattr(self.options, 'start_time', '')
             self.submit = submit(url, norad, config['Groundstation']['callsign'],\
                                  float(config['Groundstation']['longitude']),\

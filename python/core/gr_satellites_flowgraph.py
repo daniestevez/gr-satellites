@@ -293,12 +293,17 @@ class gr_satellites_flowgraph(gr.hier_block2):
                                                      options = options)]
         for server in satyaml.get('telemetry_servers', []):
             port = None
+            url = None
             if server.startswith('HIT '):
                 port = server.split()[1]
                 server = 'HIT'
+            elif server.startswith('SIDS '):
+                url = server.split()[1]
+                server = 'SIDS'
             submitters.append(datasinks.telemetry_submit(server,
                                                              norad = norad,
                                                              port = port,
+                                                             url = url,
                                                              config = config,
                                                              options = options))
         return submitters

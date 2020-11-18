@@ -495,6 +495,8 @@ certain satellite projects:
 
 * `Harbin Institute of Technology`_, which connects to the telemetry proxy included in
   `gr-lilacsat`_ and `gr-dslwp`_.
+
+* Any custom server using the SIDS protocol.
   
 To enable telemetry submission, it is necessary to edit some parameters in
 ``gr_satellites``'s config file, which is located in
@@ -554,7 +556,10 @@ through the proxy is disabled for this run).
    The Harbin Institute of Technology proxy is a Python2 application that uses
    PyQt4. Users having more modern sytems may find useful the PyQt5 version that
    can be found in the `pyqt5 branch of gr-lilacsat`_. This requires ``tornado`` version
-   4.5.3. It will not work with more recent versions of ``tornado``. 
+   4.5.3. It will not work with more recent versions of ``tornado``.
+
+No special configuration needs to be done to enable submission to custom SIDS servers,
+since these use the same protocol and configuration as SatNOGS DB.
 
 For some telemetry servers, including SatNOGS DB, the frames are submitted
 together with a timestamp of reception. This timestamp is taken from the
