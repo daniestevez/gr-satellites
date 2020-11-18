@@ -97,7 +97,7 @@ class fsk_demodulator(gr.hier_block2, options_block):
                                                      self.options.clk_bw,
                                                      damping,
                                                      ted_gain,
-                                                     self.options.clk_limit,
+                                                     self.options.clk_limit * sps,
                                                      1,
                                                      digital.constellation_bpsk().base(),
                                                      digital.IR_PFB_NO_MF)
@@ -130,7 +130,7 @@ class fsk_demodulator(gr.hier_block2, options_block):
         self.connect(self.clock_recovery, self)
 
     _default_clk_rel_bw = 0.06
-    _default_clk_limit = 0.02
+    _default_clk_limit = 0.004
     _default_deviation_hz = 5000
     
     @classmethod

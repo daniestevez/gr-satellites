@@ -98,7 +98,7 @@ class bpsk_demodulator(gr.hier_block2, options_block):
                                                      self.options.clk_bw,
                                                      damping,
                                                      ted_gain,
-                                                     self.options.clk_limit,
+                                                     self.options.clk_limit * sps,
                                                      1,
                                                      digital.constellation_bpsk().base(),
                                                      digital.IR_PFB_MF,
@@ -156,7 +156,7 @@ class bpsk_demodulator(gr.hier_block2, options_block):
     _default_rrc_alpha = 0.35
     _default_fll_bw = 25
     _default_clk_rel_bw = 0.06
-    _default_clk_limit = 0.02
+    _default_clk_limit = 0.004
     _default_costas_bw = 50
     _default_manchester_history = 32
     
