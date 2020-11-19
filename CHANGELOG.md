@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for AISTECHSAT-2 custom protocol
 - Lucky-7 image receiver
 - Support for custom SIDS servers
+- Support for TTU-100
 
 ### Changed
 - Replaced boost::bind() by C++ lambdas
