@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Lucky-7 image receiver
 - Support for custom SIDS servers
 - Support for TTU-100
+- Support for NEUTRON-1
 
 ### Changed
 - Replaced boost::bind() by C++ lambdas
