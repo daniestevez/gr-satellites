@@ -46,9 +46,11 @@ decode_rs_impl::decode_rs_impl(bool dual_basis, int interleave)
           "decode_rs", gr::io_signature::make(0, 0, 0), gr::io_signature::make(0, 0, 0)),
       d_interleave(interleave)
 {
-    d_decode_rs = dual_basis
-                      ? [](uint8_t* data) { return decode_rs_ccsds(data, NULL, 0, 0); }
-                      : [](uint8_t* data) { return decode_rs_8(data, NULL, 0, 0); };
+    if (dual_basis) {
+        d_decode_rs = [](uint8_t* data) { return decode_rs_ccsds(data, NULL, 0, 0); };
+    } else {
+        d_decode_rs = [](uint8_t* data) { return decode_rs_8(data, NULL, 0, 0); };
+    }
     d_rs_codeword.resize(d_ccsds_nn);
     d_nroots = d_ccsds_nroots;
 

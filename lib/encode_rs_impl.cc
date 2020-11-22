@@ -48,10 +48,14 @@ encode_rs_impl::encode_rs_impl(bool dual_basis, int interleave)
           "encode_rs", gr::io_signature::make(0, 0, 0), gr::io_signature::make(0, 0, 0)),
       d_interleave(interleave)
 {
-    constexpr int parity_offset = d_ccsds_nn - d_ccsds_nroots;
-    d_encode_rs =
-        dual_basis ? [](uint8_t* data) { encode_rs_ccsds(data, &data[parity_offset], 0); }
-                   : [](uint8_t* data) { encode_rs_8(data, &data[parity_offset], 0); };
+    static constexpr int parity_offset = d_ccsds_nn - d_ccsds_nroots;
+    if (dual_basis) {
+        d_encode_rs = [](uint8_t* data) {
+            encode_rs_ccsds(data, &data[parity_offset], 0);
+        };
+    } else {
+        d_encode_rs = [](uint8_t* data) { encode_rs_8(data, &data[parity_offset], 0); };
+    }
     d_rs_codeword.resize(d_ccsds_nn);
     d_nroots = d_ccsds_nroots;
 
