@@ -1,5 +1,5 @@
 name: NEUTRON-1
-norad: 99793 
+norad: 46923
 data:
   &tlm Telemetry:
     telemetry: ax25
