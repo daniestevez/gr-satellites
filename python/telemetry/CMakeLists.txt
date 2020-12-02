@@ -44,6 +44,8 @@ GR_PYTHON_INSTALL(
     cute_bct_fsw.py
     cute_bct_soh.py
     cute_pld.py
+    delfic3.py
+    delfipq.py
     dstar_one.py
     eseo.py
     fossasat.py
