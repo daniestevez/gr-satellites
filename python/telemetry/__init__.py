@@ -27,6 +27,8 @@ from .by02 import by02
 from .by70_1 import by70_1
 from .csp import csp
 from .cute_70cm import cute_70cm
+from .delfic3 import delfic3
+from .delfipq import delfipq
 from .dstar_one import dstar_one
 from .eseo import eseo
 from .floripasat import floripasat
