@@ -2,7 +2,7 @@ name: DELFI-PQ
 norad: 51074
 data:
   &tlm Telemetry:
-    unknown
+    telemetry: delfipq
 transmitters:
   1k2 FSK downlink:
     frequency: 436.650e+6
