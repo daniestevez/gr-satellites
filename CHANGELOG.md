@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [3.6.0] - 2020-12-04
+
 ### Added
 - PDU add metadata block
 - PDU Head/Tail block
@@ -31,7 +33,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - Deprecated Astrocast 9k6 deframer in favour of the new CCSDS Reed-Solomon deframer
 - Deprecated CC11xx remove length, Header remover and Strip AX.25 header in favour of PDU Head/Tail
-
 
 ## [3.5.2] - 2020-10-21
 
@@ -317,7 +318,8 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.5.2...master
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.6.0...master
+[3.6.0]: https://github.com/daniestevez/gr-satellites/compare/v3.5.2...v3.6.0
 [3.5.2]: https://github.com/daniestevez/gr-satellites/compare/v3.5.1...v3.5.2
 [3.5.1]: https://github.com/daniestevez/gr-satellites/compare/v3.5.0...v3.5.1
 [3.5.0]: https://github.com/daniestevez/gr-satellites/compare/v3.4.0...v3.5.0
