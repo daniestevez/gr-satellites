@@ -7,30 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-- Support for FossaSat-1B and FossaSat-2
-- Support for VZLUSAT-2
-- PDU Head/Tail block
-- Support for BOBCAT-1
-- Support for SPOC
 - PDU add metadata block
-- Support for AISTECHSAT-2 custom protocol
+- PDU Head/Tail block
 - Lucky-7 image receiver
 - Support for custom SIDS servers
-- Support for TTU-100
-- Support for NEUTRON-1
+- Support for AISTECHSAT-2 custom protocol
+- Support for BOBCAT-1
 - Support for BY03
+- Support for FossaSat-1B and FossaSat-2
+- Support for NEUTRON-1
+- Support for SPOC
+- Support for TTU-100
+- Support for VZLUSAT-2
 
 ### Changed
 - Replaced boost::bind() by C++ lambdas
-- Definitive NORAD IDs for NETSAT 1-4
-- Updated AISTECHSAT-2 transmit frequency
 - Refactored Reed-Solomon decoder C++ blocks
 - Refactored CCSDS deframer blocks to allow more generality
 - Make --clk_limit parameter relative to samples per symbol
+- Updated AISTECHSAT-2 transmit frequency
+- Definitive NORAD IDs for NETSAT 1-4
 
 ### Removed
-- Deprecated CC11xx remove length, Header remover and Strip AX.25 header in favour of PDU Head/Tail
 - Deprecated Astrocast 9k6 deframer in favour of the new CCSDS Reed-Solomon deframer
+- Deprecated CC11xx remove length, Header remover and Strip AX.25 header in favour of PDU Head/Tail
+
 
 ## [3.5.2] - 2020-10-21
 
