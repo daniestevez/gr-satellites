@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2018,2020 Daniel Estevez <daniel@destevez.net>
+ * Copyright 2020 Daniel Estevez <daniel@destevez.net>
  *
  * This file is part of gr-satellites
  *
@@ -8,29 +8,22 @@
  *
  */
 
-#ifndef INCLUDED_SATELLITES_DECODE_RS_GENERAL_IMPL_H
-#define INCLUDED_SATELLITES_DECODE_RS_GENERAL_IMPL_H
+#ifndef INCLUDED_SATELLITES_PDU_ADD_META_IMPL_H
+#define INCLUDED_SATELLITES_PDU_ADD_META_IMPL_H
 
-#include <satellites/decode_rs_general.h>
-
-#include <array>
-
-#include "rs.h"
+#include <satellites/pdu_add_meta.h>
 
 namespace gr {
 namespace satellites {
 
-class decode_rs_general_impl : public decode_rs_general
+class pdu_add_meta_impl : public pdu_add_meta
 {
 private:
-    const bool d_verbose;
-    void* d_rs;
-    const unsigned d_nroots;
-    std::array<uint8_t, MAX_FRAME_LEN> d_data;
+    pmt::pmt_t d_meta;
 
 public:
-    decode_rs_general_impl(int gfpoly, int fcr, int prim, int nroots, bool verbose);
-    ~decode_rs_general_impl();
+    pdu_add_meta_impl(pmt::pmt_t meta);
+    ~pdu_add_meta_impl();
 
     // Where all the action really happens
     void forecast(int noutput_items, gr_vector_int& ninput_items_required);
@@ -46,4 +39,4 @@ public:
 } // namespace satellites
 } // namespace gr
 
-#endif /* INCLUDED_SATELLITES_DECODE_RS_GENERAL_IMPL_H */
+#endif /* INCLUDED_SATELLITES_PDU_ADD_META_IMPL_H */

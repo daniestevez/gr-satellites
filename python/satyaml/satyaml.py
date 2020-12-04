@@ -22,26 +22,14 @@ class SatYAML:
         self._path = pathlib.Path(path)
 
     modulations = ['AFSK', 'FSK', 'BPSK', 'BPSK Manchester', 'DBPSK', 'DBPSK Manchester', 'FSK subaudio']
-    framings = ['AX.25', 'AX.25 G3RUH', 'AX100 ASM+Golay', 'AX100 Reed Solomon',\
-                '3CAT-1', 'Astrocast FX.25 NRZ-I', 'Astrocast FX.25 NRZ', 'Astrocast 9k6',\
-                'AO-40 FEC', 'AO-40 FEC short', 'AO-40 uncoded', 'TT-64', 'ESEO', 'Lucky-7',\
-                'Reaktor Hello World', 'S-NET', 'Swiatowid', 'NuSat', 'K2SAT',\
-                'CCSDS Reed-Solomon', 'CCSDS Reed-Solomon dual', 'CCSDS Reed-Solomon differential',\
-                'CCSDS Reed-Solomon no-scrambler', 'CCSDS Reed-Solomon dual no-scrambler',\
-                'CCSDS Reed-Solomon differential no-scrambler',\
-                'CCSDS Reed-Solomon dual differential', \
-                'CCSDS Concatenated', 'CCSDS Concatenated dual',\
-                'NASA-DSN Concatenated', 'NASA-DSN Concatenated dual',\
-                'CCSDS Reed-Solomon dual differential no-scrambler',\
-                'CCSDS Concatenated no-scrambler', 'CCSDS Concatenated dual no-scrambler',\
-                'CCSDS Concatenated differential', 'CCSDS Concatenated dual differential',\
-                'CCSDS Concatenated differential no-scrambler', 'CCSDS Concatenated dual differential no-scrambler',\
-                'NASA-DSN Concatenated no-scrambler', 'NASA-DSN Concatenated dual no-scrambler',\
-                'NASA-DSN Concatenated differential', 'NASA-DSN Concatenated dual differential',\
-                'NASA-DSN Concatenated differential no-scrambler', 'NASA-DSN Concatenated dual differential no-scrambler',\
-                'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon', 'SMOG-P RA',\
-                'SMOG-P Signalling', 'OPS-SAT', 'U482C', 'UA01', 'SALSAT',\
-                'Mobitex', 'Mobitex-NX']
+    framings = ['AX.25', 'AX.25 G3RUH', 'AX100 ASM+Golay', 'AX100 Reed Solomon',
+                '3CAT-1', 'Astrocast FX.25 NRZ-I', 'Astrocast FX.25 NRZ',
+                'AO-40 FEC', 'AO-40 FEC short', 'AO-40 uncoded', 'TT-64', 'ESEO', 'Lucky-7',
+                'Reaktor Hello World', 'S-NET', 'Swiatowid', 'NuSat', 'K2SAT',
+                'CCSDS Reed-Solomon', 'CCSDS Concatenated',
+                'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon', 'SMOG-P RA',
+                'SMOG-P Signalling', 'OPS-SAT', 'U482C', 'UA01', 'SALSAT',
+                'Mobitex', 'Mobitex-NX', 'FOSSASAT', 'AISTECHSAT-2']
     transports = ['KISS', 'KISS no control byte', 'KISS KS-1Q']
     top_level_words = ['name', 'alternative_names', 'norad', 'telemetry_servers', 'data', 'transports', 'transmitters']
     
@@ -59,7 +47,7 @@ class SatYAML:
         if 'telemetry_servers' in d:
             for server in d['telemetry_servers']:
                 if server not in ['SatNOGS', 'FUNcube', 'PWSat', 'BME'] and\
-                  not server.startswith('HIT '):
+                  not server.startswith('HIT ') and not server.startswith('SIDS '):
                     raise YAMLError(f'Unknown telemetry server {server}')
         if 'data' not in d:
             raise YAMLError(f'Missing data field in {yml}')
@@ -97,6 +85,20 @@ class SatYAML:
                 raise YAMLError(f'Missing framing field in {key} in {yml}')
             if transmitter['framing'] not in self.framings:
                 raise YAMLError(f'Unknown framing in {key} in {yml}')
+            if transmitter['framing'] in ['CCSDS Reed-Solomon', 'CCSDS Concatenated']:
+                if 'RS basis' not in transmitter:
+                    raise YAMLError(f'No RS basis field in {key} in {yml}')
+                if 'precoding' in transmitter and transmitter['precoding'] != 'differential':
+                    raise YAMLError(f'Invalid precoding value {transmitter["precoding"]} for {key} in {yml}')
+                if transmitter['RS basis'] not in ['conventional', 'dual']:
+                    raise YAMLError(f'Invalid RS basis value {transmitter["RS basis"]} for {key} in {yml}')
+                if 'RS interleaving' in transmitter and type(transmitter['RS interleaving']) is not int:
+                    raise YAMLError(f'RS interleaving does not contain an int in {key} in {yml}')
+                if 'scrambler' in transmitter and transmitter['scrambler'] not in ['CCSDS', 'none']:
+                    raise YAMLError(f'Invalid scrambler value {transmitter["scrambler"]} for {key} in {yml}')
+                if 'convolutional' in transmitter and transmitter['convolutional'] not in \
+                  ['CCSDS', 'NASA-DSN', 'CCSDS uninverted', 'NASA-DSN uninverted']:
+                    raise YAMLError(f'Invalid convolutional value {transmitter["convolutional"]} for {key} in {yml}')
             if 'data' not in transmitter and 'transports' not in transmitter:
                 raise YAMLError(f'No data or transport field in {key} in {yml}')
             if 'data' in transmitter:

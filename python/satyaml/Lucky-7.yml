@@ -3,6 +3,8 @@ norad: 44406
 data:
   &tlm Telemetry:
     unknown
+  &image Image:
+    image: lucky7
 transmitters:
   4k8 FSK downlink:
     frequency: 437.525e+6
@@ -11,3 +13,4 @@ transmitters:
     framing: Lucky-7
     data:
     - *tlm
+    - *image

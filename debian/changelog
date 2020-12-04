@@ -1,5 +1,11 @@
-gr-satellites (3.5.0-0) UNRELEASED; urgency=medium
+gr-satellites (3.5.2-1) groovy; urgency=medium
+
+  * Fix dh_installman problems
+
+ --  <daniel@destevez.net>  Fri, 27 Nov 2020 15:56:58 +0000
+
+gr-satellites (3.5.2-0) groovy; urgency=medium
 
   * Initial release
 
- --  <daniel@destevez.net>  Sat, 19 Sep 2020 20:17:36 +0000
+ --  <daniel@destevez.net>  Fri, 27 Nov 2020 15:25:00 +0000

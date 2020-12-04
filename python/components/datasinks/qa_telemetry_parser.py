@@ -12,6 +12,8 @@ from gnuradio import gr, blocks, gr_unittest
 import pmt
 import numpy as np
 
+import sys
+
 # bootstrap satellites module, even from build dir
 try:
     import python as satellites

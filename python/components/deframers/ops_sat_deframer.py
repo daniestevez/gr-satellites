@@ -9,7 +9,7 @@
 #
 
 from gnuradio import gr, blocks, digital
-from ... import nrzi_decode, hdlc_deframer, header_remover, decode_rs
+from ... import nrzi_decode, hdlc_deframer, pdu_head_tail, decode_rs
 from ...utils.options_block import options_block
 
 class ops_sat_deframer(gr.hier_block2, options_block):
@@ -36,7 +36,7 @@ class ops_sat_deframer(gr.hier_block2, options_block):
         self.nrzi = nrzi_decode()
         self.descrambler = digital.descrambler_bb(0x21, 0, 16)
         self.deframer = hdlc_deframer(False, 10000) # we skip CRC-16 check
-        self.strip = header_remover(16)
+        self.strip = pdu_head_tail(3, 16)
 
         # CCSDS descrambler
         self.pdu2tag = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
@@ -45,7 +45,7 @@ class ops_sat_deframer(gr.hier_block2, options_block):
         self.pack = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
         self.tag2pdu = blocks.tagged_stream_to_pdu(blocks.byte_t, 'packet_len')
 
-        self.fec = decode_rs(self.options.verbose_rs, 0)
+        self.fec = decode_rs(False, 1)
 
         self.connect(self, self.slicer, self.nrzi, self.descrambler, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.strip, 'in'))

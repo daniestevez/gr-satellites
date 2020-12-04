@@ -43,8 +43,8 @@ list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
 # Set the version information here
 set(VERSION_MAJOR 3)
-set(VERSION_API 5)
-set(VERSION_ABI 2)
+set(VERSION_API 6)
+set(VERSION_ABI 0)
 
 cmake_policy(SET CMP0011 NEW)
 
@@ -142,6 +142,15 @@ if(DOXYGEN_FOUND)
 else(DOXYGEN_FOUND)
     option(ENABLE_DOXYGEN "Build docs using Doxygen" OFF)
 endif(DOXYGEN_FOUND)
+
+########################################################################
+# Setup manpage option
+########################################################################
+if(NOT WIN32)
+    option(ENABLE_MANPAGES "Build man pages for commands" ON)
+else(NOT WIN32)
+    option(ENABLE_MANPAGES "Build man pages for commands" OFF)
+endif(NOT WIN32)
 
 ########################################################################
 # Create uninstall target

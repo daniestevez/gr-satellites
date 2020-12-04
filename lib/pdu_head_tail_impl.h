@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2017 Daniel Estevez <daniel@destevez.net>
+ * Copyright 2020 Daniel Estevez <daniel@destevez.net>
  *
  * This file is part of gr-satellites
  *
@@ -8,28 +8,28 @@
  *
  */
 
-#ifndef INCLUDED_SATELLITES_AO40_RS_DECODER_IMPL_H
-#define INCLUDED_SATELLITES_AO40_RS_DECODER_IMPL_H
+#ifndef INCLUDED_SATELLITES_PDU_HEAD_TAIL_IMPL_H
+#define INCLUDED_SATELLITES_PDU_HEAD_TAIL_IMPL_H
 
-#include <satellites/ao40_rs_decoder.h>
+#include <satellites/pdu_head_tail.h>
 
-#include <array>
+#define PDU_HEADTAIL_HEAD 0
+#define PDU_HEADTAIL_HEADMINUS 1
+#define PDU_HEADTAIL_TAIL 2
+#define PDU_HEADTAIL_TAILPLUS 3
 
 namespace gr {
 namespace satellites {
 
-class ao40_rs_decoder_impl : public ao40_rs_decoder
+class pdu_head_tail_impl : public pdu_head_tail
 {
 private:
-    const bool d_verbose;
-    constexpr static std::size_t d_k = 128;
-    constexpr static std::size_t d_n = d_k + 32;
-    std::array<uint8_t, d_n> d_scratch;
-    std::array<uint8_t, 2 * d_k> d_message;
+    int d_mode;
+    size_t d_num;
 
 public:
-    ao40_rs_decoder_impl(bool verbose);
-    ~ao40_rs_decoder_impl();
+    pdu_head_tail_impl(int mode, size_t num);
+    ~pdu_head_tail_impl();
 
     // Where all the action really happens
     void forecast(int noutput_items, gr_vector_int& ninput_items_required);
@@ -45,4 +45,4 @@ public:
 } // namespace satellites
 } // namespace gr
 
-#endif /* INCLUDED_SATELLITES_AO40_RS_DECODER_IMPL_H */
+#endif /* INCLUDED_SATELLITES_PDU_HEAD_TAIL_IMPL_H */

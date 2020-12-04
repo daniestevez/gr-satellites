@@ -19,7 +19,7 @@ import signal
 
 
 class ccsds_viterbi(gr.hier_block2):
-    def __init__(self, nasa_dsn = False):
+    def __init__(self, code = 'CCSDS'):
         gr.hier_block2.__init__(
             self, "CCSDS/NASA-GSFC Viterbi decoder",
                 gr.io_signature(1, 1, gr.sizeof_float*1),
@@ -29,8 +29,13 @@ class ccsds_viterbi(gr.hier_block2):
         ##################################################
         # Variables
         ##################################################
-        polys = [-109, 79] if nasa_dsn else [79, -109]
-        self.dec_cc = dec_cc = fec.cc_decoder.make(80,7, 2, polys, 0, -1, fec.CC_STREAMING, False)
+        polys = {'CCSDS' : [79, -109],
+                 'NASA-DSN' : [-109, 79],
+                 'CCSDS uninverted' : [79, 109],
+                 'NASA-DSN uninverted' : [109, 79],
+                }
+        self.dec_cc = dec_cc = fec.cc_decoder.make(80, 7, 2, polys[code],
+                                                       0, -1, fec.CC_STREAMING, False)
 
         ##################################################
         # Blocks

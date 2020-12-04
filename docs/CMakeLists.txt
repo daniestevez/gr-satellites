@@ -39,6 +39,8 @@ endif(ENABLE_DOXYGEN)
 ########################################################################
 # Man pages
 ########################################################################
+if(ENABLE_MANPAGES)
+
 FIND_PROGRAM(BZIP
              NAMES bzip2
              PATHS /bin
@@ -70,3 +72,5 @@ foreach(manpage ${manpages})
        DESTINATION ${MAN_INSTALL_DIR}/man1
     )
 endforeach(manpage)
+
+endif(ENABLE_MANPAGES)

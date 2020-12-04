@@ -9,7 +9,7 @@
 #
 
 from gnuradio import gr, digital, fec, blocks
-from ... import distributed_syncframe_soft, matrix_deinterleaver_soft, ao40_rs_decoder, decode_rs
+from ... import distributed_syncframe_soft, matrix_deinterleaver_soft, decode_rs
 from ...hier.ccsds_descrambler import ccsds_descrambler
 from ...utils.options_block import options_block
 
@@ -47,7 +47,7 @@ class ao40_fec_deframer(gr.hier_block2, options_block):
         self.viterbi = fec.cc_decoder.make(2572 if short_frames else 5132, 7, 2, [79,-109], 0, -1, fec.CC_TERMINATED, False)
         self.viterbi_decoder = fec.async_decoder(self.viterbi, False, False, 2572//8 if short_frames else 5132//8)
         self.scrambler = ccsds_descrambler()
-        self.rs = decode_rs(self.options.verbose_rs, 0) if short_frames else ao40_rs_decoder(self.options.verbose_rs)
+        self.rs = decode_rs(False, 1 if short_frames else 2)
 
         self.connect(self, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.deinterleaver, 'in'))

@@ -18,6 +18,7 @@ This class is used to reassemble files transmitted in chunks
 from .by70_1 import by70_1
 from .dsat import dsat
 from .k2sat import k2sat
+from .lucky7 import lucky7
 from .sat_1kuns_pf import sat_1kuns_pf
 from .smogp import smogp
 from .swiatowid import swiatowid

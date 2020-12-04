@@ -33,15 +33,16 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     aausat4_deframer.py
+    aistechsat_2_deframer.py
     ao40_fec_deframer.py
     ao40_uncoded_deframer.py
-    astrocast_9k6_deframer.py
     astrocast_fx25_deframer.py
     ax100_deframer.py
     ax25_deframer.py
     ccsds_concatenated_deframer.py
     ccsds_rs_deframer.py
     eseo_deframer.py
+    fossasat_deframer.py
     k2sat_deframer.py
     lilacsat_1_deframer.py
     lucky7_deframer.py

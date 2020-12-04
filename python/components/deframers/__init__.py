@@ -19,15 +19,16 @@ and the output are PDUs with the frames.
 '''
 
 from .aausat4_deframer import aausat4_deframer
+from .aistechsat_2_deframer import aistechsat_2_deframer
 from .ao40_fec_deframer import ao40_fec_deframer
 from .ao40_uncoded_deframer import ao40_uncoded_deframer
-from .astrocast_9k6_deframer import astrocast_9k6_deframer
 from .astrocast_fx25_deframer import astrocast_fx25_deframer
 from .ax100_deframer import ax100_deframer
 from .ax25_deframer import ax25_deframer
 from .ccsds_concatenated_deframer import ccsds_concatenated_deframer
 from .ccsds_rs_deframer import ccsds_rs_deframer
 from .eseo_deframer import eseo_deframer
+from .fossasat_deframer import fossasat_deframer
 from .k2sat_deframer import k2sat_deframer
 from .lilacsat_1_deframer import lilacsat_1_deframer
 from .lucky7_deframer import lucky7_deframer

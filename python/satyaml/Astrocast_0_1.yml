@@ -24,6 +24,9 @@ transmitters:
     frequency: 437.175e+6
     modulation: FSK
     baudrate: 9600
-    framing: Astrocast 9k6
+    framing: CCSDS Reed-Solomon
+    frame size: 1115
+    RS basis: dual
+    RS interleaving: 5
     data:
     - *tlm_9k6

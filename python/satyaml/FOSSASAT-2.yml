@@ -1,0 +1,14 @@
+name: FOSSASAT-2
+alternative_names:
+norad: 99998
+data:
+  &tlm Telemetry:
+    telemetry: fossasat_2
+transmitters:
+  9k6 FSK downlink:
+    frequency: 436.900e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: FOSSASAT
+    data:
+    - *tlm

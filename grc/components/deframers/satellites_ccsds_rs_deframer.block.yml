@@ -7,21 +7,28 @@ parameters:
     label: Frame size (bytes)
     dtype: int
     default: 223
--   id: differential
-    label: Differential encoding
-    dtype: bool
-    default: 'False'
-    options: ['True', 'False']
--   id: dual_basis
-    label: Use dual basis
-    dtype: bool
-    default: 'False'
-    options: ['True', 'False']
--   id: use_scrambler
-    label: Use scrambler
-    dtype: bool
-    default: 'True'
-    options: ['True', 'False']
+-   id: precoding
+    label: Precoding
+    dtype: enum
+    default: 'None'
+    options: ['None', '"differential"']
+    option_labels: [None, Differential]
+-   id: rs_basis
+    label: Reed-Solomon basis
+    dtype: enum
+    default: '"dual"'
+    options: ['"conventional"', '"dual"']
+    option_labels: [Conventional, Dual]
+-   id: rs_interleaving
+    label: Reed-Solomon interleave depth
+    default: 1
+    dtype: int
+-   id: scrambler
+    label: Scrambler
+    dtype: enum
+    default: '"CCSDS"'
+    options: ['"CCSDS"', '"none"']
+    option_labels: [CCSDS, None]
 -   id: threshold
     label: Syncword threshold
     dtype: int
@@ -42,7 +49,7 @@ outputs:
 
 templates:
     imports: import satellites.components.deframers
-    make: satellites.components.deframers.ccsds_rs_deframer(frame_size = ${frame_size}, differential = ${differential}, dual_basis = ${dual_basis}, use_scrambler = ${use_scrambler}, syncword_threshold = ${threshold}, options=${options})
+    make: satellites.components.deframers.ccsds_rs_deframer(frame_size = ${frame_size}, precoding = ${precoding}, rs_basis = ${rs_basis}, rs_interleaving = ${rs_interleaving}, scrambler = ${scrambler}, syncword_threshold = ${threshold}, options=${options})
 
 documentation: |-
     Deframes a signal using the CCSDS Reed-Solomon TM protocol
@@ -55,8 +62,10 @@ documentation: |-
 
     Parameters:
         Frame size (bytes): the size of the frame in bytes, after Reed-Solomon decoding
-        Differential encoding: toggles the usage of differential decoding
-        Use RS dual basis: toggles the usage of the dual basis definition for the Reed-Solomon code
+        Precoding: selects no precoding or differential precoding
+        Reed-Solomon basis: toggles the usage of the conventional or dual basis definition for the Reed-Solomon code
+        Reed-Solomon interleave depth: number of interleaved Reed-Solomon codewords
+        Scrambler: enables or disables the CCSDS synchronous scrambler
         Syncword threshold: number of bit errors to allow in the detection of the 32 bit syncword
         Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 

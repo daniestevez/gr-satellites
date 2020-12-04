@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2018 Daniel Estevez <daniel@destevez.net>
+ * Copyright 2018,2020 Daniel Estevez <daniel@destevez.net>
  *
  * This file is part of gr-satellites
  *
@@ -35,7 +35,9 @@ public:
      * class. satellites::encode_rs::make is the public interface for
      * creating new instances.
      */
-    static sptr make(int basis);
+    static sptr make(bool dual_basis, int interleave = 1);
+    static sptr
+    make(int symsize, int gfpoly, int fcr, int prim, int nroots, int interleave = 1);
 };
 
 } // namespace satellites

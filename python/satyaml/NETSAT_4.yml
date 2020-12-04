@@ -1,5 +1,5 @@
 name: NETSAT 4
-norad: 99785
+norad: 46504
 data:
   &tlm Telemetry:
     telemetry: ax25

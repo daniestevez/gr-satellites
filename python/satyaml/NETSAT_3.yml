@@ -1,5 +1,5 @@
 name: NETSAT 3
-norad: 99786
+norad: 46505
 data:
   &tlm Telemetry:
     telemetry: ax25

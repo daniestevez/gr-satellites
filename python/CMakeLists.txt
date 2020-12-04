@@ -32,59 +32,58 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
-    kiss.py
-    hdlc.py
-    kiss_to_pdu.py
-    pdu_to_kiss.py
-    hdlc_framer.py
-    hdlc_deframer.py
-    check_address.py
-    fixedlen_tagger.py
-    csp_header.py
-    print_header.py
-    crc32c.py
-    check_crc.py
-    swap_crc.py
-    swap_header.py
-    submit.py
-    print_timestamp.py
+    aausat4_remove_fsm.py
+    adapters.py
     adsb_kml.py
-    ks1q_header_remover.py
     ao40_uncoded_crc.py
-    check_ao40_uncoded_crc.py
-    lilacsat1_gps_kml.py
-    check_tt64_crc.py
     append_crc32c.py
-    strip_ax25_header.py
-    snet_deframer.py
     bch15.py
     beesat_classifier.py
-    adapters.py
-    snet_classifier.py
-    k2sat_deframer.py
-    feh.py
+    bme_submitter.py
     cc11xx_packet_crop.py
-    check_cc11xx_crc.py
-    cc11xx_remove_length.py
-    pwsat2_telemetry_parser.py
-    pwsat2_submitter.py
-    eseo_packet_crop.py
-    eseo_line_decoder.py
-    check_eseo_crc.py
-    funcube_submit.py
-    reflect_bytes.py
+    check_address.py
+    check_ao40_uncoded_crc.py
     check_astrocast_crc.py
-    ecss_pus.py
-    swiatowid_packet_crop.py
+    check_cc11xx_crc.py
+    check_crc.py
+    check_eseo_crc.py
     check_swiatowid_crc.py
-    swiatowid_packet_split.py
+    check_tt64_crc.py
+    crc32c.py
+    csp_header.py
+    ecss_pus.py
+    eseo_line_decoder.py
+    eseo_packet_crop.py
+    feh.py
+    fixedlen_tagger.py
+    funcube_submit.py
+    hdlc.py
+    hdlc_deframer.py
+    hdlc_framer.py
+    k2sat_deframer.py
+    kiss.py
+    kiss_to_pdu.py
+    ks1q_header_remover.py
+    lilacsat1_gps_kml.py
     manchester_sync.py
-    header_remover.py
-    aausat4_remove_fsm.py
+    ngham_check_crc.py
     ngham_packet_crop.py
     ngham_remove_padding.py
-    ngham_check_crc.py
-    bme_submitter.py
+    pdu_to_kiss.py
+    print_header.py
+    print_timestamp.py
+    pwsat2_submitter.py
+    pwsat2_telemetry_parser.py
+    reflect_bytes.py
+    snet_classifier.py
+    snet_deframer.py
+    submit.py
+    swap_crc.py
+    swap_header.py
+    swiatowid_packet_crop.py
+    swiatowid_packet_split.py
+    sx12xx_check_crc.py
+    sx12xx_packet_crop.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
 
@@ -107,3 +106,6 @@ set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/swig)
 GR_ADD_TEST(qa_hdlc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_hdlc.py)
 GR_ADD_TEST(qa_kiss ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_kiss.py)
 GR_ADD_TEST(qa_nrzi ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_nrzi.py)
+GR_ADD_TEST(qa_pdu_head_tail ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_pdu_head_tail.py)
+GR_ADD_TEST(qa_pdu_add_meta ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_pdu_add_meta.py)
+GR_ADD_TEST(qa_rs ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_rs.py)

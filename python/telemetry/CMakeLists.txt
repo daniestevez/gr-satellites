@@ -41,6 +41,9 @@ GR_PYTHON_INSTALL(
     csp.py
     dstar_one.py
     eseo.py
+    fossasat.py
+    fossasat_1b.py
+    fossasat_2.py
     floripasat.py
     funcube.py
     gomx_1.py
@@ -59,6 +62,7 @@ GR_PYTHON_INSTALL(
     suomi100.py
     trisat.py
     upmsat_2.py
+    vzlusat_2.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/telemetry
 )
 

@@ -23,22 +23,21 @@
 ########################################################################
 install(FILES
     api.h
-    decode_rs.h
-    encode_rs.h
-    ao40_rs_decoder.h
     ax100_decode.h
-    u482c_decode.h
-    lilacsat1_demux.h
-    varlen_packet_tagger.h
-    varlen_packet_framer.h
-    nusat_decoder.h
-    descrambler308.h
-    decode_rs_general.h
-    decode_rs_interleaved.h
-    distributed_syncframe_soft.h
-    matrix_deinterleaver_soft.h
     decode_ra_code.h
+    decode_rs.h
+    descrambler308.h
+    distributed_syncframe_soft.h
+    encode_rs.h
+    lilacsat1_demux.h
+    matrix_deinterleaver_soft.h
     nrzi_decode.h
     nrzi_encode.h
+    nusat_decoder.h
+    pdu_add_meta.h
+    pdu_head_tail.h
+    u482c_decode.h
+    varlen_packet_framer.h
+    varlen_packet_tagger.h
     DESTINATION include/satellites
 )

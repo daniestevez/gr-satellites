@@ -9,7 +9,7 @@
  */
 
 #ifndef INCLUDED_SATELLITES_NUSAT_DECODER_IMPL_H
-#define INCLUDED_SATELLITES_NUSAT_DECODERR_IMPL_H
+#define INCLUDED_SATELLITES_NUSAT_DECODER_IMPL_H
 
 #include <pmt/pmt.h>
 #include <satellites/nusat_decoder.h>

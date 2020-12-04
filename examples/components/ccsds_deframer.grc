@@ -103,20 +103,21 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    differential: 'True'
-    dual_basis: 'False'
+    convolutional: CCSDS
     frame_size: '114'
     maxoutbuf: '0'
     minoutbuf: '0'
-    nasa_dsn: 'False'
     options: '""'
+    precoding: '"differential"'
+    rs_basis: conventional
+    rs_interleaving: '1'
+    scrambler: CCSDS
     threshold: '4'
-    use_scrambler: 'True'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [520, 188.0]
+    coordinate: [520, 180.0]
     rotation: 0
     state: true
 

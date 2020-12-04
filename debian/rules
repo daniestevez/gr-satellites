@@ -2,3 +2,7 @@
 
 %:
 	dh $@ --with python3
+
+# Do not run dh_installman
+override_dh_installman:
+
