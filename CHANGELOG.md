@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Add filter before quadrature demod for IQ input FSK demodulator
+
 ## [3.6.0] - 2020-12-04
 
 ### Added

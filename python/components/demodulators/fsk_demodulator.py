@@ -53,8 +53,12 @@ class fsk_demodulator(gr.hier_block2, options_block):
         else:
             _deviation = self.options.deviation
         if iq:
+            # cut to Carson's bandwidth rule before quadrature demod
+            carson_cutoff = _deviation + baudrate / 2
+            fir_taps = firdes.low_pass(1, samp_rate, carson_cutoff, 0.1 * carson_cutoff)
+            self.demod_filter = filter.fir_filter_ccf(1, fir_taps)
             self.demod = analog.quadrature_demod_cf(samp_rate/(2*pi*_deviation))
-            self.connect(self, self.demod)
+            self.connect(self, self.demod_filter, self.demod)
         else:
             self.demod = self
         
