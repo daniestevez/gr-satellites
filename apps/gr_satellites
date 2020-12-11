@@ -59,6 +59,7 @@ def argument_parser():
     p_input.add_argument('--udp_ip', default = '::', help = 'UDP input listen IP [default=%(default)r]')
     p_input.add_argument('--udp_port', default = '7355', type = int, help = 'UDP input listen port [default=%(default)r]')
     p_input.add_argument('--iq', action = 'store_true', help = 'Use IQ input')
+    p_input.add_argument('--udp_raw', action = 'store_true', help = 'Use RAW UDP input (float32 or complex64)')
     p_input.add_argument('--input_gain', type = float, default = 1, help = 'Input gain (can be negative to invert signal) [default=%(default)r]')
     p_input.add_argument('--start_time', type = str, default = '', help = 'Recording start timestamp')
     p_input.add_argument('--throttle', action = 'store_true', help = 'Throttle recording input to 1x speed')
@@ -166,8 +167,12 @@ class gr_satellites_top_block(gr.top_block):
             self.input = self.audio_source
         
     def setup_udp_input(self):
-        self.input_int16 = blocks.udp_source(gr.sizeof_short, self.options.udp_ip, self.options.udp_port, 1472, False)
-        self.setup_input_int16()
+        if self.options.udp_raw:
+            size = gr.sizeof_gr_complex if self.options.iq else gr.sizeof_float
+            self.input = blocks.udp_source(size, self.options.udp_ip, self.options.udp_port, 1472, False)
+        else:
+            self.input_int16 = blocks.udp_source(gr.sizeof_short, self.options.udp_ip, self.options.udp_port, 1472, False)
+            self.setup_input_int16()
 
     def setup_input_int16(self):
         self.short_to_float = blocks.short_to_float(1, 32767)
