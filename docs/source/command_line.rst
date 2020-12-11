@@ -20,7 +20,7 @@ basic information about the arguments it allows.
    usage: gr_satellites satellite [-h] [--version] [--list_satellites]
                                (--wavfile WAVFILE | --rawfile RAWFILE | --rawint16 RAWINT16 | --audio [DEVICE] | --udp | --kiss_in KISS_IN)
                                [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
-                               [--udp_port UDP_PORT] [--iq]
+                               [--udp_port UDP_PORT] [--iq] [--udp_raw]
                                [--input_gain INPUT_GAIN]
                                [--start_time START_TIME] [--throttle]
                                [--kiss_out KISS_OUT] [--kiss_append]
@@ -156,6 +156,7 @@ the input source by using exactly one of the following options:
   The streaming format is the same as for the ``--rawint16`` and both real
   samples (by default) and IQ samples (using the ``--iq`` argument) are
   supported.
+  If the ``--udp_raw`` is used the format will be the same as for ``--rawfile``.
 
   By default, ``gr_satellites`` will listen on the IP address ``::`` (all
   addresses) and the UDP port 7355. A different IP address or port can be
