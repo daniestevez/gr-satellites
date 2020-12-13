@@ -18,6 +18,7 @@ basic information about the arguments it allows.
 
    $ gr_satellites
    usage: gr_satellites satellite [-h] [--version] [--list_satellites]
+                               [--ignore_unknown_args]
                                (--wavfile WAVFILE | --rawfile RAWFILE | --rawint16 RAWINT16 | --audio [DEVICE] | --udp | --kiss_in KISS_IN)
                                [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
                                [--udp_port UDP_PORT] [--iq] [--udp_raw]
@@ -226,6 +227,7 @@ For example, this shows all the options allowed by the FUNcube-1 decoder:
      -h, --help            show this help message and exit
      --version             show program's version number and exit
      --list_satellites     list supported satellites and exit
+     --ignore_unknown_args Treat unknown arguments as warning
 
    input:
      --wavfile WAVFILE     WAV input file
@@ -736,6 +738,15 @@ To use this functionality it is necessary to use the ``--throttle`` parameter to
 limit playback speed to 1x and use the ``--start_time`` parameter followed by the
 timestamp in ISO 8601 format (``YYYY-MM-DDTHH:MM:SS``) to indicate the start time
 of the recording.
+
+Treating unknown args as warning
+""""""""""""""""""""""""""""""""
+
+Using the argument ``--ignore_unknown_args`` will change the behaviour on unknown
+arguments to a warning instead of exiting with an error. This can be useful when
+running in automated scripts and some options may not be available on that satellite.
+For example the ``--f_offset`` and ``--use_agc``
+
 
 .. _GQRX: https://gqrx.dk/
 .. _gr-frontends: https://github.com/daniestevez/gr-frontends

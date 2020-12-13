@@ -44,6 +44,7 @@ def argument_parser():
 
     p.add_argument('--version', action = 'version', version = version)
     p.add_argument('--list_satellites', action = ListSatellites, nargs = 0, help = 'list supported satellites and exit')
+    p.add_argument('--ignore_unknown_args', action = 'store_true', help = 'Treat unknown arguments as warning')
 
     p_input = p.add_argument_group('input')
 
@@ -95,7 +96,6 @@ class gr_satellites_top_block(gr.top_block):
         satellites.core.gr_satellites_flowgraph.add_options(parser, **sat)
         if '--ignore_unknown_args' in sys.argv[2:]:
             options, unknown = parser.parse_known_args(sys.argv[2:])
-            unknown.remove('--ignore_unknown_args')
             if len(unknown) > 0:
                 print('Warning: unknown arguments passed {}'.format(unknown), file = sys.stderr)
         else:
