@@ -93,13 +93,17 @@ class gr_satellites_top_block(gr.top_block):
         gr.top_block.__init__(self, 'gr-satellites top block')
         sat = parse_satellite(sys.argv[1])
         satellites.core.gr_satellites_flowgraph.add_options(parser, **sat)
-        options, unknown = parser.parse_known_args(sys.argv[2:])
+        if '--ignore_unknown_args' in sys.argv[2:]:
+            options, unknown = parser.parse_known_args(sys.argv[2:])
+            unknown.remove('--ignore_unknown_args')
+            if len(unknown) > 0:
+                print('Warning: unknown arguments passed {}'.format(unknown), file = sys.stderr)
+        else:
+            options = parser.parse_args(sys.argv[2:])
         if options.list_satellites:
             list_satellites()
             sys.exit(0)
         check_options(options, parser)
-        if len(unknown) > 0:
-            print('Warning: unknown arguments passed {}'.format(unknown), file = sys.stderr)
         
         self.options = options
 
