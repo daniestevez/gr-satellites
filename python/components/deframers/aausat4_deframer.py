@@ -9,7 +9,7 @@
 #
 
 from gnuradio import gr, blocks, digital, fec
-from ... import decode_rs, aausat4_remove_fsm
+from ... import decode_rs, aausat4_remove_fsm, pdu_head_tail
 from ...hier.sync_to_pdu_soft import sync_to_pdu_soft
 from ...hier.ccsds_descrambler import ccsds_descrambler
 from ...utils.options_block import options_block
@@ -60,6 +60,10 @@ class aausat4_deframer(gr.hier_block2, options_block):
         self.scrambler = ccsds_descrambler()
         self.rs = decode_rs(False, 1)
 
+        # drops the length field, as decided in
+        # https://github.com/daniestevez/gr-satellites/issues/208#issuecomment-747060480
+        self.crop = pdu_head_tail(3, 2)
+
         self.connect(self, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.fsm, 'in'))
         self.msg_connect((self.fsm, 'short'), (self.viterbi_decoder_short, 'in'))
@@ -72,7 +76,8 @@ class aausat4_deframer(gr.hier_block2, options_block):
 
         self.msg_connect((self.viterbi_decoder_long, 'out'), (self.scrambler, 'in'))
         self.msg_connect((self.scrambler, 'out'), (self.rs, 'in'))
-        self.msg_connect((self.rs, 'out'), (self, 'out'))
+        self.msg_connect((self.rs, 'out'), (self.crop, 'in'))
+        self.msg_connect((self.crop, 'out'), (self, 'out'))
 
     _default_sync_threshold = 8
         
