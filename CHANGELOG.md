@@ -8,7 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Add filter before quadrature demod for IQ input FSK demodulator
-- Remove length field in AAUSAT-4 deframer
 
 ## [3.6.0] - 2020-12-04
 
