@@ -45,6 +45,7 @@ GR_PYTHON_INSTALL(
     check_ao40_uncoded_crc.py
     check_astrocast_crc.py
     check_cc11xx_crc.py
+    check_crc16_ccitt.py
     check_crc.py
     check_eseo_crc.py
     check_swiatowid_crc.py

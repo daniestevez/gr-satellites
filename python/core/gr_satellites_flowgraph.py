@@ -396,6 +396,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'Mobitex-NX' : set_options(deframers.mobitex_deframer, nx = True),
         'FOSSASAT' : deframers.fossasat_deframer,
         'AISTECHSAT-2' : deframers.aistechsat_2_deframer,
+        'AALTO-1' : deframers.aalto1_deframer,
     }
     _transport_hooks = {
         'KISS' : transports.kiss_transport,

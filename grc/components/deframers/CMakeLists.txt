@@ -19,6 +19,7 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
+    satellites_aalto1_deframer.block.yml
     satellites_aausat4_deframer.block.yml
     satellites_aistechsat_2_deframer.block.yml
     satellites_ao40_fec_deframer.block.yml

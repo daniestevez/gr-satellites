@@ -18,6 +18,7 @@ The input to these hierarchical blocks is a stream of soft symbols
 and the output are PDUs with the frames. 
 '''
 
+from .aalto1_deframer import aalto1_deframer
 from .aausat4_deframer import aausat4_deframer
 from .aistechsat_2_deframer import aistechsat_2_deframer
 from .ao40_fec_deframer import ao40_fec_deframer

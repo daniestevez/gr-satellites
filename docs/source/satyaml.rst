@@ -203,6 +203,10 @@ The framings allowed in the ``framing`` field are the following:
 * ``FOSSATSAT``, a custom protocol used by FOSSASAT
   
 * ``AISTECHSAT-2``, a custom CCSDS-like protocol used by AISTECHSAT-2
+
+* ``AALTO-1``, custom framing used by AALTO-1. It uses a
+  Texas Intruments CC1125 transceiver with a PN9 scrambler and a CRC-16 CCITT
+  (as in AX.25)
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.

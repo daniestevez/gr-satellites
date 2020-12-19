@@ -30,6 +30,7 @@ install(FILES
     satellites_check_ao40_uncoded_crc.block.yml
     satellites_check_astrocast_crc.block.yml
     satellites_check_cc11xx_crc.block.yml
+    satellites_check_crc16_ccitt.block.yml
     satellites_check_crc.block.yml
     satellites_check_eseo_crc.block.yml
     satellites_check_swiatowid_crc.block.yml

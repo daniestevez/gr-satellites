@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Support for AALTO-1 CC1125 mode
+
 ### Changed
 - Add filter before quadrature demod for IQ input FSK demodulator
 

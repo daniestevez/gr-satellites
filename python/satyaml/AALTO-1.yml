@@ -1,13 +1,22 @@
 name: AALTO-1
 norad: 42775
 data:
-  &tlm Telemetry:
+  &tlm_ax25 AX.25 Telemetry:
     telemetry: ax25
+  &tlm_cc1125 CC1125 Telemetry:
+    unknown
 transmitters:
-  9k6 FSK downlink:
+  9k6 FSK AX.25 downlink:
     frequency: 437.216e+6
     modulation: FSK
     baudrate: 9600
     framing: AX.25 G3RUH
     data:
-    - *tlm
+    - *tlm_ax25
+  9k6 FSK CC1125 downlink:
+    frequency: 437.216e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AALTO-1
+    data:
+    - *tlm_cc1125
