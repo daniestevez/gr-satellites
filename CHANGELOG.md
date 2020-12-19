@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Add filter before quadrature demod for IQ input FSK demodulator
 
+### Fixed
+- Runtime error when the baudrate is too high for the sample rate
+
 ## [3.6.0] - 2020-12-04
 
 ### Added

@@ -10,11 +10,14 @@
 
 from gnuradio import gr, analog, blocks, digital, filter
 from gnuradio.filter import firdes
+
 from math import ceil, pi
+import pathlib
+import sys
+
 from ...hier.rms_agc import rms_agc
 from ...utils.options_block import options_block
 from ... import manchester_sync
-import pathlib
 
 class bpsk_demodulator(gr.hier_block2, options_block):
     """
@@ -43,6 +46,13 @@ class bpsk_demodulator(gr.hier_block2, options_block):
 
         if manchester:
             baudrate *= 2
+
+        # prevent problems due to baudrate too high
+        if baudrate >= samp_rate / 4:
+            print(f'Sample rate {samp_rate} sps insufficient for {baudrate} baud BPSK demodulation. Demodulator will not work.',
+                      file = sys.stderr)
+            baudrate = samp_rate / 4
+            
         sps = samp_rate / baudrate
         max_sps = 10
         if sps > max_sps:
