@@ -63,8 +63,11 @@ class fsk_demodulator(gr.hier_block2, options_block):
             baudrate = samp_rate / 2
         
         if iq:
-            # cut to Carson's bandwidth rule before quadrature demod
-            carson_cutoff = _deviation + baudrate / 2
+            # Cut to Carson's bandwidth rule before quadrature demod.
+            # Note that _deviation can be negative to encode that the
+            # low tone corresponds to the symbol 1 and the high tone
+            # corresponds to the symbol 0.
+            carson_cutoff = abs(_deviation) + baudrate / 2
             fir_taps = firdes.low_pass(1, samp_rate, carson_cutoff, 0.1 * carson_cutoff)
             self.demod_filter = filter.fir_filter_ccf(1, fir_taps)
             self.demod = analog.quadrature_demod_cf(samp_rate/(2*pi*_deviation))
