@@ -23,7 +23,7 @@ extern "C" {
 
 #include "golay24.h"
 
-// Replacement for __builtin_parity in compilers other than GCC
+// Replacement for __builtin_parity in compilers other than GCC and clang
 #if !defined(__GNUC__) && !defined(__clang__)
 static inline uint32_t __builtin_parity(uint32_t x)
 {
