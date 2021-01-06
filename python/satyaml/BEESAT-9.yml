@@ -1,5 +1,5 @@
 name: BEESAT-9
-norad: 99802
+norad: 44412
 data:
   &tlm Telemetry:
     unknown
