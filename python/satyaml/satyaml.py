@@ -29,7 +29,8 @@ class SatYAML:
                 'CCSDS Reed-Solomon', 'CCSDS Concatenated',
                 'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon', 'SMOG-P RA',
                 'SMOG-P Signalling', 'OPS-SAT', 'U482C', 'UA01', 'SALSAT',
-                'Mobitex', 'Mobitex-NX', 'FOSSASAT', 'AISTECHSAT-2', 'AALTO-1']
+                'Mobitex', 'Mobitex-NX', 'FOSSASAT', 'AISTECHSAT-2', 'AALTO-1',
+                'Grizu-263A']
     transports = ['KISS', 'KISS no control byte', 'KISS KS-1Q']
     top_level_words = ['name', 'alternative_names', 'norad', 'telemetry_servers', 'data', 'transports', 'transmitters']
     

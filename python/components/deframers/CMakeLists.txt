@@ -44,6 +44,7 @@ GR_PYTHON_INSTALL(
     ccsds_rs_deframer.py
     eseo_deframer.py
     fossasat_deframer.py
+    grizu263a_deframer.py
     k2sat_deframer.py
     lilacsat_1_deframer.py
     lucky7_deframer.py

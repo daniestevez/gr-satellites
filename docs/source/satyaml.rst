@@ -207,7 +207,10 @@ The framings allowed in the ``framing`` field are the following:
 * ``AALTO-1``, custom framing used by AALTO-1. It uses a
   Texas Intruments CC1125 transceiver with a PN9 scrambler and a CRC-16 CCITT
   (as in AX.25)
-  
+
+* ``Grizu-263A``, custom framing used by Grizu-263A. It uses a Semtech SX1268
+  with a PN9 scrambler and CRC-16.
+
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.
 
