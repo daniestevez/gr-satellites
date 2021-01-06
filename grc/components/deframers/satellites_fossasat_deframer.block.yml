@@ -1,0 +1,43 @@
+id: satellites_fossasat_deframer
+label: FOSSASAT Deframer
+category: '[Satellites]/Deframers'
+
+parameters:
+-   id: threshold
+    label: Syncword threshold
+    dtype: int
+    default: 0
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.deframers
+    make: satellites.components.deframers.fossasat_deframer(syncword_threshold = ${threshold}, options=${options})
+
+documentation: |-
+    Deframes FOSSASAT-1/2 packets
+
+    This framing is based on Semtech SX126x transceiver with PN9 scrambler, bit order swapping and a CRC-16.
+
+    Input:
+        A stream of soft symbols containing FOSSASAT-1/2 packets
+
+    Output:
+        PDUs with the deframed Reaktor Hello World packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
+
+file_format: 1

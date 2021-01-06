@@ -30,6 +30,7 @@ install(FILES
     satellites_ccsds_concatenated_deframer.block.yml
     satellites_ccsds_rs_deframer.block.yml
     satellites_eseo_deframer.block.yml
+    satellites_fossasat_deframer.block.yml
     satellites_k2sat_deframer_component.block.yml
     satellites_lilacsat_1_deframer.block.yml
     satellites_lucky7_deframer.block.yml
