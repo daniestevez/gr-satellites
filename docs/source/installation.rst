@@ -97,11 +97,14 @@ After running ``make``, you can run the tests by doing ``make test`` in the
 ``build/`` directory.
 
 .. note::
-   There are systems where the AO-73 and similar decoders fail if
+   There are systems where the AO-73 and similar decoders fail to decode correctly if
    ``volk_profile`` has not been run ever in the system. This seems to be caused
    by the Viterbi decoder chosen by Volk by default when there is no
    ``~/.volk/volk_config`` file. If problems with these decoders are seen, it
-   is recommended to run ``volk_profile`` to see if it fixes the problems.
+   is recommended to run ``volk_profile`` to see if it fixes the problems. Additionally,
+   it is recommended to check if in ``~/.volk/volk_config`` there is a line that
+   contains ``volk_8u_x4_conv_k7_r2_8u avx2 avx2`` and replace both occurences
+   of ``avx2`` by either ``spiral`` or ``generic``.
 
 
 PYTHONPATH
