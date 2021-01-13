@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for AALTO-1 CC1125 mode
 - Support for Grizu-263A
 - Support for UVSQ-SAT
+- Example decoder for NEXUS 19k2 pi/4-DQPSK telemetry
 
 ### Changed
 - Add filter before quadrature demod for IQ input FSK demodulator
