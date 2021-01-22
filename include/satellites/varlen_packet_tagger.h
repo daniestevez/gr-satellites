@@ -35,7 +35,7 @@ namespace satellites {
 class SATELLITES_API varlen_packet_tagger : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<varlen_packet_tagger> sptr;
+    typedef std::shared_ptr<varlen_packet_tagger> sptr;
 
     /*!
      * \param sync_key

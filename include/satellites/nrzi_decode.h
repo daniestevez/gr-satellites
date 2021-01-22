@@ -25,7 +25,7 @@ namespace satellites {
 class SATELLITES_API nrzi_decode : virtual public gr::sync_block
 {
 public:
-    typedef boost::shared_ptr<nrzi_decode> sptr;
+    typedef std::shared_ptr<nrzi_decode> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of satellites::nrzi_decode.

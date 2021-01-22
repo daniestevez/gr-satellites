@@ -26,7 +26,7 @@ namespace satellites {
 class SATELLITES_API lilacsat1_demux : virtual public gr::sync_block
 {
 public:
-    typedef boost::shared_ptr<lilacsat1_demux> sptr;
+    typedef std::shared_ptr<lilacsat1_demux> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of satellites::lilacsat1_demux.

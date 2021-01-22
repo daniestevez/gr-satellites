@@ -26,6 +26,8 @@ if(NOT PYTHONINTERP_FOUND)
     return()
 endif()
 
+add_subdirectory(bindings)
+
 ########################################################################
 # Install python sources
 ########################################################################

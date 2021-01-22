@@ -25,7 +25,7 @@ namespace satellites {
 class SATELLITES_API distributed_syncframe_soft : virtual public gr::sync_block
 {
 public:
-    typedef boost::shared_ptr<distributed_syncframe_soft> sptr;
+    typedef std::shared_ptr<distributed_syncframe_soft> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of

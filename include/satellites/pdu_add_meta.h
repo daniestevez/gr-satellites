@@ -25,7 +25,7 @@ namespace satellites {
 class SATELLITES_API pdu_add_meta : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<pdu_add_meta> sptr;
+    typedef std::shared_ptr<pdu_add_meta> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of satellites::pdu_add_meta.

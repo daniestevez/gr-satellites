@@ -25,7 +25,7 @@ namespace satellites {
 class SATELLITES_API descrambler308 : virtual public gr::sync_block
 {
 public:
-    typedef boost::shared_ptr<descrambler308> sptr;
+    typedef std::shared_ptr<descrambler308> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of satellites::descrambler308.

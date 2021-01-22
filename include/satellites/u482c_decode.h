@@ -25,7 +25,7 @@ namespace satellites {
 class SATELLITES_API u482c_decode : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<u482c_decode> sptr;
+    typedef std::shared_ptr<u482c_decode> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of satellites::u482c_decode.

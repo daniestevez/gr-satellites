@@ -35,7 +35,7 @@ class kiss_to_pdu(gr.sync_block):
         for c in input_items[0]:
             if c == FEND:
                 if self.pdu and (not self.control_byte or not self.pdu[0] & 0x0f):
-                    msg = bytes(self.pdu[1:] if self.control_byte else self.pdu)
+                    msg = self.pdu[1:] if self.control_byte else self.pdu
                     self.message_port_pub(pmt.intern('out'), pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(msg), msg)))
                 self.pdu = list()
             elif self.transpose:

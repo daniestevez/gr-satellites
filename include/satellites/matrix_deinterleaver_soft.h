@@ -25,7 +25,7 @@ namespace satellites {
 class SATELLITES_API matrix_deinterleaver_soft : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<matrix_deinterleaver_soft> sptr;
+    typedef std::shared_ptr<matrix_deinterleaver_soft> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of

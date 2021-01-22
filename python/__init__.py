@@ -25,12 +25,12 @@ __copyright__ = 'Copyright 2016-2020 Daniel Estevez'
 __email__ = 'daniel@destevez.net'
 __license__ = 'GPL-3.0'
 
-# import swig generated symbols into the satellites namespace
-# this would fail if we are being imported from the build dir
+# import bindings into the satellites namespace
+# the first try works when we are importing from the build dir
 try:
-    from .satellites_swig import *
-except ImportError:
-    from satellites_swig import *
+    from .bindings.satellites_python import *
+except ModuleNotFoundError:
+    from satellites_python import *
 
 # import any pure python here
 #

@@ -69,10 +69,10 @@ class pdu_to_kiss(gr.basic_block):
             return
 
         control = [numpy.uint8(0)] if self.control_byte else []
-        frame = bytes([FEND] + control + kiss_escape(pmt.u8vector_elements(msg)) + [FEND])
+        frame = [FEND] + control + kiss_escape(pmt.u8vector_elements(msg)) + [FEND]
 
         if self.include_timestamp:
-            timestamp_frame = bytes([FEND] + kiss_escape(self.create_timestamp()) + [FEND])
+            timestamp_frame = [FEND] + kiss_escape(self.create_timestamp()) + [FEND]
             self.message_port_pub(pmt.intern('out'), pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(timestamp_frame), timestamp_frame)))
             
         self.message_port_pub(pmt.intern('out'), pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(frame), frame)))

@@ -25,7 +25,7 @@ namespace satellites {
 class SATELLITES_API nusat_decoder : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<nusat_decoder> sptr;
+    typedef std::shared_ptr<nusat_decoder> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of satellites::nusat_decoder.

@@ -25,7 +25,7 @@ namespace satellites {
 class SATELLITES_API ax100_decode : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<ax100_decode> sptr;
+    typedef std::shared_ptr<ax100_decode> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of satellites::ax100_decode.

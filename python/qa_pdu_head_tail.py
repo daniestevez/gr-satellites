@@ -34,7 +34,7 @@ class qa_pdu_head_tail(gr_unittest.TestCase):
         dbg = blocks.message_debug()
         num = 10
         sizes = [15, 8]
-        test_data = bytes(list(range(np.max(sizes))))
+        test_data = list(range(np.max(sizes)))
         msgs = [test_data[:x] for x in sizes]
         pdus = [pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(m), m))
                          for m in msgs]
@@ -50,7 +50,7 @@ class qa_pdu_head_tail(gr_unittest.TestCase):
         tb.wait()
 
         for j, msg in enumerate(msgs):
-            out = bytes(pmt.u8vector_elements(pmt.cdr(dbg.get_message(j))))
+            out = pmt.u8vector_elements(pmt.cdr(dbg.get_message(j)))
             if mode == 0:
                 expected = msg[:num]
             elif mode == 1:

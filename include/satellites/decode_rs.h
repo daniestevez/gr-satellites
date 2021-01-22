@@ -25,7 +25,7 @@ namespace satellites {
 class SATELLITES_API decode_rs : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<decode_rs> sptr;
+    typedef std::shared_ptr<decode_rs> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of satellites::decode_rs.

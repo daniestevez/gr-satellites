@@ -32,7 +32,7 @@ namespace satellites {
 class SATELLITES_API varlen_packet_framer : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<varlen_packet_framer> sptr;
+    typedef std::shared_ptr<varlen_packet_framer> sptr;
 
     /*!
      * \param packet_key        tag key used to mark packets

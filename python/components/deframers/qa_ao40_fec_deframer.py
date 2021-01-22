@@ -28,7 +28,7 @@ class qa_ao40_fec_deframer(gr_unittest.TestCase):
         file_base = __file__.rstrip('.py')
         self.symbols_path = file_base + '_symbols.f32'
         self.frame_path = file_base + '_frame.f32'
-        self.post_viterbi_reference = (118, 72, 14, 192, 154, 13, 112, 188, 142, 51, 95,
+        self.post_viterbi_reference = [118, 72, 14, 192, 154, 13, 112, 188, 142, 51, 95,
                                            173, 105, 181, 151, 206, 90, 144, 117, 197, 59,
                                            162, 191, 59, 11, 17, 241, 200, 135, 226, 34,
                                            67, 162, 31, 41, 162, 199, 160, 234, 36, 126,
@@ -58,8 +58,8 @@ class qa_ao40_fec_deframer(gr_unittest.TestCase):
                                            165, 169, 159, 118, 179, 112, 92, 119, 194, 35,
                                            141, 77, 129, 180, 19, 23, 247, 52, 38, 233, 32,
                                            158, 11, 230, 188, 228, 96, 46, 155, 115, 28, 15,
-                                           212, 110, 122, 27, 135, 117, 22, 44, 27)
-        self.frame_reference = (137, 0, 0, 0, 0, 0, 0, 0, 0, 31, 204, 0, 206, 2, 209, 0, 0,
+                                           212, 110, 122, 27, 135, 117, 22, 44, 27]
+        self.frame_reference = [137, 0, 0, 0, 0, 0, 0, 0, 0, 31, 204, 0, 206, 2, 209, 0, 0,
                           7, 8, 9, 9, 0, 0, 5, 1, 1, 0, 64, 19, 47, 200, 242, 92,
                           143, 52, 35, 243, 186, 11, 93, 98, 116, 81, 199, 234, 250,
                           105, 74, 154, 159, 0, 9, 239, 160, 31, 244, 167, 234, 74,
@@ -76,7 +76,7 @@ class qa_ao40_fec_deframer(gr_unittest.TestCase):
                           158, 14, 222, 15, 72, 14, 49, 1, 49, 32, 90, 0, 206, 155, 200,
                           255, 136, 104, 27, 178, 106, 90, 202, 167, 15, 195, 14, 116, 14,
                           88, 1, 52, 32, 90, 0, 215, 155, 57, 27, 151, 184, 197, 176, 43,
-                          58, 214, 181, 1, 107, 0, 106, 2, 158, 0, 3, 32, 19, 0)
+                          58, 214, 181, 1, 107, 0, 106, 2, 158, 0, 3, 32, 19, 0]
         
         self.tb = gr.top_block()
 
@@ -115,8 +115,8 @@ class qa_ao40_fec_deframer(gr_unittest.TestCase):
                                               "deinterleaver output doesn't match expected result")
 
         post_viterbi = pmt.u8vector_elements(pmt.cdr(dbg_viterbi.get_message(0)))
-        post_viterbi_reference = tuple(np.unpackbits(np.array(self.post_viterbi_reference, dtype='uint8')))
-        self.assertEqual(post_viterbi, post_viterbi_reference,
+        post_viterbi_reference = np.unpackbits(np.array(self.post_viterbi_reference, dtype='uint8'))
+        np.testing.assert_equal(post_viterbi, post_viterbi_reference,
                              "Viterbi decoder output doesn't match expected result")
 
         frame = pmt.u8vector_elements(pmt.cdr(dbg_frame.get_message(0)))

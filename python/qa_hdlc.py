@@ -46,7 +46,7 @@ class qa_hdlc(gr_unittest.TestCase):
         test_data = [bytes(np.random.randint(0, 256, test_size, dtype = 'uint8'))
                          for _ in range(test_number_frames)]
         for td in test_data:
-            test_frame = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(test_size, td))
+            test_frame = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(test_size, list(td)))
             framer.to_basic_block()._post(pmt.intern('in'), test_frame)
         framer.to_basic_block()._post(pmt.intern('system'),
                 pmt.cons(pmt.intern('done'), pmt.from_long(1)))

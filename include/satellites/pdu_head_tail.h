@@ -25,7 +25,7 @@ namespace satellites {
 class SATELLITES_API pdu_head_tail : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<pdu_head_tail> sptr;
+    typedef std::shared_ptr<pdu_head_tail> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of satellites::pdu_head_tail.
