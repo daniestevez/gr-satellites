@@ -30,7 +30,7 @@ __license__ = 'GPL-3.0'
 try:
     from .bindings.satellites_python import *
 except ModuleNotFoundError:
-    from satellites_python import *
+    from .satellites_python import *
 
 # import any pure python here
 #
