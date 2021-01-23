@@ -22,9 +22,4 @@
  static const char *__doc_gr_satellites_decode_rs_decode_rs = R"doc()doc";
 
 
- static const char *__doc_gr_satellites_decode_rs_make_0 = R"doc()doc";
-
-
- static const char *__doc_gr_satellites_decode_rs_make_1 = R"doc()doc";
-
-  
+ static const char *__doc_gr_satellites_decode_rs_make = R"doc()doc";

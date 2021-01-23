@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(decode_rs.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(93c11e2e6bb38620f7a86477469b20ab)                     */
+/* BINDTOOL_HEADER_FILE_HASH(f7626b0f1bfb611dc3c84468d901df61)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -38,8 +38,8 @@ void bind_decode_rs(py::module& m)
 
        .def(py::init(py::overload_cast<int, int>(&decode_rs::make)),
            py::arg("dual_basis"),
-	   py::arg("interleave")//, TODO: fix docstrings
-	   //D(decode_rs,make)
+           py::arg("interleave"),
+	   D(decode_rs,make)
         )
 
        .def(py::init(py::overload_cast<int, int, int, int, int, int>(&decode_rs::make)),
