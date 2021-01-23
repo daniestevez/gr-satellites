@@ -16,9 +16,9 @@ namespace py = pybind11;
 
 // Headers for binding functions
 /**************************************/
-/* The following comment block is used for
-/* gr_modtool to insert function prototypes
-/* Please do not delete
+// The following comment block is used for
+// gr_modtool to insert function prototypes
+// Please do not delete
 /**************************************/
 // BINDING_FUNCTION_PROTOTYPES(
 void bind_ax100_decode(py::module& m);
@@ -60,9 +60,9 @@ PYBIND11_MODULE(satellites_python, m)
     py::module::import("gnuradio.gr");
 
     /**************************************/
-    /* The following comment block is used for
-    /* gr_modtool to insert binding function calls
-    /* Please do not delete
+    // The following comment block is used for
+    // gr_modtool to insert binding function calls
+    // Please do not delete
     /**************************************/
     // BINDING_FUNCTION_CALLS(
     bind_ax100_decode(m);
