@@ -30,42 +30,27 @@ namespace py = pybind11;
 void bind_encode_rs(py::module& m)
 {
 
-    using encode_rs    = ::gr::satellites::encode_rs;
+    using encode_rs = ::gr::satellites::encode_rs;
 
 
-    py::class_<encode_rs, gr::block, gr::basic_block,
-        std::shared_ptr<encode_rs>>(m, "encode_rs", D(encode_rs))
+    py::class_<encode_rs, gr::block, gr::basic_block, std::shared_ptr<encode_rs>>(
+        m, "encode_rs", D(encode_rs))
 
         .def(py::init(py::overload_cast<bool, int>(&encode_rs::make)),
-           py::arg("dual_basis"),
-	   py::arg("interleave") = 1,
-	   D(encode_rs,make)
-        )
-        
+             py::arg("dual_basis"),
+             py::arg("interleave") = 1,
+             D(encode_rs, make))
+
 
         .def(py::init(py::overload_cast<int, int, int, int, int, int>(&encode_rs::make)),
-           py::arg("symsize"),
-           py::arg("gfpoly"),
-           py::arg("fcr"),
-           py::arg("prim"),
-           py::arg("nroots"),
-	   py::arg("interleave"),
-           D(encode_rs,make)
-        )
-
+             py::arg("symsize"),
+             py::arg("gfpoly"),
+             py::arg("fcr"),
+             py::arg("prim"),
+             py::arg("nroots"),
+             py::arg("interleave"),
+             D(encode_rs, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

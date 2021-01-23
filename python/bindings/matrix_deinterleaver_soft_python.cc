@@ -13,7 +13,7 @@
 /* If manual edits are made, the following tags should be modified accordingly.    */
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
-/* BINDTOOL_HEADER_FILE(matrix_deinterleaver_soft.h)                                        */
+/* BINDTOOL_HEADER_FILE(matrix_deinterleaver_soft.h) */
 /* BINDTOOL_HEADER_FILE_HASH(ff360136b96f6fe6a1b3db61c269098e)                     */
 /***********************************************************************************/
 
@@ -30,34 +30,22 @@ namespace py = pybind11;
 void bind_matrix_deinterleaver_soft(py::module& m)
 {
 
-    using matrix_deinterleaver_soft    = ::gr::satellites::matrix_deinterleaver_soft;
+    using matrix_deinterleaver_soft = ::gr::satellites::matrix_deinterleaver_soft;
 
 
-    py::class_<matrix_deinterleaver_soft, gr::block, gr::basic_block,
-        std::shared_ptr<matrix_deinterleaver_soft>>(m, "matrix_deinterleaver_soft", D(matrix_deinterleaver_soft))
+    py::class_<matrix_deinterleaver_soft,
+               gr::block,
+               gr::basic_block,
+               std::shared_ptr<matrix_deinterleaver_soft>>(
+        m, "matrix_deinterleaver_soft", D(matrix_deinterleaver_soft))
 
         .def(py::init(&matrix_deinterleaver_soft::make),
-           py::arg("rows"),
-           py::arg("cols"),
-           py::arg("output_size"),
-           py::arg("output_skip"),
-           D(matrix_deinterleaver_soft,make)
-        )
-        
-
+             py::arg("rows"),
+             py::arg("cols"),
+             py::arg("output_size"),
+             py::arg("output_skip"),
+             D(matrix_deinterleaver_soft, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

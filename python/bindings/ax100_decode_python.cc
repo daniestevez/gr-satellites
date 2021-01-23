@@ -30,31 +30,14 @@ namespace py = pybind11;
 void bind_ax100_decode(py::module& m)
 {
 
-    using ax100_decode    = ::gr::satellites::ax100_decode;
+    using ax100_decode = ::gr::satellites::ax100_decode;
 
 
-    py::class_<ax100_decode, gr::block, gr::basic_block,
-        std::shared_ptr<ax100_decode>>(m, "ax100_decode", D(ax100_decode))
+    py::class_<ax100_decode, gr::block, gr::basic_block, std::shared_ptr<ax100_decode>>(
+        m, "ax100_decode", D(ax100_decode))
 
-        .def(py::init(&ax100_decode::make),
-           py::arg("verbose"),
-           D(ax100_decode,make)
-        )
-        
-
+        .def(py::init(&ax100_decode::make), py::arg("verbose"), D(ax100_decode, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

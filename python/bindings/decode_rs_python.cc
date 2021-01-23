@@ -30,44 +30,27 @@ namespace py = pybind11;
 void bind_decode_rs(py::module& m)
 {
 
-    using decode_rs    = ::gr::satellites::decode_rs;
+    using decode_rs = ::gr::satellites::decode_rs;
 
 
-    py::class_<decode_rs, gr::block, gr::basic_block,
-        std::shared_ptr<decode_rs>>(m, "decode_rs", D(decode_rs))
+    py::class_<decode_rs, gr::block, gr::basic_block, std::shared_ptr<decode_rs>>(
+        m, "decode_rs", D(decode_rs))
 
-       .def(py::init(py::overload_cast<int, int>(&decode_rs::make)),
-           py::arg("dual_basis"),
-           py::arg("interleave"),
-	   D(decode_rs,make)
+        .def(py::init(py::overload_cast<int, int>(&decode_rs::make)),
+             py::arg("dual_basis"),
+             py::arg("interleave"),
+             D(decode_rs, make))
+
+        .def(py::init(py::overload_cast<int, int, int, int, int, int>(&decode_rs::make)),
+             py::arg("symsize"),
+             py::arg("gfpoly"),
+             py::arg("fcr"),
+             py::arg("prim"),
+             py::arg("nroots"),
+             py::arg("interleave") //,
+                                   // D(decode_rs,make)
         )
-
-       .def(py::init(py::overload_cast<int, int, int, int, int, int>(&decode_rs::make)),
-           py::arg("symsize"),
-           py::arg("gfpoly"),
-           py::arg("fcr"),
-           py::arg("prim"),
-           py::arg("nroots"),
-	   py::arg("interleave")//,
-           //D(decode_rs,make)
-        )
-        
-
-
-
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

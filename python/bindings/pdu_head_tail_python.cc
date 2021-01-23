@@ -30,32 +30,17 @@ namespace py = pybind11;
 void bind_pdu_head_tail(py::module& m)
 {
 
-    using pdu_head_tail    = ::gr::satellites::pdu_head_tail;
+    using pdu_head_tail = ::gr::satellites::pdu_head_tail;
 
 
-    py::class_<pdu_head_tail, gr::block, gr::basic_block,
-        std::shared_ptr<pdu_head_tail>>(m, "pdu_head_tail", D(pdu_head_tail))
+    py::class_<pdu_head_tail, gr::block, gr::basic_block, std::shared_ptr<pdu_head_tail>>(
+        m, "pdu_head_tail", D(pdu_head_tail))
 
         .def(py::init(&pdu_head_tail::make),
-           py::arg("mode"),
-           py::arg("num"),
-           D(pdu_head_tail,make)
-        )
-        
-
+             py::arg("mode"),
+             py::arg("num"),
+             D(pdu_head_tail, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

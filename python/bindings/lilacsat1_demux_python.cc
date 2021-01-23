@@ -30,31 +30,17 @@ namespace py = pybind11;
 void bind_lilacsat1_demux(py::module& m)
 {
 
-    using lilacsat1_demux    = ::gr::satellites::lilacsat1_demux;
+    using lilacsat1_demux = ::gr::satellites::lilacsat1_demux;
 
 
-    py::class_<lilacsat1_demux, gr::sync_block, gr::block, gr::basic_block,
-        std::shared_ptr<lilacsat1_demux>>(m, "lilacsat1_demux", D(lilacsat1_demux))
+    py::class_<lilacsat1_demux,
+               gr::sync_block,
+               gr::block,
+               gr::basic_block,
+               std::shared_ptr<lilacsat1_demux>>(m, "lilacsat1_demux", D(lilacsat1_demux))
 
-        .def(py::init(&lilacsat1_demux::make),
-           py::arg("tag"),
-           D(lilacsat1_demux,make)
-        )
-        
-
+        .def(py::init(&lilacsat1_demux::make), py::arg("tag"), D(lilacsat1_demux, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

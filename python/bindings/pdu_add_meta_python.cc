@@ -30,31 +30,14 @@ namespace py = pybind11;
 void bind_pdu_add_meta(py::module& m)
 {
 
-    using pdu_add_meta    = ::gr::satellites::pdu_add_meta;
+    using pdu_add_meta = ::gr::satellites::pdu_add_meta;
 
 
-    py::class_<pdu_add_meta, gr::block, gr::basic_block,
-        std::shared_ptr<pdu_add_meta>>(m, "pdu_add_meta", D(pdu_add_meta))
+    py::class_<pdu_add_meta, gr::block, gr::basic_block, std::shared_ptr<pdu_add_meta>>(
+        m, "pdu_add_meta", D(pdu_add_meta))
 
-        .def(py::init(&pdu_add_meta::make),
-           py::arg("meta"),
-           D(pdu_add_meta,make)
-        )
-        
-
+        .def(py::init(&pdu_add_meta::make), py::arg("meta"), D(pdu_add_meta, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

@@ -30,36 +30,24 @@ namespace py = pybind11;
 void bind_varlen_packet_tagger(py::module& m)
 {
 
-    using varlen_packet_tagger    = ::gr::satellites::varlen_packet_tagger;
+    using varlen_packet_tagger = ::gr::satellites::varlen_packet_tagger;
 
 
-    py::class_<varlen_packet_tagger, gr::block, gr::basic_block,
-        std::shared_ptr<varlen_packet_tagger>>(m, "varlen_packet_tagger", D(varlen_packet_tagger))
+    py::class_<varlen_packet_tagger,
+               gr::block,
+               gr::basic_block,
+               std::shared_ptr<varlen_packet_tagger>>(
+        m, "varlen_packet_tagger", D(varlen_packet_tagger))
 
         .def(py::init(&varlen_packet_tagger::make),
-           py::arg("sync_key"),
-           py::arg("packet_key"),
-           py::arg("length_field_size"),
-           py::arg("max_packet_size"),
-           py::arg("endianness"),
-           py::arg("use_golay"),
-           D(varlen_packet_tagger,make)
-        )
-        
-
+             py::arg("sync_key"),
+             py::arg("packet_key"),
+             py::arg("length_field_size"),
+             py::arg("max_packet_size"),
+             py::arg("endianness"),
+             py::arg("use_golay"),
+             D(varlen_packet_tagger, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

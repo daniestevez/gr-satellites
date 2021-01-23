@@ -30,30 +30,14 @@ namespace py = pybind11;
 void bind_nusat_decoder(py::module& m)
 {
 
-    using nusat_decoder    = ::gr::satellites::nusat_decoder;
+    using nusat_decoder = ::gr::satellites::nusat_decoder;
 
 
-    py::class_<nusat_decoder, gr::block, gr::basic_block,
-        std::shared_ptr<nusat_decoder>>(m, "nusat_decoder", D(nusat_decoder))
+    py::class_<nusat_decoder, gr::block, gr::basic_block, std::shared_ptr<nusat_decoder>>(
+        m, "nusat_decoder", D(nusat_decoder))
 
-        .def(py::init(&nusat_decoder::make),
-           D(nusat_decoder,make)
-        )
-        
-
+        .def(py::init(&nusat_decoder::make), D(nusat_decoder, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

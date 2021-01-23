@@ -30,31 +30,16 @@ namespace py = pybind11;
 void bind_decode_ra_code(py::module& m)
 {
 
-    using decode_ra_code    = ::gr::satellites::decode_ra_code;
+    using decode_ra_code = ::gr::satellites::decode_ra_code;
 
 
-    py::class_<decode_ra_code, gr::block, gr::basic_block,
-        std::shared_ptr<decode_ra_code>>(m, "decode_ra_code", D(decode_ra_code))
+    py::class_<decode_ra_code,
+               gr::block,
+               gr::basic_block,
+               std::shared_ptr<decode_ra_code>>(m, "decode_ra_code", D(decode_ra_code))
 
-        .def(py::init(&decode_ra_code::make),
-           py::arg("size"),
-           D(decode_ra_code,make)
-        )
-        
-
+        .def(py::init(&decode_ra_code::make), py::arg("size"), D(decode_ra_code, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

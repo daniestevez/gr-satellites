@@ -30,35 +30,23 @@ namespace py = pybind11;
 void bind_varlen_packet_framer(py::module& m)
 {
 
-    using varlen_packet_framer    = ::gr::satellites::varlen_packet_framer;
+    using varlen_packet_framer = ::gr::satellites::varlen_packet_framer;
 
 
-    py::class_<varlen_packet_framer, gr::block, gr::basic_block,
-        std::shared_ptr<varlen_packet_framer>>(m, "varlen_packet_framer", D(varlen_packet_framer))
+    py::class_<varlen_packet_framer,
+               gr::block,
+               gr::basic_block,
+               std::shared_ptr<varlen_packet_framer>>(
+        m, "varlen_packet_framer", D(varlen_packet_framer))
 
         .def(py::init(&varlen_packet_framer::make),
-           py::arg("packet_key"),
-           py::arg("length_field_size"),
-           py::arg("endianness"),
-           py::arg("use_golay"),
-           py::arg("sync_word"),
-           D(varlen_packet_framer,make)
-        )
-        
-
+             py::arg("packet_key"),
+             py::arg("length_field_size"),
+             py::arg("endianness"),
+             py::arg("use_golay"),
+             py::arg("sync_word"),
+             D(varlen_packet_framer, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

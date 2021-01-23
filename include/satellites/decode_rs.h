@@ -44,7 +44,7 @@ public:
      * constructor is in a private implementation
      * class. satellites::decode_rs::make is the public interface for
      * creating new instances.
-     */    
+     */
     static sptr
     make(int symsize, int gfpoly, int fcr, int prim, int nroots, int interleave);
 };

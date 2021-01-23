@@ -30,30 +30,17 @@ namespace py = pybind11;
 void bind_descrambler308(py::module& m)
 {
 
-    using descrambler308    = ::gr::satellites::descrambler308;
+    using descrambler308 = ::gr::satellites::descrambler308;
 
 
-    py::class_<descrambler308, gr::sync_block, gr::block, gr::basic_block,
-        std::shared_ptr<descrambler308>>(m, "descrambler308", D(descrambler308))
+    py::class_<descrambler308,
+               gr::sync_block,
+               gr::block,
+               gr::basic_block,
+               std::shared_ptr<descrambler308>>(m, "descrambler308", D(descrambler308))
 
-        .def(py::init(&descrambler308::make),
-           D(descrambler308,make)
-        )
-        
-
+        .def(py::init(&descrambler308::make), D(descrambler308, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

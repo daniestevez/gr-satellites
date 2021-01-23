@@ -30,30 +30,17 @@ namespace py = pybind11;
 void bind_nrzi_encode(py::module& m)
 {
 
-    using nrzi_encode    = ::gr::satellites::nrzi_encode;
+    using nrzi_encode = ::gr::satellites::nrzi_encode;
 
 
-    py::class_<nrzi_encode, gr::sync_block, gr::block, gr::basic_block,
-        std::shared_ptr<nrzi_encode>>(m, "nrzi_encode", D(nrzi_encode))
+    py::class_<nrzi_encode,
+               gr::sync_block,
+               gr::block,
+               gr::basic_block,
+               std::shared_ptr<nrzi_encode>>(m, "nrzi_encode", D(nrzi_encode))
 
-        .def(py::init(&nrzi_encode::make),
-           D(nrzi_encode,make)
-        )
-        
-
+        .def(py::init(&nrzi_encode::make), D(nrzi_encode, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-
