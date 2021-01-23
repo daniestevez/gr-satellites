@@ -20,7 +20,7 @@ class check_astrocast_crc(gr.basic_block):
     """
     def __init__(self, verbose):
         gr.basic_block.__init__(self,
-            name="check_eseo_crc",
+            name="check_astrocast_crc",
             in_sig=[],
             out_sig=[])
 
@@ -36,11 +36,12 @@ class check_astrocast_crc(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = bytes(pmt.u8vector_elements(msg))[1:] # drop initial 0x7e
+        packet = pmt.u8vector_elements(msg)[1:] # drop initial 0x7e
 
         # find final 0x7e
-        idx = packet.find(b'\x7e')
-        if idx == -1:
+        try:
+            idx = packet.index(0x7e)
+        except ValueError:
             return
         
         packet_out = packet[:idx-2]

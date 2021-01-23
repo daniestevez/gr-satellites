@@ -40,7 +40,7 @@ class check_crc(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = bytes( pmt.u8vector_elements(msg))
+        packet = pmt.u8vector_elements(msg)
         try:
             header = csp_header.CSP(packet[:4])
         except ValueError as e:

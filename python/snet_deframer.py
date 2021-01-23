@@ -146,7 +146,7 @@ class snet_deframer(gr.basic_block):
                 print('CRC13 fail')
             return
 
-        pdu = bytes(np.packbits(pdu_bytes))
+        pdu = np.packbits(pdu_bytes)
         pdu_tags = pmt.make_dict()
         pdu_tags = pmt.dict_add(pdu_tags, pmt.intern('SNET SrcId'), pmt.from_long(hdr.SrcId))
         self.message_port_pub(pmt.intern('out'),

@@ -31,7 +31,7 @@ class swiatowid_packet_crop(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = bytes(pmt.u8vector_elements(msg))
+        packet = pmt.u8vector_elements(msg)
 
         packet_length = packet[0] + packet[1] * 256 - 8
         if packet_length + 2 > len(packet):

@@ -19,7 +19,7 @@ gr_satellites FUNcube-1 --wavfile satellite-recordings/ao73.wav --samp_rate 48e3
 echo "Reaktor Hello World"
 gr_satellites "Reaktor Hello World" --wavfile satellite-recordings/reaktor_hello_world.wav --samp_rate 48e3
 echo "S-NET A"
-gr_satellites "S-NET A" --wavfile satellite-recordings/snet_a.wav --samp_rate 48e3
+gr_satellites "S-NET A" --wavfile satellite-recordings/snet_a.wav --samp_rate 48e3 --clk_bw 0.1
 echo "Swiatowid"
 gr_satellites Swiatowid --wavfile satellite-recordings/swiatowid.wav --samp_rate 48e3
 echo "NuSat"

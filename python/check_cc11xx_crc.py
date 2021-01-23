@@ -80,7 +80,7 @@ class check_cc11xx_crc(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = bytes(pmt.u8vector_elements(msg))
+        packet = pmt.u8vector_elements(msg)
 
         if len(packet) < 3:
             return

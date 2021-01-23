@@ -49,9 +49,9 @@ class ngham_packet_crop(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = bytes(pmt.u8vector_elements(msg))
+        packet = pmt.u8vector_elements(msg)
 
-        size_tag = np.unpackbits(np.frombuffer(packet[:3], dtype = 'uint8'))
+        size_tag = np.unpackbits(np.array(packet[:3], dtype = 'uint8'))
         tag_dist = np.sum(size_tag ^ ngham_tags, axis = 1)
         best_tag = np.argmin(tag_dist)
 

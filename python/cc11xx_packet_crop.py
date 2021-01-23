@@ -33,7 +33,7 @@ class cc11xx_packet_crop(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = bytes(pmt.u8vector_elements(msg))
+        packet = pmt.u8vector_elements(msg)
 
         crc_len = 2 if self.crc16 else 0
         packet_length = packet[0] + 1 + crc_len
