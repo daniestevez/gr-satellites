@@ -1,0 +1,15 @@
+name: EXOCUBE-2
+alternative_names:
+  - CP12
+norad: 47319
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  9k6 FSK downlink:
+    frequency: 437.150e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX.25 G3RUH
+    data:
+    - *tlm
