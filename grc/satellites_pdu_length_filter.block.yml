@@ -1,0 +1,41 @@
+id: satellites_pdu_length_filter
+label: PDU Length Filter
+category: '[Satellites]/PDU'
+
+parameters:
+-   id: min
+    label: Minimum
+    dtype: int
+    default: 0
+-   id: max
+    label: Maximum
+    dtype: int
+    default: -1
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites
+    make: satellites.pdu_length_filter(${min}, ${max})
+
+documentation: |-
+    Filters PDUs according to its length
+
+    PDUs whose length is between the minimum and maximum are passed through.
+    Others are dropped. A maximum length of -1 can be used to represent unlimited
+    maximum length.
+
+    Output:
+        The PDUs satisfying the lenght constraings
+
+    Parameters:
+        Minimum: Minimum lenght. A minimum length of 0 means no constraint.
+        Maximum: Maximum lenght. A maximum length of -1 means no constraint.
+
+file_format: 1

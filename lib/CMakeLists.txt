@@ -57,6 +57,7 @@ list(APPEND satellites_sources
     nusat_decoder_impl.cc
     pdu_add_meta_impl.cc
     pdu_head_tail_impl.cc
+    pdu_length_filter_impl.cc
     randomizer.c
     u482c_decode_impl.cc
     varlen_packet_framer_impl.cc

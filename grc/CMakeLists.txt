@@ -64,6 +64,7 @@ install(FILES
     satellites_nusat_decoder.block.yml
     satellites_pdu_add_meta.block.yml
     satellites_pdu_head_tail.block.yml
+    satellites_pdu_length_filter.block.yml
     satellites_pdu_to_kiss.block.yml
     satellites_print_header.block.yml
     satellites_print_timestamp.block.yml
