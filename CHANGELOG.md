@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Runtime error when the baudrate is too high for the sample rate
 - Build problems with clang
+- Errors about wrong Reed-Solomon message size with OPS-SAT deframer
 
 ## [3.6.0] - 2020-12-04
 
