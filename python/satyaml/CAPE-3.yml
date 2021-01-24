@@ -1,0 +1,15 @@
+name: CAPE-3
+norad: 47309
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  1k2 AFSK downlink:
+    frequency: 437.325e+6
+    modulation: AFSK
+    baudrate: 1200
+    af_carrier: 1700
+    deviation: 500
+    framing: AX.25
+    data:
+    - *tlm

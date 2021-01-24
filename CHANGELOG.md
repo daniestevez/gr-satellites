@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for UVSQ-SAT
 - Example decoder for NEXUS 19k2 pi/4-DQPSK telemetry
 - Support for MiTEE-1
+- Preliminary support for CAPE-3 (only ASFK AX.25)
 
 ### Changed
 - Add filter before quadrature demod for IQ input FSK demodulator
