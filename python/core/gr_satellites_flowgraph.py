@@ -398,6 +398,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'AISTECHSAT-2' : deframers.aistechsat_2_deframer,
         'AALTO-1' : deframers.aalto1_deframer,
         'Grizu-263A' : deframers.grizu263a_deframer,
+        'IDEASSat' : deframers.ideassat_deframer,
     }
     _transport_hooks = {
         'KISS' : transports.kiss_transport,

@@ -111,3 +111,5 @@ echo "SOKRAT"
 gr_satellites SOKRAT --wavfile satellite-recordings/sokrat.wav --samp_rate 48e3
 echo "BEESAT-9"
 gr_satellites BEESAT-9 --wavfile satellite-recordings/beesat_9.wav --samp_rate 48e3
+echo "IDEASSat"
+gr_satellites IDEASSat --wavfile satellite-recordings/ideassat.wav --samp_rate 48e3
