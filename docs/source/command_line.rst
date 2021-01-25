@@ -499,7 +499,9 @@ certain satellite projects:
 * `Harbin Institute of Technology`_, which connects to the telemetry proxy included in
   `gr-lilacsat`_ and `gr-dslwp`_.
 
-* Any custom server using the SIDS protocol.
+* Any custom server using the SIDS protocol. The `SIDS protocol`_ is an HTTP-based protocol
+  that was first developed by the ESTCube team and later used by the UWE-3 team. It is the
+  basis of the SatNOGS DB server and other telemetry servers.
   
 To enable telemetry submission, it is necessary to edit some parameters in
 ``gr_satellites``'s config file, which is located in
@@ -767,3 +769,4 @@ For example the ``--f_offset`` and ``--use_agc``
 .. _gr-dslwp: https://github.com/bg2bhc/gr-dslwp
 .. _pyqt5 branch of gr-lilacsat: https://github.com/daniestevez/gr-lilacsat/tree/pyqt5
 .. _Audio Source: https://wiki.gnuradio.org/index.php/Audio_Source
+.. _SIDS protocol: https://github.com/janvgils/sids
