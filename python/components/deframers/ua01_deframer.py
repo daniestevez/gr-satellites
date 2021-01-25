@@ -24,7 +24,7 @@ class ua01_deframer(gr.hier_block2):
         options: Options from argparse
     """
     def __init__(self, options = None):
-        gr.hier_block2.__init__(self, "ax25_deframer",
+        gr.hier_block2.__init__(self, "ua01_deframer",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
         self.message_port_register_hier_out('out')
