@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for EXOCUBE-2
 - PDU Length Filter block
 - Support for IDEASSat
+- Support for SOMP 2b
 
 ### Changed
 - Add filter before quadrature demod for IQ input FSK demodulator
