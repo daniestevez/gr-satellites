@@ -62,6 +62,7 @@ GR_PYTHON_INSTALL(
     tt64_deframer.py
     u482c_deframer.py
     ua01_deframer.py
+    yusat_deframer.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/components/deframers
 )
 

@@ -214,6 +214,9 @@ The framings allowed in the ``framing`` field are the following:
 * ``IDEASSat``, custom framing used by IDEASSat. It uses NRZI encoding,
   an 1N8 UART-like encoding with MSB-bit-ordering,
   and HDLC ``0x7e`` flags to mark the frame boundaries.
+
+* ``YUSAT``, custom framing used by YUSAT-1. It is like AX.25 but without
+  bit stuffing, LSB byte endianness, and NRZ-I.
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.

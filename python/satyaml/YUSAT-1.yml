@@ -1,0 +1,13 @@
+name: YUSAT-1
+norad: 99746
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  9k6 FSK downlink:
+    frequency: 436.250e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: YUSAT
+    data:
+    - *tlm
