@@ -10,6 +10,7 @@
 
 import yaml
 import pathlib
+import string
 
 class YAMLError(Exception):
     def __init__(self, message):
@@ -135,10 +136,17 @@ class SatYAML:
     def _get_satnorad(self, yml):
         d = self.get_yamldata(yml)
         return d['norad']
+
+    def _canonical_name(self, name):
+        """Perform some substitutions in order to match names which are loosely equal"""
+        return ''.join([a for a in name.casefold()
+                        if a not in string.punctuation + string.whitespace])
     
     def search_name(self, name):
+        name = self._canonical_name(name)
         for yml in self.yaml_files():
-            if name in self._get_satnames(yml):
+            satnames = [self._canonical_name(n) for n in self._get_satnames(yml)]
+            if name in satnames:
                 return self.get_yamldata(yml)
         raise ValueError('satellite not found')
 
