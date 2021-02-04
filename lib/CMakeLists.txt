@@ -76,6 +76,7 @@ list(APPEND satellites_sources
     radecoder/ra_decoder_gen.c
     radecoder/ra_lfsr.c
     radecoder/ra_encoder.c
+    viterbi/viterbi.cc
 )
 
 set(satellites_sources "${satellites_sources}" PARENT_SCOPE)
