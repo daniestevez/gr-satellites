@@ -35,7 +35,7 @@ documentation: |-
         The PDUs satisfying the lenght constraings
 
     Parameters:
-        Minimum: Minimum lenght. A minimum length of 0 means no constraint.
-        Maximum: Maximum lenght. A maximum length of -1 means no constraint.
+        Minimum: Minimum length. A minimum length of 0 means no constraint.
+        Maximum: Maximum length. A maximum length of -1 means no constraint.
 
 file_format: 1
