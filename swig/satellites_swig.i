@@ -9,6 +9,7 @@
 
 %{
 #include "satellites/ax100_decode.h"
+#include "satellites/convolutional_encoder.h"
 #include "satellites/decode_ra_code.h"
 #include "satellites/decode_rs.h"
 #include "satellites/descrambler308.h"
@@ -30,6 +31,8 @@
 
 %include "satellites/ax100_decode.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, ax100_decode);
+%include "satellites/convolutional_encoder.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, convolutional_encoder);
 %include "satellites/decode_ra_code.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, decode_ra_code);
 %include "satellites/decode_rs.h"
