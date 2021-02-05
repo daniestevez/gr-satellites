@@ -25,6 +25,7 @@
 #include "satellites/u482c_decode.h"
 #include "satellites/varlen_packet_framer.h"
 #include "satellites/varlen_packet_tagger.h"
+#include "satellites/viterbi_decoder.h"
 %}
 
 %include "satellites/ax100_decode.h"
@@ -61,4 +62,6 @@ GR_SWIG_BLOCK_MAGIC2(satellites, u482c_decode);
 GR_SWIG_BLOCK_MAGIC2(satellites, varlen_packet_framer);
 %include "satellites/varlen_packet_tagger.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, varlen_packet_tagger);
+%include "satellites/viterbi_decoder.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, viterbi_decoder);
 

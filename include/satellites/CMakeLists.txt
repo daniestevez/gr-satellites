@@ -40,5 +40,6 @@ install(FILES
     u482c_decode.h
     varlen_packet_framer.h
     varlen_packet_tagger.h
+    viterbi_decoder.h
     DESTINATION include/satellites
 )

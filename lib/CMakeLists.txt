@@ -63,6 +63,7 @@ list(APPEND satellites_sources
     varlen_packet_framer_impl.cc
     varlen_packet_tagger_impl.cc
     viterbi.c
+    viterbi_decoder_impl.cc
     libfec/decode_rs_8.c
     libfec/decode_rs_ccsds.c
     libfec/decode_rs_char.c
