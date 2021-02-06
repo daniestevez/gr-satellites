@@ -1,5 +1,5 @@
 name: IDEASSat
-norad: 99747
+norad: 47458
 data:
   &tlm Telemetry:
     unknown
