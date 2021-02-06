@@ -26,6 +26,7 @@ from .ao40_uncoded_deframer import ao40_uncoded_deframer
 from .astrocast_fx25_deframer import astrocast_fx25_deframer
 from .ax100_deframer import ax100_deframer
 from .ax25_deframer import ax25_deframer
+from .ax5043_deframer import ax5043_deframer
 from .ccsds_concatenated_deframer import ccsds_concatenated_deframer
 from .ccsds_rs_deframer import ccsds_rs_deframer
 from .eseo_deframer import eseo_deframer

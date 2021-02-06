@@ -217,6 +217,9 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``YUSAT``, custom framing used by YUSAT-1. It is like AX.25 but without
   bit stuffing, LSB byte endianness, and NRZ-I.
+
+* ``AX5043``, FEC framing used by the AX5043 transceiver IC. This uses a convolutional
+  code, a 4x4 interleaver, and HDLC framing with the CRC16-USB.
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.
