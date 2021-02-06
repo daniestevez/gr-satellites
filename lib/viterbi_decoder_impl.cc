@@ -61,18 +61,17 @@ void viterbi_decoder_impl::msg_handler(pmt::pmt_t pmt_msg)
     std::vector<uint8_t> msg = pmt::u8vector_elements(pmt::cdr(pmt_msg));
     std::string bits;
     for (auto b : msg) {
-	bits.push_back(b ? '1' : '0');
+        bits.push_back(b ? '1' : '0');
     }
 
     std::string outbits = d_codec.Decode(bits);
     std::vector<uint8_t> out;
     for (auto b : outbits) {
-	out.push_back(b == '1');
+        out.push_back(b == '1');
     }
 
     message_port_pub(pmt::mp("out"),
-		     pmt::cons(pmt::car(pmt_msg),
-			       pmt::init_u8vector(out.size(), out)));
+                     pmt::cons(pmt::car(pmt_msg), pmt::init_u8vector(out.size(), out)));
 
     return;
 }

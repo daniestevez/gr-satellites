@@ -21,17 +21,18 @@
 namespace gr {
 namespace satellites {
 
-convolutional_encoder::sptr convolutional_encoder::make(int constraint,
-                                            const std::vector<int>& polynomials)
+convolutional_encoder::sptr
+convolutional_encoder::make(int constraint, const std::vector<int>& polynomials)
 {
-    return gnuradio::get_initial_sptr(new convolutional_encoder_impl(constraint, polynomials));
+    return gnuradio::get_initial_sptr(
+        new convolutional_encoder_impl(constraint, polynomials));
 }
 
 /*
  * The private constructor
  */
-convolutional_encoder_impl::convolutional_encoder_impl(int constraint,
-                                           const std::vector<int>& polynomials)
+convolutional_encoder_impl::convolutional_encoder_impl(
+    int constraint, const std::vector<int>& polynomials)
     : gr::block("convolutional_encoder",
                 gr::io_signature::make(0, 0, 0),
                 gr::io_signature::make(0, 0, 0)),
@@ -48,9 +49,9 @@ convolutional_encoder_impl::convolutional_encoder_impl(int constraint,
 convolutional_encoder_impl::~convolutional_encoder_impl() {}
 
 int convolutional_encoder_impl::general_work(int noutput_items,
-                                       gr_vector_int& ninput_items,
-                                       gr_vector_const_void_star& input_items,
-                                       gr_vector_void_star& output_items)
+                                             gr_vector_int& ninput_items,
+                                             gr_vector_const_void_star& input_items,
+                                             gr_vector_void_star& output_items)
 {
     return 0;
 }
@@ -61,18 +62,17 @@ void convolutional_encoder_impl::msg_handler(pmt::pmt_t pmt_msg)
     std::vector<uint8_t> msg = pmt::u8vector_elements(pmt::cdr(pmt_msg));
     std::string bits;
     for (auto b : msg) {
-	bits.push_back(b ? '1' : '0');
+        bits.push_back(b ? '1' : '0');
     }
 
     std::string outbits = d_codec.Encode(bits);
     std::vector<uint8_t> out;
     for (auto b : outbits) {
-	out.push_back(b == '1');
+        out.push_back(b == '1');
     }
 
     message_port_pub(pmt::mp("out"),
-		     pmt::cons(pmt::car(pmt_msg),
-			       pmt::init_u8vector(out.size(), out)));
+                     pmt::cons(pmt::car(pmt_msg), pmt::init_u8vector(out.size(), out)));
 
     return;
 }
