@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Runtime error when the baudrate is too high for the sample rate
 - Build problems with clang
 - Errors about wrong Reed-Solomon message size with OPS-SAT deframer
+- Bug in SIDS submit URL encoding
 
 ## [3.6.0] - 2020-12-04
 
