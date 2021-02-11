@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Build problems with clang
 - Errors about wrong Reed-Solomon message size with OPS-SAT deframer
 - Bug in SIDS submit URL encoding
+- Bug with SatYAML files in platforms not using UTF-8
 
 ## [3.6.0] - 2020-12-04
 

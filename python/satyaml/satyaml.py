@@ -123,7 +123,7 @@ class SatYAML:
         return self._path.glob('*.yml')
 
     def get_yamldata(self, yml):
-        with open(yml) as f:
+        with open(yml, encoding = 'utf-8') as f:
             return yaml.safe_load(f)
 
     def _get_satnames(self, yml):
