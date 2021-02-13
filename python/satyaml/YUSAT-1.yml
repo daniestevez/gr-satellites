@@ -1,5 +1,5 @@
 name: YUSAT-1
-norad: 99746
+norad: 47439
 data:
   &tlm Telemetry:
     telemetry: ax25
