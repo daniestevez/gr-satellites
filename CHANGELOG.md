@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for IDEASSat
 - Support for SOMP 2b
 - Support for YUSAT-1
+- Support for DELFI-C3
 
 ### Changed
 - Add filter before quadrature demod for IQ input FSK demodulator
