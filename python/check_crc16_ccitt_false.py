@@ -80,7 +80,7 @@ class check_crc16_ccitt_false(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = bytes(pmt.u8vector_elements(msg))
+        packet = pmt.u8vector_elements(msg)
 
         if len(packet) < 3:
             return
@@ -88,7 +88,7 @@ class check_crc16_ccitt_false(gr.basic_block):
         packet_out = packet[:-2]
         msg_out = pmt.cons(pmt.car(msg_pmt), pmt.init_u8vector(len(packet_out), packet_out))
         crc = crc16_ccitt_false(packet_out)
-        if crc == struct.unpack('<H', packet[-2:])[0]:
+        if crc == struct.unpack('<H', bytes(packet[-2:]))[0]:
             if self.verbose:
                 print("CRC OK")
             self.message_port_pub(pmt.intern('ok'), msg_out)

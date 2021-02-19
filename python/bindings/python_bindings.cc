@@ -22,6 +22,7 @@ namespace py = pybind11;
 /**************************************/
 // BINDING_FUNCTION_PROTOTYPES(
 void bind_ax100_decode(py::module& m);
+void bind_convolutional_encoder(py::module &m);
 void bind_decode_ra_code(py::module& m);
 void bind_decode_rs(py::module& m);
 void bind_descrambler308(py::module& m);
@@ -34,9 +35,11 @@ void bind_nrzi_encode(py::module& m);
 void bind_nusat_decoder(py::module& m);
 void bind_pdu_add_meta(py::module& m);
 void bind_pdu_head_tail(py::module& m);
+void bind_pdu_length_filter(py::module& m);
 void bind_u482c_decode(py::module& m);
 void bind_varlen_packet_framer(py::module& m);
 void bind_varlen_packet_tagger(py::module& m);
+void bind_viterbi_decoder(py::module& m);
 // ) END BINDING_FUNCTION_PROTOTYPES
 
 
@@ -66,6 +69,7 @@ PYBIND11_MODULE(satellites_python, m)
     /**************************************/
     // BINDING_FUNCTION_CALLS(
     bind_ax100_decode(m);
+    bind_convolutional_encoder(m);
     bind_decode_ra_code(m);
     bind_decode_rs(m);
     bind_descrambler308(m);
@@ -78,8 +82,10 @@ PYBIND11_MODULE(satellites_python, m)
     bind_nusat_decoder(m);
     bind_pdu_add_meta(m);
     bind_pdu_head_tail(m);
+    bind_pdu_length_filter(m);
     bind_u482c_decode(m);
     bind_varlen_packet_framer(m);
     bind_varlen_packet_tagger(m);
+    bind_viterbi_decoder(m);
     // ) END BINDING_FUNCTION_CALLS
 }

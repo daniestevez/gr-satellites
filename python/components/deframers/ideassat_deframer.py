@@ -53,7 +53,6 @@ class uart_decode(gr.basic_block):
             print("[ERROR] Packet size is not a multiple of 10 bits")
             return
         packet = np.packbits(packet.reshape((-1,10))[:,1:-1])
-        packet = bytes(packet) # remove conversion to bytes for GNU Radio 3.9
         self.message_port_pub(pmt.intern('out'),
                               pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(packet), packet)))
 
@@ -104,7 +103,6 @@ class extract_payload(gr.basic_block):
         packet = packet[:-2]
         # put AX.25 header back
         packet = np.concatenate((header, packet))
-        packet = bytes(packet) # remove conversion to bytes for GNU Radio 3.9
         self.message_port_pub(pmt.intern('out'),
                               pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(packet), packet)))
 

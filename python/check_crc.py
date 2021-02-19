@@ -57,7 +57,7 @@ class check_crc(gr.basic_block):
                     print("Malformed CSP packet (too short)")
                 return
             crc = crc32c.crc(packet[:-4] if self.include_header else packet[4:-4])
-            packet_crc = struct.unpack(">I", packet[-4:])[0]
+            packet_crc = struct.unpack(">I", bytes(packet[-4:]))[0]
             if crc == packet_crc:
                 if self.verbose:
                     print("CRC OK")

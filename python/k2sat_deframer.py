@@ -73,6 +73,7 @@ class k2sat_deframer(gr.basic_block):
                 break
             if self.check_packet(packet[:idx]): # check if this is a valid packet
                 ax25_packet = packet[:-2+idx]
+                ax25_packet = list(packet) # conversion to list for pybind11
                 self.message_port_pub(pmt.intern('out'), pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(ax25_packet), ax25_packet)))
             start = idx + 2
 

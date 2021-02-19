@@ -25,7 +25,7 @@ namespace satellites {
 class SATELLITES_API pdu_length_filter : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<pdu_length_filter> sptr;
+    typedef std::shared_ptr<pdu_length_filter> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of satellites::pdu_length_filter.

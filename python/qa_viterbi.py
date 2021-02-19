@@ -32,7 +32,7 @@ class qa_viterbi(gr_unittest.TestCase):
         enc = convolutional_encoder(k, p)
         dec = viterbi_decoder(k, p)
         data = np.random.randint(2, size = 1000, dtype = 'uint8')
-        pdu = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(data), bytes(data)))
+        pdu = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(data), data))
   
         tb.msg_connect((enc, 'out'), (dec, 'in'))
         tb.msg_connect((dec, 'out'), (dbg, 'store'))
@@ -44,7 +44,7 @@ class qa_viterbi(gr_unittest.TestCase):
         tb.wait()
 
         out = pmt.u8vector_elements(pmt.cdr(dbg.get_message(0)))
-        self.assertEqual(bytes(out), bytes(data),
+        np.testing.assert_equal(out, np.array(data),
                                 "Encoded and decoded message does not match original")
 
 if __name__ == '__main__':

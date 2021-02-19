@@ -49,7 +49,6 @@ class deinterleave(gr.basic_block):
         # invert every other bit, since the g0 branch of the convolutional
         # encoder is inverted
         packet[::2] ^= 1
-        packet = bytes(packet) # remove conversion to bytes for GNU Radio 3.9
         self.message_port_pub(pmt.intern('out'),
                               pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(packet), packet)))
 

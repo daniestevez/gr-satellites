@@ -35,13 +35,13 @@ class crop_and_check_crc(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
             return
-        packet = bytes(pmt.u8vector_elements(msg)) # TODO GNU Radio 3.9 do not use bytes
         start = 0
         while True:
-            idx = packet[start:].find(b'\x7e')
-            start += idx + 1
-            if idx == -1:
+            try:
+                idx = packet[start:].index(0x7e)
+            except ValueError:
                 return
+            start += idx + 1
             p = packet[:idx]
             if fcs_ok(p):
                 p = p[:-2]

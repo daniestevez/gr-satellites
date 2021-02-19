@@ -25,7 +25,7 @@ namespace satellites {
 class SATELLITES_API convolutional_encoder : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<convolutional_encoder> sptr;
+    typedef std::shared_ptr<convolutional_encoder> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of satellites::convolutional_encoder.
