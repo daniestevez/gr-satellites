@@ -53,16 +53,18 @@ gr-satellites:
 The repository is organized in the following branches:
 
 * `master` is where the active development happens. From time to time, features
-  will be frozen in a new release.
+  will be frozen in a new release. This branch is compatible with GNU Radio 3.8.
 
 * `maint-3.8` is the branch where releases in the current `v3.x.y` line are
   published. This branch is compatible with GNU Radio 3.8.
 
-* `maint-3.8-v2` is the branch where releases in the `v2.x.y` line are
-  published. This branch is compatible with GNU Radio 3.8.
+* `maint-3.8-v2` is the branch where releases in the `v2.x.y` line were
+  published. This branch is compatible with GNU Radio 3.8. No changes
+  happen in this branch any longer.
 
-* `maint-3.7` is the branch where releases in the `v1.x.y` line are
-  published. This branch is compatible with GNU Radio 3.7.
+* `maint-3.7` is the branch where releases in the `v1.x.y` line were
+  published. This branch is compatible with GNU Radio 3.7. No changes happen
+  in this branch any longer.
 
 In general, pull requests should be submitted to `master`.
 

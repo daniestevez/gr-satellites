@@ -66,9 +66,10 @@ class submit(gr.basic_block):
           if self.initialTimestamp else now
         self.request['timestamp'] = timestamp.isoformat()[:-3] + 'Z'
 
-        params = bytes(urllib.parse.urlencode(self.request), encoding = 'ascii')
+        params = urllib.parse.urlencode(self.request)
         try:
-            f = urllib.request.urlopen('{}?{}'.format(self.url, params), data=params)
+            f = urllib.request.urlopen('{}?{}'.format(self.url, params),
+                                           data = bytes(params, encoding = 'ascii'))
         except Exception as e:
             print('Error while submitting telemetry:', e)
             return

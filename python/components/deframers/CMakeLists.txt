@@ -32,6 +32,7 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
+    aalto1_deframer.py
     aausat4_deframer.py
     aistechsat_2_deframer.py
     ao40_fec_deframer.py
@@ -39,10 +40,13 @@ GR_PYTHON_INSTALL(
     astrocast_fx25_deframer.py
     ax100_deframer.py
     ax25_deframer.py
+    ax5043_deframer.py
     ccsds_concatenated_deframer.py
     ccsds_rs_deframer.py
     eseo_deframer.py
     fossasat_deframer.py
+    grizu263a_deframer.py
+    ideassat_deframer.py
     k2sat_deframer.py
     lilacsat_1_deframer.py
     lucky7_deframer.py
@@ -59,6 +63,7 @@ GR_PYTHON_INSTALL(
     tt64_deframer.py
     u482c_deframer.py
     ua01_deframer.py
+    yusat_deframer.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/components/deframers
 )
 

@@ -1,0 +1,13 @@
+name: Grizu-263A
+norad: 99990
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  2k4 FSK downlink:
+    frequency: 435.675e+6
+    modulation: FSK
+    baudrate: 2400
+    framing: Grizu-263A
+    data:
+    - *tlm

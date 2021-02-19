@@ -44,6 +44,7 @@ endif(MSVC)
 
 list(APPEND satellites_sources
     ax100_decode_impl.cc
+    convolutional_encoder_impl.cc
     decode_ra_code_impl.cc
     decode_rs_impl.cc
     descrambler308_impl.cc
@@ -57,11 +58,13 @@ list(APPEND satellites_sources
     nusat_decoder_impl.cc
     pdu_add_meta_impl.cc
     pdu_head_tail_impl.cc
+    pdu_length_filter_impl.cc
     randomizer.c
     u482c_decode_impl.cc
     varlen_packet_framer_impl.cc
     varlen_packet_tagger_impl.cc
     viterbi.c
+    viterbi_decoder_impl.cc
     libfec/decode_rs_8.c
     libfec/decode_rs_ccsds.c
     libfec/decode_rs_char.c
@@ -75,6 +78,7 @@ list(APPEND satellites_sources
     radecoder/ra_decoder_gen.c
     radecoder/ra_lfsr.c
     radecoder/ra_encoder.c
+    viterbi/viterbi.cc
 )
 
 set(satellites_sources "${satellites_sources}" PARENT_SCOPE)

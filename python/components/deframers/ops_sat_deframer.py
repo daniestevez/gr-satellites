@@ -9,7 +9,7 @@
 #
 
 from gnuradio import gr, blocks, digital
-from ... import nrzi_decode, hdlc_deframer, pdu_head_tail, decode_rs
+from ... import nrzi_decode, hdlc_deframer, pdu_head_tail, decode_rs, pdu_length_filter
 from ...utils.options_block import options_block
 
 class ops_sat_deframer(gr.hier_block2, options_block):
@@ -45,14 +45,18 @@ class ops_sat_deframer(gr.hier_block2, options_block):
         self.pack = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
         self.tag2pdu = blocks.tagged_stream_to_pdu(blocks.byte_t, 'packet_len')
 
+        # prevents passing codewords of incorrect size to the RS decoder
+        self.length_filter = pdu_length_filter(33, 255)
         self.fec = decode_rs(False, 1)
 
         self.connect(self, self.slicer, self.nrzi, self.descrambler, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.strip, 'in'))
         self.msg_connect((self.strip, 'out'), (self.pdu2tag, 'pdus'))
         self.connect(self.pdu2tag, self.unpack, self.scramble, self.pack, self.tag2pdu)
-        self.msg_connect((self.tag2pdu, 'pdus'), (self.fec, 'in'))
+        self.msg_connect((self.tag2pdu, 'pdus'), (self.length_filter, 'in'))
+        self.msg_connect((self.length_filter, 'out'), (self.fec, 'in'))
         self.msg_connect((self.fec, 'out'), (self, 'out'))
+
     @classmethod
     def add_options(cls, parser):
         """

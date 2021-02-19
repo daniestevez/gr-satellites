@@ -10,6 +10,7 @@
 
 import yaml
 import pathlib
+import string
 
 class YAMLError(Exception):
     def __init__(self, message):
@@ -29,7 +30,8 @@ class SatYAML:
                 'CCSDS Reed-Solomon', 'CCSDS Concatenated',
                 'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon', 'SMOG-P RA',
                 'SMOG-P Signalling', 'OPS-SAT', 'U482C', 'UA01', 'SALSAT',
-                'Mobitex', 'Mobitex-NX', 'FOSSASAT', 'AISTECHSAT-2']
+                'Mobitex', 'Mobitex-NX', 'FOSSASAT', 'AISTECHSAT-2', 'AALTO-1',
+                'Grizu-263A', 'IDEASSat', 'YUSAT', 'AX5043']
     transports = ['KISS', 'KISS no control byte', 'KISS KS-1Q']
     top_level_words = ['name', 'alternative_names', 'norad', 'telemetry_servers', 'data', 'transports', 'transmitters']
     
@@ -121,7 +123,7 @@ class SatYAML:
         return self._path.glob('*.yml')
 
     def get_yamldata(self, yml):
-        with open(yml) as f:
+        with open(yml, encoding = 'utf-8') as f:
             return yaml.safe_load(f)
 
     def _get_satnames(self, yml):
@@ -134,10 +136,17 @@ class SatYAML:
     def _get_satnorad(self, yml):
         d = self.get_yamldata(yml)
         return d['norad']
+
+    def _canonical_name(self, name):
+        """Perform some substitutions in order to match names which are loosely equal"""
+        return ''.join([a for a in name.casefold()
+                        if a not in string.punctuation + string.whitespace])
     
     def search_name(self, name):
+        name = self._canonical_name(name)
         for yml in self.yaml_files():
-            if name in self._get_satnames(yml):
+            satnames = [self._canonical_name(n) for n in self._get_satnames(yml)]
+            if name in satnames:
                 return self.get_yamldata(yml)
         raise ValueError('satellite not found')
 

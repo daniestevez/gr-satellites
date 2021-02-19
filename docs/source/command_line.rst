@@ -18,9 +18,10 @@ basic information about the arguments it allows.
 
    $ gr_satellites
    usage: gr_satellites satellite [-h] [--version] [--list_satellites]
+                               [--ignore_unknown_args]
                                (--wavfile WAVFILE | --rawfile RAWFILE | --rawint16 RAWINT16 | --audio [DEVICE] | --udp | --kiss_in KISS_IN)
                                [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
-                               [--udp_port UDP_PORT] [--iq]
+                               [--udp_port UDP_PORT] [--iq] [--udp_raw]
                                [--input_gain INPUT_GAIN]
                                [--start_time START_TIME] [--throttle]
                                [--kiss_out KISS_OUT] [--kiss_append]
@@ -91,7 +92,8 @@ Besides specifying the satellite to use for decoding, it is mandatory to specify
 the input source by using exactly one of the following options:
 
 * ``--wavfile`` can be used to read a recording in WAV format. The sample rate
-  of the recording needs to be specified with the ``--samp_rate`` argument.
+  is obtained from the WAV header, but it can be overriden using the the
+  ``--samp_rate`` argument if necessary.
 
   By default, the WAV file is interpreted as a one-channel file containing real
   RF samples. To read a two-channel file containing IQ RF samples, the ``--iq``
@@ -106,7 +108,7 @@ the input source by using exactly one of the following options:
      
      .. code-block:: console
 
-        $ gr_satellites FUNcube-1 --wavfile satellite-recordings/ao73.wav --samp_rate 48e3
+        $ gr_satellites FUNcube-1 --wavfile satellite-recordings/ao73.wav
   
 * ``--rawfile`` can be used to read a recording in ``complex64`` or ``float32``
   format (depending on whether the ``--iq`` argument is used or not). The sample rate
@@ -156,6 +158,7 @@ the input source by using exactly one of the following options:
   The streaming format is the same as for the ``--rawint16`` and both real
   samples (by default) and IQ samples (using the ``--iq`` argument) are
   supported.
+  If the ``--udp_raw`` is used the format will be the same as for ``--rawfile``.
 
   By default, ``gr_satellites`` will listen on the IP address ``::`` (all
   addresses) and the UDP port 7355. A different IP address or port can be
@@ -225,6 +228,7 @@ For example, this shows all the options allowed by the FUNcube-1 decoder:
      -h, --help            show this help message and exit
      --version             show program's version number and exit
      --list_satellites     list supported satellites and exit
+     --ignore_unknown_args Treat unknown arguments as warning
 
    input:
      --wavfile WAVFILE     WAV input file
@@ -331,7 +335,7 @@ An example of the use of this option can be seen here:
 .. code-block:: console
 
     $ gr_satellites FUNcube-1 --wavfile ~/gr-satellites/satellite-recordings/ao73.wav \
-             --samp_rate 48e3 --hexdump
+             --hexdump
     * MESSAGE DEBUG PRINT PDU VERBOSE *
     ()
     pdu_length = 256
@@ -445,7 +449,7 @@ internal signals produced by decoding a sample recording of AU02.
 
     $ mkdir -p /tmp/fsk
     $ gr_satellites AU02 --wavfile satellite-recordings/au02.wav \
-         --samp_rate 48e3 --dump_path /tmp/fsk
+         --dump_path /tmp/fsk
 
 We see that we do not get any decoded packets. Then, we can plot the FSK symbols
 with the following Python code:
@@ -496,7 +500,9 @@ certain satellite projects:
 * `Harbin Institute of Technology`_, which connects to the telemetry proxy included in
   `gr-lilacsat`_ and `gr-dslwp`_.
 
-* Any custom server using the SIDS protocol.
+* Any custom server using the SIDS protocol. The `SIDS protocol`_ is an HTTP-based protocol
+  that was first developed by the ESTCube team and later used by the UWE-3 team. It is the
+  basis of the SatNOGS DB server and other telemetry servers.
   
 To enable telemetry submission, it is necessary to edit some parameters in
 ``gr_satellites``'s config file, which is located in
@@ -736,6 +742,15 @@ limit playback speed to 1x and use the ``--start_time`` parameter followed by th
 timestamp in ISO 8601 format (``YYYY-MM-DDTHH:MM:SS``) to indicate the start time
 of the recording.
 
+Treating unknown args as warning
+""""""""""""""""""""""""""""""""
+
+Using the argument ``--ignore_unknown_args`` will change the behaviour on unknown
+arguments to a warning instead of exiting with an error. This can be useful when
+running in automated scripts and some options may not be available on that satellite.
+For example the ``--f_offset`` and ``--use_agc``
+
+
 .. _GQRX: https://gqrx.dk/
 .. _gr-frontends: https://github.com/daniestevez/gr-frontends
 .. _Message Debug: https://wiki.gnuradio.org/index.php/Message_Debug
@@ -755,3 +770,4 @@ of the recording.
 .. _gr-dslwp: https://github.com/bg2bhc/gr-dslwp
 .. _pyqt5 branch of gr-lilacsat: https://github.com/daniestevez/gr-lilacsat/tree/pyqt5
 .. _Audio Source: https://wiki.gnuradio.org/index.php/Audio_Source
+.. _SIDS protocol: https://github.com/janvgils/sids

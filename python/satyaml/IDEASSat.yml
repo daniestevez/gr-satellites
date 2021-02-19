@@ -1,0 +1,13 @@
+name: IDEASSat
+norad: 47458
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  9k6 FSK downlink:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: IDEASSat
+    data:
+    - *tlm

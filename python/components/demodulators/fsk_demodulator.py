@@ -10,9 +10,12 @@
 
 from gnuradio import gr, blocks, analog, digital, filter
 from gnuradio.filter import firdes
-from math import ceil, pi
 import numpy as np
+
+from math import ceil, pi
 import pathlib
+import sys
+
 from ...hier.rms_agc_f import rms_agc_f
 from ...utils.options_block import options_block
 
@@ -52,9 +55,23 @@ class fsk_demodulator(gr.hier_block2, options_block):
             _deviation = deviation
         else:
             _deviation = self.options.deviation
+
+        # prevent problems due to baudrate too high
+        if baudrate >= samp_rate:
+            print(f'Sample rate {samp_rate} sps insufficient for {baudrate} baud FSK demodulation. Demodulator will not work.',
+                      file = sys.stderr)
+            baudrate = samp_rate / 2
+        
         if iq:
+            # Cut to Carson's bandwidth rule before quadrature demod.
+            # Note that _deviation can be negative to encode that the
+            # low tone corresponds to the symbol 1 and the high tone
+            # corresponds to the symbol 0.
+            carson_cutoff = abs(_deviation) + baudrate / 2
+            fir_taps = firdes.low_pass(1, samp_rate, carson_cutoff, 0.1 * carson_cutoff)
+            self.demod_filter = filter.fir_filter_ccf(1, fir_taps)
             self.demod = analog.quadrature_demod_cf(samp_rate/(2*pi*_deviation))
-            self.connect(self, self.demod)
+            self.connect(self, self.demod_filter, self.demod)
         else:
             self.demod = self
         

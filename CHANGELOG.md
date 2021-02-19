@@ -6,6 +6,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [3.7.0] - 2021-02-19
+
+### Added
+- Read sample rate from WAV files automatically
+- PDU Length Filter block
+- Example decoder for NEXUS 19k2 pi/4-DQPSK telemetry
+- Support for AALTO-1 CC1125 mode
+- Support for CAPE-3
+- Support for DELFI-C3
+- Support for EXOCUBE-2
+- Support for Grizu-263A
+- Support for IDEASSat
+- Support for MiTEE-1
+- Support for SOMP 2b
+- Support for UVSQ-SAT
+- Support for YUSAT-1
+
+### Changed
+- Add filter before quadrature demod for IQ input FSK demodulator
+
+### Fixed
+- Runtime error when the baudrate is too high for the sample rate
+- Errors about wrong Reed-Solomon message size with OPS-SAT deframer
+- Bug in SIDS submit URL encoding
+- Bug with SatYAML files in platforms not using UTF-8
+- Build problems with clang
+
 ## [3.6.0] - 2020-12-04
 
 ### Added
@@ -318,7 +345,8 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.6.0...master
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...master
+[3.7.0]: https://github.com/daniestevez/gr-satellites/compare/v3.6.0...v3.7.0
 [3.6.0]: https://github.com/daniestevez/gr-satellites/compare/v3.5.2...v3.6.0
 [3.5.2]: https://github.com/daniestevez/gr-satellites/compare/v3.5.1...v3.5.2
 [3.5.1]: https://github.com/daniestevez/gr-satellites/compare/v3.5.0...v3.5.1
