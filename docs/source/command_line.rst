@@ -92,7 +92,8 @@ Besides specifying the satellite to use for decoding, it is mandatory to specify
 the input source by using exactly one of the following options:
 
 * ``--wavfile`` can be used to read a recording in WAV format. The sample rate
-  of the recording needs to be specified with the ``--samp_rate`` argument.
+  is obtained from the WAV header, but it can be overriden using the the
+  ``--samp_rate`` argument if necessary.
 
   By default, the WAV file is interpreted as a one-channel file containing real
   RF samples. To read a two-channel file containing IQ RF samples, the ``--iq``
@@ -107,7 +108,7 @@ the input source by using exactly one of the following options:
      
      .. code-block:: console
 
-        $ gr_satellites FUNcube-1 --wavfile satellite-recordings/ao73.wav --samp_rate 48e3
+        $ gr_satellites FUNcube-1 --wavfile satellite-recordings/ao73.wav
   
 * ``--rawfile`` can be used to read a recording in ``complex64`` or ``float32``
   format (depending on whether the ``--iq`` argument is used or not). The sample rate
@@ -334,7 +335,7 @@ An example of the use of this option can be seen here:
 .. code-block:: console
 
     $ gr_satellites FUNcube-1 --wavfile ~/gr-satellites/satellite-recordings/ao73.wav \
-             --samp_rate 48e3 --hexdump
+             --hexdump
     * MESSAGE DEBUG PRINT PDU VERBOSE *
     ()
     pdu_length = 256
@@ -448,7 +449,7 @@ internal signals produced by decoding a sample recording of AU02.
 
     $ mkdir -p /tmp/fsk
     $ gr_satellites AU02 --wavfile satellite-recordings/au02.wav \
-         --samp_rate 48e3 --dump_path /tmp/fsk
+         --dump_path /tmp/fsk
 
 We see that we do not get any decoded packets. Then, we can plot the FSK symbols
 with the following Python code:
