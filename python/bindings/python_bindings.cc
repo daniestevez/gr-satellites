@@ -22,7 +22,7 @@ namespace py = pybind11;
 /**************************************/
 // BINDING_FUNCTION_PROTOTYPES(
 void bind_ax100_decode(py::module& m);
-void bind_convolutional_encoder(py::module &m);
+void bind_convolutional_encoder(py::module& m);
 void bind_decode_ra_code(py::module& m);
 void bind_decode_rs(py::module& m);
 void bind_descrambler308(py::module& m);

@@ -30,32 +30,20 @@ namespace py = pybind11;
 void bind_convolutional_encoder(py::module& m)
 {
 
-    using convolutional_encoder    = ::gr::satellites::convolutional_encoder;
+    using convolutional_encoder = ::gr::satellites::convolutional_encoder;
 
 
-    py::class_<convolutional_encoder, gr::block, gr::basic_block,
-        std::shared_ptr<convolutional_encoder>>(m, "convolutional_encoder", D(convolutional_encoder))
+    py::class_<convolutional_encoder,
+               gr::block,
+               gr::basic_block,
+               std::shared_ptr<convolutional_encoder>>(
+        m, "convolutional_encoder", D(convolutional_encoder))
 
         .def(py::init(&convolutional_encoder::make),
-           py::arg("constraint"),
-           py::arg("polynomials"),
-           D(convolutional_encoder,make)
-        )
-        
-
+             py::arg("constraint"),
+             py::arg("polynomials"),
+             D(convolutional_encoder, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-
