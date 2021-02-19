@@ -52,6 +52,10 @@ License: LGPL-2.1
  License (LGPL) version 2.1 can be found in the file
  '/usr/share/common-licenses/LGPL-2.1'.
 
+Files: lib/viterbi/*
+Copyright: Min Xu <xukmin@gmail.com>
+License: Apache-2.0
+
 Files: python/ccsds/*
 Copyright: 2019 Athanasios Theocharis <athatheoc@gmail.com>
 License: GPL-3+

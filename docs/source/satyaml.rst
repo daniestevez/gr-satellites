@@ -211,6 +211,16 @@ The framings allowed in the ``framing`` field are the following:
 * ``Grizu-263A``, custom framing used by Grizu-263A. It uses a Semtech SX1268
   with a PN9 scrambler and CRC-16.
 
+* ``IDEASSat``, custom framing used by IDEASSat. It uses NRZI encoding,
+  an 1N8 UART-like encoding with MSB-bit-ordering,
+  and HDLC ``0x7e`` flags to mark the frame boundaries.
+
+* ``YUSAT``, custom framing used by YUSAT-1. It is like AX.25 but without
+  bit stuffing, LSB byte endianness, and NRZ-I.
+
+* ``AX5043``, FEC framing used by the AX5043 transceiver IC. This uses a convolutional
+  code, a 4x4 interleaver, and HDLC framing with the CRC16-USB.
+  
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.
 

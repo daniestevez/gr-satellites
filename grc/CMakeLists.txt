@@ -31,10 +31,12 @@ install(FILES
     satellites_check_astrocast_crc.block.yml
     satellites_check_cc11xx_crc.block.yml
     satellites_check_crc16_ccitt.block.yml
+    satellites_check_crc16_ccitt_false.block.yml
     satellites_check_crc.block.yml
     satellites_check_eseo_crc.block.yml
     satellites_check_swiatowid_crc.block.yml
     satellites_check_tt64_crc.block.yml
+    satellites_convolutional_encoder.block.yml
     satellites_decode_ra_code.block.yml
     satellites_decode_rs.block.yml
     satellites_decode_rs_ccsds.block.yml
@@ -64,6 +66,7 @@ install(FILES
     satellites_nusat_decoder.block.yml
     satellites_pdu_add_meta.block.yml
     satellites_pdu_head_tail.block.yml
+    satellites_pdu_length_filter.block.yml
     satellites_pdu_to_kiss.block.yml
     satellites_print_header.block.yml
     satellites_print_timestamp.block.yml
@@ -82,6 +85,7 @@ install(FILES
     satellites_u482c_decode.block.yml
     satellites_varlen_packet_framer.block.yml
     satellites_varlen_packet_tagger.block.yml
+    satellites_viterbi_decoder.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )
 

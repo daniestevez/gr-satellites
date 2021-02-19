@@ -76,8 +76,8 @@ def argument_parser():
     return p
 
 def check_options(options, parser):
-    if options.kiss_in is None and options.samp_rate is None:
-        print('Need to specify --samp_rate unless --kiss_in is used', file = sys.stderr)
+    if options.kiss_in is None and options.wavfile is None and options.samp_rate is None:
+        print('Need to specify --samp_rate unless --wavfile or --kiss_in is used', file = sys.stderr)
         parser.print_usage(file = sys.stderr)
         sys.exit(1)
 
@@ -93,7 +93,18 @@ class gr_satellites_top_block(gr.top_block):
     def __init__(self, parser):
         gr.top_block.__init__(self, 'gr-satellites top block')
         sat = parse_satellite(sys.argv[1])
-        satellites.core.gr_satellites_flowgraph.add_options(parser, **sat)
+        try:
+            satellites.core.gr_satellites_flowgraph.add_options(parser, **sat)
+        except ValueError as e:
+            if e.args[0] == 'satellite not found':
+                print(f'Satellite {sys.argv[1]} not found')
+                exit(1)
+            else:
+                raise e
+        except FileNotFoundError as e:
+            print('Could not open SatYAML file:')
+            print(e)
+            exit(1)
         if '--ignore_unknown_args' in sys.argv[2:]:
             options, unknown = parser.parse_known_args(sys.argv[2:])
             if len(unknown) > 0:
@@ -110,11 +121,25 @@ class gr_satellites_top_block(gr.top_block):
         pdu_in = options.kiss_in is not None
 
         self.config = open_config()
-        
-        self.flowgraph = satellites.core.gr_satellites_flowgraph(samp_rate = options.samp_rate, iq = self.options.iq,
-                                                                 pdu_in = pdu_in, options = options, config = self.config,
-                                                                 dump_path = options.dump_path, **sat)
+
         self.setup_input()
+
+        # set appropriate sample rate
+        if options.samp_rate:
+            samp_rate = options.samp_rate
+        elif options.wavfile:
+            samp_rate = self.wavfile_source.sample_rate()
+        else:
+            raise ValueError('sample rate not set')
+            
+        self.flowgraph = satellites.core.gr_satellites_flowgraph(samp_rate = samp_rate,
+                                                                 iq = self.options.iq,
+                                                                 pdu_in = pdu_in,
+                                                                 options = options,
+                                                                 config = self.config,
+                                                                 dump_path = options.dump_path,
+                                                                 **sat)
+
         if pdu_in:
             self.msg_connect((self.input, 'out'), (self.flowgraph, 'in'))
         else:

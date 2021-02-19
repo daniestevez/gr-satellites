@@ -48,6 +48,7 @@ from .check_ao40_uncoded_crc import check_ao40_uncoded_crc
 from .check_astrocast_crc import check_astrocast_crc
 from .check_cc11xx_crc import check_cc11xx_crc
 from .check_crc16_ccitt import check_crc16_ccitt
+from .check_crc16_ccitt_false import check_crc16_ccitt_false
 from .check_crc import check_crc
 from .check_eseo_crc import check_eseo_crc
 from .check_swiatowid_crc import check_swiatowid_crc

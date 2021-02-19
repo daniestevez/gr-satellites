@@ -27,11 +27,13 @@ install(FILES
     satellites_astrocast_fx25_deframer.block.yml
     satellites_ax100_deframer.block.yml
     satellites_ax25_deframer.block.yml
+    satellites_ax5043_deframer.block.yml
     satellites_ccsds_concatenated_deframer.block.yml
     satellites_ccsds_rs_deframer.block.yml
     satellites_eseo_deframer.block.yml
     satellites_fossasat_deframer.block.yml
     satellites_grizu263a_deframer.block.yml
+    satellites_ideassat_deframer.block.yml
     satellites_k2sat_deframer_component.block.yml
     satellites_lilacsat_1_deframer.block.yml
     satellites_lucky7_deframer.block.yml
@@ -48,5 +50,6 @@ install(FILES
     satellites_tt64_deframer.block.yml
     satellites_u482c_deframer.block.yml
     satellites_ua01_deframer.block.yml
+    satellites_yusat_deframer.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )

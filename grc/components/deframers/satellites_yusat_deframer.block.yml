@@ -1,0 +1,34 @@
+id: satellites_yusat_deframer
+label: YUSAT Deframer
+category: '[Satellites]/Deframers'
+
+parameters:
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.deframers
+    make: satellites.components.deframers.yusat_deframer(options=${options})
+
+documentation: |-
+    Deframes Yusat ad-hoc packets
+
+    Input:
+        A stream of soft symbols containing YUSAT packets
+
+    Output:
+        PDUs with the deframed packets
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
+
+file_format: 1

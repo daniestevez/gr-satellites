@@ -1,0 +1,40 @@
+id: satellites_convolutional_encoder
+label: Convolutional Encoder
+category: '[Satellites]/FEC'
+
+parameters:
+-   id: constraint
+    label: Constraint length
+    dtype: int
+    default: 7
+-   id: polynomials
+    label: Polynomials
+    dtype: int_vector
+    default: [79, 109]
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites
+    make: satellites.convolutional_encoder(${constraint}, ${polynomials})
+
+documentation: |-
+    Generic convolutional encoder
+
+    This convolutional encoder can use any constraint length and polynomials.
+    The input should be a PDU containing the bits to be encoded (unpacked)
+
+    Output:
+        A PDU with the encoded bits (unpacked)
+
+    Parameters:
+        Contraint length: Constraint length (k) of the code
+        Polynomials: Polynomials defining the convolutional encoder
+
+file_format: 1
