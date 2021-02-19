@@ -30,32 +30,19 @@ namespace py = pybind11;
 void bind_viterbi_decoder(py::module& m)
 {
 
-    using viterbi_decoder    = ::gr::satellites::viterbi_decoder;
+    using viterbi_decoder = ::gr::satellites::viterbi_decoder;
 
 
-    py::class_<viterbi_decoder, gr::block, gr::basic_block,
-        std::shared_ptr<viterbi_decoder>>(m, "viterbi_decoder", D(viterbi_decoder))
+    py::class_<viterbi_decoder,
+               gr::block,
+               gr::basic_block,
+               std::shared_ptr<viterbi_decoder>>(m, "viterbi_decoder", D(viterbi_decoder))
 
         .def(py::init(&viterbi_decoder::make),
-           py::arg("constraint"),
-           py::arg("polynomials"),
-           D(viterbi_decoder,make)
-        )
-        
-
+             py::arg("constraint"),
+             py::arg("polynomials"),
+             D(viterbi_decoder, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

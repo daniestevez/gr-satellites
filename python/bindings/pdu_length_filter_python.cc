@@ -30,32 +30,20 @@ namespace py = pybind11;
 void bind_pdu_length_filter(py::module& m)
 {
 
-    using pdu_length_filter    = ::gr::satellites::pdu_length_filter;
+    using pdu_length_filter = ::gr::satellites::pdu_length_filter;
 
 
-    py::class_<pdu_length_filter, gr::block, gr::basic_block,
-        std::shared_ptr<pdu_length_filter>>(m, "pdu_length_filter", D(pdu_length_filter))
+    py::class_<pdu_length_filter,
+               gr::block,
+               gr::basic_block,
+               std::shared_ptr<pdu_length_filter>>(
+        m, "pdu_length_filter", D(pdu_length_filter))
 
         .def(py::init(&pdu_length_filter::make),
-           py::arg("min"),
-           py::arg("max"),
-           D(pdu_length_filter,make)
-        )
-        
-
+             py::arg("min"),
+             py::arg("max"),
+             D(pdu_length_filter, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

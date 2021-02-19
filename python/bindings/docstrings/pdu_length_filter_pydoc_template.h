@@ -7,7 +7,7 @@
  *
  */
 #include "pydoc_macros.h"
-#define D(...) DOC(gr,satellites, __VA_ARGS__ )
+#define D(...) DOC(gr, satellites, __VA_ARGS__)
 /*
   This file contains placeholders for docstrings for the Python bindings.
   Do not edit! These were automatically extracted during the binding process
@@ -15,13 +15,10 @@
  */
 
 
- 
- static const char *__doc_gr_satellites_pdu_length_filter = R"doc()doc";
+static const char* __doc_gr_satellites_pdu_length_filter = R"doc()doc";
 
 
- static const char *__doc_gr_satellites_pdu_length_filter_pdu_length_filter = R"doc()doc";
+static const char* __doc_gr_satellites_pdu_length_filter_pdu_length_filter = R"doc()doc";
 
 
- static const char *__doc_gr_satellites_pdu_length_filter_make = R"doc()doc";
-
-  
+static const char* __doc_gr_satellites_pdu_length_filter_make = R"doc()doc";
