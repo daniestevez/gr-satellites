@@ -7,29 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-- Support for AALTO-1 CC1125 mode
-- Support for Grizu-263A
-- Support for UVSQ-SAT
-- Example decoder for NEXUS 19k2 pi/4-DQPSK telemetry
-- Support for MiTEE-1
-- Support for CAPE-3
-- Support for EXOCUBE-2
-- PDU Length Filter block
-- Support for IDEASSat
-- Support for SOMP 2b
-- Support for YUSAT-1
-- Support for DELFI-C3
 - Read sample rate from WAV files automatically
+- PDU Length Filter block
+- Example decoder for NEXUS 19k2 pi/4-DQPSK telemetry
+- Support for AALTO-1 CC1125 mode
+- Support for CAPE-3
+- Support for DELFI-C3
+- Support for EXOCUBE-2
+- Support for Grizu-263A
+- Support for IDEASSat
+- Support for MiTEE-1
+- Support for SOMP 2b
+- Support for UVSQ-SAT
+- Support for YUSAT-1
 
 ### Changed
 - Add filter before quadrature demod for IQ input FSK demodulator
 
 ### Fixed
 - Runtime error when the baudrate is too high for the sample rate
-- Build problems with clang
 - Errors about wrong Reed-Solomon message size with OPS-SAT deframer
 - Bug in SIDS submit URL encoding
 - Bug with SatYAML files in platforms not using UTF-8
+- Build problems with clang
 
 ## [3.6.0] - 2020-12-04
 
