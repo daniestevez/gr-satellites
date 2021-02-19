@@ -1,9 +1,15 @@
+gr-satellites (3.7.0-0) groovy; urgency=medium
+
+  * Mainstream release v3.7.0
+
+ --  <daniel@destevez.net>  Fri, 19 Feb 2021 17:17:00 +0000
+
 gr-satellites (3.6.0-0) groovy; urgency=medium
 
   * Mainstream release v3.6.0
 
  --  <daniel@destevez.net>  Fri, 04 Dec 2020 21:00:00 +0000
- 
+
 gr-satellites (3.5.2-1) groovy; urgency=medium
 
   * Fix dh_installman problems
