@@ -1,5 +1,5 @@
 name: UVSQ-SAT
-norad: 99991
+norad: 47438
 telemetry_servers:
   - SIDS https://amsat.electrolab.fr/api/V2/SIDS
 data:
