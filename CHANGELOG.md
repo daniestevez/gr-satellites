@@ -6,15 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## [4.0.0-rc1] - 2021-02-19
+## [4.0.0] - 2021-03-06
 
 ### Added
-- Support for GNU Radio 3.9
+- Support for DELFI-n3xt
 
-### Removed
-- Support for GNU Radio 3.8
+### Changed
+- Final NORAD for UVSQ-Sat
+- Document that --wavfile allows OGG/FLAC
 
-## [3.7.0] - 2021-02-19
+## [3.7.0] and [4.0.0-rc1] - 2021-02-19
 
 ### Added
 - Read sample rate from WAV files automatically
@@ -353,7 +354,8 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0-rc1...master
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0...master
+[4.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0-rc1...v4.0.0
 [4.0.0-rc1]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...v4.0.0-rc1
 [3.7.0]: https://github.com/daniestevez/gr-satellites/compare/v3.6.0...v3.7.0
 [3.6.0]: https://github.com/daniestevez/gr-satellites/compare/v3.5.2...v3.6.0

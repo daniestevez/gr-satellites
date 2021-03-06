@@ -91,11 +91,14 @@ Specifying the input source
 Besides specifying the satellite to use for decoding, it is mandatory to specify
 the input source by using exactly one of the following options:
 
-* ``--wavfile`` can be used to read a recording in WAV format. The sample rate
-  is obtained from the WAV header, but it can be overriden using the the
+* ``--wavfile`` can be used to read a recording in WAV/OGG/FLAC format.
+  This uses libsndfile through the GNU Radio WAV File Source block, so any
+  format supported by libsndfile can be used.
+  The sample rate
+  is obtained from the file header, but it can be overriden using the the
   ``--samp_rate`` argument if necessary.
 
-  By default, the WAV file is interpreted as a one-channel file containing real
+  By default, the WAV/OGG/FLAC file is interpreted as a one-channel file containing real
   RF samples. To read a two-channel file containing IQ RF samples, the ``--iq``
   argument needs to be specified.
 
@@ -231,7 +234,7 @@ For example, this shows all the options allowed by the FUNcube-1 decoder:
      --ignore_unknown_args Treat unknown arguments as warning
 
    input:
-     --wavfile WAVFILE     WAV input file
+     --wavfile WAVFILE     WAV/OGG/FLAC input file (using libsndfile)
      --rawfile RAWFILE     RAW input file (float32 or complex64)
      --rawint16 RAWINT16   RAW input file (int16)
      --audio [DEVICE]      Soundcard device input
