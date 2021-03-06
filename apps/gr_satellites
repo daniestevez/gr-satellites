@@ -49,7 +49,7 @@ def argument_parser():
     p_input = p.add_argument_group('input')
 
     p_sources = p_input.add_mutually_exclusive_group(required = True)
-    p_sources.add_argument('--wavfile', help = 'WAV input file')
+    p_sources.add_argument('--wavfile', help = 'WAV/OGG/FLAC input file (using libsndfile)')
     p_sources.add_argument('--rawfile', help = 'RAW input file (float32 or complex64)')
     p_sources.add_argument('--rawint16', help = 'RAW input file (int16)')
     p_sources.add_argument('--audio', const = '', nargs = '?', metavar = 'DEVICE',  help = 'Soundcard device input')
