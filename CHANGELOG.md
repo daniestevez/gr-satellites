@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## Added
+### Added
 - Support for CUBE-L
 
 ## [4.0.0] - 2021-03-06
