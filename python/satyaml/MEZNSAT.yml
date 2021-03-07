@@ -18,7 +18,7 @@ transmitters:
     framing: AX.25 G3RUH
     data:
     - *tlm
-9k6 BPSK downlink:
+  9k6 BPSK downlink:
     frequency: 436.600e+6
     modulation: BPSK
     baudrate: 9600
