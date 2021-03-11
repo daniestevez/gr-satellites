@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for CUBE-L
 
+### Fixed
+- RS basis options swapped in CCSDS Reed-Solomon encoder GRC block
+
 ## [4.0.0] - 2021-03-06
 
 ### Added
