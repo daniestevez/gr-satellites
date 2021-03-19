@@ -1,0 +1,13 @@
+name: CubeSX-Sirius-HSE
+norad: 99726
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  9k6 FSK downlink:
+    frequency: 435.050e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: USP
+    data:
+    - *tlm
