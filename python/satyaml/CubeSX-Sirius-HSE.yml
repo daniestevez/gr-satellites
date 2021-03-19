@@ -5,7 +5,7 @@ data:
     telemetry: usp
 transmitters:
   9k6 FSK downlink:
-    frequency: 435.050e+6
+    frequency: 437.050e+6
     modulation: FSK
     baudrate: 9600
     framing: USP
