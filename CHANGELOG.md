@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for CUBE-L
 - USP deframer
+- Support for SPUTNIX satellites: OrbiCraft-Zorkiy, CubeSX-HSE, CubeSX-Sirius-HSE, KSU CubeSat
+- Support for TAUSAT-1 and TSURU
+- 2k4 downlink for MEZNSAT
 
 ### Fixed
 - RS basis options swapped in CCSDS Reed-Solomon encoder GRC block
