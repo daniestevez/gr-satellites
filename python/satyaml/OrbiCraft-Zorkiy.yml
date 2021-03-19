@@ -4,15 +4,8 @@ data:
   &tlm Telemetry:
     telemetry: usp
 transmitters:
-  9k6 FSK downlink dipole:
+  9k6 FSK downlink:
     frequency: 437.850e+6
-    modulation: FSK
-    baudrate: 9600
-    framing: USP
-    data:
-    - *tlm
-  9k6 FSK downlink patch:
-    frequency: 437.950e+6
     modulation: FSK
     baudrate: 9600
     framing: USP
