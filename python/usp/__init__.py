@@ -14,4 +14,5 @@ gr-satellites USP
 This module contains low-level blocks for the Unified SPUTNIX Protocol
 '''
 
+from .usp_ax25_crop import usp_ax25_crop
 from .usp_pls_crop import usp_pls_crop
