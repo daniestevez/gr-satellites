@@ -1,0 +1,30 @@
+id: satellites_usp_ax.25_crop
+label: USP AX.25 Crop
+category: '[Satellites]/USP'
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.usp
+    make: satellites.usp.usp_pls_crop()
+
+documentation: |-
+    Extracts the AX.25 encapsulated in a USP packet
+
+    This block ignores the ethertype field, reads the length field, and
+    crops and outputs the encapsulated AX.25 frame, cropping extra padding
+    at the end according to the length field.
+
+    Input:
+        A PDU containing a USP packet
+
+    Output:
+        A PDU containing the encapsulated AX.25 frame
+
+file_format: 1

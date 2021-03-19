@@ -12,7 +12,7 @@ from gnuradio import gr, digital, fec
 from ... import decode_rs
 from ...hier.ccsds_descrambler import ccsds_descrambler
 from ...hier.sync_to_pdu_soft import sync_to_pdu_soft
-from ...usp import usp_pls_crop
+from ...usp import usp_ax25_crop, usp_pls_crop
 from ...utils.options_block import options_block
 
 _syncword = '0101000001110010111101100100101100101101100100001011000111110101'
@@ -55,13 +55,15 @@ class usp_deframer(gr.hier_block2, options_block):
         self.viterbi_decoder = fec.async_decoder(self.viterbi, False, False, 4080//8)
         self.scrambler = ccsds_descrambler()
         self.rs = decode_rs(True, 1)
+        self.crop = usp_ax25_crop()
 
         self.connect(self, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.pls, 'in'))
         self.msg_connect((self.pls, 'out'), (self.viterbi_decoder, 'in'))
         self.msg_connect((self.viterbi_decoder, 'out'), (self.scrambler, 'in'))
         self.msg_connect((self.scrambler, 'out'), (self.rs, 'in'))
-        self.msg_connect((self.rs, 'out'), (self, 'out'))
+        self.msg_connect((self.rs, 'out'), (self.crop, 'in'))
+        self.msg_connect((self.crop, 'out'), (self, 'out'))
 
     _default_sync_threshold = 13
     

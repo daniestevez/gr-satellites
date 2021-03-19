@@ -19,6 +19,7 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
+    satellites_usp_ax25_crop.block.yml
     satellites_usp_pls_crop.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )
