@@ -4,7 +4,7 @@ data:
   &tlm Telemetry:
     telemetry: usp
 transmitters:
-  9k6 FSK downlink whip:
+  9k6 FSK downlink dipole:
     frequency: 437.850e+6
     modulation: FSK
     baudrate: 9600
