@@ -19,7 +19,7 @@ int HammingDistance(const std::string& x, const std::string& y)
 {
     assert(x.size() == y.size());
     int distance = 0;
-    for (int i = 0; i < x.size(); i++) {
+    for (int i = 0; i < (int) x.size(); i++) {
         distance += x[i] != y[i];
     }
     return distance;
@@ -33,7 +33,7 @@ std::ostream& operator<<(std::ostream& os, const ViterbiCodec& codec)
     const std::vector<int>& polynomials = codec.polynomials();
     assert(!polynomials.empty());
     os << polynomials.front();
-    for (int i = 1; i < polynomials.size(); i++) {
+    for (int i = 1; i < (int) polynomials.size(); i++) {
         os << ", " << polynomials[i];
     }
     return os << "})";
@@ -54,7 +54,7 @@ ViterbiCodec::ViterbiCodec(int constraint, const std::vector<int>& polynomials)
     : constraint_(constraint), polynomials_(polynomials)
 {
     assert(!polynomials_.empty());
-    for (int i = 0; i < polynomials_.size(); i++) {
+    for (int i = 0; i < (int) polynomials_.size(); i++) {
         assert(polynomials_[i] > 0);
         assert(polynomials_[i] < (1 << constraint_));
     }
@@ -79,7 +79,7 @@ std::string ViterbiCodec::Encode(const std::string& bits) const
     int state = 0;
 
     // Encode the message bits.
-    for (int i = 0; i < bits.size(); i++) {
+    for (int i = 0; i < (int) bits.size(); i++) {
         char c = bits[i];
         assert(c == '0' || c == '1');
         int input = c - '0';
@@ -99,7 +99,7 @@ std::string ViterbiCodec::Encode(const std::string& bits) const
 void ViterbiCodec::InitializeOutputs()
 {
     outputs_.resize(1 << constraint_);
-    for (int i = 0; i < outputs_.size(); i++) {
+    for (int i = 0; i < (int) outputs_.size(); i++) {
         for (int j = 0; j < num_parity_bits(); j++) {
             // Reverse polynomial bits to make the convolution code simpler.
             int polynomial = ReverseBits(constraint_, polynomials_[j]);
@@ -156,7 +156,7 @@ void ViterbiCodec::UpdatePathMetrics(const std::string& bits,
 {
     std::vector<int> new_path_metrics(path_metrics->size());
     std::vector<int> new_trellis_column(1 << (constraint_ - 1));
-    for (int i = 0; i < path_metrics->size(); i++) {
+    for (int i = 0; i < (int) path_metrics->size(); i++) {
         std::pair<int, int> p = PathMetric(bits, *path_metrics, i);
         new_path_metrics[i] = p.first;
         new_trellis_column[i] = p.second;
@@ -173,11 +173,11 @@ std::string ViterbiCodec::Decode(const std::string& bits) const
     std::vector<int> path_metrics(1 << (constraint_ - 1),
                                   std::numeric_limits<int>::max());
     path_metrics.front() = 0;
-    for (int i = 0; i < bits.size(); i += num_parity_bits()) {
+    for (int i = 0; i < (int) bits.size(); i += num_parity_bits()) {
         std::string current_bits(bits, i, num_parity_bits());
         // If some bits are missing, fill with trailing zeros.
         // This is not ideal but it is the best we can do.
-        if (current_bits.size() < num_parity_bits()) {
+        if ((int) current_bits.size() < num_parity_bits()) {
             current_bits.append(
                 std::string(num_parity_bits() - current_bits.size(), '0'));
         }
