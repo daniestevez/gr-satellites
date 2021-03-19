@@ -401,6 +401,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'IDEASSat' : deframers.ideassat_deframer,
         'YUSAT' : deframers.yusat_deframer,
         'AX5043' : deframers.ax5043_deframer,
+        'USP' : deframers.usp_deframer,
     }
     _transport_hooks = {
         'KISS' : transports.kiss_transport,

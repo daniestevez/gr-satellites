@@ -96,6 +96,7 @@ add_subdirectory(hier)
 add_subdirectory(filereceiver)
 add_subdirectory(satyaml)
 add_subdirectory(telemetry)
+add_subdirectory(usp)
 add_subdirectory(utils)
 
 ########################################################################
