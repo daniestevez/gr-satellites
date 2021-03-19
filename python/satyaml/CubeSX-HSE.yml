@@ -2,7 +2,7 @@ name: CubeSX-HSE
 norad: 99725
 data:
   &tlm Telemetry:
-    telemetry: usp
+    telemetry: ax25
 transmitters:
   9k6 FSK downlink:
     frequency: 435.650e+6

@@ -2,7 +2,7 @@ name: CubeSX-Sirius-HSE
 norad: 99726
 data:
   &tlm Telemetry:
-    telemetry: usp
+    telemetry: ax25
 transmitters:
   9k6 FSK downlink:
     frequency: 437.050e+6
