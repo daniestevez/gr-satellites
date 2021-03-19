@@ -32,40 +32,8 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
-    aalto1_deframer.py
-    aausat4_deframer.py
-    aistechsat_2_deframer.py
-    ao40_fec_deframer.py
-    ao40_uncoded_deframer.py
-    astrocast_fx25_deframer.py
-    ax100_deframer.py
-    ax25_deframer.py
-    ax5043_deframer.py
-    ccsds_concatenated_deframer.py
-    ccsds_rs_deframer.py
-    eseo_deframer.py
-    fossasat_deframer.py
-    grizu263a_deframer.py
-    ideassat_deframer.py
-    k2sat_deframer.py
-    lilacsat_1_deframer.py
-    lucky7_deframer.py
-    mobitex_deframer.py
-    ngham_deframer.py
-    nusat_deframer.py
-    ops_sat_deframer.py
-    reaktor_hello_world_deframer.py
-    sat_3cat_1_deframer.py
-    smogp_ra_deframer.py
-    smogp_signalling_deframer.py
-    snet_deframer.py
-    swiatowid_deframer.py
-    tt64_deframer.py
-    u482c_deframer.py
-    ua01_deframer.py
-    usp_deframer.py
-    yusat_deframer.py
-    DESTINATION ${GR_PYTHON_DIR}/satellites/components/deframers
+    usp_pls_crop.py
+    DESTINATION ${GR_PYTHON_DIR}/satellites/usp
 )
 
 ########################################################################
@@ -74,6 +42,4 @@ GR_PYTHON_INSTALL(
 include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-satellites)
-set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/swig)
-GR_ADD_TEST(qa_ao40_fec_deframer ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ao40_fec_deframer.py)
-GR_ADD_TEST(qa_usp_deframer ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_usp_deframer.py)
+set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)

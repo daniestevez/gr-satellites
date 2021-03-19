@@ -35,7 +35,7 @@ except ModuleNotFoundError:
 # import any pure python here
 #
 
-__all__ = ['ccsds', 'components', 'core', 'hier', 'filereceiver', 'satyaml', 'telemetry', 'utils']
+__all__ = ['ccsds', 'components', 'core', 'hier', 'filereceiver', 'satyaml', 'telemetry', 'usp', 'utils']
 
 from .aausat4_remove_fsm import aausat4_remove_fsm
 from .adsb_kml import adsb_kml

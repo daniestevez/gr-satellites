@@ -1,0 +1,33 @@
+id: satellites_usp_pls_crop
+label: USP PLS Crop
+category: '[Satellites]/USP'
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.usp
+    make: satellites.usp.usp_pls_crop()
+
+documentation: |-
+    Crops USP frames according to the PLS
+
+    The PLS is a 64 bit field at the beginning of the frame that indicates
+    the coding and frame size. This block correlates the PLS against the
+    set of all possible PLS's to detect the correct PLS for the frame and
+    then crops out the PLS and the end of the message according to the
+    frame size indicated by the detected PLS.
+
+    Input:
+        A PDU of soft symbols which contains the PLS followed by the FEC frame
+
+    Output:
+        The FEC frame; the PLS is removed and the FEC frame is trimmed to the
+        correct size
+
+file_format: 1
