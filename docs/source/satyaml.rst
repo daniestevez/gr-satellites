@@ -220,6 +220,9 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``AX5043``, FEC framing used by the AX5043 transceiver IC. This uses a convolutional
   code, a 4x4 interleaver, and HDLC framing with the CRC16-USB.
+
+* ``USP``, the `Unified SPUTNIX Protocol`_, which is based on CCSDS concatenate frames
+  with custom synchronization and a PLS based on DVB-S2.
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.
@@ -288,3 +291,4 @@ The allowable transport protocols are the following:
 .. _AX.25: http://www.ax25.net/
 .. _FX.25: https://en.wikipedia.org/wiki/FX.25_Forward_Error_Correction
 .. _NGHam: https://github.com/skagmo/ngham
+.. _Unified SPUTNIX Protocol: https://sputnix.ru/tpl/docs/amateurs/USP%20protocol%20description%20v1.04.pdf
