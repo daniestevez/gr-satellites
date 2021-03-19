@@ -1,0 +1,49 @@
+id: satellites_usp_deframer
+label: USP Deframer
+category: '[Satellites]/Deframers'
+
+parameters:
+-   id: threshold
+    label: Syncword threshold
+    dtype: int
+    default: 0
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.deframers
+    make: satellites.components.deframers.usp_deframer(syncword_threshold = ${threshold}, options=${options})
+
+documentation: |-
+    Deframes Unified SPUTNIX Protocol (USP) frames
+
+
+    This framing is based on the CCSDS concatenated framing, but is
+    optimized for variable frame size and borrows some ideas from
+    DVB-S2.
+
+    The description of the protocol can be found in
+    https://sputnix.ru/tpl/docs/amateurs/USP%20protocol%20description%20v1.04.pdf
+
+    Input:
+        A stream of soft symbols containing USP frames
+
+    Output:
+        PDUs with the deframed USP frames
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
+
+file_format: 1
