@@ -7,7 +7,7 @@ transmitters:
   4k8 FSK downlink:
     frequency: 437.130e+6
     modulation: FSK
-    baudrate: 9600
+    baudrate: 4800
     framing: AX.25 G3RUH
     data:
     - *tlm
