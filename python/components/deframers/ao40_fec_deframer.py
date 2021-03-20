@@ -9,7 +9,8 @@
 #
 
 from gnuradio import gr, digital, fec, blocks
-from ... import distributed_syncframe_soft, matrix_deinterleaver_soft, decode_rs
+from ... import distributed_syncframe_soft, matrix_deinterleaver_soft, decode_rs,\
+     check_tt64_crc
 from ...hier.ccsds_descrambler import ccsds_descrambler
 from ...utils.options_block import options_block
 
@@ -26,9 +27,11 @@ class ao40_fec_deframer(gr.hier_block2, options_block):
     Args:
         syncword_threshold: number of bit errors allowed in syncword (int)
         short_frames: use short frames (used in SMOG-P) (bool)
+        crc: use CRC-16 ARC (used in SMOG-P) (bool)
         options: Options from argparse
     """
-    def __init__(self, syncword_threshold = None, short_frames = False, options = None):
+    def __init__(self, syncword_threshold = None, short_frames = False,
+                     crc = False, options = None):
         gr.hier_block2.__init__(self, "ao40_fec_deframer",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
@@ -49,12 +52,21 @@ class ao40_fec_deframer(gr.hier_block2, options_block):
         self.scrambler = ccsds_descrambler()
         self.rs = decode_rs(False, 1 if short_frames else 2)
 
+        if crc:
+            # CRC-16 ARC
+            self.crc = check_tt64_crc(verbose = self.options.verbose_crc,
+                                      packet_len = None)
+
         self.connect(self, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.deinterleaver, 'in'))
         self.msg_connect((self.deinterleaver, 'out'), (self.viterbi_decoder, 'in'))
         self.msg_connect((self.viterbi_decoder, 'out'), (self.scrambler, 'in'))
         self.msg_connect((self.scrambler, 'out'), (self.rs, 'in'))
-        self.msg_connect((self.rs, 'out'), (self, 'out'))
+        if crc:
+            self.msg_connect((self.rs, 'out'), (self.crc, 'in'))
+            self.msg_connect((self.crc, 'ok'), (self, 'out'))
+        else:
+            self.msg_connect((self.rs, 'out'), (self, 'out'))
 
     _default_sync_threshold = 8
         
@@ -65,3 +77,4 @@ class ao40_fec_deframer(gr.hier_block2, options_block):
         """
         parser.add_argument('--syncword_threshold', type = int, default = cls._default_sync_threshold, help = 'Syncword bit errors [default=%(default)r]')
         parser.add_argument('--verbose_rs', action = 'store_true', help = 'Verbose RS decoder')
+        parser.add_argument('--verbose_crc', action = 'store_true', help = 'Verbose CRC decoder')

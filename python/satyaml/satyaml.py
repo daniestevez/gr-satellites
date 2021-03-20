@@ -28,10 +28,13 @@ class SatYAML:
                 'AO-40 FEC', 'AO-40 FEC short', 'AO-40 uncoded', 'TT-64', 'ESEO', 'Lucky-7',
                 'Reaktor Hello World', 'S-NET', 'Swiatowid', 'NuSat', 'K2SAT',
                 'CCSDS Reed-Solomon', 'CCSDS Concatenated',
-                'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon', 'SMOG-P RA',
-                'SMOG-P Signalling', 'OPS-SAT', 'U482C', 'UA01', 'SALSAT',
+                'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon',
+                'SMOG-P RA', 'SMOG-1 RA',
+                'SMOG-P Signalling', 'SMOG-1 Signalling',
+                'OPS-SAT', 'U482C', 'UA01', 'SALSAT',
                 'Mobitex', 'Mobitex-NX', 'FOSSASAT', 'AISTECHSAT-2', 'AALTO-1',
-                'Grizu-263A', 'IDEASSat', 'YUSAT', 'AX5043', 'USP']
+                'Grizu-263A', 'IDEASSat', 'YUSAT', 'AX5043', 'USP',
+                'AO-40 FEC CRC-16-ARC', 'AO-40 FEC CRC-16-ARC short']
     transports = ['KISS', 'KISS no control byte', 'KISS KS-1Q']
     top_level_words = ['name', 'alternative_names', 'norad', 'telemetry_servers', 'data', 'transports', 'transmitters']
     

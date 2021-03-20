@@ -61,13 +61,14 @@ class check_tt64_crc(gr.basic_block):
     """
     docstring for block check_tt64_crc
     """
-    def __init__(self, verbose):
+    def __init__(self, verbose, packet_len = 48):
         gr.basic_block.__init__(self,
             name="check_tt64_crc",
             in_sig=[],
             out_sig=[])
 
         self.verbose = verbose
+        self.packet_len = packet_len
         
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
@@ -81,14 +82,18 @@ class check_tt64_crc(gr.basic_block):
             return
         packet = pmt.u8vector_elements(msg)
 
-        if len(packet) < 48:
+        if self.packet_len is not None:
+            packet = packet[:self.packet_len]
+            
+        if (self.packet_len is not None and len(packet) < self.packet_len) \
+          or (self.packet_len is None and len(packet) < 2):
             if self.verbose:
                 print("Packet too short")
             return
 
-        packet_out = packet[:46]
+        packet_out = packet[:-2]
         msg_out = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(packet_out), packet_out))
-        if crc16_arc(packet[:48]) == 0:
+        if crc16_arc(packet) == 0:
             if self.verbose:
                 print("CRC OK")
             self.message_port_pub(pmt.intern('ok'), msg_out)
