@@ -123,6 +123,17 @@ Telemetry2 = Struct(
     'ack_info' / AckInfo[3]
     )
 
+# This is like SMOG-P but with some extra fields at the end
+Telemetry2_SMOG1 = Struct(
+    'timestamp' / Timestamp,
+    'pcu_dep' / PCU_DEP[2],
+    'pcu_sdc' / PCU_SDC[2],
+    'pcu_bat' / PCU_Bat[2], # Note ATL-1 doesn't use pcu_bat, but leaves these bytes unused
+    'pcu_bus' / PCU_Bus[2],
+    'ack_info' / AckInfo[3],
+    'pcu_voltage' / Voltage[2]
+    )
+
 ComStatus = BitStruct(
     'com_data_rate' / BitsInteger(3),
     'tx_power_level' / BitsInteger(2),
@@ -145,6 +156,14 @@ Functional = BitStruct(
     'rtcc' / Flag[2],
     Padding(1),
     'current_com' / BitsInteger(1)
+    )
+
+Functional_SMOG1 = BitStruct(
+    'msen' / Flag[2],
+    'flash' / Flag[2],
+    'rtcc' / Flag[2],
+    'obc' / BitsInteger(1), # active OBC
+    'current_com' / BitsInteger(1) # active COM
     )
 
 COM = Struct(
@@ -172,6 +191,13 @@ MSEN = Struct(
     'msen_temperature' / Temperature
     )
 
+MSEN_SMOG1 = Struct(
+    'msen_gyroscope' / Int16sl[3],
+    'msen_magneto' / Int16sl[3],
+    'msen_accel' / Int16sl[3],
+    'msen_temperature' / Temperature
+    )
+
 Telemetry3 = Struct(
     'timestamp' / Timestamp,
     'obc_supply_voltage' / Voltage,
@@ -184,6 +210,24 @@ Telemetry3 = Struct(
     'com_protection' / ComProtection,
     'msen' / MSEN[2],
     'functional' / Functional,
+    'com' / COM,
+    'tid' / TID[2],
+    'ack_info' / AckInfo[3]
+    )    
+
+# This is like SMOG-P but with an some fields instead of padding
+Telemetry3_SMOG1 = Struct(
+    'timestamp' / Timestamp,
+    'obc_supply_voltage' / Voltage,
+    'rtcc_temperature' / Temperature[2],
+    'obc_temperature' / Temperature,
+    'eps2_panel_a_temperature' / Temperature[2],
+    'com_status' / ComStatus,
+    'com_tx_current' / Int16ul,
+    'com_rx_current' / Int16ul,
+    'com_protection' / ComProtection,
+    'msen' / MSEN_SMOG1[2],
+    'functional' / Functional_SMOG1,
     'com' / COM,
     'tid' / TID[2],
     'ack_info' / AckInfo[3]
@@ -203,7 +247,38 @@ Beacon = Struct(
     'beacon_message' / PaddedString(80, 'utf8'),
     'uplink_stats' / UplinkStats,
     'ack_info' / AckInfo[3]
-    )    
+    )
+
+DiagnosticStatus = BitStruct(
+    'energy_mode' / BitsInteger(3),
+    'tcxo_works' / Flag,
+    'filesystem_works' / Flag,
+    'filesystem_uses_flash2' / Flag,
+    Padding(2)
+    )
+
+DiagnosticInfo = Struct(
+    Padding(1),
+    'num_recv_pkt_garbage' / Int8ul,
+    'num_recv_pkt_bad_serial' / Int8ul,
+    'num_recv_pkt_invalid' / Int8ul,
+    'last_uplink_timestamp' / Timestamp,
+    'obc_uptime_min' / Int24ub,
+    'com_uptime_min' / Int24ub,
+    'tx_voltage_drop_10mv' / Int8ul,
+    'timed_task_count' / Int8ul,
+    'status' / DiagnosticStatus
+    )
+
+# This includes notable changes with repect to SMOG-P
+# uplink_stats is replaced by diagnostic_stats and version
+Beacon_SMOG1 = Struct(
+    'timestamp' / Timestamp,
+    'beacon_message' / PaddedString(80, 'utf8'),
+    'diagnostic_stats' / DiagnosticInfo,
+    'version' / PaddedString(7, 'utf8'),
+    'ack_info' / AckInfo[3]
+    )
 
 SpectrumResult = Struct(
     'timestamp' / Timestamp,
@@ -214,6 +289,21 @@ SpectrumResult = Struct(
     'pckt_count' / Int8ul,
     'spectrum_len' / Int16ul,
     Padding(2),
+    'measid' / Int16ul,
+    'spectrum_data' / Bytes(this.spectrum_len)
+    )
+
+# This adds the field request_uplink_serial
+# in comparison to SMOG-P
+SpectrumResult_SMOG1 = Struct(
+    'timestamp' / Timestamp,
+    'startfreq' / Int32ul,
+    'stepfreq' / Int32ul,
+    'rbw' / Int8ul,
+    'pckt_index' / Int8ul,
+    'pckt_count' / Int8ul,
+    'spectrum_len' / Int16ul,
+    'request_uplink_serial' / Int16ul,
     'measid' / Int16ul,
     'spectrum_data' / Bytes(this.spectrum_len)
     )
@@ -393,6 +483,18 @@ smogp = Struct(
         129 : ATLTelemetry1,
         130 : ATLTelemetry2,
         131 : ATLTelemetry3,
+        }, default = GreedyBytes)
+    )
+
+smog1 = Struct(
+    'type' / Int8ul,
+    'payload' / Switch(this.type, {
+        1 : Telemetry1,
+        2 : Telemetry2_SMOG1,
+        3 : Telemetry3_SMOG1,
+        4 : Beacon_SMOG1,
+        5 : SpectrumResult_SMOG1,
+        7 : FileFragment,
         }, default = GreedyBytes)
     )
 

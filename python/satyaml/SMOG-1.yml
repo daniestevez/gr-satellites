@@ -4,11 +4,11 @@ telemetry_servers:
   - BME
 data:
   &tlm Telemetry:
-    telemetry: smogp
+    telemetry: smog1
   &signalling Signalling:
     telemetry: smogp_signalling
   &spectrum Spectrum:
-    files: smogp
+    files: smog1
 transmitters:
   1k25 FSK long concatenated FEC:
     frequency: 437.345e+6
