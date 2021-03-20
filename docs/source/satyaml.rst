@@ -130,6 +130,12 @@ The framings allowed in the ``framing`` field are the following:
 * ``AO-40 FEC short``, AO-40 FEC protocol with short frames, as used by SMOG-P
   and ATL-1
 
+* ``AO-40 FEC CRC-16-ARC``, the AO-40 FEC protocol with an CRC-16 ARC, as used by
+  SMOG-1
+
+* ``AO-40 FEC CRC-16-ARC short``, AO-40 FEC protocol with short frames and a
+  CRC-16 ARC, as used by SMOG-1
+
 * ``CCSDS Reed-Solomon``, CCSDS Reed-Solomon TM codewords (see :ref:`CCSDS deframers`)
 
 * ``CCSDS Concatenated``, CCSDS Concatenated TM codewords (see :ref:`CCSDS deframers`)
@@ -186,7 +192,15 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``SMOG-P RA``, Repeat-Accumulate FEC as used by SMOG-P and ATL-1
 
+* ``SMOG-1 RA``, Repeat-Accumulate FEC as used by SMOG-1. The difference with
+  ``SMOG-P RA`` is a longer 48 bit syncword (instead of 16 bit) and the inclusion
+  of a CRC-16 ARC to check frame integrity.
+
 * ``SMOG-P Signalling``, custom signalling frames as used by SMOG-P and ATL-1
+
+* ``SMOG-1 Signalling``, custom signalling frames as used by SMOG-1. The difference
+  with ``SMOG-P Signalling`` is the addition of a different PRBS to mark transitions
+  to TX mode.
 
 * ``OPS-SAT``, custom framing used by OPS-SAT, which consists of AX.25 frames
   with CCSDS Reed-Solomon codewords as payload

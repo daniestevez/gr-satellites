@@ -406,6 +406,16 @@ signalling_prbs = np.array([0x97, 0xfd, 0xd3, 0x7b, 0x0f, 0x1f, 0x6d,\
                             0x3a, 0xc6, 0x88, 0x90, 0xdb, 0x8c, 0x8c,\
                             0x42, 0xf3, 0x51, 0x75, 0x43, 0xa0, 0x83, 0x93], dtype = 'uint8')
 
+signalling_prbs_tx = np.array([0xA3, 0x9E, 0x1A, 0x55, 0x6B, 0xCB, 0x5C, 0x2F,
+                               0x2A, 0x5C, 0xAD, 0xD5, 0x32, 0xFE, 0x85, 0x1D,
+                               0xDC, 0xE8, 0xBC, 0xE5, 0x13, 0x7E, 0xBA, 0xBD,
+                               0x9D, 0x44, 0x31, 0x51, 0x3C, 0x92, 0x26, 0x6C,
+                               0xF3, 0x68, 0x98, 0xDA, 0xA3, 0xBA, 0x7F, 0x84,
+                               0x86, 0x32, 0x95, 0xAC, 0x8D, 0x4E, 0x66, 0x8B,
+                               0x7F, 0x7B, 0xE0, 0x14, 0xE2, 0x3C, 0x49, 0x45,
+                               0x32, 0xE4, 0x5C, 0x44, 0xF5, 0x6D, 0x2D, 0x0A],
+                              dtype = 'uint8')
+
 downlink_speeds = [500, 1250, 2500, 5000, 12500]
 codings = ['RX', 'AO-40 short', 'AO-40', 'RA (260, 128)', 'RA (514, 256)']
                             
@@ -418,6 +428,9 @@ class smogp_signalling:
 
         prbs = np.frombuffer(packet[:-6], dtype = 'uint8')
         ber_prbs = np.sum((np.unpackbits(prbs) ^ np.unpackbits(signalling_prbs[6:])).astype('int')) / (prbs.size * 8)
+        ber_prbs_tx = np.sum((np.unpackbits(prbs) ^ np.unpackbits(signalling_prbs_tx[6:])).astype('int')) / (prbs.size * 8)
+        sig_type = 'RX' if ber_prbs < ber_prbs_tx else 'TX'
+        ber_prbs = min(ber_prbs, ber_prbs_tx)
 
         flags = np.unpackbits(np.frombuffer(packet[-6:], dtype = 'uint8')).reshape((-1, 8))
         decoded_flags = 1*(np.sum(flags, axis = 1) > 4)
@@ -434,4 +447,4 @@ class smogp_signalling:
             print(f'Error: invalid coding {decoded_flags[3:]}')
             return
 
-        return f'Signalling packet: BER {ber_prbs:.4f}, rate {downlink_speed} baud, coding {coding}'
+        return f'Signalling packet: mode {sig_type}, BER {ber_prbs:.4f}, rate {downlink_speed} baud, coding {coding}'

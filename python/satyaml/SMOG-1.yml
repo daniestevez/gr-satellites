@@ -1,0 +1,155 @@
+name: SMOG-1
+norad: 99000
+telemetry_servers:
+  - BME
+data:
+  &tlm Telemetry:
+    telemetry: smogp
+  &signalling Signalling:
+    telemetry: smogp_signalling
+  &spectrum Spectrum:
+    files: smogp
+transmitters:
+  1k25 FSK long concatenated FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 1250
+    framing: AO-40 FEC CRC-16-ARC
+    data:
+    - *tlm
+    - *spectrum
+  1k25 FSK short concatenated FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 1250
+    framing: AO-40 FEC CRC-16-ARC short
+    data:
+    - *tlm
+    - *spectrum
+  1k25 FSK long RA FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 1250
+    framing: SMOG-1 RA
+    frame size: 256
+    data:
+    - *tlm
+    - *spectrum
+  1k25 FSK short RA FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 1250
+    framing: SMOG-1 RA
+    frame size: 128
+    data:
+    - *tlm
+    - *spectrum
+  1k25 FSK signalling:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 1250
+    framing: SMOG-1 Signalling
+    data:
+    - *signalling
+  2k5 FSK long concatenated FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 2500
+    framing: AO-40 FEC CRC-16-ARC
+    data:
+    - *tlm
+    - *spectrum
+  2k5 FSK short concatenated FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 2500
+    framing: AO-40 FEC CRC-16-ARC short
+    data:
+    - *tlm
+    - *spectrum
+  2k5 FSK long RA FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 2500
+    framing: SMOG-1 RA
+    frame size: 256
+    data:
+    - *tlm
+    - *spectrum
+  2k5 FSK short RA FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 2500
+    framing: SMOG-1 RA
+    frame size: 128
+    data:
+    - *tlm
+    - *spectrum
+  5k FSK long concatenated FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 5000
+    framing: AO-40 FEC CRC-16-ARC
+    data:
+    - *tlm
+    - *spectrum
+  5k FSK short concatenated FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 5000
+    framing: AO-40 FEC CRC-16-ARC short
+    data:
+    - *tlm
+    - *spectrum
+  5k FSK long RA FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 5000
+    framing: SMOG-1 RA
+    frame size: 256
+    data:
+    - *tlm
+    - *spectrum
+  5k FSK short RA FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 5000
+    framing: SMOG-1 RA
+    frame size: 128
+    data:
+    - *tlm
+    - *spectrum
+  12k5 FSK long concatenated FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 12500
+    framing: AO-40 FEC CRC-16-ARC
+    data:
+    - *tlm
+    - *spectrum
+  12k5 FSK short concatenated FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 12500
+    framing: AO-40 FEC CRC-16-ARC short
+    data:
+    - *tlm
+    - *spectrum
+  12k5 FSK long RA FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 12500
+    framing: SMOG-1 RA
+    frame size: 256
+    data:
+    - *tlm
+    - *spectrum
+  12k5 FSK short RA FEC:
+    frequency: 437.345e+6
+    modulation: FSK
+    baudrate: 12500
+    framing: SMOG-1 RA
+    frame size: 128
+    data:
+    - *tlm
+    - *spectrum
