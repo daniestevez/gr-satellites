@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for TAUSAT-1 and TSURU
 - 2k4 downlink for MEZNSAT
 - Support for SMOG-1
+- Env variable GR_SATELLITES_SUBMIT_TLM to force/disable telemetry submission
 
 ### Fixed
 - RS basis options swapped in CCSDS Reed-Solomon encoder GRC block

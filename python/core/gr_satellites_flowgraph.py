@@ -23,6 +23,7 @@ import functools
 import yaml
 import argparse
 import itertools
+import os
 import shlex
 
 def set_options(cl, *args, **kwargs):
@@ -183,8 +184,17 @@ class gr_satellites_flowgraph(gr.hier_block2):
                                                                               self.options.kiss_server))
         if self.options is not None and self.options.zmq_pub:
             self._additional_datasinks.append(zeromq.pub_msg_sink(self.options.zmq_pub))
-        if self.config.getboolean('Groundstation', 'submit_tlm'):
+
+        # The GR_SATELLITES_SUBMIT_TLM environment variable takes precendence
+        # over the configuration to choose whether to enable telemetry submission
+        tlm_env = os.environ.get('GR_SATELLITES_SUBMIT_TLM')
+        if tlm_env is not None:
+            tlm_submit = bool(int(tlm_env))
+        else:
+            tlm_submit = self.config.getboolean('Groundstation', 'submit_tlm')    
+        if tlm_submit:
             self._additional_datasinks.extend(self.get_telemetry_submitters(self.satyaml, self.config, self.options))
+        
         if self.options is not None and self.options.hexdump:
             self._additional_datasinks.append(datasinks.hexdump_sink())
         
