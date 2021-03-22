@@ -19,6 +19,7 @@ from .by70_1 import by70_1
 from .dsat import dsat
 from .k2sat import k2sat
 from .lucky7 import lucky7
+from .mirsat1 import mirsat1
 from .sat_1kuns_pf import sat_1kuns_pf
 from .smogp import smog1
 from .smogp import smogp
