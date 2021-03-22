@@ -125,8 +125,9 @@ class gr_satellites_flowgraph(gr.hier_block2):
         else:
             self._datasinks = dict()
             self._additional_datasinks = list()
-            if not (self.options is not None and self.options.hexdump):
-                for key, info in satyaml['data'].items():
+            do_telemetry = not (self.options is not None and self.options.hexdump)
+            for key, info in satyaml['data'].items():
+                if 'telemetry' not in info or do_telemetry:
                     self._init_datasink(key, info)
             self._init_additional_datasinks()
             self._transports = dict()
@@ -275,10 +276,11 @@ class gr_satellites_flowgraph(gr.hier_block2):
         
         for s in self._additional_datasinks:
             self.msg_connect((tagger, 'out'), (s, 'in'))
-        if self.options.hexdump:
-            return
         for data in transmitter.get('data', []):
-            self.msg_connect((tagger, 'out'), (self._datasinks[data], 'in'))
+            if data in self._datasinks:
+                # the datasink may not exist if it's a telemetry parser
+                # and we're running in hexdump mode
+                self.msg_connect((tagger, 'out'), (self._datasinks[data], 'in'))
         for transport in transmitter.get('transports', []):
             self.msg_connect((tagger, 'out'), (self._transports[transport], 'in'))
         
