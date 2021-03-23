@@ -47,6 +47,8 @@ class fsk_demodulator(gr.hier_block2, options_block):
         options_block.__init__(self, options)
 
         use_agc = self.options.use_agc or not iq
+        if self.options.disable_dc_block:
+            dc_block = False
 
         if dump_path is not None:
             dump_path = pathlib.Path(dump_path)
@@ -159,3 +161,4 @@ class fsk_demodulator(gr.hier_block2, options_block):
         parser.add_argument('--clk_limit', type = float, default = cls._default_clk_limit, help = 'Clock recovery limit (relative to baudrate) [default=%(default)r]')
         parser.add_argument('--deviation', type = float, default = cls._default_deviation_hz, help = 'Deviation (Hz) [default=%(default)r]')
         parser.add_argument('--use_agc', action = 'store_true', help = 'Use AGC (for IQ input. AGC always on for real input)')
+        parser.add_argument('--disable_dc_block', action = 'store_true', help = 'Disable DC block')
