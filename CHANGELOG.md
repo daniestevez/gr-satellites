@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 2k4 downlink for MEZNSAT
 - Support for SMOG-1
 - Env variable GR_SATELLITES_SUBMIT_TLM to force/disable telemetry submission
+- Support for NanosatC-BR1 and NanosatC-BR2
 
 ## Changed
 - In gr_satellites, do not disable non-telemetry datasinks in --hexdump mode
