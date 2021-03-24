@@ -298,9 +298,13 @@ Debug blocks.
 
     Usage of AX100 deframer in a flowgraph
 
-The AX100 deframer only has two options, the *Mode* option indicates the
+In Reed Solomon mode, the AX100 deframer only has two options:
+the *Mode* option indicates the
 mode, as described above, and the *Syncword threshold* option specifies how
 many bit errors are allowed in the detection of the 32 bit syncword.
+In ASM+Golay mode, the AX100 deframer has an additional option:
+*Scrambler*, which can be used to enable or disable the CCSDS synchronous
+scrambler.
 
 .. _GOMspace U482C deframer:
 

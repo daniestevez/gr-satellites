@@ -24,14 +24,19 @@ class ax100_deframer(gr.hier_block2, options_block):
 
     Args:
         mode: mode to use ('RS' or 'ASM') (string)
+        scrambler: scrambler to use, either 'CCSDS' or 'none' (only for ASM mode) (str)
         syncword_threshold: number of bit errors allowed in syncword (int)
         options: Options from argparse
     """
-    def __init__(self, mode, syncword_threshold = None, options = None):
+    def __init__(self, mode, scrambler = 'CCSDS',
+                     syncword_threshold = None, options = None):
         gr.hier_block2.__init__(self, "ax100_deframer",
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
         options_block.__init__(self, options)
+
+        if scrambler not in ['CCSDS', 'none']:
+            raise ValueError(f'invalid scrambler {scrambler}')
         
         self.message_port_register_hier_out('out')
 
@@ -48,7 +53,9 @@ class ax100_deframer(gr.hier_block2, options_block):
                                            sync = _syncword,\
                                            threshold = syncword_threshold)
         self.fec = ax100_decode(self.options.verbose_fec) if mode == 'RS'\
-          else u482c_decode(self.options.verbose_fec, 0, 1, 1)
+          else u482c_decode(self.options.verbose_fec, 0,
+                                1 if scrambler == 'CCSDS' else 0,
+                                1)
 
         self._blocks = [self, self.slicer]
         if mode == 'RS':

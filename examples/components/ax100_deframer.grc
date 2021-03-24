@@ -1,6 +1,7 @@
 options:
   parameters:
     author: Daniel Estevez
+    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -22,7 +23,6 @@ options:
     sizing_mode: fixed
     thread_safe_setters: ''
     title: GOMspace AX100 deframer component example
-    window_size: ''
   states:
     bus_sink: false
     bus_source: false
@@ -50,11 +50,12 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
+    en_uvec: 'True'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [790, 165]
+    coordinate: [792, 176.0]
     rotation: 0
     state: enabled
 - name: blocks_message_debug_0_0
@@ -63,11 +64,12 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
+    en_uvec: 'True'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [808, 388]
+    coordinate: [808, 392.0]
     rotation: 0
     state: true
 - name: blocks_wavfile_source_0
@@ -85,7 +87,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [53, 217]
+    coordinate: [56, 228.0]
     rotation: 0
     state: enabled
 - name: blocks_wavfile_source_0_0
@@ -103,7 +105,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [71, 440]
+    coordinate: [72, 444.0]
     rotation: 0
     state: true
 - name: note_0
@@ -141,12 +143,14 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     mode: '"ASM"'
+    options: '""'
+    scrambler: '"CCSDS"'
     threshold: '4'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [488, 217]
+    coordinate: [488, 220.0]
     rotation: 0
     state: enabled
 - name: satellites_ax100_deframer_0_0
@@ -158,12 +162,14 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     mode: '"RS"'
+    options: '""'
+    scrambler: '"CCSDS"'
     threshold: '4'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [506, 440]
+    coordinate: [504, 444.0]
     rotation: 0
     state: true
 - name: satellites_fsk_demodulator_0
@@ -176,12 +182,14 @@ blocks:
     iq: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
+    options: '""'
     samp_rate: samp_rate
+    subaudio: 'False'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [291, 217]
+    coordinate: [288, 220.0]
     rotation: 0
     state: enabled
 - name: satellites_fsk_demodulator_0_0
@@ -194,12 +202,14 @@ blocks:
     iq: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
+    options: '""'
     samp_rate: samp_rate
+    subaudio: 'False'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [309, 440]
+    coordinate: [312, 436.0]
     rotation: 0
     state: true
 

@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for SMOG-1
 - Env variable GR_SATELLITES_SUBMIT_TLM to force/disable telemetry submission
 - Support for NanosatC-BR1 and NanosatC-BR2
+- Ability to disable AX100 ASM+Golay scrambler in SatYAML and GRC block
 
 ## Changed
 - In gr_satellites, do not disable non-telemetry datasinks in --hexdump mode
