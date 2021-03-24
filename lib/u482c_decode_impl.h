@@ -14,9 +14,6 @@
 #include <pmt/pmt.h>
 #include <satellites/u482c_decode.h>
 
-#define RS_LEN 255
-#define HEADER_LEN 3
-
 #include <array>
 
 namespace gr {
@@ -30,6 +27,7 @@ private:
     const bool d_verbose;
     std::array<char, d_rs_len> d_ccsds_sequence;
     std::array<uint8_t, d_header_len + d_rs_len> d_data;
+    std::array<uint8_t, d_rs_len> d_rs_scratch;
     void* d_vp;
     const int d_viterbi;
     const int d_scrambler;

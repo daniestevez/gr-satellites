@@ -29,19 +29,6 @@ if(MSVC)
     set_source_files_properties(golay24.c PROPERTIES LANGUAGE CXX)
 endif()
 
-# This workaround is taken from GNU Radio
-# gr-fec/lib/reed-solomon/CMakeLists.txt
-#MSVC workaround: we can't have dynamically sized arrays.
-#So ifdef a max array bounds that is larger than NN and NROOTS
-#Its a bit of a hack, but if you look at the code, its so full of ifdefs,
-#and lacks optimization where it should be pre-allocating these arrays.
-if(MSVC)
-    set_source_files_properties(
-        ${CMAKE_CURRENT_SOURCE_DIR}/libfec/decode_rs_char.c
-        PROPERTIES COMPILE_DEFINITIONS "MAX_ARRAY=256;"
-    )
-endif(MSVC)
-
 list(APPEND satellites_sources
     ax100_decode_impl.cc
     convolutional_encoder_impl.cc
@@ -65,15 +52,6 @@ list(APPEND satellites_sources
     varlen_packet_tagger_impl.cc
     viterbi.c
     viterbi_decoder_impl.cc
-    libfec/decode_rs_8.c
-    libfec/decode_rs_ccsds.c
-    libfec/decode_rs_char.c
-    libfec/encode_rs_8.c
-    libfec/encode_rs_ccsds.c
-    libfec/encode_rs_char.c
-    libfec/taltab.c
-    libfec/ccsds.c
-    libfec/init_rs_char.c
     radecoder/ra_config.c
     radecoder/ra_decoder_gen.c
     radecoder/ra_lfsr.c
@@ -88,7 +66,10 @@ if(NOT satellites_sources)
 endif(NOT satellites_sources)
 
 add_library(gnuradio-satellites SHARED ${satellites_sources})
-target_link_libraries(gnuradio-satellites gnuradio::gnuradio-runtime)
+target_link_libraries(gnuradio-satellites
+    gnuradio::gnuradio-runtime
+    gnuradio::gnuradio-blocks
+    gnuradio::gnuradio-fec)
 target_include_directories(gnuradio-satellites
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PUBLIC $<INSTALL_INTERFACE:include>

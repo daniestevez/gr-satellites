@@ -24,9 +24,9 @@
 
 extern "C" {
 #include "golay24.h"
-#include "libfec/fec.h"
 #include "randomizer.h"
 #include "viterbi.h"
+#include <gnuradio/fec/rs.h>
 }
 
 #define AUTO -1
@@ -155,7 +155,11 @@ void u482c_decode_impl::msg_handler(pmt::pmt_t pmt_msg)
 
     // RS decoding
     if ((d_rs == ON) || (d_rs == AUTO && rs_flag)) {
-        auto rs_res = decode_rs_8(packet, NULL, 0, RS_LEN - rx_len);
+        d_rs_scratch.fill(0);
+        auto rs_padding = d_rs_len - rx_len;
+        auto scratch_start = &d_rs_scratch[rs_padding];
+        std::memcpy(scratch_start, packet, rx_len);
+        auto rs_res = decode_rs_8(packet, NULL, 0);
         rx_len -= 32;
 
         if (rs_res < 0) {
@@ -168,6 +172,8 @@ void u482c_decode_impl::msg_handler(pmt::pmt_t pmt_msg)
         if (d_verbose) {
             std::printf("RS decode OK. Byte errors: %d.\n", rs_res);
         }
+
+        packet = scratch_start;
     }
 
     // Send via GNU Radio message

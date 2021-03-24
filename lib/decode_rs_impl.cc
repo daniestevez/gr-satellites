@@ -20,7 +20,7 @@
 #include <exception>
 
 extern "C" {
-#include "libfec/fec.h"
+#include <gnuradio/fec/rs.h>
 }
 
 namespace gr {
@@ -47,9 +47,9 @@ decode_rs_impl::decode_rs_impl(bool dual_basis, int interleave)
       d_interleave(interleave)
 {
     if (dual_basis) {
-        d_decode_rs = [](uint8_t* data) { return decode_rs_ccsds(data, NULL, 0, 0); };
+        d_decode_rs = [](uint8_t* data) { return decode_rs_ccsds(data, NULL, 0); };
     } else {
-        d_decode_rs = [](uint8_t* data) { return decode_rs_8(data, NULL, 0, 0); };
+        d_decode_rs = [](uint8_t* data) { return decode_rs_8(data, NULL, 0); };
     }
     d_rs_codeword.resize(d_ccsds_nn);
     d_nroots = d_ccsds_nroots;
@@ -67,7 +67,7 @@ decode_rs_impl::decode_rs_impl(
           "decode_rs", gr::io_signature::make(0, 0, 0), gr::io_signature::make(0, 0, 0)),
       d_interleave(interleave)
 {
-    d_rs_p = init_rs_char(symsize, gfpoly, fcr, prim, nroots, 0);
+    d_rs_p = init_rs_char(symsize, gfpoly, fcr, prim, nroots);
     if (!d_rs_p) {
         throw std::runtime_error("Unable to initialize Reed-Solomon definition");
     }

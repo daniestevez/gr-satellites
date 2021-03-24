@@ -19,7 +19,6 @@
 
 extern "C" {
 #include "golay24.h"
-#include "libfec/fec.h"
 }
 
 namespace gr {

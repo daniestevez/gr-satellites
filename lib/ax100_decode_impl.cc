@@ -22,7 +22,7 @@
 #include <gnuradio/io_signature.h>
 
 extern "C" {
-#include "libfec/fec.h"
+#include <gnuradio/fec/rs.h>
 }
 
 namespace gr {
@@ -70,18 +70,21 @@ void ax100_decode_impl::msg_handler(pmt::pmt_t pmt_msg)
     auto msg = pmt::u8vector_elements(pmt::cdr(pmt_msg), length);
 
     length = std::min(length, d_data.size());
-    std::memcpy(d_data.data(), msg, length);
+    d_data.fill(0);
+    auto full_frame_size = msg[0];
+    auto padding = 255 - full_frame_size;
+    std::memcpy(d_data.data() + padding, &msg[1], length);
 
-    auto rs_res = decode_rs_8(&d_data[1], NULL, 0, 255 - d_data[0] + 1);
+    auto rs_res = decode_rs_8(d_data.data(), NULL, 0);
 
     // Send via GNUradio message if RS ok
     if (rs_res >= 0) {
         // Swap CSP header
-        std::swap(d_data[1], d_data[4]);
-        std::swap(d_data[2], d_data[3]);
+        std::swap(d_data[0], d_data[3]);
+        std::swap(d_data[1], d_data[2]);
 
         // 32 RS parity symbols, 1 includes the length byte
-        auto frame_len = d_data[0] - 32 - 1;
+        auto frame_len = full_frame_size - 32 - 1;
         if (frame_len < 0) {
             return;
         }
@@ -94,7 +97,7 @@ void ax100_decode_impl::msg_handler(pmt::pmt_t pmt_msg)
         // Send by GNUradio message
         message_port_pub(
             pmt::mp("out"),
-            pmt::cons(pmt::PMT_NIL, pmt::init_u8vector(frame_len, &d_data[1])));
+            pmt::cons(pmt::PMT_NIL, pmt::init_u8vector(frame_len, d_data.data())));
     } else if (d_verbose) {
         std::printf("RS decode failed.\n");
     }

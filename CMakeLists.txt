@@ -94,7 +94,7 @@ ENDIF()
 ########################################################################
 # Install directories
 ########################################################################
-find_package(Gnuradio "3.9" REQUIRED)
+find_package(Gnuradio "3.9" REQUIRED COMPONENTS blocks fec)
 include(GrVersion)
 
 include(GrPlatform) #define LIB_SUFFIX
@@ -134,6 +134,9 @@ endif(APPLE)
 # Find gnuradio build dependencies
 ########################################################################
 find_package(Doxygen)
+
+# Required by gr-fec
+find_package(GSL REQUIRED)
 
 ########################################################################
 # PyBind11 Related

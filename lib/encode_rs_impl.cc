@@ -20,7 +20,7 @@
 #include <exception>
 
 extern "C" {
-#include "libfec/fec.h"
+#include <gnuradio/fec/rs.h>
 }
 
 #include "rs.h"
@@ -50,11 +50,9 @@ encode_rs_impl::encode_rs_impl(bool dual_basis, int interleave)
 {
     static constexpr int parity_offset = d_ccsds_nn - d_ccsds_nroots;
     if (dual_basis) {
-        d_encode_rs = [](uint8_t* data) {
-            encode_rs_ccsds(data, &data[parity_offset], 0);
-        };
+        d_encode_rs = [](uint8_t* data) { encode_rs_ccsds(data, &data[parity_offset]); };
     } else {
-        d_encode_rs = [](uint8_t* data) { encode_rs_8(data, &data[parity_offset], 0); };
+        d_encode_rs = [](uint8_t* data) { encode_rs_8(data, &data[parity_offset]); };
     }
     d_rs_codeword.resize(d_ccsds_nn);
     d_nroots = d_ccsds_nroots;
@@ -72,7 +70,7 @@ encode_rs_impl::encode_rs_impl(
           "encode_rs", gr::io_signature::make(0, 0, 0), gr::io_signature::make(0, 0, 0)),
       d_interleave(interleave)
 {
-    d_rs_p = init_rs_char(symsize, gfpoly, fcr, prim, nroots, 0);
+    d_rs_p = init_rs_char(symsize, gfpoly, fcr, prim, nroots);
     const int codeword_size = (1U << symsize) - 1;
     const int parity_offset = codeword_size - nroots;
     if (!d_rs_p) {

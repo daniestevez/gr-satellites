@@ -21,7 +21,7 @@ namespace satellites {
 class ax100_decode_impl : public ax100_decode
 {
 private:
-    std::array<uint8_t, 256> d_data;
+    std::array<uint8_t, 255> d_data;
     const bool d_verbose;
 
 public:
