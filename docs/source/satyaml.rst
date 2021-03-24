@@ -262,6 +262,11 @@ CCSDS protocol. These are:
   optional and defaults to ``CCSDS`` if not specified.
 
 
+The ``AX100 ASM+Golay`` mode also supports the ``scrambler`` field, with the
+possible values ``CCSDS`` and ``none``. The default is ``CCSDS``, but the value
+``none`` can be used in case the scrambler needs to be disabled (which is a
+rarely used feature).
+
 The following example shows how transports are indicated in SatYAML files.
 
 .. code-block:: none
