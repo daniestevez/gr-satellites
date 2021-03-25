@@ -15,7 +15,6 @@
 #include "satellites/descrambler308.h"
 #include "satellites/distributed_syncframe_soft.h"
 #include "satellites/encode_rs.h"
-#include "satellites/fixedlen_tagger.h"
 #include "satellites/lilacsat1_demux.h"
 #include "satellites/matrix_deinterleaver_soft.h"
 #include "satellites/nrzi_decode.h"
@@ -44,8 +43,6 @@ GR_SWIG_BLOCK_MAGIC2(satellites, descrambler308);
 GR_SWIG_BLOCK_MAGIC2(satellites, distributed_syncframe_soft);
 %include "satellites/encode_rs.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, encode_rs);
-%include "satellites/fixedlen_tagger.h"
-GR_SWIG_BLOCK_MAGIC2(satellites, fixedlen_tagger);
 %include "satellites/lilacsat1_demux.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, lilacsat1_demux);
 %include "satellites/matrix_deinterleaver_soft.h"

@@ -37,8 +37,8 @@ class qa_fixedlen_tagger(gr_unittest.TestCase):
         self.tag2pdu = blocks.tagged_stream_to_pdu(blocks.byte_t,
                                                        self.packetlen_tag)
         self.debug = blocks.message_debug()
-        self.tagger = fixedlen_tagger(gr.sizeof_char, self.syncword_tag, self.packetlen_tag,
-                                          self.packet_len)
+        self.tagger = fixedlen_tagger(self.syncword_tag, self.packetlen_tag,
+                                          self.packet_len, np.byte)
         self.tb = gr.top_block()
         self.tb.connect(self.source, self.tagger, self.tag2pdu)
         self.tb.msg_connect((self.tag2pdu, 'pdus'), (self.debug, 'store'))

@@ -55,6 +55,7 @@ from .check_swiatowid_crc import check_swiatowid_crc
 from .check_tt64_crc import check_tt64_crc
 from .eseo_line_decoder import eseo_line_decoder
 from .eseo_packet_crop import eseo_packet_crop
+from .fixedlen_tagger import fixedlen_tagger
 from .funcube_submit import funcube_submit
 from .hdlc_deframer import hdlc_deframer
 from .hdlc_framer import hdlc_framer
