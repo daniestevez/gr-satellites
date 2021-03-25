@@ -40,7 +40,7 @@ class sync_to_pdu_soft(gr.hier_block2):
         ##################################################
         # Blocks
         ##################################################
-        self.satellites_fixedlen_tagger_0_0_0 = satellites.fixedlen_tagger('syncword', 'packet_len', packlen, numpy.float32)
+        self.satellites_fixedlen_tagger_0_0_0 = satellites.fixedlen_tagger(gr.sizeof_float, 'syncword', 'packet_len', packlen)
         self.digital_correlate_access_code_tag_bb_0_0_0 = digital.correlate_access_code_tag_ff(sync, threshold, 'syncword')
         self.blocks_tagged_stream_to_pdu_0_0_0 = blocks.tagged_stream_to_pdu(blocks.float_t, 'packet_len')
 

@@ -59,7 +59,6 @@ GR_PYTHON_INSTALL(
     eseo_line_decoder.py
     eseo_packet_crop.py
     feh.py
-    fixedlen_tagger.py
     funcube_submit.py
     hdlc.py
     hdlc_deframer.py
