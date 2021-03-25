@@ -28,7 +28,6 @@ void bind_decode_rs(py::module& m);
 void bind_descrambler308(py::module& m);
 void bind_distributed_syncframe_soft(py::module& m);
 void bind_encode_rs(py::module& m);
-void bind_fixedlen_tagger(py::module& m);
 void bind_lilacsat1_demux(py::module& m);
 void bind_matrix_deinterleaver_soft(py::module& m);
 void bind_nrzi_decode(py::module& m);
@@ -76,7 +75,6 @@ PYBIND11_MODULE(satellites_python, m)
     bind_descrambler308(m);
     bind_distributed_syncframe_soft(m);
     bind_encode_rs(m);
-    bind_fixedlen_tagger(m);
     bind_lilacsat1_demux(m);
     bind_matrix_deinterleaver_soft(m);
     bind_nrzi_decode(m);

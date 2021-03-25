@@ -40,7 +40,7 @@ class sync_to_pdu_packed(gr.hier_block2):
         ##################################################
         # Blocks
         ##################################################
-        self.satellites_fixedlen_tagger_0_0_0 = satellites.fixedlen_tagger(gr.sizeof_char, 'syncword', 'packet_len', packlen*8)
+        self.satellites_fixedlen_tagger_0_0_0 = satellites.fixedlen_tagger('syncword', 'packet_len', packlen*8, numpy.byte)
         self.digital_correlate_access_code_tag_bb_0_0_0 = digital.correlate_access_code_tag_bb(sync, threshold, 'syncword')
         self.blocks_unpacked_to_packed_xx_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
         self.blocks_tagged_stream_to_pdu_0_0_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, 'packet_len')

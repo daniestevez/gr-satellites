@@ -50,7 +50,6 @@ list(APPEND satellites_sources
     descrambler308_impl.cc
     distributed_syncframe_soft_impl.cc
     encode_rs_impl.cc
-    fixedlen_tagger_impl.cc
     golay24.c
     lilacsat1_demux_impl.cc
     matrix_deinterleaver_soft_impl.cc
