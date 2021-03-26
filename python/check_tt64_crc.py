@@ -61,7 +61,7 @@ class check_tt64_crc(gr.basic_block):
     """
     docstring for block check_tt64_crc
     """
-    def __init__(self, verbose, packet_len = 48):
+    def __init__(self, verbose, packet_len = 48, strip = True):
         gr.basic_block.__init__(self,
             name="check_tt64_crc",
             in_sig=[],
@@ -69,6 +69,7 @@ class check_tt64_crc(gr.basic_block):
 
         self.verbose = verbose
         self.packet_len = packet_len
+        self.strip = strip
         
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
@@ -91,7 +92,7 @@ class check_tt64_crc(gr.basic_block):
                 print("Packet too short")
             return
 
-        packet_out = packet[:-2]
+        packet_out = packet[:-2] if self.strip else packet
         msg_out = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(packet_out), packet_out))
         if crc16_arc(packet) == 0:
             if self.verbose:

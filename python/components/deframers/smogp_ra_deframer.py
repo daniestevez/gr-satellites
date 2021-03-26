@@ -54,7 +54,8 @@ class smogp_ra_deframer(gr.hier_block2, options_block):
         if new_protocol:
             # CRC-16 ARC
             self.crc = check_tt64_crc(verbose = self.options.verbose_crc,
-                                      packet_len = None)
+                                      packet_len = None,
+                                      strip = False)
 
         self.connect(self, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.fec, 'in'))
