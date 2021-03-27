@@ -1,0 +1,22 @@
+name: SIMBA
+alternative_names:
+  - WildTrackCube-SIMBA
+norad: 99723
+data:
+  &tlm Telemetry:
+    telemetry: csp
+transmitters:
+  1k2 FSK downlink:
+    frequency: 435.310e+6
+    modulation: FSK
+    baudrate: 1200
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
+  9k6 FSK downlink:
+    frequency: 435.310e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
