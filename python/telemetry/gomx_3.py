@@ -6,11 +6,13 @@
 # This file is part of gr-satellites
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-# 
+#
 
 from construct import *
+
 from .csp import CSPHeader
 from ..adapters import UNIXTimestampAdapter, LinearAdapter
+
 
 Voltage = LinearAdapter(1000.0, Int16ub)
 Timestamp = UNIXTimestampAdapter(Int32ub)
@@ -73,13 +75,17 @@ ADSB = Struct(
 gomx_3 = Struct(
     'csp_header' / CSPHeader,
     'beacon_type' / Int8ub,
-    'beacon' / If((this.csp_header.destination == 10) & (this.csp_header.destination_port == 30) & (this.csp_header.source == 1) & (this.beacon_type == 0),
-                Struct(
-                'eps' / EPS,
-                'com' / COM,
-                'obc' / OBC,
-                'adcs' / ADCS,
-                'adsb' / ADSB
-                )
+    'beacon' / If(
+        ((this.csp_header.destination == 10)
+         & (this.csp_header.destination_port == 30)
+         & (this.csp_header.source == 1)
+         & (this.beacon_type == 0)),
+        Struct(
+            'eps' / EPS,
+            'com' / COM,
+            'obc' / OBC,
+            'adcs' / ADCS,
+            'adsb' / ADSB
             )
+        )
     )

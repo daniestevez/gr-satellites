@@ -8,14 +8,16 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
+import datetime
+
 from construct import *
 import construct
 
-import datetime
-
 from ..adapters import LinearAdapter
 
-# See https://www.raumfahrttechnik.tu-berlin.de/fileadmin/fg169/amateur-radio/TUBiX10-COM.pdf
+# See
+# https://www.raumfahrttechnik.tu-berlin.de/fileadmin/fg169/
+# amateur-radio/TUBiX10-COM.pdf
 # for documentation
 
 LTUFrameHeader = BitStruct(
@@ -39,12 +41,18 @@ LTUFrameHeader = BitStruct(
     Padding(2)
     )
 
+
 class TimeAdapter(Adapter):
-    def _encode(self, obj, context, path = None):
+    def _encode(self, obj, context, path=None):
         d = int((obj - datetime.datetime(2000, 1, 1))*2)
-        return Container(days = d.days, milliseconds = d.seconds * 1000 + d.microseconds / 1000)
-    def _decode(self, obj, context, path = None):
-        return datetime.datetime(2000, 1, 1) + datetime.timedelta(seconds=float(obj)/2.0)
+        return Container(
+            days=d.days,
+            milliseconds=d.seconds * 1000 + d.microseconds / 1000)
+
+    def _decode(self, obj, context, path=None):
+        return (datetime.datetime(2000, 1, 1)
+                + datetime.timedelta(seconds=float(obj)/2.0))
+
 
 TimeStamp = TimeAdapter(BitsInteger(32, swapped=True))
 
@@ -135,7 +143,7 @@ ADCSTelemetry = Struct(
     'omegaYOptimal_SAT' / LinearAdapter(260, Int16sl),
     'omegaZOptimal_SAT' / LinearAdapter(260, Int16sl),
     'magXOptimal_SAT' / LinearAdapter(0.1, Int16sl),
-    'magYOptimal_SAT' / LinearAdapter(0.1, Int16sl),  
+    'magYOptimal_SAT' / LinearAdapter(0.1, Int16sl),
     'magZOptimal_SAT' / LinearAdapter(0.1, Int16sl),
     'sunXOptimal_SAT' / LinearAdapter(32000, Int16sl),
     'sunYOptimal_SAT' / LinearAdapter(32000, Int16sl),
@@ -157,13 +165,13 @@ ADCSTelemetry = Struct(
     'SGP4AltPEF' / LinearAdapter(0.25, Int8ul),
     'AttitudeErrorAngle' / LinearAdapter(177, Int16ul),
     'TargetData_Distance' / Int16ul,
-    'TargetData_ControlIsActive' / Int8ul # flag, really
+    'TargetData_ControlIsActive' / Int8ul  # flag, really
     )
 
 
 snet = Struct(
     'header' / SNETFrameHeader,
     'telemetry' / Switch(lambda c: (c.header.FCIDMajor, c.header.FCIDSub), {
-        (0,0) : ADCSTelemetry,
-        (9,0) : EPSTelemetry,
+        (0, 0): ADCSTelemetry,
+        (9, 0): EPSTelemetry,
     }, default=Pass))

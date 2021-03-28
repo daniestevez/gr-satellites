@@ -8,8 +8,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-from pathlib import Path
 import configparser
+from pathlib import Path
+
 
 def open_config():
     """
@@ -30,6 +31,7 @@ def open_config():
     config.read(config_filename)
     return config
 
+
 def write_default_config(file):
     """
     Writes a default configuration and returns the
@@ -40,24 +42,24 @@ def write_default_config(file):
     """
     config = configparser.ConfigParser()
     config['Groundstation'] = {
-        'callsign' : '',
-        'latitude' : 0,
-        'longitude' : 0,
-        'submit_tlm' : 'yes',
+        'callsign': '',
+        'latitude': 0,
+        'longitude': 0,
+        'submit_tlm': 'yes',
     }
 
     config['FUNcube'] = {
-        'site_id' : '',
-        'auth_code' : '',
+        'site_id': '',
+        'auth_code': '',
     }
-    
+
     config['PW-Sat2'] = {
-        'credentials_file' : '',
+        'credentials_file': '',
     }
 
     config['BME'] = {
-        'user' : '',
-        'password' : '',
+        'user': '',
+        'password': '',
     }
 
     with open(file, 'w') as f:

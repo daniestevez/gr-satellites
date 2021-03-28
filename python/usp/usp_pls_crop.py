@@ -17,27 +17,40 @@ import pmt
 # https://sputnix.ru/tpl/docs/amateurs/USP%20protocol%20description%20v1.04.pdf
 
 # Generator matrix for the (64,7) PLS linear code
-G = '0011001100110011001100110011001100110011001100110011001100110011000011110000111100001111000011110000111100001111000011110000111100000000111111110000000011111111000000001111111100000000111111110000000000000000111111111111111100000000000000001111111111111111000000000000000000000000000000001111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110101010101010101010101010101010101010101010101010101010101010101'
-G = np.array([int(a) for a in G], dtype = 'uint8').reshape((-1,64)).T
+G = (
+    '0011001100110011001100110011001100110011001100110011001'
+    '1001100110000111100001111000011110000111100001111000011'
+    '1100001111000011110000000011111111000000001111111100000'
+    '0001111111100000000111111110000000000000000111111111111'
+    '1111000000000000000011111111111111110000000000000000000'
+    '0000000000000111111111111111111111111111111111111111111'
+    '1111111111111111111111111111111111111111111111111111110'
+    '1010101010101010101010101010101010101010101010101010101'
+    '01010101')
+G = np.array([int(a) for a in G], dtype='uint8').reshape((-1, 64)).T
 
 # Defined PLS codes
-PLS_codes = np.array([0,1], dtype = 'uint8')
-PLS_vectors = np.unpackbits(np.array(PLS_codes, dtype = 'uint8')[np.newaxis,:], axis = 0)[1:]
+PLS_codes = np.array([0, 1], dtype='uint8')
+PLS_vectors = np.unpackbits(
+    np.array(PLS_codes, dtype='uint8')[np.newaxis, :], axis=0)[1:]
 
 # Encoded and scrambled PLS 64-bit vectors
 enc_PLS = (G @ PLS_vectors) % 2
-scramble_seq = '0111000110011101100000111100100101010011010000100010110111111010'
-scramble_seq = np.array([int(a) for a in scramble_seq], dtype = 'uint8')
-scrambled_PLS = enc_PLS ^ scramble_seq[:,np.newaxis]
+scramble_seq = (
+    '0111000110011101100000111100100101010011010000100010110111111010')
+scramble_seq = np.array([int(a) for a in scramble_seq], dtype='uint8')
+scrambled_PLS = enc_PLS ^ scramble_seq[:, np.newaxis]
 scrambled_PLS_bipolar = 2 * scrambled_PLS.astype('float32') - 1
+
 
 class usp_pls_crop(gr.basic_block):
     """
     Crop a USP packet according to its PLS
     """
     def __init__(self):
-        gr.basic_block.__init__(self,
-            name="usp_pls_crop",
+        gr.basic_block.__init__(
+            self,
+            name='usp_pls_crop',
             in_sig=[],
             out_sig=[])
         self.message_port_register_in(pmt.intern('in'))
@@ -49,8 +62,9 @@ class usp_pls_crop(gr.basic_block):
         if not pmt.is_f32vector(msg):
             print("[ERROR] Received invalid message type. Expected f32vector")
             return
-        pls = np.array(pmt.f32vector_elements(msg)[:64], dtype = 'float32')
-        correlations = np.sum(pls[:,np.newaxis] * scrambled_PLS_bipolar, axis = 0)
+        pls = np.array(pmt.f32vector_elements(msg)[:64], dtype='float32')
+        correlations = np.sum(pls[:, np.newaxis] * scrambled_PLS_bipolar,
+                              axis=0)
         code = PLS_codes[np.argmax(correlations)]
 
         # It seems that there is a typo in the rev 1.04 document

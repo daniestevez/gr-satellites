@@ -10,13 +10,16 @@
 
 import subprocess
 
+
 class FehOpener():
-    def __init__(self, fullscreen = True, interval = 1):
+    def __init__(self, fullscreen=True, interval=1):
         self.fullscreen = fullscreen
         self.interval = interval
+
     def __params(self):
         p = ['-F'] if self.fullscreen else []
         return p + ['-R', str(self.interval)]
+
     def open(self, filename):
-        subprocess.Popen(['feh'] + self.__params() + [filename],\
-                             stdin = subprocess.DEVNULL)
+        subprocess.Popen(['feh'] + self.__params() + [filename],
+                         stdin=subprocess.DEVNULL)

@@ -8,7 +8,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-'''
+"""
 GNU Radio gr-satellites out-of-tree module.
 
 gr-satellites is a GNU Radio out-of-tree module encompassing a
@@ -17,25 +17,33 @@ satellites. It suports most popular protocols, such as AX.25, the
 GOMspace NanoCom U482C and AX100 modems, an important part of the CCSDS
 stack, the AO-40 protocol used in the FUNcube satellites, and several
 ad-hoc protocols used in other satellites.
-'''
+"""
 
 __version__ = 'v4.1.0-git'
 __author__ = 'Daniel Estevez'
 __copyright__ = 'Copyright 2016-2020 Daniel Estevez'
 __email__ = 'daniel@destevez.net'
 __license__ = 'GPL-3.0'
+__all__ = [
+    'ccsds',
+    'components',
+    'core',
+    'filereceiver',
+    'hier',
+    'satyaml',
+    'telemetry',
+    'usp',
+    'utils',
+    ]
 
-# import bindings into the satellites namespace
-# the first try works when we are importing from the build dir
+# Import bindings into the satellites namespace.
+# The first try works when we are importing from the build dir
 try:
     from .bindings.satellites_python import *
 except ModuleNotFoundError:
     from .satellites_python import *
 
-# import any pure python here
-#
-
-__all__ = ['ccsds', 'components', 'core', 'hier', 'filereceiver', 'satyaml', 'telemetry', 'usp', 'utils']
+# Import any pure python here
 
 from .aausat4_remove_fsm import aausat4_remove_fsm
 from .adsb_kml import adsb_kml

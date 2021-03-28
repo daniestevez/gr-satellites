@@ -8,25 +8,26 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-import numpy
-from gnuradio import gr
 import collections
-import pmt
 import datetime
 import struct
 import warnings
 
+from gnuradio import gr
+import numpy
+import pmt
+
 from .kiss import *
 from .submit import parse_time
 
+
 class pdu_to_kiss(gr.basic_block):
-    """
-    docstring for block pdu_to_kiss
-    """
-    def __init__(self, control_byte = True, include_timestamp = False,
-                     initial_timestamp = ''):
-        gr.basic_block.__init__(self,
-            name="pdu_to_kiss",
+    """docstring for block pdu_to_kiss"""
+    def __init__(self, control_byte=True, include_timestamp=False,
+                 initial_timestamp=''):
+        gr.basic_block.__init__(
+            self,
+            name='pdu_to_kiss',
             in_sig=None,
             out_sig=None)
         self.control_byte = control_byte
@@ -36,7 +37,9 @@ class pdu_to_kiss(gr.basic_block):
         self.start_timestamp = datetime.datetime.utcnow()
 
         if not control_byte and include_timestamp:
-            warnings.warn('Using no control byte and timestamps in pdu_to_kiss will usually give problems')
+            warnings.warn(
+                'Using no control byte and timestamps in pdu_to_kiss '
+                'will usually give problems')
 
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
@@ -49,10 +52,9 @@ class pdu_to_kiss(gr.basic_block):
         epoch according to UTC and not counting leap seconds, stored as a
         big-endian 64 bit unsigned integer
         """
-        # it's tempting to use time.time() to get the timestamp
-        # but the docs say that its epoch is often 1970-01-01,
-        # but they don't promise that it's always that
-        # we use datetime.datetime() instead
+        # It's tempting to use time.time() to get the timestamp.  The docs
+        # say that its epoch is often 1970-01-01, but they don't promise
+        # that it's always the case.  We use datetime.datetime() instead.
         epoch = datetime.datetime(1970, 1, 1)
         now = datetime.datetime.utcnow()
         if self.initial_timestamp:
@@ -65,14 +67,23 @@ class pdu_to_kiss(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print("[ERROR] Received invalid message type. Expected u8vector")
+            print('[ERROR] Received invalid message type. Expected u8vector')
             return
 
         control = [numpy.uint8(0)] if self.control_byte else []
-        frame = [FEND] + control + kiss_escape(pmt.u8vector_elements(msg)) + [FEND]
+        frame = ([FEND] + control
+                 + kiss_escape(pmt.u8vector_elements(msg)) + [FEND])
 
         if self.include_timestamp:
-            timestamp_frame = [FEND] + kiss_escape(self.create_timestamp()) + [FEND]
-            self.message_port_pub(pmt.intern('out'), pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(timestamp_frame), timestamp_frame)))
-            
-        self.message_port_pub(pmt.intern('out'), pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(frame), frame)))
+            timestamp_frame = ([FEND]
+                               + kiss_escape(self.create_timestamp())
+                               + [FEND])
+            self.message_port_pub(
+                pmt.intern('out'),
+                pmt.cons(pmt.PMT_NIL,
+                         pmt.init_u8vector(len(timestamp_frame),
+                                           timestamp_frame)))
+
+        self.message_port_pub(
+            pmt.intern('out'),
+            pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(frame), frame)))

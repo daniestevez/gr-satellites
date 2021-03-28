@@ -12,6 +12,7 @@ import struct
 
 from .imagereceiver import ImageReceiver
 
+
 class ImageReceiver1KUNSPF(ImageReceiver):
     def chunk_sequence(self, chunk):
         return struct.unpack('>H', chunk[4:6])[0]
@@ -27,5 +28,6 @@ class ImageReceiver1KUNSPF(ImageReceiver):
             return None
         else:
             return chunk
+
 
 sat_1kuns_pf = ImageReceiver1KUNSPF

@@ -9,6 +9,7 @@
 #
 
 from construct import *
+
 from ..adapters import AffineAdapter, LinearAdapter
 
 TMPrimaryHeader = BitStruct(
@@ -22,7 +23,7 @@ TMPrimaryHeader = BitStruct(
     )
 
 syncA = bytes([0x55, 0x55, 0x55, 0x55, 0x55, 0x55,
-                   0x00, 0x00, 0x08, 0x77, 0x80, 0x00, 0x00, 0x63])
+               0x00, 0x00, 0x08, 0x77, 0x80, 0x00, 0x00, 0x63])
 
 syncB = bytes([0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x00, 0x26])
 
@@ -49,7 +50,8 @@ hk_STM32_first_half = Struct(
     'u_vbat_tx' / UVbat,
     'i_vbat_rx' / IVbat,
     'u_vbat_rx' / UVbat,
-    't_stm32' / AffineAdapter(1.0/0.29296875, (304.0 - 25.0)/0.29296875, Int16sb),
+    't_stm32' / AffineAdapter(1.0/0.29296875,
+                              (304.0 - 25.0) / 0.29296875, Int16sb),
     't_pa' / LinearAdapter(8.0*16.0, Int16sb),
     'n_tx_rf' / Int16ub,
     'n_rx_rf' / Int16ub,

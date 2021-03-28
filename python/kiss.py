@@ -10,10 +10,12 @@
 
 import numpy
 
+
 FEND = numpy.uint8(0xc0)
 FESC = numpy.uint8(0xdb)
 TFEND = numpy.uint8(0xdc)
 TFESC = numpy.uint8(0xdd)
+
 
 def kiss_escape(a):
     """Escapes KISS control characters
@@ -22,12 +24,12 @@ def kiss_escape(a):
     """
     buff = list()
     for x in a:
-            if x == FESC:
-                buff.append(FESC)
-                buff.append(TFESC)
-            elif x == FEND:
-                buff.append(FESC)
-                buff.append(TFEND)
-            else:
-                buff.append(numpy.uint8(x))
+        if x == FESC:
+            buff.append(FESC)
+            buff.append(TFESC)
+        elif x == FEND:
+            buff.append(FESC)
+            buff.append(TFEND)
+        else:
+            buff.append(numpy.uint8(x))
     return buff

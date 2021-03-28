@@ -14,9 +14,12 @@ from .filereceiver import FileReceiver
 from ..telemetry import smogp as tlm_smogp
 from ..telemetry import smog1 as tlm_smog1
 
+
 class FileReceiverSMOG(FileReceiver):
     def file_id(self, chunk):
-        return f'spectrum_start_{chunk.startfreq}_step_{chunk.stepfreq}_rbw_{chunk.rbw}_measid_{chunk.measid}'
+        return (
+            f'spectrum_start_{chunk.startfreq}_step_{chunk.stepfreq}'
+            f'_rbw_{chunk.rbw}_measid_{chunk.measid}')
 
     def chunk_size(self):
         return 224
@@ -29,7 +32,7 @@ class FileReceiverSMOG(FileReceiver):
 
     def file_size(self, chunk):
         return chunk.pckt_count * self.chunk_size()
-    
+
     def parse_chunk(self, chunk):
         try:
             frame = self._tlm.parse(chunk)
@@ -37,11 +40,14 @@ class FileReceiverSMOG(FileReceiver):
             return None
         return frame.payload if frame.type == 5 else None
 
+
 class FileReceiverSMOGP(FileReceiverSMOG):
     _tlm = tlm_smogp
 
+
 class FileReceiverSMOG1(FileReceiverSMOG):
     _tlm = tlm_smog1
+
 
 smogp = FileReceiverSMOGP
 smog1 = FileReceiverSMOG1

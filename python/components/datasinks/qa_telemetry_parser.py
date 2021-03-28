@@ -8,11 +8,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-from gnuradio import gr, blocks, gr_unittest
-import pmt
-import numpy as np
-
 import sys
+
+from gnuradio import gr, blocks, gr_unittest
+import numpy as np
+import pmt
+
 
 # bootstrap satellites module, even from build dir
 try:
@@ -25,6 +26,7 @@ else:
 
 from satellites.components.datasinks import telemetry_parser
 
+
 class qa_telemetry_parser(gr_unittest.TestCase):
     def setUp(self):
         self.tb = gr.top_block()
@@ -33,13 +35,17 @@ class qa_telemetry_parser(gr_unittest.TestCase):
         self.tb = None
 
     def test_instance(self):
-        """Tries to create a telemetry parser instance using several combinations of parameters"""
+        """Tries to create a telemetry parser instance
+
+        It uses several combinations of parameters
+        """
         definition = 'by02'
         telemetry_parser(definition)
-        telemetry_parser(definition, file = sys.stderr)
-        telemetry_parser(definition, file = '/dev/null')
-        telemetry_parser(definition, options = '')
-        telemetry_parser(definition, options = '--telemetry_output /dev/null')
+        telemetry_parser(definition, file=sys.stderr)
+        telemetry_parser(definition, file='/dev/null')
+        telemetry_parser(definition, options='')
+        telemetry_parser(definition, options='--telemetry_output /dev/null')
+
 
 if __name__ == '__main__':
     gr_unittest.run(qa_telemetry_parser)

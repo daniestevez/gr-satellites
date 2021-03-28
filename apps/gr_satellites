@@ -8,15 +8,16 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-import satellites.core
-from satellites.utils.config import open_config
-import satellites.components.datasources as datasources
-from satellites.satyaml import yamlfiles
-from gnuradio import gr, blocks, audio
-
-import signal
 import argparse
+import signal
 import sys
+
+from gnuradio import gr, blocks, audio
+import satellites.core
+import satellites.components.datasources as datasources
+from satellites.utils.config import open_config
+from satellites.satyaml import yamlfiles
+
 
 version = f"""gr_satellites {satellites.__version__}
 Copyright (C) 2020 Daniel Estevez
@@ -24,70 +25,122 @@ License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law."""
 
+
 class ListSatellites(argparse.Action):
     """argparse Action to list supported satellites and exit"""
-    def __call__(self, parser, namespace, values, option_string = None):
-        print(f'Satellites supported by gr_satellites {satellites.__version__}:')
+    def __call__(self, parser, namespace, values, option_string=None):
+        print(
+            f'Satellites supported by gr_satellites {satellites.__version__}:')
         ymls = yamlfiles.load_all_yaml()
-        for yml in sorted(ymls, key = lambda x: x['name'].casefold()):
+        for yml in sorted(ymls, key=lambda x: x['name'].casefold()):
             self.__print(yml)
         sys.exit(0)
+
     def __print(self, yml):
         print(f"* {yml['name']} (NORAD {yml['norad']})")
         for name, data in yml['transmitters'].items():
-            print(f"    {name} {data['frequency']*1e-6:.3f} MHz {data['modulation']} {data['framing']}")
+            print(
+                f"    {name} {data['frequency']*1e-6:.3f} MHz "
+                f"{data['modulation']} {data['framing']}")
+
 
 def argument_parser():
     description = 'gr-satellites - GNU Radio decoders for Amateur satellites'
-    info = 'The satellite parameter can be specified using name, NORAD ID or path to YAML file'
-    p = argparse.ArgumentParser(description = description, conflict_handler = 'resolve', prog = f'gr_satellites satellite', epilog = info, formatter_class = argparse.RawTextHelpFormatter)
+    info = (
+        'The satellite parameter can be specified using name, '
+        'NORAD ID or path to YAML file')
+    p = argparse.ArgumentParser(
+        description=description, conflict_handler='resolve',
+        prog='gr_satellites satellite', epilog=info,
+        formatter_class=argparse.RawTextHelpFormatter)
 
-    p.add_argument('--version', action = 'version', version = version)
-    p.add_argument('--list_satellites', action = ListSatellites, nargs = 0, help = 'list supported satellites and exit')
-    p.add_argument('--ignore_unknown_args', action = 'store_true', help = 'Treat unknown arguments as warning')
+    p.add_argument('--version', action='version', version=version)
+    p.add_argument(
+        '--list_satellites', action=ListSatellites, nargs=0,
+        help='list supported satellites and exit')
+    p.add_argument(
+        '--ignore_unknown_args', action='store_true',
+        help='Treat unknown arguments as warning')
 
     p_input = p.add_argument_group('input')
 
-    p_sources = p_input.add_mutually_exclusive_group(required = True)
-    p_sources.add_argument('--wavfile', help = 'WAV/OGG/FLAC input file (using libsndfile)')
-    p_sources.add_argument('--rawfile', help = 'RAW input file (float32 or complex64)')
-    p_sources.add_argument('--rawint16', help = 'RAW input file (int16)')
-    p_sources.add_argument('--audio', const = '', nargs = '?', metavar = 'DEVICE',  help = 'Soundcard device input')
-    p_sources.add_argument('--udp', action = 'store_true', help = 'Use UDP input')
-    p_sources.add_argument('--kiss_in', help = 'KISS input file')
+    p_sources = p_input.add_mutually_exclusive_group(required=True)
+    p_sources.add_argument(
+        '--wavfile', help='WAV/OGG/FLAC input file (using libsndfile)')
+    p_sources.add_argument(
+        '--rawfile', help='RAW input file (float32 or complex64)')
+    p_sources.add_argument(
+        '--rawint16', help='RAW input file (int16)')
+    p_sources.add_argument(
+        '--audio', const='', nargs='?', metavar='DEVICE',
+        help='Soundcard device input')
+    p_sources.add_argument(
+        '--udp', action='store_true', help='Use UDP input')
+    p_sources.add_argument('--kiss_in', help='KISS input file')
 
-    p_input.add_argument('--samp_rate', type = float, help = 'Sample rate (Hz)')
-    p_input.add_argument('--udp_ip', default = '::', help = 'UDP input listen IP [default=%(default)r]')
-    p_input.add_argument('--udp_port', default = '7355', type = int, help = 'UDP input listen port [default=%(default)r]')
-    p_input.add_argument('--iq', action = 'store_true', help = 'Use IQ input')
-    p_input.add_argument('--udp_raw', action = 'store_true', help = 'Use RAW UDP input (float32 or complex64)')
-    p_input.add_argument('--input_gain', type = float, default = 1, help = 'Input gain (can be negative to invert signal) [default=%(default)r]')
-    p_input.add_argument('--start_time', type = str, default = '', help = 'Recording start timestamp')
-    p_input.add_argument('--throttle', action = 'store_true', help = 'Throttle recording input to 1x speed')
-    
+    p_input.add_argument('--samp_rate', type=float, help='Sample rate (Hz)')
+    p_input.add_argument(
+        '--udp_ip', default='::',
+        help='UDP input listen IP [default=%(default)r]')
+    p_input.add_argument(
+        '--udp_port', default='7355', type=int,
+        help='UDP input listen port [default=%(default)r]')
+    p_input.add_argument('--iq', action='store_true', help='Use IQ input')
+    p_input.add_argument(
+        '--udp_raw', action='store_true',
+        help='Use RAW UDP input (float32 or complex64)')
+    p_input.add_argument(
+        '--input_gain', type=float, default=1,
+        help=('Input gain (can be negative to invert signal) '
+              '[default=%(default)r]'))
+    p_input.add_argument(
+        '--start_time', type=str, default='',
+        help='Recording start timestamp')
+    p_input.add_argument(
+        '--throttle', action='store_true',
+        help='Throttle recording input to 1x speed')
+
     p_output = p.add_argument_group('output')
-    p_output.add_argument('--kiss_out', help = 'KISS output file')
-    p_output.add_argument('--kiss_append', action = 'store_true', help = 'Append to KISS output file')
-    p_output.add_argument('--kiss_server', const = '8100', nargs = '?', metavar = 'PORT', help = 'Enable KISS server [default port=8100]')
-    p_output.add_argument('--kiss_server_address', default = '127.0.0.1', help = 'KISS server bind address [default=%(default)r]')
-    p_output.add_argument('--zmq_pub', const = 'tcp://127.0.0.1:5555', nargs = '?', metavar = 'ADDRESS', help = 'Enable ZMQ PUB socket [default address=tcp://127.0.0.1:5555]')
-    p_output.add_argument('--hexdump', action = 'store_true', help = 'Hexdump instead of telemetry parse')
-    p_output.add_argument('--dump_path', help = 'Path to dump internal signals')
+    p_output.add_argument('--kiss_out', help='KISS output file')
+    p_output.add_argument(
+        '--kiss_append', action='store_true',
+        help='Append to KISS output file')
+    p_output.add_argument(
+        '--kiss_server', const='8100', nargs='?', metavar='PORT',
+        help='Enable KISS server [default port=8100]')
+    p_output.add_argument(
+        '--kiss_server_address', default='127.0.0.1',
+        help='KISS server bind address [default=%(default)r]')
+    p_output.add_argument(
+        '--zmq_pub', const='tcp://127.0.0.1:5555', nargs='?',
+        metavar='ADDRESS',
+        help='Enable ZMQ PUB socket [default address=tcp://127.0.0.1:5555]')
+    p_output.add_argument(
+        '--hexdump', action='store_true',
+        help='Hexdump instead of telemetry parse')
+    p_output.add_argument('--dump_path', help='Path to dump internal signals')
     return p
 
+
 def check_options(options, parser):
-    if options.kiss_in is None and options.wavfile is None and options.samp_rate is None:
-        print('Need to specify --samp_rate unless --wavfile or --kiss_in is used', file = sys.stderr)
-        parser.print_usage(file = sys.stderr)
+    if (options.kiss_in is None
+            and options.wavfile is None
+            and options.samp_rate is None):
+        print('Need to specify --samp_rate unless --wavfile '
+              'or --kiss_in is used',
+              file=sys.stderr)
+        parser.print_usage(file=sys.stderr)
         sys.exit(1)
+
 
 def parse_satellite(satellite):
     if satellite.lower().endswith('.yml'):
-        return {'file' : satellite}
+        return {'file': satellite}
     elif satellite.isnumeric():
-        return {'norad' : int(satellite)}
+        return {'norad': int(satellite)}
     else:
-        return {'name' : satellite}
+        return {'name': satellite}
+
 
 class gr_satellites_top_block(gr.top_block):
     def __init__(self, parser):
@@ -108,14 +161,15 @@ class gr_satellites_top_block(gr.top_block):
         if '--ignore_unknown_args' in sys.argv[2:]:
             options, unknown = parser.parse_known_args(sys.argv[2:])
             if len(unknown) > 0:
-                print('Warning: unknown arguments passed {}'.format(unknown), file = sys.stderr)
+                print('Warning: unknown arguments passed {}'.format(unknown),
+                      file=sys.stderr)
         else:
             options = parser.parse_args(sys.argv[2:])
         if options.list_satellites:
             list_satellites()
             sys.exit(0)
         check_options(options, parser)
-        
+
         self.options = options
 
         pdu_in = options.kiss_in is not None
@@ -124,32 +178,33 @@ class gr_satellites_top_block(gr.top_block):
 
         self.setup_input()
 
-        # set appropriate sample rate
+        # Set appropriate sample rate
         if options.samp_rate:
             samp_rate = options.samp_rate
         elif options.wavfile:
             samp_rate = self.wavfile_source.sample_rate()
         else:
             raise ValueError('sample rate not set')
-            
-        self.flowgraph = satellites.core.gr_satellites_flowgraph(samp_rate = samp_rate,
-                                                                 iq = self.options.iq,
-                                                                 pdu_in = pdu_in,
-                                                                 options = options,
-                                                                 config = self.config,
-                                                                 dump_path = options.dump_path,
-                                                                 **sat)
+
+        self.flowgraph = satellites.core.gr_satellites_flowgraph(
+            samp_rate=samp_rate, iq=self.options.iq, pdu_in=pdu_in,
+            options=options, config=self.config, dump_path=options.dump_path,
+            **sat)
 
         if pdu_in:
             self.msg_connect((self.input, 'out'), (self.flowgraph, 'in'))
         else:
             gain = self.options.input_gain
-            self.gain = blocks.multiply_const_cc(gain) if self.options.iq else\
-              blocks.multiply_const_ff(gain)
+            self.gain = (blocks.multiply_const_cc(gain)
+                         if self.options.iq
+                         else blocks.multiply_const_ff(gain))
             if self.options.throttle:
-                size = gr.sizeof_gr_complex if self.options.iq else gr.sizeof_float
-                self.throttle = blocks.throttle(size, self.options.samp_rate, True)
-                self.connect(self.input, self.throttle, self.gain, self.flowgraph)
+                size = (gr.sizeof_gr_complex
+                        if self.options.iq else gr.sizeof_float)
+                self.throttle = blocks.throttle(size,
+                                                self.options.samp_rate, True)
+                self.connect(self.input,
+                             self.throttle, self.gain, self.flowgraph)
             else:
                 self.connect(self.input, self.gain, self.flowgraph)
 
@@ -170,7 +225,8 @@ class gr_satellites_top_block(gr.top_block):
             raise Exception('No input source set for flowgraph')
 
     def setup_wavfile_input(self):
-        self.wavfile_source = blocks.wavfile_source(self.options.wavfile, False)
+        self.wavfile_source = blocks.wavfile_source(self.options.wavfile,
+                                                    False)
         if self.options.iq:
             self.float_to_complex = blocks.float_to_complex(1)
             self.connect((self.wavfile_source, 0), (self.float_to_complex, 0))
@@ -181,14 +237,18 @@ class gr_satellites_top_block(gr.top_block):
 
     def setup_rawfile_input(self):
         size = gr.sizeof_gr_complex if self.options.iq else gr.sizeof_float
-        self.input = blocks.file_source(size, self.options.rawfile, False, 0, 0)
+        self.input = blocks.file_source(size, self.options.rawfile,
+                                        False, 0, 0)
 
     def setup_rawint16_input(self):
-        self.input_int16 = blocks.file_source(gr.sizeof_short, self.options.rawint16, False, 0, 0)
+        self.input_int16 = blocks.file_source(gr.sizeof_short,
+                                              self.options.rawint16, False,
+                                              0, 0)
         self.setup_input_int16()
 
     def setup_audio_input(self):
-        self.audio_source = audio.source(self.options.samp_rate, self.options.audio, True)
+        self.audio_source = audio.source(self.options.samp_rate,
+                                         self.options.audio, True)
         if self.options.iq:
             self.float_to_complex = blocks.float_to_complex(1)
             self.connect((self.audio_source, 0), (self.float_to_complex, 0))
@@ -196,13 +256,16 @@ class gr_satellites_top_block(gr.top_block):
             self.input = self.float_to_complex
         else:
             self.input = self.audio_source
-        
+
     def setup_udp_input(self):
         if self.options.udp_raw:
             size = gr.sizeof_gr_complex if self.options.iq else gr.sizeof_float
-            self.input = blocks.udp_source(size, self.options.udp_ip, self.options.udp_port, 1472, False)
+            self.input = blocks.udp_source(size, self.options.udp_ip,
+                                           self.options.udp_port, 1472, False)
         else:
-            self.input_int16 = blocks.udp_source(gr.sizeof_short, self.options.udp_ip, self.options.udp_port, 1472, False)
+            self.input_int16 = blocks.udp_source(
+                gr.sizeof_short, self.options.udp_ip, self.options.udp_port,
+                1472, False)
             self.setup_input_int16()
 
     def setup_input_int16(self):
@@ -221,18 +284,20 @@ class gr_satellites_top_block(gr.top_block):
     def setup_kiss_input(self):
         self.input = datasources.kiss_file_source(self.options.kiss_in)
 
+
 def main():
     parser = argument_parser()
-    if len(sys.argv) >= 2 and sys.argv[1] in ['--version', '--list_satellites']:
+    if len(sys.argv) >= 2 and sys.argv[1] in ['--version',
+                                              '--list_satellites']:
         options = parser.parse_args()
         if options.list_satellites:
             list_satellites()
         sys.exit(0)
-    
+
     if len(sys.argv) <= 1 or sys.argv[1][0] == '-':
-        parser.print_usage(file = sys.stderr)
+        parser.print_usage(file=sys.stderr)
         sys.exit(1)
-    
+
     tb = gr_satellites_top_block(parser)
 
     def sig_handler(sig=None, frame=None):
@@ -245,6 +310,7 @@ def main():
 
     tb.start()
     tb.wait()
-        
+
+
 if __name__ == '__main__':
     main()

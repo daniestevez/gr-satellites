@@ -10,6 +10,7 @@
 
 from construct import *
 
+
 TMSecondaryHeader = BitStruct(
     'version' / BitsInteger(4),
     'time_reference_status' / BitsInteger(4),

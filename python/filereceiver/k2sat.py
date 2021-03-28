@@ -12,6 +12,7 @@ import struct
 
 from .imagereceiver import ImageReceiver
 
+
 class ImageReceiverK2SAT(ImageReceiver):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -32,15 +33,17 @@ class ImageReceiverK2SAT(ImageReceiver):
             fc += 256
         self._last_frame_count = fc
         return fc
-        
+
     def chunk_sequence(self, chunk):
         fh = self._first_header_pointer(chunk)
         if fh == 0x00:
-            # first packet in image
+            # First packet in image
             self._first_header_frame_count = self._unwrapped_frame_count(chunk)
             return 0
-        return self._unwrapped_frame_count(chunk) - self._first_header_frame_count if \
-          self._first_header_frame_count is not None else None
+        return (self._unwrapped_frame_count(chunk)
+                - self._first_header_frame_count
+                if self._first_header_frame_count is not None
+                else None)
 
     def is_last_chunk(self, chunk):
         # 0xff indicates last packet in image
@@ -54,5 +57,6 @@ class ImageReceiverK2SAT(ImageReceiver):
 
     def parse_chunk(self, chunk):
         return chunk if len(chunk) > 16 + 4 + 1 else None
+
 
 k2sat = ImageReceiverK2SAT

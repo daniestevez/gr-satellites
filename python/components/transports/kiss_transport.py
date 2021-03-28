@@ -9,7 +9,9 @@
 #
 
 from gnuradio import gr, blocks
+
 from ... import kiss_to_pdu, pdu_head_tail
+
 
 class kiss_transport(gr.hier_block2):
     """
@@ -23,8 +25,11 @@ class kiss_transport(gr.hier_block2):
         header_remove_bytes: Remove this many bytes from header (int)
         options: options from argparse
     """
-    def __init__(self, control_byte = True, header_remove_bytes = 0, options = None):
-        gr.hier_block2.__init__(self, "kiss_transport",
+    def __init__(self, control_byte=True, header_remove_bytes=0,
+                 options=None):
+        gr.hier_block2.__init__(
+            self,
+            'kiss_transport',
             gr.io_signature(0, 0, 0),
             gr.io_signature(0, 0, 0))
         self.message_port_register_hier_in('in')

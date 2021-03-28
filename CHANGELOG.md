@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Changed
 - In gr_satellites, do not disable non-telemetry datasinks in --hexdump mode
+- Reformatting of Python code according to PEP8
 
 ### Fixed
 - RS basis options swapped in CCSDS Reed-Solomon encoder GRC block

@@ -9,8 +9,10 @@
 #
 
 from construct import *
+
 from ..adapters import LinearAdapter, AffineAdapter
 from .ax25 import Header16
+
 
 # Beacon of type 1
 General = Struct(
@@ -48,7 +50,7 @@ General = Struct(
     'mm_error' / Int16ul[2],
     'mt_error' / Int16ul[2],
     'tt_tx_status' / Int8ul,
-    'tt_error' / Int16ul)    
+    'tt_error' / Int16ul)
 
 Temperature = LinearAdapter(10, Int16ul)
 
@@ -279,5 +281,6 @@ eseo = Struct(
     'header' / Header16,
     'type' / Int8ul,
     'byte' / Int8ul,
-    'data' / Switch(this.type, {3 : General, 4 : PowerSystem, 5 : OBDH, 6 : AOCS, 7 : FDIR, 8 : Payload})
+    'data' / Switch(this.type, {
+        3: General, 4: PowerSystem, 5: OBDH, 6: AOCS, 7: FDIR, 8: Payload})
     )

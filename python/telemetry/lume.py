@@ -6,15 +6,15 @@
 # This file is part of gr-satellites
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-# 
+#
 
 from construct import *
+
 from ..ccsds import space_packet as ccsds_space_packet
 from .. import ecss_pus
-
 from ..adapters import LinearAdapter
-
 from .csp import CSPHeader
+
 
 TMHeader = BitStruct(
     'version' / BitsInteger(2),
@@ -25,19 +25,23 @@ TMHeader = BitStruct(
     'empty_frame' / BitsInteger(1),
     'ocf_presence' / BitsInteger(1),
     'sequence_flags' / BitsInteger(2),
-    'fixed_length_frame' / BitsInteger(1))
+    'fixed_length_frame' / BitsInteger(1)
+    )
 
 TMTail = Struct(
     'packet_errors' / Int16ub,
     'frame_errors' / Int16ub,
-    'frame_error_control' / Int16ub)
+    'frame_error_control' / Int16ub
+    )
 
 SPTail = Struct(
-    'PEC' / Int16ub)
+    'PEC' / Int16ub
+    )
 
 TimeField = Struct(
     'day' / Int16ub,
-    'milliseconds_of_day' / Int32ub)
+    'milliseconds_of_day' / Int32ub
+    )
 
 OBC = Struct(
     'boot_cause' / Int32ub,
@@ -63,7 +67,8 @@ OBC = Struct(
     'om_state' / Int8ub,
     'om_sw_version' / Bytes(32),
     'op_tr_conn' / Int8ub,
-    'op_tr_conn_active' / Int8ub)
+    'op_tr_conn_active' / Int8ub
+    )
 
 EPS = Struct(
     'output_off_delta' / Int16ub[8],
@@ -87,7 +92,8 @@ EPS = Struct(
     'wdt_i2c_time_left' / Int32ub,
     'vbatt' / Int16ub,
     'vboost' / Int16ub[3],
-    'wdtcspc' / Int8ub[2])
+    'wdtcspc' / Int8ub[2]
+    )
 
 TTC = Struct(
     'temp_brd' / LinearAdapter(10, Int16sb),
@@ -107,19 +113,22 @@ TTC = Struct(
     'active_conf' / Int8ub,
     'boot_count' / Int16ub,
     'last_contact' / Int32ub,
-    'tx_duty' / Int8ub)
+    'tx_duty' / Int8ub
+    )
 
 GSSBEntry = Struct(
     'reboots' / Int8ub,
     'current_state' / Int8ub,
     'antenna_state' / Int8ub,
-    'attempts_total' / Int16ub)
+    'attempts_total' / Int16ub
+    )
 
-GSSB =  GSSBEntry[4]
+GSSB = GSSBEntry[4]
 
 TTCGSSB = Struct(
     'gssb' / GSSB,
-    'ttc' / TTC)
+    'ttc' / TTC
+    )
 
 AOCS = Struct(
     'extmag_valid' / Int8ub,
@@ -141,7 +150,8 @@ AOCS = Struct(
     'cur_gssb' / Int16ub[2],
     'cur_pwm' / Int16ub,
     'cur_gps' / Int16ub,
-    'cur_wde' / Int16ub)
+    'cur_wde' / Int16ub
+    )
 
 Temps = Struct(
     'aocs_suns' / Float32b[5],
@@ -155,13 +165,16 @@ Temps = Struct(
     'obc' / LinearAdapter(10, Int16sb)[2],
     'obc_gyro' / Float32b,
     'ttc_brd' / LinearAdapter(10, Int16sb),
-    'ttc_pa' / LinearAdapter(10, Int16sb))
+    'ttc_pa' / LinearAdapter(10, Int16sb)
+    )
 
-payloads = {1 : OBC, 2 : EPS, 3 : TTCGSSB, 4 : AOCS, 5: Temps}
+payloads = {1: OBC, 2: EPS, 3: TTCGSSB, 4: AOCS, 5: Temps}
 
 UserData = Struct(
     'id' / Int16ub,
-    'data' / Switch(this.id, payloads, default = Bytes(this._.space_packet_header.data_length-16))
+    'data' / Switch(
+        this.id, payloads,
+        default=Bytes(this._.space_packet_header.data_length-16))
     )
 
 lume = Struct(
@@ -172,4 +185,5 @@ lume = Struct(
     'pus_time_field' / TimeField,
     'payload' / UserData,
     'space_packet_tail' / SPTail,
-    'tm_tail' / TMTail)
+    'tm_tail' / TMTail
+    )

@@ -11,6 +11,7 @@
 from ..feh import FehOpener
 from .filereceiver import FileReceiver
 
+
 class ImageReceiver(FileReceiver):
     """
     Class to reassemble images transmitted in chunks and display them
@@ -19,7 +20,7 @@ class ImageReceiver(FileReceiver):
     This implements the generic framework. Specific protocols should
     inherit from this class and implement some FileReceiver methods
     """
-    def __init__(self, path, verbose = False, display = False, fullscreen = True):
+    def __init__(self, path, verbose=False, display=False, fullscreen=True):
         """
         Builds a new ImageReceiver
 
@@ -38,7 +39,7 @@ class ImageReceiver(FileReceiver):
         Generates a filename based on the file id
 
         The default implementation uses the fid.jpg as filename
-        
+
         Args:
            fid: file id (usually int)
         """
@@ -72,7 +73,7 @@ class ImageReceiver(FileReceiver):
             return
         f = self._files[self._current_file]
         if f.write_pointer >= 10*64:
-            # enough data to display
+            # Enough data to display
             if self._feh is not None and not f.displaying:
-                f.displaying =  True
+                f.displaying = True
                 self._feh.open(f.path)

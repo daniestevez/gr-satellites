@@ -11,11 +11,13 @@
 from gnuradio import gr
 import pmt
 
-# details of the NGHam protocol taken from
+
+# Details of the NGHam protocol taken from
 # https://github.com/skagmo/ngham/blob/master/ngham.c
 
 ngham_rs_sizes = [47, 79, 111, 159, 191, 223, 255]
 ngham_non_rs_sizes = [47-16, 79-16, 111-16, 159-32, 191-32, 223-32, 255-32]
+
 
 class ngham_remove_padding(gr.basic_block):
     """
@@ -25,8 +27,9 @@ class ngham_remove_padding(gr.basic_block):
     still in the packet and removes them as well
     """
     def __init__(self):
-        gr.basic_block.__init__(self,
-            name="ngham_remove_padding",
+        gr.basic_block.__init__(
+            self,
+            name='ngham_remove_padding',
             in_sig=[],
             out_sig=[])
         self.message_port_register_in(pmt.intern('in'))
@@ -36,7 +39,7 @@ class ngham_remove_padding(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print("[ERROR] Received invalid message type. Expected u8vector")
+            print('[ERROR] Received invalid message type. Expected u8vector')
             return
         packet = pmt.u8vector_elements(msg)
 
@@ -50,4 +53,6 @@ class ngham_remove_padding(gr.basic_block):
 
         padding = packet[0] & 0x1f
         packet = packet[:-padding]
-        self.message_port_pub(pmt.intern('out'),  pmt.cons(pmt.car(msg_pmt), pmt.init_u8vector(len(packet), packet)))
+        self.message_port_pub(
+            pmt.intern('out'),
+            pmt.cons(pmt.car(msg_pmt), pmt.init_u8vector(len(packet), packet)))

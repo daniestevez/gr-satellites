@@ -6,11 +6,13 @@
 # This file is part of gr-satellites
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-# 
+#
 
 from construct import *
+
 from .csp import CSPHeader
 from ..adapters import UNIXTimestampAdapter, LinearAdapter
+
 
 Timestamp = UNIXTimestampAdapter(Int32ub)
 Temperature = LinearAdapter(4, Int16sb)
@@ -22,32 +24,32 @@ OBC = Struct(
     )
 
 COM = Struct(
-    'byte_corr_tot' / Int16ub, # Bytes corrected by RS
-    'rx' / Int16ub, # RX packets
+    'byte_corr_tot' / Int16ub,  # Bytes corrected by RS
+    'rx' / Int16ub,  # RX packets
     'rx_err' / Int16ub,
     'tx' / Int16ub,
     'last_temp' / Int16sb[2],
-    'last_rssi' / Int16sb, # dBm
-    'last_rferr' / Int16sb, # Hz
-    'last_batt_volt' / LinearAdapter(100.0, Int16ub), # V
-    'last_tx_current' / Int16ub, # mA
+    'last_rssi' / Int16sb,  # dBm
+    'last_rferr' / Int16sb,  # Hz
+    'last_batt_volt' / LinearAdapter(100.0, Int16ub),  # V
+    'last_tx_current' / Int16ub,  # mA
     'boot_count' / Int16ub
     )
 
-Battmode = Enum(Int8ub, normal = 0, undervoltage = 1, overvoltage = 2)
+Battmode = Enum(Int8ub, normal=0, undervoltage=1, overvoltage=2)
 
 EPS = Struct(
     'vboost' / LinearAdapter(1000.0, Int16ub)[3],
     'vbatt' / LinearAdapter(1000.0, Int16ub),
     'curout' / Int16ub[6],
     'curin' / Int16ub[3],
-    'cursun' / Int16ub, # Boost converter current mA
-    'cursys' / Int16ub, # Battery current mA
+    'cursun' / Int16ub,  # Boost converter current mA
+    'cursys' / Int16ub,  # Battery current mA
     'temp' / Int16sb[6],
-    'output' / Int8ub, # Output status
-    'counter_boot' / Int16ub, # EPS reboots
-    'counter_wdt_i2c' / Int16ub, # WDT I2C reboots
-    'counter_wdt_gnd' / Int16ub, # WDT GND reboots
+    'output' / Int8ub,  # Output status
+    'counter_boot' / Int16ub,  # EPS reboots
+    'counter_wdt_i2c' / Int16ub,  # WDT I2C reboots
+    'counter_wdt_gnd' / Int16ub,  # WDT GND reboots
     'bootcause' / Int8ub,
     'latchup' / Int16ub[6],
     'battmode' / Battmode
@@ -74,7 +76,7 @@ Hub = Struct(
     'boot_count' / Int16ub,
     'reset_cause' / Int8ub,
     'switch_status' / Int8ub,
-    'burns' / Int16ub[2] # burn tries
+    'burns' / Int16ub[2]  # burn tries
     )
 
 ADCS = Struct(
@@ -101,5 +103,6 @@ gomx_1 = Struct(
     'csp_header' / CSPHeader,
     'beacon_time' / Timestamp,
     'beacon_flags' / Int8ub,
-    'beacon' / Optional(beacon_a), # there is also an unsupported beacon_b which is shorter
+    # There is also an unsupported beacon_b which is shorter
+    'beacon' / Optional(beacon_a),
     )

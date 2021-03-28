@@ -9,7 +9,9 @@
 #
 
 from gnuradio import gr, blocks
+
 from ... import kiss_to_pdu
+
 
 class kiss_file_source(gr.hier_block2):
     """
@@ -23,8 +25,10 @@ class kiss_file_source(gr.hier_block2):
         file: input filename (string)
         options: options from argparse
     """
-    def __init__(self, file, append = False, options = None):
-        gr.hier_block2.__init__(self, "kiss_file_source",
+    def __init__(self, file, append=False, options=None):
+        gr.hier_block2.__init__(
+            self,
+            'kiss_file_source',
             gr.io_signature(0, 0, 0),
             gr.io_signature(0, 0, 0))
         self.message_port_register_hier_out('out')

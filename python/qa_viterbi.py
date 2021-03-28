@@ -9,8 +9,8 @@
 #
 
 from gnuradio import gr, blocks, gr_unittest
-import pmt
 import numpy as np
+import pmt
 
 # bootstrap satellites module, even from build dir
 try:
@@ -23,6 +23,7 @@ else:
 
 from satellites import convolutional_encoder, viterbi_decoder
 
+
 class qa_viterbi(gr_unittest.TestCase):
     def test_viterbi(self):
         tb = gr.top_block()
@@ -31,21 +32,24 @@ class qa_viterbi(gr_unittest.TestCase):
         p = [25, 23]
         enc = convolutional_encoder(k, p)
         dec = viterbi_decoder(k, p)
-        data = np.random.randint(2, size = 1000, dtype = 'uint8')
+        data = np.random.randint(2, size=1000, dtype='uint8')
         pdu = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(data), data))
-  
+
         tb.msg_connect((enc, 'out'), (dec, 'in'))
         tb.msg_connect((dec, 'out'), (dbg, 'store'))
         enc.to_basic_block()._post(pmt.intern('in'), pdu)
-        enc.to_basic_block()._post(pmt.intern('system'),
-                pmt.cons(pmt.intern('done'), pmt.from_long(1)))
+        enc.to_basic_block()._post(
+            pmt.intern('system'),
+            pmt.cons(pmt.intern('done'), pmt.from_long(1)))
 
         tb.start()
         tb.wait()
 
         out = pmt.u8vector_elements(pmt.cdr(dbg.get_message(0)))
-        np.testing.assert_equal(out, np.array(data),
-                                "Encoded and decoded message does not match original")
+        np.testing.assert_equal(
+            out, np.array(data),
+            'Encoded and decoded message does not match original')
+
 
 if __name__ == '__main__':
     gr_unittest.run(qa_viterbi)
