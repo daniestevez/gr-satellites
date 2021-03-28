@@ -7,11 +7,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  check:
+  pycodestyle:
     runs-on: ubuntu-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - uses: andymckay/pycodestyle-action@0.1.3
+      - uses: daniestevez/gr-satellites-pycodestyle-action@0.2
