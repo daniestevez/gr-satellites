@@ -32,10 +32,10 @@ class qa_viterbi(gr_unittest.TestCase):
         p = [25, 23]
         enc = convolutional_encoder(k, p)
         dec = viterbi_decoder(k, p)
-        data = np.random.randint(2, size = 1000, dtype='uint8')
+        data = np.random.randint(2, size=1000, dtype='uint8')
         pdu = pmt.cons(pmt.PMT_NIL,
                        pmt.init_u8vector(len(data), bytes(data)))
-  
+
         tb.msg_connect((enc, 'out'), (dec, 'in'))
         tb.msg_connect((dec, 'out'), (dbg, 'store'))
         enc.to_basic_block()._post(pmt.intern('in'), pdu)

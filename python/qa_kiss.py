@@ -58,12 +58,13 @@ class qa_kiss(gr_unittest.TestCase):
         self.tb.start()
         self.tb.wait()
 
-        for j,td in enumerate(test_data):
+        for j, td in enumerate(test_data):
             result_data = bytes(
                 pmt.u8vector_elements(pmt.cdr(dbg.get_message(j))))
             self.assertEqual(
                 td, result_data,
                 'KISS to PDU output does not match expected frame')
+
 
 if __name__ == '__main__':
     gr_unittest.run(qa_kiss)
