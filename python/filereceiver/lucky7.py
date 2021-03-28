@@ -15,13 +15,14 @@ import struct
 
 from .imagereceiver import ImageReceiver
 
+
 class ImageReceiverLucky7(ImageReceiver):
     def chunk_sequence(self, chunk):
         return struct.unpack('>H', chunk[3:5])[0]
 
     def chunk_size(self):
         return 28
-    
+
     def chunk_data(self, chunk):
         return chunk[7:]
 
@@ -30,9 +31,11 @@ class ImageReceiverLucky7(ImageReceiver):
 
     def parse_chunk(self, chunk):
         address = struct.unpack('>H', chunk[1:3])[0]
-        if address < 0xC000 \
-          or address >= 0xC000 + self.file_size(chunk)/self.chunk_size():
+        if (address < 0xC000
+                or address >= (
+                    0xC000 + self.file_size(chunk)/self.chunk_size())):
             return None
-        return chunk    
+        return chunk
+
 
 lucky7 = ImageReceiverLucky7

@@ -6,11 +6,13 @@
 # This file is part of gr-satellites
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-# 
+#
 
 from construct import *
+
 from ..adapters import *
 from .csp import CSPHeader
+
 
 Timestamp = UNIXTimestampAdapter(Int32sb)
 
@@ -64,9 +66,9 @@ class sat_1kuns_pf:
     @staticmethod
     def parse(packet):
         if len(packet) == 138:
-            # this is most likely an image packet
-            return 
-        
+            # This is most likely an image packet
+            return
+
         if len(packet) >= 92:
             return WODBeacon.parse(packet)
         else:

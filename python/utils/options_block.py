@@ -11,6 +11,7 @@
 import argparse
 import shlex
 
+
 class options_block:
     """
     Class used to add default option parsing to blocks
@@ -26,7 +27,7 @@ class options_block:
 
     This class automatically set options to default values even if no options
     arguments was passed to the child class __init__() method.
-    
+
     Args:
         options: options from argparse
     """
@@ -35,6 +36,6 @@ class options_block:
             self.options = options
             return
 
-        p = argparse.ArgumentParser(prog = self.__class__.__name__)
+        p = argparse.ArgumentParser(prog=self.__class__.__name__)
         self.add_options(p)
         self.options = p.parse_args(shlex.split(options) if options else [])

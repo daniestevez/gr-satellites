@@ -9,8 +9,10 @@
 #
 
 from construct import *
+
 from ..adapters import LinearAdapter
 from .csp import CSPHeader
+
 
 EPS = Struct(
     'boot_count' / Int16ub,
@@ -49,9 +51,9 @@ ADCS2 = Struct(
 
 AIS = Struct(
     'boot_count' / Int16ub,
-    Padding(4), # unknown data
+    Padding(4),  # unknown data
     'unique_mssi' / Int16ub,
-    Padding(12) # unknown data
+    Padding(12)  # unknown data
     )
 
 Valid = BitStruct(

@@ -8,19 +8,20 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-import numpy
 from gnuradio import gr
+import numpy
 import pmt
+
 from . import hdlc_deframer
 from . import hdlc
 
+
 class k2sat_deframer(gr.basic_block):
-    """
-    docstring for block k2sat_deframer
-    """
+    """docstring for block k2sat_deframer"""
     def __init__(self):
-        gr.basic_block.__init__(self,
-            name="k2sat_deframer",
+        gr.basic_block.__init__(
+            self,
+            name='k2sat_deframer',
             in_sig=[],
             out_sig=[])
 
@@ -52,29 +53,34 @@ class k2sat_deframer(gr.basic_block):
             self.crc_table.append(tmp)
 
     def check_packet(self, packet):
-        data = b'\x7e' + packet # add 0x7e HDLC flag for CRC-16 check
+        data = b'\x7e' + packet  # add 0x7e HDLC flag for CRC-16 check
         checksum = 0xFFFF
         for d in data:
-            checksum = ((checksum << 8) & 0xFF00) ^ self.crc_table[((checksum >> 8) ^ d) & 0x00FF]
+            checksum = (((checksum << 8) & 0xFF00)
+                        ^ self.crc_table[((checksum >> 8) ^ d) & 0x00FF])
         return checksum == 0
-        
+
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print("[ERROR] Received invalid message type. Expected u8vector")
+            print('[ERROR] Received invalid message type. Expected u8vector')
             return
         packet = bytes(pmt.u8vector_elements(msg))
 
-        # search all packet end markers in current packet
+        # Search all packet end markers in current packet
         start = 0
         while True:
-            idx = packet[start:].find(b'\x7e\x55\x55\x55') # find packet end marker
+            # Find packet end marker
+            idx = packet[start:].find(b'\x7e\x55\x55\x55')
             if idx == -1:
                 break
-            if self.check_packet(packet[:idx]): # check if this is a valid packet
+            # Check if this is a valid packet
+            if self.check_packet(packet[:idx]):
                 ax25_packet = packet[:-2+idx]
-                self.message_port_pub(pmt.intern('out'), pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(ax25_packet), ax25_packet)))
+                self.message_port_pub(
+                    pmt.intern('out'),
+                    pmt.cons(pmt.PMT_NIL,
+                             pmt.init_u8vector(len(ax25_packet), ax25_packet)))
             start = idx + 2
 
         return
-

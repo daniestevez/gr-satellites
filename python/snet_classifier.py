@@ -6,19 +6,19 @@
 # This file is part of gr-satellites
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-# 
+#
 
-import numpy
 from gnuradio import gr
+import numpy
 import pmt
 
+
 class snet_classifier(gr.basic_block):
-    """
-    docstring for block snet_classifier
-    """
+    """docstring for block snet_classifier"""
     def __init__(self):
-        gr.basic_block.__init__(self,
-            name="snet_classifier",
+        gr.basic_block.__init__(
+            self,
+            name='snet_classifier',
             in_sig=[],
             out_sig=[])
 
@@ -30,7 +30,8 @@ class snet_classifier(gr.basic_block):
         self.message_port_register_out(pmt.intern('SNET-D'))
 
     def handle_msg(self, msg_pmt):
-        srcId = pmt.dict_ref(pmt.car(msg_pmt), pmt.intern('SNET SrcId'), pmt.PMT_NIL)
+        srcId = pmt.dict_ref(pmt.car(msg_pmt),
+                             pmt.intern('SNET SrcId'), pmt.PMT_NIL)
         if pmt.eq(srcId, pmt.PMT_NIL):
             return
         sat = pmt.to_long(srcId) >> 1

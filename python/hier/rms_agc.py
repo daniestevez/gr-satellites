@@ -12,20 +12,16 @@
 from gnuradio import blocks
 from gnuradio import gr
 from gnuradio.filter import firdes
-import sys
-import signal
-
-
 
 
 class rms_agc(gr.hier_block2):
     def __init__(self, alpha=1e-2, reference=0.5):
         gr.hier_block2.__init__(
-            self, "RMS AGC",
-                gr.io_signature(1, 1, gr.sizeof_gr_complex*1),
-                gr.io_signature(1, 1, gr.sizeof_gr_complex*1),
+            self,
+            'RMS AGC',
+            gr.io_signature(1, 1, gr.sizeof_gr_complex*1),
+            gr.io_signature(1, 1, gr.sizeof_gr_complex*1),
         )
-
         ##################################################
         # Parameters
         ##################################################
@@ -36,21 +32,28 @@ class rms_agc(gr.hier_block2):
         # Blocks
         ##################################################
         self.blocks_rms_xx_0 = blocks.rms_cf(alpha)
-        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_ff(1.0/reference)
+        self.blocks_multiply_const_vxx_0 = (
+            blocks.multiply_const_ff(1.0/reference))
         self.blocks_float_to_complex_0 = blocks.float_to_complex(1)
         self.blocks_divide_xx_0 = blocks.divide_cc(1)
         self.blocks_add_const_vxx_0 = blocks.add_const_ff(1e-20)
 
-
-
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.blocks_add_const_vxx_0, 0), (self.blocks_float_to_complex_0, 0))
+        self.connect(
+            (self.blocks_add_const_vxx_0, 0),
+            (self.blocks_float_to_complex_0, 0))
         self.connect((self.blocks_divide_xx_0, 0), (self, 0))
-        self.connect((self.blocks_float_to_complex_0, 0), (self.blocks_divide_xx_0, 1))
-        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_add_const_vxx_0, 0))
-        self.connect((self.blocks_rms_xx_0, 0), (self.blocks_multiply_const_vxx_0, 0))
+        self.connect(
+            (self.blocks_float_to_complex_0, 0),
+            (self.blocks_divide_xx_0, 1))
+        self.connect(
+            (self.blocks_multiply_const_vxx_0, 0),
+            (self.blocks_add_const_vxx_0, 0))
+        self.connect(
+            (self.blocks_rms_xx_0, 0),
+            (self.blocks_multiply_const_vxx_0, 0))
         self.connect((self, 0), (self.blocks_divide_xx_0, 0))
         self.connect((self, 0), (self.blocks_rms_xx_0, 0))
 

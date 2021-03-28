@@ -12,6 +12,7 @@ from construct import *
 
 from .imagereceiver import ImageReceiver
 
+
 block_size = 46
 
 swiatowid_image_block = Struct(
@@ -19,13 +20,14 @@ swiatowid_image_block = Struct(
     'data' / Bytes(block_size)
     )
 
+
 class ImageReceiverSwiatowid(ImageReceiver):
     def filename(self, fid):
         return f'{fid}.jpg'
 
     def chunk_size(self):
         return block_size
-    
+
     def parse_chunk(self, chunk):
         if len(chunk) != swiatowid_image_block.sizeof():
             return None
@@ -34,5 +36,6 @@ class ImageReceiverSwiatowid(ImageReceiver):
         except ConstructError:
             return None
         return frame
+
 
 swiatowid = ImageReceiverSwiatowid

@@ -6,11 +6,12 @@
 # This file is part of gr-satellites
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-# 
+#
 
 from construct import *
 
 from ..ccsds.telemetry import PrimaryHeader, OCFTrailer
+
 
 trisat = Struct(
     'tm_primary_header' / PrimaryHeader,

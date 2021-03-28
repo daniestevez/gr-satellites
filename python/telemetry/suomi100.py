@@ -9,8 +9,10 @@
 #
 
 from construct import *
+
 from ..adapters import UNIXTimestampAdapter
 from .csp import CSPHeader
+
 
 Timestamp = UNIXTimestampAdapter(Int32ub)
 
@@ -23,25 +25,29 @@ Beacon0EPS = Struct(
     'batt_in_cur' / Int16ub,
     'batt_out_cur' / Int16ub,
     'temp' / Int16ub[6],
-    'batt_mode' / Int8ub)
+    'batt_mode' / Int8ub
+    )
 
 Beacon0COM = Struct(
     'timestamp' / Timestamp,
     'temp' / Int16sb[2],
     'rssi' / Int16sb,
     'rferr' / Int16sb,
-    'rssi_bgnd' / Int16sb)
+    'rssi_bgnd' / Int16sb
+    )
 
 Beacon0OBC = Struct(
     'timestamp' / Timestamp,
     'cur' / Int16ub[6],
-    'temp' / Int16sb[2])
+    'temp' / Int16sb[2]
+    )
 
 Beacon0 = Struct(
     'beacon_type' / Const(b'\x00'),
     'eps' / Beacon0EPS,
     'com' / Beacon0COM,
-    'obc' / Beacon0OBC)
+    'obc' / Beacon0OBC
+    )
 
 Beacon1EPS = Struct(
     'timestamp' / Timestamp,
@@ -55,7 +61,8 @@ Beacon1EPS = Struct(
     'boot_cause' / Int8ub,
     'latchup' / Int16ub[6],
     'out_val' / Int8ub[8],
-    'ppt_mode' / Int8ub)
+    'ppt_mode' / Int8ub
+    )
 
 Beacon1COM = Struct(
     'timestamp' / Timestamp,
@@ -70,7 +77,8 @@ Beacon1COM = Struct(
     'rx_bytes' / Int32ub,
     'config' / Int8ub,
     'tx_count' / Int32ub,
-    'rx_count' / Int32ub)
+    'rx_count' / Int32ub
+    )
 
 Beacon1OBC = Struct(
     'timestamp' / Timestamp,
@@ -79,13 +87,15 @@ Beacon1OBC = Struct(
     'filesystem' / Int8ub,
     'boot_count' / Int16ub,
     'boot_cause' / Int32ub,
-    'clock' / Timestamp)
+    'clock' / Timestamp
+    )
 
 Beacon1 = Struct(
     'beacon_type' / Const(b'\x01'),
     'eps' / Beacon1EPS,
     'com' / Beacon1COM,
-    'obc' / Beacon1OBC)
+    'obc' / Beacon1OBC
+    )
 
 suomi100 = Struct(
     'header' / CSPHeader,

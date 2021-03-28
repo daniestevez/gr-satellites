@@ -8,11 +8,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-import numpy as np
+import struct
+
 from gnuradio import gr
+import numpy as np
 import pmt
 
-import struct
 
 # This block is based on the Universal SPUNTIX Protocol (USP)
 # Protocol Description revision 1.04
@@ -23,8 +24,9 @@ class usp_ax25_crop(gr.basic_block):
     Crop a USP packet to obtain the encapsulated AX.25 frame
     """
     def __init__(self):
-        gr.basic_block.__init__(self,
-            name="usp_ax25_crop",
+        gr.basic_block.__init__(
+            self,
+            name='usp_ax25_crop',
             in_sig=[],
             out_sig=[])
         self.message_port_register_in(pmt.intern('in'))
@@ -34,7 +36,7 @@ class usp_ax25_crop(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print("[ERROR] Received invalid message type. Expected u8vector")
+            print('[ERROR] Received invalid message type. Expected u8vector')
             return
         msg = pmt.u8vector_elements(msg)
 

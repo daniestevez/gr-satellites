@@ -10,18 +10,23 @@
 
 from construct import *
 
+
 SSID = BitStruct(
-    'ch' / Flag, # C / H bit
-    Default(BitsInteger(2), 3), # reserved bits
+    'ch' / Flag,  # C / H bit
+    Default(BitsInteger(2), 3),  # reserved bits
     'ssid' / BitsInteger(4),
-    'extension' / Flag # last address bit
+    'extension' / Flag  # last address bit
     )
 
+
 class CallsignAdapter(Adapter):
-    def _encode(self, obj, context, path = None):
-        return bytes([x << 1 for x in bytes((obj.upper() + ' '*6)[:6], encoding = 'ascii')])
-    def _decode(self, obj, context, path = None):
-        return str(bytes([x >> 1 for x in obj]), encoding = 'ascii').strip()
+    def _encode(self, obj, context, path=None):
+        return bytes([x << 1 for x in bytes(
+            (obj.upper() + ' '*6)[:6], encoding='ascii')])
+
+    def _decode(self, obj, context, path=None):
+        return str(bytes([x >> 1 for x in obj]), encoding='ascii').strip()
+
 
 Callsign = CallsignAdapter(Bytes(6))
 

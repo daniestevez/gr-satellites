@@ -10,6 +10,7 @@
 
 from gnuradio import gr, blocks
 
+
 class hexdump_sink(gr.hier_block2):
     """
     Hierarchical block for hexdump output
@@ -21,8 +22,10 @@ class hexdump_sink(gr.hier_block2):
     Args:
         options: options from argparse
     """
-    def __init__(self, options = None):
-        gr.hier_block2.__init__(self, "hexdump_sink",
+    def __init__(self, options=None):
+        gr.hier_block2.__init__(
+            self,
+            'hexdump_sink',
             gr.io_signature(0, 0, 0),
             gr.io_signature(0, 0, 0))
         self.message_port_register_hier_in('in')

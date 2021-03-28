@@ -15,7 +15,7 @@ The deframers transform IQ or real samples into soft symbols. Only
 demodulation is done, with no packet boundary detection.
 
 The input to these hierarchical blocks is a stream of samples
-and the output is a stream of soft symbols. 
+and the output is a stream of soft symbols.
 '''
 
 from .afsk_demodulator import afsk_demodulator
