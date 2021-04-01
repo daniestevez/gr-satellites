@@ -15,7 +15,7 @@ The deframers transform soft symbols into frames, detecting packet
 boundaries and performing error correction and checking as needed.
 
 The input to these hierarchical blocks is a stream of soft symbols
-and the output are PDUs with the frames. 
+and the output are PDUs with the frames.
 '''
 
 from .aalto1_deframer import aalto1_deframer

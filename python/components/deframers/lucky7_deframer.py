@@ -9,12 +9,15 @@
 #
 
 from gnuradio import gr, digital
+
 from ... import check_cc11xx_crc
 from ...hier.si4463_scrambler import si4463_scrambler
 from ...hier.sync_to_pdu import sync_to_pdu
 from ...utils.options_block import options_block
 
+
 _syncword = '0010110111010100'
+
 
 class lucky7_deframer(gr.hier_block2, options_block):
     """
@@ -30,21 +33,22 @@ class lucky7_deframer(gr.hier_block2, options_block):
         syncword_threshold: number of bit errors allowed in syncword (int)
         options: Options from argparse
     """
-    def __init__(self, syncword_threshold = None, options = None):
-        gr.hier_block2.__init__(self, "lucky7_deframer",
+    def __init__(self, syncword_threshold=None, options=None):
+        gr.hier_block2.__init__(
+            self,
+            'lucky7_deframer',
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
         options_block.__init__(self, options)
-        
+
         self.message_port_register_hier_out('out')
 
         if syncword_threshold is None:
             syncword_threshold = self.options.syncword_threshold
 
         self.slicer = digital.binary_slicer_fb()
-        self.deframer = sync_to_pdu(packlen = 37*8,\
-                                           sync = _syncword,\
-                                           threshold = syncword_threshold)
+        self.deframer = sync_to_pdu(
+            packlen=37*8, sync=_syncword, threshold=syncword_threshold)
         self.scrambler = si4463_scrambler()
         self.crc = check_cc11xx_crc(self.options.verbose_crc)
 
@@ -54,11 +58,15 @@ class lucky7_deframer(gr.hier_block2, options_block):
         self.msg_connect((self.crc, 'ok'), (self, 'out'))
 
     _default_sync_threshold = 1
-        
+
     @classmethod
     def add_options(cls, parser):
         """
         Adds Lucky-7 deframer specific options to the argparse parser
         """
-        parser.add_argument('--syncword_threshold', type = int, default = cls._default_sync_threshold, help = 'Syncword bit errors [default=%(default)r]')
-        parser.add_argument('--verbose_crc', action = 'store_true', help = 'Verbose CRC decoder')
+        parser.add_argument(
+            '--syncword_threshold', type=int,
+            default=cls._default_sync_threshold,
+            help='Syncword bit errors [default=%(default)r]')
+        parser.add_argument(
+            '--verbose_crc', action='store_true', help='Verbose CRC decoder')

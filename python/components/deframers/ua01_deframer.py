@@ -9,7 +9,9 @@
 #
 
 from gnuradio import gr, digital
+
 from ... import nrzi_decode, hdlc_deframer
+
 
 class ua01_deframer(gr.hier_block2):
     """
@@ -23,8 +25,10 @@ class ua01_deframer(gr.hier_block2):
     Args:
         options: Options from argparse
     """
-    def __init__(self, options = None):
-        gr.hier_block2.__init__(self, "ua01_deframer",
+    def __init__(self, options=None):
+        gr.hier_block2.__init__(
+            self,
+            'ua01_deframer',
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
         self.message_port_register_hier_out('out')
@@ -36,5 +40,5 @@ class ua01_deframer(gr.hier_block2):
         self.deframer = hdlc_deframer(True, 10000)
 
         self.connect(self, self.slicer, self.nrzi0, self.nrzi1,
-                         self.descrambler, self.deframer)
+                     self.descrambler, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self, 'out'))

@@ -14,4 +14,4 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - uses: daniestevez/gr-satellites-pycodestyle-action@0.2.1
+      - uses: daniestevez/gr-satellites-pycodestyle-action@0.2.2
