@@ -9,8 +9,11 @@
 #
 
 from gnuradio import gr, blocks, digital
-from ... import nrzi_decode, hdlc_deframer, pdu_head_tail, decode_rs, pdu_length_filter
+
+from ... import (
+    nrzi_decode, hdlc_deframer, pdu_head_tail, decode_rs, pdu_length_filter)
 from ...utils.options_block import options_block
+
 
 class ops_sat_deframer(gr.hier_block2, options_block):
     """
@@ -24,8 +27,10 @@ class ops_sat_deframer(gr.hier_block2, options_block):
     Args:
         options: Options from argparse
     """
-    def __init__(self, options = None):
-        gr.hier_block2.__init__(self, "ops_sat_deframer",
+    def __init__(self, options=None):
+        gr.hier_block2.__init__(
+            self,
+            'ops_sat_deframer',
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
         options_block.__init__(self, options)
@@ -35,24 +40,28 @@ class ops_sat_deframer(gr.hier_block2, options_block):
         self.slicer = digital.binary_slicer_fb()
         self.nrzi = nrzi_decode()
         self.descrambler = digital.descrambler_bb(0x21, 0, 16)
-        self.deframer = hdlc_deframer(False, 10000) # we skip CRC-16 check
+        self.deframer = hdlc_deframer(False, 10000)  # we skip CRC-16 check
         self.strip = pdu_head_tail(3, 16)
 
         # CCSDS descrambler
         self.pdu2tag = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
         self.unpack = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
-        self.scramble = digital.additive_scrambler_bb(0xA9, 0xFF, 7, count=0, bits_per_byte=1, reset_tag_key="packet_len")
+        self.scramble = digital.additive_scrambler_bb(
+            0xA9, 0xFF, 7, count=0, bits_per_byte=1,
+            reset_tag_key='packet_len')
         self.pack = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
         self.tag2pdu = blocks.tagged_stream_to_pdu(blocks.byte_t, 'packet_len')
 
-        # prevents passing codewords of incorrect size to the RS decoder
+        # Prevents passing codewords of incorrect size to the RS decoder
         self.length_filter = pdu_length_filter(33, 255)
         self.fec = decode_rs(False, 1)
 
-        self.connect(self, self.slicer, self.nrzi, self.descrambler, self.deframer)
+        self.connect(self, self.slicer, self.nrzi, self.descrambler,
+                     self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.strip, 'in'))
         self.msg_connect((self.strip, 'out'), (self.pdu2tag, 'pdus'))
-        self.connect(self.pdu2tag, self.unpack, self.scramble, self.pack, self.tag2pdu)
+        self.connect(self.pdu2tag, self.unpack, self.scramble, self.pack,
+                     self.tag2pdu)
         self.msg_connect((self.tag2pdu, 'pdus'), (self.length_filter, 'in'))
         self.msg_connect((self.length_filter, 'out'), (self.fec, 'in'))
         self.msg_connect((self.fec, 'out'), (self, 'out'))
@@ -62,4 +71,5 @@ class ops_sat_deframer(gr.hier_block2, options_block):
         """
         Adds OPS-SAT deframer specific options to the argparse parser
         """
-        parser.add_argument('--verbose_rs', action = 'store_true', help = 'Verbose RS decoder')
+        parser.add_argument(
+            '--verbose_rs', action='store_true', help='Verbose RS decoder')

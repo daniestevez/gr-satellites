@@ -8,9 +8,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
+import importlib
+
 from gnuradio import gr, blocks, digital
 
-import importlib
 
 class mobitex_deframer(gr.hier_block2):
     """
@@ -26,8 +27,10 @@ class mobitex_deframer(gr.hier_block2):
         nx: use NX mode (boolean)
         options: Options from argparse
     """
-    def __init__(self, nx = False, options = None):
-        gr.hier_block2.__init__(self, "mobitex_deframer",
+    def __init__(self, nx=False, options=None):
+        gr.hier_block2.__init__(
+            self,
+            'mobitex_deframer',
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
         self.message_port_register_hier_out('out')

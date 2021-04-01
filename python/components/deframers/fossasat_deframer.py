@@ -9,15 +9,18 @@
 #
 
 from gnuradio import gr, digital
+import pmt
+
 from ... import pdu_head_tail
 from ... import sx12xx_check_crc, sx12xx_packet_crop
 from ... import reflect_bytes
 from ...hier.pn9_scrambler import pn9_scrambler
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
-import pmt
+
 
 _syncword = '01010101010101010001001000010010'
+
 
 class fossasat_deframer(gr.hier_block2, options_block):
     """
@@ -33,8 +36,10 @@ class fossasat_deframer(gr.hier_block2, options_block):
         syncword_threshold: number of bit errors allowed in syncword (int)
         options: Options from argparse
     """
-    def __init__(self, syncword_threshold = None, options = None):
-        gr.hier_block2.__init__(self, "fossasat_deframer",
+    def __init__(self, syncword_threshold=None, options=None):
+        gr.hier_block2.__init__(
+            self,
+            'fossasat_deframer',
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
         options_block.__init__(self, options)
@@ -45,12 +50,14 @@ class fossasat_deframer(gr.hier_block2, options_block):
             syncword_threshold = self.options.syncword_threshold
 
         self.slicer = digital.binary_slicer_fb()
-        self.sync = sync_to_pdu_packed(packlen = 255, sync = _syncword, threshold = syncword_threshold)
+        self.sync = sync_to_pdu_packed(
+            packlen=255, sync=_syncword, threshold=syncword_threshold)
         self.reflect_1 = reflect_bytes()
         self.scrambler = pn9_scrambler()
         self.reflect_2 = reflect_bytes()
-        self.crop = sx12xx_packet_crop(crc_len = 2)
-        self.crc = sx12xx_check_crc(verbose = self.options.verbose_crc, initial = 0x1D0F, final = 0xFFFF)
+        self.crop = sx12xx_packet_crop(crc_len=2)
+        self.crc = sx12xx_check_crc(
+            verbose=self.options.verbose_crc, initial=0x1D0F, final=0xFFFF)
         self.remove_length = pdu_head_tail(3, 1)
 
         self.connect(self, self.slicer, self.sync)
@@ -69,5 +76,9 @@ class fossasat_deframer(gr.hier_block2, options_block):
         """
         Adds FOSSASAT deframer specific options to the argparse parser
         """
-        parser.add_argument('--syncword_threshold', type = int, default = cls._default_sync_threshold, help = 'Syncword bit errors [default=%(default)r]')
-        parser.add_argument('--verbose_crc', action = 'store_true', help = 'Verbose CRC decoder')
+        parser.add_argument(
+            '--syncword_threshold', type=int,
+            default=cls._default_sync_threshold,
+            help='Syncword bit errors [default=%(default)r]')
+        parser.add_argument(
+            '--verbose_crc', action='store_true', help='Verbose CRC decoder')
