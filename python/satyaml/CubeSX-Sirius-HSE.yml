@@ -1,5 +1,5 @@
 name: CubeSX-Sirius-HSE
-norad: 99726
+norad: 47951
 data:
   &tlm Telemetry:
     telemetry: ax25

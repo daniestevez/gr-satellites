@@ -1,5 +1,5 @@
 name: SMOG-1
-norad: 99000
+norad: 47964
 telemetry_servers:
   - BME
 data:
