@@ -60,7 +60,7 @@ class telemetry_submit(gr.hier_block2, options_block):
             self.submit = pwsat2_submitter(
                 config['PW-Sat2']['credentials_file'], '')
         elif server == 'BME':
-            satellites = {44830: 'atl1', 44832: 'smogp', 99736: 'smog1'}
+            satellites = {44830: 'atl1', 44832: 'smogp', 47964: 'smog1'}
             satellite = satellites[norad]
             self.submit = bme_submitter(
                 config['BME']['user'], config['BME']['password'], satellite)

@@ -1,5 +1,5 @@
 name: TSURU
-norad: 99772
+norad: 47927
 data:
   &tlm Telemetry:
     telemetry: ax25

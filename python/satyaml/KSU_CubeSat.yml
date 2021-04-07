@@ -1,5 +1,5 @@
 name: KSU CubeSat
-norad: 99720
+norad: 49754
 data:
   &tlm Telemetry:
     telemetry: ax25
