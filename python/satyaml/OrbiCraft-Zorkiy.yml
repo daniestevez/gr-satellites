@@ -1,5 +1,5 @@
 name: OrbiCraft-Zorkiy
-norad: 99724
+norad: 47960
 data:
   &tlm Telemetry:
     telemetry: ax25
