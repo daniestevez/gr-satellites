@@ -76,7 +76,7 @@ def compute_error_locations(s):
             ^ gf_mult(gf_mult(s[2], s[2]), s[5])
             ^ gf_mult(gf_mult(s[1], s[4]), s[4])
             ^ gf_mult(gf_mult(s[3], s[3]), s[3]))
-        L[3] = gf_mult(l[3], inv_det_S)
+        L[3] = gf_mult(L[3], inv_det_S)
         L[2] = (
             gf_mult(gf_mult(s[0], s[4]), s[4])
             ^ gf_mult(gf_mult(s[1], s[2]), s[5])
@@ -84,7 +84,7 @@ def compute_error_locations(s):
             ^ gf_mult(gf_mult(s[2], s[2]), s[4])
             ^ gf_mult(gf_mult(s[1], s[3]), s[4])
             ^ gf_mult(gf_mult(s[0], s[3]), s[5]))
-        L[2] = gf_mult(l[2], inv_det_S)
+        L[2] = gf_mult(L[2], inv_det_S)
         L[1] = (
             gf_mult(gf_mult(s[0], s[2]), s[5])
             ^ gf_mult(gf_mult(s[1], s[3]), s[3])
