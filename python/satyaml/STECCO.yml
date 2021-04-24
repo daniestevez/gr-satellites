@@ -1,5 +1,5 @@
 name: STECCO
-norad: 99735
+norad: 47962
 data:
   &tlm Telemetry:
     telemetry: ax25

@@ -1,5 +1,5 @@
 name: UNISAT-7
-norad: 99741
+norad: 47945
 data:
   &tlm Telemetry:
     telemetry: ax25
