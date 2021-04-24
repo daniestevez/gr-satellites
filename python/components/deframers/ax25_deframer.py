@@ -9,7 +9,9 @@
 #
 
 from gnuradio import gr, digital
+
 from ... import nrzi_decode, hdlc_deframer
+
 
 class ax25_deframer(gr.hier_block2):
     """
@@ -24,8 +26,10 @@ class ax25_deframer(gr.hier_block2):
         g3ruh_scrambler: use G3RUH descrambling (boolean)
         options: Options from argparse
     """
-    def __init__(self, g3ruh_scrambler, options = None):
-        gr.hier_block2.__init__(self, "ax25_deframer",
+    def __init__(self, g3ruh_scrambler, options=None):
+        gr.hier_block2.__init__(
+            self,
+            'ax25_deframer',
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
         self.message_port_register_hier_out('out')

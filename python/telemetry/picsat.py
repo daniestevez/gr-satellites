@@ -8,43 +8,60 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
+import datetime
+
 from construct import *
 from .ax25 import Header
-import datetime
+
 
 # An adapted version of Space Packet primary header
 # where the APID is broken down as used by the PicSat mission
-PrimaryHeader = BitStruct('ccsds_version' / BitsInteger(3),
-                          'packet_type' / Flag,
-                          'secondary_header_flag' / Flag,
-                          'process_id' / BitsInteger(4),
-                          'level_flag' / Flag,
-                          'payload_flag' / Flag,
-                          'packet_category' / BitsInteger(5),
-                          'sequence_flag' / BitsInteger(2),
-                          'packet_id' / BitsInteger(14),
-                          'data_length' / BitsInteger(16))
+PrimaryHeader = BitStruct(
+    'ccsds_version' / BitsInteger(3),
+    'packet_type' / Flag,
+    'secondary_header_flag' / Flag,
+    'process_id' / BitsInteger(4),
+    'level_flag' / Flag,
+    'payload_flag' / Flag,
+    'packet_category' / BitsInteger(5),
+    'sequence_flag' / BitsInteger(2),
+    'packet_id' / BitsInteger(14),
+    'data_length' / BitsInteger(16)
+    )
+
 
 class TimeAdapter(Adapter):
-    def _encode(self, obj, context, path = None):
+    def _encode(self, obj, context, path=None):
         d = obj - datetime.datetime(1970, 1, 1)
-        return Container(days = d.days, milliseconds = d.seconds * 1000 + d.microseconds / 1000)
-    def _decode(self, obj, context, path = None):
-        return datetime.datetime(1970, 1, 1) + datetime.timedelta(days=obj.days, seconds=obj.milliseconds/1000, microseconds=(obj.milliseconds%1000)*1000)
+        return Container(
+            days=d.days,
+            milliseconds=d.seconds * 1000 + d.microseconds / 1000)
 
-SecondaryHeaderTM = TimeAdapter(Struct('days' / Int16ub, 'milliseconds' / Int32ub))
+    def _decode(self, obj, context, path=None):
+        return (datetime.datetime(1970, 1, 1)
+                + datetime.timedelta(
+                    days=obj.days,
+                    seconds=obj.milliseconds/1000,
+                    microseconds=(obj.milliseconds % 1000) * 1000))
 
-SecondaryHeaderTC = BitStruct('req_ack_reception' / Flag,
-                              'req_fmt_reception' / Flag,
-                              'req_exe_reception' / Flag,
-                              'telecommand_id' / BitsInteger(10),
-                              'emitter_id' / BitsInteger(3),
-                              'signature' / Bytes(16))
+
+SecondaryHeaderTM = TimeAdapter(
+    Struct('days' / Int16ub, 'milliseconds' / Int32ub))
+
+SecondaryHeaderTC = BitStruct(
+    'req_ack_reception' / Flag,
+    'req_fmt_reception' / Flag,
+    'req_exe_reception' / Flag,
+    'telecommand_id' / BitsInteger(10),
+    'emitter_id' / BitsInteger(3),
+    'signature' / Bytes(16)
+    )
 
 AntStatus = Struct(
     'undeployed' / Flag,
     'timeout' / Flag,
-    'deploying' / Flag)
+    'deploying' / Flag
+    )
 
 BeaconA = BitStruct(
     Padding(1),
@@ -73,8 +90,9 @@ BeaconA = BitStruct(
     'ant3_status_a' / AntStatus,
     Padding(1),
     'ant4_status_a' / AntStatus,
-    'armed_ants_a_status' / Flag)
-    
+    'armed_ants_a_status' / Flag
+    )
+
 BeaconB = Struct(
     'solar_panel_temps' / Int16ub[5],
     'ants_temperature' / Int16ub[2],
@@ -91,7 +109,8 @@ BeaconB = Struct(
     'n_reboots_eps' / Int32ub,
     'n_reboots_obc' / Int32ub,
     'quaternions' / Float32b[4],
-    'angular_rates' / Float32b[3])
+    'angular_rates' / Float32b[3]
+    )
 
 BeaconC = BitStruct(
     Padding(12),
@@ -110,7 +129,8 @@ BeaconC = BitStruct(
     Padding(1),
     'adcs_stat_flag_hl_op_safe' / Flag,
     'adcs_stat_flag_hl_op_idle' / Flag,
-    Padding(1))
+    Padding(1)
+    )
 
 BeaconD = Struct(
     'up_time' / Int32ub,
@@ -120,7 +140,8 @@ BeaconD = Struct(
     'last_fram_log_counter' / Int16ub,
     'average_photon_count' / Int16ub,
     'sat_mode' / Int8ub,
-    'tc_sequence_count' / Int16ub)
+    'tc_sequence_count' / Int16ub
+    )
 
 Beacon = Struct(Padding(3), BeaconA, BeaconB, BeaconC, BeaconD)
 
@@ -132,7 +153,8 @@ PayloadBeaconFlags = BitStruct(
     'hv_flag' / Flag,
     'dac_flag' / Flag,
     'interrupt_flag' / Flag,
-    'diode_flag' / Flag)
+    'diode_flag' / Flag
+    )
 
 PayloadBeacon = Struct(
     'message' / Bytes(29),
@@ -153,13 +175,21 @@ PayloadBeacon = Struct(
     'vref' / Int16ub,
     'pitch' / Int16sb,
     'roll' / Int16sb,
-    'yaw' / Int16sb)
+    'yaw' / Int16sb
+    )
 
 picsat = Struct(
     'ax25_header' / Header,
     'primary_header' / PrimaryHeader,
-    'secondary_header' / IfThenElse(lambda c: c.primary_header.packet_type, SecondaryHeaderTC, SecondaryHeaderTM),
-    'packet' / Switch(lambda c: (c.primary_header.payload_flag, c.primary_header.packet_category), {
-        (False,1) : Beacon,
-        (True,7) : PayloadBeacon,
-    }, default = Pass))
+    'secondary_header' / IfThenElse(
+        lambda c: c.primary_header.packet_type,
+        SecondaryHeaderTC, SecondaryHeaderTM),
+    'packet' / Switch(
+        lambda c: (c.primary_header.payload_flag,
+                   c.primary_header.packet_category),
+        {
+            (False, 1): Beacon,
+            (True, 7): PayloadBeacon,
+            }, default=Pass
+        )
+    )

@@ -8,17 +8,17 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-import numpy
 from gnuradio import gr
+import numpy
 import pmt
 
+
 class swiatowid_packet_split(gr.basic_block):
-    """
-    docstring for block swiatowid_packet_split
-    """
+    """docstring for block swiatowid_packet_split"""
     def __init__(self):
-        gr.basic_block.__init__(self,
-            name="swiatowid_packet_split",
+        gr.basic_block.__init__(
+            self,
+            name='swiatowid_packet_split',
             in_sig=[],
             out_sig=[])
 
@@ -29,11 +29,15 @@ class swiatowid_packet_split(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print("[ERROR] Received invalid message type. Expected u8vector")
+            print('[ERROR] Received invalid message type. Expected u8vector')
             return
         packet = pmt.u8vector_elements(msg)
 
-        for j in range(0, len(packet) - 2, 58): # -2 is included for the case when the packet carriers a CRC-16
+        for j in range(0, len(packet) - 2, 58):
+            # -2 above is included for the case when the packet
+            # carriers a CRC-16
             piece = packet[j:j+58]
-            self.message_port_pub(pmt.intern('out'),
-                                  pmt.cons(pmt.car(msg_pmt), pmt.init_u8vector(len(piece), piece)))
+            self.message_port_pub(
+                pmt.intern('out'),
+                pmt.cons(pmt.car(msg_pmt),
+                         pmt.init_u8vector(len(piece), piece)))

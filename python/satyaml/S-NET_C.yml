@@ -1,0 +1,17 @@
+name: S-NET C
+norad: 43189
+alternative_names:
+  - DP0TBD
+data:
+  &tlm Telemetry:
+    telemetry: snet
+transmitters:
+  1k2 AFSK downlink:
+    frequency: 435.950e+6
+    modulation: AFSK
+    baudrate: 1200
+    af_carrier: 1500
+    deviation: -600
+    framing: S-NET
+    data:
+    - *tlm

@@ -6,10 +6,12 @@
 # This file is part of gr-satellites
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-# 
+#
 
 from construct import *
+
 from ..adapters import LinearAdapter
+
 
 Beacon = Struct(
     Const(b'\x6c'),

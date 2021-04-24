@@ -1,0 +1,17 @@
+name: pycodestyle
+
+# Controls when the action will run. 
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  pycodestyle:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - uses: daniestevez/gr-satellites-pycodestyle-action@0.2.2

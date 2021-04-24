@@ -98,6 +98,7 @@ add_subdirectory(hier)
 add_subdirectory(filereceiver)
 add_subdirectory(satyaml)
 add_subdirectory(telemetry)
+add_subdirectory(usp)
 add_subdirectory(utils)
 
 ########################################################################
@@ -107,6 +108,7 @@ include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-satellites)
 set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/swig)
+GR_ADD_TEST(qa_fixedlen_tagger ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_fixedlen_tagger.py)
 GR_ADD_TEST(qa_hdlc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_hdlc.py)
 GR_ADD_TEST(qa_kiss ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_kiss.py)
 GR_ADD_TEST(qa_nrzi ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_nrzi.py)

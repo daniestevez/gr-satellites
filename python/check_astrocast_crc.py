@@ -8,24 +8,24 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-import numpy
 from gnuradio import gr
+import numpy
 import pmt
 
 from .hdlc_deframer import fcs_ok
 
+
 class check_astrocast_crc(gr.basic_block):
-    """
-    docstring for block check_astrocast_crc
-    """
+    """docstring for block check_astrocast_crc"""
     def __init__(self, verbose):
-        gr.basic_block.__init__(self,
-            name="check_astrocast_crc",
+        gr.basic_block.__init__(
+            self,
+            name='check_astrocast_crc',
             in_sig=[],
             out_sig=[])
 
         self.verbose = verbose
-        
+
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
         self.message_port_register_out(pmt.intern('ok'))
@@ -34,23 +34,24 @@ class check_astrocast_crc(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print("[ERROR] Received invalid message type. Expected u8vector")
+            print('[ERROR] Received invalid message type. Expected u8vector')
             return
-        packet = pmt.u8vector_elements(msg)[1:] # drop initial 0x7e
+        packet = pmt.u8vector_elements(msg)[1:]  # drop initial 0x7e
 
-        # find final 0x7e
+        # Find final 0x7e
         try:
             idx = packet.index(0x7e)
         except ValueError:
             return
-        
+
         packet_out = packet[:idx-2]
-        msg_out = pmt.cons(pmt.car(msg_pmt), pmt.init_u8vector(len(packet_out), packet_out))
+        msg_out = pmt.cons(pmt.car(msg_pmt),
+                           pmt.init_u8vector(len(packet_out), packet_out))
         if fcs_ok(packet[:idx]):
             if self.verbose:
-                print("CRC OK")
+                print('CRC OK')
             self.message_port_pub(pmt.intern('ok'), msg_out)
         else:
             if self.verbose:
-                print("CRC failed")
+                print('CRC failed')
             self.message_port_pub(pmt.intern('fail'), msg_out)

@@ -8,20 +8,21 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-import numpy
-from gnuradio import gr
 import collections
+
+from gnuradio import gr
+import numpy
 import pmt
 
 from .kiss import *
 
+
 class kiss_to_pdu(gr.sync_block):
-    """
-    docstring for block kiss_to_pdu
-    """
+    """docstring for block kiss_to_pdu"""
     def __init__(self, control_byte=True):
-        gr.sync_block.__init__(self,
-            name="kiss_to_pdu",
+        gr.sync_block.__init__(
+            self,
+            name='kiss_to_pdu',
             in_sig=[numpy.uint8],
             out_sig=[])
 
@@ -34,9 +35,13 @@ class kiss_to_pdu(gr.sync_block):
     def work(self, input_items, output_items):
         for c in input_items[0]:
             if c == FEND:
-                if self.pdu and (not self.control_byte or not self.pdu[0] & 0x0f):
+                if (self.pdu
+                        and (not self.control_byte or not self.pdu[0] & 0x0f)):
                     msg = self.pdu[1:] if self.control_byte else self.pdu
-                    self.message_port_pub(pmt.intern('out'), pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(msg), msg)))
+                    self.message_port_pub(
+                        pmt.intern('out'),
+                        pmt.cons(pmt.PMT_NIL,
+                                 pmt.init_u8vector(len(msg), msg)))
                 self.pdu = list()
             elif self.transpose:
                 if c == TFEND:
@@ -50,4 +55,3 @@ class kiss_to_pdu(gr.sync_block):
                 self.pdu.append(c)
 
         return len(input_items[0])
-

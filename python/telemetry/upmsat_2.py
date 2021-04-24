@@ -6,14 +6,15 @@
 # This file is part of gr-satellites
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-# 
+#
+
+import math
 
 from construct import *
 
 from .ax25 import Header as AX25Header
 from ..adapters import LinearAdapter, AffineAdapter
 
-import math
 
 Header = Struct(
     'command_id' / Int8ub,
@@ -21,25 +22,33 @@ Header = Struct(
     'length' / Int8ub
     )
 
-OperatingMode = Enum(Int8ub, off = 0, test = 1, await_launch = 2, launch = 3,
-                         latency = 4, initialization = 5, commissioning = 6, safe = 7,
-                         beacon = 8, nominal = 9, experiment = 10)
+OperatingMode = Enum(Int8ub, off=0, test=1, await_launch=2, launch=3,
+                     latency=4, initialization=5, commissioning=6, safe=7,
+                     beacon=8, nominal=9, experiment=10)
 
-BatteryWarning = Enum(BitsInteger(2), none = 0, low = 1, critical = 2, high = 3)
+BatteryWarning = Enum(BitsInteger(2), none=0, low=1, critical=2, high=3)
+
 
 class TemperatureAdapter(Adapter):
     def __init__(self, *args, **kwargs):
         return Adapter.__init__(self, *args, **kwargs)
-    def _decode(self, obj, context, path = None):
+
+    def _decode(self, obj, context, path=None):
         return 0.336*(obj - 1708.1) if obj >= 1707.0 else \
           6.41 * (4.15 - math.sqrt(17.24 - 0.31 * (obj - 1712.2)))
+
+
 Temperature = TemperatureAdapter(BitsInteger(12))
-          
+
+
 class BatteryTempAdapter(Adapter):
     def __init__(self, *args, **kwargs):
         return Adapter.__init__(self, *args, **kwargs)
-    def _decode(self, obj, context, path = None):
+
+    def _decode(self, obj, context, path=None):
         return 1.2 * (60 - math.sqrt(3600 - 1.72 * (2333 - obj)))
+
+
 BatteryTemp = BatteryTempAdapter(BitsInteger(12))
 
 PSUCurrent = AffineAdapter(232.6, 0.42, BitsInteger(12))
@@ -58,26 +67,26 @@ AnalogData = BitStruct(
     'PSU_In15V_TM' / PSUCurrent,
     'PSU_Ip3V3_TM' / PSUCurrent,
     'PDU_IVBUS_TM' / PSUCurrent,
-    'PV_TPSXp_TM'  / Temperature,
-    'PV_TPSXn_TM'  / Temperature,
-    'PV_TPSYp_TM'  / Temperature,
-    'PV_TPSYn_TM'  / Temperature,
-    'PV_TPSZp_TM'  / Temperature,
-    'PV_ISPXp_TM'  / AffineAdapter(810.64, 1688.3, BitsInteger(12)),
-    'PV_ISPXn_TM'  / AffineAdapter(656.02, 1622.3, BitsInteger(12)),
-    'PV_ISPYp_TM'  / AffineAdapter(853.8, 1798.4, BitsInteger(12)),
-    'PV_ISPYn_TM'  / AffineAdapter(810.64, 1688.3, BitsInteger(12)),
-    'PV_ISPZp_TM'  / AffineAdapter(638.81, 1571.8, BitsInteger(12)),
-    'OBC_T_TM'  / BitsInteger(12),
+    'PV_TPSXp_TM' / Temperature,
+    'PV_TPSXn_TM' / Temperature,
+    'PV_TPSYp_TM' / Temperature,
+    'PV_TPSYn_TM' / Temperature,
+    'PV_TPSZp_TM' / Temperature,
+    'PV_ISPXp_TM' / AffineAdapter(810.64, 1688.3, BitsInteger(12)),
+    'PV_ISPXn_TM' / AffineAdapter(656.02, 1622.3, BitsInteger(12)),
+    'PV_ISPYp_TM' / AffineAdapter(853.8, 1798.4, BitsInteger(12)),
+    'PV_ISPYn_TM' / AffineAdapter(810.64, 1688.3, BitsInteger(12)),
+    'PV_ISPZp_TM' / AffineAdapter(638.81, 1571.8, BitsInteger(12)),
+    'OBC_T_TM' / BitsInteger(12),
     'MGM_T_TM' / Temperature[3],
-    'MGM_xyz_TM'  / BitsInteger(12)[9],
-    'MGM_TX_TM'  / BitsInteger(12),
-    'MODEM_T_TR_TM'  / Temperature,
-    'EBOX_T_INT_TM'  / Temperature,
-    'EBOX_T_EXT_TM'  / Temperature,
-    'BATT_T_EXT_TM'  / Temperature,
-    'BATT_T_INT_TM'  / Temperature,
-    'SS6_XYZ_TM'  / AffineAdapter(17.7, -201.4, BitsInteger(12))[6],
+    'MGM_xyz_TM' / BitsInteger(12)[9],
+    'MGM_TX_TM' / BitsInteger(12),
+    'MODEM_T_TR_TM' / Temperature,
+    'EBOX_T_INT_TM' / Temperature,
+    'EBOX_T_EXT_TM' / Temperature,
+    'BATT_T_EXT_TM' / Temperature,
+    'BATT_T_INT_TM' / Temperature,
+    'SS6_XYZ_TM' / AffineAdapter(17.7, -201.4, BitsInteger(12))[6],
     'RW_T_TM' / Temperature[2],
     'TP_TM' / Temperature[6],
     )
@@ -104,7 +113,7 @@ DigitalData = BitStruct(
     Padding(5)
     )
 
-Time = LinearAdapter(4.0, Int32ub) 
+Time = LinearAdapter(4.0, Int32ub)
 
 HousekeepingData = Struct(
     'operating_mode' / OperatingMode,

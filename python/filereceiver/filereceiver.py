@@ -10,6 +10,7 @@
 
 import pathlib
 
+
 class File:
     """
     Class to hold housekeeping data about a file being received
@@ -30,6 +31,7 @@ class File:
         self.size = None
         self.chunks = None
 
+
 class FileReceiver:
     """
     Class to reassemble files transmitted in chunks
@@ -37,7 +39,7 @@ class FileReceiver:
     This implements the generic framework. Specific protocols should
     inherit from this class and implement some functions
     """
-    def __init__(self, path, verbose = False):
+    def __init__(self, path, verbose=False):
         """
         Builds a new FileReceiver
 
@@ -61,7 +63,7 @@ class FileReceiver:
 
         The default implementation returns chunk.file_id if available
         else None
-        
+
         Args:
             chunk: a file chunk (parsed by parse_chunk())
         """
@@ -70,7 +72,7 @@ class FileReceiver:
     def chunk_sequence(self, chunk):
         """
         Returns the sequence number of a given chunk
-        
+
         The sequence number should increase from 0. If the chunk number
         cannot be identified from a chunk, or if chunk_offset is used
         instead, it should return None.
@@ -165,7 +167,7 @@ class FileReceiver:
             last chunk.
         """
         return None
-    
+
     def parse_chunk(self, chunk):
         """
         Parses the chunk into an object which is easier to handle
@@ -184,7 +186,7 @@ class FileReceiver:
         Generates a filename based on the file id
 
         The default implementation uses the file id as filename
-        
+
         Args:
            fid: file id (usually int)
         """
@@ -200,7 +202,7 @@ class FileReceiver:
         Args:
             f: the file just completed (File)
         """
-    
+
     def _new_file(self, fid):
         """
         Creates a new file
@@ -230,7 +232,7 @@ class FileReceiver:
     def log(self, message):
         if self._verbose:
             print(f'{self._name}: {message}')
-            
+
     def push_chunk(self, chunk):
         """
         Processes a new chunk
@@ -244,8 +246,8 @@ class FileReceiver:
         chunk = self.parse_chunk(chunk)
         if chunk is None:
             return
-        
-        # find file
+
+        # Find file
         # TODO: logic about new file when file_id == None
         fid = self.file_id(chunk)
         if fid is None:
@@ -261,8 +263,10 @@ class FileReceiver:
 
         seq = self.chunk_sequence(chunk)
 
-        # detect a new file if sequence has decreased
-        if self.file_id(chunk) is None and seq is not None and seq < f.expected_seq:
+        # Detect a new file if sequence has decreased
+        if (self.file_id(chunk) is None
+                and seq is not None
+                and seq < f.expected_seq):
             # f is finished
             self.log(f'file {fid} is finished')
             fid = self._next_fid
@@ -277,29 +281,33 @@ class FileReceiver:
             self.log(f'received sequence {seq} for file {fid}')
 
         if f.broken:
-            # file is broken, nothing can be done with the chunk
+            # File is broken, nothing can be done with the chunk
             return
 
-        # try to determine offset
+        # Try to determine offset
         offset = self.chunk_offset(chunk)
         if seq is None and offset is not None:
             self.log(f'received offset {offset} for file {fid}')
         if offset is None:
-            # check sequence continuity
+            # Check sequence continuity
             if seq is None:
-                raise Exception('FileReceiver unable to compute chunk_offset() nor chunk_sequence()')
+                raise Exception(
+                    'FileReceiver unable to compute chunk_offset() '
+                    'nor chunk_sequence()')
             if seq != f.expected_seq:
-                self.log(f'received sequence {seq} != expected sequence {f.expected_seq}. File reception is broken.')
+                self.log(f'received sequence {seq} != expected sequence '
+                         f'{f.expected_seq}. File reception is broken.')
                 f.broken = True
                 return
             offset = f.write_pointer
-            
+
         data = self.chunk_data(chunk)
         new_write_pointer = offset + len(data)
 
         # check offset within size
         if f.size is not None and new_write_pointer > f.size:
-            self.log(f'invalid offset {offset} (chunk size is {len(data)}, file size is {f.size})')
+            self.log(f'invalid offset {offset} (chunk size is {len(data)}, '
+                     f'file size is {f.size})')
             return
 
         # write chunk at offset
@@ -312,9 +320,9 @@ class FileReceiver:
         f.expected_seq = seq + 1 if seq is not None else None
 
         # check if file is complete
-        if (f.size is not None and f.write_pointer >= f.size) or \
-          (f.chunks is not None and f.expected_seq >= f.chunks) or \
-          self.is_last_chunk(chunk) is True:
-          self.log(f'file {fid} complete')
-          self.on_completion(f)
-          self._current_file = None
+        if ((f.size is not None and f.write_pointer >= f.size)
+                or (f.chunks is not None and f.expected_seq >= f.chunks)
+                or self.is_last_chunk(chunk)):
+            self.log(f'file {fid} complete')
+            self.on_completion(f)
+            self._current_file = None

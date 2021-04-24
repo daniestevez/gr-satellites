@@ -14,16 +14,19 @@ import pmt
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...hdlc_deframer import fcs_ok
 
+
 # HDLC 0x7e flag
 _syncword = '01111110'
+
 
 class crop_and_check_crc(gr.basic_block):
     """
     Helper block to crop using the final 0x7e flag and check CRC-16
     """
     def __init__(self):
-        gr.basic_block.__init__(self,
-            name="crop_and_check_crc",
+        gr.basic_block.__init__(
+            self,
+            name='crop_and_check_crc',
             in_sig=[],
             out_sig=[])
         self.message_port_register_in(pmt.intern('in'))
@@ -33,7 +36,7 @@ class crop_and_check_crc(gr.basic_block):
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print("[ERROR] Received invalid message type. Expected u8vector")
+            print('[ERROR] Received invalid message type. Expected u8vector')
             return
         start = 0
         while True:
@@ -45,9 +48,11 @@ class crop_and_check_crc(gr.basic_block):
             p = packet[:idx]
             if fcs_ok(p):
                 p = p[:-2]
-                self.message_port_pub(pmt.intern('out'),
-                              pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(p), p)))
+                self.message_port_pub(
+                    pmt.intern('out'),
+                    pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(p), p)))
                 return
+
 
 class yusat_deframer(gr.hier_block2):
     """
@@ -59,17 +64,18 @@ class yusat_deframer(gr.hier_block2):
     Args:
         options: Options from argparse
     """
-    def __init__(self, options = None):
-        gr.hier_block2.__init__(self, "yusat_deframer",
+    def __init__(self, options=None):
+        gr.hier_block2.__init__(
+            self,
+            'yusat_deframer',
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
         self.message_port_register_hier_out('out')
 
         self.slicer = digital.binary_slicer_fb()
-        # we hope that 256 bytes is long enough to contain the full packet
-        self.deframer = sync_to_pdu_packed(packlen = 256,
-                                           sync = _syncword,\
-                                           threshold = 0)
+        # We hope that 256 bytes is long enough to contain the full packet
+        self.deframer = sync_to_pdu_packed(
+            packlen=256, sync=_syncword, threshold=0)
         self.crop = crop_and_check_crc()
 
         self.connect(self, self.slicer, self.deframer)

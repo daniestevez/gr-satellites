@@ -9,8 +9,10 @@
 #
 
 from construct import *
+
 from ..adapters import *
 from .csp import CSPHeader
+
 
 Beacon = Struct(
     Padding(8),
@@ -36,11 +38,15 @@ Drop = Struct(
 vzlusat_2 = Struct(
     'csp_header' / CSPHeader,
     'cmd' / Hex(Int8ub),
-    'payload' / IfThenElse((this.csp_header.source == 1) & (this.csp_header.destination == 26) & (this.csp_header.source_port == 18) & (this.csp_header.destination_port == 18),
-                Switch(this.cmd, {
-                    0x56 : Beacon,
-                    0x03 : Drop
-                    }, default = HexDump(GreedyBytes)),
-                HexDump(GreedyBytes)
-            )
+    'payload' / IfThenElse(
+        ((this.csp_header.source == 1)
+         & (this.csp_header.destination == 26)
+         & (this.csp_header.source_port == 18)
+         & (this.csp_header.destination_port == 18)),
+        Switch(this.cmd, {
+            0x56: Beacon,
+            0x03: Drop
+            }, default=HexDump(GreedyBytes)),
+        HexDump(GreedyBytes)
+        )
     )

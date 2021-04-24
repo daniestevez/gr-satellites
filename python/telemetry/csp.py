@@ -10,6 +10,7 @@
 
 from construct import *
 
+
 Address = BitsInteger(5)
 Port = BitsInteger(6)
 

@@ -13,4 +13,3 @@ gr-satellites utils
 
 This module contains assorted utils for gr-satellites
 '''
-

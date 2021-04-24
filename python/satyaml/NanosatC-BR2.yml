@@ -1,0 +1,20 @@
+name: NanosatC-BR2
+norad: 99734
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  1k2 BPSK downlink:
+    frequency: 145.865e+6
+    modulation: BPSK
+    baudrate: 1200
+    framing: AX.25
+    data:
+      - *tlm
+  4k8 BPSK downlink:
+    frequency: 145.865e+6
+    modulation: BPSK
+    baudrate: 4800
+    framing: AX.25
+    data:
+      - *tlm

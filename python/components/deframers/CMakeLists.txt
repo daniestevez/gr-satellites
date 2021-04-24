@@ -63,6 +63,7 @@ GR_PYTHON_INSTALL(
     tt64_deframer.py
     u482c_deframer.py
     ua01_deframer.py
+    usp_deframer.py
     yusat_deframer.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/components/deframers
 )
@@ -75,3 +76,4 @@ include(GrTest)
 set(GR_TEST_TARGET_DEPS gnuradio-satellites)
 set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/swig)
 GR_ADD_TEST(qa_ao40_fec_deframer ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ao40_fec_deframer.py)
+GR_ADD_TEST(qa_usp_deframer ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_usp_deframer.py)

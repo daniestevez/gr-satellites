@@ -9,8 +9,8 @@
 #
 
 from gnuradio import gr, blocks, gr_unittest
-import pmt
 import numpy as np
+import pmt
 
 # bootstrap satellites module, even from build dir
 try:
@@ -23,10 +23,11 @@ else:
 
 from satellites import nrzi_encode, nrzi_decode
 
+
 class qa_nrzi(gr_unittest.TestCase):
     def setUp(self):
         test_size = 256
-        self.data = np.random.randint(0, 2, test_size, dtype = 'uint8')
+        self.data = np.random.randint(0, 2, test_size, dtype='uint8')
         self.source = blocks.vector_source_b(self.data, False, 1, [])
         self.sink = blocks.vector_sink_b(1, 0)
         self.tb = gr.top_block()
@@ -45,10 +46,11 @@ class qa_nrzi(gr_unittest.TestCase):
         self.tb.start()
         self.tb.wait()
 
-        expected = np.cumsum((1 ^ self.data) & 1) & 1 
+        expected = np.cumsum((1 ^ self.data) & 1) & 1
 
-        np.testing.assert_equal(self.sink.data(), expected,
-                                    'NRZI encode output does not match expected result')
+        np.testing.assert_equal(
+            self.sink.data(), expected,
+            'NRZI encode output does not match expected result')
 
     def test_decode(self):
         """Performs NRZI decode and checks the result"""
@@ -60,8 +62,9 @@ class qa_nrzi(gr_unittest.TestCase):
 
         expected = self.data[1:] ^ self.data[:-1] ^ 1
 
-        np.testing.assert_equal(self.sink.data()[1:], expected,
-                                    'NRZI decode output does not match expected result')
+        np.testing.assert_equal(
+            self.sink.data()[1:], expected,
+            'NRZI decode output does not match expected result')
 
     def test_encode_decode(self):
         """Performs NRZI encode and decode and checks the result"""
@@ -72,9 +75,10 @@ class qa_nrzi(gr_unittest.TestCase):
         self.tb.start()
         self.tb.wait()
 
-        np.testing.assert_equal(self.sink.data(), self.data,
-                                    'NRZI encoded and decoded output does not match input')
+        np.testing.assert_equal(
+            self.sink.data(), self.data,
+            'NRZI encoded and decoded output does not match input')
 
-        
+
 if __name__ == '__main__':
     gr_unittest.run(qa_nrzi)

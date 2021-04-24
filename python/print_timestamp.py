@@ -8,19 +8,19 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
+import datetime
+
 import numpy
 from gnuradio import gr
 import pmt
 
-import datetime
 
 class print_timestamp(gr.basic_block):
-    """
-    docstring for block print_timestamp
-    """
+    """docstring for block print_timestamp"""
     def __init__(self, tstamp_format='', count_packets=False):
-        gr.basic_block.__init__(self,
-            name="swap_crc",
+        gr.basic_block.__init__(
+            self,
+            name='print_timestamp',
             in_sig=[],
             out_sig=[])
 
@@ -39,5 +39,5 @@ class print_timestamp(gr.basic_block):
         if self.count_packets:
             print('Packet number', self.packet_counter)
             self.packet_counter += 1
-        
+
         self.message_port_pub(pmt.intern('out'), msg_pmt)

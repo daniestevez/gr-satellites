@@ -8,7 +8,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-# This contains code taken from https://github.com/PW-Sat2/SimpleUploader-radio.pw-sat.pl
+# This contains code taken from
+# https://github.com/PW-Sat2/SimpleUploader-radio.pw-sat.pl
 # That code is licenced under the following terms:
 
 # MIT License
@@ -22,8 +23,8 @@
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
 #
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
 #
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -33,38 +34,38 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import base64
+import datetime
+import json
 
-import numpy
 from gnuradio import gr
+import numpy
 import pmt
 
 from . import hdlc
 
-import json
-import base64
-import datetime
 
 class pwsat2_submitter(gr.basic_block):
-    """
-    docstring for block pwsat2_submitter
-    """
+    """docstring for block pwsat2_submitter"""
     def __init__(self, credentials_file, initialTimestamp):
-        gr.basic_block.__init__(self,
+        gr.basic_block.__init__(
+            self,
             name="pwsat2_submitter",
             in_sig=[],
             out_sig=[])
         self.requests = __import__('requests')
-        
+
         self.baseUrl = 'http://radio.pw-sat.pl'
         self.headers = {'content-type': 'application/json'}
 
         dtformat = '%Y-%m-%d %H:%M:%S'
-        self.initialTimestamp = datetime.datetime.strptime(initialTimestamp, dtformat) \
-            if initialTimestamp != '' else None
+        self.initialTimestamp = (
+            datetime.datetime.strptime(initialTimestamp, dtformat)
+            if initialTimestamp != '' else None)
         self.startTimestamp = datetime.datetime.utcnow()
 
         self.authenticate(credentials_file)
-        
+
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
 
@@ -78,7 +79,9 @@ class pwsat2_submitter(gr.basic_block):
             return
 
         url = self.baseUrl+'/api/authenticate'
-        response = self.requests.post(url, data=json.dumps(credentials), headers=self.headers)
+        response = self.requests.post(url,
+                                      data=json.dumps(credentials),
+                                      headers=self.headers)
         if response.status_code == 200:
             self.cookies = response.cookies
         else:
@@ -86,7 +89,7 @@ class pwsat2_submitter(gr.basic_block):
             print('Reply:', response.text)
             print('HTTP code', response.status_code)
             self.cookies = None
-    
+
     def loadCredentials(self, path):
         with open(path) as f:
             credentials = json.load(f)
@@ -94,21 +97,28 @@ class pwsat2_submitter(gr.basic_block):
 
     def putPacket(self, frame, timestamp):
         if self.cookies is None:
-            print('Not uploading packet to', self.baseUrl, 'as we are not authenticated')
+            print('Not uploading packet to',
+                  self.baseUrl,
+                  'as we are not authenticated')
             return
         url = self.baseUrl+'/communication/frame'
 
-        payload = { 'frame': str(base64.b64encode(frame), encoding = 'ascii'),
-                    'timestamp': int((timestamp - datetime.datetime(1970, 1, 1)).total_seconds() * 1000),
-                    'traffic': 'Rx'}
+        timestamp = (timestamp - datetime.datetime(1970, 1, 1)).total_seconds()
+        timestamp = int(timestamp * 1000)
+        payload = {'frame': str(base64.b64encode(frame), encoding='ascii'),
+                   'timestamp': timestamp,
+                   'traffic': 'Rx'}
 
-        response = self.requests.put(url, data=json.dumps(payload), headers=self.headers, cookies=self.cookies)
+        response = self.requests.put(url,
+                                     data=json.dumps(payload),
+                                     headers=self.headers,
+                                     cookies=self.cookies)
         return response.text
-    
+
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
-            print("[ERROR] Received invalid message type. Expected u8vector")
+            print('[ERROR] Received invalid message type. Expected u8vector')
             return
 
         data = bytearray(pmt.u8vector_elements(msg))
@@ -117,10 +127,10 @@ class pwsat2_submitter(gr.basic_block):
         data.append((crc >> 8) & 0xff)
 
         frame = bytes(data)
-        
+
         now = datetime.datetime.utcnow()
-        timestamp = now - self.startTimestamp + self.initialTimestamp \
-          if self.initialTimestamp else now
+        timestamp = (now - self.startTimestamp + self.initialTimestamp
+                     if self.initialTimestamp else now)
 
         response = self.putPacket(frame, timestamp)
         if response:

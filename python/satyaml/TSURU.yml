@@ -1,0 +1,13 @@
+name: TSURU
+norad: 47927
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  4k8 FSK downlink:
+    frequency: 437.375e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: AX.25 G3RUH
+    data:
+    - *tlm

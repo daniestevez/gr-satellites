@@ -17,7 +17,6 @@ object, but in more complex cases, another class supporting the
 '''
 
 import construct
-construct.setGlobalPrintFullStrings(True)
 
 from .aausat4 import aausat4
 from .amicalsat import amicalsat
@@ -44,6 +43,7 @@ from .quetzal1 import quetzal1
 from .sat_1kuns_pf import sat_1kuns_pf
 from .sat_3cat_1 import sat_3cat_1
 from .sat_3cat_2 import sat_3cat_2
+from .smogp import smog1
 from .smogp import smogp
 from .smogp import smogp_signalling
 from .snet import snet
@@ -52,3 +52,5 @@ from .by70_1 import taurus1
 from .trisat import trisat
 from .upmsat_2 import upmsat_2
 from .vzlusat_2 import vzlusat_2
+
+construct.setGlobalPrintFullStrings(True)

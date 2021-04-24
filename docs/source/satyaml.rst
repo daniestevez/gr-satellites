@@ -130,6 +130,12 @@ The framings allowed in the ``framing`` field are the following:
 * ``AO-40 FEC short``, AO-40 FEC protocol with short frames, as used by SMOG-P
   and ATL-1
 
+* ``AO-40 FEC CRC-16-ARC``, the AO-40 FEC protocol with an CRC-16 ARC, as used by
+  SMOG-1
+
+* ``AO-40 FEC CRC-16-ARC short``, AO-40 FEC protocol with short frames and a
+  CRC-16 ARC, as used by SMOG-1
+
 * ``CCSDS Reed-Solomon``, CCSDS Reed-Solomon TM codewords (see :ref:`CCSDS deframers`)
 
 * ``CCSDS Concatenated``, CCSDS Concatenated TM codewords (see :ref:`CCSDS deframers`)
@@ -186,7 +192,15 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``SMOG-P RA``, Repeat-Accumulate FEC as used by SMOG-P and ATL-1
 
+* ``SMOG-1 RA``, Repeat-Accumulate FEC as used by SMOG-1. The difference with
+  ``SMOG-P RA`` is a longer 48 bit syncword (instead of 16 bit) and the inclusion
+  of a CRC-16 ARC to check frame integrity.
+
 * ``SMOG-P Signalling``, custom signalling frames as used by SMOG-P and ATL-1
+
+* ``SMOG-1 Signalling``, custom signalling frames as used by SMOG-1. The difference
+  with ``SMOG-P Signalling`` is the addition of a different PRBS to mark transitions
+  to TX mode.
 
 * ``OPS-SAT``, custom framing used by OPS-SAT, which consists of AX.25 frames
   with CCSDS Reed-Solomon codewords as payload
@@ -220,6 +234,9 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``AX5043``, FEC framing used by the AX5043 transceiver IC. This uses a convolutional
   code, a 4x4 interleaver, and HDLC framing with the CRC16-USB.
+
+* ``USP``, the `Unified SPUTNIX Protocol`_, which is based on CCSDS concatenate frames
+  with custom synchronization and a PLS based on DVB-S2.
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.
@@ -244,6 +261,11 @@ CCSDS protocol. These are:
   ``NASA-DSN``, ``CCSDS uninverted``, ``NASA-DSN uninverted``.  This field is
   optional and defaults to ``CCSDS`` if not specified.
 
+
+The ``AX100 ASM+Golay`` mode also supports the ``scrambler`` field, with the
+possible values ``CCSDS`` and ``none``. The default is ``CCSDS``, but the value
+``none`` can be used in case the scrambler needs to be disabled (which is a
+rarely used feature).
 
 The following example shows how transports are indicated in SatYAML files.
 
@@ -288,3 +310,4 @@ The allowable transport protocols are the following:
 .. _AX.25: http://www.ax25.net/
 .. _FX.25: https://en.wikipedia.org/wiki/FX.25_Forward_Error_Correction
 .. _NGHam: https://github.com/skagmo/ngham
+.. _Unified SPUTNIX Protocol: https://sputnix.ru/tpl/docs/amateurs/USP%20protocol%20description%20v1.04.pdf
