@@ -6,21 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [4.1.0], [3.8.0] - 2021-04-24
+
 ### Added
-- Support for CUBE-L
 - USP deframer
-- Support for SPUTNIX satellites: OrbiCraft-Zorkiy, CubeSX-HSE, CubeSX-Sirius-HSE, KSU CubeSat
-- Support for TAUSAT-1 and TSURU
-- 2k4 downlink for MEZNSAT
-- Support for SMOG-1
 - Env variable GR_SATELLITES_SUBMIT_TLM to force/disable telemetry submission
-- Support for NanosatC-BR1 and NanosatC-BR2
 - Ability to disable AX100 ASM+Golay scrambler in SatYAML and GRC block
 - Support for BCCSAT 1
-- Support for UNISAT-7
-- Support for STECCO
-- Support for SIMBA
+- Support for CUBE-L
 - Support for GRBAlpha
+- Support for NanosatC-BR1 and NanosatC-BR2
+- Support for SIMBA
+- Support for SMOG-1
+- Support for SPUTNIX satellites: OrbiCraft-Zorkiy, CubeSX-HSE, CubeSX-Sirius-HSE, KSU CubeSat
+- Support for STECCO
+- Support for TAUSAT-1 and TSURU
+- Support for UNISAT-7
+- 2k4 downlink for MEZNSAT
 
 ## Changed
 - In gr_satellites, do not disable non-telemetry datasinks in --hexdump mode
@@ -376,7 +378,11 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...master
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v4.1.0...master
+[4.1.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0...v4.1.0
+[4.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0-rc1...v4.0.0
+[4.0.0-rc1]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...v4.0.0-rc1
+[3.8.0]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...v3.8.0
 [3.7.0]: https://github.com/daniestevez/gr-satellites/compare/v3.6.0...v3.7.0
 [3.6.0]: https://github.com/daniestevez/gr-satellites/compare/v3.5.2...v3.6.0
 [3.5.2]: https://github.com/daniestevez/gr-satellites/compare/v3.5.1...v3.5.2
