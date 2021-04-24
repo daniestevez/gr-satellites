@@ -19,7 +19,7 @@ stack, the AO-40 protocol used in the FUNcube satellites, and several
 ad-hoc protocols used in other satellites.
 """
 
-__version__ = 'v3.8.0-git'
+__version__ = 'v3.8.0'
 __author__ = 'Daniel Estevez'
 __copyright__ = 'Copyright 2016-2020 Daniel Estevez'
 __email__ = 'daniel@destevez.net'
