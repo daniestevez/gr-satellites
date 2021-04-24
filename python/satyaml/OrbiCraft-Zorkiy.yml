@@ -12,7 +12,7 @@ transmitters:
     data:
     - *tlm
   2k4 FSK downlink:
-    frequency: 435.650e+6
+    frequency: 435.850e+6
     modulation: FSK
     baudrate: 2400
     framing: USP
