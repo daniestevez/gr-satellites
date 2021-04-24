@@ -5,14 +5,14 @@ data:
     telemetry: ax25
 transmitters:
   1k2 FSK downlink:
-    frequency: 435.650e+6
+    frequency: 437.050e+6
     modulation: FSK
     baudrate: 1200
     framing: USP
     data:
     - *tlm
   2k4 FSK downlink:
-    frequency: 435.650e+6
+    frequency: 437.050e+6
     modulation: FSK
     baudrate: 2400
     framing: USP
