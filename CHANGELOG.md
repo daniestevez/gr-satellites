@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for UNISAT-7
 - 2k4 downlink for MEZNSAT
 
-## Changed
+### Changed
 - In gr_satellites, do not disable non-telemetry datasinks in --hexdump mode
 - Reformatting of Python code according to PEP8
 
