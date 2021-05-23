@@ -1,0 +1,35 @@
+id: satellites_diy1_deframer
+label: DIY-1 Deframer
+category: '[Satellites]/Deframers'
+
+parameters:
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.deframers
+    make: satellites.components.deframers.diy1_deframer(options=${options})
+
+documentation: |-
+    Deframes DIY-1 RFM22 packets
+
+    Input:
+        A stream of soft symbols containing DIY-1 packets
+
+    Output:
+        PDUs with the deframed packets
+
+    Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
+
+file_format: 1

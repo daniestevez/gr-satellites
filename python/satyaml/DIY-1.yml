@@ -1,0 +1,13 @@
+name: DIY-1
+norad: 47963
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  500 baud FSK downlink:
+    frequency: 437.125e+6
+    modulation: FSK
+    baudrate: 500
+    framing: DIY-1
+    data:
+    - *tlm
