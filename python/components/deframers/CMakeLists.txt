@@ -43,6 +43,7 @@ GR_PYTHON_INSTALL(
     ax5043_deframer.py
     ccsds_concatenated_deframer.py
     ccsds_rs_deframer.py
+    diy1_deframer.py
     eseo_deframer.py
     fossasat_deframer.py
     grizu263a_deframer.py

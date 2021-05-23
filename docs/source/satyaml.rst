@@ -237,6 +237,8 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``USP``, the `Unified SPUTNIX Protocol`_, which is based on CCSDS concatenate frames
   with custom synchronization and a PLS based on DVB-S2.
+
+* ``DIY-1``, the custom framing used by DIY-1, which uses an RFM22 chip transceiver.
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.

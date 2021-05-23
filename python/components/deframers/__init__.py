@@ -29,6 +29,7 @@ from .ax25_deframer import ax25_deframer
 from .ax5043_deframer import ax5043_deframer
 from .ccsds_concatenated_deframer import ccsds_concatenated_deframer
 from .ccsds_rs_deframer import ccsds_rs_deframer
+from .diy1_deframer import diy1_deframer
 from .eseo_deframer import eseo_deframer
 from .fossasat_deframer import fossasat_deframer
 from .grizu263a_deframer import grizu263a_deframer

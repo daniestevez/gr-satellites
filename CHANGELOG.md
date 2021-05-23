@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Support for DIY-1
+
 ### Fixed
 - Runtime bug in AALTO-1 deframer
 
