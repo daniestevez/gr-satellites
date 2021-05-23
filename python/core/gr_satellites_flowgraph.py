@@ -140,7 +140,9 @@ class gr_satellites_flowgraph(gr.hier_block2):
             do_telemetry = not (self.options is not None
                                 and self.options.hexdump)
             for key, info in satyaml['data'].items():
-                if 'telemetry' not in info or do_telemetry:
+                is_telemetry = ('telemetry' in info
+                                or info == 'unknown')
+                if not is_telemetry or do_telemetry:
                     self._init_datasink(key, info)
             self._init_additional_datasinks()
             self._transports = dict()
