@@ -247,7 +247,7 @@ class gr_satellites_top_block(gr.top_block):
         self.setup_input_int16()
 
     def setup_audio_input(self):
-        self.audio_source = audio.source(self.options.samp_rate,
+        self.audio_source = audio.source(int(self.options.samp_rate),
                                          self.options.audio, True)
         if self.options.iq:
             self.float_to_complex = blocks.float_to_complex(1)
