@@ -2,7 +2,7 @@ name: MIR-SAT1
 norad: 90001
 data:
   &tlm Telemetry:
-    telemetry: ax25
+    telemetry: mirsat1
   &file Files:
     files: mirsat1
 transmitters:
