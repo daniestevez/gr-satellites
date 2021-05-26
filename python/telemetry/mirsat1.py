@@ -102,6 +102,10 @@ BeaconPartA = Struct(
 
 mirsat1 = Struct(
     'ax25_header' / AX25Header,
-    'header' / Bytes(6),
-    'beacon' / Select(BeaconPartA, BeaconPartB)
+    'telemetry' / If(
+        this.ax25_header.pid == 0xF0,
+        Struct(
+            'header' / Bytes(6),
+            'beacon' / Select(BeaconPartA, BeaconPartB)
+            ))
     )
