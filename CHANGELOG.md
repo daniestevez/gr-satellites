@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Runtime bug in AALTO-1 deframer
 - Duplicated printing with --hexdump and unknown telemetry
+- Bug in FSK demodulator with IQ mode and high baudrate
 
 ## [4.1.0], [3.8.0] - 2021-04-24
 
