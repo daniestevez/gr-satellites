@@ -50,6 +50,7 @@ GR_PYTHON_INSTALL(
     gomx_3.py
     kr01.py
     lume.py
+    mirsat1.py
     mysat1.py
     picsat.py
     qo100.py

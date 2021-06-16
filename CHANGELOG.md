@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Support for DIY-1
+- Support for MIR-SAT1
 
 ### Fixed
 - Runtime bug in AALTO-1 deframer
