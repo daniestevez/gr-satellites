@@ -13,6 +13,10 @@ Using conda is the easiest and recommended way of installing gr-satellites in Wi
 This section shows how to install `miniconda`_, GNU Radio, and
 gr-satellites from scratch.
 
+
+More details about installing GNU Radio with conda can be found in the `CondaInstall_`
+page of the GNU Radio wiki.
+
 Miniconda
 ^^^^^^^^^
 
@@ -106,3 +110,4 @@ through Conda and for helping me make gr-satellites build on Windows.
 .. _miniconda: https://docs.conda.io/en/latest/miniconda.html
 .. _Ryan Volz: https://github.com/ryanvolz
 .. _Petrus Hyvönen: https://github.com/petrushy
+.. _CondaInstall: https://wiki.gnuradio.org/index.php/CondaInstall
