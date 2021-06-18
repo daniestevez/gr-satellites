@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [4.2.0], [3.9.0] - 2021-06-18	
+
 ### Added
 - Support for CubeSX-HSE in 1k2, 2k4 and 4k8 modes
 - Support for CubeSX-Sirius-HSE in 1k2 and 2k4 modes
@@ -392,7 +394,8 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v4.1.0...master
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v4.2.0...master
+[4.1.0]: https://github.com/daniestevez/gr-satellites/compare/v4.1.0...v4.2.0
 [4.1.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0-rc1...v4.0.0
 [4.0.0-rc1]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...v4.0.0-rc1
