@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- Support for CubeSX-HSE in 1k2, 2k4 and 4k8 modes
+- Support for CubeSX-Sirius-HSE in 1k2 and 2k4 modes
+- Support for OrbicraftZorkiy in 2k4 mode
+- Support for KAITUO-1B
 - Support for DIY-1
 - Support for MIR-SAT1
 
