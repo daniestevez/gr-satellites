@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Support for CubeSX-HSE in 1k2, 2k4 and 4k8 modes
+- Support for CubeSX-Sirius-HSE in 1k2 and 2k4 modes
+- Support for OrbicraftZorkiy in 2k4 mode
+- Support for KAITUO-1B
+- Support for DIY-1
+- Support for MIR-SAT1
+
+### Fixed
+- Runtime bug in AALTO-1 deframer
+- Duplicated printing with --hexdump and unknown telemetry
+- Bug in FSK demodulator with IQ mode and high baudrate
+
 ## [4.1.0], [3.8.0] - 2021-04-24
 
 ### Added
@@ -24,7 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for UNISAT-7
 - 2k4 downlink for MEZNSAT
 
-## Changed
+### Changed
 - In gr_satellites, do not disable non-telemetry datasinks in --hexdump mode
 - Reformatting of Python code according to PEP8
 

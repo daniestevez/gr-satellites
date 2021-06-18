@@ -48,7 +48,7 @@ class aalto1_deframer(gr.hier_block2, options_block):
 
         self.slicer = digital.binary_slicer_fb()
         self.deframer = sync_to_pdu_packed(
-            packlen=255, sync=syncword, threshold=syncword_threshold)
+            packlen=255, sync=_syncword, threshold=syncword_threshold)
         self.scrambler = pn9_scrambler()
         self.crop = cc11xx_packet_crop(True)
         self.crc = check_crc16_ccitt(self.options.verbose_crc)

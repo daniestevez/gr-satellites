@@ -1,9 +1,30 @@
 name: CubeSX-HSE
-norad: 99725
+norad: 47952
 data:
   &tlm Telemetry:
     telemetry: ax25
 transmitters:
+  1k2 FSK downlink:
+    frequency: 435.650e+6
+    modulation: FSK
+    baudrate: 1200
+    framing: USP
+    data:
+    - *tlm
+  2k4 FSK downlink:
+    frequency: 435.650e+6
+    modulation: FSK
+    baudrate: 2400
+    framing: USP
+    data:
+    - *tlm
+  4k8 FSK downlink:
+    frequency: 435.650e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: USP
+    data:
+    - *tlm
   9k6 FSK downlink:
     frequency: 435.650e+6
     modulation: FSK

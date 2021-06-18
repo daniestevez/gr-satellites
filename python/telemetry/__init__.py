@@ -36,6 +36,7 @@ from .gomx_1 import gomx_1
 from .gomx_3 import gomx_3
 from .kr01 import kr01
 from .lume import lume
+from .mirsat1 import mirsat1
 from .mysat1 import mysat1
 from .picsat import picsat
 from .qo100 import qo100
