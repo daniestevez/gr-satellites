@@ -1,5 +1,5 @@
 name: MIR-SAT1
-norad: 99718
+norad: 48868
 data:
   &tlm Telemetry:
     telemetry: mirsat1
