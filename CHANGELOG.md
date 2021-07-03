@@ -6,7 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## [4.2.0], [3.9.0] - 2021-06-18	
+### Added
+- Support for DHABISAT
+- Support for ION SCV-003
+- Support for IT-SPINS
+- Support for JAISAT-1
+- Support for QMR-KWT
+- Support for RAMSAT
+- Support for SOAR
+- Support for TUBIN
+
+## [4.2.0], [3.9.0] - 2021-06-18
 
 ### Added
 - Support for CubeSX-HSE in 1k2, 2k4 and 4k8 modes
