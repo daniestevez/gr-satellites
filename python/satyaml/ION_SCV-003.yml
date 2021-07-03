@@ -1,0 +1,13 @@
+name: ION SCV-003
+norad: 99677
+data:
+  &tlm Telemetry:
+    telemetry: csp
+transmitters:
+  1k2 FSK downlink:
+    frequency: 437.515e+6
+    modulation: FSK
+    baudrate: 1200
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
