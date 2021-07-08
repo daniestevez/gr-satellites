@@ -1,5 +1,5 @@
 name: TUBIN
-norad: 99678
+norad: 48900
 telemetry_servers:
   - SIDS http://fachgebiet.rft.tu-berlin.de/ham/telemetry/send
 data:
