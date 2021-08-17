@@ -77,6 +77,7 @@ class sync_to_pdu_packed(gr.hier_block2):
 
     def set_packlen(self, packlen):
         self.packlen = packlen
+        self.satellites_fixedlen_tagger_0_0_0.set_packet_len(self.packlen)
 
     def get_sync(self):
         return self.sync
