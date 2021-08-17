@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for RAMSAT
 - Support for SOAR
 - Support for TUBIN
+- Support for LEDSAT
 
 ## [4.2.0], [3.9.0] - 2021-06-18
 
