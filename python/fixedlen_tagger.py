@@ -36,6 +36,10 @@ class fixedlen_tagger(gr.basic_block):
         self.written = 0
         self.really_written = 0
 
+    def set_packet_len(self, packet_len):
+        self.packet_len = packet_len
+        self.stream.maxlen = self.packet_len
+
     def try_to_flush(self, out):
         # Try to send as much items as we have in buffer
         len_write = min(len(self.data), len(out))
