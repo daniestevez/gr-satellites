@@ -1,5 +1,5 @@
 name: QMR-KWT
-norad: 99680
+norad: 48943
 data:
   &tlm Telemetry:
     telemetry: ax25
