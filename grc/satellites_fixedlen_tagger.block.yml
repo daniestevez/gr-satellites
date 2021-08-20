@@ -38,5 +38,7 @@ templates:
         import numpy
     make: satellites.fixedlen_tagger(${syncword_tag}, ${packetlen_tag}, ${packet_len},
         ${stream_type.t})
+    callbacks:
+    - set_packet_len(${packet_len})
 
 file_format: 1

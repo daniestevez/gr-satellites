@@ -1,0 +1,13 @@
+name: SOAR
+norad: 48851
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  4k8 FSK downlink:
+    frequency: 401.725e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm

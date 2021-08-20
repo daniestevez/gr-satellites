@@ -6,6 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [4.3.0], [3.10.0] - 2021-08-20
+
+### Added
+- Support for DHABISAT
+- Support for ION SCV-003
+- Support for IT-SPINS
+- Support for JAISAT-1
+- Support for LEDSAT
+- Support for QMR-KWT
+- Support for RAMSAT
+- Support for SOAR
+- Support for TUBIN
+- Ability to change frame length in fixedlen_tagger block
+
+## [4.2.0], [3.9.0] - 2021-06-18
+
 ### Added
 - Support for CubeSX-HSE in 1k2, 2k4 and 4k8 modes
 - Support for CubeSX-Sirius-HSE in 1k2 and 2k4 modes
@@ -392,10 +408,14 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v4.1.0...master
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v4.3.0...master
+[4.3.0]: https://github.com/daniestevez/gr-satellites/compare/v4.2.0...v4.3.0
+[4.2.0]: https://github.com/daniestevez/gr-satellites/compare/v4.1.0...v4.2.0
 [4.1.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0-rc1...v4.0.0
 [4.0.0-rc1]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...v4.0.0-rc1
+[3.9.0]: https://github.com/daniestevez/gr-satellites/compare/v3.9.0...v3.10.0
+[3.9.0]: https://github.com/daniestevez/gr-satellites/compare/v3.8.0...v3.9.0
 [3.8.0]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...v3.8.0
 [3.7.0]: https://github.com/daniestevez/gr-satellites/compare/v3.6.0...v3.7.0
 [3.6.0]: https://github.com/daniestevez/gr-satellites/compare/v3.5.2...v3.6.0

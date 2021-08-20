@@ -645,7 +645,7 @@ display image files in realtime using `feh`_ as they are being received.
 These receiver blocks use *FileReceiver definitions*, which are
 classes derived from ``FileReceiver``. The list of available definitions can be
 seen in ``python/filereceiver/__index__.py``, or by calling
-``import satellites.filreceiver; help(satellites.filereceiver)`` in
+``import satellites.filereceiver; help(satellites.filereceiver)`` in
 ``python3``. Classes used by the Image receiver must be derived from ``ImageReceiver``.
 
 The figure below shows an example flowgraph of the Image receiver block, which can be

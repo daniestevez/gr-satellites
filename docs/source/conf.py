@@ -20,13 +20,13 @@
 # -- Project information -----------------------------------------------------
 
 project = 'gr-satellites'
-copyright = '2020, Daniel Estévez'
+copyright = '2021, Daniel Estévez'
 author = 'Daniel Estévez'
 
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '4.2.0'
+release = '4.3.0'
 
 
 # -- General configuration ---------------------------------------------------

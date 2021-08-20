@@ -1,5 +1,5 @@
 name: NanosatC-BR2
-norad: 99734
+norad: 47950
 data:
   &tlm Telemetry:
     telemetry: ax25
