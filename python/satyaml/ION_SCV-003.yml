@@ -1,5 +1,5 @@
 name: ION SCV-003
-norad: 99677
+norad: 48912
 data:
   &tlm Telemetry:
     telemetry: csp
