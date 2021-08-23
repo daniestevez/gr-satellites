@@ -1,5 +1,5 @@
 name: LEDSAT
-norad: 99670
+norad: 49069
 data:
   &tlm Telemetry:
     telemetry: csp
