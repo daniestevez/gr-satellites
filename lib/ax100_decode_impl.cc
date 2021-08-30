@@ -76,10 +76,6 @@ void ax100_decode_impl::msg_handler(pmt::pmt_t pmt_msg)
 
     // Send via GNUradio message if RS ok
     if (rs_res >= 0) {
-        // Swap CSP header
-        std::swap(d_data[1], d_data[4]);
-        std::swap(d_data[2], d_data[3]);
-
         // 32 RS parity symbols, 1 includes the length byte
         auto frame_len = d_data[0] - 32 - 1;
         if (frame_len < 0) {

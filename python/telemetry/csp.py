@@ -14,7 +14,7 @@ from construct import *
 Address = BitsInteger(5)
 Port = BitsInteger(6)
 
-CSPHeader = ByteSwapped(BitStruct(
+CSPHeader = BitStruct(
     'priority' / BitsInteger(2),
     'source' / Address,
     'destination' / Address,
@@ -26,14 +26,9 @@ CSPHeader = ByteSwapped(BitStruct(
     'xtea' / Flag,
     'rdp' / Flag,
     'crc' / Flag
-    ))
+    )
 
 csp = Struct(
     'header' / CSPHeader,
-    'payload' / GreedyBytes
-    )
-
-csp_swapped = Struct(
-    'header' / ByteSwapped(CSPHeader),
     'payload' / GreedyBytes
     )
