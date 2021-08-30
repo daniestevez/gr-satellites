@@ -171,11 +171,6 @@ void u482c_decode_impl::msg_handler(pmt::pmt_t pmt_msg)
     }
 
     // Send via GNU Radio message
-    // Swap CSP header
-    std::swap(packet[0], packet[3]);
-    std::swap(packet[1], packet[2]);
-
-    // Send by GNUradio message
     message_port_pub(pmt::mp("out"),
                      pmt::cons(pmt::PMT_NIL, pmt::init_u8vector(rx_len, packet)));
 }
