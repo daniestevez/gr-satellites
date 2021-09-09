@@ -39,6 +39,9 @@ GR_PYTHON_INSTALL(
     by02.py
     by70_1.py
     csp.py
+    cute_70cm.py
+    cute_bct_fsw.py
+    cute_bct_soh.py
     dstar_one.py
     eseo.py
     fossasat.py
