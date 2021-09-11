@@ -8,6 +8,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
+import sys
+
 from ..feh import FehOpener
 from .filereceiver import FileReceiver
 
@@ -76,4 +78,9 @@ class ImageReceiver(FileReceiver):
             # Enough data to display
             if self._feh is not None and not f.displaying:
                 f.displaying = True
-                self._feh.open(f.path)
+                try:
+                    self._feh.open(f.path)
+                except Exception as e:
+                    print('Unable to open feh image viewer',
+                          file=sys.stderr)
+                    print(e, file=sys.stderr)
