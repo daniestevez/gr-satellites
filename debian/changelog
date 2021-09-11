@@ -1,3 +1,9 @@
+gr-satellites (3.10.1-0) hirsute; urgency=medium
+
+  * Mainstream release v3.10.1
+
+ --  <daniel@destevez.net>  Sat, 11 Sep 2021 16:24:00 +0000
+
 gr-satellites (3.10.0-0) hirsute; urgency=medium
 
   * Mainstream release v3.10.0
