@@ -48,7 +48,7 @@ class check_crc16_ccitt(gr.basic_block):
                            pmt.init_u8vector(len(packet_out), packet_out))
 
         crc = hdlc.crc_ccitt(packet_out)
-        packet_crc = struct.unpack('<H', packet[-2:])[0]
+        packet_crc = struct.unpack('<H', bytes(packet[-2:]))[0]
         if crc == packet_crc:
             if self.verbose:
                 print('CRC OK')

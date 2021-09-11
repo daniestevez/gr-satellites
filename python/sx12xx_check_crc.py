@@ -86,17 +86,18 @@ class sx12xx_check_crc(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print('[ERROR] Received invalid message type. Expected u8vector')
             return
-        packet = bytes(pmt.u8vector_elements(msg))
+        packet_orig = pmt.u8vector_elements(msg)
+        packet = bytes(packet_orig)
 
         if len(packet) < 3:
             return
 
-        packet_out = packet[:-2]
+        packet_out = packet_orig[:-2]
         packet_crc = int.from_bytes(packet[-2:], 'big')
         msg_out = pmt.cons(
             pmt.car(msg_pmt),
             pmt.init_u8vector(len(packet_out), packet_out))
-        res = crc16(packet_out, self.initial, self.final)
+        res = crc16(packet[:-2], self.initial, self.final)
         if res == packet_crc:
             if self.verbose:
                 print('CRC OK')
