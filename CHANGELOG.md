@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [4.3.1], [3.10.1] - 2021-09-11
+
+### Changed
+- Do not swap CSP header endianness in AX100 and U482C deframers
+- Final NORAD ID for LEDSAT
+
+### Fixed
+- Fatal error of the image receiver if feh can't be run
+
 ## [4.3.0], [3.10.0] - 2021-08-20
 
 ### Added
