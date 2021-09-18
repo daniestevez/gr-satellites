@@ -1,0 +1,16 @@
+name: build-ubuntu
+
+# Controls when the action will run.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: daniestevez/gr-satellites-ci-action@v1.2.1
