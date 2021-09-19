@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for BINAR-1
 
+### Changed
+- Default output path for file receiver changed to current directory
+
 ## [4.3.1], [3.10.1] - 2021-09-11
 
 ### Changed

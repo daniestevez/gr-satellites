@@ -70,7 +70,7 @@ class file_receiver(gr.basic_block):
         Adds telemetry parser specific options to the argparse parser
         """
         parser.add_argument(
-            '--file_output_path', default='/tmp',
+            '--file_output_path', default='.',
             help='File output path [default=%(default)r]')
         parser.add_argument(
             '--verbose_file_receiver',
