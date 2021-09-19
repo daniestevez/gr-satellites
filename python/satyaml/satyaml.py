@@ -39,7 +39,7 @@ class SatYAML:
         'OPS-SAT', 'U482C', 'UA01', 'SALSAT', 'Mobitex', 'Mobitex-NX',
         'FOSSASAT', 'AISTECHSAT-2', 'AALTO-1', 'Grizu-263A', 'IDEASSat',
         'YUSAT', 'AX5043', 'USP', 'AO-40 FEC CRC-16-ARC',
-        'AO-40 FEC CRC-16-ARC short', 'DIY-1',
+        'AO-40 FEC CRC-16-ARC short', 'DIY-1', 'BINAR-1',
         ]
     transports = [
         'KISS', 'KISS no control byte', 'KISS KS-1Q',

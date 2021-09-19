@@ -27,6 +27,7 @@ from .astrocast_fx25_deframer import astrocast_fx25_deframer
 from .ax100_deframer import ax100_deframer
 from .ax25_deframer import ax25_deframer
 from .ax5043_deframer import ax5043_deframer
+from .binar1_deframer import binar1_deframer
 from .ccsds_concatenated_deframer import ccsds_concatenated_deframer
 from .ccsds_rs_deframer import ccsds_rs_deframer
 from .diy1_deframer import diy1_deframer
