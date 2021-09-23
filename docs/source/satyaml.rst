@@ -136,6 +136,8 @@ The framings allowed in the ``framing`` field are the following:
 * ``AO-40 FEC CRC-16-ARC short``, AO-40 FEC protocol with short frames and a
   CRC-16 ARC, as used by SMOG-1
 
+* ``CCSDS Uncoded``, uncoded CCSDS codeworks (see :ref:`CCSDS deframers`)
+
 * ``CCSDS Reed-Solomon``, CCSDS Reed-Solomon TM codewords (see :ref:`CCSDS deframers`)
 
 * ``CCSDS Concatenated``, CCSDS Concatenated TM codewords (see :ref:`CCSDS deframers`)
