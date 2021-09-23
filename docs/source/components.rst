@@ -380,16 +380,21 @@ Reed-Solomon codeword and is used by SMOG-P and ATL-1.
 CCSDS deframers
 """""""""""""""
 
-The CCSDS Concatenated deframer and CCSDS Reed-Solomon deframer blocks implement
-some of the CCSDS protocols defined in the TM Synchronization and Channel Coding
-Blue Book (see the `CCSDS Blue Books`_).
+The CCSDS Uncoded deframer, CCSDS Concatenated deframer, and CCSDS Reed-Solomon
+deframer blocks implement some of the CCSDS protocols defined in the TM
+Synchronization and Channel Coding Blue Book (see the `CCSDS Blue Books`_).
+
+The CCSDS Uncoded deframer implements uncoded TM frames.
 
 The CCSDS Reed-Solomon deframer implements Reed-Solomon TM frames, which use a
 Reed-Solmon (255, 223) code (or a shortened version of this code) and the CCSDS
-synchronous scrambler. There is support for several interleave Reed-Solomon codewords.
-The CCSDS Concatenated deframer implements
-concatenated TM frames, which add an r=1/2, k=7 convolutional code as an inner
-coding to the Reed-Solomon frames. The usage of both deframers is very similar.
+synchronous scrambler. There is support for several interleave Reed-Solomon
+codewords.
+
+The CCSDS Concatenated deframer implements concatenated TM frames, which add an
+r=1/2, k=7 convolutional code as an inner coding to the Reed-Solomon frames.
+
+The usage of all three of these deframers is very similar.
 
 The figure below shows an example flowgraph of the CCSDS Concatenated deframer
 block. This example can be found in

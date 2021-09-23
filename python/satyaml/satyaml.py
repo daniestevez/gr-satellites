@@ -33,7 +33,7 @@ class SatYAML:
         '3CAT-1', 'Astrocast FX.25 NRZ-I', 'Astrocast FX.25 NRZ',
         'AO-40 FEC', 'AO-40 FEC short', 'AO-40 uncoded', 'TT-64', 'ESEO',
         'Lucky-7', 'Reaktor Hello World', 'S-NET', 'Swiatowid', 'NuSat',
-        'K2SAT', 'CCSDS Reed-Solomon', 'CCSDS Concatenated',
+        'K2SAT', 'CCSDS Reed-Solomon', 'CCSDS Concatenated', 'CCSDS Uncoded',
         'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon',
         'SMOG-P RA', 'SMOG-1 RA', 'SMOG-P Signalling', 'SMOG-1 Signalling',
         'OPS-SAT', 'U482C', 'UA01', 'SALSAT', 'Mobitex', 'Mobitex-NX',

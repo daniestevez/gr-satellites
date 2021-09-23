@@ -31,14 +31,15 @@ class ccsds_rs_deframer(gr.hier_block2, options_block):
         frame_size: frame size (not including parity check bytes) (int)
         precoding: either None or 'differential' for differential precoding
                    (str)
+        rs_en: If Reed-Solomon should be enabled or not (bool)
         rs_basis: Reed-Solomon basis, either 'conventional' or 'dual' (str)
         rs_interleaving: Reed-Solomon interleaving depth (int)
         scrambler: scrambler to use, either 'CCSDS' or 'none' (str)
         syncword_threshold: number of bit errors allowed in syncword (int)
         options: Options from argparse
     """
-    def __init__(self, frame_size=223, precoding=None, rs_basis='dual',
-                 rs_interleaving=1, scrambler='CCSDS',
+    def __init__(self, frame_size=223, precoding=None, rs_en=True,
+                 rs_basis='dual', rs_interleaving=1, scrambler='CCSDS',
                  syncword_threshold=None, options=None):
         gr.hier_block2.__init__(
             self,
@@ -66,7 +67,8 @@ class ccsds_rs_deframer(gr.hier_block2, options_block):
                         else sync_to_pdu_packed)
         packlen_mult = 8 if scrambler == 'CCSDS' else 1
         self.deframer = deframe_func(
-            packlen=(frame_size + 32 * rs_interleaving) * packlen_mult,
+            packlen=((frame_size + (32 * rs_interleaving if rs_en else 0)) *
+                     packlen_mult),
             sync=_syncword, threshold=syncword_threshold)
         if scrambler == 'CCSDS':
             self.scrambler = ccsds_descrambler()
@@ -78,12 +80,20 @@ class ccsds_rs_deframer(gr.hier_block2, options_block):
         self._blocks += [self.deframer]
 
         self.connect(*self._blocks)
+
+        if rs_en:
+            out = (self.fec, 'in')
+        else:
+            out = (self, 'out')
+
         if scrambler == 'CCSDS':
             self.msg_connect((self.deframer, 'out'), (self.scrambler, 'in'))
-            self.msg_connect((self.scrambler, 'out'), (self.fec, 'in'))
+            self.msg_connect((self.scrambler, 'out'), out)
         else:
-            self.msg_connect((self.deframer, 'out'), (self.fec, 'in'))
-        self.msg_connect((self.fec, 'out'), (self, 'out'))
+            self.msg_connect((self.deframer, 'out'), out)
+
+        if rs_en:
+            self.msg_connect((self.fec, 'out'), (self, 'out'))
 
     _default_sync_threshold = 4
 
