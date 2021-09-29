@@ -1,5 +1,5 @@
 name: CUTE
-norad: 99510
+norad: 49263
 data:
   &tlm Telemetry:
     telemetry: cute_70cm
