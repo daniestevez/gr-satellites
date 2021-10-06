@@ -6,7 +6,7 @@ data:
 transmitters:
   9k6 FSK downlink:
     frequency: 437.075e+6
-    modulation: FSK
+    modulation: BPSK
     baudrate: 9600
     framing: AX.25 G3RUH
     data:
