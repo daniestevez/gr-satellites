@@ -35,8 +35,8 @@ all the support from the community.
 
 So if you are planning to use gr-satellites for something as important as your
 next satellite mission, we are glad to have you on-board. You are more than
-welcome to write in
-[Github issues](https://github.com/daniestevez/gr-satellites/issues)
+welcome to write in the
+[Github discussions](https://github.com/daniestevez/gr-satellites/discussions/categories/satellite-teams)
 a heads-up message, such as a statement of interest or presentation letter
 (you can make it look the way you like) so that we are aware of your work and can
 start coordinating efforts with you.
