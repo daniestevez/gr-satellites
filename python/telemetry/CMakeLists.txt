@@ -42,6 +42,7 @@ GR_PYTHON_INSTALL(
     cute_70cm.py
     cute_bct_fsw.py
     cute_bct_soh.py
+    cute_pld.py
     dstar_one.py
     eseo.py
     fossasat.py
