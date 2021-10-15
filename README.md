@@ -85,8 +85,11 @@ how to build and install gr-satellites are given in the
 
 Support for gr-satellites is handled only through
 [Github issues](https://github.com/daniestevez/gr-satellites/issues)
+and [Github discussions](https://github.com/daniestevez/gr-satellites/discussions)
 so that the whole community can benefit, rather than through private
 channels such as email. Please understand this when asking for support.
+Take a look [here](https://github.com/daniestevez/gr-satellites/discussions/304) to
+check whether a new topic fits better in the issues page or in the discussions page.
 
 ## Satellite teams
 
