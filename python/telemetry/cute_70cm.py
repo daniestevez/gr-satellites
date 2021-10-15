@@ -17,6 +17,7 @@ from construct import Adapter, BitsInteger, BitStruct, Container, Enum, \
 from .ax25 import Header
 from .cute_bct_fsw import cute_bct_fsw
 from .cute_bct_soh import cute_bct_soh
+from .cute_pld import cute_pld_sw_stat
 
 PrimaryHeader = BitStruct(
     'ccsds_version' / BitsInteger(3),
@@ -75,7 +76,8 @@ cute_ax25_packet_complete = Struct(
         lambda c: (c.primary_header.APID),
         {
             (0x55): cute_bct_fsw,
-            (0x56): cute_bct_soh
+            (0x56): cute_bct_soh,
+            (0x1FF): cute_pld_sw_stat
         }
     )
 )
