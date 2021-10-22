@@ -10,7 +10,7 @@
 
 from gnuradio import gr, digital
 
-from ... import sx12xx_check_crc
+from ... import sx12xx_check_crc, cc11xx_packet_crop
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
 
@@ -24,10 +24,11 @@ class binar1_deframer(gr.hier_block2, options_block):
     """
     Hierarchical block to deframe the BINAR-1 custom framing
 
-    This framing uses a custom syncword, fixed packet size
-    (albeit there is a field with the packet length that always
-    has the value 0x56), no scrambling, and CRC-16 CCITT FALSE
-    (as in CCSDS transfer frames).
+    This framing uses a custom syncword, a 1-byte packet length
+    field, no scrambling, and CRC-16 CCITT FALSE (as in CCSDS
+    transfer frames). the packet length field was supposed to
+    always have the value 0x56, but we have seen other values
+    such as 0x4b being used.
 
     The input is a float stream of soft symbols. The output are PDUs
     with frames.
@@ -51,11 +52,13 @@ class binar1_deframer(gr.hier_block2, options_block):
 
         self.slicer = digital.binary_slicer_fb()
         self.deframer = sync_to_pdu_packed(
-            packlen=89, sync=_syncword, threshold=syncword_threshold)
+            packlen=255+3, sync=_syncword, threshold=syncword_threshold)
+        self.crop = cc11xx_packet_crop(use_crc16=True)
         self.crc = sx12xx_check_crc(self.options.verbose_crc, 0xffff, 0x0)
 
         self.connect(self, self.slicer, self.deframer)
-        self.msg_connect((self.deframer, 'out'), (self.crc, 'in'))
+        self.msg_connect((self.deframer, 'out'), (self.crop, 'in'))
+        self.msg_connect((self.crop, 'out'), (self.crc, 'in'))
         self.msg_connect((self.crc, 'ok'), (self, 'out'))
 
     _default_sync_threshold = 0
