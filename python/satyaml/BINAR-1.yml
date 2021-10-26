@@ -3,6 +3,8 @@ norad: 99520
 data:
   &tlm Telemetry:
     unknown
+  &ax25 AX.25 telemetry:
+    telemetry: ax25
 transmitters:
   1k2 FSK downlink:
     frequency: 435.810e+6
@@ -18,3 +20,17 @@ transmitters:
     framing: BINAR-1
     data:
     - *tlm
+  1k2 FSK AX.25 downlink:
+    frequency: 435.810e+6
+    modulation: FSK
+    baudrate: 1200
+    framing: AX.25 G3RUH
+    data:
+    - *ax25
+  9k6 FSK AX.25 downlink:
+    frequency: 435.810e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX.25 G3RUH
+    data:
+    - *ax25
