@@ -38,7 +38,7 @@ class crop_and_check_crc(gr.basic_block):
         if not pmt.is_u8vector(msg):
             print('[ERROR] Received invalid message type. Expected u8vector')
             return
-        packet = msg
+        packet = pmt.u8vector_elements(msg)
         start = 0
         while True:
             try:
