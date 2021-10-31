@@ -8,9 +8,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Support for BINAR-1
+- Support for CUAVA-1
+- Support for CUTE
+- CCSDS Uncoded Deframer block
 
 ### Changed
 - Default output path for file receiver changed to current directory
+- Added 9k6 mode to BEESAT-1
+
+### Fixed
+- CSP header parsing in AAUSAT-4 and BY70-1 telemetry parsers
+
+### Removed
+- Deleted unused test_satellites.cc test code
 
 ## [4.3.1], [3.10.1] - 2021-09-11
 
