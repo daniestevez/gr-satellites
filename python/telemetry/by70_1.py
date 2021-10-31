@@ -433,7 +433,7 @@ Frame = Select(
     EPS_Error)
 
 by70_1 = Struct(
-    'csp_header' / ByteSwapped(CSPHeader),
+    'csp_header' / CSPHeader,
     'beacon' / If(this.csp_header.destination == 5, Frame),
     'camera' / If(this.csp_header.destination == 6, ImageData),
     'packet_count' / Int32ul,
