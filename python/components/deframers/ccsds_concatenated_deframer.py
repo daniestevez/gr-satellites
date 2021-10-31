@@ -37,9 +37,9 @@ class ccsds_concatenated_deframer(gr.hier_block2, options_block):
         syncword_threshold: number of bit errors allowed in syncword (int)
         options: Options from argparse
     """
-    def __init__(self, frame_size=223, precoding=None, rs_en=True, rs_basis='dual',
-                 rs_interleaving=1, scrambler='CCSDS', convolutional='CCSDS',
-                 syncword_threshold=None, options=None):
+    def __init__(self, frame_size=223, precoding=None, rs_en=True,
+                 rs_basis='dual', rs_interleaving=1, scrambler='CCSDS',
+                 convolutional='CCSDS', syncword_threshold=None, options=None):
         gr.hier_block2.__init__(
             self,
             'ccsds_concatenated_deframer',
