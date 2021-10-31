@@ -27,6 +27,7 @@ class ccsds_concatenated_deframer(gr.hier_block2, options_block):
         frame_size: frame size (not including parity check bytes) (int)
         precoding: either None or 'differential' for differential precoding
                    (str)
+        rs_en: If Reed-Solomon should be enabled or not (bool)
         rs_basis: Reed-Solomon basis, either 'conventional' or 'dual' (str)
         rs_interleaving: Reed-Solomon interleaving depth (int)
         scrambler: scrambler to use, either 'CCSDS' or 'none' (str)
@@ -36,7 +37,7 @@ class ccsds_concatenated_deframer(gr.hier_block2, options_block):
         syncword_threshold: number of bit errors allowed in syncword (int)
         options: Options from argparse
     """
-    def __init__(self, frame_size=223, precoding=None, rs_basis='dual',
+    def __init__(self, frame_size=223, precoding=None, rs_en=True, rs_basis='dual',
                  rs_interleaving=1, scrambler='CCSDS', convolutional='CCSDS',
                  syncword_threshold=None, options=None):
         gr.hier_block2.__init__(
@@ -56,10 +57,10 @@ class ccsds_concatenated_deframer(gr.hier_block2, options_block):
         self.addconst0 = blocks.add_const_ff(-0.5)
         self.addconst1 = blocks.add_const_ff(-0.5)
         self.rs0 = ccsds_rs_deframer(
-            frame_size, precoding, rs_basis, rs_interleaving,
+            frame_size, precoding, rs_en, rs_basis, rs_interleaving,
             scrambler, syncword_threshold, options)
         self.rs1 = ccsds_rs_deframer(
-            frame_size, precoding, rs_basis, rs_interleaving,
+            frame_size, precoding, rs_en, rs_basis, rs_interleaving,
             scrambler, syncword_threshold, options)
 
         self.connect(self, self.viterbi0, self.char2float0,
