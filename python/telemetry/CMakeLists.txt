@@ -36,6 +36,7 @@ GR_PYTHON_INSTALL(
     amicalsat.py
     au03.py
     ax25.py
+    binar1.py
     by02.py
     by70_1.py
     csp.py
