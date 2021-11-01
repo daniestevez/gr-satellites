@@ -114,4 +114,3 @@ binar1 = Struct(
     'telemetry' / Telemetry,
     'message' / StringMsg,
 )
-
