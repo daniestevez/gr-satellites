@@ -41,6 +41,7 @@ GR_PYTHON_INSTALL(
     ax100_deframer.py
     ax25_deframer.py
     ax5043_deframer.py
+    binar1_deframer.py
     ccsds_concatenated_deframer.py
     ccsds_rs_deframer.py
     diy1_deframer.py

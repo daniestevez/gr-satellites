@@ -136,6 +136,8 @@ The framings allowed in the ``framing`` field are the following:
 * ``AO-40 FEC CRC-16-ARC short``, AO-40 FEC protocol with short frames and a
   CRC-16 ARC, as used by SMOG-1
 
+* ``CCSDS Uncoded``, uncoded CCSDS codeworks (see :ref:`CCSDS deframers`)
+
 * ``CCSDS Reed-Solomon``, CCSDS Reed-Solomon TM codewords (see :ref:`CCSDS deframers`)
 
 * ``CCSDS Concatenated``, CCSDS Concatenated TM codewords (see :ref:`CCSDS deframers`)
@@ -239,6 +241,8 @@ The framings allowed in the ``framing`` field are the following:
   with custom synchronization and a PLS based on DVB-S2.
 
 * ``DIY-1``, the custom framing used by DIY-1, which uses an RFM22 chip transceiver.
+
+* ``BINAR-1``, the custom framing used by the BINAR-1 satellite.
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.

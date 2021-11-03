@@ -36,9 +36,14 @@ GR_PYTHON_INSTALL(
     amicalsat.py
     au03.py
     ax25.py
+    binar1.py
     by02.py
     by70_1.py
     csp.py
+    cute_70cm.py
+    cute_bct_fsw.py
+    cute_bct_soh.py
+    cute_pld.py
     dstar_one.py
     eseo.py
     fossasat.py

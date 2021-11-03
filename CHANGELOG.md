@@ -6,6 +6,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [4.4.0], [3.11.0] - 2021-11-03
+
+### Added
+- Support for BINAR-1
+- Support for CUAVA-1
+- Support for CUTE
+- CCSDS Uncoded Deframer block
+
+### Changed
+- Default output path for file receiver changed to current directory
+- Added 9k6 mode to BEESAT-1
+
+### Fixed
+- CSP header parsing in AAUSAT-4 and BY70-1 telemetry parsers
+- YUSAT deframer
+
+### Removed
+- Deleted unused test_satellites.cc test code
+
 ## [4.3.1], [3.10.1] - 2021-09-11
 
 ### Changed
@@ -417,13 +436,17 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v4.3.0...master
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v4.4.0...master
+[4.4.0]: https://github.com/daniestevez/gr-satellites/compare/v4.3.1...v4.4.0
+[4.3.1]: https://github.com/daniestevez/gr-satellites/compare/v4.3.0...v4.3.1
 [4.3.0]: https://github.com/daniestevez/gr-satellites/compare/v4.2.0...v4.3.0
 [4.2.0]: https://github.com/daniestevez/gr-satellites/compare/v4.1.0...v4.2.0
 [4.1.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0-rc1...v4.0.0
 [4.0.0-rc1]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...v4.0.0-rc1
-[3.9.0]: https://github.com/daniestevez/gr-satellites/compare/v3.9.0...v3.10.0
+[3.11.1]: https://github.com/daniestevez/gr-satellites/compare/v3.11.0...v3.11.1
+[3.11.0]: https://github.com/daniestevez/gr-satellites/compare/v3.10.0...v3.11.0
+[3.10.0]: https://github.com/daniestevez/gr-satellites/compare/v3.9.0...v3.10.0
 [3.9.0]: https://github.com/daniestevez/gr-satellites/compare/v3.8.0...v3.9.0
 [3.8.0]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...v3.8.0
 [3.7.0]: https://github.com/daniestevez/gr-satellites/compare/v3.6.0...v3.7.0

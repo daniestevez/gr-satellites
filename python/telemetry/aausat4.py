@@ -68,7 +68,7 @@ Valid = BitStruct(
 
 aausat4 = Struct(
     'frame_length' / Int16ub,
-    'csp_header' / CSPHeader,
+    'csp_header' / ByteSwapped(CSPHeader),
     'valid' / Valid,
     'eps' / EPS,
     'com' / COM,

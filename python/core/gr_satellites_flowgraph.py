@@ -443,6 +443,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'K2SAT': deframers.k2sat_deframer,
         'CCSDS Reed-Solomon': deframers.ccsds_rs_deframer,
         'CCSDS Concatenated': deframers.ccsds_concatenated_deframer,
+        'CCSDS Uncoded': set_options(deframers.ccsds_rs_deframer, rs_en=False),
         'LilacSat-1': deframers.lilacsat_1_deframer,
         'AAUSAT-4': deframers.aausat4_deframer,
         'NGHam': set_options(deframers.ngham_deframer, decode_rs=True),
@@ -468,6 +469,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'AX5043': deframers.ax5043_deframer,
         'USP': deframers.usp_deframer,
         'DIY-1': deframers.diy1_deframer,
+        'BINAR-1': deframers.binar1_deframer,
         }
     _transport_hooks = {
         'KISS': transports.kiss_transport,

@@ -22,9 +22,11 @@ from .aausat4 import aausat4
 from .amicalsat import amicalsat
 from .au03 import au03
 from .ax25 import ax25
+from .binar1 import binar1
 from .by02 import by02
 from .by70_1 import by70_1
 from .csp import csp
+from .cute_70cm import cute_70cm
 from .dstar_one import dstar_one
 from .eseo import eseo
 from .floripasat import floripasat
