@@ -1,0 +1,15 @@
+name: TEVEL-3
+alternative_names:
+  - T3TYB
+norad: 99473
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  9k6 BPSK downlink:
+    frequency: 436.400e+6
+    modulation: BPSK
+    baudrate: 9600
+    framing: AX.25 G3RUH
+    data:
+    - *tlm
