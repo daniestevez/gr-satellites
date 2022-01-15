@@ -13,4 +13,4 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: daniestevez/gr-satellites-ci-action@v1.2.1
+      - uses: daniestevez/gr-satellites-ci-action@v1.3.0
