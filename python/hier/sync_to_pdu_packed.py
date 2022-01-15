@@ -16,6 +16,8 @@ from gnuradio.filter import firdes
 import satellites
 import numpy
 
+from ..grtypes import byte_t
+
 
 class sync_to_pdu_packed(gr.hier_block2):
     def __init__(self, packlen=0,
@@ -47,7 +49,7 @@ class sync_to_pdu_packed(gr.hier_block2):
         self.blocks_unpacked_to_packed_xx_0 = (
             blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST))
         self.blocks_tagged_stream_to_pdu_0_0_0 = (
-            blocks.tagged_stream_to_pdu(blocks.byte_t, 'packet_len'))
+            blocks.tagged_stream_to_pdu(byte_t, 'packet_len'))
         self.blocks_tagged_stream_multiply_length_0 = (
             blocks.tagged_stream_multiply_length(gr.sizeof_char*1,
                                                  'packet_len', 1/8.0))

@@ -22,6 +22,7 @@ else:
     sys.modules['satellites'] = satellites
 
 from satellites import kiss_to_pdu, pdu_to_kiss
+from satellites.grtypes import byte_t
 
 
 class qa_kiss(gr_unittest.TestCase):
@@ -35,7 +36,7 @@ class qa_kiss(gr_unittest.TestCase):
         """Connects a PDU to KISS and KISS to PDU and  sends PDUs through"""
         pdu2kiss = pdu_to_kiss(include_timestamp=True)
         kiss2pdu = kiss_to_pdu()
-        pdu2tag = blocks.pdu_to_tagged_stream(blocks.byte_t)
+        pdu2tag = blocks.pdu_to_tagged_stream(byte_t)
         dbg = blocks.message_debug()
 
         self.tb.connect(pdu2tag, kiss2pdu)

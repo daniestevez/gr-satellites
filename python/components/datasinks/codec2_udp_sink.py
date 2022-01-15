@@ -11,6 +11,7 @@
 from gnuradio import gr, blocks
 
 from ...utils.options_block import options_block
+from ...grtypes import byte_t
 
 
 class codec2_udp_sink(gr.hier_block2, options_block):
@@ -40,7 +41,7 @@ class codec2_udp_sink(gr.hier_block2, options_block):
         if port is None:
             port = self.options.codec2_port
 
-        self.pdu2tag = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
+        self.pdu2tag = blocks.pdu_to_tagged_stream(byte_t, 'packet_len')
         payload_bytes = 7
         self.udp = blocks.udp_sink(gr.sizeof_char*1,
                                    ip, port, payload_bytes, False)
