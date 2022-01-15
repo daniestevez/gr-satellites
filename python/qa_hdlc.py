@@ -22,6 +22,7 @@ else:
     sys.modules['satellites'] = satellites
 
 from satellites import hdlc_framer, hdlc_deframer
+from satellites.grtypes import byte_t
 
 
 class qa_hdlc(gr_unittest.TestCase):
@@ -35,7 +36,7 @@ class qa_hdlc(gr_unittest.TestCase):
         """Connects an HDLC framer to a deframer and sends PDUs through"""
         framer = hdlc_framer(100, 20)
         deframer = hdlc_deframer(True, 10000)
-        pdu2tag = blocks.pdu_to_tagged_stream(blocks.byte_t)
+        pdu2tag = blocks.pdu_to_tagged_stream(byte_t)
         dbg = blocks.message_debug()
 
         self.tb.connect(pdu2tag, deframer)
