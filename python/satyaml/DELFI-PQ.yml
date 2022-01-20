@@ -1,5 +1,5 @@
 name: DELFI-PQ
-norad: 99489
+norad: 51074
 data:
   &tlm Telemetry:
     unknown
