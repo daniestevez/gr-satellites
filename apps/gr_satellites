@@ -179,7 +179,7 @@ class gr_satellites_top_block(gr.top_block):
         self.setup_input()
 
         # Set appropriate sample rate
-        if options.samp_rate:
+        if options.samp_rate or pdu_in:
             samp_rate = options.samp_rate
         elif options.wavfile:
             samp_rate = self.wavfile_source.sample_rate()
