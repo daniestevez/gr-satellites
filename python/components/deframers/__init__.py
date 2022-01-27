@@ -31,6 +31,7 @@ from .binar1_deframer import binar1_deframer
 from .ccsds_concatenated_deframer import ccsds_concatenated_deframer
 from .ccsds_rs_deframer import ccsds_rs_deframer
 from .diy1_deframer import diy1_deframer
+from .endurosat_deframer import endurosat_deframer
 from .eseo_deframer import eseo_deframer
 from .fossasat_deframer import fossasat_deframer
 from .grizu263a_deframer import grizu263a_deframer
