@@ -1,13 +1,22 @@
 name: GASPACS
 norad: 99430
 data:
-  &tlm Telemetry:
+  &ax25 AX.25 Telemetry:
     telemetry: ax25
+  &endurosat Endurosat Telemetry:
+     unknown
 transmitters:
-  9k6 FSK downlink:
+  9k6 FSK AX.25 downlink:
     frequency: 437.365e+6
     modulation: FSK
     baudrate: 9600
     framing: AX.25 G3RUH
     data:
-    - *tlm
+    - *ax25
+  9k6 FSK Endurosat downlink:
+    frequency: 437.365e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: Endurosat
+    data:
+    - *endurosat
