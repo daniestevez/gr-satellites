@@ -6,6 +6,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Support for GNU Radio 3.10
+- Support for DELFI-PQ
+- Support for EXP-1
+- Support for GASPACS
+- Support for IRIS-A
+- Support for TARGIT
+- Support for the TEVEL satellites
+- Support for XW-3
+
+### Changed
+- Final NORAD ID for CUAVA-1
+- Final NORAD ID for Grizu-263A
+
+### Fixed
+- Bug in sx12xx_packet_crop under GNU Radio 3.9
+- Bug in --kiss_in mode
+- NORAD ID for KSU CubeSat
+
 ## [4.4.0], [3.11.0] - 2021-11-03
 
 ### Added
