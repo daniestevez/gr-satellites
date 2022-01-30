@@ -1,5 +1,5 @@
 name: GASPACS
-norad: 99430
+norad: 51439
 data:
   &ax25 AX.25 Telemetry:
     telemetry: ax25
