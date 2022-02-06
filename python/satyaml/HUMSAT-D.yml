@@ -4,7 +4,7 @@ data:
   &tlm Telemetry:
     telemetry: csp
 transmitters:
-  1k2 FSK telemetry downlink:
+  1k2 AFSK telemetry downlink:
     frequency: 437.325e+6
     modulation: AFSK
     baudrate: 1200
