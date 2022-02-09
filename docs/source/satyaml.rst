@@ -15,7 +15,7 @@ SatYAML files are stored in the ``python/satyaml`` directory. Below we show the
 SatYAML file ``1KUNS-PF.yml`` to give an overall idea of the format of these
 files.
 
-.. code-block:: none
+.. code-block:: yaml
 
    name: 1KUNS-PF
    alternative_names:
@@ -277,7 +277,7 @@ rarely used feature).
 
 The following example shows how transports are indicated in SatYAML files.
 
-.. code-block:: none
+.. code-block:: yaml
 
    name: KS-1Q
    norad: 41845
