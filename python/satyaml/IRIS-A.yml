@@ -1,5 +1,5 @@
 name: IRIS-A
-norad: 99498
+norad: 51044
 data:
   &tlm Telemetry:
     telemetry: ax25
