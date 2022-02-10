@@ -1,5 +1,5 @@
 name: GT-1
-norad: 99435
+norad: 51510
 data:
   &tlm Telemetry:
     telemetry: ax25
