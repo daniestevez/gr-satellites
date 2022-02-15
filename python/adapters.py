@@ -31,6 +31,19 @@ class LinearAdapter(AffineAdapter):
         return AffineAdapter.__init__(self, c, 0, *args, **kwargs)
 
 
+class PolynomialAdapter(Adapter):
+    def __init__(self, coeffs, *args, **kwargs):
+        self.c = coeffs
+        return Adapter.__init__(self, *args, **kwargs)
+
+    def _encode(self, obj, context, path=None):
+        raise NotImplementedError
+
+    def _decode(self, obj, context, path=None):
+        x = float(obj)
+        return sum([c * (x ** i) for i, c in enumerate(self.c)])
+
+
 class UNIXTimestampAdapter(Adapter):
     def _encode(self, obj, context, path=None):
         return round(obj.timestamp())

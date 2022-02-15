@@ -2,7 +2,7 @@ name: INSPIRESat-1
 norad: 51657
 data:
   &tlm Telemetry:
-    telemetry: ax25
+    telemetry: inspiresat_1
 transmitters:
   9k6 FSK downlink:
     frequency: 437.500e+6
