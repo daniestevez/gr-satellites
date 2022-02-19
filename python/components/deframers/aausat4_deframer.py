@@ -11,6 +11,8 @@
 from gnuradio import gr, blocks, digital, fec
 
 from ... import decode_rs, aausat4_remove_fsm
+from ...grpdu import pdu_to_tagged_stream, tagged_stream_to_pdu
+from ...grtypes import byte_t
 from ...hier.sync_to_pdu_soft import sync_to_pdu_soft
 from ...hier.ccsds_descrambler import ccsds_descrambler
 from ...utils.options_block import options_block
@@ -61,11 +63,11 @@ class aausat4_deframer(gr.hier_block2, options_block):
         # Workaround for bug https://github.com/gnuradio/gnuradio/pull/2965
         # We use packed output for Viterbi short decoder and then
         # we unpack the PDUs.
-        self.pdu2tag = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
+        self.pdu2tag = pdu_to_tagged_stream(byte_t, 'packet_len')
         self.unpack = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
         self.taglength = blocks.tagged_stream_multiply_length(
             gr.sizeof_char*1, 'packet_len', 8)
-        self.tag2pdu = blocks.tagged_stream_to_pdu(blocks.byte_t, 'packet_len')
+        self.tag2pdu = tagged_stream_to_pdu(byte_t, 'packet_len')
 
         self.scrambler = ccsds_descrambler()
         self.rs = decode_rs(False, 1)

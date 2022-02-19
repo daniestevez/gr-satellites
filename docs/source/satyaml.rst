@@ -15,7 +15,7 @@ SatYAML files are stored in the ``python/satyaml`` directory. Below we show the
 SatYAML file ``1KUNS-PF.yml`` to give an overall idea of the format of these
 files.
 
-.. code-block:: none
+.. code-block:: yaml
 
    name: 1KUNS-PF
    alternative_names:
@@ -243,6 +243,8 @@ The framings allowed in the ``framing`` field are the following:
 * ``DIY-1``, the custom framing used by DIY-1, which uses an RFM22 chip transceiver.
 
 * ``BINAR-1``, the custom framing used by the BINAR-1 satellite.
+
+* ``Endurosat``, the custom framing used by the Endurosat modem.
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.
@@ -275,7 +277,7 @@ rarely used feature).
 
 The following example shows how transports are indicated in SatYAML files.
 
-.. code-block:: none
+.. code-block:: yaml
 
    name: KS-1Q
    norad: 41845

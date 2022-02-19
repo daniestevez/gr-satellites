@@ -513,7 +513,7 @@ To enable telemetry submission, it is necessary to edit some parameters in
 with a template when ``gr_satellites`` is first run. The template looks like
 this:
 
-.. code-block::
+.. code-block:: ini
 
     [Groundstation]
     callsign = 

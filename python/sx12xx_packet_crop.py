@@ -44,4 +44,4 @@ class sx12xx_packet_crop(gr.basic_block):
         self.message_port_pub(
             pmt.intern('out'),
             pmt.cons(pmt.car(msg_pmt),
-                     pmt.init_u8vector(packet_length, packet)))
+                     pmt.init_u8vector(packet_length, list(packet))))

@@ -12,6 +12,8 @@ from gnuradio import gr, blocks, digital
 
 from ... import (
     decode_rs, ngham_packet_crop, ngham_remove_padding, ngham_check_crc)
+from ...grpdu import pdu_to_tagged_stream, tagged_stream_to_pdu
+from ...grtypes import byte_t
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...hier.ccsds_descrambler import ccsds_descrambler
 from ...utils.options_block import options_block
@@ -56,11 +58,11 @@ class ngham_deframer(gr.hier_block2, options_block):
         self.deframer = sync_to_pdu_packed(
             packlen=255 + 3, sync=_syncword, threshold=syncword_threshold)
         self.crop = ngham_packet_crop()
-        self.pdu2tag = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
+        self.pdu2tag = pdu_to_tagged_stream(byte_t, 'packet_len')
         self.unpack = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
         self.taglength = blocks.tagged_stream_multiply_length(
             gr.sizeof_char*1, 'packet_len', 8)
-        self.tag2pdu = blocks.tagged_stream_to_pdu(blocks.byte_t, 'packet_len')
+        self.tag2pdu = tagged_stream_to_pdu(byte_t, 'packet_len')
         self.scrambler = ccsds_descrambler()
         self.padding = ngham_remove_padding()
         self.crc = ngham_check_crc(self.options.verbose_crc)

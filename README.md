@@ -39,7 +39,7 @@ Currently there are the following series of releases in the history of
 gr-satellites:
 
 * `v4.x.y` has the same functionality as the v3.x.y series, but supports
-   GNU Radio 3.9.
+   GNU Radio 3.9 and 3.10.
 
 * `v3.x.y` is the result of a large refactor that introduces a lot of
   new functionality and improvements. The refactor started on September
@@ -56,10 +56,11 @@ gr-satellites:
 The repository is organized in the following branches:
 
 * `master` is where the active development happens. From time to time, features
-  will be frozen in a new release. This branch is compatible with GNU Radio 3.9.
+  will be frozen in a new release. This branch is compatible with GNU Radio 3.9
+  and 3.10.
 
 * `maint-3.9` is the branch where releases in the current `v4.x.y` line are
-  published. This branch is compatible with GNU Radio 3.9.
+  published. This branch is compatible with GNU Radio 3.9 and 3.10.
 
 * `maint-3.8` is the branch where releases in the current `v3.x.y` line are
   published. This branch is compatible with GNU Radio 3.8.

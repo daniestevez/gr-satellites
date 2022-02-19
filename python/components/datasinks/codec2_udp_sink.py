@@ -10,7 +10,12 @@
 
 from gnuradio import gr, blocks
 
+
+if gr.api_version() != '9':
+    from gnuradio import network
+
 from ...utils.options_block import options_block
+from ...grtypes import byte_t
 
 
 class codec2_udp_sink(gr.hier_block2, options_block):
@@ -40,10 +45,20 @@ class codec2_udp_sink(gr.hier_block2, options_block):
         if port is None:
             port = self.options.codec2_port
 
-        self.pdu2tag = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
+        self.pdu2tag = blocks.pdu_to_tagged_stream(byte_t, 'packet_len')
         payload_bytes = 7
-        self.udp = blocks.udp_sink(gr.sizeof_char*1,
-                                   ip, port, payload_bytes, False)
+        # The UDP sink has been moved in GNU Radio 3.10
+        if gr.api_version() == '9':
+            self.udp = udp_sink(gr.sizeof_char*1,
+                                ip, port, payload_bytes, False)
+        else:
+            udp_header = 0  # no header
+            # The new UDP sink requires at least 8 bytes of payload.
+            # We use 14 bytes, which is 2 codec2 frames.
+            payload_bytes = 14
+            self.udp = network.udp_sink(gr.sizeof_char, 1,
+                                        ip, port, udp_header,
+                                        payload_bytes, False)
         self.msg_connect((self, 'in'), (self.pdu2tag, 'pdus'))
         self.connect(self.pdu2tag, self.udp)
 

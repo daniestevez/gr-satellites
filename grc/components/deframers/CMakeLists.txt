@@ -33,6 +33,7 @@ install(FILES
     satellites_ccsds_uncoded_deframer.block.yml
     satellites_ccsds_rs_deframer.block.yml
     satellites_diy1_deframer.block.yml
+    satellites_endurosat_deframer.block.yml
     satellites_eseo_deframer.block.yml
     satellites_fossasat_deframer.block.yml
     satellites_grizu263a_deframer.block.yml

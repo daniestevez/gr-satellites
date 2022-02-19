@@ -14,6 +14,8 @@ import pmt
 from ... import pdu_head_tail
 from ... import check_cc11xx_crc, sx12xx_packet_crop
 from ... import reflect_bytes
+from ...grpdu import pdu_to_tagged_stream, tagged_stream_to_pdu
+from ...grtypes import byte_t
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
 
@@ -58,10 +60,10 @@ class grizu263a_deframer(gr.hier_block2, options_block):
         self.scrambler = digital.additive_scrambler_bb(
             0x21, 0x100, 8, count=0, bits_per_byte=8,
             reset_tag_key='packet_len')
-        self.stream2pdu = blocks.tagged_stream_to_pdu(blocks.byte_t,
-                                                      'packet_len')
-        self.pdu2stream = blocks.pdu_to_tagged_stream(blocks.byte_t,
-                                                      'packet_len')
+        self.stream2pdu = tagged_stream_to_pdu(byte_t,
+                                               'packet_len')
+        self.pdu2stream = pdu_to_tagged_stream(byte_t,
+                                               'packet_len')
 
         self.reflect_2 = reflect_bytes()
         self.crop = sx12xx_packet_crop(crc_len=2)

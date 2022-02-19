@@ -4,7 +4,7 @@ alternative_names:
 norad: 32789
 data:
   &tlm Telemetry:
-    telemetry: ax25
+    telemetry: delfic3
 transmitters:
   1k2 BPSK downlink:
     frequency: 145.867e+6

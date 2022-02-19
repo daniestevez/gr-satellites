@@ -1,0 +1,13 @@
+name: EXP-1
+norad: 37855
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  1k2 FSK telemetry downlink:
+    frequency: 437.493e+6
+    modulation: FSK
+    baudrate: 1200
+    framing: AX.25
+    data:
+      - *tlm

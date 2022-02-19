@@ -1,0 +1,14 @@
+name: DELFI-PQ
+norad: 51074
+data:
+  &tlm Telemetry:
+    telemetry: delfipq
+transmitters:
+  1k2 FSK downlink:
+    frequency: 436.650e+6
+    modulation: FSK
+    baudrate: 1200
+    deviation: 600
+    framing: AX.25 G3RUH
+    data:
+    - *tlm
