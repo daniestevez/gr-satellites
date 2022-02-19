@@ -70,13 +70,13 @@ You can also browse the list of `all releases`_ to see older vesions
 and pre-releases.
 
 Users interested in collaborating with testing or developing gr-satellites can
-clone the git repository and use the master branch. There is more information
+clone the git repository and use the main branch. There is more information
 about the organization in branches in the `README`_.
 
 .. _daniestevez/gr-satellites: https://github.com/daniestevez/gr-satellites/
 .. _latest stable release: https://github.com/daniestevez/gr-satellites/releases/latest
 .. _all releases: https://github.com/daniestevez/gr-satellites/releases
-.. _README: https://github.com/daniestevez/gr-satellites/blob/master/README.md
+.. _README: https://github.com/daniestevez/gr-satellites/blob/main/README.md
 
 Building and installing
 ^^^^^^^^^^^^^^^^^^^^^^^

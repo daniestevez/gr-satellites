@@ -3,7 +3,7 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/daniestevez/gr-satellites)](https://github.com/daniestevez/gr-satellites/releases/latest)
 [![Conda](https://img.shields.io/conda/v/conda-forge/gnuradio-satellites)](https://anaconda.org/conda-forge/gnuradio-satellites)
 [![Read the Docs](https://img.shields.io/readthedocs/gr-satellites)](https://gr-satellites.readthedocs.io/)
-[![GitHub license](https://img.shields.io/github/license/daniestevez/gr-satellites)](https://github.com/daniestevez/gr-satellites/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/daniestevez/gr-satellites)](https://github.com/daniestevez/gr-satellites/blob/main/LICENSE)
 
 gr-satellites is a GNU Radio out-of-tree module encompassing a collection of
 telemetry decoders that supports many different Amateur satellites. This
@@ -55,7 +55,7 @@ gr-satellites:
 
 The repository is organized in the following branches:
 
-* `master` is where the active development happens. From time to time, features
+* `main` is where the active development happens. From time to time, features
   will be frozen in a new release. This branch is compatible with GNU Radio 3.9
   and 3.10.
 
@@ -73,7 +73,7 @@ The repository is organized in the following branches:
   published. This branch is compatible with GNU Radio 3.7. No changes happen
   in this branch any longer.
 
-In general, pull requests should be submitted to `master`.
+In general, pull requests should be submitted to `main`.
 
 ## Installation
 
@@ -96,7 +96,7 @@ check whether a new topic fits better in the issues page or in the discussions p
 
 Satellite teams interested in using gr-satellites for you groundstation
 solution, please read
-[this note](https://github.com/daniestevez/gr-satellites/blob/master/satellite_teams.md),
+[this note](https://github.com/daniestevez/gr-satellites/blob/main/satellite_teams.md),
 especially if you will be using Amateur radio spectrum.
 
 ## CCSDS TM and TC Space Datalink and SpacePacket blocks
@@ -104,4 +104,4 @@ especially if you will be using Amateur radio spectrum.
 Athanasios Theocharis made under ESA Summer of Code in Space 2019 a collection
 of blocks covering several CCSDS blue books. The documentation for this blocks
 can be found in
-[CCSDS_README.md](https://github.com/daniestevez/gr-satellites/blob/master/CCSDS_README.md).
+[CCSDS_README.md](https://github.com/daniestevez/gr-satellites/blob/main/CCSDS_README.md).
