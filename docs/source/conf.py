@@ -26,7 +26,7 @@ author = 'Daniel Estévez'
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '3.12.0'
+release = '3.13.0-git'
 
 
 # -- General configuration ---------------------------------------------------
