@@ -61,6 +61,7 @@ GR_PYTHON_INSTALL(
     feh.py
     fixedlen_tagger.py
     funcube_submit.py
+    grpdu.py
     grtypes.py
     hdlc.py
     hdlc_deframer.py

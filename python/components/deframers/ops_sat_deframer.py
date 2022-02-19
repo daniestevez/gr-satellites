@@ -12,6 +12,7 @@ from gnuradio import gr, blocks, digital
 
 from ... import (
     nrzi_decode, hdlc_deframer, pdu_head_tail, decode_rs, pdu_length_filter)
+from ...grpdu import pdu_to_tagged_stream, tagged_stream_to_pdu
 from ...grtypes import byte_t
 from ...utils.options_block import options_block
 
@@ -45,13 +46,13 @@ class ops_sat_deframer(gr.hier_block2, options_block):
         self.strip = pdu_head_tail(3, 16)
 
         # CCSDS descrambler
-        self.pdu2tag = blocks.pdu_to_tagged_stream(byte_t, 'packet_len')
+        self.pdu2tag = pdu_to_tagged_stream(byte_t, 'packet_len')
         self.unpack = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
         self.scramble = digital.additive_scrambler_bb(
             0xA9, 0xFF, 7, count=0, bits_per_byte=1,
             reset_tag_key='packet_len')
         self.pack = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
-        self.tag2pdu = blocks.tagged_stream_to_pdu(byte_t, 'packet_len')
+        self.tag2pdu = tagged_stream_to_pdu(byte_t, 'packet_len')
 
         # Prevents passing codewords of incorrect size to the RS decoder
         self.length_filter = pdu_length_filter(33, 255)

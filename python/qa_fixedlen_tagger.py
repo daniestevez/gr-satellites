@@ -23,6 +23,7 @@ else:
 
 from satellites import fixedlen_tagger
 from satellites.grtypes import byte_t
+from satellites.grpdu import tagged_stream_to_pdu
 
 
 class qa_fixedlen_tagger(gr_unittest.TestCase):
@@ -36,8 +37,8 @@ class qa_fixedlen_tagger(gr_unittest.TestCase):
                                   pmt.intern('sync'), pmt.intern('test_src')))
                 for j in self.tag_positions]
         self.source = blocks.vector_source_b(self.data, False, 1, tags)
-        self.tag2pdu = blocks.tagged_stream_to_pdu(byte_t,
-                                                   self.packetlen_tag)
+        self.tag2pdu = tagged_stream_to_pdu(byte_t,
+                                            self.packetlen_tag)
         self.debug = blocks.message_debug()
         self.tagger = fixedlen_tagger(self.syncword_tag, self.packetlen_tag,
                                       self.packet_len, np.byte)

@@ -13,7 +13,7 @@ from gnuradio import blocks
 from gnuradio import digital
 from gnuradio import gr
 from gnuradio.filter import firdes
-
+from ..grpdu import pdu_to_tagged_stream, tagged_stream_to_pdu
 from ..grtypes import byte_t
 
 
@@ -36,9 +36,9 @@ class pn9_scrambler(gr.hier_block2):
                                           bits_per_byte=8,
                                           reset_tag_key='packet_len'))
         self.blocks_tagged_stream_to_pdu_0 = (
-            blocks.tagged_stream_to_pdu(byte_t, 'packet_len'))
+            tagged_stream_to_pdu(byte_t, 'packet_len'))
         self.blocks_pdu_to_tagged_stream_0 = (
-            blocks.pdu_to_tagged_stream(byte_t, 'packet_len'))
+            pdu_to_tagged_stream(byte_t, 'packet_len'))
 
         ##################################################
         # Connections

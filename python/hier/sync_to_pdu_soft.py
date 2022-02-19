@@ -17,7 +17,7 @@ import sys
 import signal
 import satellites
 import numpy
-
+from ..grpdu import tagged_stream_to_pdu
 from ..grtypes import float_t
 
 
@@ -48,7 +48,7 @@ class sync_to_pdu_soft(gr.hier_block2):
         self.digital_correlate_access_code_tag_bb_0_0_0 = (
             digital.correlate_access_code_tag_ff(sync, threshold, 'syncword'))
         self.blocks_tagged_stream_to_pdu_0_0_0 = (
-            blocks.tagged_stream_to_pdu(float_t, 'packet_len'))
+            tagged_stream_to_pdu(float_t, 'packet_len'))
 
         ##################################################
         # Connections
