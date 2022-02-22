@@ -123,6 +123,13 @@ adcs_info = BitStruct(
                                CONVERGING=5, ON_SUN=6, NOT_ACTIVE=7),
 )
 
+# Polynomial used for converting certain temperature telemetry points
+# (obc_temp, eps_temp, int_temp, sp0_temp, sp1_temp, sp2_temp)
+tempPoly = [91.394, -0.0894932, 3.55e-05, -6.26e-9, 1.89e-13]
+
+# Polynomial used for converting bat0_temp and bat1_temp
+batTempPoly = [-259.74, 1.471182747, 3.59e-4, 8.77e-8, 2.14e-11]
+
 is1_beacon = Struct(
     'cmd_recv_count' / Int8ul,
     'cmd_fail_count' / Int8ul,
@@ -174,9 +181,9 @@ is1_beacon = Struct(
     'adcs_wheel_sp1' / PolynomialAdapter([0.0, 0.4], Int16sl),
     'adcs_wheel_sp2' / PolynomialAdapter([0.0, 0.4], Int16sl),
     'adcs_wheel_sp3' / PolynomialAdapter([0.0, 0.4], Int16sl),
-    'adcs_body_rt1' / Int32sl,
-    'adcs_body_rt2' / Int32sl,
-    'adcs_body_rt3' / Int32sl,
+    'adcs_body_rt1' / PolynomialAdapter([0.0, 5.0e-9], Int32sl),
+    'adcs_body_rt2' / PolynomialAdapter([0.0, 5.0e-9], Int32sl),
+    'adcs_body_rt3' / PolynomialAdapter([0.0, 5.0e-9], Int32sl),
     Padding(12),
     'daxss_time_sec' / Int32ul,
     'daxss_cmd_op' / Int8ul,
@@ -203,8 +210,8 @@ is1_beacon = Struct(
     'sp2_volt' / PolynomialAdapter([0.0, 0.001], Int16ul),
     'sp1_curr' / PolynomialAdapter([0.0, 0.0005], Int16ul),
     'sp1_volt' / PolynomialAdapter([0.0, 0.001], Int16ul),
-    'sp0_curr' / PolynomialAdapter([0.0, 0.0005], Int16ul),
-    'sp0_volt' / PolynomialAdapter([0.0, 0.001], Int16ul),
+    'sp0_curr' / PolynomialAdapter([0.0, 0.00125], Int16ul),
+    'sp0_volt' / PolynomialAdapter([0.0, 0.00125], Int16ul),
     'bat_vcell' / Int16ul,
     'gps_12v_2_curr' / PolynomialAdapter([0.0, 0.0005], Int16ul),
     'gps_12v_2_volt' / PolynomialAdapter([0.0, 0.001], Int16ul),
@@ -218,14 +225,14 @@ is1_beacon = Struct(
     '3p3_volt' / PolynomialAdapter([0.0, 0.001], Int16ul),
     'cip_curr' / PolynomialAdapter([0.0, 0.0005], Int16ul),
     'cip_volt' / PolynomialAdapter([0.0, 0.001], Int16ul),
-    'obc_temp' / PolynomialAdapter([91.394, -0.089493, 3.6e-05], Int16ul),
-    'eps_temp' / PolynomialAdapter([91.394, -0.089493, 3.6e-05], Int16ul),
-    'int_temp' / PolynomialAdapter([91.394, -0.089493, 3.6e-05], Int16ul),
-    'sp0_temp' / PolynomialAdapter([91.394, -0.089493, 3.6e-05], Int16ul),
-    'bat0_temp' / PolynomialAdapter([91.394, -0.089493, 3.6e-05], Int16ul),
-    'sp1_temp' / PolynomialAdapter([91.394, -0.089493, 3.6e-05], Int16ul),
-    'bat1_temp' / PolynomialAdapter([91.394, -0.089493, 3.6e-05], Int16ul),
-    'sp2_temp' / PolynomialAdapter([91.394, -0.089493, 3.6e-05], Int16ul),
+    'obc_temp' / PolynomialAdapter(tempPoly, Int16ul),
+    'eps_temp' / PolynomialAdapter(tempPoly, Int16ul),
+    'int_temp' / PolynomialAdapter(tempPoly, Int16ul),
+    'sp0_temp' / PolynomialAdapter(tempPoly, Int16ul),
+    'bat0_temp' / PolynomialAdapter(batTempPoly, Int16ul),
+    'sp1_temp' / PolynomialAdapter(tempPoly, Int16ul),
+    'bat1_temp' / PolynomialAdapter(batTempPoly, Int16ul),
+    'sp2_temp' / PolynomialAdapter(tempPoly, Int16ul),
     'bat_fg3' / PolynomialAdapter([0.0, 0.003906], Int16ul),
     'bat0_temp_conv' / Float32l,
     'bat1_temp_conv' / Float32l,
