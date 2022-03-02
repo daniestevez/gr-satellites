@@ -42,7 +42,7 @@ from gnuradio import gr
 import numpy
 import pmt
 
-from . import hdlc
+from . import crc, hdlc
 
 
 class pwsat2_submitter(gr.basic_block):
@@ -53,6 +53,7 @@ class pwsat2_submitter(gr.basic_block):
             name="pwsat2_submitter",
             in_sig=[],
             out_sig=[])
+        self.crc_calc = crc(16, 0x1021, 0xFFFF, 0xFFFF, True, True)
         self.requests = __import__('requests')
 
         self.baseUrl = 'http://radio.pw-sat.pl'
@@ -121,10 +122,10 @@ class pwsat2_submitter(gr.basic_block):
             print('[ERROR] Received invalid message type. Expected u8vector')
             return
 
-        data = bytearray(pmt.u8vector_elements(msg))
-        crc = hdlc.crc_ccitt(data)
-        data.append(crc & 0xff)
-        data.append((crc >> 8) & 0xff)
+        data = list(pmt.u8vector_elements(msg))
+        crc_val = self.crc_calc.compute(data)
+        data.append(crc_val & 0xff)
+        data.append((crc_val >> 8) & 0xff)
 
         frame = bytes(data)
 

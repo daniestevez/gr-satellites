@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2019 Daniel Estevez <daniel@destevez.net>
+# Copyright 2019, 2022 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -10,7 +10,7 @@
 
 from gnuradio import gr, digital
 
-from ... import check_cc11xx_crc
+from ...crcs import crc16_cc11xx
 from ...hier.si4463_scrambler import si4463_scrambler
 from ...hier.sync_to_pdu import sync_to_pdu
 from ...utils.options_block import options_block
@@ -50,7 +50,7 @@ class lucky7_deframer(gr.hier_block2, options_block):
         self.deframer = sync_to_pdu(
             packlen=37*8, sync=_syncword, threshold=syncword_threshold)
         self.scrambler = si4463_scrambler()
-        self.crc = check_cc11xx_crc(self.options.verbose_crc)
+        self.crc = crc16_cc11xx()
 
         self.connect(self, self.slicer, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.scrambler, 'in'))
@@ -68,5 +68,3 @@ class lucky7_deframer(gr.hier_block2, options_block):
             '--syncword_threshold', type=int,
             default=cls._default_sync_threshold,
             help='Syncword bit errors [default=%(default)r]')
-        parser.add_argument(
-            '--verbose_crc', action='store_true', help='Verbose CRC decoder')

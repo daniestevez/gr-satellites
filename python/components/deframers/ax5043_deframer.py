@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2021 Daniel Estevez <daniel@destevez.net>
+# Copyright 2021-2022 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -12,12 +12,11 @@ from gnuradio import gr, blocks, digital
 import numpy as np
 import pmt
 
-from ... import viterbi_decoder
+from ... import crc, viterbi_decoder
 from ...grtypes import byte_t
 from ...hdlc_deframer import hdlc_deframer
 from ...hier.sync_to_pdu import sync_to_pdu
 from ...utils.options_block import options_block
-from ...check_tt64_crc import crc_table
 
 
 # Two HDLC flags encoded and interleaved (32 bits)
@@ -58,19 +57,15 @@ class deinterleave(gr.basic_block):
             pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(packet), packet)))
 
 
-def crc16_usb(data):
-    crc = 0xffff
-    for byte in data:
-        tbl_idx = (crc ^ byte) & 0xff
-        crc = (crc_table[tbl_idx] ^ (crc >> 8)) & 0xffff
-    return (crc ^ 0xffff) & 0xffff
+class crc16_usb:
+    def __init__(self):
+        self.c = crc(16, 0x8005, 0xFFFF, 0xFFFF, True, True)
 
-
-def crc_check(frame):
-    if len(frame) <= 2:
-        return False
-    crc = crc16_usb(frame[:-2])
-    return frame[-2] == (crc & 0xff) and frame[-1] == ((crc >> 8) & 0xff)
+    def check(self, frame):
+        if len(frame) <= 2:
+            return False
+        out = self.c.compute(frame[:-2])
+        return frame[-2] == (out & 0xff) and frame[-1] == ((out >> 8) & 0xff)
 
 
 class ax5043_deframer(gr.hier_block2, options_block):
@@ -102,7 +97,9 @@ class ax5043_deframer(gr.hier_block2, options_block):
         self.deinterleave = deinterleave()
         self.viterbi = viterbi_decoder(5, [25, 23])
         self.pdu2tag = blocks.pdu_to_tagged_stream(byte_t, 'packet_len')
-        self.hdlc = hdlc_deframer(True, 10000, crc_check_func=crc_check)
+        self.crc_check = crc16_usb()
+        self.hdlc = hdlc_deframer(True, 10000,
+                                  crc_check_func=self.crc_check.check)
 
         self.connect(self, self.slicer, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.deinterleave, 'in'))

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2019 Daniel Estevez <daniel@destevez.net>
+# Copyright 2019, 2022 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -10,7 +10,8 @@
 
 from gnuradio import gr, digital
 
-from ... import decode_rs, check_eseo_crc, eseo_packet_crop, eseo_line_decoder
+from ... import decode_rs, eseo_packet_crop, eseo_line_decoder
+from ...crcs import crc16_ccitt_zero
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
 
@@ -48,7 +49,7 @@ class eseo_deframer(gr.hier_block2, options_block):
         self.crop = eseo_packet_crop(drop_rs=False)
         self.rs = decode_rs(8, 0x11d, 1, 1, 16, 1)
         self.line = eseo_line_decoder()
-        self.crc = check_eseo_crc(self.options.verbose_crc)
+        self.crc = crc16_ccitt_zero()
 
         self.connect(self, self.slicer, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.crop, 'in'))
@@ -68,7 +69,3 @@ class eseo_deframer(gr.hier_block2, options_block):
             '--syncword_threshold', type=int,
             default=cls._default_sync_threshold,
             help='Syncword bit errors [default=%(default)r]')
-        parser.add_argument(
-            '--verbose_rs', action='store_true', help='Verbose RS decoder')
-        parser.add_argument(
-            '--verbose_crc', action='store_true', help='Verbose CRC decoder')

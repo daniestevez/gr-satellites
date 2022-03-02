@@ -54,6 +54,7 @@ GR_PYTHON_INSTALL(
     check_swiatowid_crc.py
     check_tt64_crc.py
     crc32c.py
+    crcs.py
     csp_header.py
     ecss_pus.py
     eseo_line_decoder.py

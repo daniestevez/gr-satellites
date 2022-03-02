@@ -1,6 +1,6 @@
 id: satellites_check_crc16_ccitt
-label: Check CRC-16 CCITT
-category: '[Satellites]/CRC'
+label: Check CRC-16 CCITT (Deprecated)
+category: '[Satellites]/Deprecated'
 
 parameters:
 -   id: verbose
