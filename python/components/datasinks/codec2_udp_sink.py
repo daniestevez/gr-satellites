@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2019 Daniel Estevez <daniel@destevez.net>
+# Copyright 2019, 2022 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -49,8 +49,8 @@ class codec2_udp_sink(gr.hier_block2, options_block):
         payload_bytes = 7
         # The UDP sink has been moved in GNU Radio 3.10
         if gr.api_version() == '9':
-            self.udp = udp_sink(gr.sizeof_char*1,
-                                ip, port, payload_bytes, False)
+            self.udp = blocks.udp_sink(
+                gr.sizeof_char*1, ip, port, payload_bytes, False)
         else:
             udp_header = 0  # no header
             # The new UDP sink requires at least 8 bytes of payload.
