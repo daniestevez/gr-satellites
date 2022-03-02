@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Copyright 2020 jgromes <gromes.jan@gmail.com>
+# Copyright 2022 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -12,8 +13,9 @@ from gnuradio import gr, digital
 import pmt
 
 from ... import pdu_head_tail
-from ... import sx12xx_check_crc, sx12xx_packet_crop
+from ... import sx12xx_packet_crop
 from ... import reflect_bytes
+from ... import crc_check
 from ...hier.pn9_scrambler import pn9_scrambler
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
@@ -56,8 +58,8 @@ class fossasat_deframer(gr.hier_block2, options_block):
         self.scrambler = pn9_scrambler()
         self.reflect_2 = reflect_bytes()
         self.crop = sx12xx_packet_crop(crc_len=2)
-        self.crc = sx12xx_check_crc(
-            verbose=self.options.verbose_crc, initial=0x1D0F, final=0xFFFF)
+        self.crc = crc_check(
+            16, 0x1021, 0x1D0F, 0xFFFF, False, False, False, True)
         self.remove_length = pdu_head_tail(3, 1)
 
         self.connect(self, self.slicer, self.sync)
@@ -80,5 +82,3 @@ class fossasat_deframer(gr.hier_block2, options_block):
             '--syncword_threshold', type=int,
             default=cls._default_sync_threshold,
             help='Syncword bit errors [default=%(default)r]')
-        parser.add_argument(
-            '--verbose_crc', action='store_true', help='Verbose CRC decoder')

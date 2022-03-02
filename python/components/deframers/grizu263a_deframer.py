@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2021 Daniel Estevez <daniel@destevez.net>
+# Copyright 2021-2022 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -12,8 +12,10 @@ from gnuradio import gr, blocks, digital
 import pmt
 
 from ... import pdu_head_tail
-from ... import check_cc11xx_crc, sx12xx_packet_crop
+from ... import sx12xx_packet_crop
 from ... import reflect_bytes
+
+from ...crcs import crc16_cc11xx
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
 
@@ -65,7 +67,7 @@ class grizu263a_deframer(gr.hier_block2, options_block):
 
         self.reflect_2 = reflect_bytes()
         self.crop = sx12xx_packet_crop(crc_len=2)
-        self.crc = check_cc11xx_crc(self.options.verbose_crc)
+        self.crc = crc16_cc11xx()
         self.remove_length = pdu_head_tail(3, 1)
 
         self.connect(self, self.slicer, self.sync)
@@ -89,5 +91,3 @@ class grizu263a_deframer(gr.hier_block2, options_block):
             '--syncword_threshold', type=int,
             default=cls._default_sync_threshold,
             help='Syncword bit errors [default=%(default)r]')
-        parser.add_argument(
-            '--verbose_crc', action='store_true', help='Verbose CRC decoder')
