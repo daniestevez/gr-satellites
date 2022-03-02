@@ -119,7 +119,8 @@ class qa_crc(gr_unittest.TestCase):
         self.common_test_crc_check(matching_crc=False)
         self.assertEqual(self.dbg.num_messages(), 0)
         self.assertEqual(self.dbg_fail.num_messages(), 1)
-        out = list(pmt.u8vector_elements(pmt.cdr(self.dbg_fail.get_message(0))))
+        out = list(pmt.u8vector_elements(
+            pmt.cdr(self.dbg_fail.get_message(0))))
         self.assertEqual(out, self.data)
 
     def test_crc_append_crc16_ccitt_zero(self):
