@@ -45,6 +45,9 @@ endif(MSVC)
 list(APPEND satellites_sources
     ax100_decode_impl.cc
     convolutional_encoder_impl.cc
+    crc.cc
+    crc_append_impl.cc
+    crc_check_impl.cc
     decode_ra_code_impl.cc
     decode_rs_impl.cc
     descrambler308_impl.cc
