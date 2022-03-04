@@ -37,6 +37,11 @@ parameters:
     dtype: bool
     default: False
     hide: part
+-   id: skip_header_bytes
+    label: Header bytes to skip
+    dtype: int
+    default: 0
+    hide: part
 
 inputs:
 -   domain: message
@@ -48,6 +53,6 @@ outputs:
 
 templates:
     imports: import satellites
-    make: satellites.crc_append(${num_bits}, ${poly}, ${initial_value}, ${final_xor}, ${input_reflected}, ${result_reflected}, ${swap_endianness})
+    make: satellites.crc_append(${num_bits}, ${poly}, ${initial_value}, ${final_xor}, ${input_reflected}, ${result_reflected}, ${swap_endianness}, ${skip_header_bytes})
 
 file_format: 1
