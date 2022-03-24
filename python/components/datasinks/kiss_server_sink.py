@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2020 Daniel Estevez <daniel@destevez.net>
+# Copyright 2020, 2022 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -35,6 +35,8 @@ class kiss_server_sink(gr.hier_block2):
         self.message_port_register_hier_in('in')
 
         self.kiss = pdu_to_kiss(include_timestamp=True)
+        # port needs to be an str
+        port = str(port)
         self.server = blocks.socket_pdu(
             'TCP_SERVER', address, port, 10000, False)
 

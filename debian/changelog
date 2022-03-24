@@ -1,3 +1,9 @@
+gr-satellites (3.12.0-0) impish; urgency=medium
+
+  * Mainstream release v3.12.0
+
+ --  <daniel@destevez.net>  Sat, 19 Feb 2022 11:00:00 +0000
+
 gr-satellites (3.11.0-0) hirsute; urgency=medium
 
   * Mainstream release v3.11.0

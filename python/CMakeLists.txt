@@ -54,6 +54,7 @@ GR_PYTHON_INSTALL(
     check_swiatowid_crc.py
     check_tt64_crc.py
     crc32c.py
+    crcs.py
     csp_header.py
     ecss_pus.py
     eseo_line_decoder.py
@@ -110,6 +111,7 @@ include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-satellites)
 set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/swig)
+GR_ADD_TEST(qa_crc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_crc.py)
 GR_ADD_TEST(qa_fixedlen_tagger ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_fixedlen_tagger.py)
 GR_ADD_TEST(qa_hdlc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_hdlc.py)
 GR_ADD_TEST(qa_kiss ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_kiss.py)

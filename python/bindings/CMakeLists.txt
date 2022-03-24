@@ -30,6 +30,9 @@ include(GrPybind)
 
 list(APPEND satellites_python_files
     ax100_decode_python.cc
+    crc_python.cc
+    crc_append_python.cc
+    crc_check_python.cc
     convolutional_encoder_python.cc
     decode_ra_code_python.cc
     decode_rs_python.cc

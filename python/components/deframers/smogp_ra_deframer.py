@@ -10,7 +10,8 @@
 
 from gnuradio import gr, digital
 
-from ... import decode_ra_code, check_tt64_crc
+from ... import decode_ra_code
+from ...crcs import crc16_arc
 from ...hier.sync_to_pdu_soft import sync_to_pdu_soft
 from ...utils.options_block import options_block
 
@@ -58,8 +59,7 @@ class smogp_ra_deframer(gr.hier_block2, options_block):
         self.fec = decode_ra_code(frame_size)
         if new_protocol:
             # CRC-16 ARC
-            self.crc = check_tt64_crc(
-                verbose=self.options.verbose_crc, packet_len=None, strip=False)
+            self.crc = crc16_arc(discard_crc=False)
 
         self.connect(self, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.fec, 'in'))
@@ -82,5 +82,3 @@ class smogp_ra_deframer(gr.hier_block2, options_block):
             '--ra_syncword_threshold', type=int,
             default=cls._default_sync_threshold,
             help='RA syncword bit errors [default=%(default)r]')
-        parser.add_argument(
-            '--verbose_crc', action='store_true', help='Verbose CRC decoder')

@@ -10,7 +10,8 @@
 
 from gnuradio import gr, digital
 
-from ... import check_crc16_ccitt, cc11xx_packet_crop, pdu_head_tail
+from ... import cc11xx_packet_crop, pdu_head_tail
+from ...crcs import crc16_ccitt_x25
 from ...hier.pn9_scrambler import pn9_scrambler
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
@@ -51,7 +52,7 @@ class aalto1_deframer(gr.hier_block2, options_block):
             packlen=255, sync=_syncword, threshold=syncword_threshold)
         self.scrambler = pn9_scrambler()
         self.crop = cc11xx_packet_crop(True)
-        self.crc = check_crc16_ccitt(self.options.verbose_crc)
+        self.crc = crc16_ccitt_x25()
         self.crop2 = pdu_head_tail(3, 1)
 
         self.connect(self, self.slicer, self.deframer)
@@ -72,6 +73,3 @@ class aalto1_deframer(gr.hier_block2, options_block):
             '--syncword_threshold', type=int,
             default=cls._default_sync_threshold,
             help='Syncword bit errors [default=%(default)r]')
-        parser.add_argument(
-            '--verbose_crc', action='store_true',
-            help='Verbose CRC decoder')

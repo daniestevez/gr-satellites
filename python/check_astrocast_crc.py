@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2018 Daniel Estevez <daniel@destevez.net>
+# Copyright 2018, 2022 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -12,7 +12,7 @@ from gnuradio import gr
 import numpy
 import pmt
 
-from .hdlc_deframer import fcs_ok
+from .hdlc_deframer import hdlc_crc_check
 
 
 class check_astrocast_crc(gr.basic_block):
@@ -25,6 +25,7 @@ class check_astrocast_crc(gr.basic_block):
             out_sig=[])
 
         self.verbose = verbose
+        self.crc_check = hdlc_crc_check()
 
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
@@ -47,7 +48,7 @@ class check_astrocast_crc(gr.basic_block):
         packet_out = packet[:idx-2]
         msg_out = pmt.cons(pmt.car(msg_pmt),
                            pmt.init_u8vector(len(packet_out), packet_out))
-        if fcs_ok(packet[:idx]):
+        if self.crc_check.fcs_ok(packet[:idx]):
             if self.verbose:
                 print('CRC OK')
             self.message_port_pub(pmt.intern('ok'), msg_out)

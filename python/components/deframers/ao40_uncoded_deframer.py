@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2019 Daniel Estevez <daniel@destevez.net>
+# Copyright 2019, 2022 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -10,7 +10,7 @@
 
 from gnuradio import gr, digital
 
-from ... import check_ao40_uncoded_crc
+from ...crcs import crc16_ccitt_false
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
 
@@ -45,7 +45,7 @@ class ao40_uncoded_deframer(gr.hier_block2, options_block):
         self.slicer = digital.binary_slicer_fb()
         self.deframer = sync_to_pdu_packed(
             packlen=512 + 2, sync=_syncword, threshold=syncword_threshold)
-        self.crc = check_ao40_uncoded_crc(self.options.verbose_crc)
+        self.crc = crc16_ccitt_false()
 
         self.connect(self, self.slicer, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.crc, 'in'))
@@ -62,5 +62,3 @@ class ao40_uncoded_deframer(gr.hier_block2, options_block):
             '--syncword_threshold', type=int,
             default=cls._default_sync_threshold,
             help='Syncword bit errors [default=%(default)r]')
-        parser.add_argument(
-            '--verbose_crc', action='store_true', help='Verbose CRC decoder')

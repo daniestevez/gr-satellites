@@ -1,6 +1,6 @@
 id: satellites_sx12xx_check_crc
-label: Check SX12xx CRC-16
-category: '[Satellites]/SX12xx'
+label: Check SX12xx CRC-16 (Deprecated)
+category: '[Satellites]/Deprecated'
 
 parameters:
 -   id: verbose
