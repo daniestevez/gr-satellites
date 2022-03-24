@@ -15,6 +15,7 @@ from gnuradio import blocks
 from gnuradio import digital
 from gnuradio import filter
 from gnuradio import gr
+from gnuradio.fft import window
 from gnuradio.filter import firdes
 from rms_agc import rms_agc  # grc-generated hier_block
 
@@ -63,9 +64,9 @@ class lilacsat1_ber_bpsk(gr.hier_block2):
             reference=0.5,
         )
         self.low_pass_filter_0_0 = filter.fir_filter_ccf(1, firdes.low_pass(
-        	1, samp_rate, 10000, 1000, firdes.WIN_HAMMING, 6.76))
+        	1, samp_rate, 10000, 1000, window.WIN_HAMMING, 6.76))
         self.low_pass_filter_0 = filter.fir_filter_ccf(1, firdes.low_pass(
-        	1, samp_rate, 6000, 500, firdes.WIN_HAMMING, 6.76))
+        	1, samp_rate, 6000, 500, window.WIN_HAMMING, 6.76))
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(sps, 0.05, (rrc_taps), nfilts, nfilts/2, 0.01, 1)
         self.digital_fll_band_edge_cc_0 = digital.fll_band_edge_cc(sps, 0.350, 100, 0.01)
         self.digital_costas_loop_cc_0_0 = digital.costas_loop_cc(0.1, 2, False)
@@ -173,8 +174,8 @@ class lilacsat1_ber_bpsk(gr.hier_block2):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 10000, 1000, firdes.WIN_HAMMING, 6.76))
-        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 6000, 500, firdes.WIN_HAMMING, 6.76))
+        self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 10000, 1000, window.WIN_HAMMING, 6.76))
+        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 6000, 500, window.WIN_HAMMING, 6.76))
 
     def get_rrc_taps_0(self):
         return self.rrc_taps_0

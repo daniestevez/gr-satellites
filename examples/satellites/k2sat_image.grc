@@ -41,7 +41,7 @@ blocks:
     gain: '1.0'
     samp_rate: samp_rate
     width: 4*10e3
-    win: firdes.WIN_HAMMING
+    win: window.WIN_HAMMING
   states:
     bus_sink: false
     bus_source: false

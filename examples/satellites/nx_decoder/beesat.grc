@@ -238,7 +238,7 @@ blocks:
     samp_rate: '48000'
     type: interp_fir_filter_fff
     width: '100'
-    win: firdes.WIN_HAMMING
+    win: window.WIN_HAMMING
   states:
     bus_sink: false
     bus_source: false

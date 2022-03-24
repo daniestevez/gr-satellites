@@ -470,7 +470,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     num_taps: '65'
-    win: firdes.WIN_HAMMING
+    win: window.WIN_HAMMING
   states:
     bus_sink: false
     bus_source: false
@@ -494,7 +494,7 @@ blocks:
     samp_rate: '48000'
     type: fir_filter_ccf
     width: '500'
-    win: firdes.WIN_HAMMING
+    win: window.WIN_HAMMING
   states:
     bus_sink: false
     bus_source: false
@@ -664,7 +664,7 @@ blocks:
     width7: '1'
     width8: '1'
     width9: '1'
-    wintype: firdes.WIN_BLACKMAN_hARRIS
+    wintype: window.WIN_BLACKMAN_hARRIS
     ymax: '10'
     ymin: '-140'
   states:

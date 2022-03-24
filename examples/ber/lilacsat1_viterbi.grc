@@ -1082,7 +1082,7 @@
     </param>
     <param>
       <key>win</key>
-      <value>firdes.WIN_HAMMING</value>
+      <value>window.WIN_HAMMING</value>
     </param>
   </block>
   <block>
@@ -1157,7 +1157,7 @@
     </param>
     <param>
       <key>win</key>
-      <value>firdes.WIN_HAMMING</value>
+      <value>window.WIN_HAMMING</value>
     </param>
   </block>
   <block>
