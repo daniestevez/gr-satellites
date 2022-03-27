@@ -12,12 +12,11 @@ import argparse
 import signal
 import sys
 
+from gnuradio import gr, blocks, audio
 
 if gr.api_version() != '9':
     from gnuradio import network
 
-
-from gnuradio import gr, blocks, audio
 import satellites.core
 import satellites.components.datasources as datasources
 from satellites.utils.config import open_config
