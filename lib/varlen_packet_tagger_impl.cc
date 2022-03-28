@@ -16,7 +16,7 @@
 #include <gnuradio/io_signature.h>
 #include <cstdio>
 #include <iostream>
-
+#include <boost/format.hpp>
 extern "C" {
 #include "golay24.h"
 #include "libfec/fec.h"

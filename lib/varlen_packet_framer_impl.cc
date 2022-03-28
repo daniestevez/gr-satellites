@@ -17,7 +17,7 @@
 #include <cstdio>
 #include <ctime>
 #include <iostream>
-
+#include <boost/format.hpp>
 extern "C" {
 #include "golay24.h"
 #include "libfec/fec.h"
