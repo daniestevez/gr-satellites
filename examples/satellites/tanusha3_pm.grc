@@ -1,6 +1,7 @@
 options:
   parameters:
     author: Daniel Estevez
+    catch_exceptions: 'True'
     category: Custom
     cmake_opt: ''
     comment: ''
@@ -87,6 +88,7 @@ blocks:
     comment: ''
     const_points: '[-1, 1]'
     dims: '1'
+    normalization: digital.constellation.AMPLITUDE_NORMALIZATION
     precision: '8'
     rot_sym: '2'
     soft_dec_lut: None
@@ -114,7 +116,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [704, 308]
+    coordinate: [1128, 312.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0
@@ -136,7 +138,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [176, 364]
+    coordinate: [192, 400.0]
     rotation: 0
     state: enabled
 - name: bfo
@@ -169,7 +171,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [888, 328]
+    coordinate: [1440, 352.0]
     rotation: 0
     state: enabled
 - name: blocks_message_debug_0
@@ -178,11 +180,12 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
+    en_uvec: 'True'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1112, 704]
+    coordinate: [1624, 676.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_conjugate_cc_1
@@ -198,7 +201,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [528, 312]
+    coordinate: [872, 308.0]
     rotation: 0
     state: enabled
 - name: blocks_short_to_float_0
@@ -215,48 +218,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 308]
-    rotation: 0
-    state: enabled
-- name: blocks_socket_pdu_0
-  id: blocks_socket_pdu
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    host: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    mtu: '10000'
-    port: '52001'
-    tcp_no_delay: 'True'
-    type: TCP_SERVER
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [792, 912]
-    rotation: 0
-    state: enabled
-- name: blocks_udp_source_0
-  id: blocks_udp_source
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    eof: 'False'
-    ipaddr: ip
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    port: port
-    psize: '1472'
-    type: short
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [24, 284]
+    coordinate: [368, 308.0]
     rotation: 0
     state: enabled
 - name: callsign
@@ -288,7 +250,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [416, 656]
+    coordinate: [568, 640.0]
     rotation: 0
     state: enabled
 - name: digital_clock_recovery_mm_xx_0
@@ -309,7 +271,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [200, 620]
+    coordinate: [136, 588.0]
     rotation: 0
     state: enabled
 - name: hilbert_fc_0
@@ -327,7 +289,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [392, 308]
+    coordinate: [632, 284.0]
     rotation: 0
     state: enabled
 - name: ip
@@ -402,9 +364,52 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1040, 276]
+    coordinate: [1680, 288.0]
     rotation: 0
     state: enabled
+- name: network_socket_pdu_0
+  id: network_socket_pdu
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    host: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mtu: '10000'
+    port: '52001'
+    tcp_no_delay: 'False'
+    type: TCP_SERVER
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1088, 924.0]
+    rotation: 0
+    state: true
+- name: network_udp_source_0
+  id: network_udp_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    header: '0'
+    ipv6: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    notify_missed: 'False'
+    payloadsize: '1472'
+    port: port
+    src_zeros: 'False'
+    type: short
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 252.0]
+    rotation: 0
+    state: true
 - name: port
   id: parameter
   parameters:
@@ -470,7 +475,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [704, 644]
+    coordinate: [1112, 628.0]
     rotation: 0
     state: enabled
 - name: satellites_nrzi_decode_0
@@ -485,7 +490,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [560, 656]
+    coordinate: [832, 640.0]
     rotation: 0
     state: enabled
 - name: satellites_pdu_to_kiss_0
@@ -494,6 +499,8 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
+    control_byte: 'True'
+    include_timestamp: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
@@ -527,18 +534,19 @@ connections:
 - [blocks_complex_to_arg_0_0, '0', low_pass_filter_0, '0']
 - [blocks_multiply_conjugate_cc_1, '0', analog_pll_carriertracking_cc_0, '0']
 - [blocks_short_to_float_0, '0', hilbert_fc_0, '0']
-- [blocks_udp_source_0, '0', blocks_short_to_float_0, '0']
 - [digital_binary_slicer_fb_0, '0', satellites_nrzi_decode_0, '0']
 - [digital_clock_recovery_mm_xx_0, '0', digital_binary_slicer_fb_0, '0']
 - [hilbert_fc_0, '0', blocks_multiply_conjugate_cc_1, '0']
 - [low_pass_filter_0, '0', digital_clock_recovery_mm_xx_0, '0']
+- [network_udp_source_0, '0', blocks_short_to_float_0, '0']
 - [satellites_check_address_0, ok, satellites_print_timestamp_0, in]
 - [satellites_hdlc_deframer_0, out, satellites_check_address_0, in]
 - [satellites_hdlc_deframer_0, out, satellites_pdu_to_kiss_0, in]
 - [satellites_nrzi_decode_0, '0', satellites_hdlc_deframer_0, '0']
-- [satellites_pdu_to_kiss_0, out, blocks_socket_pdu_0, pdus]
+- [satellites_pdu_to_kiss_0, out, network_socket_pdu_0, pdus]
 - [satellites_print_timestamp_0, out, blocks_message_debug_0, print_pdu]
 - [satellites_print_timestamp_0, out, satellites_pdu_to_kiss_0, in]
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-75-g67e88516

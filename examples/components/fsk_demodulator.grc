@@ -1,6 +1,7 @@
 options:
   parameters:
     author: Daniel Estevez
+    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -41,7 +42,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [184, 12]
+    coordinate: [296, 12.0]
     rotation: 0
     state: enabled
 - name: blocks_wavfile_source_0
@@ -169,6 +170,7 @@ blocks:
     iq: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
+    options: '""'
     samp_rate: samp_rate
     subaudio: 'False'
   states:
@@ -185,3 +187,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-75-g67e88516

@@ -1,6 +1,7 @@
 options:
   parameters:
     author: ''
+    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -46,11 +47,11 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 28]
+    coordinate: [400, 20.0]
     rotation: 0
     state: enabled
-- name: blocks_random_pdu_0
-  id: blocks_random_pdu
+- name: pdu_random_pdu_0
+  id: pdu_random_pdu
   parameters:
     affinity: ''
     alias: ''
@@ -58,16 +59,16 @@ blocks:
     length_modulo: '2'
     mask: '0xFF'
     maxoutbuf: '0'
-    maxsize: '2'
+    maxsize: '2000'
     minoutbuf: '0'
-    minsize: '2'
+    minsize: '50'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [672, 32]
+    coordinate: [1104, 128.0]
     rotation: 0
-    state: enabled
+    state: true
 - name: satellites_ccsds_telemetry_parser_0
   id: satellites_ccsds_telemetry_parser
   parameters:
@@ -201,9 +202,9 @@ blocks:
     state: enabled
 
 connections:
-- [blocks_message_strobe_0, strobe, blocks_random_pdu_0, generate]
-- [blocks_random_pdu_0, pdus, satellites_telemetry_primaryheader_adder_0, in]
-- [blocks_random_pdu_0, pdus, satellites_telemetry_primaryheader_adder_0_0, in]
+- [blocks_message_strobe_0, strobe, pdu_random_pdu_0, generate]
+- [pdu_random_pdu_0, pdus, satellites_telemetry_primaryheader_adder_0, in]
+- [pdu_random_pdu_0, pdus, satellites_telemetry_primaryheader_adder_0_0, in]
 - [satellites_telemetry_primaryheader_adder_0, out, satellites_virtual_channel_demultiplexer_0,
   in]
 - [satellites_telemetry_primaryheader_adder_0_0, out, satellites_virtual_channel_demultiplexer_0,
@@ -217,3 +218,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-75-g67e88516

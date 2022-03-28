@@ -1,6 +1,7 @@
 options:
   parameters:
     author: Daniel Estevez
+    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -145,7 +146,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 124]
+    coordinate: [48, 164.0]
     rotation: 0
     state: enabled
 - name: blocks_interleave_0
@@ -183,7 +184,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [235, 156]
+    coordinate: [408, 148.0]
     rotation: 0
     state: enabled
 - name: digital_costas_loop_cc_1
@@ -201,7 +202,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [909, 145]
+    coordinate: [1480, 148.0]
     rotation: 0
     state: enabled
 - name: digital_pfb_clock_sync_xxx_0_0
@@ -244,7 +245,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [434, 148]
+    coordinate: [736, 124.0]
     rotation: 0
     state: enabled
 - name: qtgui_const_sink_x_0
@@ -339,23 +340,6 @@ blocks:
     coordinate: [675, 265]
     rotation: 0
     state: enabled
-- name: rms_agc_0
-  id: rms_agc
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha: 1e-2
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    reference: '0.5'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [702, 164]
-    rotation: 0
-    state: enabled
 - name: satellites_image_receiver_0
   id: satellites_image_receiver
   parameters:
@@ -364,6 +348,7 @@ blocks:
     comment: ''
     display: 'True'
     fullscreen: 'True'
+    options: '""'
     path: /tmp/
     receiver: k2sat
     verbose: 'True'
@@ -382,12 +367,30 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
+    options: '""'
     threshold: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
     coordinate: [471, 444]
+    rotation: 0
+    state: true
+- name: satellites_rms_agc_0
+  id: satellites_rms_agc
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: 1e-2
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    reference: '0.5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1152, 124.0]
     rotation: 0
     state: true
 
@@ -400,9 +403,10 @@ connections:
 - [digital_costas_loop_cc_1, '0', digital_pfb_clock_sync_xxx_0_0, '0']
 - [digital_pfb_clock_sync_xxx_0_0, '0', blocks_complex_to_float_0, '0']
 - [digital_pfb_clock_sync_xxx_0_0, '0', qtgui_const_sink_x_0, '0']
-- [freq_xlating_fir_filter_xxx_0, '0', rms_agc_0, '0']
-- [rms_agc_0, '0', digital_costas_loop_cc_1, '0']
+- [freq_xlating_fir_filter_xxx_0, '0', satellites_rms_agc_0, '0']
 - [satellites_k2sat_deframer_component_0, out, satellites_image_receiver_0, in]
+- [satellites_rms_agc_0, '0', digital_costas_loop_cc_1, '0']
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-75-g67e88516

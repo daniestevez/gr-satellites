@@ -1,6 +1,7 @@
 options:
   parameters:
     author: Daniel Estevez
+    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -41,7 +42,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [208, 12]
+    coordinate: [288, 20.0]
     rotation: 0
     state: enabled
 - name: blocks_message_debug_0
@@ -50,11 +51,12 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
+    en_uvec: 'True'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [790, 165]
+    coordinate: [1184, 156.0]
     rotation: 0
     state: enabled
 - name: blocks_wavfile_source_0
@@ -87,12 +89,13 @@ blocks:
     iq: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
+    options: '""'
     samp_rate: samp_rate
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [290, 201]
+    coordinate: [440, 172.0]
     rotation: 0
     state: true
 - name: satellites_u482c_deframer_0
@@ -103,12 +106,13 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
+    options: '""'
     threshold: '4'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [494, 225]
+    coordinate: [760, 236.0]
     rotation: 0
     state: true
 
@@ -119,3 +123,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-75-g67e88516
