@@ -1,6 +1,7 @@
 options:
   parameters:
     author: ''
+    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -32,28 +33,6 @@ options:
     state: enabled
 
 blocks:
-- name: variable_time_format_parameters_0
-  id: variable_time_format_parameters
-  parameters:
-    add_z_terminator: '1'
-    additional_basic_time: '0'
-    additional_fractional_time: '0'
-    ascii_dec_num: '1'
-    basic_time: '3'
-    calendar_variation_ccs: '0'
-    comment: ''
-    frac_time: '0'
-    length_of_day_cds: '0'
-    length_of_submillisecond_cds: '0'
-    number_of_subsecond_ccs: '0'
-    time_format_general: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [872, 24]
-    rotation: 0
-    state: enabled
 - name: blocks_message_strobe_0
   id: blocks_message_strobe
   parameters:
@@ -71,8 +50,8 @@ blocks:
     coordinate: [48, 140]
     rotation: 0
     state: enabled
-- name: blocks_random_pdu_0
-  id: blocks_random_pdu
+- name: pdu_random_pdu_0
+  id: pdu_random_pdu
   parameters:
     affinity: ''
     alias: ''
@@ -87,9 +66,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [560, 116]
+    coordinate: [432, 36.0]
     rotation: 0
-    state: enabled
+    state: true
 - name: satellites_space_packet_parser_0
   id: satellites_space_packet_parser
   parameters:
@@ -104,7 +83,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [952, 292]
+    coordinate: [1216, 276.0]
     rotation: 0
     state: enabled
 - name: satellites_space_packet_primaryheader_adder_0
@@ -128,7 +107,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [520, 304]
+    coordinate: [688, 304.0]
     rotation: 0
     state: enabled
 - name: satellites_space_packet_time_stamp_adder_0
@@ -168,13 +147,35 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [64, 308]
+    coordinate: [144, 300.0]
+    rotation: 0
+    state: enabled
+- name: variable_time_format_parameters_0
+  id: variable_time_format_parameters
+  parameters:
+    add_z_terminator: '1'
+    additional_basic_time: '0'
+    additional_fractional_time: '0'
+    ascii_dec_num: '1'
+    basic_time: '3'
+    calendar_variation_ccs: '0'
+    comment: ''
+    frac_time: '0'
+    length_of_day_cds: '0'
+    length_of_submillisecond_cds: '0'
+    number_of_subsecond_ccs: '0'
+    time_format_general: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [872, 24]
     rotation: 0
     state: enabled
 
 connections:
-- [blocks_message_strobe_0, strobe, blocks_random_pdu_0, generate]
-- [blocks_random_pdu_0, pdus, satellites_space_packet_time_stamp_adder_0, in]
+- [blocks_message_strobe_0, strobe, pdu_random_pdu_0, generate]
+- [pdu_random_pdu_0, pdus, satellites_space_packet_time_stamp_adder_0, in]
 - [satellites_space_packet_primaryheader_adder_0, out, satellites_space_packet_parser_0,
   in]
 - [satellites_space_packet_time_stamp_adder_0, out, satellites_space_packet_primaryheader_adder_0,
@@ -182,3 +183,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-75-g67e88516

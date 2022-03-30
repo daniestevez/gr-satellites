@@ -1,6 +1,7 @@
 options:
   parameters:
     author: Daniel Estevez
+    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -136,7 +137,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [608, 556.0]
+    coordinate: [1328, 324.0]
     rotation: 0
     state: true
 - name: blocks_interleave_0
@@ -155,7 +156,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [336, 776.0]
+    coordinate: [536, 756.0]
     rotation: 0
     state: true
 - name: blocks_multiply_conjugate_cc_0
@@ -171,7 +172,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [752, 488.0]
+    coordinate: [1544, 436.0]
     rotation: 0
     state: true
 - name: blocks_multiply_const_vxx_0
@@ -189,26 +190,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [464, 788.0]
+    coordinate: [712, 732.0]
     rotation: 0
     state: true
-- name: blocks_pdu_to_tagged_stream_0
-  id: blocks_pdu_to_tagged_stream
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    tag: packet_len
-    type: byte
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [232, 956.0]
-    rotation: 0
-    state: enabled
 - name: blocks_unpack_k_bits_bb_0
   id: blocks_unpack_k_bits_bb
   parameters:
@@ -222,7 +206,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [448, 956.0]
+    coordinate: [752, 940.0]
     rotation: 0
     state: enabled
 - name: blocks_wavfile_source_0
@@ -267,7 +251,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [216, 460.0]
+    coordinate: [584, 312.0]
     rotation: 0
     state: true
 - name: freq_xlating_fir_filter_xxx_0
@@ -314,6 +298,23 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [656, 12.0]
+    rotation: 0
+    state: true
+- name: pdu_pdu_to_tagged_stream_0
+  id: pdu_pdu_to_tagged_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    tag: packet_len
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [384, 980.0]
     rotation: 0
     state: true
 - name: qtgui_const_sink_x_0
@@ -405,7 +406,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [952, 492.0]
+    coordinate: [1800, 596.0]
     rotation: 0
     state: enabled
 - name: qtgui_freq_sink_x_0
@@ -460,6 +461,7 @@ blocks:
     minoutbuf: '0'
     name: '""'
     nconnections: '1'
+    norm_window: 'False'
     showports: 'False'
     tr_chan: '0'
     tr_level: '0.0'
@@ -478,7 +480,7 @@ blocks:
     width7: '1'
     width8: '1'
     width9: '1'
-    wintype: firdes.WIN_BLACKMAN_hARRIS
+    wintype: window.WIN_BLACKMAN_hARRIS
     ymax: '10'
     ymin: '-140'
   states:
@@ -507,7 +509,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [632, 748.0]
+    coordinate: [968, 680.0]
     rotation: 0
     state: true
 - name: satellites_hdlc_deframer_0
@@ -524,7 +526,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [592, 948.0]
+    coordinate: [992, 924.0]
     rotation: 0
     state: enabled
 - name: satellites_hexdump_sink_0
@@ -538,7 +540,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [912, 912.0]
+    coordinate: [1472, 912.0]
     rotation: 0
     state: disabled
 - name: satellites_reflect_bytes_0
@@ -587,7 +589,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [912, 988.0]
+    coordinate: [1440, 980.0]
     rotation: 0
     state: enabled
 
@@ -599,18 +601,19 @@ connections:
 - [blocks_multiply_conjugate_cc_0, '0', blocks_complex_to_float_0, '0']
 - [blocks_multiply_conjugate_cc_0, '0', qtgui_const_sink_x_0, '0']
 - [blocks_multiply_const_vxx_0, '0', satellites_ccsds_rs_deframer_0, '0']
-- [blocks_pdu_to_tagged_stream_0, '0', blocks_unpack_k_bits_bb_0, '0']
 - [blocks_unpack_k_bits_bb_0, '0', satellites_hdlc_deframer_0, '0']
 - [blocks_wavfile_source_0, '0', freq_xlating_fir_filter_xxx_0, '0']
 - [digital_symbol_sync_xx_0, '0', blocks_delay_0, '0']
 - [digital_symbol_sync_xx_0, '0', blocks_multiply_conjugate_cc_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', qtgui_freq_sink_x_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', satellites_rms_agc_0, '0']
+- [pdu_pdu_to_tagged_stream_0, '0', blocks_unpack_k_bits_bb_0, '0']
 - [satellites_ccsds_rs_deframer_0, out, satellites_reflect_bytes_0, in]
 - [satellites_hdlc_deframer_0, out, satellites_hexdump_sink_0, in]
 - [satellites_hdlc_deframer_0, out, satellites_telemetry_parser_0, in]
-- [satellites_reflect_bytes_0, out, blocks_pdu_to_tagged_stream_0, pdus]
+- [satellites_reflect_bytes_0, out, pdu_pdu_to_tagged_stream_0, pdus]
 - [satellites_rms_agc_0, '0', digital_symbol_sync_xx_0, '0']
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-75-g67e88516

@@ -1,6 +1,7 @@
 options:
   parameters:
     author: Daniel Estevez
+    catch_exceptions: 'True'
     category: Custom
     cmake_opt: ''
     comment: ''
@@ -38,11 +39,12 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
+    en_uvec: 'True'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [600, 560]
+    coordinate: [880, 652.0]
     rotation: 0
     state: disabled
 - name: blocks_multiply_const_vxx_0
@@ -60,7 +62,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [464, 260]
+    coordinate: [744, 284.0]
     rotation: 0
     state: enabled
 - name: blocks_short_to_float_0
@@ -77,28 +79,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [248, 260]
-    rotation: 0
-    state: enabled
-- name: blocks_udp_source_0
-  id: blocks_udp_source
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    eof: 'False'
-    ipaddr: ip
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    port: port
-    psize: '1472'
-    type: short
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [8, 236]
+    coordinate: [384, 300.0]
     rotation: 0
     state: enabled
 - name: callsign
@@ -130,7 +111,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 432]
+    coordinate: [272, 492.0]
     rotation: 0
     state: enabled
 - name: digital_clock_recovery_mm_xx_0_0
@@ -151,7 +132,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [56, 396]
+    coordinate: [768, 368.0]
     rotation: 0
     state: enabled
 - name: invert
@@ -238,14 +219,37 @@ blocks:
     samp_rate: '48000'
     type: interp_fir_filter_fff
     width: '100'
-    win: firdes.WIN_HAMMING
+    win: window.WIN_HAMMING
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [664, 212]
+    coordinate: [1168, 228.0]
     rotation: 0
     state: enabled
+- name: network_udp_source_0
+  id: network_udp_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    header: '0'
+    ipv6: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    notify_missed: 'False'
+    payloadsize: '1472'
+    port: port
+    src_zeros: 'False'
+    type: short
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [56, 288.0]
+    rotation: 0
+    state: true
 - name: note_0
   id: note
   parameters:
@@ -256,7 +260,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 332]
+    coordinate: [48, 460.0]
     rotation: 0
     state: enabled
 - name: port
@@ -303,7 +307,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [520, 688]
+    coordinate: [800, 780.0]
     rotation: 0
     state: enabled
 - name: satellites_print_timestamp_0
@@ -320,7 +324,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [64, 612]
+    coordinate: [344, 712.0]
     rotation: 0
     state: enabled
 - name: satellites_submit_0
@@ -339,7 +343,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [872, 488]
+    coordinate: [1152, 584.0]
     rotation: 0
     state: disabled
 - name: tnc_nx_nx_decoder_1_0
@@ -356,17 +360,17 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [440, 420]
+    coordinate: [552, 540.0]
     rotation: 0
     state: enabled
 
 connections:
 - [blocks_multiply_const_vxx_0, '0', low_pass_filter_0, '0']
 - [blocks_short_to_float_0, '0', blocks_multiply_const_vxx_0, '0']
-- [blocks_udp_source_0, '0', blocks_short_to_float_0, '0']
 - [digital_binary_slicer_fb_0, '0', tnc_nx_nx_decoder_1_0, '0']
 - [digital_clock_recovery_mm_xx_0_0, '0', digital_binary_slicer_fb_0, '0']
 - [low_pass_filter_0, '0', digital_clock_recovery_mm_xx_0_0, '0']
+- [network_udp_source_0, '0', blocks_short_to_float_0, '0']
 - [satellites_print_timestamp_0, out, blocks_message_debug_0, print_pdu]
 - [satellites_print_timestamp_0, out, satellites_dstar_one_telemetry_parser_0, in]
 - [tnc_nx_nx_decoder_1_0, out, satellites_print_timestamp_0, in]
@@ -374,3 +378,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-75-g67e88516

@@ -1,6 +1,7 @@
 options:
   parameters:
     author: Daniel Estevez
+    catch_exceptions: 'True'
     category: Custom
     cmake_opt: ''
     comment: ''
@@ -27,7 +28,7 @@ options:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 8]
+    coordinate: [0, 16.0]
     rotation: 0
     state: enabled
 
@@ -38,11 +39,12 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
+    en_uvec: 'True'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [872, 368]
+    coordinate: [1376, 436.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_const_vxx_0
@@ -60,7 +62,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [464, 260]
+    coordinate: [672, 356.0]
     rotation: 0
     state: enabled
 - name: blocks_short_to_float_0
@@ -77,28 +79,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [248, 260]
-    rotation: 0
-    state: enabled
-- name: blocks_udp_source_0
-  id: blocks_udp_source
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    eof: 'False'
-    ipaddr: ip
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    port: port
-    psize: '1472'
-    type: short
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [8, 236]
+    coordinate: [400, 412.0]
     rotation: 0
     state: enabled
 - name: callsign
@@ -115,7 +96,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [512, 15]
+    coordinate: [560, 20.0]
     rotation: 0
     state: enabled
 - name: digital_binary_slicer_fb_0
@@ -130,7 +111,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 432]
+    coordinate: [416, 732.0]
     rotation: 0
     state: enabled
 - name: digital_clock_recovery_mm_xx_0_0
@@ -151,7 +132,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [56, 396]
+    coordinate: [88, 600.0]
     rotation: 0
     state: enabled
 - name: invert
@@ -168,7 +149,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 128]
+    coordinate: [8, 196.0]
     rotation: 0
     state: enabled
 - name: ip
@@ -185,7 +166,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [248, 15]
+    coordinate: [280, 20.0]
     rotation: 0
     state: enabled
 - name: latitude
@@ -202,7 +183,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [512, 119]
+    coordinate: [432, 156.0]
     rotation: 0
     state: enabled
 - name: longitude
@@ -219,7 +200,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [720, 119]
+    coordinate: [664, 156.0]
     rotation: 0
     state: enabled
 - name: low_pass_filter_0
@@ -238,14 +219,37 @@ blocks:
     samp_rate: '48000'
     type: interp_fir_filter_fff
     width: '100'
-    win: firdes.WIN_HAMMING
+    win: window.WIN_HAMMING
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [664, 212]
+    coordinate: [1032, 340.0]
     rotation: 0
     state: enabled
+- name: network_udp_source_0
+  id: network_udp_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    header: '0'
+    ipv6: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    notify_missed: 'False'
+    payloadsize: '1472'
+    port: port
+    src_zeros: 'False'
+    type: short
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [56, 352.0]
+    rotation: 0
+    state: true
 - name: note_0
   id: note
   parameters:
@@ -256,7 +260,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 332]
+    coordinate: [16, 516.0]
     rotation: 0
     state: enabled
 - name: port
@@ -273,7 +277,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [392, 15]
+    coordinate: [424, 20.0]
     rotation: 0
     state: enabled
 - name: recstart
@@ -290,7 +294,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [720, 15]
+    coordinate: [728, 20.0]
     rotation: 0
     state: enabled
 - name: satellites_print_timestamp_0
@@ -307,7 +311,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616, 420]
+    coordinate: [968, 600.0]
     rotation: 0
     state: enabled
 - name: tnc_nx_nx_decoder_1_0
@@ -324,19 +328,20 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [440, 420]
+    coordinate: [680, 644.0]
     rotation: 0
     state: enabled
 
 connections:
 - [blocks_multiply_const_vxx_0, '0', low_pass_filter_0, '0']
 - [blocks_short_to_float_0, '0', blocks_multiply_const_vxx_0, '0']
-- [blocks_udp_source_0, '0', blocks_short_to_float_0, '0']
 - [digital_binary_slicer_fb_0, '0', tnc_nx_nx_decoder_1_0, '0']
 - [digital_clock_recovery_mm_xx_0_0, '0', digital_binary_slicer_fb_0, '0']
 - [low_pass_filter_0, '0', digital_clock_recovery_mm_xx_0_0, '0']
+- [network_udp_source_0, '0', blocks_short_to_float_0, '0']
 - [satellites_print_timestamp_0, out, blocks_message_debug_0, print_pdu]
 - [tnc_nx_nx_decoder_1_0, out, satellites_print_timestamp_0, in]
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-75-g67e88516

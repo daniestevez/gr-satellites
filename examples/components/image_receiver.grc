@@ -1,6 +1,7 @@
 options:
   parameters:
     author: Daniel Estevez
+    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -41,7 +42,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [208, 12]
+    coordinate: [288, 12.0]
     rotation: 0
     state: enabled
 - name: blocks_throttle_0
@@ -60,7 +61,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [273, 225]
+    coordinate: [336, 268.0]
     rotation: 0
     state: true
 - name: blocks_wavfile_source_0
@@ -78,7 +79,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [53, 217]
+    coordinate: [8, 212.0]
     rotation: 0
     state: enabled
 - name: satellites_image_receiver_0
@@ -89,6 +90,7 @@ blocks:
     comment: ''
     display: 'True'
     fullscreen: 'True'
+    options: '""'
     path: /tmp/
     receiver: by70_1
     verbose: 'True'
@@ -96,7 +98,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [939, 209]
+    coordinate: [1208, 184.0]
     rotation: 0
     state: true
 - name: satellites_kiss_transport_0
@@ -107,12 +109,13 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
+    options: '""'
     use_control: 'False'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [711, 225]
+    coordinate: [864, 244.0]
     rotation: 0
     state: true
 - name: satellites_satellite_decoder_0
@@ -127,13 +130,14 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     name: LilacSat-1
-    norad: ''
+    norad: '0'
+    options: '""'
     samp_rate: samp_rate
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [453, 209]
+    coordinate: [512, 120.0]
     rotation: 0
     state: true
 
@@ -145,3 +149,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-75-g67e88516
