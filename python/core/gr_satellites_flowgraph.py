@@ -471,6 +471,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'DIY-1': deframers.diy1_deframer,
         'BINAR-1': deframers.binar1_deframer,
         'Endurosat': deframers.endurosat_deframer,
+        'SanoSat': deframers.sanosat_deframer,
         }
     _transport_hooks = {
         'KISS': transports.kiss_transport,
