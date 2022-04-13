@@ -118,15 +118,15 @@ void nusat_decoder_impl::msg_handler(pmt::pmt_t pmt_msg)
     // Reed-Solomon decoding
     auto rs_res = decode_rs_char(d_rs, d_data.data(), NULL, 0);
     if (rs_res < 0) {
-        GR_LOG_INFO(d_logger, "Reed-Solomon decoding failed");
+        d_logger->info("Reed-Solomon decoding failed");
         return;
     } else {
-        GR_LOG_INFO(d_logger, "Reed-Solomon decoding OK");
+        d_logger->info("Reed-Solomon decoding OK");
     }
 
     length = d_data[d_len_byte];
     if (length >= msg_length - d_header_len) {
-        GR_LOG_INFO(d_logger, "Length field corrupted");
+        d_logger->info("Length field corrupted");
         return;
     }
 
@@ -138,7 +138,7 @@ void nusat_decoder_impl::msg_handler(pmt::pmt_t pmt_msg)
 
     // Compute CRC-8
     if (crc8(packet, length) != d_data[d_crc_byte]) {
-        GR_LOG_INFO(d_logger, "CRC-8 does not match");
+        d_logger->info("CRC-8 does not match");
         return;
     }
 

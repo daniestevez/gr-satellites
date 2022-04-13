@@ -14,7 +14,6 @@
 
 #include "varlen_packet_framer_impl.h"
 #include <gnuradio/io_signature.h>
-#include <boost/format.hpp>
 #include <cstdio>
 #include <ctime>
 #include <iostream>
@@ -158,9 +157,8 @@ int varlen_packet_framer_impl::general_work(int noutput_items,
             std::cout << "\tread: " << nitems_read(0) << "\tini:  " << ninput_items[0]
                       << "\touti: " << noutput_items << std::endl;
 #endif
-            GR_LOG_DEBUG(d_debug_logger,
-                         boost::format("%d byte packet output @ %ld") % packet_len %
-                             nitems_written(0));
+            d_debug_logger->debug(
+                "{:d} byte packet output @ {:d}", packet_len, nitems_written(0));
             d_ninput_items_required = 1; // d_header_length + asm_len + 1; // abs min
             return packet_len + d_header_length + asm_len;
         } else {
