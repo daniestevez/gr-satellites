@@ -44,7 +44,6 @@ install(FILES
     satellites_decode_rs_ccsds.block.yml
     satellites_descrambler308.block.yml
     satellites_distributed_syncframe_soft.block.yml
-    satellites_dstar_one_telemetry_parser.block.yml
     satellites_encode_rs.block.yml
     satellites_encode_rs_ccsds.block.yml
     satellites_eseo_line_decoder.block.yml
