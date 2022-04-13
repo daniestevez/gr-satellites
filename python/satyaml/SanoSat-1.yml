@@ -1,0 +1,13 @@
+name: SanoSat-1
+norad: 51031
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  500baud FSK downlink:
+    frequency: 436.235e+6
+    modulation: FSK
+    baudrate: 500
+    framing: SanoSat
+    data:
+    - *tlm
