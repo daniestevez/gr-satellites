@@ -293,19 +293,6 @@ blocks:
     coordinate: [720, 15]
     rotation: 0
     state: enabled
-- name: satellites_dstar_one_telemetry_parser_0
-  id: satellites_dstar_one_telemetry_parser
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [520, 688]
-    rotation: 0
-    state: enabled
 - name: satellites_print_timestamp_0
   id: satellites_print_timestamp
   parameters:
@@ -342,6 +329,23 @@ blocks:
     coordinate: [872, 488]
     rotation: 0
     state: disabled
+- name: satellites_telemetry_parser_0
+  id: satellites_telemetry_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: dstar_one
+    file: ''
+    options: '""'
+    output: stdout
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [480, 612.0]
+    rotation: 0
+    state: true
 - name: tnc_nx_nx_decoder_1_0
   id: tnc_nx_nx_decoder
   parameters:
@@ -368,7 +372,7 @@ connections:
 - [digital_clock_recovery_mm_xx_0_0, '0', digital_binary_slicer_fb_0, '0']
 - [low_pass_filter_0, '0', digital_clock_recovery_mm_xx_0_0, '0']
 - [satellites_print_timestamp_0, out, blocks_message_debug_0, print_pdu]
-- [satellites_print_timestamp_0, out, satellites_dstar_one_telemetry_parser_0, in]
+- [satellites_print_timestamp_0, out, satellites_telemetry_parser_0, in]
 - [tnc_nx_nx_decoder_1_0, out, satellites_print_timestamp_0, in]
 - [tnc_nx_nx_decoder_1_0, out, satellites_submit_0, in]
 
