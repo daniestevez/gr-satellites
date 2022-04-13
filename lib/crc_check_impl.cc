@@ -88,7 +88,7 @@ void crc_check_impl::msg_handler(pmt::pmt_t pmt_msg)
 
     const auto size = msg.size();
     if (size <= d_header_bytes + num_bytes) {
-        GR_LOG_WARN(this->d_logger, "PDU too short; dropping");
+        this->d_logger->warn("PDU too short; dropping");
         return;
     }
 
@@ -111,9 +111,9 @@ void crc_check_impl::msg_handler(pmt::pmt_t pmt_msg)
 
     const bool crc_ok = crc_computed == msg_crc;
     if (crc_ok) {
-        GR_LOG_INFO(this->d_logger, "CRC OK");
+        this->d_logger->info("CRC OK");
     } else {
-        GR_LOG_INFO(this->d_logger, "CRC fail");
+        this->d_logger->info("CRC fail");
     }
 
     const auto out_size = d_discard_crc ? size - num_bytes : size;

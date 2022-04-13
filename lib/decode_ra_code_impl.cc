@@ -79,7 +79,7 @@ void decode_ra_code_impl::msg_handler(pmt::pmt_t pmt_msg)
                 "message length: %ld, expected: %d\n",
                 (long)length,
                 ra_code_length * RA_BITCOUNT);
-        GR_LOG_ERROR(d_logger, "Invalid message length");
+        d_logger->error("Invalid message length");
         return;
     }
 

@@ -82,7 +82,7 @@ void crc_append_impl::msg_handler(pmt::pmt_t pmt_msg)
 
     const auto size = msg.size();
     if (size <= d_header_bytes) {
-        GR_LOG_WARN(this->d_logger, "PDU too short; dropping");
+        this->d_logger->warn("PDU too short; dropping");
         return;
     }
 
