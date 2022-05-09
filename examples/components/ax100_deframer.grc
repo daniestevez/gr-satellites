@@ -23,6 +23,7 @@ options:
     sizing_mode: fixed
     thread_safe_setters: ''
     title: GOMspace AX100 deframer component example
+    window_size: (1000,1000)
   states:
     bus_sink: false
     bus_source: false
@@ -41,7 +42,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [208, 12]
+    coordinate: [304, 4.0]
     rotation: 0
     state: enabled
 - name: blocks_message_debug_0
@@ -55,7 +56,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [792, 176.0]
+    coordinate: [1008, 156.0]
     rotation: 0
     state: enabled
 - name: blocks_message_debug_0_0
@@ -69,7 +70,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [808, 392.0]
+    coordinate: [984, 372.0]
     rotation: 0
     state: true
 - name: blocks_wavfile_source_0
@@ -105,7 +106,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [72, 444.0]
+    coordinate: [16, 420.0]
     rotation: 0
     state: true
 - name: note_0
@@ -150,7 +151,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [488, 220.0]
+    coordinate: [592, 216.0]
     rotation: 0
     state: enabled
 - name: satellites_ax100_deframer_0_0
@@ -169,7 +170,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [504, 444.0]
+    coordinate: [576, 460.0]
     rotation: 0
     state: true
 - name: satellites_fsk_demodulator_0
@@ -189,7 +190,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [288, 220.0]
+    coordinate: [352, 216.0]
     rotation: 0
     state: enabled
 - name: satellites_fsk_demodulator_0_0
@@ -223,3 +224,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-75-g67e88516

@@ -28,7 +28,27 @@ CSPHeader = BitStruct(
     'crc' / Flag
     )
 
+Addressv2 = BitsInteger(14)
+
+CSPHeaderv2 = BitStruct(
+    'priority' / BitsInteger(2),
+    'destination' / Addressv2,
+    'source' / Addressv2,
+    'destination_port' / Port,
+    'source_port' / Port,
+    'reserved' / BitsInteger(2),
+    'hmac' / Flag,
+    'xtea' / Flag,
+    'rdp' / Flag,
+    'crc' / Flag
+    )
+
 csp = Struct(
     'header' / CSPHeader,
+    'payload' / GreedyBytes
+    )
+
+cspv2 = Struct(
+    'header' / CSPHeaderv2,
     'payload' / GreedyBytes
     )

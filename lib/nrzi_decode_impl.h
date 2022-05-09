@@ -18,9 +18,6 @@ namespace satellites {
 
 class nrzi_decode_impl : public nrzi_decode
 {
-private:
-    uint8_t d_last;
-
 public:
     nrzi_decode_impl();
     ~nrzi_decode_impl();

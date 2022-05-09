@@ -14,7 +14,7 @@ from gnuradio import gr
 import numpy
 import pmt
 
-from . import hdlc
+from . import crc, hdlc
 
 
 class hdlc_framer(gr.basic_block):
@@ -26,6 +26,7 @@ class hdlc_framer(gr.basic_block):
             in_sig=None,
             out_sig=None)
 
+        self.crc_calc = crc(16, 0x1021, 0xFFFF, 0xFFFF, True, True)
         self.preamble_bytes = preamble_bytes
         self.postamble_bytes = postamble_bytes
         self.message_port_register_in(pmt.intern('in'))
@@ -39,9 +40,9 @@ class hdlc_framer(gr.basic_block):
             return
 
         data = list(pmt.u8vector_elements(msg))
-        crc = hdlc.crc_ccitt(data)
-        data.append(crc & 0xff)
-        data.append((crc >> 8) & 0xff)
+        crc_val = self.crc_calc.compute(data)
+        data.append(crc_val & 0xff)
+        data.append((crc_val >> 8) & 0xff)
 
         buff = list(hdlc.flag * self.preamble_bytes)
         ones = 0  # number of consecutive ones

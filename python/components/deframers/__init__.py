@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2019 Daniel Estevez <daniel@destevez.net>
+# Copyright 2019-2022 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -44,6 +44,7 @@ from .ngham_deframer import ngham_deframer
 from .nusat_deframer import nusat_deframer
 from .ops_sat_deframer import ops_sat_deframer
 from .reaktor_hello_world_deframer import reaktor_hello_world_deframer
+from .sanosat_deframer import sanosat_deframer
 from .sat_3cat_1_deframer import sat_3cat_1_deframer
 from .smogp_ra_deframer import smogp_ra_deframer
 from .smogp_signalling_deframer import smogp_signalling_deframer

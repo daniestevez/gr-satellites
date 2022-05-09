@@ -245,6 +245,8 @@ The framings allowed in the ``framing`` field are the following:
 * ``BINAR-1``, the custom framing used by the BINAR-1 satellite.
 
 * ``Endurosat``, the custom framing used by the Endurosat modem.
+
+* ``SanoSat``, the custom framing used by SanoSat-1.
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.

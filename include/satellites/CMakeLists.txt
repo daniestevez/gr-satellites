@@ -24,6 +24,9 @@
 install(FILES
     api.h
     ax100_decode.h
+    crc.h
+    crc_append.h
+    crc_check.h
     convolutional_encoder.h
     decode_ra_code.h
     decode_rs.h

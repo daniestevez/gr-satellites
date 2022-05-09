@@ -1,6 +1,7 @@
 options:
   parameters:
     author: Daniel Estevez
+    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -41,7 +42,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [208, 12]
+    coordinate: [328, 12.0]
     rotation: 0
     state: enabled
 - name: blocks_message_debug_0
@@ -50,11 +51,12 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
+    en_uvec: 'True'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [824, 168.0]
+    coordinate: [1200, 156.0]
     rotation: 0
     state: enabled
 - name: blocks_wavfile_source_0
@@ -94,7 +96,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 196.0]
+    coordinate: [376, 188.0]
     rotation: 0
     state: true
 - name: satellites_ccsds_concatenated_deframer_0
@@ -103,21 +105,21 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    convolutional: CCSDS
+    convolutional: '"CCSDS"'
     frame_size: '114'
     maxoutbuf: '0'
     minoutbuf: '0'
     options: '""'
     precoding: '"differential"'
-    rs_basis: conventional
+    rs_basis: '"dual"'
     rs_interleaving: '1'
-    scrambler: CCSDS
+    scrambler: '"CCSDS"'
     threshold: '4'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [520, 180.0]
+    coordinate: [744, 200.0]
     rotation: 0
     state: true
 
@@ -128,3 +130,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-75-g67e88516

@@ -10,7 +10,8 @@
 
 from gnuradio import gr, digital
 
-from ... import decode_rs, check_tt64_crc
+from ... import decode_rs
+from ...crcs import crc16_arc
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
 
@@ -46,7 +47,7 @@ class tt64_deframer(gr.hier_block2, options_block):
         self.deframer = sync_to_pdu_packed(
             packlen=64, sync=_syncword, threshold=syncword_threshold)
         self.rs = decode_rs(8, 0x11d, 1, 1, 16, 1)
-        self.crc = check_tt64_crc(self.options.verbose_crc)
+        self.crc = crc16_arc()
 
         self.connect(self, self.slicer, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.rs, 'in'))
@@ -66,5 +67,3 @@ class tt64_deframer(gr.hier_block2, options_block):
             help='Syncword bit errors [default=%(default)r]')
         parser.add_argument(
             '--verbose_rs', action='store_true', help='Verbose RS decoder')
-        parser.add_argument(
-            '--verbose_crc', action='store_true', help='Verbose CRC decoder')

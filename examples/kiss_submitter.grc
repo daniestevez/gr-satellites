@@ -1,6 +1,7 @@
 options:
   parameters:
     author: Daniel Estevez
+    catch_exceptions: 'True'
     category: Custom
     cmake_opt: ''
     comment: ''
@@ -38,68 +39,12 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
+    en_uvec: 'True'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1152, 240.0]
-    rotation: 0
-    state: enabled
-- name: blocks_pdu_to_tagged_stream_0
-  id: blocks_pdu_to_tagged_stream
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    tag: packet_len
-    type: byte
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [224, 204.0]
-    rotation: 0
-    state: enabled
-- name: blocks_socket_pdu_0
-  id: blocks_socket_pdu
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    host: host
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    mtu: '10000'
-    port: port
-    tcp_no_delay: 'False'
-    type: TCP_CLIENT
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [48, 132.0]
-    rotation: 0
-    state: enabled
-- name: blocks_socket_pdu_0_0
-  id: blocks_socket_pdu
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    host: localhost
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    mtu: '10000'
-    port: '52002'
-    tcp_no_delay: 'True'
-    type: TCP_SERVER
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [888, 316.0]
+    coordinate: [1504, 244.0]
     rotation: 0
     state: enabled
 - name: callsign
@@ -170,6 +115,46 @@ blocks:
     coordinate: [816, 12.0]
     rotation: 0
     state: enabled
+- name: network_socket_pdu_0
+  id: network_socket_pdu
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    host: host
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mtu: '10000'
+    port: port
+    tcp_no_delay: 'False'
+    type: TCP_CLIENT
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 188.0]
+    rotation: 0
+    state: true
+- name: network_socket_pdu_1
+  id: network_socket_pdu
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    host: localhost
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mtu: '10000'
+    port: '52002'
+    tcp_no_delay: 'True'
+    type: TCP_SERVER
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1272, 524.0]
+    rotation: 0
+    state: true
 - name: norad
   id: parameter
   parameters:
@@ -184,7 +169,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1152, 12.0]
+    coordinate: [1224, 12.0]
     rotation: 0
     state: enabled
 - name: note_0
@@ -197,7 +182,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [216, 108.0]
+    coordinate: [16, 332.0]
     rotation: 0
     state: true
 - name: note_1
@@ -210,7 +195,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [432, 124.0]
+    coordinate: [616, 340.0]
     rotation: 0
     state: true
 - name: note_3
@@ -223,7 +208,24 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1048, 380.0]
+    coordinate: [1264, 436.0]
+    rotation: 0
+    state: true
+- name: pdu_pdu_to_tagged_stream_0
+  id: pdu_pdu_to_tagged_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    tag: packet_len
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [320, 196.0]
     rotation: 0
     state: true
 - name: port
@@ -273,7 +275,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [472, 180.0]
+    coordinate: [664, 268.0]
     rotation: 0
     state: enabled
 - name: satellites_pdu_to_kiss_0
@@ -282,13 +284,15 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
+    control_byte: 'True'
+    include_timestamp: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [688, 336.0]
+    coordinate: [944, 444.0]
     rotation: 0
     state: enabled
 - name: satellites_print_timestamp_0
@@ -305,7 +309,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [720, 244.0]
+    coordinate: [1024, 212.0]
     rotation: 0
     state: enabled
 - name: satellites_submit_0
@@ -324,18 +328,19 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1000, 108.0]
+    coordinate: [1432, 72.0]
     rotation: 0
     state: disabled
 
 connections:
-- [blocks_pdu_to_tagged_stream_0, '0', satellites_kiss_to_pdu_0, '0']
-- [blocks_socket_pdu_0, pdus, blocks_pdu_to_tagged_stream_0, pdus]
+- [network_socket_pdu_0, pdus, pdu_pdu_to_tagged_stream_0, pdus]
+- [pdu_pdu_to_tagged_stream_0, '0', satellites_kiss_to_pdu_0, '0']
 - [satellites_kiss_to_pdu_0, out, satellites_pdu_to_kiss_0, in]
 - [satellites_kiss_to_pdu_0, out, satellites_print_timestamp_0, in]
-- [satellites_pdu_to_kiss_0, out, blocks_socket_pdu_0_0, pdus]
+- [satellites_pdu_to_kiss_0, out, network_socket_pdu_1, pdus]
 - [satellites_print_timestamp_0, out, blocks_message_debug_0, print_pdu]
 - [satellites_print_timestamp_0, out, satellites_submit_0, in]
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-75-g67e88516

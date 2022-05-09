@@ -37,12 +37,13 @@ install(FILES
     satellites_check_swiatowid_crc.block.yml
     satellites_check_tt64_crc.block.yml
     satellites_convolutional_encoder.block.yml
+    satellites_crc_append.block.yml
+    satellites_crc_check.block.yml
     satellites_decode_ra_code.block.yml
     satellites_decode_rs.block.yml
     satellites_decode_rs_ccsds.block.yml
     satellites_descrambler308.block.yml
     satellites_distributed_syncframe_soft.block.yml
-    satellites_dstar_one_telemetry_parser.block.yml
     satellites_encode_rs.block.yml
     satellites_encode_rs_ccsds.block.yml
     satellites_eseo_line_decoder.block.yml

@@ -55,6 +55,7 @@ GR_PYTHON_INSTALL(
     funcube.py
     gomx_1.py
     gomx_3.py
+    inspiresat_1.py
     kr01.py
     lume.py
     mirsat1.py

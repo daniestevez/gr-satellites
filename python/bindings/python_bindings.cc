@@ -22,6 +22,9 @@ namespace py = pybind11;
 /**************************************/
 // BINDING_FUNCTION_PROTOTYPES(
 void bind_ax100_decode(py::module& m);
+void bind_crc(py::module& m);
+void bind_crc_append(py::module& m);
+void bind_crc_check(py::module& m);
 void bind_convolutional_encoder(py::module& m);
 void bind_decode_ra_code(py::module& m);
 void bind_decode_rs(py::module& m);
@@ -69,6 +72,9 @@ PYBIND11_MODULE(satellites_python, m)
     /**************************************/
     // BINDING_FUNCTION_CALLS(
     bind_ax100_decode(m);
+    bind_crc(m);
+    bind_crc_append(m);
+    bind_crc_check(m);
     bind_convolutional_encoder(m);
     bind_decode_ra_code(m);
     bind_decode_rs(m);

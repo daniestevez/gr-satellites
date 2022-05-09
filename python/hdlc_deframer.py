@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2017 Daniel Estevez <daniel@destevez.net>
+# Copyright 2017, 2022 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -14,7 +14,7 @@ from gnuradio import gr
 import numpy
 import pmt
 
-from . import hdlc
+from . import crc, hdlc
 
 
 def pack(s):
@@ -28,16 +28,20 @@ def pack(s):
     return d
 
 
-def fcs_ok(frame):
-    if len(frame) <= 2:
-        return False
-    crc = hdlc.crc_ccitt(frame[:-2])
-    return frame[-2] == (crc & 0xff) and frame[-1] == ((crc >> 8) & 0xff)
+class hdlc_crc_check:
+    def __init__(self):
+        self.crc_calc = crc(16, 0x1021, 0xFFFF, 0xFFFF, True, True)
+
+    def fcs_ok(self, frame):
+        if len(frame) <= 2:
+            return False
+        out = self.crc_calc.compute(frame[:-2])
+        return frame[-2] == (out & 0xff) and frame[-1] == ((out >> 8) & 0xff)
 
 
 class hdlc_deframer(gr.sync_block):
     """docstring for block hdlc_deframer"""
-    def __init__(self, check_fcs, max_length, crc_check_func=fcs_ok):
+    def __init__(self, check_fcs, max_length, crc_check_func=None):
         gr.sync_block.__init__(
             self,
             name='hdlc_deframer',
@@ -47,7 +51,11 @@ class hdlc_deframer(gr.sync_block):
         self.bits = collections.deque(maxlen=(max_length+2)*8 + 7)
         self.ones = 0  # consecutive ones for flag checking
         self.check = check_fcs
-        self.fcs_ok = crc_check_func
+        if crc_check_func is not None:
+            self.fcs_ok = crc_check_func
+        else:
+            self.crc_check = hdlc_crc_check()
+            self.fcs_ok = self.crc_check.fcs_ok
 
         self.message_port_register_out(pmt.intern('out'))
 

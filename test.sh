@@ -117,3 +117,5 @@ echo "IDEASSat"
 gr_satellites IDEASSat --wavfile satellite-recordings/ideassat.wav
 echo "CAPE-3"
 gr_satellites CAPE-3 --wavfile satellite-recordings/cape3.wav
+echo "SanoSat-1"
+gr_satellites SanoSat-1 --wavfile satellite-recordings/sanosat1.wav

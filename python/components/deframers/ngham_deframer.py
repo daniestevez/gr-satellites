@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2019 Daniel Estevez <daniel@destevez.net>
+# Copyright 2019, 2022 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -11,7 +11,8 @@
 from gnuradio import gr, blocks, digital
 
 from ... import (
-    decode_rs, ngham_packet_crop, ngham_remove_padding, ngham_check_crc)
+    decode_rs, ngham_packet_crop, ngham_remove_padding)
+from ...crcs import crc16_ccitt_x25
 from ...grpdu import pdu_to_tagged_stream, tagged_stream_to_pdu
 from ...grtypes import byte_t
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
@@ -65,7 +66,7 @@ class ngham_deframer(gr.hier_block2, options_block):
         self.tag2pdu = tagged_stream_to_pdu(byte_t, 'packet_len')
         self.scrambler = ccsds_descrambler()
         self.padding = ngham_remove_padding()
-        self.crc = ngham_check_crc(self.options.verbose_crc)
+        self.crc = crc16_ccitt_x25(swap_endianness=False)
 
         self.connect(self, self.slicer, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.crop, 'in'))
@@ -88,7 +89,3 @@ class ngham_deframer(gr.hier_block2, options_block):
             '--syncword_threshold', type=int,
             default=cls._default_sync_threshold,
             help='Syncword bit errors [default=%(default)r]')
-        parser.add_argument(
-            '--verbose_rs', action='store_true', help='Verbose RS decoder')
-        parser.add_argument(
-            '--verbose_crc', action='store_true', help='Verbose CRC check')

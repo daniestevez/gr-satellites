@@ -14,9 +14,9 @@
 
 #include "varlen_packet_tagger_impl.h"
 #include <gnuradio/io_signature.h>
+#include <boost/format.hpp>
 #include <cstdio>
 #include <iostream>
-
 extern "C" {
 #include "golay24.h"
 #include "libfec/fec.h"
