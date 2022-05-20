@@ -40,6 +40,7 @@ GR_PYTHON_INSTALL(
     by02.py
     by70_1.py
     csp.py
+    ctim.py
     cute_70cm.py
     cute_bct_fsw.py
     cute_bct_soh.py
