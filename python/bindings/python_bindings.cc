@@ -26,6 +26,7 @@ void bind_crc(py::module& m);
 void bind_crc_append(py::module& m);
 void bind_crc_check(py::module& m);
 void bind_convolutional_encoder(py::module& m);
+void bind_costas_loop_8apsk_cc(py::module& m);
 void bind_decode_ra_code(py::module& m);
 void bind_decode_rs(py::module& m);
 void bind_descrambler308(py::module& m);
@@ -77,6 +78,7 @@ PYBIND11_MODULE(satellites_python, m)
     bind_crc_append(m);
     bind_crc_check(m);
     bind_convolutional_encoder(m);
+    bind_costas_loop_8apsk_cc(m);
     bind_decode_ra_code(m);
     bind_decode_rs(m);
     bind_descrambler308(m);

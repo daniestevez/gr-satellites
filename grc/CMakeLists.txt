@@ -37,6 +37,7 @@ install(FILES
     satellites_check_swiatowid_crc.block.yml
     satellites_check_tt64_crc.block.yml
     satellites_convolutional_encoder.block.yml
+    satellites_costas_loop_8apsk_cc.block.yml
     satellites_crc_append.block.yml
     satellites_crc_check.block.yml
     satellites_decode_ra_code.block.yml

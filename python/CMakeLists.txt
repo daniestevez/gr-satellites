@@ -111,6 +111,7 @@ include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-satellites)
 set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/swig)
+GR_ADD_TEST(qa_costas_loop_8apsk_cc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_costas_loop_8apsk_cc.py)
 GR_ADD_TEST(qa_crc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_crc.py)
 GR_ADD_TEST(qa_fixedlen_tagger ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_fixedlen_tagger.py)
 GR_ADD_TEST(qa_fixedlen_to_pdu ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_fixedlen_to_pdu.py)
