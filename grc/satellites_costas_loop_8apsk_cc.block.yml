@@ -1,0 +1,47 @@
+id: satellites_costas_loop_8apsk_cc
+label: 8APSK Costas Loop
+category: '[Satellites]/Synchronizers'
+
+parameters:
+- id: loop_bw
+  label: Loop bandwidth
+  dtype: real
+
+inputs:
+- domain: stream
+  dtype: complex
+
+outputs:
+- domain: stream
+  dtype: complex
+- label: frequency
+  domain: stream
+  dtype: float
+  optional: true
+- label: phase
+  domain: stream
+  dtype: float
+  optional: true
+- label: error
+  domain: stream
+  dtype: float
+  optional: true
+
+templates:
+  imports: import satellites
+  make: satellites.costas_loop_8apsk_cc(${loop_bw})
+  callbacks:
+  - set_loop_bandwidth(${loop_bw})
+
+cpp_templates:
+    includes: ['#include <satellites/costas_loop_8apsk_cc.h>']
+    declarations: 'gr::satellites::costas_loop_8apsk_cc::sptr ${id};'
+    make: |-
+        this->${id} = gr::satellites::costas_loop_8apsk_cc::make(${loop_bw});
+    link: ['gnuradio::satellites']
+    callbacks:
+    - set_loop_bandwidth(${loop_bw})
+
+#  'file_format' specifies the version of the GRC yml format used in the file
+#  and should usually not be changed.
+file_format: 1

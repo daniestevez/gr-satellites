@@ -28,6 +28,7 @@ install(FILES
     crc_append.h
     crc_check.h
     convolutional_encoder.h
+    costas_loop_8apsk_cc.h
     decode_ra_code.h
     decode_rs.h
     descrambler308.h

@@ -45,6 +45,7 @@ endif(MSVC)
 list(APPEND satellites_sources
     ax100_decode_impl.cc
     convolutional_encoder_impl.cc
+    costas_loop_8apsk_cc_impl.cc
     crc.cc
     crc_append_impl.cc
     crc_check_impl.cc
@@ -92,7 +93,10 @@ if(NOT satellites_sources)
 endif(NOT satellites_sources)
 
 add_library(gnuradio-satellites SHARED ${satellites_sources})
-target_link_libraries(gnuradio-satellites gnuradio::gnuradio-runtime gnuradio::gnuradio-blocks)
+target_link_libraries(gnuradio-satellites
+	gnuradio::gnuradio-runtime
+	gnuradio::gnuradio-blocks
+	gnuradio::gnuradio-digital)
 target_include_directories(gnuradio-satellites
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PUBLIC $<INSTALL_INTERFACE:include>
