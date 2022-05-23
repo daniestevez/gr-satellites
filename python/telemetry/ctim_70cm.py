@@ -349,7 +349,7 @@ ctim_beacon = Struct(
 )
 
 
-ctim = Struct(
+ctim_70cm = Struct(
     'ax25_header' / Header,
     'primary_header' / ccsds_space_packet.PrimaryHeader,
     'secondary_header' / If(
@@ -357,9 +357,9 @@ ctim = Struct(
         SecondaryHeader
     ),
     'packet' / Switch(
-        lambda c: (c.primary_header.AP_ID),
+        lambda c: c.primary_header.AP_ID,
         {
-            (0x01): ctim_beacon
+            0x01: ctim_beacon
         }
     )
 )
