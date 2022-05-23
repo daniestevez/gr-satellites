@@ -34,6 +34,7 @@ list(APPEND satellites_python_files
     crc_append_python.cc
     crc_check_python.cc
     convolutional_encoder_python.cc
+    costas_loop_8apsk_cc_python.cc
     decode_ra_code_python.cc
     decode_rs_python.cc
     descrambler308_python.cc
