@@ -40,7 +40,9 @@ class FileReceiverQO100Multimedia(FileReceiver):
             return data
         # Trim if we are in the last chunk
         length = (self._files[self._current_file].size
-                  - self.chunk_offset(chunk))
+                  - self.chunk_offset(chunk)
+                  if self._current_file is not None
+                  else len(data))
         return data[:length]
 
     def file_size(self, chunk):
@@ -59,7 +61,8 @@ class FileReceiverQO100Multimedia(FileReceiver):
     def file_id(self, chunk):
         if self.chunk_sequence(chunk) != 0:
             return None
-        return str(chunk[2:52], encoding='ascii').rstrip('\x00')
+        return (str(chunk[2:52], encoding='ascii').rstrip('\x00')
+                .replace('\x00', ' '))
 
     def on_completion(self, f):
         if self._current_frame_type not in [3, 4, 5]:
