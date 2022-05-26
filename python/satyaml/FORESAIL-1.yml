@@ -1,0 +1,20 @@
+name: FORESAIL-1
+norad: 99399
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  19k2 FSK downlink:
+    frequency: 437.125e+6
+    modulation: FSK
+    baudrate: 19200
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
+  9k6 FSK downlink:
+    frequency: 437.125e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
