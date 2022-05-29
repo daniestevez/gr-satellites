@@ -61,17 +61,24 @@ class FileReceiverQO100Multimedia(FileReceiver):
     def file_id(self, chunk):
         if self.chunk_sequence(chunk) != 0:
             return None
-        return (str(chunk[2:52], encoding='ascii').rstrip('\x00')
+        name = (str(chunk[2:52], encoding='ascii')
+                .rstrip('\x00')
                 .replace('\x00', ' '))
+        if self.frame_type(chunk) in [3, 4, 5]:
+            # ASCII, HTML and binary files are zipped, so we add the .zip
+            # extension
+            name += '.zip'
+        return name
 
     def on_completion(self, f):
-        if self._current_frame_type not in [3, 4, 5]:
+        fname = f.path.name
+        if not fname.endswith('.zip'):
+            # Not a zip file. No need to unzip
             return
-        # ASCII, HTML and binary files are zipped
-        f.f.close()
-        del self._files[self._current_file]
-        data = zipfile.ZipFile(f.path).read(f.path.name)
-        with open(f.path, 'wb') as fdata:
+        f.f.flush()
+        outname = fname[:-4]  # remove .zip
+        data = zipfile.ZipFile(f.path).read(outname)
+        with open(f.path.parent / outname, 'wb') as fdata:
             fdata.write(data)
 
 
