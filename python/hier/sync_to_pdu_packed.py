@@ -13,10 +13,9 @@ from gnuradio import blocks
 from gnuradio import digital
 from gnuradio import gr
 from gnuradio.filter import firdes
-import satellites
-import numpy
-from ..grpdu import tagged_stream_to_pdu
+from .. import fixedlen_to_pdu
 from ..grtypes import byte_t
+import numpy
 
 
 class sync_to_pdu_packed(gr.hier_block2):
@@ -41,45 +40,28 @@ class sync_to_pdu_packed(gr.hier_block2):
         ##################################################
         # Blocks
         ##################################################
-        self.satellites_fixedlen_tagger_0_0_0 = (
-            satellites.fixedlen_tagger('syncword', 'packet_len',
-                                       packlen*8, numpy.byte))
+        self.fixedlen_to_pdu = fixedlen_to_pdu(
+                byte_t, 'syncword', packlen*8, True)
         self.digital_correlate_access_code_tag_bb_0_0_0 = (
             digital.correlate_access_code_tag_bb(sync, threshold, 'syncword'))
-        self.blocks_unpacked_to_packed_xx_0 = (
-            blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST))
-        self.blocks_tagged_stream_to_pdu_0_0_0 = (
-            tagged_stream_to_pdu(byte_t, 'packet_len'))
-        self.blocks_tagged_stream_multiply_length_0 = (
-            blocks.tagged_stream_multiply_length(gr.sizeof_char*1,
-                                                 'packet_len', 1/8.0))
 
         ##################################################
         # Connections
         ##################################################
         self.msg_connect(
-            (self.blocks_tagged_stream_to_pdu_0_0_0, 'pdus'), (self, 'out'))
-        self.connect(
-            (self.blocks_tagged_stream_multiply_length_0, 0),
-            (self.blocks_tagged_stream_to_pdu_0_0_0, 0))
-        self.connect(
-            (self.blocks_unpacked_to_packed_xx_0, 0),
-            (self.blocks_tagged_stream_multiply_length_0, 0))
+            (self.fixedlen_to_pdu, 'pdus'), (self, 'out'))
         self.connect(
             (self.digital_correlate_access_code_tag_bb_0_0_0, 0),
-            (self.satellites_fixedlen_tagger_0_0_0, 0))
+            self.fixedlen_to_pdu)
         self.connect(
             (self, 0), (self.digital_correlate_access_code_tag_bb_0_0_0, 0))
-        self.connect(
-            (self.satellites_fixedlen_tagger_0_0_0, 0),
-            (self.blocks_unpacked_to_packed_xx_0, 0))
 
     def get_packlen(self):
         return self.packlen
 
     def set_packlen(self, packlen):
         self.packlen = packlen
-        self.satellites_fixedlen_tagger_0_0_0.set_packet_len(self.packlen)
+        # TODO: add callback to self.fixedlen_to_pdu
 
     def get_sync(self):
         return self.sync

@@ -53,6 +53,7 @@ list(APPEND satellites_sources
     descrambler308_impl.cc
     distributed_syncframe_soft_impl.cc
     encode_rs_impl.cc
+    fixedlen_to_pdu_impl.cc
     golay24.c
     lilacsat1_demux_impl.cc
     matrix_deinterleaver_soft_impl.cc
@@ -91,7 +92,7 @@ if(NOT satellites_sources)
 endif(NOT satellites_sources)
 
 add_library(gnuradio-satellites SHARED ${satellites_sources})
-target_link_libraries(gnuradio-satellites gnuradio::gnuradio-runtime)
+target_link_libraries(gnuradio-satellites gnuradio::gnuradio-runtime gnuradio::gnuradio-blocks)
 target_include_directories(gnuradio-satellites
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PUBLIC $<INSTALL_INTERFACE:include>
