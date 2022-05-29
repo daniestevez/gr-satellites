@@ -38,13 +38,17 @@ gr-satellites [documentation](https://gr-satellites.readthedocs.io/) is hosted i
 Currently there are the following series of releases in the history of
 gr-satellites:
 
-* `v4.x.y` has the same functionality as the v3.x.y series, but supports
-   GNU Radio 3.9 and 3.10.
+* `v5.x.y` is the current release series, and supports GNU Radio 3.10.
 
-* `v3.x.y` is the result of a large refactor that introduces a lot of
-  new functionality and improvements. The refactor started on September
-  2019 and was finished in May 2020. This supports GNU Radio 3.8.
+* `v4.x.y` has the same functionality as the v5.x.y series, but supports
+  GNU Radio 3.9 (until v4.6.0, the v4.x.y series supported both GNU Radio
+  3.9 and 3.10).
 
+* `v3.x.y` has the same functionality as the v5.x.y series, but supports
+  GNU Rado 3.8. This series was the result of a large refactor that
+  introduced a lot of new functionality and improvements.
+  The refactor started on September 2019 and was finished in May 2020.
+   
 * `v2.x.y` is a series of releases compatible with GNU Radio 3.8 that existed
   between September 2019 and May 2020. The functionality in this series is
   equivalent to the `v1.x.y` series.
@@ -55,12 +59,14 @@ gr-satellites:
 
 The repository is organized in the following branches:
 
-* `master` is where the active development happens. From time to time, features
-  will be frozen in a new release. This branch is compatible with GNU Radio 3.9
-  and 3.10.
+* `main` is where the active development happens. From time to time, features
+  will be frozen in a new release. This branch is compatible with GNU Radio 3.10.
+
+* `maint-3.10` is the branch where releases in the current `v5.x.y` line are
+  published. This branch is compatible with GNU Radio 3.10.
 
 * `maint-3.9` is the branch where releases in the current `v4.x.y` line are
-  published. This branch is compatible with GNU Radio 3.9 and 3.10.
+  published. This branch is compatible with GNU Radio 3.9.
 
 * `maint-3.8` is the branch where releases in the current `v3.x.y` line are
   published. This branch is compatible with GNU Radio 3.8.
