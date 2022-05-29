@@ -21,7 +21,7 @@ parameters:
 -   id: pack
     label: Pack bits
     dtype: bool
-    defaul: 'False'
+    default: 'False'
     hide: ${ 'none' if type == 'byte' else 'all' }
 
 inputs:
