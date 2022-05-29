@@ -39,6 +39,7 @@ GR_PYTHON_INSTALL(
     imagereceiver.py
     lucky7.py
     mirsat1.py
+    qo100_multimedia.py
     sat_1kuns_pf.py
     smogp.py
     swiatowid.py

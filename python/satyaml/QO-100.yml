@@ -7,14 +7,14 @@ data:
     telemetry: qo100
 transmitters:
   400baud uncoded BPSK beacon:
-    frequency: 10489.800e+6
+    frequency: 10489.750e+6
     modulation: DBPSK Manchester
     baudrate: 400
     framing: AO-40 uncoded
     data:
     - *tlm
   400baud FEC BPSK beacon:
-    frequency: 10489.800e+6
+    frequency: 10489.750e+6
     modulation: DBPSK Manchester
     baudrate: 400
     framing: AO-40 FEC

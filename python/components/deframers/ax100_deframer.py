@@ -30,10 +30,11 @@ class ax100_deframer(gr.hier_block2, options_block):
         scrambler: scrambler to use, either 'CCSDS' or 'none'
                    (only for ASM mode) (str)
         syncword_threshold: number of bit errors allowed in syncword (int)
+        syncword: syncword to use (str)
         options: Options from argparse
     """
     def __init__(self, mode, scrambler='CCSDS', syncword_threshold=None,
-                 options=None):
+                 syncword=_syncword, options=None):
         gr.hier_block2.__init__(
             self,
             'ax100_deframer',
@@ -57,7 +58,7 @@ class ax100_deframer(gr.hier_block2, options_block):
             self.descrambler = digital.descrambler_bb(0x21, 0, 16)
         self.deframer = sync_to_pdu_packed(
             packlen=256 if mode == 'RS' else 255,
-            sync=_syncword, threshold=syncword_threshold)
+            sync=syncword, threshold=syncword_threshold)
         self.fec = (ax100_decode(self.options.verbose_fec) if mode == 'RS'
                     else u482c_decode(
                         self.options.verbose_fec, 0,

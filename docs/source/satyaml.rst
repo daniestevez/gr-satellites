@@ -247,6 +247,9 @@ The framings allowed in the ``framing`` field are the following:
 * ``Endurosat``, the custom framing used by the Endurosat modem.
 
 * ``SanoSat``, the custom framing used by SanoSat-1.
+
+* ``FORESAIL-1``, the custom framing used by FORESAIL-1. It is the same as the
+  AX-100 ASM mode, but the ASM used is the CCSDS ASM ``0x1ACFFC1D``.
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.
