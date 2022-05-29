@@ -1,4 +1,4 @@
-name: build-ubuntu
+name: build-ubuntu-gr310
 
 # Controls when the action will run.
 on:
@@ -13,4 +13,4 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: daniestevez/gr-satellites-ci-action@v1.3.2
+      - uses: daniestevez/gr-satellites-ci-action@v2.0.4
