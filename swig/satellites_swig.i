@@ -1,8 +1,10 @@
 /* -*- c++ -*- */
 
 #define SATELLITES_API
+#define BLOCKS_API
 
 %include "gnuradio.i"           // the common stuff
+%include "gnuradio/blocks/pdu.h"
 
 //load generated python docstrings
 %include "satellites_swig_doc.i"
@@ -18,6 +20,7 @@
 #include "satellites/descrambler308.h"
 #include "satellites/distributed_syncframe_soft.h"
 #include "satellites/encode_rs.h"
+#include "satellites/fixedlen_to_pdu.h"
 #include "satellites/lilacsat1_demux.h"
 #include "satellites/matrix_deinterleaver_soft.h"
 #include "satellites/nrzi_decode.h"
@@ -51,6 +54,8 @@ GR_SWIG_BLOCK_MAGIC2(satellites, descrambler308);
 GR_SWIG_BLOCK_MAGIC2(satellites, distributed_syncframe_soft);
 %include "satellites/encode_rs.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, encode_rs);
+%include "satellites/fixedlen_to_pdu.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, fixedlen_to_pdu);
 %include "satellites/lilacsat1_demux.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, lilacsat1_demux);
 %include "satellites/matrix_deinterleaver_soft.h"

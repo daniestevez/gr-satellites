@@ -33,6 +33,7 @@ install(FILES
     descrambler308.h
     distributed_syncframe_soft.h
     encode_rs.h
+    fixedlen_to_pdu.h
     lilacsat1_demux.h
     matrix_deinterleaver_soft.h
     nrzi_decode.h
