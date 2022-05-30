@@ -23,8 +23,8 @@ namespace satellites {
 matrix_deinterleaver_soft::sptr
 matrix_deinterleaver_soft::make(int rows, int cols, int output_size, int output_skip)
 {
-    return gnuradio::get_initial_sptr(
-        new matrix_deinterleaver_soft_impl(rows, cols, output_size, output_skip));
+    return gnuradio::make_block_sptr<matrix_deinterleaver_soft_impl>(
+        rows, cols, output_size, output_skip);
 }
 
 /*

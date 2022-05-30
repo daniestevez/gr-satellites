@@ -23,7 +23,7 @@ namespace satellites {
 
 pdu_head_tail::sptr pdu_head_tail::make(int mode, size_t num)
 {
-    return gnuradio::get_initial_sptr(new pdu_head_tail_impl(mode, num));
+    return gnuradio::make_block_sptr<pdu_head_tail_impl>(mode, num);
 }
 
 /*

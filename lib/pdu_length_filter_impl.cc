@@ -23,7 +23,7 @@ namespace satellites {
 
 pdu_length_filter::sptr pdu_length_filter::make(int min, int max)
 {
-    return gnuradio::get_initial_sptr(new pdu_length_filter_impl(min, max));
+    return gnuradio::make_block_sptr<pdu_length_filter_impl>(min, max);
 }
 
 /*

@@ -24,8 +24,7 @@ namespace satellites {
 convolutional_encoder::sptr
 convolutional_encoder::make(int constraint, const std::vector<int>& polynomials)
 {
-    return gnuradio::get_initial_sptr(
-        new convolutional_encoder_impl(constraint, polynomials));
+    return gnuradio::make_block_sptr<convolutional_encoder_impl>(constraint, polynomials);
 }
 
 /*
