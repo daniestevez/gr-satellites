@@ -41,6 +41,7 @@ void bind_nusat_decoder(py::module& m);
 void bind_pdu_add_meta(py::module& m);
 void bind_pdu_head_tail(py::module& m);
 void bind_pdu_length_filter(py::module& m);
+void bind_pdu_scrambler(py::module& m);
 void bind_u482c_decode(py::module& m);
 void bind_varlen_packet_framer(py::module& m);
 void bind_varlen_packet_tagger(py::module& m);
@@ -93,6 +94,7 @@ PYBIND11_MODULE(satellites_python, m)
     bind_pdu_add_meta(m);
     bind_pdu_head_tail(m);
     bind_pdu_length_filter(m);
+    bind_pdu_scrambler(m);
     bind_u482c_decode(m);
     bind_varlen_packet_framer(m);
     bind_varlen_packet_tagger(m);
