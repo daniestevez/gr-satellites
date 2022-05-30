@@ -49,6 +49,7 @@ list(APPEND satellites_python_files
     pdu_add_meta_python.cc
     pdu_head_tail_python.cc
     pdu_length_filter_python.cc
+    pdu_scrambler_python.cc
     python_bindings.cc
     u482c_decode_python.cc
     varlen_packet_framer_python.cc

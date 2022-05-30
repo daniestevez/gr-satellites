@@ -43,6 +43,7 @@ install(FILES
     pdu_add_meta.h
     pdu_head_tail.h
     pdu_length_filter.h
+    pdu_scrambler.h
     u482c_decode.h
     varlen_packet_framer.h
     varlen_packet_tagger.h
