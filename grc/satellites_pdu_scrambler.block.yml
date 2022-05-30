@@ -1,0 +1,35 @@
+id: satellites_pdu_scrambler
+label: PDU Scrambler
+category: '[Satellites]/PDU'
+
+parameters:
+-   id: sequence
+    label: Sequence
+    dtype: int_vector
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites
+    make: satellites.pdu_scrambler(${sequence})
+
+documentation: |-
+    PDU Scrambler
+
+    Uses a predefined sequence to implement a synchronous scrambler that acts
+    on PDUs. The scrambling sequence needs to be longer than the PDUs that the
+    block will process. PDUs which are longer than the sequence are dropped.
+
+    Output:
+        The scrambled PDUs
+
+    Parameters:
+        Sequence: The scrambling sequence to use.
+
+file_format: 1
