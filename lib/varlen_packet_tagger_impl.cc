@@ -32,8 +32,8 @@ varlen_packet_tagger::sptr varlen_packet_tagger::make(const std::string& sync_ke
                                                       endianness_t endianness,
                                                       bool use_golay)
 {
-    return gnuradio::get_initial_sptr(new varlen_packet_tagger_impl(
-        sync_key, packet_key, length_field_size, max_packet_size, endianness, use_golay));
+    return gnuradio::make_block_sptr<varlen_packet_tagger_impl>(
+        sync_key, packet_key, length_field_size, max_packet_size, endianness, use_golay);
 }
 
 varlen_packet_tagger_impl::varlen_packet_tagger_impl(const std::string& sync_key,

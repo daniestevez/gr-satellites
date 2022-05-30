@@ -28,14 +28,14 @@ namespace satellites {
 
 decode_rs::sptr decode_rs::make(int dual_basis, int interleave)
 {
-    return gnuradio::get_initial_sptr(new decode_rs_impl(dual_basis, interleave));
+    return gnuradio::make_block_sptr<decode_rs_impl>(dual_basis, interleave);
 }
 
 decode_rs::sptr
 decode_rs::make(int symsize, int gfpoly, int fcr, int prim, int nroots, int interleave)
 {
-    return gnuradio::get_initial_sptr(
-        new decode_rs_impl(symsize, gfpoly, fcr, prim, nroots, interleave));
+    return gnuradio::make_block_sptr<decode_rs_impl>(
+        symsize, gfpoly, fcr, prim, nroots, interleave);
 }
 
 /*

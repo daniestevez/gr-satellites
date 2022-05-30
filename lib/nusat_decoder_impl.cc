@@ -30,7 +30,7 @@ namespace satellites {
 
 nusat_decoder::sptr nusat_decoder::make()
 {
-    return gnuradio::get_initial_sptr(new nusat_decoder_impl());
+    return gnuradio::make_block_sptr<nusat_decoder_impl>();
 }
 
 const uint8_t nusat_decoder_impl::d_scrambler_sequence[] = {

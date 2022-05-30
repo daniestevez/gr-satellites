@@ -20,7 +20,7 @@ namespace satellites {
 
 nrzi_decode::sptr nrzi_decode::make()
 {
-    return gnuradio::get_initial_sptr(new nrzi_decode_impl());
+    return gnuradio::make_block_sptr<nrzi_decode_impl>();
 }
 
 /*

@@ -24,7 +24,7 @@ namespace satellites {
 viterbi_decoder::sptr viterbi_decoder::make(int constraint,
                                             const std::vector<int>& polynomials)
 {
-    return gnuradio::get_initial_sptr(new viterbi_decoder_impl(constraint, polynomials));
+    return gnuradio::make_block_sptr<viterbi_decoder_impl>(constraint, polynomials);
 }
 
 /*

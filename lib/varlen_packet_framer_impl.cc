@@ -33,8 +33,8 @@ varlen_packet_framer::make(const std::string& packet_key,
                            bool use_golay,
                            const std::vector<uint8_t> sync_word)
 {
-    return gnuradio::get_initial_sptr(new varlen_packet_framer_impl(
-        packet_key, length_field_size, endianness, use_golay, sync_word));
+    return gnuradio::make_block_sptr<varlen_packet_framer_impl>(
+        packet_key, length_field_size, endianness, use_golay, sync_word);
 }
 
 varlen_packet_framer_impl::varlen_packet_framer_impl(const std::string& packet_key,

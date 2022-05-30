@@ -28,7 +28,7 @@ namespace satellites {
 
 decode_ra_code::sptr decode_ra_code::make(int size)
 {
-    return gnuradio::get_initial_sptr(new decode_ra_code_impl(size));
+    return gnuradio::make_block_sptr<decode_ra_code_impl>(size);
 }
 
 /*

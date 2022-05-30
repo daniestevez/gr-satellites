@@ -30,7 +30,7 @@ namespace satellites {
 
 ax100_decode::sptr ax100_decode::make(bool verbose)
 {
-    return gnuradio::get_initial_sptr(new ax100_decode_impl(verbose));
+    return gnuradio::make_block_sptr<ax100_decode_impl>(verbose);
 }
 
 /*

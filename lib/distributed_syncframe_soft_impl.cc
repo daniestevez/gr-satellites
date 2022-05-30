@@ -21,8 +21,8 @@ namespace satellites {
 distributed_syncframe_soft::sptr
 distributed_syncframe_soft::make(int threshold, const std::string& syncword, int step)
 {
-    return gnuradio::get_initial_sptr(
-        new distributed_syncframe_soft_impl(threshold, syncword, step));
+    return gnuradio::make_block_sptr<distributed_syncframe_soft_impl>(
+        threshold, syncword, step);
 }
 
 /*
