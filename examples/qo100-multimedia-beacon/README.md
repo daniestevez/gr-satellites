@@ -19,10 +19,10 @@ included in the flowgraph `qo100_multimedia_beacon_ea4gpz.grc`. This gets a
 DC.
 
 The other element used in the receiver is the Python script
-`qo100_websockets_server.py` that runs a WebSockets server. This is used for
+`qo100_websocket_server.py` that runs a WebSocket server. This is used for
 sending real-time data from the beacon into a web browser. The beacon transmits
 a file `qo100info.html` that can be opened with a web browser. This HTML file
-will connect to the WebSockets server to fetch and display real-time data.
+will connect to the WebSocket server to fetch and display real-time data.
 
 ## Running
 
@@ -34,7 +34,7 @@ Companion.
 that interfaces with the SDR. See `qo100_multimedia_beacon_ea4gpz.grc` for an
 example.
 
-3. Run the flowgraph and the `qo100_websockets_server.py` script. They can be
+3. Run the flowgraph and the `qo100_websocket_server.py` script. They can be
 started in any order, and restarted independently.
 
 4. Check that a good 8APSK constellation is displayed in the GUI of the

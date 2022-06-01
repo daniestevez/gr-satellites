@@ -86,7 +86,7 @@ async def main():
     logging.basicConfig(
         format='%(asctime)s:%(levelname)s:%(message)s',
         level=logging.INFO)
-    logging.info('starting QO-100 multimedia beacon WebSockets server')
+    logging.info('starting QO-100 multimedia beacon WebSocket server')
     async with websockets.serve(handle, 'localhost', 40134):
         await asyncio.Future()  # run forever
 
