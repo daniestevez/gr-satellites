@@ -709,7 +709,7 @@ blocks:
     coordinate: [160, 332.0]
     rotation: 0
     state: enabled
-- name: file_path
+- name: files_path
   id: parameter
   parameters:
     alias: ''
