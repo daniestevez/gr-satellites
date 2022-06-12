@@ -191,7 +191,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    file_path: /tmp/
+    files_path: /tmp/
     gui_hint: ''
     samp_rate: '6000'
   states:
