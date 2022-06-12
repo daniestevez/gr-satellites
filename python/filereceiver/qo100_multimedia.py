@@ -18,9 +18,7 @@ class FileReceiverQO100Multimedia(FileReceiver):
         return (int(chunk[1]) >> 4) & 0x03
 
     def frame_type(self, chunk):
-        frame_type = int(chunk[1]) & 0x0f
-        self._current_frame_type = frame_type
-        return frame_type
+        return int(chunk[1]) & 0x0f
 
     def chunk_sequence(self, chunk):
         return int(chunk[0]) | ((int(chunk[1]) >> 6) << 8)
@@ -56,14 +54,27 @@ class FileReceiverQO100Multimedia(FileReceiver):
     def parse_chunk(self, chunk):
         if self.frame_type(chunk) >= 8:
             return None
+        # Drop chunk if it's the last chunk and we do not have enough
+        # information about the current file. This prevents self.chunk_data
+        # from failing later on.
+        if self.is_last_chunk(chunk):
+            try:
+                self.chunk_data(chunk)
+            except Exception as e:
+                print('Could not get file data for last chunk:', e)
+                return None
         return chunk
 
     def file_id(self, chunk):
         if self.chunk_sequence(chunk) != 0:
             return None
-        name = (str(chunk[2:52], encoding='ascii')
-                .rstrip('\x00')
-                .replace('\x00', ' '))
+        try:
+            name = (str(chunk[2:52], encoding='ascii')
+                    .rstrip('\x00')
+                    .replace('\x00', ' '))
+        except Exception as e:
+            print('Could not obtain filename:', e)
+            return None
         if self.frame_type(chunk) in [3, 4, 5]:
             # ASCII, HTML and binary files are zipped, so we add the .zip
             # extension
@@ -77,9 +88,12 @@ class FileReceiverQO100Multimedia(FileReceiver):
             return
         f.f.flush()
         outname = fname[:-4]  # remove .zip
-        data = zipfile.ZipFile(f.path).read(outname)
-        with open(f.path.parent / outname, 'wb') as fdata:
-            fdata.write(data)
+        try:
+            data = zipfile.ZipFile(f.path).read(outname)
+            with open(f.path.parent / outname, 'wb') as fdata:
+                fdata.write(data)
+        except Exception as e:
+            print('Could not unzip received file:', e)
 
 
 qo100_multimedia = FileReceiverQO100Multimedia
