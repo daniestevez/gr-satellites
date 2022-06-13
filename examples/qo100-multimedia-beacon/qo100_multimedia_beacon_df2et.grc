@@ -100,6 +100,18 @@ blocks:
     coordinate: [256, 660.0]
     rotation: 0
     state: true
+- name: pilot_tone
+  id: variable
+  parameters:
+    comment: ''
+    value: '1450'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1048, 236.0]
+    rotation: 0
+    state: true
 - name: rrc_taps
   id: variable
   parameters:
@@ -223,6 +235,28 @@ blocks:
     coordinate: [576, 24.0]
     rotation: 0
     state: true
+- name: analog_sig_source_x_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: pilot_tone*decim1*-1
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    type: complex
+    waveform: analog.GR_SIN_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1008, 68.0]
+    rotation: 0
+    state: true
 - name: blocks_complex_to_float_0
   id: blocks_complex_to_float
   parameters:
@@ -267,7 +301,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 392.0]
+    coordinate: [328, 336.0]
     rotation: 0
     state: true
 - name: blocks_multiply_const_vxx_0
@@ -966,7 +1000,7 @@ blocks:
     alpha1: '1.0'
     alpha10: '1.0'
     alpha2: '0.25'
-    alpha3: '1.0'
+    alpha3: '0.4'
     alpha4: '1.0'
     alpha5: '1.0'
     alpha6: '1.0'
@@ -998,7 +1032,7 @@ blocks:
     label1: Signal
     label10: ''''''
     label2: Mirrored signal
-    label3: ''''''
+    label3: 100 Hz pilot tone
     label4: ''''''
     label5: ''''''
     label6: ''''''
@@ -1009,7 +1043,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     name: Spectrum
-    nconnections: '2'
+    nconnections: '3'
     norm_window: 'False'
     showports: 'False'
     tr_chan: '0'
@@ -1036,7 +1070,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [552, 276.0]
+    coordinate: [584, 272.0]
     rotation: 0
     state: true
 - name: qtgui_time_sink_x_0
@@ -1412,6 +1446,7 @@ blocks:
     state: true
 
 connections:
+- [analog_sig_source_x_0, '0', qtgui_freq_sink_x_0, '2']
 - [blocks_complex_to_float_0, '0', qtgui_time_sink_x_0, '0']
 - [blocks_complex_to_float_0, '1', qtgui_time_sink_x_0, '1']
 - [blocks_complex_to_mag_0, '0', qtgui_time_sink_x_0, '2']

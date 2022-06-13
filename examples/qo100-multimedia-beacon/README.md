@@ -48,3 +48,19 @@ the parameters of the QO-100 multimedia beacon RX block).
 the message "CONNECTED to local HSModem" in green rather than "offline" in
 red. Real-time information, such as the waterfall data will start to appear in
 the web page.
+
+## Reception with RTL-SDR Stick
+
+The initial flowgraph by EA4GPZ was adapted by DF2ET to support gqrx as input
+via UDP stream. The file is `qo100_multimedia_beacon_df2et.grc` This was tested
+with an RTL-SDR dongle as SDR device. Besides running the flowgraph in GNU 
+Radio you need to
+
+1. Configure gqrx to stream the I/Q data to the UDP sink of the flowgraph
+(e.g. localhost port 7355).
+
+2. Possibly fine-tune the RX using the tune frequency parameter in the QT GUI
+to center the signal in the spectrum
+
+Further information can be found in
+[DF2ET's blog](https://www.florian-wolters.de/posts/qo100-hsmodem-gnuradio-decoder/)
