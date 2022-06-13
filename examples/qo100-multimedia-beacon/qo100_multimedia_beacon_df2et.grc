@@ -1,0 +1,1514 @@
+options:
+  parameters:
+    author: Florian Wolters DF2ET
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: Based on work by Daniel Estevez EA4GPZ
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: qo100_multimedia_beacon
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: run
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: QO-100 multimedia beacon RX (RTL-SDR)
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: baudrate
+  id: variable
+  parameters:
+    comment: ''
+    value: '2400'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [80, 660.0]
+    rotation: 0
+    state: true
+- name: constellation_8apsk
+  id: variable_constellation
+  parameters:
+    comment: ''
+    const_points: sym_points
+    dims: '1'
+    normalization: digital.constellation.NO_NORMALIZATION
+    precision: '8'
+    rot_sym: '7'
+    soft_dec_lut: None
+    sym_map: sym_map
+    type: calcdist
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [976, 468.0]
+    rotation: 0
+    state: true
+- name: decim1
+  id: variable
+  parameters:
+    comment: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 244.0]
+    rotation: 0
+    state: true
+- name: decim2
+  id: variable
+  parameters:
+    comment: ''
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [912, 244.0]
+    rotation: 0
+    state: true
+- name: nfilt
+  id: variable
+  parameters:
+    comment: ''
+    value: '64'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 660.0]
+    rotation: 0
+    state: true
+- name: pilot_tone
+  id: variable
+  parameters:
+    comment: ''
+    value: '1450'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1048, 236.0]
+    rotation: 0
+    state: true
+- name: rrc_taps
+  id: variable
+  parameters:
+    comment: ''
+    value: firdes.root_raised_cosine(nfilt, nfilt, 1.0/sps, 0.2, int(ceil(15*sps*nfilt)))
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [336, 660.0]
+    rotation: 0
+    state: true
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [296, 16.0]
+    rotation: 0
+    state: true
+- name: sps
+  id: variable
+  parameters:
+    comment: ''
+    value: samp_rate/(decim1*decim2*baudrate)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [120, 756.0]
+    rotation: 0
+    state: true
+- name: sym_map
+  id: variable
+  parameters:
+    comment: ''
+    value: '[0b000, 0b100, 0b001, 0b011, 0b010, 0b110, 0b111, 0b101]'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [976, 388.0]
+    rotation: 0
+    state: true
+- name: sym_map_inv
+  id: variable
+  parameters:
+    comment: ''
+    value: '[sym_map.index(a) for a in range(8)]'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1144, 388.0]
+    rotation: 0
+    state: true
+- name: sym_points
+  id: variable
+  parameters:
+    comment: ''
+    value: '[0] + list(np.exp(1j*2*np.pi*np.arange(7)/7) * np.sqrt(8/7))'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [976, 316.0]
+    rotation: 0
+    state: true
+- name: syncword_bits
+  id: variable
+  parameters:
+    comment: ''
+    value: '''010100111110000110100110'''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, 796.0]
+    rotation: 0
+    state: true
+- name: syncword_symbols
+  id: variable
+  parameters:
+    comment: ''
+    value: '[sym_points[sym_map.index(a)] for a in [2, 4, 7, 6, 0, 6, 4, 6]]'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [752, 620.0]
+    rotation: 0
+    state: true
+- name: syncword_threshold
+  id: variable
+  parameters:
+    comment: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 816.0]
+    rotation: 0
+    state: true
+- name: tune
+  id: variable_qtgui_entry
+  parameters:
+    comment: ''
+    gui_hint: 1,0,1,1
+    label: Tune frequency (Hz)
+    type: real
+    value: '-3000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [576, 24.0]
+    rotation: 0
+    state: true
+- name: analog_sig_source_x_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: pilot_tone*decim1*-1
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    type: complex
+    waveform: analog.GR_SIN_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1008, 68.0]
+    rotation: 0
+    state: true
+- name: blocks_complex_to_float_0
+  id: blocks_complex_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [848, 720.0]
+    rotation: 0
+    state: true
+- name: blocks_complex_to_mag_0
+  id: blocks_complex_to_mag
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 792.0]
+    rotation: 0
+    state: true
+- name: blocks_conjugate_cc_0
+  id: blocks_conjugate_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 336.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: np.exp(1j*2*np.pi/7)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 1012.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_const_vxx_0_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: np.exp(1j*2*np.pi*2/7)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 1100.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_const_vxx_0_0_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: np.exp(1j*2*np.pi*5/7)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 1364.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_const_vxx_0_1
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: np.exp(1j*2*np.pi*3/7)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 1188.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_const_vxx_0_1_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: np.exp(1j*2*np.pi*6/7)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 1452.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_const_vxx_0_2
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: np.exp(1j*2*np.pi*4/7)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 1276.0]
+    rotation: 0
+    state: true
+- name: blocks_short_to_float_0
+  id: blocks_short_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [264, 188.0]
+    rotation: 0
+    state: true
+- name: blocks_unpack_k_bits_bb_0
+  id: blocks_unpack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '3'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 924.0]
+    rotation: 0
+    state: true
+- name: blocks_unpack_k_bits_bb_0_0
+  id: blocks_unpack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '3'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 1012.0]
+    rotation: 0
+    state: true
+- name: blocks_unpack_k_bits_bb_0_0_0
+  id: blocks_unpack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '3'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 1276.0]
+    rotation: 0
+    state: true
+- name: blocks_unpack_k_bits_bb_0_1
+  id: blocks_unpack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '3'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 1100.0]
+    rotation: 0
+    state: true
+- name: blocks_unpack_k_bits_bb_0_1_0
+  id: blocks_unpack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '3'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 1364.0]
+    rotation: 0
+    state: true
+- name: blocks_unpack_k_bits_bb_0_1_0_0
+  id: blocks_unpack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '3'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 1452.0]
+    rotation: 0
+    state: true
+- name: blocks_unpack_k_bits_bb_0_2
+  id: blocks_unpack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '3'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 1188.0]
+    rotation: 0
+    state: true
+- name: digital_constellation_decoder_cb_0
+  id: digital_constellation_decoder_cb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    constellation: constellation_8apsk
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 924.0]
+    rotation: 0
+    state: true
+- name: digital_constellation_decoder_cb_0_0
+  id: digital_constellation_decoder_cb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    constellation: constellation_8apsk
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 1012.0]
+    rotation: 0
+    state: true
+- name: digital_constellation_decoder_cb_0_0_0
+  id: digital_constellation_decoder_cb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    constellation: constellation_8apsk
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 1276.0]
+    rotation: 0
+    state: true
+- name: digital_constellation_decoder_cb_0_1
+  id: digital_constellation_decoder_cb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    constellation: constellation_8apsk
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 1100.0]
+    rotation: 0
+    state: true
+- name: digital_constellation_decoder_cb_0_1_0
+  id: digital_constellation_decoder_cb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    constellation: constellation_8apsk
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 1364.0]
+    rotation: 0
+    state: true
+- name: digital_constellation_decoder_cb_0_1_0_0
+  id: digital_constellation_decoder_cb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    constellation: constellation_8apsk
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 1452.0]
+    rotation: 0
+    state: true
+- name: digital_constellation_decoder_cb_0_2
+  id: digital_constellation_decoder_cb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    constellation: constellation_8apsk
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 1188.0]
+    rotation: 0
+    state: true
+- name: digital_map_bb_0
+  id: digital_map_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    map: sym_map
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 924.0]
+    rotation: 0
+    state: true
+- name: digital_map_bb_0_0
+  id: digital_map_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    map: sym_map
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 1012.0]
+    rotation: 0
+    state: true
+- name: digital_map_bb_0_0_0
+  id: digital_map_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    map: sym_map
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 1276.0]
+    rotation: 0
+    state: true
+- name: digital_map_bb_0_1
+  id: digital_map_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    map: sym_map
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 1100.0]
+    rotation: 0
+    state: true
+- name: digital_map_bb_0_1_0
+  id: digital_map_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    map: sym_map
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 1364.0]
+    rotation: 0
+    state: true
+- name: digital_map_bb_0_1_0_0
+  id: digital_map_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    map: sym_map
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 1452.0]
+    rotation: 0
+    state: true
+- name: digital_map_bb_0_2
+  id: digital_map_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    map: sym_map
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 1188.0]
+    rotation: 0
+    state: true
+- name: digital_symbol_sync_xx_0
+  id: digital_symbol_sync_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    constellation: digital.constellation_bpsk().base()
+    damping: '1.0'
+    loop_bw: '0.005'
+    max_dev: '0.01'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nfilters: nfilt
+    osps: '1'
+    pfb_mf_taps: rrc_taps
+    resamp_type: digital.IR_PFB_MF
+    sps: sps
+    ted_gain: '0.5'
+    ted_type: digital.TED_SIGNAL_TIMES_SLOPE_ML
+    type: cc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [144, 460.0]
+    rotation: 0
+    state: enabled
+- name: fir_filter_xxx_0
+  id: fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_delay: '0'
+    taps: np.conjugate(syncword_symbols)[::-1]
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 724.0]
+    rotation: 0
+    state: true
+- name: freq_xlating_fir_filter_xxx_0
+  id: freq_xlating_fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    center_freq: 245e3 + tune
+    comment: ''
+    decim: decim1
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    taps: firdes.low_pass(1, samp_rate, 3000, 200)
+    type: fcc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [472, 132.0]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: from math import ceil
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [776, 28.0]
+    rotation: 0
+    state: true
+- name: import_0_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy as np
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 28.0]
+    rotation: 0
+    state: true
+- name: network_socket_pdu_0
+  id: network_socket_pdu
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    host: 127.0.0.1
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mtu: '10000'
+    port: '52001'
+    tcp_no_delay: 'False'
+    type: TCP_SERVER
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1424, 1372.0]
+    rotation: 0
+    state: true
+- name: network_udp_source_0
+  id: network_udp_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    header: '0'
+    ipv6: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    notify_missed: 'False'
+    payloadsize: '1472'
+    port: '7355'
+    src_zeros: 'False'
+    type: short
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 116.0]
+    rotation: 0
+    state: true
+- name: qtgui_const_sink_x_0
+  id: qtgui_const_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: '"blue"'
+    color10: '"red"'
+    color2: '"red"'
+    color3: '"red"'
+    color4: '"red"'
+    color5: '"red"'
+    color6: '"red"'
+    color7: '"red"'
+    color8: '"red"'
+    color9: '"red"'
+    comment: ''
+    grid: 'True'
+    gui_hint: 0,1,1,1
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'False'
+    marker1: '0'
+    marker10: '0'
+    marker2: '0'
+    marker3: '0'
+    marker4: '0'
+    marker5: '0'
+    marker6: '0'
+    marker7: '0'
+    marker8: '0'
+    marker9: '0'
+    name: 8APSK constellation
+    nconnections: '1'
+    size: int(0.5*baudrate)
+    style1: '0'
+    style10: '0'
+    style2: '0'
+    style3: '0'
+    style4: '0'
+    style5: '0'
+    style6: '0'
+    style7: '0'
+    style8: '0'
+    style9: '0'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: complex
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    xmax: '2'
+    xmin: '-2'
+    ymax: '2'
+    ymin: '-2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [768, 356.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_freq_sink_x_0
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '0.25'
+    alpha3: '0.4'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    axislabels: 'True'
+    bw: samp_rate/(decim1*decim2)
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    ctrlpanel: 'False'
+    fc: '0'
+    fftsize: '4096'
+    freqhalf: 'True'
+    grid: 'True'
+    gui_hint: 0,0,1,1
+    label: Relative Gain
+    label1: Signal
+    label10: ''''''
+    label2: Mirrored signal
+    label3: 100 Hz pilot tone
+    label4: ''''''
+    label5: ''''''
+    label6: ''''''
+    label7: ''''''
+    label8: ''''''
+    label9: ''''''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: Spectrum
+    nconnections: '3'
+    norm_window: 'False'
+    showports: 'False'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: complex
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: window.WIN_BLACKMAN_hARRIS
+    ymax: '-20'
+    ymin: '-70'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [584, 272.0]
+    rotation: 0
+    state: true
+- name: qtgui_time_sink_x_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'True'
+    grid: 'True'
+    gui_hint: 2,0,1,2
+    label1: I
+    label10: Signal 10
+    label2: Q
+    label3: Amplitude
+    label4: Signal 4
+    label5: Signal 5
+    label6: Signal 6
+    label7: Signal 7
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: Syncword correlation
+    nconnections: '3'
+    size: (255+3)*8//3*2
+    srate: baudrate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: float
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '10'
+    ymin: '-10'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1040, 720.0]
+    rotation: 0
+    state: true
+- name: satellites_costas_loop_8apsk_cc_0
+  id: satellites_costas_loop_8apsk_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    loop_bw: '0.02'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [536, 440.0]
+    rotation: 0
+    state: enabled
+- name: satellites_crc_check_0
+  id: satellites_crc_check
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    discard_crc: 'True'
+    final_xor: '0x0000'
+    initial_value: '0xFFFF'
+    input_reflected: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_bits: '16'
+    poly: '0x1021'
+    result_reflected: 'True'
+    skip_header_bytes: '0'
+    swap_endianness: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1104, 1344.0]
+    rotation: 0
+    state: enabled
+- name: satellites_decode_rs_0
+  id: satellites_decode_rs
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    fcr: '120'
+    gfpoly: '0x187'
+    interleave: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nroots: '32'
+    nsym: '8'
+    prim: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1112, 1180.0]
+    rotation: 0
+    state: enabled
+- name: satellites_file_receiver_0
+  id: satellites_file_receiver
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    options: '""'
+    path: /tmp/
+    receiver: qo100_multimedia
+    verbose: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1128, 1492.0]
+    rotation: 0
+    state: true
+- name: satellites_hexdump_sink_0
+  id: satellites_hexdump_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    options: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1400, 1504.0]
+    rotation: 0
+    state: disabled
+- name: satellites_pdu_scrambler_0
+  id: satellites_pdu_scrambler
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    sequence: '[130, 239, 223, 19, 146, 254, 12, 86, 106, 68, 77, 213, 243, 216, 102,
+      227, 108, 113, 229, 89, 26, 64, 138, 216, 225, 121, 194, 137, 152, 64, 51, 175,
+      68, 200, 37, 104, 247, 68, 193, 50, 19, 14, 196, 81, 4, 236, 191, 249, 83, 25,
+      161, 171, 167, 29, 33, 139, 7, 152, 230, 144, 125, 206, 34, 236, 112, 78, 219,
+      34, 181, 161, 7, 45, 198, 235, 62, 115, 194, 100, 209, 95, 186, 161, 53, 10,
+      110, 246, 122, 246, 207, 194, 178, 63, 232, 93, 158, 234, 231, 73, 214, 64,
+      130, 239, 223, 19, 146, 254, 12, 86, 106, 68, 77, 213, 243, 216, 102, 227, 108,
+      113, 229, 89, 26, 64, 138, 216, 225, 121, 194, 137, 152, 64, 51, 175, 68, 200,
+      37, 104, 247, 68, 193, 50, 19, 14, 196, 81, 4, 236, 191, 249, 83, 25, 161, 171,
+      167, 29, 33, 139, 7, 152, 230, 144, 125, 206, 34, 236, 112, 78, 219, 34, 181,
+      161, 7, 45, 198, 235, 62, 115, 194, 100, 209, 95, 186, 161, 53, 10, 110, 246,
+      122, 246, 207, 194, 178, 63, 232, 93, 158, 234, 231, 73, 214, 64, 130, 239,
+      223, 19, 146, 254, 12, 86, 106, 68, 77, 213, 243, 216, 102, 227, 108, 113, 229,
+      89, 26, 64, 138, 216, 225, 121, 194, 137, 152, 64, 51, 175, 68, 200, 37, 104,
+      247, 68, 193, 50, 19, 14, 196, 81, 4, 236, 191, 249, 83, 25, 161, 171, 167,
+      29, 33, 139, 7, 152, 230, 144, 125, 206, 34, 236, 112, 78, 219, 34, 181, 161,
+      7, 45, 198, 235, 62, 115, 194, 100, 209, 95, 186, 161, 53, 10, 110, 246, 122,
+      246, 207, 194, 178, 63, 232, 93, 158, 234, 231, 73, 214, 64, 130, 239, 223,
+      19, 146, 254, 12, 86, 106, 68, 77, 213, 243, 216, 102, 227, 108, 113, 229, 89,
+      26, 64, 138, 216, 225, 121, 194, 137, 152, 64, 51, 175, 68, 200, 37, 104, 247,
+      68, 193, 50, 19, 14, 196, 81, 4, 236, 191, 249, 83, 25, 161, 171, 167, 29, 33,
+      139, 7, 152, 230, 144, 125, 206, 34, 236, 112, 78, 219, 34, 181, 161, 7, 45,
+      198, 235, 62, 115, 194, 100, 209, 95, 186, 161, 53, 10, 110, 246, 122, 246,
+      207, 194, 178, 63, 232, 93, 158, 234, 231, 73, 214, 64]'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1072, 1100.0]
+    rotation: 0
+    state: true
+- name: satellites_rms_agc_0
+  id: satellites_rms_agc
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: 1e-2
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    reference: '1.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [128, 316.0]
+    rotation: 0
+    state: enabled
+- name: satellites_sync_to_pdu_packed_0
+  id: satellites_sync_to_pdu_packed
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packlen: '255'
+    sync: syncword_bits
+    threshold: syncword_threshold
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [816, 908.0]
+    rotation: 0
+    state: true
+- name: satellites_sync_to_pdu_packed_0_0
+  id: satellites_sync_to_pdu_packed
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packlen: '255'
+    sync: syncword_bits
+    threshold: syncword_threshold
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [816, 996.0]
+    rotation: 0
+    state: true
+- name: satellites_sync_to_pdu_packed_0_0_0
+  id: satellites_sync_to_pdu_packed
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packlen: '255'
+    sync: syncword_bits
+    threshold: syncword_threshold
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [816, 1260.0]
+    rotation: 0
+    state: true
+- name: satellites_sync_to_pdu_packed_0_1
+  id: satellites_sync_to_pdu_packed
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packlen: '255'
+    sync: syncword_bits
+    threshold: syncword_threshold
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [816, 1084.0]
+    rotation: 0
+    state: true
+- name: satellites_sync_to_pdu_packed_0_1_0
+  id: satellites_sync_to_pdu_packed
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packlen: '255'
+    sync: syncword_bits
+    threshold: syncword_threshold
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [816, 1348.0]
+    rotation: 0
+    state: true
+- name: satellites_sync_to_pdu_packed_0_1_0_0
+  id: satellites_sync_to_pdu_packed
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packlen: '255'
+    sync: syncword_bits
+    threshold: syncword_threshold
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [816, 1436.0]
+    rotation: 0
+    state: true
+- name: satellites_sync_to_pdu_packed_0_2
+  id: satellites_sync_to_pdu_packed
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packlen: '255'
+    sync: syncword_bits
+    threshold: syncword_threshold
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [816, 1172.0]
+    rotation: 0
+    state: true
+
+connections:
+- [analog_sig_source_x_0, '0', qtgui_freq_sink_x_0, '2']
+- [blocks_complex_to_float_0, '0', qtgui_time_sink_x_0, '0']
+- [blocks_complex_to_float_0, '1', qtgui_time_sink_x_0, '1']
+- [blocks_complex_to_mag_0, '0', qtgui_time_sink_x_0, '2']
+- [blocks_conjugate_cc_0, '0', qtgui_freq_sink_x_0, '1']
+- [blocks_multiply_const_vxx_0, '0', digital_constellation_decoder_cb_0_0, '0']
+- [blocks_multiply_const_vxx_0_0, '0', digital_constellation_decoder_cb_0_1, '0']
+- [blocks_multiply_const_vxx_0_0_0, '0', digital_constellation_decoder_cb_0_1_0, '0']
+- [blocks_multiply_const_vxx_0_1, '0', digital_constellation_decoder_cb_0_2, '0']
+- [blocks_multiply_const_vxx_0_1_0, '0', digital_constellation_decoder_cb_0_1_0_0,
+  '0']
+- [blocks_multiply_const_vxx_0_2, '0', digital_constellation_decoder_cb_0_0_0, '0']
+- [blocks_short_to_float_0, '0', freq_xlating_fir_filter_xxx_0, '0']
+- [blocks_unpack_k_bits_bb_0, '0', satellites_sync_to_pdu_packed_0, '0']
+- [blocks_unpack_k_bits_bb_0_0, '0', satellites_sync_to_pdu_packed_0_0, '0']
+- [blocks_unpack_k_bits_bb_0_0_0, '0', satellites_sync_to_pdu_packed_0_0_0, '0']
+- [blocks_unpack_k_bits_bb_0_1, '0', satellites_sync_to_pdu_packed_0_1, '0']
+- [blocks_unpack_k_bits_bb_0_1_0, '0', satellites_sync_to_pdu_packed_0_1_0, '0']
+- [blocks_unpack_k_bits_bb_0_1_0_0, '0', satellites_sync_to_pdu_packed_0_1_0_0, '0']
+- [blocks_unpack_k_bits_bb_0_2, '0', satellites_sync_to_pdu_packed_0_2, '0']
+- [digital_constellation_decoder_cb_0, '0', digital_map_bb_0, '0']
+- [digital_constellation_decoder_cb_0_0, '0', digital_map_bb_0_0, '0']
+- [digital_constellation_decoder_cb_0_0_0, '0', digital_map_bb_0_0_0, '0']
+- [digital_constellation_decoder_cb_0_1, '0', digital_map_bb_0_1, '0']
+- [digital_constellation_decoder_cb_0_1_0, '0', digital_map_bb_0_1_0, '0']
+- [digital_constellation_decoder_cb_0_1_0_0, '0', digital_map_bb_0_1_0_0, '0']
+- [digital_constellation_decoder_cb_0_2, '0', digital_map_bb_0_2, '0']
+- [digital_map_bb_0, '0', blocks_unpack_k_bits_bb_0, '0']
+- [digital_map_bb_0_0, '0', blocks_unpack_k_bits_bb_0_0, '0']
+- [digital_map_bb_0_0_0, '0', blocks_unpack_k_bits_bb_0_0_0, '0']
+- [digital_map_bb_0_1, '0', blocks_unpack_k_bits_bb_0_1, '0']
+- [digital_map_bb_0_1_0, '0', blocks_unpack_k_bits_bb_0_1_0, '0']
+- [digital_map_bb_0_1_0_0, '0', blocks_unpack_k_bits_bb_0_1_0_0, '0']
+- [digital_map_bb_0_2, '0', blocks_unpack_k_bits_bb_0_2, '0']
+- [digital_symbol_sync_xx_0, '0', satellites_costas_loop_8apsk_cc_0, '0']
+- [fir_filter_xxx_0, '0', blocks_complex_to_float_0, '0']
+- [fir_filter_xxx_0, '0', blocks_complex_to_mag_0, '0']
+- [freq_xlating_fir_filter_xxx_0, '0', satellites_rms_agc_0, '0']
+- [network_udp_source_0, '0', blocks_short_to_float_0, '0']
+- [satellites_costas_loop_8apsk_cc_0, '0', blocks_multiply_const_vxx_0, '0']
+- [satellites_costas_loop_8apsk_cc_0, '0', blocks_multiply_const_vxx_0_0, '0']
+- [satellites_costas_loop_8apsk_cc_0, '0', blocks_multiply_const_vxx_0_0_0, '0']
+- [satellites_costas_loop_8apsk_cc_0, '0', blocks_multiply_const_vxx_0_1, '0']
+- [satellites_costas_loop_8apsk_cc_0, '0', blocks_multiply_const_vxx_0_1_0, '0']
+- [satellites_costas_loop_8apsk_cc_0, '0', blocks_multiply_const_vxx_0_2, '0']
+- [satellites_costas_loop_8apsk_cc_0, '0', digital_constellation_decoder_cb_0, '0']
+- [satellites_costas_loop_8apsk_cc_0, '0', fir_filter_xxx_0, '0']
+- [satellites_costas_loop_8apsk_cc_0, '0', qtgui_const_sink_x_0, '0']
+- [satellites_crc_check_0, ok, network_socket_pdu_0, pdus]
+- [satellites_crc_check_0, ok, satellites_file_receiver_0, in]
+- [satellites_crc_check_0, ok, satellites_hexdump_sink_0, in]
+- [satellites_decode_rs_0, out, satellites_crc_check_0, in]
+- [satellites_pdu_scrambler_0, out, satellites_decode_rs_0, in]
+- [satellites_rms_agc_0, '0', blocks_conjugate_cc_0, '0']
+- [satellites_rms_agc_0, '0', digital_symbol_sync_xx_0, '0']
+- [satellites_rms_agc_0, '0', qtgui_freq_sink_x_0, '0']
+- [satellites_sync_to_pdu_packed_0, out, satellites_pdu_scrambler_0, in]
+- [satellites_sync_to_pdu_packed_0_0, out, satellites_pdu_scrambler_0, in]
+- [satellites_sync_to_pdu_packed_0_0_0, out, satellites_pdu_scrambler_0, in]
+- [satellites_sync_to_pdu_packed_0_1, out, satellites_pdu_scrambler_0, in]
+- [satellites_sync_to_pdu_packed_0_1_0, out, satellites_pdu_scrambler_0, in]
+- [satellites_sync_to_pdu_packed_0_1_0_0, out, satellites_pdu_scrambler_0, in]
+- [satellites_sync_to_pdu_packed_0_2, out, satellites_pdu_scrambler_0, in]
+
+metadata:
+  file_format: 1
