@@ -8,6 +8,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
+import socket
+import threading
 import zipfile
 
 from .filereceiver import FileReceiver
@@ -92,8 +94,25 @@ class FileReceiverQO100Multimedia(FileReceiver):
             data = zipfile.ZipFile(f.path).read(outname)
             with open(f.path.parent / outname, 'wb') as fdata:
                 fdata.write(data)
+                if fname.endswith('.blt.zip'):
+                    threading.Thread(
+                        target=send_to_websocket,
+                        args=(data,)).run()
         except Exception as e:
             print('Could not unzip received file:', e)
+
+
+# This is used in a new thread to send the file contents to the websocket
+# server Python script (see examples/qo100-multimedia-beacon).
+def send_to_websocket(data):
+    port = 52002
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect(('127.0.0.1', port))
+        s.send(data)
+        s.close()
+    except Exception as e:
+        print('Could not send file to websocket server script:', e)
 
 
 qo100_multimedia = FileReceiverQO100Multimedia
