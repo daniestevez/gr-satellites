@@ -7,9 +7,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
-#!/usr/bin/env python3
 
 import asyncio
+import functools
 import logging
 import websockets
 
@@ -50,6 +50,23 @@ async def tcp_client(queue):
         await queue.put(payload)
 
 
+async def handle_file(reader, writer, queue):
+    max_len = 2**20
+    data = await reader.read(max_len)
+    logging.info('received new bulletin file')
+    await queue.put(b'\x10' + data)
+
+
+async def tcp_file_server(queue):
+    port = 52002
+    server = await asyncio.start_server(
+        functools.partial(handle_file, queue=queue),
+        '127.0.0.1', port)
+    logging.info('starting TCP file server at port %d', port)
+    async with server:
+        await server.serve_forever()
+
+
 def repack_8to6(data):
     """Repacks data from 8 bits/byte to 6 bits/byte"""
     out = bytearray()
@@ -78,6 +95,7 @@ async def handle(websocket):
     queue = asyncio.Queue()
     await asyncio.gather(
         tcp_client(queue),
+        tcp_file_server(queue),
         ws_send_data(websocket, queue),
         ws_recv_alive(websocket))
 
