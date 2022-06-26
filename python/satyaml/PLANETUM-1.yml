@@ -1,5 +1,5 @@
 name: PLANETUM-1
-norad: 99398
+norad: 52738
 data:
   &tlm Telemetry:
     telemetry: ax25
