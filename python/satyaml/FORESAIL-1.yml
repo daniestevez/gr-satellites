@@ -1,5 +1,5 @@
 name: FORESAIL-1
-norad: 99399
+norad: 52766
 data:
   &tlm Telemetry:
     unknown
