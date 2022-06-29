@@ -39,6 +39,8 @@ GR_PYTHON_INSTALL(
     binar1.py
     by02.py
     by70_1.py
+    cirbe_70cm.py
+    cirbe_bct_soh.py
     csp.py
     ctim_70cm.py
     cute_70cm.py
