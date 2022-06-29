@@ -1,0 +1,21 @@
+name: CIRBE
+norad: 99401
+data:
+  &tlm Telemetry:
+    telemetry: cirbe_70cm
+transmitters:
+  9k6 FSK downlink:
+    frequency: 437.250e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX.25 
+    data:
+    - *tlm
+  19k2 FSK downlink:
+    frequency: 437.250e+6
+    modulation: FSK
+    baudrate: 19200
+    framing: AX.25 
+    data:
+    - *tlm
+
