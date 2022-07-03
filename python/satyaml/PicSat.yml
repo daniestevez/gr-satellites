@@ -1,5 +1,7 @@
 name: PicSat
-norad: 43132 
+norad: 43132
+telemetry_servers:
+  - SIDS https://picsat.obspm.fr/sids/reportframe?
 data:
   &tlm Telemetry:
     telemetry: picsat
