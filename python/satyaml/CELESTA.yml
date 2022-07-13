@@ -1,0 +1,31 @@
+name: CELESTA
+alternative_names:
+  - ROBUSTA-1D
+norad: 99383
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  2k4 FSK downlink:
+    frequency: 436.500e+6
+    modulation: FSK
+    baudrate: 2400
+    framing: AX.25
+    data:
+    - *tlm
+  9k6 FSK downlink:
+    frequency: 436.500e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX.25
+    data:
+    - *tlm
+  1k2 AFSK downlink:
+    frequency: 436.500e+6
+    modulation: AFSK
+    baudrate: 1200
+    af_carrier: 1700
+    deviation: 500
+    framing: AX.25
+    data:
+    - *tlm
