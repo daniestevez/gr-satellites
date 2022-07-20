@@ -1,5 +1,5 @@
 name: GREENCUBE
-norad: 99382
+norad: 53109
 data:
   &tlm Telemetry:
     unknown
@@ -11,7 +11,7 @@ transmitters:
     framing: AX100 ASM+Golay
     data:
     - *tlm
- 600 FSK downlink:
+  600 FSK downlink:
     frequency: 435.310e+6
     modulation: FSK
     baudrate: 600
@@ -36,6 +36,13 @@ transmitters:
     frequency: 435.310e+6
     modulation: FSK
     baudrate: 4800
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
+  9k6 FSK downlink:
+    frequency: 435.310e+6
+    modulation: FSK
+    baudrate: 9600
     framing: AX100 ASM+Golay
     data:
     - *tlm
