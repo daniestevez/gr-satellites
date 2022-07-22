@@ -1,5 +1,5 @@
 name: OreSat0
-norad: 99410
+norad: 52017
 data:
   &tlm Telemetry:
     telemetry: ax25

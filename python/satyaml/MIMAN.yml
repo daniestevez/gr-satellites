@@ -1,5 +1,5 @@
-name: MIMAM
-norad: 99388
+name: MIMAN
+norad: 52900
 data:
   &tlm Telemetry:
     unknown
