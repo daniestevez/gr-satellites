@@ -42,8 +42,8 @@ set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING "")
 list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
 # Set the version information here
-set(VERSION_MAJOR 4)
-set(VERSION_API 7)
+set(VERSION_MAJOR 5)
+set(VERSION_API 1)
 set(VERSION_ABI 0)
 set(VERSION_PATCH git)
 
