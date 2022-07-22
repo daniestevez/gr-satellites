@@ -1,3 +1,9 @@
+gr-satellites (5.0.0-1) jammy; urgency=medium
+
+  * Add additional dependencies to Debian package
+
+ --  <daniel@destevez.net>  Fri, 22 Jul 2022 20:40:00 +0000
+
 gr-satellites (5.0.0-0) jammy; urgency=medium
 
   * Mainstream release v5.0.0
