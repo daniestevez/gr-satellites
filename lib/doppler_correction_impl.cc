@@ -11,6 +11,7 @@
 #include <gnuradio/expj.h>
 #include <gnuradio/io_signature.h>
 #include <cstdio>
+#include <fstream>
 #include <stdexcept>
 
 namespace gr {
