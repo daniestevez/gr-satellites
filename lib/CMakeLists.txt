@@ -53,6 +53,7 @@ list(APPEND satellites_sources
     decode_rs_impl.cc
     descrambler308_impl.cc
     distributed_syncframe_soft_impl.cc
+    doppler_correction_impl.cc
     encode_rs_impl.cc
     fixedlen_to_pdu_impl.cc
     golay24.c
