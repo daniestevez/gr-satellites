@@ -1,7 +1,7 @@
 name: TEVEL-8
 alternative_names:
   - T8GBS
-norad: 99478
+norad: 50989
 data:
   &tlm Telemetry:
     telemetry: ax25

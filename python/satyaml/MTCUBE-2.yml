@@ -1,7 +1,7 @@
 name: MTCUBE-2
 alternative_names:
   - ROBUSTA-1F
-norad: 99384
+norad: 53106
 telemetry_servers:
   - SIDS https://ddp.csum.umontpellier.fr/store_beacon
 data:

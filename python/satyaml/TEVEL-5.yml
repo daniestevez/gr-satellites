@@ -1,7 +1,7 @@
 name: TEVEL-5
 alternative_names:
   - T5SNG
-norad: 99475
+norad: 50998
 data:
   &tlm Telemetry:
     telemetry: ax25

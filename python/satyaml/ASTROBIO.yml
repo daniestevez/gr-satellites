@@ -1,7 +1,8 @@
 name: ASTROBIO
 alternative_names:
   - ABCS
-norad: 99385
+  - ASTROBIOCUBESAT
+norad: 53107
 data:
   &tlm Telemetry:
     telemetry: ax25

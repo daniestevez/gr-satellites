@@ -1,5 +1,5 @@
 name: TARGIT
-norad: 99434
+norad: 51440
 data:
   &tlm Telemetry:
     telemetry: ax25

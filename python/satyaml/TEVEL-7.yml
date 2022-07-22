@@ -1,7 +1,7 @@
 name: TEVEL-7
 alternative_names:
   - T7ADM
-norad: 99477
+norad: 51062
 data:
   &tlm Telemetry:
     telemetry: ax25

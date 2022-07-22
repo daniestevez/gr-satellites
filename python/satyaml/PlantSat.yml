@@ -1,5 +1,5 @@
 name: PlantSat
-norad: 99407
+norad: 52188
 data:
   &tlm Telemetry:
     unknown
