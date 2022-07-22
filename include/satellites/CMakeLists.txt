@@ -33,6 +33,7 @@ install(FILES
     decode_rs.h
     descrambler308.h
     distributed_syncframe_soft.h
+    doppler_correction.h
     encode_rs.h
     fixedlen_to_pdu.h
     lilacsat1_demux.h
