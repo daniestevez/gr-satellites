@@ -6,6 +6,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [5.0.0], [4.7.0], [3.14.0] - 2022-07-22
+
+### Added
+- 8APSK Costas loop block
+- Custom SIDS telemetry server for PicSat
+- Doppler correction block
+- File receiver for QO-100
+- Fixed length to PDU block
+- Support for ALFACRUX
+- Support for ASTROBIO
+- Support for CELESTA
+- Support for CTIM 70 cm sw_stat beacons
+- Support for FORESAIL-1
+- Support for GREENCUBE
+- Support for MIMAN
+- Support for MTCUBE-2
+- Support for PLANETUM-1
+- Support for RANDEV-1
+- Support for SNUGLITE-II
+- Support for STEP-CUBELAB-II
+- Support for SUCHAI-1
+- Support for QO-100 multimedia beacon
+
+### Changed
+- Main branch only supports GNU Radio 3.10
+- Modernize logging and remove usage of Boost
+- Sync to PDU blocks now use Fixed length to PDU
+
+### Fixed
+- NORAD IDs for OreSat0, PlantSat and TEVEL constellation
+
 ## [4.6.0], [3.13.0] - 2022-05-09
 
 ### Added
@@ -487,7 +518,9 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v4.6.0...main
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v5.0.0...main
+[5.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.6.0...v5.0.0
+[4.7.0]: https://github.com/daniestevez/gr-satellites/compare/v4.6.0...v4.7.0
 [4.6.0]: https://github.com/daniestevez/gr-satellites/compare/v4.5.0...v4.6.0
 [4.5.0]: https://github.com/daniestevez/gr-satellites/compare/v4.4.0...v4.5.0
 [4.4.0]: https://github.com/daniestevez/gr-satellites/compare/v4.3.1...v4.4.0
@@ -497,6 +530,7 @@ First gr-satellites release using semantic versioning
 [4.1.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0-rc1...v4.0.0
 [4.0.0-rc1]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...v4.0.0-rc1
+[3.14.0]: https://github.com/daniestevez/gr-satellites/compare/v3.13.0...v3.14.0
 [3.13.0]: https://github.com/daniestevez/gr-satellites/compare/v3.12.0...v3.13.0
 [3.12.0]: https://github.com/daniestevez/gr-satellites/compare/v3.11.0...v3.12.0
 [3.11.0]: https://github.com/daniestevez/gr-satellites/compare/v3.10.1...v3.11.0
