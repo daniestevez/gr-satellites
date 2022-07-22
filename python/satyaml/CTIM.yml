@@ -1,5 +1,5 @@
 name: CTIM
-norad: 99402
+norad: 52950
 data:
   &tlm Telemetry:
     telemetry: ctim_70cm

@@ -1,7 +1,7 @@
 name: TEVEL-3
 alternative_names:
   - T3TYB
-norad: 99473
+norad: 50988
 data:
   &tlm Telemetry:
     telemetry: ax25

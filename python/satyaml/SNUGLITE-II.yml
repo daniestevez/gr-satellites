@@ -1,5 +1,5 @@
 name: SNUGLITE-II
-norad: 99389
+norad: 52899
 data:
   &tlm Telemetry:
     telemetry: ax25
