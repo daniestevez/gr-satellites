@@ -39,6 +39,7 @@ list(APPEND satellites_python_files
     decode_rs_python.cc
     descrambler308_python.cc
     distributed_syncframe_soft_python.cc
+    doppler_correction_python.cc
     encode_rs_python.cc
     fixedlen_to_pdu_python.cc
     lilacsat1_demux_python.cc
