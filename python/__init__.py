@@ -36,6 +36,11 @@ __all__ = [
     'utils',
     ]
 
+# We need to import gnuradio.blocks so that the bindings for
+# gnuradio.blocks.control_loop are imported, since the bindings for
+# costas_loop_8apsk requiere control_loop to be imported.
+import gnuradio.blocks
+
 # Import bindings into the satellites namespace.
 # The first try works when we are importing from the build dir
 try:
