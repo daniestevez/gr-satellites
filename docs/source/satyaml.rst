@@ -250,6 +250,8 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``FORESAIL-1``, the custom framing used by FORESAIL-1. It is the same as the
   AX-100 ASM mode, but the ASM used is the CCSDS ASM ``0x1ACFFC1D``.
+
+* ``HSU-SAT1``, the custom framing used by HSU-SAT1.
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.
