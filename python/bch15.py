@@ -28,7 +28,7 @@ def gf_mult(x, y):
 
 def gf_inv(x):
     if x == 0:
-        raise(ValueError)
+        raise ValueError
     return exp_table[-log_table[x-1] % len(exp_table)]
 
 
