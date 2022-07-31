@@ -37,6 +37,7 @@ install(FILES
     satellites_eseo_deframer.block.yml
     satellites_fossasat_deframer.block.yml
     satellites_grizu263a_deframer.block.yml
+    satellites_hsu_sat1_deframer.block.yml
     satellites_ideassat_deframer.block.yml
     satellites_k2sat_deframer_component.block.yml
     satellites_lilacsat_1_deframer.block.yml
