@@ -1,0 +1,33 @@
+id: satellites_phase_unwrap
+label: Phase Unwrap
+category: '[Satellites]/Doppler'
+
+templates:
+  imports: import satellites
+  make: satellites.phase_unwrap()
+
+inputs:
+- label: in
+  domain: stream
+  dtype: float
+
+outputs:
+- label: out
+  domain: stream
+  dtype: byte
+  vlen: 12
+
+documentation: |-
+    The Phase Unwrap block unwraps a phase input by counting integer cycles. The
+    integer number of cycles is given as an int64_t, so that overflows are
+    impossible in most use cases. The output of the block is a vector of 12 bytes
+    that contains the integer number of cycles in the first 8 bytes and the
+    fractional phase in radians in the last 4 bytes.
+    
+    Input:
+        A stream of float phases in radians
+    Output:
+        The integer number of cycles and fractional cycles in radians as described
+        above.
+
+file_format: 1
