@@ -73,6 +73,7 @@ install(FILES
     satellites_pdu_length_filter.block.yml
     satellites_pdu_scrambler.block.yml
     satellites_pdu_to_kiss.block.yml
+    satellites_phase_unwrap.block.yml
     satellites_print_header.block.yml
     satellites_print_timestamp.block.yml
     satellites_pwsat2_submitter.block.yml
