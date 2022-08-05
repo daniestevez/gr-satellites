@@ -32,6 +32,7 @@
 #include "satellites/pdu_head_tail.h"
 #include "satellites/pdu_length_filter.h"
 #include "satellites/pdu_scrambler.h"
+#include "satellites/phase_unwrap.h"
 #include "satellites/u482c_decode.h"
 #include "satellites/varlen_packet_framer.h"
 #include "satellites/varlen_packet_tagger.h"
@@ -81,6 +82,8 @@ GR_SWIG_BLOCK_MAGIC2(satellites, pdu_head_tail);
 GR_SWIG_BLOCK_MAGIC2(satellites, pdu_length_filter);
 %include "satellites/pdu_scrambler.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, pdu_scrambler);
+%include "satellites/phase_unwrap.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, phase_unwrap);
 %include "satellites/u482c_decode.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, u482c_decode);
 %include "satellites/varlen_packet_framer.h"

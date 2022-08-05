@@ -118,5 +118,6 @@ GR_ADD_TEST(qa_pdu_add_meta ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_
 GR_ADD_TEST(qa_pdu_head_tail ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_pdu_head_tail.py)
 GR_ADD_TEST(qa_pdu_length_filter ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_pdu_length_filter.py)
 GR_ADD_TEST(qa_pdu_scrambler ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_pdu_scrambler.py)
+GR_ADD_TEST(qa_phase_unwrap ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_phase_unwrap.py)
 GR_ADD_TEST(qa_rs ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_rs.py)
 GR_ADD_TEST(qa_viterbi ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_viterbi.py)
