@@ -1,0 +1,15 @@
+name: AzaadiSAT
+norad: 99999
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  1k2 AFSK downlink:
+    frequency: 437.400e+6
+    modulation: AFSK
+    baudrate: 1200
+    af_carrier: 3625
+    deviation: -625
+    framing: AX.25
+    data:
+    - *tlm
