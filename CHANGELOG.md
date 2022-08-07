@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- Support for AzaadiSAT
 - Support for HSU-SAT1
+- Support for 10 Sputnix satellites in 2022-08-09 launch
+- Phase Unwrap block
+
+### Fixed
+- Python bindings for 8APSK Costas Loop
 
 ## [5.0.0], [4.7.0], [3.14.0] - 2022-07-22
 
