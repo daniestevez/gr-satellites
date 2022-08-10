@@ -48,6 +48,7 @@ GR_PYTHON_INSTALL(
     endurosat_deframer.py
     eseo_deframer.py
     fossasat_deframer.py
+    geoscan_deframer.py
     grizu263a_deframer.py
     hsu_sat1_deframer.py
     ideassat_deframer.py
