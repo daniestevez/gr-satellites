@@ -477,6 +477,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
             mode='ASM',
             syncword='00011010110011111111110000011101'),
         'HSU-SAT1': deframers.hsu_sat1_deframer,
+        'GEOSCAN': deframers.geoscan_deframer,
         }
     _transport_hooks = {
         'KISS': transports.kiss_transport,
