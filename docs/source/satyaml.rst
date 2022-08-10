@@ -252,6 +252,8 @@ The framings allowed in the ``framing`` field are the following:
   AX-100 ASM mode, but the ASM used is the CCSDS ASM ``0x1ACFFC1D``.
 
 * ``HSU-SAT1``, the custom framing used by HSU-SAT1.
+
+* ``GEOSCAN``, the custom framing used by GEOSCAN-EDELVEIS.
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.

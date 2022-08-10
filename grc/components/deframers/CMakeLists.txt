@@ -36,6 +36,7 @@ install(FILES
     satellites_endurosat_deframer.block.yml
     satellites_eseo_deframer.block.yml
     satellites_fossasat_deframer.block.yml
+    satellites_geoscan_deframer.block.yml
     satellites_grizu263a_deframer.block.yml
     satellites_hsu_sat1_deframer.block.yml
     satellites_ideassat_deframer.block.yml
