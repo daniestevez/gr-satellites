@@ -7,10 +7,10 @@ data:
    &tlm Telemetry:
      unknown
 transmitters:
-   8k FSK downlink:
+   9k6 FSK downlink:
      frequency: 436.200e+6
      modulation: FSK
-     baudrate: 8000
+     baudrate: 9600
      framing: GEOSCAN
      data:
      - *tlm
