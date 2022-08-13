@@ -1,35 +1,36 @@
-name: SIREN
+name: ISOI
 alternative_names:
-  - SXC3-217
-  - RS30S
-norad: 53384
+  - SXC3-219
+  - MEDEX
+  - RS19S
+norad: 53381
 data:
   &tlm Telemetry:
     telemetry: ax25
 transmitters:
   1k2 FSK downlink:
-    frequency: 437.750e+6
+    frequency: 437.650e+6
     modulation: FSK
     baudrate: 1200
     framing: USP
     data:
     - *tlm
   2k4 FSK downlink:
-    frequency: 437.750e+6
+    frequency: 437.650e+6
     modulation: FSK
     baudrate: 2400
     framing: USP
     data:
     - *tlm
   4k8 FSK downlink:
-    frequency: 437.750e+6
+    frequency: 437.650e+6
     modulation: FSK
     baudrate: 4800
     framing: USP
     data:
     - *tlm
   9k6 FSK downlink:
-    frequency: 437.750e+6
+    frequency: 437.650e+6
     modulation: FSK
     baudrate: 9600
     framing: USP

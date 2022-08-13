@@ -2,7 +2,7 @@ name: MIET-AIS
 alternative_names:
   - SXC3-214
   - RS28S
-norad: 99360
+norad: 53377
 data:
   &tlm Telemetry:
     telemetry: ax25
