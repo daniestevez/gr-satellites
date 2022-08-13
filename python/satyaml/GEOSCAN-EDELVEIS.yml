@@ -2,7 +2,7 @@ name: GEOSCAN-EDELVEIS
 alternative_names:
    - RS20S
    - GEOSCAN
-norad: 99395
+norad: 53385
 data:
    &tlm Telemetry:
      unknown
