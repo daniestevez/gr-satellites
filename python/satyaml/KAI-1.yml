@@ -1,0 +1,47 @@
+name: KAI-1
+alternative_names:
+  - KNRTU-KAI
+  - KNITU-KAI
+  - RS26S
+norad: 53378
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  1k2 AFSK downlink:
+    frequency: 435.665e+6
+    modulation: AFSK
+    baudrate: 1200
+    af_carrier: 1700
+    deviation: 500
+    framing: AX.25
+    data:
+    - *tlm
+  1k2 USP FSK downlink:
+    frequency: 435.665e+6
+    modulation: FSK
+    baudrate: 1200
+    framing: USP
+    data:
+    - *tlm
+  2k4 USP FSK downlink:
+    frequency: 435.665e+6
+    modulation: FSK
+    baudrate: 2400
+    framing: USP
+    data:
+    - *tlm
+  4k8 USP FSK downlink:
+    frequency: 435.665e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: USP
+    data:
+    - *tlm
+  9k6 USP FSK downlink:
+    frequency: 435.665e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: USP
+    data:
+    - *tlm

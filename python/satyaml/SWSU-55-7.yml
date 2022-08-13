@@ -1,0 +1,19 @@
+name: SWSU-55-7
+alternative_names:
+  - RS5S
+  - SWGU-11
+  - YuZGU-55-11
+norad: 53310
+data:
+  &tlm AX25 telemetry:
+    telemetry: ax25
+transmitters:
+  1k2 AFSK downlink:
+    frequency: 437.0875e+6
+    modulation: AFSK
+    baudrate: 1123
+    af_carrier: 1700
+    deviation: 565
+    framing: AX.25
+    data:
+    - *tlm
