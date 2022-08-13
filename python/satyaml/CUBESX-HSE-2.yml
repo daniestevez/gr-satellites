@@ -1,35 +1,36 @@
-name: KUZSTU
+name: CUBESX-HSE-2
 alternative_names:
-  - SXC3-218
-  - RS34S
-norad: 99357
+  - SXC3-213
+  - HSE-AIS
+  - RS21S
+norad: 53383
 data:
   &tlm Telemetry:
     telemetry: ax25
 transmitters:
   1k2 FSK downlink:
-    frequency: 437.700e+6
+    frequency: 435.570e+6
     modulation: FSK
     baudrate: 1200
     framing: USP
     data:
     - *tlm
   2k4 FSK downlink:
-    frequency: 437.700e+6
+    frequency: 435.570e+6
     modulation: FSK
     baudrate: 2400
     framing: USP
     data:
     - *tlm
   4k8 FSK downlink:
-    frequency: 437.700e+6
+    frequency: 435.570e+6
     modulation: FSK
     baudrate: 4800
     framing: USP
     data:
     - *tlm
   9k6 FSK downlink:
-    frequency: 437.700e+6
+    frequency: 435.570e+6
     modulation: FSK
     baudrate: 9600
     framing: USP

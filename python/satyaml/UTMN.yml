@@ -2,7 +2,7 @@ name: UTMN
 alternative_names:
   - SXC3-216
   - RS23S
-norad: 99363
+norad: 53376
 data:
   &tlm Telemetry:
     telemetry: ax25

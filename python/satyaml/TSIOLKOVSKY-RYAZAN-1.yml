@@ -1,0 +1,17 @@
+name: TSIOLKOVSKY-RYAZAN-1
+alternative_names:
+  - RS9S
+norad: 53312
+data:
+  &tlm AX25 telemetry:
+    telemetry: ax25
+transmitters:
+  1k2 AFSK downlink:
+    frequency: 437.025e+6
+    modulation: AFSK
+    baudrate: 1135
+    af_carrier: 1700
+    deviation: 565
+    framing: AX.25
+    data:
+    - *tlm
