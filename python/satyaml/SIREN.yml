@@ -2,7 +2,7 @@ name: SIREN
 alternative_names:
   - SXC3-217
   - RS30S
-norad: 99362
+norad: 53384
 data:
   &tlm Telemetry:
     telemetry: ax25
