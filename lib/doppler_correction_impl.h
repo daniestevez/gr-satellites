@@ -39,10 +39,10 @@ private:
             d_phase += 2 * GR_M_PI;
     }
 
-    void read_doppler_file(std::string& filename);
+    void read_doppler_file(const char* filename);
 
 public:
-    doppler_correction_impl(std::string& filename, double samp_rate, double t0);
+    doppler_correction_impl(const char* filename, double samp_rate, double t0);
     ~doppler_correction_impl();
 
     int work(int noutput_items,

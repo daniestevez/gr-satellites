@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Python bindings for 8APSK Costas Loop
+- Python bindings for Doppler correction block under GNU Radio 3.8
 
 ## [5.0.0], [4.7.0], [3.14.0] - 2022-07-22
 
