@@ -54,7 +54,7 @@ public:
      * \param samp_rate Sample rate
      * \param t0 Timestamp corresponding to the first sample
      */
-    static sptr make(std::string& filename, double samp_rate, double t0);
+    static sptr make(const char* filename, double samp_rate, double t0);
 };
 
 } // namespace satellites

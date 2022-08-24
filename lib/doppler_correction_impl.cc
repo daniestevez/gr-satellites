@@ -18,14 +18,14 @@ namespace gr {
 namespace satellites {
 
 doppler_correction::sptr
-doppler_correction::make(std::string& filename, double samp_rate, double t0)
+doppler_correction::make(const char* filename, double samp_rate, double t0)
 {
     return gnuradio::get_initial_sptr(
         new doppler_correction_impl(filename, samp_rate, t0));
 }
 
 
-doppler_correction_impl::doppler_correction_impl(std::string& filename,
+doppler_correction_impl::doppler_correction_impl(const char* filename,
                                                  double samp_rate,
                                                  double t0)
     : gr::sync_block("doppler_correction",
@@ -43,7 +43,7 @@ doppler_correction_impl::doppler_correction_impl(std::string& filename,
 
 doppler_correction_impl::~doppler_correction_impl() {}
 
-void doppler_correction_impl::read_doppler_file(std::string& filename)
+void doppler_correction_impl::read_doppler_file(const char* filename)
 {
     std::ifstream input_file(filename);
     double time;
