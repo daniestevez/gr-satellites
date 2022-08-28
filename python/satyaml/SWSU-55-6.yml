@@ -3,7 +3,7 @@ alternative_names:
   - RS4S
   - SWGU-10
   - YuZGU-55-10
-norad: 53306
+norad: 53321
 data:
   &tlm AX25 telemetry:
     telemetry: ax25
