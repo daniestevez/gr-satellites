@@ -98,6 +98,17 @@ channels such as email. Please understand this when asking for support.
 Take a look [here](https://github.com/daniestevez/gr-satellites/discussions/304) to
 check whether a new topic fits better in the issues page or in the discussions page.
 
+## Known problems
+
+The AVX2 Viterbi decoder in [Volk](https://github.com/gnuradio/volk) versions
+earlier than 1.5.0 is broken (the decoder
+[was disabled in Volk 1.5.0](https://github.com/gnuradio/volk/commit/61497d115aead301850453d418415f5ad346ee25)).
+If using an older version of Volk on a machine that supports AVX2, the
+gr-satellites decoders for the satellites that use convolutional coding will not
+work. To solve this, the AVX2 kernel should be disabled in `~/.volk/volk_config` or by using
+the `VOLK_GENERIC=1` environment variable. See
+[issue #217](https://github.com/daniestevez/gr-satellites/issues/217)).
+
 ## Satellite teams
 
 Satellite teams interested in using gr-satellites for you groundstation
