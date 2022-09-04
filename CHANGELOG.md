@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for AzaadiSAT
 - Support for HSU-SAT1
 - Support for 10 Sputnix satellites in 2022-08-09 launch
+- Support for SelfieSat
 - Phase Unwrap block
 
 ### Fixed
