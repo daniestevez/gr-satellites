@@ -1,5 +1,5 @@
 name: HSU-SAT1
-norad: 99999
+norad: 53462
 data:
   &tlm Telemetry:
     unknown
