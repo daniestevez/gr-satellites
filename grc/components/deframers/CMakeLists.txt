@@ -41,6 +41,7 @@ install(FILES
     satellites_hsu_sat1_deframer.block.yml
     satellites_ideassat_deframer.block.yml
     satellites_k2sat_deframer_component.block.yml
+    satellites_light1_deframer.block.yml
     satellites_lilacsat_1_deframer.block.yml
     satellites_lucky7_deframer.block.yml
     satellites_mobitex_deframer.block.yml

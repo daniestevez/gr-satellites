@@ -1,0 +1,13 @@
+name: Light-1
+norad: 51509
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  2k4 FSK downlink:
+    frequency: 437.710e+6
+    modulation: FSK
+    baudrate: 2400
+    framing: Light-1
+    data:
+    - *tlm

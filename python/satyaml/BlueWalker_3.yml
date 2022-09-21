@@ -1,0 +1,13 @@
+name: BlueWalker 3
+norad: 53807
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  2k4 FSK downlink:
+    frequency: 437.500e+6
+    modulation: FSK
+    baudrate: 2400
+    framing: Light-1
+    data:
+    - *tlm
