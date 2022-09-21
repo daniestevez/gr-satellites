@@ -165,7 +165,10 @@ The framings allowed in the ``framing`` field are the following:
   transceiver with a PN9 scrambler and a CRC-16
 
 * ``Reaktor Hello World``, custom framing used by Reaktor Hello World. It uses a
-  Texas Intruments CC1125 transceiver with a PN9 scrambler and a CRC-16
+  Texas Intruments CC1125 transceiver with a PN9 scrambler and a CRC-16.
+
+* ``Light-1``, custom framing used by Light-1 and BlueWalker 3. It is the same
+  as the ``Reaktor Hello World`` framing, but uses a different syncword.
 
 * ``S-NET``, custom framing used by S-NET, which uses BCH FEC and interleaving
 
