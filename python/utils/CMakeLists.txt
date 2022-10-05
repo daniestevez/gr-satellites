@@ -33,6 +33,7 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     config.py
+    satcfg.py
     options_block.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/utils
 )
