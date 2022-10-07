@@ -37,17 +37,21 @@ install(FILES
     satellites_check_swiatowid_crc.block.yml
     satellites_check_tt64_crc.block.yml
     satellites_convolutional_encoder.block.yml
+    satellites_costas_loop_8apsk_cc.block.yml
+    satellites_crc_append.block.yml
+    satellites_crc_check.block.yml
     satellites_decode_ra_code.block.yml
     satellites_decode_rs.block.yml
     satellites_decode_rs_ccsds.block.yml
     satellites_descrambler308.block.yml
     satellites_distributed_syncframe_soft.block.yml
-    satellites_dstar_one_telemetry_parser.block.yml
+    satellites_doppler_correction.block.yml
     satellites_encode_rs.block.yml
     satellites_encode_rs_ccsds.block.yml
     satellites_eseo_line_decoder.block.yml
     satellites_eseo_packet_crop.block.yml
     satellites_fixedlen_tagger.block.yml
+    satellites_fixedlen_to_pdu.block.yml
     satellites_funcube_submit.block.yml
     satellites_hdlc_deframer.block.yml
     satellites_hdlc_framer.block.yml
@@ -67,7 +71,9 @@ install(FILES
     satellites_pdu_add_meta.block.yml
     satellites_pdu_head_tail.block.yml
     satellites_pdu_length_filter.block.yml
+    satellites_pdu_scrambler.block.yml
     satellites_pdu_to_kiss.block.yml
+    satellites_phase_unwrap.block.yml
     satellites_print_header.block.yml
     satellites_print_timestamp.block.yml
     satellites_pwsat2_submitter.block.yml

@@ -14,10 +14,9 @@ from gnuradio import gr, digital
 import numpy as np
 import pmt
 
-from ... import nrzi_decode
+from ... import crc, nrzi_decode
 from ...hier.sync_to_pdu import sync_to_pdu
 from ...utils.options_block import options_block
-from ...check_crc16_ccitt_false import crc16_ccitt_false
 
 
 # The 40 bit syncword is formed by 4130f000, which is the end of the
@@ -72,6 +71,7 @@ class extract_payload(gr.basic_block):
             name='extract_payload',
             in_sig=[],
             out_sig=[])
+        self.crc_calc = crc(16, 0x1021, 0xFFFF, 0x0, False, False)
         self.verbose = verbose
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
@@ -96,9 +96,9 @@ class extract_payload(gr.basic_block):
         packet = packet[:, 17:-1].ravel()
         # Drop final padding
         packet = packet[:-11]
-        # Check CRC
-        crc = crc16_ccitt_false(packet[4:-2])  # do not include first 4 bytes
-        if crc != struct.unpack('<H', packet[-2:])[0]:
+        # Check CRC (do not include first 4 bytes)
+        crc_val = self.crc_calc.compute(packet[4:-2])
+        if crc_val != struct.unpack('<H', packet[-2:])[0]:
             if self.verbose:
                 print('CRC failed')
                 return

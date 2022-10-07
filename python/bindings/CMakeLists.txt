@@ -30,12 +30,18 @@ include(GrPybind)
 
 list(APPEND satellites_python_files
     ax100_decode_python.cc
+    crc_python.cc
+    crc_append_python.cc
+    crc_check_python.cc
     convolutional_encoder_python.cc
+    costas_loop_8apsk_cc_python.cc
     decode_ra_code_python.cc
     decode_rs_python.cc
     descrambler308_python.cc
     distributed_syncframe_soft_python.cc
+    doppler_correction_python.cc
     encode_rs_python.cc
+    fixedlen_to_pdu_python.cc
     lilacsat1_demux_python.cc
     matrix_deinterleaver_soft_python.cc
     nrzi_decode_python.cc
@@ -44,6 +50,8 @@ list(APPEND satellites_python_files
     pdu_add_meta_python.cc
     pdu_head_tail_python.cc
     pdu_length_filter_python.cc
+    pdu_scrambler_python.cc
+    phase_unwrap_python.cc
     python_bindings.cc
     u482c_decode_python.cc
     varlen_packet_framer_python.cc

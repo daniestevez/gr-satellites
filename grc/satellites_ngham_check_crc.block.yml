@@ -1,6 +1,6 @@
 id: satellites_ngham_check_crc
-label: Check NGHam CRC-16
-category: '[Satellites]/NGHam'
+label: Check NGHam CRC-16 (Deprecated)
+category: '[Satellites]/Deprecated'
 
 parameters:
 -   id: verbose

@@ -31,7 +31,7 @@ namespace satellites {
 
 lilacsat1_demux::sptr lilacsat1_demux::make(std::string tag)
 {
-    return gnuradio::get_initial_sptr(new lilacsat1_demux_impl(tag));
+    return gnuradio::make_block_sptr<lilacsat1_demux_impl>(tag);
 }
 
 /*

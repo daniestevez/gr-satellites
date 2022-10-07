@@ -20,7 +20,7 @@ namespace satellites {
 
 descrambler308::sptr descrambler308::make()
 {
-    return gnuradio::get_initial_sptr(new descrambler308_impl());
+    return gnuradio::make_block_sptr<descrambler308_impl>();
 }
 
 /*

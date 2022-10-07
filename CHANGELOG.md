@@ -6,6 +6,76 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Support for AzaadiSAT
+- Support for HSU-SAT1
+- Support for 10 Sputnix satellites in 2022-08-09 launch
+- Support for SelfieSat
+- Phase Unwrap block
+
+### Fixed
+- Python bindings for 8APSK Costas Loop
+
+## [5.0.0], [4.7.0], [3.14.0] - 2022-07-22
+
+### Added
+- 8APSK Costas loop block
+- Custom SIDS telemetry server for PicSat
+- Doppler correction block
+- File receiver for QO-100
+- Fixed length to PDU block
+- Support for ALFACRUX
+- Support for ASTROBIO
+- Support for CELESTA
+- Support for CTIM 70 cm sw_stat beacons
+- Support for FORESAIL-1
+- Support for GREENCUBE
+- Support for MIMAN
+- Support for MTCUBE-2
+- Support for PLANETUM-1
+- Support for RANDEV-1
+- Support for SNUGLITE-II
+- Support for STEP-CUBELAB-II
+- Support for SUCHAI-1
+- Support for QO-100 multimedia beacon
+
+### Changed
+- Main branch only supports GNU Radio 3.10
+- Modernize logging and remove usage of Boost
+- Sync to PDU blocks now use Fixed length to PDU
+
+### Fixed
+- NORAD IDs for OreSat0, PlantSat and TEVEL constellation
+
+## [4.6.0], [3.13.0] - 2022-05-09
+
+### Added
+- Support for BDSat
+- Support for D-STAR ONE LightSat
+- Support for Eaglet-I in BPSK mode
+- Support for INS-2TD
+- Support for INSPIRESat-1
+- Support for OreSat0
+- Support for PlantSat
+- Support for SanoSat-1
+- Support for SUCHAI-3
+- New generic CRC blocks
+- Telemetry parsing for CSP v2
+
+### Changed
+- Improved NRZI decoder block
+- Refactor code using CRCs to use the new blocks
+- Updated example GRC files to GNU Radio 3.10
+- Deprecate Print Header block
+
+### Fixed
+- Codec2 UDP sink under GNU Radio 3.9
+- KISS server sink under GNU Radio 3.9
+- UDP source under GNU Radio 3.10
+
+### Removed
+- Leftover files for D-STAR ONE telemetry parser
+
 ## [4.5.0], [3.12.0] - 2022-02-19
 
 ### Added
@@ -460,8 +530,11 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v4.5.0...main
-[4.4.0]: https://github.com/daniestevez/gr-satellites/compare/v4.4.0...v4.5.0
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v5.0.0...main
+[5.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.6.0...v5.0.0
+[4.7.0]: https://github.com/daniestevez/gr-satellites/compare/v4.6.0...v4.7.0
+[4.6.0]: https://github.com/daniestevez/gr-satellites/compare/v4.5.0...v4.6.0
+[4.5.0]: https://github.com/daniestevez/gr-satellites/compare/v4.4.0...v4.5.0
 [4.4.0]: https://github.com/daniestevez/gr-satellites/compare/v4.3.1...v4.4.0
 [4.3.1]: https://github.com/daniestevez/gr-satellites/compare/v4.3.0...v4.3.1
 [4.3.0]: https://github.com/daniestevez/gr-satellites/compare/v4.2.0...v4.3.0
@@ -469,6 +542,8 @@ First gr-satellites release using semantic versioning
 [4.1.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0-rc1...v4.0.0
 [4.0.0-rc1]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...v4.0.0-rc1
+[3.14.0]: https://github.com/daniestevez/gr-satellites/compare/v3.13.0...v3.14.0
+[3.13.0]: https://github.com/daniestevez/gr-satellites/compare/v3.12.0...v3.13.0
 [3.12.0]: https://github.com/daniestevez/gr-satellites/compare/v3.11.0...v3.12.0
 [3.11.0]: https://github.com/daniestevez/gr-satellites/compare/v3.10.1...v3.11.0
 [3.10.1]: https://github.com/daniestevez/gr-satellites/compare/v3.10.0...v3.10.1

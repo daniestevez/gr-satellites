@@ -12,7 +12,9 @@ out-of-tree module.
 Dependencies
 ^^^^^^^^^^^^
 
-gr-satellites requires `GNU Radio`_ version at least 3.8.
+gr-satellites requires `GNU Radio`_ version at least 3.8. Depending on the GNU
+Radio version, a different branch of gr-satellites should be used. See the
+`gr-satellites README`_ for more information about the different branches.
 
 
 .. warning::
@@ -21,16 +23,20 @@ gr-satellites requires `GNU Radio`_ version at least 3.8.
    by default when GNU Radio is installed. The main ones that may cause problems
    are:
 
-   * swig
+   * swig (only for GNU Radio 3.8)
    * liborc (in Debian-based distributions ``liborc-0.4-dev`` is needed)
+   * libsndfile (only for GNU Radio 3.9 and greater; in Debian-based
+     distributions ``libsndfile1-dev`` is needed).
+   * spdlog (only for GNU Radio 3.10 and greater; in Debian-based distributions
+     ``libspdlog-dev`` is needed).
 
-Additionally, the following libraries are required:
+Additionally, the following Python packages are required:
 
 * `construct`_, at least version 2.9.
 * `requests`_
 
 .. note::
-   construct and requests are Python packages and can be installed with `pip`_
+   construct and requests can be installed with `pip`_
    by doing
 
    .. code-block:: console
@@ -38,12 +44,13 @@ Additionally, the following libraries are required:
       $ pip3 install --user --upgrade construct requests
 
    Alternatively, construct and requests can be installed from your
-   distribution's package manager
+   distribution's package manager.
  
 .. _GNU Radio: https://gnuradio.org/
 .. _construct: https://construct.readthedocs.io/en/latest/
 .. _requests: https://pypi.org/project/requests/
 .. _pip: https://pypi.org/project/pip/
+.. _gr-satellites README: https://github.com/daniestevez/gr-satellites/blob/main/README.md
 
 Optional dependencies
 ^^^^^^^^^^^^^^^^^^^^^

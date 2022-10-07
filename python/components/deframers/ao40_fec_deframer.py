@@ -12,8 +12,8 @@ from gnuradio import gr, digital, fec, blocks
 
 from ... import (
     distributed_syncframe_soft, matrix_deinterleaver_soft, decode_rs,
-    check_tt64_crc,
     )
+from ...crcs import crc16_arc
 from ...hier.ccsds_descrambler import ccsds_descrambler
 from ...utils.options_block import options_block
 
@@ -65,9 +65,7 @@ class ao40_fec_deframer(gr.hier_block2, options_block):
 
         if crc:
             # CRC-16 ARC
-            self.crc = check_tt64_crc(
-                verbose=self.options.verbose_crc, packet_len=None,
-                strip=False)
+            self.crc = crc16_arc(discard_crc=False)
 
         self.connect(self, self.deframer)
         self.msg_connect((self.deframer, 'out'), (self.deinterleaver, 'in'))
@@ -92,7 +90,3 @@ class ao40_fec_deframer(gr.hier_block2, options_block):
             '--syncword_threshold', type=int,
             default=cls._default_sync_threshold,
             help='Syncword bit errors [default=%(default)r]')
-        parser.add_argument(
-            '--verbose_rs', action='store_true', help='Verbose RS decoder')
-        parser.add_argument(
-            '--verbose_crc', action='store_true', help='Verbose CRC decoder')

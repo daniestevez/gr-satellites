@@ -1,6 +1,7 @@
 options:
   parameters:
     author: Daniel Estevez
+    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -41,7 +42,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [184, 12]
+    coordinate: [280, 12.0]
     rotation: 0
     state: enabled
 - name: blocks_head_0
@@ -59,7 +60,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [763, 224]
+    coordinate: [888, 228.0]
     rotation: 0
     state: enabled
 - name: blocks_skiphead_0
@@ -77,7 +78,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [576, 224]
+    coordinate: [648, 220.0]
     rotation: 0
     state: true
 - name: blocks_wavfile_source_0
@@ -95,7 +96,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [53, 216]
+    coordinate: [24, 212.0]
     rotation: 0
     state: true
 - name: qtgui_time_sink_x_0
@@ -192,7 +193,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [937, 208]
+    coordinate: [1128, 208.0]
     rotation: 0
     state: true
 - name: satellites_bpsk_demodulator_0
@@ -208,6 +209,7 @@ blocks:
     manchester: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
+    options: '""'
     samp_rate: samp_rate
   states:
     bus_sink: false
@@ -225,3 +227,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-75-g67e88516

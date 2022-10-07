@@ -15,7 +15,6 @@
 #include "encode_rs_impl.h"
 #include <gnuradio/io_signature.h>
 
-#include <boost/format.hpp>
 #include <algorithm>
 #include <exception>
 
@@ -30,14 +29,14 @@ namespace satellites {
 
 encode_rs::sptr encode_rs::make(bool dual_basis, int interleave)
 {
-    return gnuradio::get_initial_sptr(new encode_rs_impl(dual_basis, interleave));
+    return gnuradio::make_block_sptr<encode_rs_impl>(dual_basis, interleave);
 }
 
 encode_rs::sptr
 encode_rs::make(int symsize, int gfpoly, int fcr, int prim, int nroots, int interleave)
 {
-    return gnuradio::get_initial_sptr(
-        new encode_rs_impl(symsize, gfpoly, fcr, prim, nroots, interleave));
+    return gnuradio::make_block_sptr<encode_rs_impl>(
+        symsize, gfpoly, fcr, prim, nroots, interleave);
 }
 
 /*
@@ -92,8 +91,8 @@ encode_rs_impl::encode_rs_impl(
 void encode_rs_impl::check_interleave()
 {
     if (d_interleave <= 0) {
-        throw std::runtime_error(
-            boost::str(boost::format("Invalid interleave value = %d") % d_interleave));
+        throw std::runtime_error("Invalid interleave value = " +
+                                 std::to_string(d_interleave));
     }
 }
 
@@ -129,23 +128,22 @@ void encode_rs_impl::msg_handler(pmt::pmt_t pmt_msg)
     auto msg = pmt::u8vector_elements(pmt::cdr(pmt_msg));
 
     if (msg.size() % d_interleave != 0) {
-        GR_LOG_ERROR(
-            d_logger,
-            boost::format("Reed-Solomon message size not divisible by interleave "
-                          "depth. size = %d, interleave = %d") %
-                msg.size() % d_interleave);
+        d_logger->error("Reed-Solomon message size not divisible by interleave "
+                        "depth. size = {:d}, interleave = {:d}",
+                        msg.size(),
+                        d_interleave);
         return;
     }
 
     int rs_kk = msg.size() / d_interleave;
 
     if ((unsigned)(rs_kk + d_nroots) > d_rs_codeword.size()) {
-        GR_LOG_ERROR(
-            d_logger,
-            boost::format("Reed-Solomon message too large. size = %d, interleave "
-                          "= %d, RS code (%d, %d)") %
-                msg.size() % d_interleave % d_rs_codeword.size() %
-                (d_rs_codeword.size() - d_nroots));
+        d_logger->error("Reed-Solomon message too large. size = {:d}, interleave "
+                        "= {:d}, RS code ({:d}, {:d})",
+                        msg.size(),
+                        d_interleave,
+                        d_rs_codeword.size(),
+                        d_rs_codeword.size() - d_nroots);
         return;
     }
 

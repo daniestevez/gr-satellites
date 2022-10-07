@@ -165,7 +165,10 @@ The framings allowed in the ``framing`` field are the following:
   transceiver with a PN9 scrambler and a CRC-16
 
 * ``Reaktor Hello World``, custom framing used by Reaktor Hello World. It uses a
-  Texas Intruments CC1125 transceiver with a PN9 scrambler and a CRC-16
+  Texas Intruments CC1125 transceiver with a PN9 scrambler and a CRC-16.
+
+* ``Light-1``, custom framing used by Light-1 and BlueWalker 3. It is the same
+  as the ``Reaktor Hello World`` framing, but uses a different syncword.
 
 * ``S-NET``, custom framing used by S-NET, which uses BCH FEC and interleaving
 
@@ -245,6 +248,15 @@ The framings allowed in the ``framing`` field are the following:
 * ``BINAR-1``, the custom framing used by the BINAR-1 satellite.
 
 * ``Endurosat``, the custom framing used by the Endurosat modem.
+
+* ``SanoSat``, the custom framing used by SanoSat-1.
+
+* ``FORESAIL-1``, the custom framing used by FORESAIL-1. It is the same as the
+  AX-100 ASM mode, but the ASM used is the CCSDS ASM ``0x1ACFFC1D``.
+
+* ``HSU-SAT1``, the custom framing used by HSU-SAT1.
+
+* ``GEOSCAN``, the custom framing used by GEOSCAN-EDELVEIS.
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.

@@ -45,11 +45,17 @@ endif(MSVC)
 list(APPEND satellites_sources
     ax100_decode_impl.cc
     convolutional_encoder_impl.cc
+    costas_loop_8apsk_cc_impl.cc
+    crc.cc
+    crc_append_impl.cc
+    crc_check_impl.cc
     decode_ra_code_impl.cc
     decode_rs_impl.cc
     descrambler308_impl.cc
     distributed_syncframe_soft_impl.cc
+    doppler_correction_impl.cc
     encode_rs_impl.cc
+    fixedlen_to_pdu_impl.cc
     golay24.c
     lilacsat1_demux_impl.cc
     matrix_deinterleaver_soft_impl.cc
@@ -59,6 +65,8 @@ list(APPEND satellites_sources
     pdu_add_meta_impl.cc
     pdu_head_tail_impl.cc
     pdu_length_filter_impl.cc
+    pdu_scrambler_impl.cc
+    phase_unwrap_impl.cc
     randomizer.c
     u482c_decode_impl.cc
     varlen_packet_framer_impl.cc
@@ -88,7 +96,10 @@ if(NOT satellites_sources)
 endif(NOT satellites_sources)
 
 add_library(gnuradio-satellites SHARED ${satellites_sources})
-target_link_libraries(gnuradio-satellites gnuradio::gnuradio-runtime)
+target_link_libraries(gnuradio-satellites
+	gnuradio::gnuradio-runtime
+	gnuradio::gnuradio-blocks
+	gnuradio::gnuradio-digital)
 target_include_directories(gnuradio-satellites
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PUBLIC $<INSTALL_INTERFACE:include>

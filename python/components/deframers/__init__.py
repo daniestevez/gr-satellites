@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2019 Daniel Estevez <daniel@destevez.net>
+# Copyright 2019-2022 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -34,7 +34,9 @@ from .diy1_deframer import diy1_deframer
 from .endurosat_deframer import endurosat_deframer
 from .eseo_deframer import eseo_deframer
 from .fossasat_deframer import fossasat_deframer
+from .geoscan_deframer import geoscan_deframer
 from .grizu263a_deframer import grizu263a_deframer
+from .hsu_sat1_deframer import hsu_sat1_deframer
 from .ideassat_deframer import ideassat_deframer
 from .k2sat_deframer import k2sat_deframer
 from .lilacsat_1_deframer import lilacsat_1_deframer
@@ -44,6 +46,7 @@ from .ngham_deframer import ngham_deframer
 from .nusat_deframer import nusat_deframer
 from .ops_sat_deframer import ops_sat_deframer
 from .reaktor_hello_world_deframer import reaktor_hello_world_deframer
+from .sanosat_deframer import sanosat_deframer
 from .sat_3cat_1_deframer import sat_3cat_1_deframer
 from .smogp_ra_deframer import smogp_ra_deframer
 from .smogp_signalling_deframer import smogp_signalling_deframer

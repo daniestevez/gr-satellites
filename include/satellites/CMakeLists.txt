@@ -24,12 +24,18 @@
 install(FILES
     api.h
     ax100_decode.h
+    crc.h
+    crc_append.h
+    crc_check.h
     convolutional_encoder.h
+    costas_loop_8apsk_cc.h
     decode_ra_code.h
     decode_rs.h
     descrambler308.h
     distributed_syncframe_soft.h
+    doppler_correction.h
     encode_rs.h
+    fixedlen_to_pdu.h
     lilacsat1_demux.h
     matrix_deinterleaver_soft.h
     nrzi_decode.h
@@ -38,6 +44,8 @@ install(FILES
     pdu_add_meta.h
     pdu_head_tail.h
     pdu_length_filter.h
+    pdu_scrambler.h
+    phase_unwrap.h
     u482c_decode.h
     varlen_packet_framer.h
     varlen_packet_tagger.h

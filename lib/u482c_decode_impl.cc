@@ -38,8 +38,7 @@ namespace satellites {
 
 u482c_decode::sptr u482c_decode::make(bool verbose, int viterbi, int scrambler, int rs)
 {
-    return gnuradio::get_initial_sptr(
-        new u482c_decode_impl(verbose, viterbi, scrambler, rs));
+    return gnuradio::make_block_sptr<u482c_decode_impl>(verbose, viterbi, scrambler, rs);
 }
 
 /*

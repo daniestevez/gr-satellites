@@ -1,0 +1,16 @@
+name: GEOSCAN-EDELVEIS
+alternative_names:
+   - RS20S
+   - GEOSCAN
+norad: 53385
+data:
+   &tlm Telemetry:
+     unknown
+transmitters:
+   9k6 FSK downlink:
+     frequency: 436.200e+6
+     modulation: FSK
+     baudrate: 9600
+     framing: GEOSCAN
+     data:
+     - *tlm

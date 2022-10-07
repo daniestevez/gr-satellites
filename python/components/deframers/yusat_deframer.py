@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2021 Daniel Estevez <daniel@destevez.net>
+# Copyright 2021-2022 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -12,7 +12,7 @@ from gnuradio import gr, digital
 import pmt
 
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
-from ...hdlc_deframer import fcs_ok
+from ...hdlc_deframer import hdlc_crc_check
 
 
 # HDLC 0x7e flag
@@ -29,6 +29,7 @@ class crop_and_check_crc(gr.basic_block):
             name='crop_and_check_crc',
             in_sig=[],
             out_sig=[])
+        self.crc_check = hdlc_crc_check()
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
         self.message_port_register_out(pmt.intern('out'))
@@ -47,7 +48,7 @@ class crop_and_check_crc(gr.basic_block):
                 return
             start += idx + 1
             p = packet[:idx]
-            if fcs_ok(p):
+            if self.crc_check.fcs_ok(p):
                 p = p[:-2]
                 self.message_port_pub(
                     pmt.intern('out'),

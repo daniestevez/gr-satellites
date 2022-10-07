@@ -1,0 +1,59 @@
+id: satellites_fixedlen_to_pdu
+label: Fixed Length To PDU
+category: '[Satellites]/Packet'
+
+parameters:
+-   id: type
+    label: Type
+    dtype: enum
+    options: [complex, float, int, short, byte]
+    option_attributes:
+        size: [gr.sizeof_gr_complex, gr.sizeof_float, gr.sizeof_int, gr.sizeof_short,
+               gr.sizeof_char]
+    hide: part
+-   id: syncword_tag
+    label: Syncword tag
+    dtype: string
+    default: syncword
+-   id: packet_len
+    label: Packet length
+    dtype: int
+-   id: pack
+    label: Pack bits
+    dtype: bool
+    default: 'False'
+    hide: ${ 'none' if type == 'byte' else 'all' }
+
+inputs:
+-   domain: stream
+    dtype: ${ type }
+
+outputs:
+-   domain: message
+    id: pdus
+
+templates:
+    imports: |-
+        import satellites
+    make: satellites.fixedlen_to_pdu(${type.size}, ${syncword_tag}, ${packet_len}, ${pack if type == 'byte' else False})
+
+documentation: |-
+    Extracts PDUs of fixed length according to syncword tags
+
+    Given an input stream containing tags that mark the location of frames,
+    this block extracts PDUs of a fixed length starting at the location of
+    those tags. The data in the PDUs may overlap if tags are spaced less than
+    the PDU length.
+
+    Output:
+       PDUs containting the frames that start at the location marked by the tags.
+
+    Parameters:
+        Type: input stream type.
+        Syncword tags: name of the syncword tags to use.
+        Packet length: PDU length, in items of the input stream.
+        Pack bits: when the input type is bytes and this option is enabled,
+        8 bits per byte are packed in the output PDU. The packet length should
+        correspond to the number of bits, and be a multiple of 8.
+
+file_format: 1

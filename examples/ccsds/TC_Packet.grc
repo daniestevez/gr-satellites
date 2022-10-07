@@ -1,6 +1,7 @@
 options:
   parameters:
     author: ''
+    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -49,8 +50,8 @@ blocks:
     coordinate: [88, 160]
     rotation: 0
     state: enabled
-- name: blocks_random_pdu_0
-  id: blocks_random_pdu
+- name: pdu_random_pdu_0
+  id: pdu_random_pdu
   parameters:
     affinity: ''
     alias: ''
@@ -65,9 +66,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 136]
+    coordinate: [496, 76.0]
     rotation: 0
-    state: enabled
+    state: true
 - name: satellites_telecommand_parser_0
   id: satellites_telecommand_parser
   parameters:
@@ -106,10 +107,11 @@ blocks:
     state: enabled
 
 connections:
-- [blocks_message_strobe_0, strobe, blocks_random_pdu_0, generate]
-- [blocks_random_pdu_0, pdus, satellites_telecommand_primaryheader_adder_0, in]
+- [blocks_message_strobe_0, strobe, pdu_random_pdu_0, generate]
+- [pdu_random_pdu_0, pdus, satellites_telecommand_primaryheader_adder_0, in]
 - [satellites_telecommand_primaryheader_adder_0, out, satellites_telecommand_parser_0,
   in]
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-75-g67e88516

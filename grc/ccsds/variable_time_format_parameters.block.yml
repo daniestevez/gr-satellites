@@ -8,96 +8,100 @@ parameters:
     dtype: enum
     default: drop_down
     options: ['0', '1', '2', '3', '4']
-    option_labels: [CUC, CDS, CCS, ASCII A, ASCII B]
+    option_labels: ['CUC', 'CDS', 'CCS', 'ASCII A', 'ASCII B']
 -   id: basic_time
-    label: $basic_time_num_octets_cuc()
+    label: 'Basic Time'
     dtype: raw
     default: '0'
     hide: ${ ('none' if time_format_general == '0' else 'all') }
 -   id: frac_time
-    label: $fractional_time_num_octets_cuc()
+    label: 'Fractional Time'
     dtype: raw
     default: '0'
     hide: ${ ('none' if time_format_general == '0' else 'all') }
 -   id: additional_basic_time
-    label: $additional_basic_time_num_octets_cuc()
+    label: 'Basic time additional'
     dtype: raw
     default: '0'
     hide: ${ ('none' if time_format_general == '0' else 'all') }
 -   id: additional_fractional_time
-    label: $additional_fractional_time_num_octets_cuc()
+    label: 'Basic time additional additional'
     dtype: raw
     default: '0'
     hide: ${ ('none' if time_format_general == '0' else 'all') }
 -   id: length_of_day_cds
-    label: $len_of_day()
+    label: 'Length of Day'
     dtype: enum
     default: drop_down
     options: ['0', '1']
-    option_labels: [16-bit day segment, 24-bit day segments]
+    option_labels: ['16-bit day segment', '24-bit day segments']
     hide: ${ ('none' if time_format_general == '1' else 'all') }
 -   id: length_of_submillisecond_cds
-    label: $len_of_submilsecs()
+    label: 'Length of Submilliseconds'
     dtype: enum
     default: drop_down
     options: ['0', '1', '2']
-    option_labels: [Millisecond, Microsecond, Picosecond]
+    option_labels: ['Millisecond', 'Microsecond', 'Picosecond']
     hide: ${ ('none' if time_format_general == '1' else 'all') }
 -   id: calendar_variation_ccs
-    label: $calendar_variation()
+    label: 'Calendar variation'
     dtype: enum
     default: drop_down
     options: ['0', '1']
-    option_labels: [Month of year/day of month, Day of year]
+    option_labels: ['Month of year/day of month', 'Day of year']
     hide: ${ ('none' if time_format_general == '2' else 'all') }
 -   id: number_of_subsecond_ccs
-    label: $num_of_subsecs()
+    label: 'Number of Subseconds'
     dtype: enum
     default: drop_down
     options: ['0', '1', '2', '3', '4', '5', '6']
-    option_labels: [1 s, 10^-2 s, 10^-4 s, 10^-6 s, 10^-8 s, 10^-10 s, 10^-12 s]
+    option_labels: ['1 s', '10^-2 s', '10^-4 s', '10^-6 s', '10^-8 s', '10^-10 s', '10^-12 s']
     hide: ${ ('none' if time_format_general == '2' else 'all') }
 -   id: ascii_dec_num
-    label: $ascii_dec()
-    dtype: ''
+    label: 'ASCII Decimals'
+    dtype: raw
     default: '1'
     hide: ${ ('none' if time_format_general > '2' else 'all') }
 -   id: add_z_terminator
-    label: $add_z()
+    label: 'Add Z terminator'
     dtype: enum
     default: drop_down
     options: ['1', '0']
     option_labels: ['Yes', 'No']
     hide: ${ ('none' if time_format_general > '2' else 'all') }
-value: ${value}
+-   id: value
+    label: Default Value
+    dtype: raw
+    default: '0'
+value: ${ id }
 
 templates:
     imports: "def struct(data): return type('Struct', (object,), data)()"
     var_make: |-
         self.${id} = ${id} = struct({
-            'basic_time_num_octets_cuc': ${context.get('basic_time')},
-            'fractional_time_num_octets_cuc': ${context.get('frac_time')},
-            'additional_basic_time_num_octets_cuc': ${context.get('additional_basic_time')},
-            'additional_fractional_time_num_octets_cuc': ${context.get('additional_fractional_time')},
-            'len_of_day': ${context.get('length_of_day_cds')},
-            'len_of_submilsecs': ${context.get('length_of_submillisecond_cds')},
-            'calendar_variation': ${context.get('calendar_variation_ccs')},
-            'num_of_subsecs': ${context.get('number_of_subsecond_ccs')},
-            'ascii_dec': ${context.get('ascii_dec_num')},
-            'add_z': ${context.get('add_z_terminator')},
+            'basic_time_num_octets_cuc': ${basic_time},
+            'fractional_time_num_octets_cuc': ${frac_time},
+            'additional_basic_time_num_octets_cuc': ${additional_basic_time},
+            'additional_fractional_time_num_octets_cuc': ${additional_fractional_time},
+            'len_of_day': ${length_of_day_cds},
+            'len_of_submilsecs': ${length_of_submillisecond_cds},
+            'calendar_variation': ${calendar_variation_ccs},
+            'num_of_subsecs': ${number_of_subsecond_ccs},
+            'ascii_dec': ${ascii_dec_num},
+            'add_z': ${add_z_terminator},
         })
     var_value: |-
-        struct({
-            'basic_time_num_octects_cuc': ${context.get('basic_time')},
-            'fractional_time_num_octets_cuc': ${context.get('frac_time')},
-            'additional_basic_time_num_octets_cuc': ${context.get('additional_basic_time')},
-            'additional_fractional_time_num_octets_cuc': ${context.get('additional_fractional_time')},
-            'len_of_day': ${context.get('length_of_day_cds')},
-            'len_of_submilsecs': ${context.get('length_of_submillisecond_cds')},
-            'calendar_variation': ${context.get('calendar_variation_ccs')},
-            'num_of_subsecs': ${context.get('number_of_subsecond_ccs')},
-            'ascii_dec': ${context.get('ascii_dec_num')},
-            'add_z': ${context.get('add_z_terminator')},
+        self.${id} = ${id} = struct({
+            'basic_time_num_octets_cuc': ${basic_time},
+            'fractional_time_num_octets_cuc': ${frac_time},
+            'additional_basic_time_num_octets_cuc': ${additional_basic_time},
+            'additional_fractional_time_num_octets_cuc': ${additional_fractional_time},
+            'len_of_day': ${length_of_day_cds},
+            'len_of_submilsecs': ${length_of_submillisecond_cds},
+            'calendar_variation': ${calendar_variation_ccs},
+            'num_of_subsecs': ${number_of_subsecond_ccs},
+            'ascii_dec': ${ascii_dec_num},
+            'add_z': ${add_z_terminator},
         })
 
 file_format: 1

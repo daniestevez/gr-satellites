@@ -7,13 +7,14 @@ Build-Depends: cmake,
                dh-python,
                doxygen,
                gnuradio-dev,
+               libsndfile1-dev,
                liborc-0.4-dev,
+               libspdlog-dev,
                pkg-config,
-               python3-dev,
-               python3-six,
-               swig,
                python3-construct,
-               python3-requests
+               python3-dev,
+               python3-requests,
+               python3-six
 Standards-Version: 4.5.0
 Homepage: http://github.com/daniestevez/gr-satellites
 Vcs-Git: git://github.com/daniestevez/gr-satellites.git

@@ -49,4 +49,5 @@ include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-satellites)
 set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/swig)
+GR_ADD_TEST(qa_kiss_server_sink ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_kiss_server_sink.py)
 GR_ADD_TEST(qa_telemetry_parser ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_telemetry_parser.py)

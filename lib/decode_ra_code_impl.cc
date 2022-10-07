@@ -28,7 +28,7 @@ namespace satellites {
 
 decode_ra_code::sptr decode_ra_code::make(int size)
 {
-    return gnuradio::get_initial_sptr(new decode_ra_code_impl(size));
+    return gnuradio::make_block_sptr<decode_ra_code_impl>(size);
 }
 
 /*
@@ -79,7 +79,7 @@ void decode_ra_code_impl::msg_handler(pmt::pmt_t pmt_msg)
                 "message length: %ld, expected: %d\n",
                 (long)length,
                 ra_code_length * RA_BITCOUNT);
-        GR_LOG_ERROR(d_logger, "Invalid message length");
+        d_logger->error("Invalid message length");
         return;
     }
 

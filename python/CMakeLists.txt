@@ -54,6 +54,7 @@ GR_PYTHON_INSTALL(
     check_swiatowid_crc.py
     check_tt64_crc.py
     crc32c.py
+    crcs.py
     csp_header.py
     ecss_pus.py
     eseo_line_decoder.py
@@ -110,12 +111,17 @@ include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-satellites)
 set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/swig)
+GR_ADD_TEST(qa_costas_loop_8apsk_cc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_costas_loop_8apsk_cc.py)
+GR_ADD_TEST(qa_crc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_crc.py)
 GR_ADD_TEST(qa_fixedlen_tagger ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_fixedlen_tagger.py)
+GR_ADD_TEST(qa_fixedlen_to_pdu ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_fixedlen_to_pdu.py)
 GR_ADD_TEST(qa_hdlc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_hdlc.py)
 GR_ADD_TEST(qa_kiss ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_kiss.py)
 GR_ADD_TEST(qa_nrzi ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_nrzi.py)
 GR_ADD_TEST(qa_pdu_add_meta ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_pdu_add_meta.py)
 GR_ADD_TEST(qa_pdu_head_tail ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_pdu_head_tail.py)
 GR_ADD_TEST(qa_pdu_length_filter ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_pdu_length_filter.py)
+GR_ADD_TEST(qa_pdu_scrambler ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_pdu_scrambler.py)
+GR_ADD_TEST(qa_phase_unwrap ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_phase_unwrap.py)
 GR_ADD_TEST(qa_rs ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_rs.py)
 GR_ADD_TEST(qa_viterbi ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_viterbi.py)

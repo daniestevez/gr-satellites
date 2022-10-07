@@ -23,7 +23,7 @@ namespace satellites {
 
 pdu_add_meta::sptr pdu_add_meta::make(pmt::pmt_t meta)
 {
-    return gnuradio::get_initial_sptr(new pdu_add_meta_impl(meta));
+    return gnuradio::make_block_sptr<pdu_add_meta_impl>(meta);
 }
 
 /*

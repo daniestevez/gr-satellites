@@ -1,7 +1,7 @@
 name: TEVEL-6
 alternative_names:
   - T6NZR
-norad: 99476
+norad: 50999
 data:
   &tlm Telemetry:
     telemetry: ax25

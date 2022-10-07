@@ -48,7 +48,9 @@ GR_PYTHON_INSTALL(
     endurosat_deframer.py
     eseo_deframer.py
     fossasat_deframer.py
+    geoscan_deframer.py
     grizu263a_deframer.py
+    hsu_sat1_deframer.py
     ideassat_deframer.py
     k2sat_deframer.py
     lilacsat_1_deframer.py
@@ -58,6 +60,7 @@ GR_PYTHON_INSTALL(
     nusat_deframer.py
     ops_sat_deframer.py
     reaktor_hello_world_deframer.py
+    sanosat_deframer.py
     sat_3cat_1_deframer.py
     smogp_ra_deframer.py
     smogp_signalling_deframer.py

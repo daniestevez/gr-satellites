@@ -13,10 +13,9 @@ from gnuradio import blocks
 from gnuradio import digital
 from gnuradio import gr
 from gnuradio.filter import firdes
-import satellites
-import numpy
-from ..grpdu import tagged_stream_to_pdu
+from .. import fixedlen_to_pdu
 from ..grtypes import byte_t
+import numpy
 
 
 class sync_to_pdu(gr.hier_block2):
@@ -40,27 +39,21 @@ class sync_to_pdu(gr.hier_block2):
         ##################################################
         # Blocks
         ##################################################
-        self.satellites_fixedlen_tagger_0_0_0 = (
-            satellites.fixedlen_tagger('syncword', 'packet_len',
-                                       packlen, numpy.byte))
+        self.fixedlen_to_pdu = fixedlen_to_pdu(
+                byte_t, 'syncword', packlen)
         self.digital_correlate_access_code_tag_bb_0_0_0 = (
             digital.correlate_access_code_tag_bb(sync, threshold, 'syncword'))
-        self.blocks_tagged_stream_to_pdu_0_0_0 = (
-            tagged_stream_to_pdu(byte_t, 'packet_len'))
 
         ##################################################
         # Connections
         ##################################################
         self.msg_connect(
-            (self.blocks_tagged_stream_to_pdu_0_0_0, 'pdus'), (self, 'out'))
+            (self.fixedlen_to_pdu, 'pdus'), (self, 'out'))
         self.connect(
             (self.digital_correlate_access_code_tag_bb_0_0_0, 0),
-            (self.satellites_fixedlen_tagger_0_0_0, 0))
+            self.fixedlen_to_pdu)
         self.connect(
             (self, 0), (self.digital_correlate_access_code_tag_bb_0_0_0, 0))
-        self.connect(
-            (self.satellites_fixedlen_tagger_0_0_0, 0),
-            (self.blocks_tagged_stream_to_pdu_0_0_0, 0))
 
     def get_packlen(self):
         return self.packlen

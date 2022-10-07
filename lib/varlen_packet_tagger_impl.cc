@@ -16,7 +16,6 @@
 #include <gnuradio/io_signature.h>
 #include <cstdio>
 #include <iostream>
-
 extern "C" {
 #include "golay24.h"
 #include "libfec/fec.h"
@@ -32,8 +31,8 @@ varlen_packet_tagger::sptr varlen_packet_tagger::make(const std::string& sync_ke
                                                       endianness_t endianness,
                                                       bool use_golay)
 {
-    return gnuradio::get_initial_sptr(new varlen_packet_tagger_impl(
-        sync_key, packet_key, length_field_size, max_packet_size, endianness, use_golay));
+    return gnuradio::make_block_sptr<varlen_packet_tagger_impl>(
+        sync_key, packet_key, length_field_size, max_packet_size, endianness, use_golay);
 }
 
 varlen_packet_tagger_impl::varlen_packet_tagger_impl(const std::string& sync_key,
@@ -113,7 +112,7 @@ int varlen_packet_tagger_impl::general_work(int noutput_items,
             if (golay_res >= 0) {
                 packet_len = 8 * (0xFFF & golay_field);
             } else {
-                GR_LOG_WARN(d_debug_logger, "Golay decode failed.");
+                d_debug_logger->warn("Golay decode failed.");
                 d_have_sync = false;
                 consume_each(1); // skip ahead
                 return 0;
@@ -124,8 +123,7 @@ int varlen_packet_tagger_impl::general_work(int noutput_items,
         }
 
         if (packet_len > d_mtu) {
-            GR_LOG_WARN(d_debug_logger,
-                        boost::format("Packet length %d > mtu %d.") % packet_len % d_mtu);
+            d_debug_logger->warn("Packet length {:d} > mtu {:d}.", packet_len, d_mtu);
             d_have_sync = false;
             consume_each(1); // skip ahead
             return 0;
@@ -142,13 +140,13 @@ int varlen_packet_tagger_impl::general_work(int noutput_items,
         if (ninput_items[0] >= packet_len + d_header_length) {
 
             if (d_use_golay) {
-                GR_LOG_DEBUG(d_debug_logger,
-                             boost::format("Header: 0x%06x, Len: %d") %
-                                 (0xFFFFFF & golay_field) % (0xFFF & packet_len));
+                d_debug_logger->debug("Header: {#06x}, Len: {:d}",
+                                      0xFFFFFF & golay_field,
+                                      0xFFF & packet_len);
                 if (golay_res >= 0) {
-                    GR_LOG_DEBUG(d_debug_logger,
-                                 boost::format("Golay decoded. Errors: %d, Length: %d") %
-                                     golay_res % packet_len);
+                    d_debug_logger->debug("Golay decoded. Errors: {:d}, Length: {:d}",
+                                          golay_res,
+                                          packet_len);
                 }
             }
 

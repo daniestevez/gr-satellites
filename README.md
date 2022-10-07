@@ -38,13 +38,17 @@ gr-satellites [documentation](https://gr-satellites.readthedocs.io/) is hosted i
 Currently there are the following series of releases in the history of
 gr-satellites:
 
-* `v4.x.y` has the same functionality as the v3.x.y series, but supports
-   GNU Radio 3.9 and 3.10.
+* `v5.x.y` is the current release series, and supports GNU Radio 3.10.
 
-* `v3.x.y` is the result of a large refactor that introduces a lot of
-  new functionality and improvements. The refactor started on September
-  2019 and was finished in May 2020. This supports GNU Radio 3.8.
+* `v4.x.y` has the same functionality as the v5.x.y series, but supports
+  GNU Radio 3.9 (until v4.6.0, the v4.x.y series supported both GNU Radio
+  3.9 and 3.10).
 
+* `v3.x.y` has the same functionality as the v5.x.y series, but supports
+  GNU Rado 3.8. This series was the result of a large refactor that
+  introduced a lot of new functionality and improvements.
+  The refactor started on September 2019 and was finished in May 2020.
+   
 * `v2.x.y` is a series of releases compatible with GNU Radio 3.8 that existed
   between September 2019 and May 2020. The functionality in this series is
   equivalent to the `v1.x.y` series.
@@ -56,11 +60,13 @@ gr-satellites:
 The repository is organized in the following branches:
 
 * `main` is where the active development happens. From time to time, features
-  will be frozen in a new release. This branch is compatible with GNU Radio 3.9
-  and 3.10.
+  will be frozen in a new release. This branch is compatible with GNU Radio 3.10.
+
+* `maint-3.10` is the branch where releases in the current `v5.x.y` line are
+  published. This branch is compatible with GNU Radio 3.10.
 
 * `maint-3.9` is the branch where releases in the current `v4.x.y` line are
-  published. This branch is compatible with GNU Radio 3.9 and 3.10.
+  published. This branch is compatible with GNU Radio 3.9.
 
 * `maint-3.8` is the branch where releases in the current `v3.x.y` line are
   published. This branch is compatible with GNU Radio 3.8.
@@ -91,6 +97,17 @@ so that the whole community can benefit, rather than through private
 channels such as email. Please understand this when asking for support.
 Take a look [here](https://github.com/daniestevez/gr-satellites/discussions/304) to
 check whether a new topic fits better in the issues page or in the discussions page.
+
+## Known problems
+
+The AVX2 Viterbi decoder in [Volk](https://github.com/gnuradio/volk) versions
+earlier than 1.5.0 is broken (the decoder
+[was disabled in Volk 1.5.0](https://github.com/gnuradio/volk/commit/61497d115aead301850453d418415f5ad346ee25)).
+If using an older version of Volk on a machine that supports AVX2, the
+gr-satellites decoders for the satellites that use convolutional coding will not
+work. To solve this, the AVX2 kernel should be disabled in `~/.volk/volk_config` or by using
+the `VOLK_GENERIC=1` environment variable. See
+[issue #217](https://github.com/daniestevez/gr-satellites/issues/217)).
 
 ## Satellite teams
 

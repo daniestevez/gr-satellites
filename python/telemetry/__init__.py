@@ -26,6 +26,7 @@ from .binar1 import binar1
 from .by02 import by02
 from .by70_1 import by70_1
 from .csp import csp
+from .ctim_70cm import ctim_70cm
 from .cute_70cm import cute_70cm
 from .delfic3 import delfic3
 from .delfipq import delfipq
@@ -37,6 +38,7 @@ from .fossasat_2 import fossasat_2
 from .funcube import funcube
 from .gomx_1 import gomx_1
 from .gomx_3 import gomx_3
+from .inspiresat_1 import inspiresat_1
 from .kr01 import kr01
 from .lume import lume
 from .mirsat1 import mirsat1

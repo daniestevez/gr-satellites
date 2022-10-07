@@ -471,6 +471,16 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'DIY-1': deframers.diy1_deframer,
         'BINAR-1': deframers.binar1_deframer,
         'Endurosat': deframers.endurosat_deframer,
+        'SanoSat': deframers.sanosat_deframer,
+        'FORESAIL-1': set_options(
+            deframers.ax100_deframer,
+            mode='ASM',
+            syncword='00011010110011111111110000011101'),
+        'HSU-SAT1': deframers.hsu_sat1_deframer,
+        'GEOSCAN': deframers.geoscan_deframer,
+        'Light-1': set_options(
+            deframers.reaktor_hello_world_deframer,
+            syncword='light-1'),
         }
     _transport_hooks = {
         'KISS': transports.kiss_transport,

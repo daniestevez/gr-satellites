@@ -15,7 +15,6 @@
 #include "decode_rs_impl.h"
 #include <gnuradio/io_signature.h>
 
-#include <boost/format.hpp>
 #include <algorithm>
 #include <exception>
 
@@ -28,14 +27,14 @@ namespace satellites {
 
 decode_rs::sptr decode_rs::make(int dual_basis, int interleave)
 {
-    return gnuradio::get_initial_sptr(new decode_rs_impl(dual_basis, interleave));
+    return gnuradio::make_block_sptr<decode_rs_impl>(dual_basis, interleave);
 }
 
 decode_rs::sptr
 decode_rs::make(int symsize, int gfpoly, int fcr, int prim, int nroots, int interleave)
 {
-    return gnuradio::get_initial_sptr(
-        new decode_rs_impl(symsize, gfpoly, fcr, prim, nroots, interleave));
+    return gnuradio::make_block_sptr<decode_rs_impl>(
+        symsize, gfpoly, fcr, prim, nroots, interleave);
 }
 
 /*
@@ -83,8 +82,8 @@ decode_rs_impl::decode_rs_impl(
 void decode_rs_impl::check_interleave()
 {
     if (d_interleave <= 0) {
-        throw std::runtime_error(
-            boost::str(boost::format("Invalid interleave value = %d") % d_interleave));
+        throw std::runtime_error("Invalid interleave value = " +
+                                 std::to_string(d_interleave));
     }
 }
 
@@ -121,21 +120,21 @@ void decode_rs_impl::msg_handler(pmt::pmt_t pmt_msg)
     int errors = 0;
 
     if (msg.size() % d_interleave != 0) {
-        GR_LOG_WARN(d_logger,
-                    boost::format("Reed-Solomon message size not divisible by interleave "
-                                  "depth. size = %d, interleave = %d") %
-                        msg.size() % d_interleave);
+        d_logger->warn("Reed-Solomon message size not divisible by interleave "
+                       "depth. size = {:d}, interleave = {:d}",
+                       msg.size(),
+                       d_interleave);
         return;
     }
 
     int rs_nn = msg.size() / d_interleave;
     if (rs_nn <= d_nroots || (unsigned)rs_nn > d_rs_codeword.size()) {
-        GR_LOG_ERROR(
-            d_logger,
-            boost::format("Wrong Reed-Solomon message size. size = %d, interleave "
-                          "= %d, RS code (%d, %d)") %
-                msg.size() % d_interleave % d_rs_codeword.size() %
-                (d_rs_codeword.size() - d_nroots));
+        d_logger->error("Wrong Reed-Solomon message size. size = {:d}, interleave "
+                        "= {:d}, RS code ({:d}, {:d})",
+                        msg.size(),
+                        d_interleave,
+                        d_rs_codeword.size(),
+                        d_rs_codeword.size() - d_nroots);
         return;
     }
 
@@ -150,15 +149,13 @@ void decode_rs_impl::msg_handler(pmt::pmt_t pmt_msg)
 
         auto rs_res = d_decode_rs(d_rs_codeword.data());
         if (rs_res < 0) {
-            GR_LOG_DEBUG(d_logger,
-                         boost::format("Reed-Solomon decode fail (interleaver path %d)") %
-                             j);
+            d_logger->debug("Reed-Solomon decode fail (interleaver path {:d})", j);
             return;
         }
-        GR_LOG_DEBUG(d_logger,
-                     boost::format(
-                         "Reed-Solomon decode corrected %d bytes (interleaver path %d)") %
-                         rs_res % j);
+        d_logger->debug(
+            "Reed-Solomon decode corrected {:d} bytes (interleaver path {:d})",
+            rs_res,
+            j);
         errors += rs_res;
 
         for (int k = 0; k < rs_nn - d_nroots; ++k) {

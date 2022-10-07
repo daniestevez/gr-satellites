@@ -23,7 +23,7 @@ outputs:
 
 templates:
     imports: import satellites.components.deframers
-    make: satellites.components.deframers.reaktor_hello_world_deframer(syncword_threshold = ${threshold}, options=${options})
+    make: satellites.components.deframers.aalto_deframer(syncword_threshold = ${threshold}, options=${options})
 
 documentation: |-
     Deframes AALTO-1 custom packets
