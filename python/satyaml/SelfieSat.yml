@@ -1,5 +1,5 @@
 name: SelfieSat
-norad: 52760
+norad: 53951
 data:
   &tlm Telemetry:
     unknown
