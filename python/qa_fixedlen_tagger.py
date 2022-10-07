@@ -31,7 +31,7 @@ class qa_fixedlen_tagger(gr_unittest.TestCase):
         self.syncword_tag = 'syncword'
         self.packetlen_tag = 'packet_len'
         self.packet_len = 100
-        self.data = np.arange(3000, dtype='uint8')
+        self.data = np.arange(16384, dtype='uint8')
         self.tag_positions = [50, 213, 217, 230, 1530, 1531]
         tags = [gr.python_to_tag((j, pmt.intern(self.syncword_tag),
                                   pmt.intern('sync'), pmt.intern('test_src')))
