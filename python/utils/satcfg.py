@@ -11,7 +11,7 @@
 from pathlib import Path
 
 
-def get_cfg(satellite):
+def get_cfg(norad):
     """
     Opens and returns the local configuration for selected satellite
     """
@@ -27,6 +27,6 @@ def get_cfg(satellite):
     with open(config_filename, encoding='utf-8') as f:
         for row in f:
             sat = row.strip().split(' ')
-            if len(sat) > 1 and satellite == sat[0]:
+            if len(sat) > 1 and norad == int(sat[0]):
                 return sat[1:]
     return []

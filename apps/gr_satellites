@@ -155,6 +155,7 @@ class gr_satellites_top_block(gr.top_block):
     def __init__(self, parser):
         gr.top_block.__init__(self, 'gr-satellites top block')
         sat = parse_satellite(sys.argv[1])
+        norad = yamlfiles.open_satyaml(**parse_satellite(sys.argv[1]))['norad']
         try:
             satellites.core.gr_satellites_flowgraph.add_options(parser, **sat)
         except ValueError as e:
@@ -167,7 +168,7 @@ class gr_satellites_top_block(gr.top_block):
             print('Could not open SatYAML file:')
             print(e)
             exit(1)
-        satcfg_args = get_cfg(sys.argv[1]) if '--satcfg' in sys.argv[2:] else []
+        satcfg_args = get_cfg(norad) if '--satcfg' in sys.argv[2:] else []
         if '--ignore_unknown_args' in sys.argv[2:]:
             options, unknown = parser.parse_known_args(satcfg_args + sys.argv[2:])
             if len(unknown) > 0:
