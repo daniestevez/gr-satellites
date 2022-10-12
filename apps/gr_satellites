@@ -155,8 +155,8 @@ class gr_satellites_top_block(gr.top_block):
     def __init__(self, parser):
         gr.top_block.__init__(self, 'gr-satellites top block')
         sat = parse_satellite(sys.argv[1])
-        norad = yamlfiles.open_satyaml(**parse_satellite(sys.argv[1]))['norad']
         try:
+            norad = yamlfiles.open_satyaml(**parse_satellite(sys.argv[1]))['norad']
             satellites.core.gr_satellites_flowgraph.add_options(parser, **sat)
         except ValueError as e:
             if e.args[0] == 'satellite not found':

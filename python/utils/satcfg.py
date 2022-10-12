@@ -18,13 +18,10 @@ def get_cfg(norad):
     config_dir = Path.home() / '.gr_satellites'
     config_filename = config_dir / 'sat.cfg'
 
-    if not config_dir.exists():
-        Path.mkdir(config_dir)
-
     if not config_filename.exists():
         return []
 
-    with open(config_filename, encoding='utf-8') as f:
+    with open(config_filename) as f:
         for row in f:
             sat = row.strip().split(' ')
             if len(sat) > 1 and norad == int(sat[0]):

@@ -130,7 +130,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         elif samp_rate is None:
             raise ValueError('samp_rate not specified')
 
-        self.satyaml = satyaml = self.open_satyaml(file, name, norad)
+        self.satyaml = satyaml = yamlfiles.open_satyaml(file, name, norad)
 
         if grc_block:
             self.message_port_register_hier_out('out')
@@ -329,7 +329,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         The telemetry submitters are those appropriate for this satellite
 
         Args:
-            satyaml: satellite YAML file, as returned by self.open_satyaml
+            satyaml: satellite YAML file, as returned by yamlfiles.open_satyaml
             config: configuration file from configparser
         """
         norad = satyaml['norad']
@@ -359,24 +359,9 @@ class gr_satellites_flowgraph(gr.hier_block2):
     def get_transport(self, protocol):
         return self._transport_hooks[protocol]
 
-    @staticmethod
-    def open_satyaml(file, name, norad):
-        if sum([x is not None for x in [file, name, norad]]) != 1:
-            raise ValueError(
-                'exactly one of file, name and norad needs to be specified')
-
-        if file is not None:
-            satyaml = yamlfiles.get_yamldata(file)
-        elif name is not None:
-            satyaml = yamlfiles.search_name(name)
-        else:
-            satyaml = yamlfiles.search_norad(norad)
-
-        return satyaml
-
     @classmethod
     def add_options(cls, parser, file=None, name=None, norad=None):
-        satyaml = cls.open_satyaml(file, name, norad)
+        satyaml = yamlfiles.open_satyaml(file, name, norad)
 
         demod_options = parser.add_argument_group('demodulation')
         deframe_options = parser.add_argument_group('deframing')
