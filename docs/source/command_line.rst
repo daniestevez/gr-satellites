@@ -761,7 +761,9 @@ them on the command line again.
 The format of the file is one row per satellite, first the norad ID then the rest of the row is treated as aguments.
 
 Example:
+
 .. code-block:: ini
+
     39444 --f_offset 12000
     46276 --disable_dc_block --deviation 500 --clk_bw 0.15
     35933 --clk_bw 0.3
