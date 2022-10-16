@@ -168,7 +168,13 @@ class fsk_demodulator(gr.hier_block2, options_block):
             self.connect(self.dcblock, self.clock_recovery)
             if dump_path is not None:
                 self.connect(self.dcblock, self.waveform)
-        self.connect(self.clock_recovery, self)
+        if not iq and _deviation < 0:
+            # when working with FM-demodulated input, if the deviation is
+            # negative, the polarity of the signal needs to be inverted.
+            self.invert_polarity = blocks.multiply_const_ff(-1, 1)
+            self.connect(self.clock_recovery, self.invert_polarity, self)
+        else:
+            self.connect(self.clock_recovery, self)
 
     _default_clk_rel_bw = 0.06
     _default_clk_limit = 0.004
