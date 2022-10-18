@@ -1,0 +1,29 @@
+name: EIRSAT-1
+norad: 99320
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  9k6 GMSK convolutional downlink:
+    frequency: 437.100e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: CCSDS Concatenated
+    frame size: 892
+    RS basis: dual 
+    RS interleaving: 4
+    convolutional: CCSDS uninverted
+    deviation: -2400
+    data:
+    - *tlm
+  9k6 GMSK downlink:
+    frequency: 437.100e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: CCSDS Reed-Solomon
+    frame size: 892
+    RS basis: dual 
+    RS interleaving: 4
+    deviation: -2400
+    data:
+    - *tlm
