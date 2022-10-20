@@ -8,12 +8,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Support for AzaadiSAT
+- Support for BlueWalker 3
+- Support for EIRSAT-1
+- Support for GEOSCAN-EDELVEIS
 - Support for HSU-SAT1
+- Support for JAGSAT-1
+- Support for Light-1
 - Support for 10 Sputnix satellites in 2022-08-09 launch
 - Support for SelfieSat
+- Support for TUMnanoSAT
 - Phase Unwrap block
+- gr_satellites --satcfg to read default arguments from file
 
 ### Fixed
+- AALTO deframer GRC file
+- FSK demodulator with negative deviation in non-IQ mode
 - Python bindings for 8APSK Costas Loop
 
 ## [5.0.0], [4.7.0], [3.14.0] - 2022-07-22
