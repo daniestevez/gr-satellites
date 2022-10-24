@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [5.1.0], [4.8.0], [3.15.0] - 2022-10-24
+
 ### Added
 - Support for AzaadiSAT
 - Support for BlueWalker 3
@@ -539,8 +541,10 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v5.0.0...main
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v5.1.0...main
+[5.1.0]: https://github.com/daniestevez/gr-satellites/compare/v5.0.0...v5.1.0
 [5.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.6.0...v5.0.0
+[4.8.0]: https://github.com/daniestevez/gr-satellites/compare/v4.7.0...v4.8.0
 [4.7.0]: https://github.com/daniestevez/gr-satellites/compare/v4.6.0...v4.7.0
 [4.6.0]: https://github.com/daniestevez/gr-satellites/compare/v4.5.0...v4.6.0
 [4.5.0]: https://github.com/daniestevez/gr-satellites/compare/v4.4.0...v4.5.0
@@ -551,6 +555,7 @@ First gr-satellites release using semantic versioning
 [4.1.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0-rc1...v4.0.0
 [4.0.0-rc1]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...v4.0.0-rc1
+[3.14.0]: https://github.com/daniestevez/gr-satellites/compare/v3.14.0...v3.15.0
 [3.14.0]: https://github.com/daniestevez/gr-satellites/compare/v3.13.0...v3.14.0
 [3.13.0]: https://github.com/daniestevez/gr-satellites/compare/v3.12.0...v3.13.0
 [3.12.0]: https://github.com/daniestevez/gr-satellites/compare/v3.11.0...v3.12.0
