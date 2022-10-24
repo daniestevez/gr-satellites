@@ -40,7 +40,7 @@ class SatYAML:
         'FOSSASAT', 'AISTECHSAT-2', 'AALTO-1', 'Grizu-263A', 'IDEASSat',
         'YUSAT', 'AX5043', 'USP', 'AO-40 FEC CRC-16-ARC',
         'AO-40 FEC CRC-16-ARC short', 'DIY-1', 'BINAR-1', 'Endurosat',
-        'SanoSat', 'FORESAIL-1',
+        'SanoSat', 'FORESAIL-1', 'HSU-SAT1', 'GEOSCAN', 'Light-1',
         ]
     transports = [
         'KISS', 'KISS no control byte', 'KISS KS-1Q',
@@ -209,6 +209,18 @@ class SatYAML:
             if norad == self._get_satnorad(yml):
                 return self.get_yamldata(yml)
         raise ValueError('satellite not found')
+
+    def open_satyaml(self, file=None, name=None, norad=None):
+        if sum([x is not None for x in [file, name, norad]]) != 1:
+            raise ValueError(
+                'exactly one of file, name and norad needs to be specified')
+
+        if file is not None:
+            return self.get_yamldata(file)
+        elif name is not None:
+            return self.search_name(name)
+        else:
+            return self.search_norad(norad)
 
 
 yamlfiles = SatYAML()

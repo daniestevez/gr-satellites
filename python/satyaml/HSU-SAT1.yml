@@ -1,0 +1,15 @@
+name: HSU-SAT1
+norad: 53462
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  1k2 AFSK downlink:
+    frequency: 437.280e+6
+    modulation: AFSK
+    baudrate: 1200
+    af_carrier: 1700
+    deviation: -500
+    framing: HSU-SAT1
+    data:
+    - *tlm

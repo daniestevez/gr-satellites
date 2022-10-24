@@ -34,9 +34,9 @@ class qa_nrzi(gr_unittest.TestCase):
 
     def tearDown(self):
         self.tb = None
-        del(self.data)
-        del(self.source)
-        del(self.sink)
+        del self.data
+        del self.source
+        del self.sink
 
     def test_encode(self):
         """Performs NRZI encode and checks the result"""

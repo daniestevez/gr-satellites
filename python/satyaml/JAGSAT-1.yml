@@ -1,0 +1,13 @@
+name: JAGSAT-1
+norad: 53771
+data:
+  &tlm Telemetry:
+     unknown
+transmitters:
+  9k6 FSK downlink:
+    frequency: 437.365e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: Endurosat
+    data:
+    - *tlm

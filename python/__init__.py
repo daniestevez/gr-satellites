@@ -19,7 +19,7 @@ stack, the AO-40 protocol used in the FUNcube satellites, and several
 ad-hoc protocols used in other satellites.
 """
 
-__version__ = 'v5.0.0'
+__version__ = 'v5.1.0'
 __author__ = 'Daniel Estevez'
 __copyright__ = 'Copyright 2016-2022 Daniel Estevez'
 __email__ = 'daniel@destevez.net'
@@ -35,6 +35,11 @@ __all__ = [
     'usp',
     'utils',
     ]
+
+# We need to import gnuradio.blocks so that the bindings for
+# gnuradio.blocks.control_loop are imported, since the bindings for
+# costas_loop_8apsk requiere control_loop to be imported.
+import gnuradio.blocks
 
 # Import bindings into the satellites namespace.
 # The first try works when we are importing from the build dir

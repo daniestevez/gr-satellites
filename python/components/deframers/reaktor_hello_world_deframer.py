@@ -17,7 +17,11 @@ from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
 
 
-_syncword = '00110101001011100011010100101110'
+_syncwords = {
+    'reaktor hello world': '00110101001011100011010100101110',
+    # The Light-1 syncword is also used by BlueWalker 3
+    'light-1': '10010011000010110101000111011110',
+}
 
 
 class reaktor_hello_world_deframer(gr.hier_block2, options_block):
@@ -34,13 +38,23 @@ class reaktor_hello_world_deframer(gr.hier_block2, options_block):
         syncword_threshold: number of bit errors allowed in syncword (int)
         options: Options from argparse
     """
-    def __init__(self, syncword_threshold=None, options=None):
+    def __init__(self, syncword_threshold=None,
+                 syncword='reaktor hello world',
+                 options=None):
         gr.hier_block2.__init__(
             self,
             'reaktor_hello_world_deframer',
             gr.io_signature(1, 1, gr.sizeof_float),
             gr.io_signature(0, 0, 0))
         options_block.__init__(self, options)
+
+        try:
+            _syncword = _syncwords[syncword]
+        except KeyError:
+            syncwords = ', '.join([
+                f"'{a}'" for a in _syncwords.keys()])
+            raise ValueError(
+                f'supported syncwords are:', syncwords)
 
         self.message_port_register_hier_out('out')
 

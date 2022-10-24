@@ -19,6 +19,7 @@ basic information about the arguments it allows.
    $ gr_satellites
    usage: gr_satellites satellite [-h] [--version] [--list_satellites]
                                [--ignore_unknown_args]
+                               [--satcfg]
                                (--wavfile WAVFILE | --rawfile RAWFILE | --rawint16 RAWINT16 | --audio [DEVICE] | --udp | --kiss_in KISS_IN)
                                [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
                                [--udp_port UDP_PORT] [--iq] [--udp_raw]
@@ -232,6 +233,7 @@ For example, this shows all the options allowed by the FUNcube-1 decoder:
      --version             show program's version number and exit
      --list_satellites     list supported satellites and exit
      --ignore_unknown_args Treat unknown arguments as warning
+     --satcfg              Use default options from sat.cfg for named satellite
 
    input:
      --wavfile WAVFILE     WAV/OGG/FLAC input file (using libsndfile)
@@ -752,6 +754,22 @@ Using the argument ``--ignore_unknown_args`` will change the behaviour on unknow
 arguments to a warning instead of exiting with an error. This can be useful when
 running in automated scripts and some options may not be available on that satellite.
 For example the ``--f_offset`` and ``--use_agc``
+
+Using sat.cfg for default arguments
+"""""""""""""""""""""""""""""""""""
+
+With ``--satcfg`` the configuration file `~/.gr_satellites/sat.cfg` will be read and arguments
+added automatically to the command line. Some of these can be overridden with specifying
+them on the command line again.
+The format of the file is one row per satellite, first the norad ID then the rest of the row is treated as aguments.
+
+Example:
+
+.. code-block:: ini
+
+    39444 --f_offset 12000
+    46276 --disable_dc_block --deviation 500 --clk_bw 0.15
+    35933 --clk_bw 0.3
 
 
 .. _GQRX: https://gqrx.dk/

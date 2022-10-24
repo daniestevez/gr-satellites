@@ -34,7 +34,9 @@ from .diy1_deframer import diy1_deframer
 from .endurosat_deframer import endurosat_deframer
 from .eseo_deframer import eseo_deframer
 from .fossasat_deframer import fossasat_deframer
+from .geoscan_deframer import geoscan_deframer
 from .grizu263a_deframer import grizu263a_deframer
+from .hsu_sat1_deframer import hsu_sat1_deframer
 from .ideassat_deframer import ideassat_deframer
 from .k2sat_deframer import k2sat_deframer
 from .lilacsat_1_deframer import lilacsat_1_deframer
