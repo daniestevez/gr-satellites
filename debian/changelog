@@ -1,4 +1,16 @@
-gr-satellites (5.1.0-0) jammy kinetic; urgency=medium
+gr-satellites (5.1.1-1) kinetic; urgency=medium
+
+  * Mainstream release v5.1.1
+
+gr-satellites (5.1.1-0) jammy; urgency=medium
+
+  * Mainstream release v5.1.1
+
+gr-satellites (5.1.0-1) kinetic; urgency=medium
+
+  * Mainstream release v5.1.0
+
+gr-satellites (5.1.0-0) jammy; urgency=medium
 
   * Mainstream release v5.1.0
 
