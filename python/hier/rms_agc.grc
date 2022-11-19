@@ -55,7 +55,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    const: 1e-20
+    const: 1e-19
     maxoutbuf: '0'
     minoutbuf: '0'
     type: float
