@@ -38,7 +38,7 @@ class rms_agc_f(gr.hier_block2):
         self.blocks_multiply_const_vxx_0 = (
             blocks.multiply_const_ff(1.0/reference))
         self.blocks_divide_xx_0 = blocks.divide_ff(1)
-        self.blocks_add_const_vxx_0 = blocks.add_const_ff(1e-20)
+        self.blocks_add_const_vxx_0 = blocks.add_const_ff(1e-19)
 
         ##################################################
         # Connections
