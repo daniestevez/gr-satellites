@@ -11,7 +11,7 @@ transmitters:
   1k2 AFSK downlink:
     frequency: 437.0875e+6
     modulation: AFSK
-    baudrate: 1123
+    baudrate: 1145
     af_carrier: 1700
     deviation: 565
     framing: AX.25
