@@ -205,8 +205,7 @@ class gr_satellites_top_block(gr.top_block):
             if self.options.throttle:
                 size = (gr.sizeof_gr_complex
                         if self.options.iq else gr.sizeof_float)
-                self.throttle = blocks.throttle(size,
-                                                self.options.samp_rate, True)
+                self.throttle = blocks.throttle(size, samp_rate, True)
                 self.connect(self.input,
                              self.throttle, self.gain, self.flowgraph)
             else:
