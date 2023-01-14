@@ -71,7 +71,7 @@ int doppler_correction_impl::work(int noutput_items,
             d_sample_t0 = tag.offset;
             d_t0 = static_cast<double>(pmt::to_uint64(pmt::tuple_ref(tag.value, 0))) +
                    pmt::to_double(pmt::tuple_ref(tag.value, 1));
-            printf("[doppler_correction] set time %f at sample %d\n", d_t0, d_sample_t0);
+            d_logger->info("set time {} at sample {}", d_t0, d_sample_t0);
         }
     }
 
