@@ -83,9 +83,9 @@ int doppler_correction_impl::work(int noutput_items,
             ++d_current_index;
         }
         double freq;
-        if (d_current_index + 1 == times.size()) {
-            // We are at the end of the file, so we maintain a constant
-            // frequency.
+        if ((time < times[d_current_index]) || (d_current_index + 1 == times.size())) {
+            // We are before the beginning or past the end of the file, so we
+            // maintain a constant frequency.
             freq = freqs_rad_per_sample[d_current_index];
         } else {
             // Linearly interpolate frequency
