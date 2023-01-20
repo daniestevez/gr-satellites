@@ -1,5 +1,5 @@
 name: NUTSat
-norad: 99230
+norad: 55124
 data:
   &tlm Telemetry:
     telemetry: ax25
