@@ -1,5 +1,5 @@
 name: HSKSAT
-norad: 99208
+norad: 55182
 data:
   &tlm Telemetry:
     telemetry: ax25

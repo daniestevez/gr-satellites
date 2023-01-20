@@ -1,5 +1,5 @@
 name: MARIO
-norad: 99241
+norad: 55123
 data:
   &tlm Telemetry:
     telemetry: ax25
