@@ -1,0 +1,46 @@
+name: TRISAT-R
+norad: 53108
+data:
+  &tlm unknown Telemetry:
+    trisat
+transmitters:
+  1k baud FSK downlink:
+    frequency: 435.6125e+6
+    modulation: FSK
+    baudrate: 1000
+    framing: CCSDS Concatenated
+    RS basis: dual
+    convolutional: NASA-DSN
+    frame size: 223
+    data:
+    - *tlm
+  2k baud FSK downlink:
+    frequency: 435.6125e+6
+    modulation: FSK
+    baudrate: 2000
+    framing: CCSDS Concatenated
+    RS basis: dual
+    convolutional: NASA-DSN
+    frame size: 223
+    data:
+    - *tlm
+  3k baud FSK downlink:
+    frequency: 435.6125e+6
+    modulation: FSK
+    baudrate: 3000
+    framing: CCSDS Concatenated
+    RS basis: dual
+    convolutional: NASA-DSN
+    frame size: 223
+    data:
+    - *tlm
+  5k baud FSK downlink:
+    frequency: 435.6125e+6
+    modulation: FSK
+    baudrate: 5000
+    framing: CCSDS Concatenated
+    RS basis: dual
+    convolutional: NASA-DSN
+    frame size: 223
+    data:
+    - *tlm
