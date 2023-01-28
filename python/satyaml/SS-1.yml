@@ -1,5 +1,5 @@
 name: SS-1
-norad: 99369
+norad: 55181
 data:
   &tlm Telemetry:
     telemetry: ax25
