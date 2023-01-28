@@ -1,5 +1,5 @@
 name: Sharjahsat-1
-norad: 99204
+norad: 55104
 data:
   &tlm Telemetry:
     telemetry: ax25
