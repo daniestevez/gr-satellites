@@ -6,6 +6,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Support for BDSat-2
+- Support for CAS-5A
+- Support for CIRBE
+- Support for HKSAT
+- Support for INS-2B
+- Support for MARIO
+- Support for NUTSat
+- Support for SharjahSat-1
+- Support for SS-1
+- Support for TRISAT-R
+
+### Changed
+- Doppler Correction block: use constant frequency before start of file
+- Doppler Correction block: use logging instead of printing
+- Marked Fixedlen Tagger block as deprecated
+
+### Fixed
+- Throttle mode when used with --wavfile
+- MTCUBE-2 NORAD ID
+
 ## [5.1.1], [4.8.1], [3.15.1] - 2022-11-19
 
 ### Fixed
