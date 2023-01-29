@@ -1,5 +1,5 @@
 name: GREENCUBE
-norad: 53109
+norad: 53106
 data:
   &tlm Telemetry:
     unknown

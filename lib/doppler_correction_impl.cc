@@ -71,7 +71,7 @@ int doppler_correction_impl::work(int noutput_items,
             d_sample_t0 = tag.offset;
             d_t0 = static_cast<double>(pmt::to_uint64(pmt::tuple_ref(tag.value, 0))) +
                    pmt::to_double(pmt::tuple_ref(tag.value, 1));
-            printf("[doppler_correction] set time %f at sample %d\n", d_t0, d_sample_t0);
+            d_logger->info("set time {} at sample {}", d_t0, d_sample_t0);
         }
     }
 
@@ -83,9 +83,9 @@ int doppler_correction_impl::work(int noutput_items,
             ++d_current_index;
         }
         double freq;
-        if (d_current_index + 1 == times.size()) {
-            // We are at the end of the file, so we maintain a constant
-            // frequency.
+        if ((time < times[d_current_index]) || (d_current_index + 1 == times.size())) {
+            // We are before the beginning or past the end of the file, so we
+            // maintain a constant frequency.
             freq = freqs_rad_per_sample[d_current_index];
         } else {
             // Linearly interpolate frequency
