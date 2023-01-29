@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [5.2.0], [4.9.0], [3.16.0] - 2023-01-29
+
 ### Added
 - Support for BDSat-2
 - Support for CAS-5A
@@ -566,10 +568,12 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v5.1.1...main
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v5.2.0...main
+[5.2.0]: https://github.com/daniestevez/gr-satellites/compare/v5.1.1...v5.2.0
 [5.1.1]: https://github.com/daniestevez/gr-satellites/compare/v5.1.0...v5.1.1
 [5.1.0]: https://github.com/daniestevez/gr-satellites/compare/v5.0.0...v5.1.0
 [5.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.6.0...v5.0.0
+[4.8.1]: https://github.com/daniestevez/gr-satellites/compare/v4.8.1...v4.9.0
 [4.8.1]: https://github.com/daniestevez/gr-satellites/compare/v4.8.0...v4.8.1
 [4.8.0]: https://github.com/daniestevez/gr-satellites/compare/v4.7.0...v4.8.0
 [4.7.0]: https://github.com/daniestevez/gr-satellites/compare/v4.6.0...v4.7.0
@@ -582,6 +586,7 @@ First gr-satellites release using semantic versioning
 [4.1.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0-rc1...v4.0.0
 [4.0.0-rc1]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...v4.0.0-rc1
+[3.16.0]: https://github.com/daniestevez/gr-satellites/compare/v3.15.1...v3.16.0
 [3.15.1]: https://github.com/daniestevez/gr-satellites/compare/v3.15.0...v3.15.1
 [3.15.0]: https://github.com/daniestevez/gr-satellites/compare/v3.14.0...v3.15.0
 [3.14.0]: https://github.com/daniestevez/gr-satellites/compare/v3.13.0...v3.14.0
