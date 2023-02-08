@@ -64,7 +64,9 @@ will need to be written to support them. Most likely, a new deframer will need
 to be written. Examples can be found in
 [python/components/deframers](https://github.com/daniestevez/gr-satellites/tree/main/python/components/deframers).
 
-See also the [note to satellite teams] planning to use gr-satellites for their
+See also the
+[note to satellite teams](satellite_teams.md)
+planning to use gr-satellites for their
 mission.
 
 [grep1]: https://github.com/gnuradio/greps/blob/main/grep-0001-coding-guidelines.md
