@@ -573,7 +573,7 @@ First gr-satellites release using semantic versioning
 [5.1.1]: https://github.com/daniestevez/gr-satellites/compare/v5.1.0...v5.1.1
 [5.1.0]: https://github.com/daniestevez/gr-satellites/compare/v5.0.0...v5.1.0
 [5.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.6.0...v5.0.0
-[4.8.1]: https://github.com/daniestevez/gr-satellites/compare/v4.8.1...v4.9.0
+[4.9.0]: https://github.com/daniestevez/gr-satellites/compare/v4.8.1...v4.9.0
 [4.8.1]: https://github.com/daniestevez/gr-satellites/compare/v4.8.0...v4.8.1
 [4.8.0]: https://github.com/daniestevez/gr-satellites/compare/v4.7.0...v4.8.0
 [4.7.0]: https://github.com/daniestevez/gr-satellites/compare/v4.6.0...v4.7.0
