@@ -17,8 +17,8 @@ For Python, we follow PEP8. In contrast to GNU Radio, which doesn't use a Python
 formatting checker, since a large amount of the gr-satellites code base is
 Python, we use pycodestyle to check PEP8 formatting. This is part of the
 CI pipeline and can be checked locally by running pycodestyle. Note that there
-are some [folders that are excluded]
-(https://github.com/daniestevez/gr-satellites-pycodestyle-action/blob/main/Dockerfile)
+are some
+[folders that are excluded](https://github.com/daniestevez/gr-satellites-pycodestyle-action/blob/master/Dockerfile)
 from pycodestyle checking.
 
 ## Python or C++?
