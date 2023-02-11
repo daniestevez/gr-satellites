@@ -1,5 +1,5 @@
 name: AZAADISAT-2
-norad: 99198
+norad: 55563
 data:
   &tlm Telemetry:
     telemetry: ax25
