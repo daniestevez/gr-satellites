@@ -33,6 +33,7 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     by70_1.py
+    cas5a.py
     dsat.py
     k2sat.py
     filereceiver.py
