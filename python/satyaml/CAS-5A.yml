@@ -5,6 +5,8 @@ norad: 54684
 data:
   &tlm Telemetry:
     telemetry: ax25
+  &image Image:
+    image: cas5a
 transmitters:
   4k8 FSK downlink:
     frequency: 435.650e+6
@@ -20,3 +22,4 @@ transmitters:
     framing: AX.25 G3RUH
     data:
     - *tlm
+    - *image
