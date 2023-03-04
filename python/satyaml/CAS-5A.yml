@@ -15,6 +15,7 @@ transmitters:
     framing: AX.25 G3RUH
     data:
     - *tlm
+    - *image
   9k6 FSK downlink:
     frequency: 435.650e+6
     modulation: FSK
