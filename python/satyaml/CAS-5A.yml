@@ -6,7 +6,7 @@ data:
   &tlm Telemetry:
     telemetry: ax25
   &image Image:
-    image: cas5a
+    image: cas5a_new
 transmitters:
   4k8 FSK downlink:
     frequency: 435.650e+6
