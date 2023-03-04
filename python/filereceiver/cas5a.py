@@ -8,6 +8,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
+import struct
+
 from .imagereceiver import ImageReceiver
 
 # Documentation:
@@ -62,4 +64,36 @@ class ImageReceiverCAS5A(ImageReceiver):
         return self._current_fid
 
 
+class ImageReceiverCAS5ANew(ImageReceiver):
+    # Documentation:
+    # https://twitter.com/scott23192/status/1630749478561935360
+    # https://mega.nz/file/4rIywT5L#WoZsMxzIkUKhqHTrYh__nvv_N9CGwVV-dLsJ2k4_2OA
+
+    def parse_chunk(self, chunk):
+        # The AX.25 header occupies 16 bytes
+        if len(chunk) <= 16:
+            return None
+        chunk = chunk[16:]
+        if not chunk.startswith(b'\x03'):
+            return None
+        return chunk
+
+    def chunk_sequence(self, chunk):
+        # sequences are 1-based rather than 0-based
+        return struct.unpack('>H', chunk[3:5])[0] - 1
+
+    def chunk_data(self, chunk):
+        return chunk[16:]
+
+    def chunk_size(self):
+        # This isn't stated explicitly in the documentation, but it seems that
+        # all the chunks except the last one are 240 bytes.
+        return 240
+
+    def is_last_chunk(self, chunk):
+        num_chunks = struct.unpack('>H', chunk[1:3])[0]
+        return num_chunks == self.chunk_sequence(chunk) + 1
+
+
 cas5a = ImageReceiverCAS5A
+cas5a_new = ImageReceiverCAS5ANew
