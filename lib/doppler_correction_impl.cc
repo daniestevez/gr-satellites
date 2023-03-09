@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2022 Daniel Estevez <daniel@destevez.net>.
+ * Copyright 2022-2023 Daniel Estevez <daniel@destevez.net>.
  *
  * This file is part of gr-satellites
  *
@@ -36,7 +36,9 @@ doppler_correction_impl::doppler_correction_impl(const char* filename,
       d_current_index(0),
       d_t0(t0),
       d_sample_t0(0),
-      d_rx_time_key(pmt::mp("rx_time"))
+      d_rx_time_key(pmt::mp("rx_time")),
+      d_current_time(t0),
+      d_current_freq(0.0)
 {
     read_doppler_file(filename);
 }
@@ -57,12 +59,24 @@ void doppler_correction_impl::read_doppler_file(const char* filename)
         times.push_back(time);
         freqs_rad_per_sample.push_back(2.0 * GR_M_PI * frequency / d_samp_rate);
     }
+    if (freqs_rad_per_sample.size() >= 1) {
+        d_current_freq = freqs_rad_per_sample[0];
+    }
+}
+
+void doppler_correction_impl::set_time(double t)
+{
+    gr::thread::scoped_lock guard(d_setlock);
+    d_sample_t0 = nitems_written(0);
+    d_t0 = t;
+    printf("[doppler correction] set time %f at sample %d\n", d_t0, d_sample_t0);
 }
 
 int doppler_correction_impl::work(int noutput_items,
                                   gr_vector_const_void_star& input_items,
                                   gr_vector_void_star& output_items)
 {
+    gr::thread::scoped_lock guard(d_setlock);
     auto in = static_cast<const gr_complex*>(input_items[0]);
     auto out = static_cast<gr_complex*>(output_items[0]);
 
@@ -76,14 +90,15 @@ int doppler_correction_impl::work(int noutput_items,
         }
     }
 
+    double time = 0.0;
+    double freq = 0.0;
     for (int j = 0; j < noutput_items; ++j) {
-        double time = d_t0 + (nitems_written(0) - d_sample_t0 + j) / d_samp_rate;
+        time = d_t0 + (nitems_written(0) - d_sample_t0 + j) / d_samp_rate;
         // Advance d_current_index so that the next time is greater than the
         // current.
         while (d_current_index + 1 < times.size() && times[d_current_index + 1] <= time) {
             ++d_current_index;
         }
-        double freq;
         if ((time < times[d_current_index]) || (d_current_index + 1 == times.size())) {
             // We are before the beginning or past the end of the file, so we
             // maintain a constant frequency.
@@ -102,6 +117,9 @@ int doppler_correction_impl::work(int noutput_items,
         // so we use the usual product.
         out[j] = in[j] * nco;
     }
+
+    d_current_freq = freq;
+    d_current_time = time;
 
     return noutput_items;
 }
