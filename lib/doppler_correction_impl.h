@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2022 Daniel Estevez <daniel@destevez.net>.
+ * Copyright 2022-2023 Daniel Estevez <daniel@destevez.net>.
  *
  * This file is part of gr-satellites
  *
@@ -29,6 +29,8 @@ private:
     std::vector<double> freqs_rad_per_sample;
     std::vector<tag_t> d_tags;
     const pmt::pmt_t d_rx_time_key;
+    double d_current_time;
+    double d_current_freq;
 
     // Implementation taken from gr::block::control_loop
     void phase_wrap()
@@ -43,11 +45,25 @@ private:
 
 public:
     doppler_correction_impl(std::string& filename, double samp_rate, double t0);
-    ~doppler_correction_impl();
+    ~doppler_correction_impl() override;
+
+    void set_time(double) override;
+
+    double time() override
+    {
+        gr::thread::scoped_lock guard(d_setlock);
+        return d_current_time;
+    }
+
+    double frequency() override
+    {
+        gr::thread::scoped_lock guard(d_setlock);
+        return d_current_freq * d_samp_rate / (2.0 * GR_M_PI);
+    }
 
     int work(int noutput_items,
              gr_vector_const_void_star& input_items,
-             gr_vector_void_star& output_items);
+             gr_vector_void_star& output_items) override;
 };
 
 } // namespace satellites

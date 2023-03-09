@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Free Software Foundation, Inc.
+ * Copyright 2023 Free Software Foundation, Inc.
  *
  * This file is part of GNU Radio
  *
@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(doppler_correction.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(2f8dcd8094f394be084fcc883e9189f9)                     */
+/* BINDTOOL_HEADER_FILE_HASH(56444490a7f522137e132976be778b10)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -46,6 +46,18 @@ void bind_doppler_correction(py::module& m)
              py::arg("t0"),
              D(doppler_correction, make))
 
+
+        .def("set_time",
+             &doppler_correction::set_time,
+             py::arg("t"),
+             D(doppler_correction, set_time))
+
+
+        .def("time", &doppler_correction::time, D(doppler_correction, time))
+
+
+        .def(
+            "frequency", &doppler_correction::frequency, D(doppler_correction, frequency))
 
         ;
 }
