@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2022 Daniel Estevez <daniel@destevez.net>.
+ * Copyright 2022-2023 Daniel Estevez <daniel@destevez.net>.
  *
  * This file is part of gr-satellites
  *
@@ -55,6 +55,23 @@ public:
      * \param t0 Timestamp corresponding to the first sample
      */
     static sptr make(std::string& filename, double samp_rate, double t0);
+
+    /*!
+     * \brief Sets the current time.
+     *
+     * \param t Tiemstamp corresponding to the current time.
+     */
+    virtual void set_time(double t) = 0;
+
+    /*!
+     * \brief Returns the current time.
+     */
+    virtual double time() = 0;
+
+    /*!
+     * \brief Returns the current frequency in Hz.
+     */
+    virtual double frequency() = 0;
 };
 
 } // namespace satellites
