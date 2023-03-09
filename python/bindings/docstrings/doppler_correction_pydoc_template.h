@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Free Software Foundation, Inc.
+ * Copyright 2023 Free Software Foundation, Inc.
  *
  * This file is part of GNU Radio
  *
@@ -18,8 +18,21 @@
 static const char* __doc_gr_satellites_doppler_correction = R"doc()doc";
 
 
-static const char* __doc_gr_satellites_doppler_correction_doppler_correction =
+static const char* __doc_gr_satellites_doppler_correction_doppler_correction_0 =
+    R"doc()doc";
+
+
+static const char* __doc_gr_satellites_doppler_correction_doppler_correction_1 =
     R"doc()doc";
 
 
 static const char* __doc_gr_satellites_doppler_correction_make = R"doc()doc";
+
+
+static const char* __doc_gr_satellites_doppler_correction_set_time = R"doc()doc";
+
+
+static const char* __doc_gr_satellites_doppler_correction_time = R"doc()doc";
+
+
+static const char* __doc_gr_satellites_doppler_correction_frequency = R"doc()doc";
