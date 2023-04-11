@@ -28,7 +28,15 @@ private:
     std::vector<double> times;
     std::vector<double> freqs_rad_per_sample;
     std::vector<tag_t> d_tags;
+    
+    // Used by UHD
     const pmt::pmt_t d_rx_time_key;
+
+    // Used by gr-difi
+    const pmt::pmt_t d_pck_n_key;
+    const pmt::pmt_t d_full_key;
+    const pmt::pmt_t d_frac_key;
+    
     double d_current_time;
     double d_current_freq;
 
