@@ -36,6 +36,9 @@ doppler_correction_impl::doppler_correction_impl(std::string& filename,
       d_t0(t0),
       d_sample_t0(0),
       d_rx_time_key(pmt::mp("rx_time")),
+      d_pck_n_key(pmt::mp("pck_n")),
+      d_full_key(pmt::mp("full")),
+      d_frac_key(pmt::mp("frac")),
       d_current_time(t0),
       d_current_freq(0.0)
 {
@@ -79,12 +82,34 @@ int doppler_correction_impl::work(int noutput_items,
     auto in = static_cast<const gr_complex*>(input_items[0]);
     auto out = static_cast<gr_complex*>(output_items[0]);
 
-    get_tags_in_window(d_tags, 0, 0, noutput_items, d_rx_time_key);
-    for (auto tag : d_tags) {
-        if (pmt::is_tuple(tag.value)) {
+    std::vector<gr::tag_t> tags;
+    get_tags_in_window(tags, 0, 0, noutput_items);
+    for (const auto& tag : tags) {
+        double t0;
+        bool set = false;
+        if (pmt::eqv(tag.key, d_rx_time_key)) {
+            if (pmt::is_tuple(tag.value)) {
+                t0 = static_cast<double>(pmt::to_uint64(pmt::tuple_ref(tag.value, 0))) +
+                     pmt::to_double(pmt::tuple_ref(tag.value, 1));
+                set = true;
+            }
+        } else if (pmt::eqv(tag.key, d_pck_n_key)) {
+            if (pmt::is_dict(tag.value)) {
+                const auto full_pmt = pmt::dict_ref(tag.value, d_full_key, pmt::PMT_NIL);
+                const auto frac_pmt = pmt::dict_ref(tag.value, d_frac_key, pmt::PMT_NIL);
+                if (pmt::is_integer(full_pmt) && pmt::is_uint64(frac_pmt)) {
+                    const auto full = pmt::to_long(full_pmt);
+                    const auto frac = pmt::to_uint64(frac_pmt);
+                    // in DIFI, frac gives the number of picoseconds
+                    t0 = static_cast<double>(full) + 1e-12 * static_cast<double>(frac);
+                    set = true;
+                }
+            }
+        }
+
+        if (set) {
             d_sample_t0 = tag.offset;
-            d_t0 = static_cast<double>(pmt::to_uint64(pmt::tuple_ref(tag.value, 0))) +
-                   pmt::to_double(pmt::tuple_ref(tag.value, 1));
+            d_t0 = t0;
             printf("[doppler_correction] set time %f at sample %d\n", d_t0, d_sample_t0);
         }
     }
