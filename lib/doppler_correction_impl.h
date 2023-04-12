@@ -12,6 +12,7 @@
 
 #include <gnuradio/math.h>
 #include <satellites/doppler_correction.h>
+#include <cstdint>
 #include <vector>
 
 namespace gr {
@@ -24,11 +25,11 @@ private:
     double d_samp_rate;
     size_t d_current_index;
     double d_t0;
-    int d_sample_t0;
+    uint64_t d_sample_t0;
     std::vector<double> times;
     std::vector<double> freqs_rad_per_sample;
     std::vector<tag_t> d_tags;
-    
+
     // Used by UHD
     const pmt::pmt_t d_rx_time_key;
 
@@ -36,7 +37,7 @@ private:
     const pmt::pmt_t d_pck_n_key;
     const pmt::pmt_t d_full_key;
     const pmt::pmt_t d_frac_key;
-    
+
     double d_current_time;
     double d_current_freq;
 
