@@ -136,7 +136,7 @@ int doppler_correction_impl::work(int noutput_items,
         }
         d_phase += freq;
         phase_wrap();
-        const gr_complex nco = gr_expj(-d_phase);
+        const gr_complex nco = gr_expj(-static_cast<float>(d_phase));
         gr::fast_cc_multiply(out[j], in[j], nco);
     }
 
