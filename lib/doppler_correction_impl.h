@@ -21,7 +21,7 @@ namespace satellites {
 class doppler_correction_impl : public doppler_correction
 {
 private:
-    float d_phase;
+    double d_phase;
     double d_samp_rate;
     size_t d_current_index;
     double d_t0;
