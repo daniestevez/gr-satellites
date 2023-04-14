@@ -73,6 +73,7 @@ void doppler_correction_impl::set_time(double t)
     d_sample_t0 = nitems_written(0);
     d_t0 = t;
     printf("[doppler correction] set time %f at sample %d\n", d_t0, d_sample_t0);
+    adjust_current_index();
 }
 
 int doppler_correction_impl::work(int noutput_items,
@@ -112,13 +113,17 @@ int doppler_correction_impl::work(int noutput_items,
             d_sample_t0 = tag.offset;
             d_t0 = t0;
             printf("[doppler_correction] set time %f at sample %d\n", d_t0, d_sample_t0);
+            adjust_current_index();
         }
     }
 
     double time = 0.0;
     double freq = 0.0;
     for (int j = 0; j < noutput_items; ++j) {
-        time = d_t0 + (nitems_written(0) - d_sample_t0 + j) / d_samp_rate;
+        time = d_t0 + static_cast<double>(static_cast<int64_t>(nitems_written(0)) -
+                                          static_cast<int64_t>(d_sample_t0) +
+                                          static_cast<int64_t>(j)) /
+                          d_samp_rate;
         // Advance d_current_index so that the next time is greater than the
         // current.
         while (d_current_index + 1 < times.size() && times[d_current_index + 1] <= time) {
