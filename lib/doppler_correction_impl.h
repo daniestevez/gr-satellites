@@ -50,6 +50,15 @@ private:
             d_phase += 2 * GR_M_PI;
     }
 
+    // Called after a time update. Makes the current index go backwards if
+    // needed because of a time update "to the past".
+    void adjust_current_index()
+    {
+        while ((d_current_index > 0) && (times[d_current_index] > d_t0)) {
+            --d_current_index;
+        }
+    }
+
     void read_doppler_file(std::string& filename);
 
 public:
