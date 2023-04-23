@@ -1,5 +1,5 @@
 name: CIRBE
-norad: 99401
+norad: 56188
 data:
   &tlm Telemetry:
     telemetry: cirbe_70cm

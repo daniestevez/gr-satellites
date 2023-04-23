@@ -1,5 +1,5 @@
 name: ROSEYCUBESAT-1
-norad: 99201
+norad: 56212
 data:
   &tlm Telemetry:
     telemetry: ax25
