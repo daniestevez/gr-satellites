@@ -1,5 +1,5 @@
 name: INSPIRE-SAT 7
-norad: 99245
+norad: 56211
 data:
   &tlm Telemetry:
     telemetry: ax25
