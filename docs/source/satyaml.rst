@@ -257,6 +257,8 @@ The framings allowed in the ``framing`` field are the following:
 * ``HSU-SAT1``, the custom framing used by HSU-SAT1.
 
 * ``GEOSCAN``, the custom framing used by GEOSCAN-EDELVEIS.
+
+* ``SPINO``, the custom framing used by the SPINO payload on INSPIRE-Sat7.
   
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.
