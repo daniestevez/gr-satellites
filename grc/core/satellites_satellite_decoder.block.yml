@@ -6,8 +6,8 @@ parameters:
 -   id: definition
     label: Satellite definition
     dtype: enum
-    options: ['file', 'name', 'norad']
-    option_labels: ['YAML file', 'Satellite name', 'NORAD ID']
+    options: ['name', 'norad', 'file']
+    option_labels: ['Satellite name', 'NORAD ID', 'YAML file']
 -   id: file
     label: File
     dtype: file_open
@@ -19,6 +19,7 @@ parameters:
 -   id: norad
     label: NORAD ID
     dtype: int
+    default: 0
     hide: ${ 'none' if definition == 'norad' else 'all' }
 -   id: samp_rate
     label: Sample Rate
