@@ -65,6 +65,7 @@ GR_PYTHON_INSTALL(
     smogp_ra_deframer.py
     smogp_signalling_deframer.py
     snet_deframer.py
+    spino_deframer.py
     swiatowid_deframer.py
     tt64_deframer.py
     u482c_deframer.py
