@@ -51,6 +51,7 @@ from .sat_3cat_1_deframer import sat_3cat_1_deframer
 from .smogp_ra_deframer import smogp_ra_deframer
 from .smogp_signalling_deframer import smogp_signalling_deframer
 from .snet_deframer import snet_deframer
+from .spino_deframer import spino_deframer
 from .swiatowid_deframer import swiatowid_deframer
 from .tt64_deframer import tt64_deframer
 from .u482c_deframer import u482c_deframer
