@@ -20,7 +20,7 @@ import numpy
 
 def parse_time(time):
     try:
-        return datetime.datetime.fromisofromat(time)
+        return datetime.datetime.fromisoformat(time)
     except AttributeError:
         # Workaround for Python version <3.7, which doesn't have
         # fromisoformat()
