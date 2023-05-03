@@ -203,7 +203,8 @@ class gr_satellites_flowgraph(gr.hier_block2):
         if self.options is not None and self.options.kiss_server:
             self._additional_datasinks.append(
                 datasinks.kiss_server_sink(self.options.kiss_server_address,
-                                           self.options.kiss_server))
+                                           self.options.kiss_server,
+                                           options=self.options))
         if self.options is not None and self.options.zmq_pub:
             self._additional_datasinks.append(
                 zeromq.pub_msg_sink(self.options.zmq_pub))
