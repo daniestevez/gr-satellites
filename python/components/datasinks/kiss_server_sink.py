@@ -10,9 +10,10 @@
 
 from gnuradio import gr, blocks
 from ... import pdu_to_kiss
+from ...utils.options_block import options_block
 
 
-class kiss_server_sink(gr.hier_block2):
+class kiss_server_sink(gr.hier_block2, options_block):
     """
     Hierarchical block for KISS TCP server
 
@@ -33,8 +34,12 @@ class kiss_server_sink(gr.hier_block2):
             gr.io_signature(0, 0, 0),
             gr.io_signature(0, 0, 0))
         self.message_port_register_hier_in('in')
+        options_block.__init__(self, options)
 
-        self.kiss = pdu_to_kiss(include_timestamp=True)
+        initial_timestamp = getattr(self.options, 'start_time', '')
+
+        self.kiss = pdu_to_kiss(include_timestamp=True,
+                                initial_timestamp=initial_timestamp)
         # port needs to be an str
         port = str(port)
         self.server = blocks.socket_pdu(
@@ -42,3 +47,12 @@ class kiss_server_sink(gr.hier_block2):
 
         self.msg_connect((self, 'in'), (self.kiss, 'in'))
         self.msg_connect((self.kiss, 'out'), (self.server, 'pdus'))
+
+    @classmethod
+    def add_options(cls, parser):
+        """
+        Adds KISS server sink specific options to the argparse parser
+        """
+        parser.add_argument(
+            '--start_time', type=str, default='',
+            help='Recording start timestamp')
