@@ -34,6 +34,7 @@ class hdlc_framer(gr.basic_block):
         self.message_port_register_out(pmt.intern('out'))
 
     def handle_msg(self, msg_pmt):
+        meta = pmt.car(msg_pmt)
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
             print('[ERROR] Received invalid message type. Expected u8vector')
@@ -64,4 +65,4 @@ class hdlc_framer(gr.basic_block):
 
         self.message_port_pub(
             pmt.intern('out'),
-            pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(buff), buff)))
+            pmt.cons(meta, pmt.init_u8vector(len(buff), buff)))

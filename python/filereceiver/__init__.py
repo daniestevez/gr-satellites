@@ -16,6 +16,8 @@ This class is used to reassemble files transmitted in chunks
 '''
 
 from .by70_1 import by70_1
+from .cas5a import cas5a
+from .cas5a import cas5a_new
 from .dsat import dsat
 from .k2sat import k2sat
 from .lucky7 import lucky7

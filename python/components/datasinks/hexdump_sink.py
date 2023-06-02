@@ -31,4 +31,4 @@ class hexdump_sink(gr.hier_block2):
         self.message_port_register_hier_in('in')
 
         self.message_debug = blocks.message_debug()
-        self.msg_connect((self, 'in'), (self.message_debug, 'print_pdu'))
+        self.msg_connect((self, 'in'), (self.message_debug, 'print'))

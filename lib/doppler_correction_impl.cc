@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2022 Daniel Estevez <daniel@destevez.net>.
+ * Copyright 2022-2023 Daniel Estevez <daniel@destevez.net>.
  *
  * This file is part of gr-satellites
  *
@@ -35,7 +35,12 @@ doppler_correction_impl::doppler_correction_impl(std::string& filename,
       d_current_index(0),
       d_t0(t0),
       d_sample_t0(0),
-      d_rx_time_key(pmt::mp("rx_time"))
+      d_rx_time_key(pmt::mp("rx_time")),
+      d_pck_n_key(pmt::mp("pck_n")),
+      d_full_key(pmt::mp("full")),
+      d_frac_key(pmt::mp("frac")),
+      d_current_time(t0),
+      d_current_freq(0.0)
 {
     read_doppler_file(filename);
 }
@@ -56,33 +61,73 @@ void doppler_correction_impl::read_doppler_file(std::string& filename)
         times.push_back(time);
         freqs_rad_per_sample.push_back(2.0 * GR_M_PI * frequency / d_samp_rate);
     }
+    if (freqs_rad_per_sample.size() >= 1) {
+        d_current_freq = freqs_rad_per_sample[0];
+    }
+}
+
+void doppler_correction_impl::set_time(double t)
+{
+    gr::thread::scoped_lock guard(d_setlock);
+    d_sample_t0 = nitems_written(0);
+    d_t0 = t;
+    d_logger->info("set time {} at sample {}", d_t0, d_sample_t0);
+    adjust_current_index();
 }
 
 int doppler_correction_impl::work(int noutput_items,
                                   gr_vector_const_void_star& input_items,
                                   gr_vector_void_star& output_items)
 {
+    gr::thread::scoped_lock guard(d_setlock);
     auto in = static_cast<const gr_complex*>(input_items[0]);
     auto out = static_cast<gr_complex*>(output_items[0]);
 
-    get_tags_in_window(d_tags, 0, 0, noutput_items, d_rx_time_key);
-    for (auto tag : d_tags) {
-        if (pmt::is_tuple(tag.value)) {
+    std::vector<gr::tag_t> tags;
+    get_tags_in_window(tags, 0, 0, noutput_items);
+    for (const auto& tag : tags) {
+        double t0;
+        bool set = false;
+        if (pmt::eqv(tag.key, d_rx_time_key)) {
+            if (pmt::is_tuple(tag.value)) {
+                t0 = static_cast<double>(pmt::to_uint64(pmt::tuple_ref(tag.value, 0))) +
+                     pmt::to_double(pmt::tuple_ref(tag.value, 1));
+                set = true;
+            }
+        } else if (pmt::eqv(tag.key, d_pck_n_key)) {
+            if (pmt::is_dict(tag.value)) {
+                const auto full_pmt = pmt::dict_ref(tag.value, d_full_key, pmt::PMT_NIL);
+                const auto frac_pmt = pmt::dict_ref(tag.value, d_frac_key, pmt::PMT_NIL);
+                if (pmt::is_integer(full_pmt) && pmt::is_uint64(frac_pmt)) {
+                    const auto full = pmt::to_long(full_pmt);
+                    const auto frac = pmt::to_uint64(frac_pmt);
+                    // in DIFI, frac gives the number of picoseconds
+                    t0 = static_cast<double>(full) + 1e-12 * static_cast<double>(frac);
+                    set = true;
+                }
+            }
+        }
+
+        if (set) {
             d_sample_t0 = tag.offset;
-            d_t0 = static_cast<double>(pmt::to_uint64(pmt::tuple_ref(tag.value, 0))) +
-                   pmt::to_double(pmt::tuple_ref(tag.value, 1));
+            d_t0 = t0;
             d_logger->info("set time {} at sample {}", d_t0, d_sample_t0);
+            adjust_current_index();
         }
     }
 
+    double time = 0.0;
+    double freq = 0.0;
     for (int j = 0; j < noutput_items; ++j) {
-        double time = d_t0 + (nitems_written(0) - d_sample_t0 + j) / d_samp_rate;
+        time = d_t0 + static_cast<double>(static_cast<int64_t>(nitems_written(0)) -
+                                          static_cast<int64_t>(d_sample_t0) +
+                                          static_cast<int64_t>(j)) /
+                          d_samp_rate;
         // Advance d_current_index so that the next time is greater than the
         // current.
         while (d_current_index + 1 < times.size() && times[d_current_index + 1] <= time) {
             ++d_current_index;
         }
-        double freq;
         if ((time < times[d_current_index]) || (d_current_index + 1 == times.size())) {
             // We are before the beginning or past the end of the file, so we
             // maintain a constant frequency.
@@ -96,9 +141,12 @@ int doppler_correction_impl::work(int noutput_items,
         }
         d_phase += freq;
         phase_wrap();
-        const gr_complex nco = gr_expj(-d_phase);
+        const gr_complex nco = gr_expj(-static_cast<float>(d_phase));
         gr::fast_cc_multiply(out[j], in[j], nco);
     }
+
+    d_current_freq = freq;
+    d_current_time = time;
 
     return noutput_items;
 }

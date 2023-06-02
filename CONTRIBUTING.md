@@ -17,8 +17,8 @@ For Python, we follow PEP8. In contrast to GNU Radio, which doesn't use a Python
 formatting checker, since a large amount of the gr-satellites code base is
 Python, we use pycodestyle to check PEP8 formatting. This is part of the
 CI pipeline and can be checked locally by running pycodestyle. Note that there
-are some [folders that are excluded]
-(https://github.com/daniestevez/gr-satellites-pycodestyle-action/blob/main/Dockerfile)
+are some
+[folders that are excluded](https://github.com/daniestevez/gr-satellites-pycodestyle-action/blob/master/Dockerfile)
 from pycodestyle checking.
 
 ## Python or C++?
@@ -64,7 +64,9 @@ will need to be written to support them. Most likely, a new deframer will need
 to be written. Examples can be found in
 [python/components/deframers](https://github.com/daniestevez/gr-satellites/tree/main/python/components/deframers).
 
-See also the [note to satellite teams] planning to use gr-satellites for their
+See also the
+[note to satellite teams](satellite_teams.md)
+planning to use gr-satellites for their
 mission.
 
 [grep1]: https://github.com/gnuradio/greps/blob/main/grep-0001-coding-guidelines.md

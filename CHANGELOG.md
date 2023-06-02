@@ -6,6 +6,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [5.3.0], [4.10.0], [3.17.0] - 2023-06-02
+
+### Added
+- 19k2 FSK mode for KUZBASS-300
+- CAS-5A image receiver
+- Getters and setters for Doppler Correction block
+- Support for AZAADISAT-2
+- Support for CIRBE
+- Support for INSPIRE-SAT 7
+- Support for gr-difi time tags in the Doppler Correction block
+- Support for SPINO
+
+### Fixed
+- CSP packet ID endianness in csp_header.py
+- Default NORAD ID in Satellite Decoder block
+- Framing for CYCLOPS (USP instead of AX.25)
+- Several bugs in the Doppler Correction block
+- Typo in the Submit block that caused a bug when using the start time option
+
+### Changed
+- HDLC Framer passes the input metadata to the output
+- Use print instead of print_pdu in Hexdump Sink
+- Use start time in KISS Server Sink.
+
 ## [5.2.0], [4.9.0], [3.16.0] - 2023-01-29
 
 ### Added
@@ -574,7 +598,7 @@ First gr-satellites release using semantic versioning
 [5.1.1]: https://github.com/daniestevez/gr-satellites/compare/v5.1.0...v5.1.1
 [5.1.0]: https://github.com/daniestevez/gr-satellites/compare/v5.0.0...v5.1.0
 [5.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.6.0...v5.0.0
-[4.8.1]: https://github.com/daniestevez/gr-satellites/compare/v4.8.1...v4.9.0
+[4.9.0]: https://github.com/daniestevez/gr-satellites/compare/v4.8.1...v4.9.0
 [4.8.1]: https://github.com/daniestevez/gr-satellites/compare/v4.8.0...v4.8.1
 [4.8.0]: https://github.com/daniestevez/gr-satellites/compare/v4.7.0...v4.8.0
 [4.7.0]: https://github.com/daniestevez/gr-satellites/compare/v4.6.0...v4.7.0

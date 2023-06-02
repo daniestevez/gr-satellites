@@ -1,0 +1,29 @@
+name: INSPIRE-SAT 7
+norad: 56211
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+  &spino SPINO:
+    unknown
+transmitters:
+  9k6 BPSK downlink:
+    frequency: 437.410e+6
+    modulation: BPSK
+    baudrate: 9600
+    framing: AX.25 G3RUH
+    data:
+    - *tlm
+  2k4 2FSK SPINO payload:
+    frequency: 435.200e+6
+    modulation: FSK
+    baudrate: 2400
+    framing: SPINO
+    data:
+    - *spino
+  9k6 2FSK SPINO payload:
+    frequency: 435.200e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: SPINO
+    data:
+    - *spino
