@@ -14,9 +14,9 @@ parameters:
 -   id: protocol
     label: Protocol
     dtype: enum
-    default: 'False'
-    options: ['False', 'True']
-    option_labels: ['SMOG-P', 'SMOG-1']
+    default: '"SMOG-P"'
+    options: ['"SMOG-P"', '"SMOG-1"', '"MRC-100"']
+    option_labels: ['SMOG-P', 'SMOG-1', 'MRC-100']
 -   id: options
     label: Command line options
     dtype: string
@@ -33,10 +33,10 @@ outputs:
 
 templates:
     imports: import satellites.components.deframers
-    make: satellites.components.deframers.smogp_ra_deframer(frame_size = ${frame_size}, syncword_threshold = ${threshold}, new_protocol=${protocol}, options=${options})
+    make: satellites.components.deframers.smogp_ra_deframer(frame_size = ${frame_size}, syncword_threshold = ${threshold}, variant=${protocol}, options=${options})
 
 documentation: |-
-    Deframes SMOG-P or SMOG-1 RA FEC frames
+    Deframes SMOG-P, SMOG-1 or MRC-100 RA FEC frames
 
     The frames use a Repeat-Accumulate FEC
 
@@ -49,7 +49,7 @@ documentation: |-
     Parameters:
         Frame size: size of the decode frame in bytes
         Syncword threshold: number of bit errors to allow in syncword detection
-        Protocol: chooses between SMOG-P older protocol and SMOG-1 newer protocol
+        Protocol: chooses between the different protocol variants
         Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 
 file_format: 1
