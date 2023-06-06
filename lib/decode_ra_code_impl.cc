@@ -91,7 +91,7 @@ void decode_ra_code_impl::msg_handler(pmt::pmt_t pmt_msg)
         }
     }
 
-    ra_decoder_gen(d_ra_context.get(), d_ra_in.data(), (ra_word_t*)d_ra_out.data(), 20);
+    ra_decoder_gen(d_ra_context.get(), d_ra_in.data(), (ra_word_t*)d_ra_out.data(), 40);
 
     d_ra_recode.resize(ra_code_length);
     ra_encoder(d_ra_context.get(), (const ra_word_t*)d_ra_out.data(), d_ra_recode.data());
