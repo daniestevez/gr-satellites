@@ -1,0 +1,44 @@
+name: MRC-100
+norad: 99182
+data:
+  &tlm Telemetry:
+    unknown
+  &signalling Signalling:
+    unknown
+transmitters:
+  1k25 FSK:
+    frequency: 436.720e+6
+    modulation: FSK
+    baudrate: 1250
+    deviation: 312.5
+    framing: MRC-100 RA
+    frame size: 126
+    data:
+    - *tlm
+  2k5 FSK:
+    frequency: 436.720e+6
+    modulation: FSK
+    baudrate: 2500
+    deviation: 625
+    framing: MRC-100 RA
+    frame size: 126
+    data:
+    - *tlm
+  5k FSK:
+    frequency: 436.720e+6
+    modulation: FSK
+    baudrate: 5000
+    deviation: 1250
+    framing: MRC-100 RA
+    frame size: 126
+    data:
+    - *tlm
+  12k5 FSK:
+    frequency: 436.720e+6
+    modulation: FSK
+    baudrate: 12500
+    deviation: 3125
+    framing: MRC-100 RA
+    frame size: 126
+    data:
+    - *tlm
