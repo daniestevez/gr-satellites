@@ -12,7 +12,7 @@ outputs:
 
 templates:
     imports: import satellites.usp
-    make: satellites.usp.usp_pls_crop()
+    make: satellites.usp.usp_ax25_crop()
 
 documentation: |-
     Extracts the AX.25 encapsulated in a USP packet
