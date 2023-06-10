@@ -44,8 +44,26 @@ class afsk_demodulator(gr.hier_block2, options_block):
         options_block.__init__(self, options)
 
         if iq:
+            # Cut to Carson's bandwidth rule before quadrature demod.
+            # Assume that the FM modulator used a deviation of 3 kHz,
+            # which is typical.
+            fm_deviation = 3000
+            # Note that deviation can be negative to encode that the
+            # low tone corresponds to the symbol 1 and the high tone
+            # corresponds to the symbol 0.
+            carson_cutoff = fm_deviation + af_carrier + abs(deviation)
             self.demod = analog.quadrature_demod_cf(1)
-            self.connect(self, self.demod)
+            if carson_cutoff >= samp_rate / 2:
+                # Sample rate is already narrower than Carson's
+                # bandwidth. Do not filter
+                self.connect(self, self.demod)
+            else:
+                # Sample rate is wider than Carson's bandwidth.
+                # Lowpass filter before demod.
+                fir_taps = firdes.low_pass(
+                    1, samp_rate, carson_cutoff, 0.1 * carson_cutoff)
+                self.demod_filter = filter.fir_filter_ccf(1, fir_taps)
+                self.connect(self, self.demod_filter, self.demod)
         else:
             self.demod = self
 
