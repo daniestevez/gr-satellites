@@ -21,7 +21,7 @@ basic information about the arguments it allows.
                                [--ignore_unknown_args]
                                [--satcfg]
                                (--wavfile WAVFILE | --rawfile RAWFILE | --rawint16 RAWINT16 | --audio [DEVICE] | --udp | --kiss_in KISS_IN)
-                               [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
+                               [--samp_rate SAMP_RATE]
                                [--udp_port UDP_PORT] [--iq] [--udp_raw]
                                [--input_gain INPUT_GAIN]
                                [--start_time START_TIME] [--throttle]
@@ -165,8 +165,8 @@ the input source by using exactly one of the following options:
   If the ``--udp_raw`` is used the format will be the same as for ``--rawfile``.
 
   By default, ``gr_satellites`` will listen on the IP address ``::`` (all
-  addresses) and the UDP port 7355. A different IP address or port can be
-  specified using the parameters ``--udp_ip`` and ``--udp_port``.
+  addresses) and the UDP port 7355. A different port can be
+  specified using the parameter ``--udp_port``.
 
   .. note::
      `GQRX`_ can stream audio in UDP using this format and UDP port,
@@ -208,7 +208,7 @@ For example, this shows all the options allowed by the FUNcube-1 decoder:
    $ gr_satellites FUNcube-1 --help
    usage: gr_satellites satellite [-h] [--version] [--list_satellites]
 				  (--wavfile WAVFILE | --rawfile RAWFILE | --rawint16 RAWINT16 | --audio [DEVICE] | --udp | --kiss_in KISS_IN)
-				  [--samp_rate SAMP_RATE] [--udp_ip UDP_IP]
+				  [--samp_rate SAMP_RATE]
 				  [--udp_port UDP_PORT] [--iq]
 				  [--input_gain INPUT_GAIN]
 				  [--start_time START_TIME] [--throttle]
@@ -244,7 +244,6 @@ For example, this shows all the options allowed by the FUNcube-1 decoder:
      --kiss_in KISS_IN     KISS input file
      --samp_rate SAMP_RATE
 			   Sample rate (Hz)
-     --udp_ip UDP_IP       UDP input listen IP [default='::']
      --udp_port UDP_PORT   UDP input listen port [default='7355']
      --iq                  Use IQ input
      --input_gain INPUT_GAIN
