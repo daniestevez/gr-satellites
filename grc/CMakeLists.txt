@@ -25,6 +25,7 @@ install(FILES
     satellites_ax100_decode.block.yml
     satellites_beesat_classifier.block.yml
     satellites_bme_submitter.block.yml
+    satellites_bme_ws_submitter.block.yml
     satellites_cc11xx_packet_crop.block.yml
     satellites_check_address.block.yml
     satellites_check_ao40_uncoded_crc.block.yml

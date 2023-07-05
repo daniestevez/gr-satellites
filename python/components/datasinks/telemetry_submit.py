@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2019 Daniel Estevez <daniel@destevez.net>
+# Copyright 2019,2023 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -11,7 +11,7 @@
 from gnuradio import gr, blocks
 
 from ... import submit, funcube_submit
-from ... import pwsat2_submitter, bme_submitter, pdu_to_kiss
+from ... import pwsat2_submitter, bme_submitter, bme_ws_submitter, pdu_to_kiss
 from ...utils.options_block import options_block
 
 
@@ -24,7 +24,8 @@ class telemetry_submit(gr.hier_block2, options_block):
     These are submitted to a telemetry server
 
     Args:
-        server: 'SatNOGS', 'FUNcube', 'PWSat', 'BME' or 'SIDS' (string)
+        server: 'SatNOGS', 'FUNcube', 'PWSat', 'BME', 'BMEWS'
+            or 'SIDS' (string)
         norad: NORAD ID (int)
         port: TCP port to connect to (used by HIT) (str)
         url: SIDS URL (used by SIDS) (str)
@@ -64,6 +65,8 @@ class telemetry_submit(gr.hier_block2, options_block):
             satellite = satellites[norad]
             self.submit = bme_submitter(
                 config['BME']['user'], config['BME']['password'], satellite)
+        elif server == 'BMEWS':
+            self.submit = bme_ws_submitter()
         elif server == 'HIT':
             try:
                 self.tcp = blocks.socket_pdu(
