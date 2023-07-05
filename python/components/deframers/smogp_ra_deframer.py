@@ -41,7 +41,7 @@ class mrc100_crc_reorder(gr.basic_block):
             name='mrc100_crc_reorder',
             in_sig=[],
             out_sig=[])
-        self.inverse = False
+        self.inverse = inverse
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
         self.message_port_register_out(pmt.intern('out'))
