@@ -1,5 +1,7 @@
 name: MRC-100
 norad: 99182
+telemetry_servers:
+  - BMEWS
 data:
   &tlm Telemetry:
     unknown

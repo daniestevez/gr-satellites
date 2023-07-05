@@ -42,6 +42,7 @@ GR_PYTHON_INSTALL(
     bch15.py
     beesat_classifier.py
     bme_submitter.py
+    bme_ws_submitter.py
     cc11xx_packet_crop.py
     check_address.py
     check_ao40_uncoded_crc.py

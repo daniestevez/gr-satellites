@@ -14,7 +14,8 @@ Build-Depends: cmake,
                python3-construct,
                python3-dev,
                python3-requests,
-               python3-six
+               python3-six,
+	       python3-websocket
 Standards-Version: 4.5.0
 Homepage: http://github.com/daniestevez/gr-satellites
 Vcs-Git: git://github.com/daniestevez/gr-satellites.git
@@ -26,7 +27,8 @@ Pre-Depends: ${misc:Pre-Depends}
 Depends: ${misc:Depends}, ${python3:Depends}, ${shlibs:Depends},
          gnuradio,
          python3-construct,
-	 python3-requests
+	 python3-requests,
+	 python3-websocket
 Recommends: feh
 Description:GNU Radio out-of-tree module with Amateur satellite decoders.
  gr-satellites is a GNU Radio out-of-tree module that contains a collection of

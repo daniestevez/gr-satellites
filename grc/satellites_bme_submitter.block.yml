@@ -1,6 +1,6 @@
 id: satellites_bme_submitter
-label: BME Telemetry Forwarder
-category: '[Satellites]/Misc'
+label: BME Telemetry Forwarder (Deprecated)
+category: '[Satellites]/Deprecated'
 
 parameters:
 -   id: user
