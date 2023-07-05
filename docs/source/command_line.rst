@@ -497,7 +497,10 @@ certain satellite projects:
 
 * `PW-Sat2 Groundstation`_, which is used by PW-Sat2.
 
-* The `BME telemetry server`_, which is used by SMOG-P, ATL-1 and SMOG-1.
+* The `BME telemetry server`_, which is used by SMOG-P, ATL-1 and SMOG-1. (This
+  server is deprecated, since it is not used anymore by BME).
+
+* The `BME telemetry server (WebSocket)`_, which is used by MRC-100.
 
 * `Harbin Institute of Technology`_, which connects to the telemetry proxy included in
   `gr-lilacsat`_ and `gr-dslwp`_.
@@ -550,6 +553,9 @@ have an account registered in the server to obtain the credentials file.
 To enable telemetry submission to the BME server, it is necessary to
 `register an account in the BME server`_. The user and password should be
 entered into the gr-satellites ``.ini`` file.
+
+The BME server (WebSocket) does not require any registration or additional
+configuration.
 
 To use the Harbin Institute of Technology proxy to submit telemetry, the proxy
 needs to be run and started in the local computer before running
@@ -777,6 +783,7 @@ Example:
 .. _FUNcube Warehouse: http://warehouse.funcube.org.uk/
 .. _PW-Sat2 Groundstation: https://radio.pw-sat.pl/
 .. _BME telemetry server: https://gnd.bme.hu:8080/
+.. _BME telemetry server (WebSocket): https://gnd.bme.hu/
 .. _registering in the warehouse: http://warehouse.funcube.org.uk/registration
 .. _Your credentials: https://radio.pw-sat.pl/communication/yourcredentials
 .. _register an account in the BME server: https://gnd.bme.hu:8080/auth/register

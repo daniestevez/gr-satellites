@@ -50,6 +50,7 @@ from .adsb_kml import adsb_kml
 from .append_crc32c import append_crc32c
 from .beesat_classifier import beesat_classifier
 from .bme_submitter import bme_submitter
+from .bme_ws_submitter import bme_ws_submitter
 from .cc11xx_packet_crop import cc11xx_packet_crop
 from .check_address import check_address
 from .check_ao40_uncoded_crc import check_ao40_uncoded_crc
