@@ -7,8 +7,8 @@ parameters:
     label: Server
     dtype: enum
     default: '"SatNOGS"'
-    options: ['"SatNOGS"', '"FUNcube"', '"PWSat"', '"BME"', '"HIT"', '"SIDS"']
-    option_labels: [SatNOGS DB, AMSAT-UK Data Warehouse, PW-Sat2 Ground Station, BME Ground Station, Harbin Institute of Technology, Custom SIDS server]
+    options: ['"SatNOGS"', '"FUNcube"', '"PWSat"', '"BME"', '"BMEWS"', '"HIT"', '"SIDS"']
+    option_labels: [SatNOGS DB, AMSAT-UK Data Warehouse, PW-Sat2 Ground Station, BME Ground Station (Deprecated), BME Ground Station (WebSocket), Harbin Institute of Technology, Custom SIDS server]
 -   id: url
     label: URL
     dtype: string
