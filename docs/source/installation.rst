@@ -34,6 +34,7 @@ Additionally, the following Python packages are required:
 
 * `construct`_, at least version 2.9.
 * `requests`_
+* `websocket-client`_
 
 .. note::
    construct and requests can be installed with `pip`_
@@ -49,6 +50,7 @@ Additionally, the following Python packages are required:
 .. _GNU Radio: https://gnuradio.org/
 .. _construct: https://construct.readthedocs.io/en/latest/
 .. _requests: https://pypi.org/project/requests/
+.. _websocket-client: https://pypi.org/project/websocket-client/
 .. _pip: https://pypi.org/project/pip/
 .. _gr-satellites README: https://github.com/daniestevez/gr-satellites/blob/main/README.md
 
