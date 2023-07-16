@@ -1,7 +1,7 @@
 name: STRATOSAT-TK1
 alternative_names:
    - RS52S
-norad: 99151
+norad: 57167
 data:
    &tlm Telemetry:
      unknown
