@@ -1,7 +1,7 @@
 name: MONITOR-3
 alternative_names:
   - RS58S
-norad: 99138
+norad: 57180
 data:
   &tlm Telemetry:
     telemetry: ax25
