@@ -1,7 +1,7 @@
 name: KUZGTU-1
 alternative_names:
   - RS47S
-norad: 99135
+norad: 57217
 data:
   &tlm Telemetry:
     telemetry: ax25
