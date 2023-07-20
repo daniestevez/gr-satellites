@@ -1,7 +1,7 @@
 name: CUBESX-HSE-3
 alternative_names:
   - RS42S
-norad: 99141
+norad: 57178
 data:
   &tlm Telemetry:
     telemetry: ax25
