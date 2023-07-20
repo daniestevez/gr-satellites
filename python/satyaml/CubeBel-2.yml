@@ -1,5 +1,5 @@
 name: CubeBel-2
-norad: 99163
+norad: 57175
 data:
   &tlm Telemetry:
     telemetry: ax25
