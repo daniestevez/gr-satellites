@@ -1,7 +1,7 @@
 name: MONITOR-4
 alternative_names:
   - RS57S
-norad: 99137
+norad: 57182
 data:
   &tlm Telemetry:
     telemetry: ax25
