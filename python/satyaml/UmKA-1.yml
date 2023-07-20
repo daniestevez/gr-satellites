@@ -1,5 +1,5 @@
 name: UmKA-1
-norad: 99136
+norad: 57172
 data:
   &tlm Telemetry:
     telemetry: ax25
