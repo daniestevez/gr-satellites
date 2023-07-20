@@ -1,5 +1,5 @@
 name: NANOZOND-1
-norad: 99143
+norad: 57190
 data:
   &tlm Telemetry:
     telemetry: ax25
