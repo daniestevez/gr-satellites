@@ -1,7 +1,7 @@
 name: SVYATOBOR-1
 alternative_names:
   - RS60S
-norad: 99144
+norad: 57187
 data:
   &tlm Telemetry:
     telemetry: ax25
