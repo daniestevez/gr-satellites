@@ -1,7 +1,7 @@
 name: MONITOR-2
 alternative_names:
   - RS39S
-norad: 99139
+norad: 57174
 data:
   &tlm Telemetry:
     telemetry: ax25
