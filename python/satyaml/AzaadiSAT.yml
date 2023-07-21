@@ -1,5 +1,7 @@
 name: AzaadiSAT
-norad: 99999
+alternative_names:
+  - EPDM-0969-2670-9539-4005
+norad: 99355
 data:
   &tlm Telemetry:
     telemetry: ax25
