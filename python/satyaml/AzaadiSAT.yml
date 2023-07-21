@@ -1,5 +1,5 @@
 name: AzaadiSAT
-norad: 99999
+norad: 99355
 data:
   &tlm Telemetry:
     telemetry: ax25
