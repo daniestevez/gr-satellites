@@ -1,0 +1,16 @@
+name: SNIPE-3
+alternative_names:
+  - SNIPE-C
+  - KASI-SAT-C
+norad: 56746
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  4k8 FSK downlink:
+    frequency: 436.950e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
