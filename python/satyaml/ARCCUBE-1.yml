@@ -1,7 +1,7 @@
 name: ARCCUBE-1
 alternative_names:
   - RS25S
-norad: 99153
+norad: 57205
 data:
   &tlm Telemetry:
     telemetry: ax25
