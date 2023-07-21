@@ -1,0 +1,16 @@
+name: SNIPE-1
+alternative_names:
+  - SNIPE-A
+  - KASI-SAT-A
+norad: 56749
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  4k8 FSK downlink:
+    frequency: 435.450e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
