@@ -1,6 +1,4 @@
 name: FOSSASAT-1B
-alternative_names:
-  - SHUV-9360-7405-4358-2470
 norad: 99504
 data:
   &tlm Telemetry:
