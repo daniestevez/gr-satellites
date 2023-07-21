@@ -1,6 +1,5 @@
 name: FOSSASAT-1B
-alternative_names:
-norad: 99999
+norad: 99504
 data:
   &tlm Telemetry:
     telemetry: fossasat_1b
