@@ -9,7 +9,7 @@ parameters:
     options: ['True', 'False']
     option_labels: ['Yes', 'No']
 -   id: buggy_crc
-    label: Verbose
+    label: Buggy CRC
     dtype: bool
     default: True
 
