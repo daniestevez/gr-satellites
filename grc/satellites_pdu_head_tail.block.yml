@@ -8,7 +8,7 @@ parameters:
     dtype: enum
     default: '0'
     options: ['0', '1', '2', '3']
-    option_labels: ['Head', 'Head-', 'Tail', 'Tail-']
+    option_labels: ['Head', 'Head-', 'Tail', 'Tail+']
 -   id: num
     label: Number
     dtype: int
@@ -29,7 +29,7 @@ templates:
 documentation: |-
     Slices some bytes from the beginning or end of a PDU
     This works in the same manner that the head -c and tail -c UNIX commands,
-    with the difference that the Tail- mode numbers the bytes of the PDU starting
+    with the difference that the Tail+ mode numbers the bytes of the PDU starting
     by 0, while the UNIX command numbers them starting by 1.
 
     Output:
@@ -38,9 +38,9 @@ documentation: |-
     Parameters:
         Mode: the mode, which is:
               - Head  to work as head -c num
-              - Head+ to work as head -c +num
+              - Head- to work as head -c -num
               - Tail  to work as tail -c num
-              - Tail- to work as tail -c -num (except for the numbering of the bytes)
+              - Tail+ to work as tail -c +num (except for the numbering of the bytes)
         Num: the number of bytes, as the num parameter of head or tail
 
 file_format: 1
