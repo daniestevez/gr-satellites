@@ -46,6 +46,7 @@ install(FILES
     pdu_length_filter.h
     pdu_scrambler.h
     phase_unwrap.h
+    selector.h
     u482c_decode.h
     varlen_packet_framer.h
     varlen_packet_tagger.h
