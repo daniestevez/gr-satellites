@@ -80,6 +80,7 @@ install(FILES
     satellites_pwsat2_submitter.block.yml
     satellites_pwsat2_telemetry_parser.block.yml
     satellites_reflect_bytes.block.yml
+    satellites_selector.block.yml
     satellites_snet_classifier.block.yml
     satellites_snet_deframer.block.yml
     satellites_submit.block.yml
