@@ -1,0 +1,13 @@
+id: satellites_bme_ws_submitter
+label: BME Telemetry Forwarder (WebSocket)
+category: '[Satellites]/Misc'
+
+inputs:
+-   domain: message
+    id: in
+
+templates:
+    imports: import satellites
+    make: satellites.bme_submitter()
+
+file_format: 1

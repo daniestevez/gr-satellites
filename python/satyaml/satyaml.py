@@ -36,6 +36,7 @@ class SatYAML:
         'K2SAT', 'CCSDS Reed-Solomon', 'CCSDS Concatenated', 'CCSDS Uncoded',
         'LilacSat-1', 'AAUSAT-4', 'NGHam', 'NGHam no Reed Solomon',
         'SMOG-P RA', 'SMOG-1 RA', 'SMOG-P Signalling', 'SMOG-1 Signalling',
+        'MRC-100 RA',
         'OPS-SAT', 'U482C', 'UA01', 'SALSAT', 'Mobitex', 'Mobitex-NX',
         'FOSSASAT', 'AISTECHSAT-2', 'AALTO-1', 'Grizu-263A', 'IDEASSat',
         'YUSAT', 'AX5043', 'USP', 'AO-40 FEC CRC-16-ARC',
@@ -64,7 +65,8 @@ class SatYAML:
             raise YAMLError(f'NORAD field does not contain a number in {yml}')
         if 'telemetry_servers' in d:
             for server in d['telemetry_servers']:
-                if (server not in ['SatNOGS', 'FUNcube', 'PWSat', 'BME']
+                if (server not in ['SatNOGS', 'FUNcube', 'PWSat', 'BME',
+                                   'BMEWS']
                         and not server.startswith('HIT ')
                         and not server.startswith('SIDS ')):
                     raise YAMLError(f'Unknown telemetry server {server}')

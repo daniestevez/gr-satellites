@@ -19,7 +19,7 @@ stack, the AO-40 protocol used in the FUNcube satellites, and several
 ad-hoc protocols used in other satellites.
 """
 
-__version__ = 'v5.3.0'
+__version__ = 'v5.4.0'
 __author__ = 'Daniel Estevez'
 __copyright__ = 'Copyright 2016-2023 Daniel Estevez'
 __email__ = 'daniel@destevez.net'
@@ -55,6 +55,7 @@ from .adsb_kml import adsb_kml
 from .append_crc32c import append_crc32c
 from .beesat_classifier import beesat_classifier
 from .bme_submitter import bme_submitter
+from .bme_ws_submitter import bme_ws_submitter
 from .cc11xx_packet_crop import cc11xx_packet_crop
 from .check_address import check_address
 from .check_ao40_uncoded_crc import check_ao40_uncoded_crc

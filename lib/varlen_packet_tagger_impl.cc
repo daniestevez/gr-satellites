@@ -98,7 +98,7 @@ int varlen_packet_tagger_impl::general_work(int noutput_items,
     std::vector<tag_t> tags;
 
     uint32_t golay_field;
-    int golay_res;
+    int golay_res = 0;
 
     if (d_have_sync) {
         if (d_header_length > ninput_items[0]) {

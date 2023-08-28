@@ -68,6 +68,7 @@ list(APPEND satellites_sources
     pdu_scrambler_impl.cc
     phase_unwrap_impl.cc
     randomizer.c
+    selector_impl.cc
     u482c_decode_impl.cc
     varlen_packet_framer_impl.cc
     varlen_packet_tagger_impl.cc

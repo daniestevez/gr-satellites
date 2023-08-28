@@ -201,6 +201,10 @@ The framings allowed in the ``framing`` field are the following:
   ``SMOG-P RA`` is a longer 48 bit syncword (instead of 16 bit) and the inclusion
   of a CRC-16 ARC to check frame integrity.
 
+* ``MRC-100 RA``, Repeat-Accumulate FEC as used by SMOG-1. The difference with
+  ``SMOG-P RA`` is a 32-bit syncword, a smaller frame size, and the inclusion of
+  a CRC-16-CCITT-FALSE in the second and third byte to check frame integrity.
+
 * ``SMOG-P Signalling``, custom signalling frames as used by SMOG-P and ATL-1
 
 * ``SMOG-1 Signalling``, custom signalling frames as used by SMOG-1. The difference

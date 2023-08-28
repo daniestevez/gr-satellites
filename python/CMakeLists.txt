@@ -42,6 +42,7 @@ GR_PYTHON_INSTALL(
     bch15.py
     beesat_classifier.py
     bme_submitter.py
+    bme_ws_submitter.py
     cc11xx_packet_crop.py
     check_address.py
     check_ao40_uncoded_crc.py
@@ -124,4 +125,5 @@ GR_ADD_TEST(qa_pdu_length_filter ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR
 GR_ADD_TEST(qa_pdu_scrambler ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_pdu_scrambler.py)
 GR_ADD_TEST(qa_phase_unwrap ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_phase_unwrap.py)
 GR_ADD_TEST(qa_rs ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_rs.py)
+GR_ADD_TEST(qa_selector ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_selector.py)
 GR_ADD_TEST(qa_viterbi ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_viterbi.py)
