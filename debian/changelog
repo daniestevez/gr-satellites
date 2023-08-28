@@ -1,3 +1,15 @@
+gr-satellites (5.4.0-1) kinetic; urgency=medium
+
+  * Mainstream release v5.4.0
+
+ --  <daniel@destevez.net>  Mon, 28 Aug 2023 16:10:00 +0000
+
+gr-satellites (5.4.0-0) jammy; urgency=medium
+
+  * Mainstream release v5.4.0
+
+ --  <daniel@destevez.net>  Mon, 28 Aug 2023 16:10:00 +0000
+
 gr-satellites (5.3.0-1) kinetic; urgency=medium
 
   * Mainstream release v5.3.0
