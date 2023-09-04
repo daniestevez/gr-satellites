@@ -72,7 +72,6 @@ from .k2sat_deframer import k2sat_deframer
 from .kiss_to_pdu import kiss_to_pdu
 from .ks1q_header_remover import ks1q_header_remover
 from .lilacsat1_gps_kml import lilacsat1_gps_kml
-from .manchester_sync import manchester_sync
 from .ngham_check_crc import ngham_check_crc
 from .ngham_packet_crop import ngham_packet_crop
 from .ngham_remove_padding import ngham_remove_padding

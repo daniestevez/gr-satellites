@@ -3,21 +3,28 @@ label: Manchester Sync
 category: '[Satellites]/Coding'
 
 parameters:
--   id: history
-    label: History
+-   id: type
+    label: IO Type
+    dtype: enum
+    options: [complex, float]
+    option_attributes:
+        fcn: [cc, ff]
+    hide: part
+-   id: block_size
+    label: Block Size
     dtype: int
     default: 0
 
 inputs:
 -   domain: stream
-    dtype: complex
+    dtype: ${ type }
 
 outputs:
 -   domain: stream
-    dtype: complex
+    dtype: ${ type }
 
 templates:
     imports: import satellites
-    make: satellites.manchester_sync(history = ${history})
+    make: satellites.manchester_sync_${type.fcn}(${block_size})
 
 file_format: 1
