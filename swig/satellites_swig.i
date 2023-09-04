@@ -24,6 +24,7 @@
 #include "satellites/encode_rs.h"
 #include "satellites/fixedlen_to_pdu.h"
 #include "satellites/lilacsat1_demux.h"
+#include "satellites/manchester_sync.h"
 #include "satellites/matrix_deinterleaver_soft.h"
 #include "satellites/nrzi_decode.h"
 #include "satellites/nrzi_encode.h"
@@ -67,6 +68,9 @@ GR_SWIG_BLOCK_MAGIC2(satellites, encode_rs);
 GR_SWIG_BLOCK_MAGIC2(satellites, fixedlen_to_pdu);
 %include "satellites/lilacsat1_demux.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, lilacsat1_demux);
+%include "satellites/manchester_sync.h"
+GR_SWIG_BLOCK_MAGIC2_TMPL(satellites, manchester_sync_cc, manchester_sync<gr_complex>);
+GR_SWIG_BLOCK_MAGIC2_TMPL(satellites, manchester_sync_ff, manchester_sync<float>);
 %include "satellites/matrix_deinterleaver_soft.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, matrix_deinterleaver_soft);
 %include "satellites/nrzi_decode.h"
