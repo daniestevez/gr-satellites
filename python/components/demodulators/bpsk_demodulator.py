@@ -15,7 +15,7 @@ import sys
 from gnuradio import gr, analog, blocks, digital, filter
 from gnuradio.filter import firdes
 
-from ... import manchester_sync
+from ... import manchester_sync_cc
 from ...hier.rms_agc import rms_agc
 from ...utils.options_block import options_block
 
@@ -155,7 +155,8 @@ class bpsk_demodulator(gr.hier_block2, options_block):
         self.complex_to_real = blocks.complex_to_real(1)
 
         if manchester:
-            self.manchester = manchester_sync(self.options.manchester_history)
+            self.manchester = manchester_sync_cc(
+                self.options.manchester_block_size)
             self.connect(self.clock_recovery, self.manchester)
         else:
             self.manchester = self.clock_recovery
@@ -200,7 +201,7 @@ class bpsk_demodulator(gr.hier_block2, options_block):
     _default_clk_rel_bw = 0.06
     _default_clk_limit = 0.004
     _default_costas_bw = 50
-    _default_manchester_history = 32
+    _default_manchester_block_size = 32
 
     @classmethod
     def add_options(cls, parser):
@@ -228,6 +229,7 @@ class bpsk_demodulator(gr.hier_block2, options_block):
             '--costas_bw', type=float, default=cls._default_costas_bw,
             help='Costas loop bandwidth (Hz) [default=%(default)r]')
         parser.add_argument(
-            '--manchester_history', type=int,
-            default=cls._default_manchester_history,
-            help='Manchester recovery history (symbols) [default=%(default)r]')
+            '--manchester_block_size', type=int,
+            default=cls._default_manchester_block_size,
+            help=('Manchester recovery block size (symbols) '
+                  '[default=%(default)r]'))
