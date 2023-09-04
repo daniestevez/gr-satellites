@@ -37,6 +37,7 @@ install(FILES
     encode_rs.h
     fixedlen_to_pdu.h
     lilacsat1_demux.h
+    manchester_sync.h
     matrix_deinterleaver_soft.h
     nrzi_decode.h
     nrzi_encode.h

@@ -58,6 +58,7 @@ list(APPEND satellites_sources
     fixedlen_to_pdu_impl.cc
     golay24.c
     lilacsat1_demux_impl.cc
+    manchester_sync_impl.cc
     matrix_deinterleaver_soft_impl.cc
     nrzi_decode_impl.cc
     nrzi_encode_impl.cc

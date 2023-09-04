@@ -73,7 +73,6 @@ GR_PYTHON_INSTALL(
     kiss_to_pdu.py
     ks1q_header_remover.py
     lilacsat1_gps_kml.py
-    manchester_sync.py
     ngham_check_crc.py
     ngham_packet_crop.py
     ngham_remove_padding.py
@@ -118,6 +117,7 @@ GR_ADD_TEST(qa_fixedlen_tagger ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/
 GR_ADD_TEST(qa_fixedlen_to_pdu ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_fixedlen_to_pdu.py)
 GR_ADD_TEST(qa_hdlc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_hdlc.py)
 GR_ADD_TEST(qa_kiss ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_kiss.py)
+GR_ADD_TEST(qa_manchester_sync ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_manchester_sync.py)
 GR_ADD_TEST(qa_nrzi ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_nrzi.py)
 GR_ADD_TEST(qa_pdu_add_meta ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_pdu_add_meta.py)
 GR_ADD_TEST(qa_pdu_head_tail ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_pdu_head_tail.py)
