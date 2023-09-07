@@ -8,6 +8,6 @@ inputs:
 
 templates:
     imports: import satellites
-    make: satellites.bme_submitter()
+    make: satellites.bme_ws_submitter()
 
 file_format: 1
