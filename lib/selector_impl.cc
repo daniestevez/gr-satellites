@@ -144,15 +144,22 @@ void selector_impl::forecast(int noutput_items, gr_vector_int& ninput_items_requ
     for (unsigned i = 0; i < ninputs; i++) {
         ninput_items_required[i] = 0;
     }
-    // When we are requested to produce only one item, we lie and say that we
-    // can produce it for free. This hack is required in order to ensure that
-    // general_work() gets called when there is only input in some of the
-    // inactive inputs. This achieves having general_work() consume that input,
-    // which may unblock the production of items for the active input elsewhere
-    // in the flowgraph.
-    if (noutput_items > 1) {
+    // When we have multiple inputs and are requested to produce only one item,
+    // we lie and say that we can produce it for free. This hack is required in
+    // order to ensure that general_work() gets called when there is only input
+    // in some of the inactive inputs. This achieves having general_work()
+    // consume that input, which may unblock the production of items for the
+    // active input elsewhere in the flowgraph.
+    if ((ninputs == 1) || (noutput_items > 1)) {
         gr::thread::scoped_lock l(d_mutex);
         ninput_items_required[d_input_index] = noutput_items;
+    } else if (ninputs == 2) {
+        // If we lie and have exactly 2 inputs, tell the runtime that we need to
+        // have some items (to dump them) on the inactive input. If we have more
+        // inputs we cannot do this trick because we don't know in which
+        // inactive input the items might be present.
+        gr::thread::scoped_lock l(d_mutex);
+        ninput_items_required[1 - d_input_index] = 1;
     }
 }
 
