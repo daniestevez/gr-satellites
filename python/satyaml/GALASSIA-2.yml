@@ -1,0 +1,13 @@
+name: GALASSIA-2
+norad: 57486
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  1k2 FSK downlink:
+    frequency: 436.400e+6
+    modulation: FSK
+    baudrate: 1200
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
