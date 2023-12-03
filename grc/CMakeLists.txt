@@ -22,6 +22,7 @@ install(FILES
     satellites_aausat4_remove_fsm.block.yml
     satellites_adsb_kml.block.yml
     satellites_append_crc32c.block.yml
+    satellites_autopolarization.block.yml
     satellites_ax100_decode.block.yml
     satellites_beesat_classifier.block.yml
     satellites_bme_submitter.block.yml
