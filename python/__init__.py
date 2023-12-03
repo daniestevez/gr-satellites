@@ -48,6 +48,7 @@ except ImportError:
 from .aausat4_remove_fsm import aausat4_remove_fsm
 from .adsb_kml import adsb_kml
 from .append_crc32c import append_crc32c
+from .autopolarization import autopolarization
 from .beesat_classifier import beesat_classifier
 from .bme_submitter import bme_submitter
 from .bme_ws_submitter import bme_ws_submitter

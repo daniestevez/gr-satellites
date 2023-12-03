@@ -37,6 +37,7 @@ GR_PYTHON_INSTALL(
     adsb_kml.py
     ao40_uncoded_crc.py
     append_crc32c.py
+    autopolarization.py
     bch15.py
     beesat_classifier.py
     bme_submitter.py
