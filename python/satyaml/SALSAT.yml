@@ -10,6 +10,7 @@ transmitters:
     baudrate: 1200
     af_carrier: 1500
     deviation: -300
+    fm_deviation: 10000
     framing: SALSAT
     data:
     - *tlm
