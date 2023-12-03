@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2019 Daniel Estevez <daniel@destevez.net>
+# Copyright 2019-2023 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -34,7 +34,8 @@ class afsk_demodulator(gr.hier_block2, options_block):
         options: Options from argparse
     """
     def __init__(self, baudrate, samp_rate, iq, af_carrier,
-                 deviation, dump_path=None, options=None):
+                 deviation, dump_path=None, options=None,
+                 fm_deviation=None):
         gr.hier_block2.__init__(
             self,
             'afsk_demodulator',
@@ -43,11 +44,12 @@ class afsk_demodulator(gr.hier_block2, options_block):
             gr.io_signature(1, 1, gr.sizeof_float))
         options_block.__init__(self, options)
 
+        # The FM deviation is used to apply Carson's rule in a low-pass filter
+        # in the IQ case. In the FM demodulated case it is ignored.
+        if fm_deviation is None:
+            fm_deviation = self.options.fm_deviation
+
         if iq:
-            # Cut to Carson's bandwidth rule before quadrature demod.
-            # Assume that the FM modulator used a deviation of 3 kHz,
-            # which is typical.
-            fm_deviation = 3000
             # Note that deviation can be negative to encode that the
             # low tone corresponds to the symbol 1 and the high tone
             # corresponds to the symbol 0.
@@ -79,7 +81,13 @@ class afsk_demodulator(gr.hier_block2, options_block):
 
         self.connect(self.demod, self.xlating, self.fsk, self)
 
+    _default_fm_deviation_hz = 3000
+
     @classmethod
     def add_options(cls, parser):
-        """Adds CCSDS concatenated deframer options to the argparse parser"""
+        """Adds AFSK demodulator options to the argparse parser"""
         fsk_demodulator.add_options(parser)
+        parser.add_argument(
+            '--fm-deviation', type=float,
+            default=cls._default_fm_deviation_hz,
+            help='FM deviation (Hz) [default=%(default)r]')

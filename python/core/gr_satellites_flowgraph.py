@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2019 Daniel Estevez <daniel@destevez.net>
+# Copyright 2019-2023 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -253,7 +253,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
             transmitter: transmitter entry in the SatYAML
         """
         baudrate = transmitter['baudrate']
-        demod_options = ['deviation', 'af_carrier']
+        demod_options = ['deviation', 'fm_deviation', 'af_carrier']
         demod_options = {k: k for k in demod_options}
         demodulator_additional_options = filter_translate_dict(transmitter,
                                                                demod_options)
