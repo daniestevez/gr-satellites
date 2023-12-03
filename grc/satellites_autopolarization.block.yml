@@ -1,0 +1,37 @@
+id: satellites_autopolarization
+label: Auto-Polarization
+category: '[Satellites]/Polarization'
+
+parameters:
+- id: fft_size
+  label: FFT size
+  dtype: int
+  default: 2048
+- id: fft_avg
+  label: FFT average
+  dtype: int
+  default: round(0.1 * samp_rate / 2048)
+- id: iir_weight
+  label: IIR weight
+  dtype: float
+  default: 0.1
+
+inputs:
+- domain: stream
+  dtype: complex
+- domain: stream
+  dtype: complex
+
+outputs:
+- label: signal
+  domain: stream
+  dtype: complex
+- label: orthogonal
+  domain: stream
+  dtype: complex
+  
+templates:
+    imports: import satellites
+    make: satellites.autopolarization(fft_size=${fft_size}, fft_avg=${fft_avg}, iir_weight=${iir_weight})
+
+file_format: 1
