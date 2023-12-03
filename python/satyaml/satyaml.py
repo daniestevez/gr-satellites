@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2019 Daniel Estevez <daniel@destevez.net>
+# Copyright 2019-2023 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -115,6 +115,11 @@ class SatYAML:
                     and type(transmitter['deviation']) not in [float, int]):
                 raise YAMLError(
                     'Deviation field does not contain a float '
+                    f'in {key} in {yml}')
+            if ('fm_deviation' in transmitter
+                    and type(transmitter['fm_deviation']) not in [float, int]):
+                raise YAMLError(
+                    'FM deviation field does not contain a float '
                     f'in {key} in {yml}')
             if 'framing' not in transmitter:
                 raise YAMLError(f'Missing framing field in {key} in {yml}')

@@ -109,7 +109,9 @@ The modulations allowed in the ``modulation`` field are the following:
   ``True`` is used to perform non-coherent demodulation
 
 The ``AFSK`` modulation also needs the ``deviation`` and ``af_carrier`` fields
-that indicate the AFSK tone frequencies in Hz, as in the AFSK demodulator.
+that indicate the AFSK tone frequencies in Hz, as in the AFSK demodulator. Optionally,
+it is possible to indicate the deviation of the FM modulation using the ``fm_deviation``
+field. By default, an FM deviation of 3 kHz is assumed.
   
 The framings allowed in the ``framing`` field are the following:
 
