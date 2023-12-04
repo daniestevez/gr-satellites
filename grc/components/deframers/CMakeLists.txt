@@ -49,6 +49,7 @@ install(FILES
     satellites_nusat_deframer.block.yml
     satellites_ops_sat_deframer.block.yml
     satellites_reaktor_hello_world_deframer.block.yml
+    satellites_sanosat_deframer.block.yml
     satellites_sat_3cat_1_deframer.block.yml
     satellites_smogp_ra_deframer.block.yml
     satellites_smogp_signalling_deframer.block.yml
