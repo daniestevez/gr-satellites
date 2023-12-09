@@ -50,6 +50,7 @@ GR_PYTHON_INSTALL(
     fossasat_deframer.py
     geoscan_deframer.py
     grizu263a_deframer.py
+    hades_deframer.py
     hsu_sat1_deframer.py
     ideassat_deframer.py
     k2sat_deframer.py
