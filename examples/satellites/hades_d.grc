@@ -1,0 +1,563 @@
+options:
+  parameters:
+    author: Daniel Estevez
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: hades_d
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: run
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: HADES-D FSK decoder
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: baudrate
+  id: variable
+  parameters:
+    comment: ''
+    value: '50'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [752, 12.0]
+    rotation: 0
+    state: true
+- name: dec
+  id: variable
+  parameters:
+    comment: ''
+    value: samp_rate // (baudrate * sps)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 84.0]
+    rotation: 0
+    state: true
+- name: deviation
+  id: variable
+  parameters:
+    comment: ''
+    value: '550'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 12.0]
+    rotation: 0
+    state: true
+- name: freq_error
+  id: variable
+  parameters:
+    comment: ''
+    value: -1.3e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 12.0]
+    rotation: 0
+    state: true
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '32000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 12.0]
+    rotation: 0
+    state: enabled
+- name: sideband_filter
+  id: variable
+  parameters:
+    comment: ''
+    value: firdes.low_pass(1, samp_rate, 200, 25)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 12.0]
+    rotation: 0
+    state: true
+- name: sps
+  id: variable
+  parameters:
+    comment: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [752, 84.0]
+    rotation: 0
+    state: true
+- name: blocks_complex_to_mag_squared_0
+  id: blocks_complex_to_mag_squared
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 224.0]
+    rotation: 0
+    state: true
+- name: blocks_complex_to_mag_squared_0_0
+  id: blocks_complex_to_mag_squared
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 312.0]
+    rotation: 0
+    state: true
+- name: blocks_complex_to_real_0
+  id: blocks_complex_to_real
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [576, 504.0]
+    rotation: 0
+    state: true
+- name: blocks_file_source_0
+  id: blocks_file_source
+  parameters:
+    affinity: ''
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: HADES-D_2023-12-09T11_20_03_32ksps.sigmf-data
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [32, 172.0]
+    rotation: 0
+    state: true
+- name: blocks_float_to_complex_0
+  id: blocks_float_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 488.0]
+    rotation: 0
+    state: true
+- name: blocks_null_source_0
+  id: blocks_null_source
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_source: '[[0,],]'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 520.0]
+    rotation: 0
+    state: true
+- name: blocks_rotator_cc_0
+  id: blocks_rotator_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: Low tone
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    phase_inc: -2 * np.pi * (freq_error - deviation) / samp_rate
+    tag_inc_update: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 208.0]
+    rotation: 0
+    state: true
+- name: blocks_rotator_cc_0_0
+  id: blocks_rotator_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: High tone
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    phase_inc: -2 * np.pi * (freq_error + deviation) / samp_rate
+    tag_inc_update: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 296.0]
+    rotation: 0
+    state: true
+- name: blocks_sub_xx_0
+  id: blocks_sub_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1088, 256.0]
+    rotation: 0
+    state: true
+- name: blocks_throttle2_0
+  id: blocks_throttle2
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    limit: auto
+    maximum: '0.1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate * 30
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [280, 196.0]
+    rotation: 0
+    state: true
+- name: digital_symbol_sync_xx_0
+  id: digital_symbol_sync_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    constellation: digital.constellation_bpsk().base()
+    damping: '1.0'
+    loop_bw: '0.01'
+    max_dev: '0.01'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nfilters: '128'
+    osps: '1'
+    pfb_mf_taps: '[]'
+    resamp_type: digital.IR_MMSE_8TAP
+    sps: sps
+    ted_gain: '1.0'
+    ted_type: digital.TED_GARDNER
+    type: ff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [744, 444.0]
+    rotation: 0
+    state: true
+- name: fir_filter_xxx_0
+  id: fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: dec
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_delay: '0'
+    taps: sideband_filter
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [680, 212.0]
+    rotation: 0
+    state: true
+- name: fir_filter_xxx_0_0
+  id: fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: dec
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_delay: '0'
+    taps: sideband_filter
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [680, 300.0]
+    rotation: 0
+    state: true
+- name: fir_filter_xxx_1
+  id: fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_delay: '0'
+    taps: '[1] * sps'
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1208, 260.0]
+    rotation: 0
+    state: true
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy as np
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [208, 108.0]
+    rotation: 0
+    state: true
+- name: qtgui_time_sink_x_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label1: Signal 1
+    label10: Signal 10
+    label2: Signal 2
+    label3: Signal 3
+    label4: Signal 4
+    label5: Signal 5
+    label6: Signal 6
+    label7: Signal 7
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '0'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '""'
+    nconnections: '1'
+    size: 60 * baudrate
+    srate: samp_rate
+    stemplot: 'False'
+    style1: '0'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: float
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '3'
+    ymin: '-3'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1064, 436.0]
+    rotation: 0
+    state: true
+- name: satellites_hades_deframer_0
+  id: satellites_hades_deframer
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    options: '""'
+    threshold: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 644.0]
+    rotation: 0
+    state: true
+- name: satellites_hexdump_sink_0
+  id: satellites_hexdump_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    options: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [656, 648.0]
+    rotation: 0
+    state: true
+- name: satellites_rms_agc_0
+  id: satellites_rms_agc
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: 3e-2
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    reference: '1.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [424, 492.0]
+    rotation: 0
+    state: true
+
+connections:
+- [blocks_complex_to_mag_squared_0, '0', blocks_sub_xx_0, '0']
+- [blocks_complex_to_mag_squared_0_0, '0', blocks_sub_xx_0, '1']
+- [blocks_complex_to_real_0, '0', digital_symbol_sync_xx_0, '0']
+- [blocks_file_source_0, '0', blocks_rotator_cc_0_0, '0']
+- [blocks_file_source_0, '0', blocks_throttle2_0, '0']
+- [blocks_float_to_complex_0, '0', satellites_rms_agc_0, '0']
+- [blocks_null_source_0, '0', blocks_float_to_complex_0, '1']
+- [blocks_rotator_cc_0, '0', fir_filter_xxx_0, '0']
+- [blocks_rotator_cc_0_0, '0', fir_filter_xxx_0_0, '0']
+- [blocks_sub_xx_0, '0', fir_filter_xxx_1, '0']
+- [blocks_throttle2_0, '0', blocks_rotator_cc_0, '0']
+- [digital_symbol_sync_xx_0, '0', qtgui_time_sink_x_0, '0']
+- [digital_symbol_sync_xx_0, '0', satellites_hades_deframer_0, '0']
+- [fir_filter_xxx_0, '0', blocks_complex_to_mag_squared_0, '0']
+- [fir_filter_xxx_0_0, '0', blocks_complex_to_mag_squared_0_0, '0']
+- [fir_filter_xxx_1, '0', blocks_float_to_complex_0, '0']
+- [satellites_hades_deframer_0, out, satellites_hexdump_sink_0, in]
+- [satellites_rms_agc_0, '0', blocks_complex_to_real_0, '0']
+
+metadata:
+  file_format: 1
+  grc_version: 3.10.8.0
