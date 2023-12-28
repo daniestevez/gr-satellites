@@ -1,3 +1,15 @@
+gr-satellites (5.5.0-1) mantic; urgency=medium
+
+  * Mainstream release v5.5.0
+
+ --  <daniel@destevez.net>  Thu, 28 Dec 2023 15:00:00 +0000
+
+gr-satellites (5.5.0-0) jammy; urgency=medium
+
+  * Mainstream release v5.5.0
+
+ --  <daniel@destevez.net>  Thu, 28 Dec 2023 15:00:00 +0000
+
 gr-satellites (5.4.0-1) kinetic; urgency=medium
 
   * Mainstream release v5.4.0
