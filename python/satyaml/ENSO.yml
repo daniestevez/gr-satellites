@@ -1,0 +1,15 @@
+name: ENSO
+alternative_names:
+  - ROBUSTA 1E
+norad: 58470
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  2k4 FSK downlink:
+    frequency: 436.500e+6
+    modulation: FSK
+    baudrate: 2400
+    framing: AX.25
+    data:
+    - *tlm

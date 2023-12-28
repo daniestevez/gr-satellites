@@ -19,7 +19,7 @@ stack, the AO-40 protocol used in the FUNcube satellites, and several
 ad-hoc protocols used in other satellites.
 """
 
-__version__ = 'v5.4.0'
+__version__ = 'v5.5.0'
 __author__ = 'Daniel Estevez'
 __copyright__ = 'Copyright 2016-2023 Daniel Estevez'
 __email__ = 'daniel@destevez.net'
@@ -53,6 +53,7 @@ except ModuleNotFoundError:
 from .aausat4_remove_fsm import aausat4_remove_fsm
 from .adsb_kml import adsb_kml
 from .append_crc32c import append_crc32c
+from .autopolarization import autopolarization
 from .beesat_classifier import beesat_classifier
 from .bme_submitter import bme_submitter
 from .bme_ws_submitter import bme_ws_submitter
@@ -77,7 +78,6 @@ from .k2sat_deframer import k2sat_deframer
 from .kiss_to_pdu import kiss_to_pdu
 from .ks1q_header_remover import ks1q_header_remover
 from .lilacsat1_gps_kml import lilacsat1_gps_kml
-from .manchester_sync import manchester_sync
 from .ngham_check_crc import ngham_check_crc
 from .ngham_packet_crop import ngham_packet_crop
 from .ngham_remove_padding import ngham_remove_padding

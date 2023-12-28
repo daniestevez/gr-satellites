@@ -1,0 +1,13 @@
+name: CLARKSAT-1
+norad: 58613
+data:
+  &tlm unknown telemetry:
+    unknown
+transmitters:
+  4k8 G3RUH FSK downlink:
+    frequency: 435.130e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: AX.25 G3RUH
+    data:
+    - *tlm

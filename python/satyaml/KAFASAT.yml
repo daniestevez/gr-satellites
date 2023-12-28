@@ -1,0 +1,13 @@
+name: KAFASAT
+norad: 58317
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  1k2 FSK downlink:
+    frequency: 435.835e+6
+    modulation: FSK
+    baudrate: 1200
+    framing: AX.25 G3RUH
+    data:
+    - *tlm
