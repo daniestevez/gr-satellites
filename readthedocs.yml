@@ -15,3 +15,8 @@ formats: all
 # Do not include submodules, as they are not needed to build docs
 submodules:
   exclude: all
+
+# Declare the Python requirements required to build your docs
+python:
+   install:
+   - requirements: docs/requirements.txt
