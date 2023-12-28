@@ -6,6 +6,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [5.5.0], [4.12.0], [3.19.0] - 2023-12-28
+
+### Added
+- Auto-Polarization Python block
+- --fm-deviation option to AFSK Demodulator
+- TLE to Doppler file Python script
+- HADES-D deframer and example decoder
+- Support for CLARKSAT-1
+- Support for ENSO
+- Support for GALASSIA-2
+- Support for Hayasat
+- Support for IRIS-C
+- Support for KAFASAT
+- Support for PEARL-1C and PEARL-1H
+- Support for SCOOB-II
+- Support for VELOX-AM
+- Support for VERONIKA
+
+### Fixed
+- BME Telemetry Submitter GRC file
+- SNET Deframer GRC file typo
+- AF deviation in SALSAT SatYAML file
+- Added missing SanoSat Deframer GRC file
+
+### Changed
+- Ported Manchester Sync block to C++
+- CPU usage improvement for Selector block
+- Final NORAD ID for EIRSAT-1
+
 ## [5.4.0], [4.11.0], [3.18.0] - 2023-08-28
 
 ### Added
@@ -626,13 +655,15 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v5.4.0...main
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v5.5.0...main
+[5.5.0]: https://github.com/daniestevez/gr-satellites/compare/v5.4.0...v5.5.0
 [5.4.0]: https://github.com/daniestevez/gr-satellites/compare/v5.3.0...v5.4.0
 [5.3.0]: https://github.com/daniestevez/gr-satellites/compare/v5.2.0...v5.3.0
 [5.2.0]: https://github.com/daniestevez/gr-satellites/compare/v5.1.1...v5.2.0
 [5.1.1]: https://github.com/daniestevez/gr-satellites/compare/v5.1.0...v5.1.1
 [5.1.0]: https://github.com/daniestevez/gr-satellites/compare/v5.0.0...v5.1.0
 [5.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.6.0...v5.0.0
+[4.12.0]: https://github.com/daniestevez/gr-satellites/compare/v4.11.0...v4.12.0
 [4.11.0]: https://github.com/daniestevez/gr-satellites/compare/v4.10.0...v4.11.0
 [4.10.0]: https://github.com/daniestevez/gr-satellites/compare/v4.9.0...v4.10.0
 [4.9.0]: https://github.com/daniestevez/gr-satellites/compare/v4.8.1...v4.9.0
@@ -648,6 +679,7 @@ First gr-satellites release using semantic versioning
 [4.1.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0-rc1...v4.0.0
 [4.0.0-rc1]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...v4.0.0-rc1
+[3.19.0]: https://github.com/daniestevez/gr-satellites/compare/v3.18.0...v3.19.0
 [3.18.0]: https://github.com/daniestevez/gr-satellites/compare/v3.17.0...v3.18.0
 [3.17.0]: https://github.com/daniestevez/gr-satellites/compare/v3.16.0...v3.17.0
 [3.16.0]: https://github.com/daniestevez/gr-satellites/compare/v3.15.1...v3.16.0
