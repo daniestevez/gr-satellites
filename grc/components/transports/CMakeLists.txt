@@ -20,5 +20,6 @@
 
 install(FILES
     satellites_kiss_transport.block.yml
+    satellites_nanolink_transport.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )
