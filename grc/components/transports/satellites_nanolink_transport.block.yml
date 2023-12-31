@@ -1,0 +1,36 @@
+id: satellites_nanolink_transport
+label: NANOLINK Transport
+category: '[Satellites]/Transports'
+
+parameters:
+- id: options
+  label: Command line options
+  dtype: string
+  default: '""'
+  hide: part
+
+inputs:
+- domain: message
+  id: in
+
+outputs:
+- domain: message
+  id: out
+
+templates:
+  imports: import satellites.components.transports
+  make: satellites.components.transports.nanolink_transport(options=${options})
+
+documentation: |-
+   Implements NANOLINK frame reception from a stream of bytes.
+
+    Input:
+        PDUs containing consecutive bytes of stream containing NANOLINK frames
+
+    Output:
+        PDUs with the frames contained inside the stream
+
+    Parameters:
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
+
+file_format: 1

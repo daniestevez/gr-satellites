@@ -20,3 +20,4 @@ are PDUs as well.
 '''
 
 from .kiss_transport import kiss_transport
+from .nanolink_transport import nanolink_transport
