@@ -6,10 +6,9 @@ parameters:
 -   id: type
     label: Type
     dtype: enum
-    options: [complex, float, int, short, byte]
+    options: [complex, float, byte]
     option_attributes:
-        size: [gr.sizeof_gr_complex, gr.sizeof_float, gr.sizeof_int, gr.sizeof_short,
-               gr.sizeof_char]
+        vector_type: [satellites.grtypes.complex_t, satellites.grtypes.float_t, satellites.grtypes.byte_t]
     hide: part
 -   id: syncword_tag
     label: Syncword tag
@@ -35,7 +34,8 @@ outputs:
 templates:
     imports: |-
         import satellites
-    make: satellites.fixedlen_to_pdu(${type.size}, ${syncword_tag}, ${packet_len}, ${pack if type == 'byte' else False})
+        import satellites.grtypes
+    make: satellites.fixedlen_to_pdu(${type.vector_type}, ${syncword_tag}, ${packet_len}, ${pack if type == 'byte' else False})
 
 documentation: |-
     Extracts PDUs of fixed length according to syncword tags
