@@ -419,7 +419,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    alist: /tmp/ccsds_1_2_1024.alist
+    alist: ccsds_1_2_1024.alist
     comment: ''
     implementation: '''Phif64'''
     k: '1024'
