@@ -1,36 +1,17 @@
 name: MONITOR-2
 alternative_names:
   - RS39S
-norad: 57174
+norad: 57184
 data:
   &tlm Telemetry:
     telemetry: ax25
 transmitters:
-  1k2 FSK downlink:
-    frequency: 435.860e+6
-    modulation: FSK
+  1k2 AFSK downlink:
+    frequency: 435.815e+6
+    modulation: AFSK
     baudrate: 1200
-    framing: USP
-    data:
-    - *tlm
-  2k4 FSK downlink:
-    frequency: 435.860e+6
-    modulation: FSK
-    baudrate: 2400
-    framing: USP
-    data:
-    - *tlm
-  4k8 FSK downlink:
-    frequency: 435.860e+6
-    modulation: FSK
-    baudrate: 4800
-    framing: USP
-    data:
-    - *tlm
-  9k6 FSK downlink:
-    frequency: 435.860e+6
-    modulation: FSK
-    baudrate: 9600
-    framing: USP
+    af_carrier: 1700
+    deviation: 600
+    framing: AX.25
     data:
     - *tlm
