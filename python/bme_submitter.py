@@ -37,9 +37,13 @@ class bme_submitter(gr.basic_block):
 
     def authenticate(self, user, password):
         self.auth_token = None
-        rauth = requests.post(
-            'https://gnd.bme.hu:8080/api/tokens',
-            auth=HTTPBasicAuth(user, password), timeout=10)
+        try:
+            rauth = requests.post(
+                'https://gnd.bme.hu:8080/api/tokens',
+                auth=HTTPBasicAuth(user, password), timeout=10)
+        except Exception as e:
+            print(f'Authentication failed: {e}')
+            return
         if rauth.status_code == 200:
             # We hit the jackpot.
             # Let's use the token obtained in the authentication header.
