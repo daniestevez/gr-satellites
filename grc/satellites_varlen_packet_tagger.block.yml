@@ -23,9 +23,9 @@ parameters:
     default: 255*8
 -   id: endianness
     label: Endianness
-    dtype: int
-    default: int(gr.GR_MSB_FIRST)
-    options: [int(gr.GR_MSB_FIRST), int(gr.GR_LSB_FIRST)]
+    dtype: raw
+    default: gr.GR_MSB_FIRST
+    options: [gr.GR_MSB_FIRST, gr.GR_LSB_FIRST]
     option_labels: [MSB, LSB]
 -   id: use_golay
     label: Golay Decoding
