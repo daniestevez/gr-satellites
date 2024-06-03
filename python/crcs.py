@@ -34,3 +34,8 @@ def crc16_ccitt_zero(swap_endianness=False, discard_crc=True):
 def crc16_cc11xx(discard_crc=True):
     return crc_check(16, 0x8005, 0xFFFF, 0x0, False, False,
                      False, discard_crc)
+
+
+def crc32c(discard_crc=True):
+    return crc_check(32, 0x1EDC6F41, 0xFFFFFFFF, 0xFFFFFFFF,
+                     True, True, False, discard_crc)

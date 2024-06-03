@@ -60,6 +60,7 @@ GR_PYTHON_INSTALL(
     ngham_deframer.py
     nusat_deframer.py
     ops_sat_deframer.py
+    qubik_deframer.py
     reaktor_hello_world_deframer.py
     sanosat_deframer.py
     sat_3cat_1_deframer.py

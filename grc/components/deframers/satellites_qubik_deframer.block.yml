@@ -1,12 +1,12 @@
-id: satellites_hades_deframer
-label: HADES-D Deframer
+id: satellites_qubik_deframer
+label: QUBIK Deframer
 category: '[Satellites]/Deframers'
 
 parameters:
 -   id: threshold
     label: Syncword threshold
     dtype: int
-    default: 0
+    default: 4
 -   id: options
     label: Command line options
     dtype: string
@@ -23,20 +23,19 @@ outputs:
 
 templates:
     imports: import satellites.components.deframers
-    make: satellites.components.deframers.hades_deframer(syncword_threshold=${threshold}, options=${options})
+    make: satellites.components.deframers.qubik_deframer(syncword_threshold=${threshold}, options=${options})
 
 documentation: |-
-    Deframes HADES-D packets
+    Deframes QUBIK packets
 
-    See the following documents for the specifications
-    https://www.amsat-ea.org/app/download/13595424/AMSAT+EA+-+Descripci%C3%B3n+de+transmisiones+de+HADES-D.pdf
-    https://www.amsat-ea.org/app/download/13595777/AMSAT+EA+-+HADES-D+Transmissions+description.pdf
+    QUBIK packets use a custom 32-bit syncword, CCSDS Reed-Solomon, CCSDS
+    scrambling (unusually applied before Reed-Solomon encoding), and a CRC-32C.
 
     Input:
-        A stream of soft symbols containing HADES-D packets
+        A stream of soft symbols containing QUBIK packets
 
     Output:
-        PDUs with the deframed HADES-D packets
+        PDUs with the deframed QUBIK packets
 
     Parameters:
         Syncword threshold: number of bit errors to allow in syncword detection
