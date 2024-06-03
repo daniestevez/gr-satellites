@@ -50,6 +50,7 @@ GR_PYTHON_INSTALL(
     delfic3.py
     delfipq.py
     dstar_one.py
+    erminaz.py
     eseo.py
     fossasat.py
     fossasat_1b.py
