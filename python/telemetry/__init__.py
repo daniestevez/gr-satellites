@@ -33,6 +33,7 @@ from .cute_70cm import cute_70cm
 from .delfic3 import delfic3
 from .delfipq import delfipq
 from .dstar_one import dstar_one
+from .erminaz import erminaz
 from .eseo import eseo
 from .floripasat import floripasat
 from .fossasat_1b import fossasat_1b
