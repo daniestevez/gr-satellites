@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# Copyright 2019-2020, 2024 Daniel Estevez <daniel@destevez.net>
+#
+# This file is part of gr-satellites
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+import subprocess
+import sys
+
+import numpy as np
+
+from satellites.kiss import *
+from satellites.telemetry.erminaz import *
+
+
+def print_usage():
+    print(f'Usage {sys.argv[0]} <erminaz_frames.kss> <output_path>')
+
+
+def seqnum(packet):
+    return packet[8]*256 + packet[9]
+
+
+def read_kiss_file(path):
+    frames = list()
+    frame = list()
+    transpose = False
+    with open(path, 'rb') as f:
+        for c in f.read():
+            if c == FEND:
+                if len(frame) > 1 and (frame[0] & 0x0f) == 0:
+                    frames.append(frame[1:])
+                frame = list()
+            elif transpose:
+                if c == TFEND:
+                    frame.append(FEND)
+                elif c == TFESC:
+                    frame.append(FESC)
+                transpose = False
+            elif c == FESC:
+                transpose = True
+            else:
+                frame.append(c)
+    return np.array(frames, dtype='uint8')
+
+
+def main():
+    if len(sys.argv) != 3:
+        print_usage()
+        sys.exit(1)
+
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+
+    # Read frames
+    x = read_kiss_file(input_file)
+
+    # Filter out by virtual channel
+    vcid = 4
+    headers = [TMPrimaryHeader.parse(y) for y in x]
+    x = np.array([y for h, y in zip(headers, x)
+                  if h.virtual_channel_id == vcid])
+
+    # Extract SSDV packets
+    x = x[:, TMPrimaryHeader.sizeof() + 2:]
+    id_idx = 6
+    ids = set(x[:, id_idx])
+
+    for i in ids:
+        L = list(x[x[:, id_idx] == i, :])
+        L.sort(key=seqnum)
+        ssdv = '{}_{:03}.ssdv'.format(output_file, i)
+        jpeg = '{}_{:03}.jpg'.format(output_file, i)
+        np.array(L).tofile(ssdv)
+        print('Calling SSDV decoder for image {}'.format(hex(i)))
+        subprocess.call(['ssdv', '-d', '-l', str(x.shape[1]), ssdv, jpeg])
+        print()
+
+
+if __name__ == '__main__':
+    main()
