@@ -10,6 +10,7 @@ transmitters:
     frequency: 435.950e+6
     modulation: FSK
     baudrate: 4800
+    deviation: 1200
     framing: Mobitex-NX
     data:
     - *tlm
