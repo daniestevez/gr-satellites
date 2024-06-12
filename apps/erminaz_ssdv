@@ -64,6 +64,9 @@ def main():
     headers = [TMPrimaryHeader.parse(y) for y in x]
     x = np.array([y for h, y in zip(headers, x)
                   if h.virtual_channel_id == vcid])
+    if x.size == 0:
+        # there are no SSDV packets
+        return
 
     # Extract SSDV packets
     x = x[:, TMPrimaryHeader.sizeof() + 2:]
