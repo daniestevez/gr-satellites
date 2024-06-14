@@ -52,11 +52,12 @@ blocks:
     alias: ''
     comment: ''
     en_uvec: 'True'
+    log_level: info
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1200, 156.0]
+    coordinate: [872, 136.0]
     rotation: 0
     state: enabled
 - name: blocks_wavfile_source_0
@@ -90,13 +91,13 @@ blocks:
     manchester: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
-    options: '""'
+    options: ''
     samp_rate: samp_rate
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [376, 188.0]
+    coordinate: [312, 196.0]
     rotation: 0
     state: true
 - name: satellites_ccsds_concatenated_deframer_0
@@ -111,7 +112,7 @@ blocks:
     minoutbuf: '0'
     options: '""'
     precoding: '"differential"'
-    rs_basis: '"dual"'
+    rs_basis: '"conventional"'
     rs_interleaving: '1'
     scrambler: '"CCSDS"'
     threshold: '4'
@@ -119,7 +120,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [744, 200.0]
+    coordinate: [576, 180.0]
     rotation: 0
     state: true
 
@@ -130,4 +131,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-75-g67e88516
+  grc_version: 3.10.7.0
