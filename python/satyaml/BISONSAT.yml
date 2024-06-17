@@ -1,7 +1,7 @@
 name: BISONSAT
 alternative_names:
   - N7SKC
-norad: 40968
+norad: 40974
 data:
   &tlm Telemetry:
     telemetry: ax25
