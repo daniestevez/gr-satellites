@@ -13,7 +13,7 @@ transmitters:
     RS basis: dual 
     RS interleaving: 4
     convolutional: CCSDS uninverted
-    deviation: -2400
+    deviation: -3500
     data:
     - *tlm
   9k6 GMSK downlink:
@@ -24,6 +24,6 @@ transmitters:
     frame size: 892
     RS basis: dual 
     RS interleaving: 4
-    deviation: -2400
+    deviation: -3500
     data:
     - *tlm
