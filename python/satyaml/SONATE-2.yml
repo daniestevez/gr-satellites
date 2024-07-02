@@ -1,5 +1,5 @@
 name: SONATE-2
-norad: 98959
+norad: 59112
 data:
   &tlm Telemetry:
     telemetry: ax25
@@ -8,6 +8,7 @@ transmitters:
     frequency: 437.025e+6
     modulation: FSK
     baudrate: 9600
+    deviation: 2400
     framing: AX.25 G3RUH
     data:
     - *tlm
