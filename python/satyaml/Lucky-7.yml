@@ -10,6 +10,7 @@ transmitters:
     frequency: 437.525e+6
     modulation: FSK
     baudrate: 4800
+    deviation: 4800
     framing: Lucky-7
     data:
     - *tlm
