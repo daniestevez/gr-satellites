@@ -1,5 +1,5 @@
 name: QARMAN
-norad: 45257
+norad: 45263
 data:
   &tlm Telemetry:
     telemetry: ax25
