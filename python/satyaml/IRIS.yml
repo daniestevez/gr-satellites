@@ -1,7 +1,7 @@
 name: IRIS
 alternative_names:
   - ManitobaSat-1
-norad: 99073
+norad: 57315
 data:
   &tlm Telemetry:
     unknown
