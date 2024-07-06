@@ -1,6 +1,6 @@
 name: Hayasat
 alternative_names:
-norad: 99032
+norad: 58471
 data:
   &tlm Telemetry:
     telemetry: ax25
