@@ -1,7 +1,7 @@
 name: AHMAT-1
 alternative_names:
   - RS41S
-norad: 99142
+norad: 57206
 data:
   &tlm AX25 telemetry:
     telemetry: ax25
