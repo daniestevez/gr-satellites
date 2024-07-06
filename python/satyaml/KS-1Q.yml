@@ -1,5 +1,5 @@
 name: KS-1Q
-norad: 41845
+norad: 41847
 data:
   &tlm Telemetry:
     telemetry: csp
