@@ -8,6 +8,7 @@ transmitters:
     frequency: 435.310e+6
     modulation: FSK
     baudrate: 300
+    deviation: 125
     framing: AX100 ASM+Golay
     data:
     - *tlm
@@ -22,6 +23,7 @@ transmitters:
     frequency: 435.310e+6
     modulation: FSK
     baudrate: 1200
+    deviation: 500
     framing: AX100 ASM+Golay
     data:
     - *tlm
