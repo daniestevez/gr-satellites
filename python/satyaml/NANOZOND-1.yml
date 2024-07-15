@@ -22,6 +22,7 @@ transmitters:
     frequency: 437.000e+6
     modulation: FSK
     baudrate: 4800
+    deviation: 1200
     framing: USP
     data:
     - *tlm
