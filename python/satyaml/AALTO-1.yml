@@ -10,6 +10,7 @@ transmitters:
     frequency: 437.216e+6
     modulation: FSK
     baudrate: 9600
+    deviation: 3000
     framing: AX.25 G3RUH
     data:
     - *tlm_ax25
@@ -17,6 +18,7 @@ transmitters:
     frequency: 437.216e+6
     modulation: FSK
     baudrate: 9600
+    deviation: 3000
     framing: AALTO-1
     data:
     - *tlm_cc1125
