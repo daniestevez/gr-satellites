@@ -1,0 +1,28 @@
+name: CATSAT
+norad: 99164
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  2k4 FSK downlink:
+    frequency: 437.185e+6
+    modulation: FSK
+    baudrate: 2400
+    deviation: 750
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
+  9k6 FSK downlink:
+    frequency: 437.185e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
+  38k4 FSK downlink:
+    frequency: 437.185e+6
+    modulation: FSK
+    baudrate: 38400
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
