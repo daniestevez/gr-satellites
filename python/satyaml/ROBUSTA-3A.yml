@@ -1,5 +1,5 @@
 name: ROBUSTA-3A
-norad: 98895
+norad: 60243
 data:
   &tlm Telemetry:
     telemetry: ax25
