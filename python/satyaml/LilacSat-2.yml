@@ -31,6 +31,7 @@ transmitters:
     frequency: 437.225e+6
     modulation: FSK
     baudrate: 4800
+    deviation: 4000
     framing: CCSDS Concatenated
     RS basis: conventional
     frame size: 114
@@ -40,6 +41,7 @@ transmitters:
     frequency: 437.200e+6
     modulation: FSK subaudio
     baudrate: 300
+    deviation: 600
     framing: CCSDS Reed-Solomon
     RS basis: conventional
     frame size: 114
