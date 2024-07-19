@@ -1,5 +1,5 @@
 name: CATSAT
-norad: 99164
+norad: 60246
 data:
   &tlm Telemetry:
     unknown
