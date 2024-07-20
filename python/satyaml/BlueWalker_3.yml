@@ -8,6 +8,7 @@ transmitters:
     frequency: 437.500e+6
     modulation: FSK
     baudrate: 2400
+    deviation: 600
     framing: Light-1
     data:
     - *tlm
