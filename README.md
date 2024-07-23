@@ -111,10 +111,16 @@ the `VOLK_GENERIC=1` environment variable. See
 
 ## Satellite teams
 
-Satellite teams interested in using gr-satellites for you groundstation
+Satellite teams interested in using gr-satellites for your groundstation
 solution, please read
 [this note](https://github.com/daniestevez/gr-satellites/blob/master/satellite_teams.md),
 especially if you will be using Amateur radio spectrum.
+
+## Commercial satellites
+
+[This note](https://github.com/daniestevez/gr-satellites/blob/main/commercial_satellites.md)
+describes the policy of the gr-satellites project with respect to code
+contributions that add support for commercial satellite missions.
 
 ## CCSDS TM and TC Space Datalink and SpacePacket blocks
 
