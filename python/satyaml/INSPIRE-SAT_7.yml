@@ -17,6 +17,7 @@ transmitters:
     frequency: 435.200e+6
     modulation: FSK
     baudrate: 2400
+    deviation: 1200
     framing: SPINO
     data:
     - *spino
