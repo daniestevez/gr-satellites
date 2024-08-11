@@ -5,7 +5,7 @@ category: '[Satellites]/PDU'
 parameters:
 -   id: meta
     label: Metadata
-    dtype: object
+    dtype: raw
 
 inputs:
 -   domain: message
