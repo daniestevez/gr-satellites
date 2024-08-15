@@ -7,23 +7,26 @@ data:
     unknown
 transmitters:
   1k2 FSK FX.25 NRZ-I downlink:
-    frequency: 437.175e+6
+    frequency: 437.150e+6
     modulation: FSK
     baudrate: 1200
+    deviation: 1200
     framing: Astrocast FX.25 NRZ-I
     data:
     - *tlm
   1k2 FSK FX.25 NRZ downlink:
-    frequency: 437.175e+6
+    frequency: 437.150e+6
     modulation: FSK
     baudrate: 1200
+    deviation: 1200
     framing: Astrocast FX.25 NRZ
     data:
     - *tlm
   9k6 FSK downlink:
-    frequency: 437.175e+6
+    frequency: 437.150e+6
     modulation: FSK
     baudrate: 9600
+    deviation: 4800
     framing: CCSDS Reed-Solomon
     frame size: 1115
     RS basis: dual
