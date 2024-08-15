@@ -8,6 +8,7 @@ transmitters:
     frequency: 437.130e+6
     modulation: FSK
     baudrate: 4800
+    deviation: 1200
     framing: AX.25 G3RUH
     data:
     - *tlm
