@@ -1,0 +1,13 @@
+name: CUAVA-2
+norad: 98858
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  1k2 BPSK downlink:
+    frequency: 400.65e+6
+    modulation: BPSK
+    baudrate: 1200
+    framing: AX.25 G3RUH
+    data:
+    - *tlm
