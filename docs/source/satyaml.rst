@@ -268,6 +268,8 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``QUBIK``, the custom framing used by QUBIK.
 
+* ``Hades``, the custom framing used by HADES-D.
+
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.
 
