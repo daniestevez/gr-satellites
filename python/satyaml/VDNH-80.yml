@@ -1,0 +1,14 @@
+name: VDNH-80
+norad: 44392
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  4k8 FSK downlink:
+    frequency: 436.500e+6
+    modulation: FSK
+    baudrate: 4800
+    deviation: 1200
+    framing: Mobitex
+    data:
+    - *tlm
