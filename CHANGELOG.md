@@ -6,6 +6,117 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [5.6.0], [4.13.0], [3.20.0] - 2024-09-03
+
+### Added
+- 19k2 transmitter for RESHUCUBE
+- 19k2 transmitter for ISOI
+- AFSK transmitter for CUBEBUG-3
+- HADES deframer in SatYAML and core flowgraph
+- Support for AVION
+- Support for BELIEFSAT-0
+- Support for CATSAT
+- Support for CUAVA-2
+- Support for ERMINAZ
+- Support for GRBBeta
+- Support for Kashiwa
+- Support for KILICSAT
+- Support for MOVE-II and Nanolink transport
+- Support for NANOFF-A and -B
+- Support for OOV-Cube
+- Support for ROBUSTA-3A
+- Support for SATURN
+- Support for SONATE-2
+- Support for VDNH-80
+- Support for WS-1
+- Policy for commercial missions
+- Waveform plot Python script (in tools)
+
+### Fixed
+- AHMAT-1 NORAD ID
+- Astrocast 0.1 frequency
+- BISONSAT NORAD ID
+- CCSDS Deframer example
+- Crashes when the BME Submitter fails
+- Fixedlen to Pdu GRC YAML
+- Hayasat NORAD ID
+- IRIS NORAD ID
+- KS-1Q NORAD ID
+- MCUBED-2 NORAD ID
+- MONITOR-2 NORAD ID and transmitters
+- PDU add meta GRC YAML
+- QARMAN NORAD ID
+- ROBUSTA-3A NORAD ID
+- SCOOB-II NORAD ID
+- USP AX.25 Crop GRC YAML
+- Varlen Packet Framer and Varlen Packet Tagger GRC YAML
+
+### Changed
+- FSK deviation for AALTO-1
+- FSK deviation for AISTECHSAT-2 and -3
+- FSK deviation for al-Farabi-2
+- FSK deviation for ARCCUBE-1
+- FSK deviation for Astrocast 0.1
+- FSK deviation for BCCSAT 1
+- FSK deviation for BDSAT-2
+- FSK deviation for BEESAT-2 and -9
+- FSK deviation for BISONSAT
+- FSK deviation for BlueWalker 3
+- FSK deviation for CIRBE
+- FSK deviation for CubeBel-2
+- FSK deviation for CUBEBUG-3
+- FSK deviation for CUBE-L
+- FSK deviation for CubeSX-HSE, -HSE-2, -HSE-3 and -Sirius-HSE
+- FSK deviation for CUTE
+- FSK deviation for DEKART
+- FSK deviation for D-STAR One LightSat, iSat and Sparrow
+- FSK deviaiton for EIRSAT-1
+- FSK deviaiton for ENSO
+- FSK deviation for GO-32
+- FSK deviation for GRBAlpha
+- FSK deviation for GREENCUBE
+- FSK deviation for Hayasat
+- FSK deviation for INS-2TD
+- FSK deviation for INSPIRE-SAT 1 and 7
+- FSK deviation for ION-MK01
+- FSK deviation for IRIS-A
+- FSK deviation for KAFASAT
+- FSK deviation for KSU CubeSat
+- FSK deviation for LEDSAT
+- FSK deviation for LilacSat-2
+- FSK deviation for Lucky-7
+- FSK deviation for Luojia-1
+- FSK deviation for MCUBED-2
+- FSK deviation for MIMAN
+- FSK deviation for MONITOR-3 and -4
+- FSK deviation for NANOFF-A and -B
+- FSK deviation for NANOZOND
+- FSK deviation for NETSAT 2
+- FSK deviation for NORBI
+- FSK deviation for OrbiCraft-Zorkiy
+- FSK deviation for PEARL-1C and -1H
+- FSK deviation for POLYITAN-1
+- FSK deviation for SelfieSat
+- FSK deviation for Sharjahsat-1
+- FSK deviation for SKOLTECH-B1
+- FSK deviation for SNUGLITE
+- FSK deviation for SOMP 2b
+- FSK deviation for SONATE-2
+- FSK deviation for SSS-2B
+- FSK deviation for STRATOSAT-TK1
+- FSK deviation for SUCHAI-2 and -3
+- FSK deviation for Suomi 100
+- FSK deviation for TIGRISAT
+- FSK deviation for TTU-100
+- FSK deviation for TUBIN
+- FSK deviation for UmKA-1
+- FSK deviation for UPMSat 2
+- FSK deviation for UTMN-2
+- FSK deviation for UWE-4
+- FSK deviation for VERONIKA
+- FSK deviation for VIZARD-METEO
+- FSK deviation for VZLUSAT-2
+
 ## [5.5.0], [4.12.0], [3.19.0] - 2023-12-28
 
 ### Added
@@ -656,7 +767,8 @@ Large refactor release bringing new functionality and improvements. This is an o
 ## [1.0.0] - 2018-08-02
 First gr-satellites release using semantic versioning
 
-[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v5.5.0...main
+[Unreleased]: https://github.com/daniestevez/gr-satellites/compare/v5.6.0...main
+[5.5.0]: https://github.com/daniestevez/gr-satellites/compare/v5.5.0...v5.6.0
 [5.5.0]: https://github.com/daniestevez/gr-satellites/compare/v5.4.0...v5.5.0
 [5.4.0]: https://github.com/daniestevez/gr-satellites/compare/v5.3.0...v5.4.0
 [5.3.0]: https://github.com/daniestevez/gr-satellites/compare/v5.2.0...v5.3.0
@@ -664,6 +776,7 @@ First gr-satellites release using semantic versioning
 [5.1.1]: https://github.com/daniestevez/gr-satellites/compare/v5.1.0...v5.1.1
 [5.1.0]: https://github.com/daniestevez/gr-satellites/compare/v5.0.0...v5.1.0
 [5.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.6.0...v5.0.0
+[4.13.0]: https://github.com/daniestevez/gr-satellites/compare/v4.12.0...v4.13.0
 [4.12.0]: https://github.com/daniestevez/gr-satellites/compare/v4.11.0...v4.12.0
 [4.11.0]: https://github.com/daniestevez/gr-satellites/compare/v4.10.0...v4.11.0
 [4.10.0]: https://github.com/daniestevez/gr-satellites/compare/v4.9.0...v4.10.0
@@ -680,6 +793,7 @@ First gr-satellites release using semantic versioning
 [4.1.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/daniestevez/gr-satellites/compare/v4.0.0-rc1...v4.0.0
 [4.0.0-rc1]: https://github.com/daniestevez/gr-satellites/compare/v3.7.0...v4.0.0-rc1
+[3.20.0]: https://github.com/daniestevez/gr-satellites/compare/v3.19.0...v3.20.0
 [3.19.0]: https://github.com/daniestevez/gr-satellites/compare/v3.18.0...v3.19.0
 [3.18.0]: https://github.com/daniestevez/gr-satellites/compare/v3.17.0...v3.18.0
 [3.17.0]: https://github.com/daniestevez/gr-satellites/compare/v3.16.0...v3.17.0
