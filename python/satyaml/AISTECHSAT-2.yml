@@ -24,6 +24,7 @@ transmitters:
     frequency: 436.600e+6
     modulation: FSK
     baudrate: 4800
+    deviation: 1600
     framing: AISTECHSAT-2
     data:
     - *custom
@@ -31,6 +32,7 @@ transmitters:
     frequency: 436.600e+6
     modulation: FSK
     baudrate: 4800
+    deviation: 1600
     framing: AX100 ASM+Golay
     data:
     - *tlm

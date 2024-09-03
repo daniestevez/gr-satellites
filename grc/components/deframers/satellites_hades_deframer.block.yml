@@ -33,7 +33,7 @@ documentation: |-
     https://www.amsat-ea.org/app/download/13595777/AMSAT+EA+-+HADES-D+Transmissions+description.pdf
 
     Input:
-        A stream of soft symbols containing SanoSat-1 packets
+        A stream of soft symbols containing HADES-D packets
 
     Output:
         PDUs with the deframed HADES-D packets

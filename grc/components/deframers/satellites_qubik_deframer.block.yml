@@ -1,0 +1,44 @@
+id: satellites_qubik_deframer
+label: QUBIK Deframer
+category: '[Satellites]/Deframers'
+
+parameters:
+-   id: threshold
+    label: Syncword threshold
+    dtype: int
+    default: 4
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.deframers
+    make: satellites.components.deframers.qubik_deframer(syncword_threshold=${threshold}, options=${options})
+
+documentation: |-
+    Deframes QUBIK packets
+
+    QUBIK packets use a custom 32-bit syncword, CCSDS Reed-Solomon, CCSDS
+    scrambling (unusually applied before Reed-Solomon encoding), and a CRC-32C.
+
+    Input:
+        A stream of soft symbols containing QUBIK packets
+
+    Output:
+        PDUs with the deframed QUBIK packets
+
+    Parameters:
+        Syncword threshold: number of bit errors to allow in syncword detection
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
+
+file_format: 1

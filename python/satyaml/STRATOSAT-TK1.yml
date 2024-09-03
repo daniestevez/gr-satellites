@@ -10,6 +10,7 @@ transmitters:
      frequency: 435.870e+6
      modulation: FSK
      baudrate: 9600
+     deviation: 4800
      framing: GEOSCAN
      data:
      - *tlm

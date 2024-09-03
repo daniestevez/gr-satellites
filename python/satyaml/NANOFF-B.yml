@@ -1,0 +1,22 @@
+name: NANOFF-B
+norad: 58755
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  4k8 FSK downlink:
+    frequency: 435.950e+6
+    modulation: FSK
+    baudrate: 4800
+    deviation: 1200
+    framing: Mobitex-NX
+    data:
+    - *tlm
+  9k6 FSK downlink:
+    frequency: 435.950e+6
+    modulation: FSK
+    baudrate: 9600
+    deviation: 1200
+    framing: Mobitex-NX
+    data:
+    - *tlm

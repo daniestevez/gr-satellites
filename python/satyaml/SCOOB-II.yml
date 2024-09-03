@@ -1,5 +1,5 @@
 name: SCOOB-II
-norad: 99057
+norad: 57484
 data:
   &tlm Telemetry:
     telemetry: ax25

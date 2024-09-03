@@ -92,7 +92,7 @@ The modulations allowed in the ``modulation`` field are the following:
 
 * ``FSK subaudio``, for which the :ref:`FSK demodulator` with Subaudio set to
   ``True`` is used
-  
+
 * ``BPSK``. Coherent BPSK, for which the :ref:`BPSK demodulator` with
   Differential and Manchester set to ``False`` is used
 
@@ -112,7 +112,7 @@ The ``AFSK`` modulation also needs the ``deviation`` and ``af_carrier`` fields
 that indicate the AFSK tone frequencies in Hz, as in the AFSK demodulator. Optionally,
 it is possible to indicate the deviation of the FM modulation using the ``fm_deviation``
 field. By default, an FM deviation of 3 kHz is assumed.
-  
+
 The framings allowed in the ``framing`` field are the following:
 
 * ``AX.25``, `AX.25`_ with no scrambling (see :ref:`AX.25 deframer`)
@@ -226,7 +226,7 @@ The framings allowed in the ``framing`` field are the following:
   from TU Berlin
 
 * ``FOSSATSAT``, a custom protocol used by FOSSASAT
-  
+
 * ``AISTECHSAT-2``, a custom CCSDS-like protocol used by AISTECHSAT-2
 
 * ``AALTO-1``, custom framing used by AALTO-1. It uses a
@@ -265,7 +265,11 @@ The framings allowed in the ``framing`` field are the following:
 * ``GEOSCAN``, the custom framing used by GEOSCAN-EDELVEIS.
 
 * ``SPINO``, the custom framing used by the SPINO payload on INSPIRE-Sat7.
-  
+
+* ``QUBIK``, the custom framing used by QUBIK.
+
+* ``Hades``, the custom framing used by HADES-D.
+
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.
 
@@ -333,7 +337,7 @@ The allowable transport protocols are the following:
 
 * ``KISS KS-1Q``, KISS variant used by KS-1Q, which includes a header before the
   KISS bytes
-  
+
 .. _YAML: https://yaml.org/
 .. _AX.25: http://www.ax25.net/
 .. _FX.25: https://en.wikipedia.org/wiki/FX.25_Forward_Error_Correction

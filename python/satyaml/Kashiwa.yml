@@ -1,0 +1,14 @@
+name: Kashiwa
+norad: 59508
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  4k8 FSK AX25:
+    frequency: 437.375e+6
+    modulation: FSK
+    baudrate: 4800
+    deviation: 1200
+    framing: AX.25 G3RUH
+    data:
+    - *tlm
