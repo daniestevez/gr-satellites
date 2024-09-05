@@ -42,7 +42,7 @@ class SatYAML:
         'YUSAT', 'AX5043', 'USP', 'AO-40 FEC CRC-16-ARC', 'Hades',
         'AO-40 FEC CRC-16-ARC short', 'DIY-1', 'BINAR-1', 'Endurosat',
         'SanoSat', 'FORESAIL-1', 'HSU-SAT1', 'GEOSCAN', 'Light-1',
-        'SPINO', 'QUBIK',
+        'SPINO', 'QUBIK', 'BINAR-2',
         ]
     transports = [
         'KISS', 'KISS no control byte', 'KISS KS-1Q',

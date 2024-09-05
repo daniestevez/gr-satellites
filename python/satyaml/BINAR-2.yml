@@ -1,0 +1,13 @@
+name: BINAR-2
+norad: 60956
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  9k6 FSK downlink:
+    frequency: 437.700e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: BINAR-2
+    data:
+    - *tlm

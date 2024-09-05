@@ -253,6 +253,8 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``BINAR-1``, the custom framing used by the BINAR-1 satellite.
 
+* ``BINAR-2``, the custom framing used by the BINAR-2, 3 and 4 satellites.
+
 * ``Endurosat``, the custom framing used by the Endurosat modem.
 
 * ``SanoSat``, the custom framing used by SanoSat-1.

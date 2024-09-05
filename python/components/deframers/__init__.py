@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2019-2022 Daniel Estevez <daniel@destevez.net>
+# Copyright 2019-2024 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -28,6 +28,7 @@ from .ax100_deframer import ax100_deframer
 from .ax25_deframer import ax25_deframer
 from .ax5043_deframer import ax5043_deframer
 from .binar1_deframer import binar1_deframer
+from .binar2_deframer import binar2_deframer
 from .ccsds_concatenated_deframer import ccsds_concatenated_deframer
 from .ccsds_rs_deframer import ccsds_rs_deframer
 from .diy1_deframer import diy1_deframer
