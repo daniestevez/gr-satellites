@@ -1,5 +1,5 @@
-id: satellites_binar1_deframer
-label: BINAR-1 Deframer
+id: satellites_binar2_deframer
+label: BINAR-2 Deframer
 category: '[Satellites]/Deframers'
 
 parameters:
@@ -19,13 +19,13 @@ outputs:
 
 templates:
     imports: import satellites.components.deframers
-    make: satellites.components.deframers.binar1_deframer(options=${options})
+    make: satellites.components.deframers.binar2_deframer(options=${options})
 
 documentation: |-
-    Deframes BINAR-1 custom packets
+    Deframes BINAR-2 custom packets
 
     Input:
-        A stream of soft symbols containing BINAR-1 packets
+        A stream of soft symbols containing BINAR-2 packets
 
     Output:
         PDUs with the deframed packets
