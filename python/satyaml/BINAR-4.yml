@@ -1,5 +1,5 @@
 name: BINAR-4
-norad: 60958
+norad: 60952
 data:
   &tlm Telemetry:
     unknown
