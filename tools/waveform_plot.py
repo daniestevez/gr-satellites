@@ -26,6 +26,7 @@ def waveform_plot(a: dict):
         return 1
     print(f"Plotting {a['waveform']}")
 
+    plt.rcParams['savefig.directory'] = "."
     fig, (sig, hst) = plt.subplots(1, 2, sharey=True, figsize=(10, 6), tight_layout=True,
                                    gridspec_kw={'width_ratios': [0.8, 0.2]})
     plt.yticks(np.arange(-5, 5, 0.1), minor=True)
@@ -47,6 +48,7 @@ def waveform_plot(a: dict):
         hst.hist(x, density=True, bins=1000, orientation='horizontal')
 
     plt.show()
+    plt.close()
 
 
 if __name__ == "__main__":
