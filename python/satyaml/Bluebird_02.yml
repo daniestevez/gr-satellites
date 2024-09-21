@@ -1,11 +1,11 @@
 name: Bluebird 02
-norad: 98803
+norad: 61048
 data:
   &tlm Telemetry:
     unknown
 transmitters:
   2k4 FSK downlink:
-    frequency: 432.300e+6
+    frequency: 435.900e+6
     modulation: FSK
     baudrate: 2400
     deviation: 600
