@@ -1,5 +1,5 @@
 name: Bluebird 01
-norad: 98804
+norad: 61047
 data:
   &tlm Telemetry:
     unknown
