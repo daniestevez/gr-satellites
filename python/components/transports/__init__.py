@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2019 Daniel Estevez <daniel@destevez.net>
+# Copyright 2019,2024 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -21,3 +21,4 @@ are PDUs as well.
 
 from .kiss_transport import kiss_transport
 from .nanolink_transport import nanolink_transport
+from .tm_kiss_transport import tm_kiss_transport
