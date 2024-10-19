@@ -226,7 +226,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
             self._additional_datasinks.append(datasinks.hexdump_sink())
 
     def _init_transport(self, key, info):
-        """Initialize a datasink
+        """Initialize a transport
 
         Initializes a transport according to a SatYAML entry and connects
         it to the appropriate datasink
