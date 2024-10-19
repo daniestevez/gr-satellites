@@ -3,6 +3,14 @@ norad: 99130
 data:
   &tlm Telemetry:
     unknown
+transports:
+  &tm_kiss TM KISS:
+    protocol: TM short KISS
+    virtual_channels:
+    - 0
+    - 2
+    data:
+    - *tlm
 transmitters:
   9k6 BPSK downlink:
     frequency: 436.210e+6
@@ -12,5 +20,5 @@ transmitters:
     precoding: differential
     RS basis: conventional
     frame size: 223
-    data:
-    - *tlm
+    transports:
+    - *tm_kiss

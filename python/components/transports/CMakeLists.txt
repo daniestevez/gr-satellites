@@ -34,6 +34,7 @@ GR_PYTHON_INSTALL(
     __init__.py
     kiss_transport.py
     nanolink_transport.py
+    tm_kiss_transport.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/components/transports
 )
 
