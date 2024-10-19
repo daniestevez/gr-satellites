@@ -1,0 +1,16 @@
+name: ASRTU-1
+norad: 99130
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  9k6 BPSK downlink:
+    frequency: 436.210e+6
+    modulation: BPSK
+    baudrate: 9600
+    framing: CCSDS Concatenated
+    precoding: differential
+    RS basis: conventional
+    frame size: 223
+    data:
+    - *tlm
