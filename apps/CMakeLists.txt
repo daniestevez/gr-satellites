@@ -23,8 +23,7 @@ include(GrPython)
 GR_PYTHON_INSTALL(
     PROGRAMS
     gr_satellites
-    erminaz_ssdv
-    jy1sat_ssdv
+    gr_satellites_ssdv
     smog_p_spectrum
     DESTINATION bin
 )

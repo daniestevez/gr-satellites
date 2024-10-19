@@ -20,6 +20,7 @@ import construct
 
 from .aausat4 import aausat4
 from .amicalsat import amicalsat
+from .asrtu import asrtu
 from .au03 import au03
 from .ax25 import ax25
 from .binar1 import binar1
