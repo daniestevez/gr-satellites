@@ -56,7 +56,7 @@ set(MAN_BUILD_DIR ${PROJECT_BINARY_DIR}/docs)
 
 list(APPEND manpages
      gr_satellites.1
-     jy1sat_ssdv.1
+     gr_satellites_ssdv.1
      smog_p_spectrum.1
 )
 
