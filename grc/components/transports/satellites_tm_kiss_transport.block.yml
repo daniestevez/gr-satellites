@@ -1,0 +1,47 @@
+id: satellites_tm_kiss_transport
+label: TM KISS Transport
+category: '[Satellites]/Transports'
+
+parameters:
+-   id: virtual_channels
+    label: Virtual channels
+    dtype: int_vector
+    default: [0]
+-   id: short_tm
+    label: Short TM
+    dtype: bool
+    default: 'False'
+    options: ['True', 'False']    
+-   id: options
+    label: Command line options
+    dtype: string
+    default: '""'
+    hide: part
+
+inputs:
+-   domain: message
+    id: in
+
+outputs:
+-   domain: message
+    id: out
+
+templates:
+    imports: import satellites.components.transports
+    make: satellites.components.transports.kiss_transport(virtual_channels=${virtual_channels}, short_tm=${short_tm}, options=${options})
+
+documentation: |-
+    Implements fragmentation/defragmentation using the KISS protocol in TM frames payload
+
+    Input:
+        PDUs containing TM frames with KISS stream payload
+
+    Output:
+        PDUs with the packets contained inside the KISS stream of each selected virtual channel
+
+    Parameters:
+        Virtual channels: List of virtual channels to extract
+        Short TM: Use short TM header from BY02 and other missions
+        Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
+
+file_format: 1
