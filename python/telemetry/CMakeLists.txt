@@ -34,11 +34,13 @@ GR_PYTHON_INSTALL(
     __init__.py
     aausat4.py
     amicalsat.py
+    asrtu.py
     au03.py
     ax25.py
     binar1.py
     by02.py
     by70_1.py
+    ccsds.py
     cirbe_70cm.py
     cirbe_bct_soh.py
     csp.py

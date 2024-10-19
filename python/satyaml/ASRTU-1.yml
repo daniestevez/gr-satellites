@@ -2,7 +2,7 @@ name: ASRTU-1
 norad: 99130
 data:
   &tlm Telemetry:
-    unknown
+    telemetry: asrtu
 transports:
   &tm_kiss TM KISS:
     protocol: TM short KISS
