@@ -235,7 +235,11 @@ class gr_satellites_flowgraph(gr.hier_block2):
             key: the name of the transport entry in SatYAML
             info: the body of the transport entry in SatYAML
         """
-        transport = self.get_transport(info['protocol'])()
+        if 'virtual_channels' in info:
+            args = {'virtual_channels': info['virtual_channels']}
+        else:
+            args = {}
+        transport = self.get_transport(info['protocol'])(**args)
         self._transports[key] = transport
         if not self.options.hexdump:
             for data in info['data']:
@@ -480,4 +484,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
                                             control_byte=False),
         'KISS KS-1Q': set_options(transports.kiss_transport,
                                   control_byte=False, header_remove_bytes=3),
+        'TM KISS': transports.tm_kiss_transport,
+        'TM short KISS': set_options(transports.tm_kiss_transport,
+                                     short_tm=True),
         }

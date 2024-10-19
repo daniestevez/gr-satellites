@@ -340,6 +340,11 @@ The allowable transport protocols are the following:
 * ``KISS KS-1Q``, KISS variant used by KS-1Q, which includes a header before the
   KISS bytes
 
+* ``TM KISS``, TM frames containing a KISS stream in some virtual channels
+
+* ``TM short KISS``, short (5 byte) TM frames containing a KISS stream in some
+  virtual channels
+
 .. _YAML: https://yaml.org/
 .. _AX.25: http://www.ax25.net/
 .. _FX.25: https://en.wikipedia.org/wiki/FX.25_Forward_Error_Correction
