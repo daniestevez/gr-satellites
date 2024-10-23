@@ -33,6 +33,8 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     aausat4.py
+    aepex_70cm.py
+    aepex_sw_stat.py
     amicalsat.py
     asrtu.py
     au03.py
