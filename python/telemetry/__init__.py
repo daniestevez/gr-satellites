@@ -19,6 +19,7 @@ object, but in more complex cases, another class supporting the
 import construct
 
 from .aausat4 import aausat4
+from .aepex_70cm import aepex_70cm
 from .amicalsat import amicalsat
 from .au03 import au03
 from .ax25 import ax25
