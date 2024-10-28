@@ -12,6 +12,10 @@ parameters:
     dtype: string
     default: '""'
     hide: part
+-   id: new_geoscan_platform
+    label: New GEOSCAN Platform deframer
+    dtype: int
+    default: 0
 
 inputs:
 -   domain: stream
@@ -23,7 +27,7 @@ outputs:
 
 templates:
     imports: import satellites.components.deframers
-    make: satellites.components.deframers.geoscan_deframer(syncword_threshold = ${threshold}, options=${options})
+    make: satellites.components.deframers.geoscan_deframer(new_geoscan_platform = ${new_geoscan_platform}, syncword_threshold = ${threshold}, options=${options})
 
 documentation: |-
     Deframes AALTO-1 custom packets
