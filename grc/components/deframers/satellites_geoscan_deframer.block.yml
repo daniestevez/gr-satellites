@@ -12,7 +12,7 @@ parameters:
     dtype: string
     default: '""'
     hide: part
--   id: packet_length
+-   id: frame_size
     label: Frame length (bytes)
     dtype: int
     default: 66
@@ -27,7 +27,7 @@ outputs:
 
 templates:
     imports: import satellites.components.deframers
-    make: satellites.components.deframers.geoscan_deframer(packet_length = ${packet_length}, syncword_threshold = ${threshold}, options=${options})
+    make: satellites.components.deframers.geoscan_deframer(frame_size = ${frame_size}, syncword_threshold = ${threshold}, options=${options})
 
 documentation: |-
     Deframes GEOSCAN custom packets
