@@ -12,10 +12,10 @@ parameters:
     dtype: string
     default: '""'
     hide: part
--   id: new_geoscan_platform
-    label: New GEOSCAN Platform deframer
+-   id: packet_length
+    label: Frame length (bytes)
     dtype: int
-    default: 0
+    default: 66
 
 inputs:
 -   domain: stream
@@ -27,10 +27,10 @@ outputs:
 
 templates:
     imports: import satellites.components.deframers
-    make: satellites.components.deframers.geoscan_deframer(new_geoscan_platform = ${new_geoscan_platform}, syncword_threshold = ${threshold}, options=${options})
+    make: satellites.components.deframers.geoscan_deframer(packet_length = ${packet_length}, syncword_threshold = ${threshold}, options=${options})
 
 documentation: |-
-    Deframes AALTO-1 custom packets
+    Deframes GEOSCAN custom packets
 
     The frames are transmitted by a Texas Intruments CC1125 transceiver with a PN9 scrambler and the built-in CRC.
 

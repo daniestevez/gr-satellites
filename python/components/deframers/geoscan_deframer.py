@@ -33,7 +33,7 @@ class geoscan_deframer(gr.hier_block2, options_block):
         syncword_threshold: number of bit errors allowed in syncword (int)
         options: Options from argparse
     """
-    def __init__(self,new_geoscan_platform=False, syncword_threshold=None, options=None):
+    def __init__(self, packet_length=None, syncword_threshold=None, options=None):
         gr.hier_block2.__init__(
             self,
             'geoscan_deframer',
@@ -46,14 +46,12 @@ class geoscan_deframer(gr.hier_block2, options_block):
         if syncword_threshold is None:
             syncword_threshold = self.options.syncword_threshold
         
-        if new_geoscan_platform:
-            self.packlen=74
-        else:
-            self.packlen=66
-
+        if packet_length is None:
+            packet_length = self.options.packet_length
+        
         self.slicer = digital.binary_slicer_fb()
         self.deframer = sync_to_pdu_packed(
-            packlen=self.packlen, sync=_syncword, threshold=syncword_threshold)
+            packlen=packet_length, sync=_syncword, threshold=syncword_threshold)
         self.scrambler = pn9_scrambler()
         self.crc = crc16_cc11xx()
 
@@ -63,6 +61,7 @@ class geoscan_deframer(gr.hier_block2, options_block):
         self.msg_connect((self.crc, 'ok'), (self, 'out'))
 
     _default_sync_threshold = 4
+    _default_packet_length = 66
 
     @classmethod
     def add_options(cls, parser):
@@ -73,3 +72,7 @@ class geoscan_deframer(gr.hier_block2, options_block):
             '--syncword_threshold', type=int,
             default=cls._default_sync_threshold,
             help='Syncword bit errors [default=%(default)r]')
+        parser.add_argument(
+            '--packet_length', type=int,
+            default=cls._default_packet_length,
+            help='Frame length in bytes [default=%(default)r]')
