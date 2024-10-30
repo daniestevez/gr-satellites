@@ -12,6 +12,10 @@ parameters:
     dtype: string
     default: '""'
     hide: part
+-   id: frame_size
+    label: Frame length (bytes)
+    dtype: int
+    default: 66
 
 inputs:
 -   domain: stream
@@ -23,10 +27,10 @@ outputs:
 
 templates:
     imports: import satellites.components.deframers
-    make: satellites.components.deframers.geoscan_deframer(syncword_threshold = ${threshold}, options=${options})
+    make: satellites.components.deframers.geoscan_deframer(frame_size = ${frame_size}, syncword_threshold = ${threshold}, options=${options})
 
 documentation: |-
-    Deframes AALTO-1 custom packets
+    Deframes GEOSCAN custom packets
 
     The frames are transmitted by a Texas Intruments CC1125 transceiver with a PN9 scrambler and the built-in CRC.
 
@@ -37,6 +41,7 @@ documentation: |-
         PDUs with the deframed GEOSCAN packets
 
     Parameters:
+        Frame size: size of the decode frame in bytes
         Syncword threshold: number of bit errors to allow in syncword detection
         Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 

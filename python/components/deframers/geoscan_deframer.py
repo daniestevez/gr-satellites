@@ -31,9 +31,10 @@ class geoscan_deframer(gr.hier_block2, options_block):
 
     Args:
         syncword_threshold: number of bit errors allowed in syncword (int)
+        frame_size: size of the decode frame in bytes
         options: Options from argparse
     """
-    def __init__(self, syncword_threshold=None, options=None):
+    def __init__(self, frame_size=66, syncword_threshold=None, options=None):
         gr.hier_block2.__init__(
             self,
             'geoscan_deframer',
@@ -45,10 +46,9 @@ class geoscan_deframer(gr.hier_block2, options_block):
 
         if syncword_threshold is None:
             syncword_threshold = self.options.syncword_threshold
-
         self.slicer = digital.binary_slicer_fb()
         self.deframer = sync_to_pdu_packed(
-            packlen=66, sync=_syncword, threshold=syncword_threshold)
+            packlen=frame_size, sync=_syncword, threshold=syncword_threshold)
         self.scrambler = pn9_scrambler()
         self.crc = crc16_cc11xx()
 
