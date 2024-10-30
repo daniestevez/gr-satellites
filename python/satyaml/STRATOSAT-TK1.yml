@@ -12,5 +12,6 @@ transmitters:
      baudrate: 9600
      deviation: 4800
      framing: GEOSCAN
+     frame size: 66
      data:
      - *tlm
