@@ -41,6 +41,7 @@ documentation: |-
         PDUs with the deframed GEOSCAN packets
 
     Parameters:
+        Frame size: size of the decode frame in bytes
         Syncword threshold: number of bit errors to allow in syncword detection
         Command line options: options to pass down to the block, following the syntax of the gr_satellites command line tool
 

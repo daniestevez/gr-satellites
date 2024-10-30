@@ -44,8 +44,7 @@ class geoscan_deframer(gr.hier_block2, options_block):
         self.message_port_register_hier_out('out')
 
         if syncword_threshold is None:
-            syncword_threshold = self.options.syncword_threshold
-        
+            syncword_threshold = self.options.syncword_threshold     
         self.slicer = digital.binary_slicer_fb()
         self.deframer = sync_to_pdu_packed(
             packlen=frame_size, sync=_syncword, threshold=syncword_threshold)
