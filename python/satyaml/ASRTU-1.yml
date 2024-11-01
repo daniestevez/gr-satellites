@@ -13,7 +13,7 @@ transports:
     - *tlm
 transmitters:
   9k6 BPSK downlink:
-    frequency: 436.210e+6
+    frequency: 435.400e+6
     modulation: BPSK
     baudrate: 9600
     framing: CCSDS Concatenated
