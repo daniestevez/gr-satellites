@@ -49,6 +49,7 @@ install(FILES
     satellites_mobitex_deframer.block.yml
     satellites_ngham_deframer.block.yml
     satellites_nusat_deframer.block.yml
+    satellites_openlst_deframer.block.yml
     satellites_ops_sat_deframer.block.yml
     satellites_qubik_deframer.block.yml
     satellites_reaktor_hello_world_deframer.block.yml
