@@ -272,6 +272,9 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``Hades``, the custom framing used by HADES-D.
 
+* ``OpenLST``, OpenLST protocol framing, with FEC (convolutional coding) and PN9
+  whitening.
+
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.
 

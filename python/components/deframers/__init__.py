@@ -46,6 +46,7 @@ from .lucky7_deframer import lucky7_deframer
 from .mobitex_deframer import mobitex_deframer
 from .ngham_deframer import ngham_deframer
 from .nusat_deframer import nusat_deframer
+from .openlst_deframer import openlst_deframer
 from .ops_sat_deframer import ops_sat_deframer
 from .qubik_deframer import qubik_deframer
 from .reaktor_hello_world_deframer import reaktor_hello_world_deframer
