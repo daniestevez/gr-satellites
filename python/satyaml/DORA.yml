@@ -1,0 +1,13 @@
+name: DORA
+norad: 61502
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  7k4 FSK downlink:
+    frequency: 436.825e+6
+    modulation: FSK
+    baudrate: 7415.77
+    framing: OpenLST
+    data:
+    - *tlm

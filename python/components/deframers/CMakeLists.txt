@@ -60,6 +60,7 @@ GR_PYTHON_INSTALL(
     mobitex_deframer.py
     ngham_deframer.py
     nusat_deframer.py
+    openlst_deframer.py
     ops_sat_deframer.py
     qubik_deframer.py
     reaktor_hello_world_deframer.py
