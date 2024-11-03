@@ -184,6 +184,7 @@ class openlst_fec_decode(gr.basic_block):
         # Decode remaining
         a = 8
         while len(decoded) < length:
+            assert len(msg) >= a + 4
             decoded += whiten(decoder.send(msg[a:a+4]), pngen)
             a += 4
 
@@ -226,7 +227,7 @@ class openlst_deframer(gr.hier_block2, options_block):
 
         self.slicer = digital.binary_slicer_fb()
         self.deframer = sync_to_pdu_packed(
-            packlen=512, sync=_syncword, threshold=syncword_threshold)
+            packlen=520, sync=_syncword, threshold=syncword_threshold)
         self.fec = openlst_fec_decode()
         self.crc = crc_check(16, 0x8005, 0xFFFF, 0x0, False, False,
                              True, True)
