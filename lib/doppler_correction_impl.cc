@@ -10,7 +10,6 @@
 #include "doppler_correction_impl.h"
 #include <gnuradio/expj.h>
 #include <gnuradio/io_signature.h>
-#include <cstdio>
 #include <fstream>
 #include <stdexcept>
 
@@ -50,6 +49,9 @@ doppler_correction_impl::~doppler_correction_impl() {}
 void doppler_correction_impl::read_doppler_file(std::string& filename)
 {
     std::ifstream input_file(filename);
+    if (!input_file.good()) {
+        throw std::runtime_error("error opening Doppler file");
+    }
     double time;
     double frequency;
 
