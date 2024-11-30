@@ -13,6 +13,9 @@ parameters:
     dtype: string
     options: ['"from"', '"to"']
     option_labels: [From, To]
+-   id: digicallsign
+    label: Digicallsign
+    dtype: string
 
 inputs:
 -   domain: message
@@ -28,6 +31,6 @@ outputs:
 
 templates:
     imports: import satellites
-    make: satellites.check_address(${address}, ${direction})
+    make: satellites.check_address(${address}, ${direction}, ${digicallsign})
 
 file_format: 1
