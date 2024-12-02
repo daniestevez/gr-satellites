@@ -53,6 +53,7 @@ class check_address(gr.basic_block):
         else:
             address = packet[7:14]
 
+        hbit = 0
         if len(packet) > 20:
 
             hbit = packet[20] >> 7
@@ -60,12 +61,7 @@ class check_address(gr.basic_block):
 # (set to 1 in case of digipeated message)
             digi = [c >> 1 for c in packet[14:20]]
 
-# error handling
-            try:
-                digi = bytes(digi).decode('ascii').rstrip(' ')
-
-            except UnicodeDecodeError:
-                print("Not to ASCII convertable string detected.")
+            digi = bytes(digi).decode('ascii').rstrip(' ')
 
 # extension bit (least significant bit after sender callsign)
 # (set to 0 in case of digi callsign follows)
@@ -73,19 +69,13 @@ class check_address(gr.basic_block):
 
         callsign = [c >> 1 for c in address[:6]]
 
-# error handling
-        try:
-            callsign = bytes(callsign).decode('ascii').rstrip(' ')
-
-        except UnicodeDecodeError:
-            print("Not to ASCII convertable string detected.")
+        callsign = bytes(callsign).decode('ascii').rstrip(' ')
 
         ssid = (address[6] >> 1) & 0x0f
 
-
 # altered if sentence
         if ((callsign == self.callsign
-                and (ssid == self.ssid if self.ssid is not None else True))
+                and (self.ssid is None or ssid == self.ssid))
                 or (ebit == 0 and hbit == 1 and digi == self.digicallsign)):
             # match
             self.message_port_pub(pmt.intern('ok'), msg_pmt)
