@@ -33,4 +33,16 @@ templates:
     imports: import satellites
     make: satellites.check_address(${address}, ${direction}, ${digicallsign})
 
+documentation: |-
+    Enter an address (choose "from" for source or "to" for destination callsign) and/or enter a digipeater callsign.
+    The address callsign may have a SSID, the digipeater callsign must not have a SSID.
+    
+    Example and results:
+    Address: PCSAT-1 (from)
+    Digicallsign: W3ADO
+
+    Every frame with PCSAT-1 as source callsign will be forwarded to output port "ok".
+    Every frame with "via" W3ADO (SSID is arbitrary) and hbit set (usually marked with an asterisk (*) to show that it was digipeated) will be forwarded to output port "ok".
+    Everything else will be forwarded to output port "fail".
+    
 file_format: 1
