@@ -16,6 +16,7 @@ parameters:
 -   id: digicallsign
     label: Digicallsign
     dtype: string
+    default: ''
 
 inputs:
 -   domain: message
