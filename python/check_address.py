@@ -17,7 +17,7 @@ import pmt
 
 class check_address(gr.basic_block):
     """docstring for block check_address"""
-    def __init__(self, address, direction, digicallsign):
+    def __init__(self, address, direction, digicallsign=''):
         gr.basic_block.__init__(
             self,
             name='check_address',
