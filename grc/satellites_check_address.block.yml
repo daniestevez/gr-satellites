@@ -35,7 +35,9 @@ templates:
     make: satellites.check_address(${address}, ${direction}, ${digicallsign})
 
 documentation: |-
-    Enter an address (choose "from" for source or "to" for destination callsign) and/or enter a digipeater callsign.
+    Enter either an address (choose "from" for source or "to" for destination callsign) or a digipeater callsign or both.
+    The logical connective between 'address' and 'digipeater callsign' is an inclusive disjunction (OR).
+    If at least one callsign of both matches, the frame is passed to output port "ok".
     The address callsign may have a SSID, the digipeater callsign must not have a SSID.
     
     Example and results:
