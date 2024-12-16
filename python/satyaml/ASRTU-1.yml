@@ -1,5 +1,5 @@
 name: ASRTU-1
-norad: 99130
+norad: 61781
 data:
   &tlm Telemetry:
     telemetry: asrtu
