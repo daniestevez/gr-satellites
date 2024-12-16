@@ -14,7 +14,7 @@
 #include <pmt/pmt.h>
 #include <satellites/varlen_packet_framer.h>
 
-//#define VLPF_DEBUG_TIMING
+// #define VLPF_DEBUG_TIMING
 
 namespace gr {
 namespace satellites {
