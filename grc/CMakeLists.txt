@@ -50,6 +50,8 @@ install(FILES
     satellites_doppler_correction.block.yml
     satellites_encode_rs.block.yml
     satellites_encode_rs_ccsds.block.yml
+    satellites_encode_rs_ccsds_vector.block.yml
+    satellites_encode_rs_vector.block.yml
     satellites_eseo_line_decoder.block.yml
     satellites_eseo_packet_crop.block.yml
     satellites_fixedlen_tagger.block.yml
