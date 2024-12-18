@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(encode_rs.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(99021331d1740a77b5cd3f667010f815)                     */
+/* BINDTOOL_HEADER_FILE_HASH(3086a7f214bce934affa48bc9d1c4fc5)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -35,22 +35,31 @@ void bind_encode_rs(py::module& m)
 
     py::class_<encode_rs, gr::block, gr::basic_block, std::shared_ptr<encode_rs>>(
         m, "encode_rs", D(encode_rs))
-
         .def(py::init(py::overload_cast<bool, int>(&encode_rs::make)),
              py::arg("dual_basis"),
              py::arg("interleave") = 1,
              D(encode_rs, make))
-
-
+        .def(py::init(py::overload_cast<int, bool, int>(&encode_rs::make)),
+             py::arg("frame_size"),
+             py::arg("dual_basis"),
+             py::arg("interleave") = 1,
+             D(encode_rs, make))
         .def(py::init(py::overload_cast<int, int, int, int, int, int>(&encode_rs::make)),
              py::arg("symsize"),
              py::arg("gfpoly"),
              py::arg("fcr"),
              py::arg("prim"),
              py::arg("nroots"),
-             py::arg("interleave"),
+             py::arg("interleave") = 1,
              D(encode_rs, make))
-
-
-        ;
+        .def(py::init(
+                 py::overload_cast<int, int, int, int, int, int, int>(&encode_rs::make)),
+             py::arg("frame_size"),
+             py::arg("symsize"),
+             py::arg("gfpoly"),
+             py::arg("fcr"),
+             py::arg("prim"),
+             py::arg("nroots"),
+             py::arg("interleave"),
+             D(encode_rs, make));
 }
