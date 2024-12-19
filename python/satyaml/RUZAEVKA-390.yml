@@ -1,0 +1,25 @@
+name: RUZAEVKA-390
+alternative_names:
+  - RS44S
+norad: 61766
+data:
+  &tlm AX25 telemetry:
+    telemetry: ax25
+transmitters:
+  1k135 AX25 AFSK downlink:
+    frequency: 437.050e+6
+    modulation: AFSK
+    baudrate: 1143
+    af_carrier: 1810
+    deviation: 565
+    framing: AX.25
+    data:
+    - *tlm
+  2k4 AX25 FSK downlink:
+    frequency: 435.750e+6
+    modulation: FSK
+    baudrate: 2400
+    deviation: 600
+    framing: AX.25
+    data:
+    - *tlm
