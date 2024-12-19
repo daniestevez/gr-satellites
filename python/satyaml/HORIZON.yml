@@ -1,7 +1,7 @@
 name: HORIZON
 alternative_names:
   - RS59S
-norad: 61755
+norad: 61757
 data:
    &tlm AX25 Telemetry:
      telemetry: ax25
