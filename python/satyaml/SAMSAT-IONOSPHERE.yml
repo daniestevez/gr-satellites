@@ -1,0 +1,16 @@
+name: SAMSAT-IONOSPHERE
+alternative_names:
+  - RS75S
+norad: 61784
+data:
+  &tlm AX25 telemetry:
+    telemetry: ax25
+transmitters:
+  1k2 AX25 FSK downlink:
+    frequency: 437.400e+6
+    modulation: FSK
+    baudrate: 1200
+    deviation: 500
+    framing: AX.25
+    data:
+    - *tlm
