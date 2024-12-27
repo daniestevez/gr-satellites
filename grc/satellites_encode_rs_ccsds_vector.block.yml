@@ -1,0 +1,34 @@
+id: satellites_encode_rs_ccsds_vector
+label: CCSDS Reed-Solomon Encoder (vector)
+category: '[Satellites]/FEC'
+
+parameters:
+-   id: frame_size
+    label: Frame size
+    default: 223
+    dtype: int  
+-   id: basis
+    label: Basis
+    dtype: enum
+    options: ['False', 'True']
+    option_labels: [Conventional, Dual]
+-   id: interleave
+    label: Interleave depth
+    default: 1
+    dtype: int
+
+inputs:
+-   domain: stream
+    dtype: byte
+    vlen: ${ frame_size }
+
+outputs:
+-   domain: stream
+    dtype: byte
+    vlen: ${ 255 * interleave }
+
+templates:
+    imports: import satellites
+    make: satellites.encode_rs(${frame_size}, ${basis}, ${interleave})
+
+file_format: 1
