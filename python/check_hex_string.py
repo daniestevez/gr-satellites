@@ -42,9 +42,9 @@ class check_hex_string(gr.basic_block):
             self.message_port_pub(pmt.intern('fail'), msg_pmt)
             return
 
-        hex_string = packet[self.startindex:self.startindex + len(self.hexstring)]
+        hex_str = packet[self.startindex:self.startindex + len(self.hexstring)]
 
-        if (hex_string == self.hexstring):
+        if (hex_str == self.hexstring):
             # match
             self.message_port_pub(pmt.intern('ok'), msg_pmt)
         else:
