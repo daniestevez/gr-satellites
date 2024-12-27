@@ -67,6 +67,7 @@ from .check_crc16_ccitt import check_crc16_ccitt
 from .check_crc16_ccitt_false import check_crc16_ccitt_false
 from .check_crc import check_crc
 from .check_eseo_crc import check_eseo_crc
+from .check_hex_string import check_hex_string
 from .check_swiatowid_crc import check_swiatowid_crc
 from .check_tt64_crc import check_tt64_crc
 from .eseo_line_decoder import eseo_line_decoder
