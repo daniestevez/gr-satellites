@@ -53,6 +53,7 @@ GR_PYTHON_INSTALL(
     check_crc16_ccitt_false.py
     check_crc.py
     check_eseo_crc.py
+    check_hex_string.py
     check_swiatowid_crc.py
     check_tt64_crc.py
     crc32c.py
