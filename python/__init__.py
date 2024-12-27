@@ -59,7 +59,6 @@ from .bme_submitter import bme_submitter
 from .bme_ws_submitter import bme_ws_submitter
 from .cc11xx_packet_crop import cc11xx_packet_crop
 from .check_address import check_address
-from .check_address2 import check_address2
 from .check_ao40_uncoded_crc import check_ao40_uncoded_crc
 from .check_astrocast_crc import check_astrocast_crc
 from .check_cc11xx_crc import check_cc11xx_crc
