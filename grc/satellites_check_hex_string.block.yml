@@ -35,12 +35,14 @@ documentation: |-
     Checks data from input port from "Starting Position" on for a "Hex String".
 
     If the incoming string matches the entered string, data will be passed to output port "ok", else to "fail".
+    
+    Example for a match:
 
-    Example:
-    Hex String = c0ffee
-    Starting Position = 1
+    Entered block parameters:
+    "Hex String" = 4450304E4641	(ASCII for DP0NFA)
+    "Starting Position" = 10		(Starts counting from 0 on)
 
-    => Match for "ff"
+    Data coming into input port: "02300400000000003D0E4450304E4641000100C300B7142EF90F9C06290000000"
     
 
 file_format: 1
