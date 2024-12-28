@@ -14,7 +14,10 @@ import pmt
 
 
 class check_hex_string(gr.basic_block):
-    """docstring for block check_hex_string"""
+    """
+    Checks incoming hex string from a specified position
+    for a given hex string.
+    """
     def __init__(self, hexstring, startindex=0):
         gr.basic_block.__init__(
             self,
