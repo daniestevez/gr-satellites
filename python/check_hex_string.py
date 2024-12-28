@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2017 Daniel Estevez <daniel@destevez.net>
+# Copyright 2024 DL7NDR Daniel (https://www.qrz.com/db/DL7NDR)
 #
 # This file is part of gr-satellites
 #
