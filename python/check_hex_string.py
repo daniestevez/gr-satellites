@@ -47,7 +47,7 @@ class check_hex_string(gr.basic_block):
 
         hex_str = packet[self.startindex:self.startindex + len(self.hexstring)]
 
-        if (hex_str == self.hexstring):
+        if hex_str == self.hexstring:
             # match
             self.message_port_pub(pmt.intern('ok'), msg_pmt)
         else:
