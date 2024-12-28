@@ -40,11 +40,6 @@ class check_hex_string(gr.basic_block):
             return
         packet = bytes(pmt.u8vector_elements(msg))
 
-        # Check packet length
-        if len(packet) < len(self.hexstring):
-            self.message_port_pub(pmt.intern('fail'), msg_pmt)
-            return
-
         hex_str = packet[self.startindex:self.startindex + len(self.hexstring)]
 
         if hex_str == self.hexstring:
