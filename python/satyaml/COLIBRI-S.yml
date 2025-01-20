@@ -1,0 +1,17 @@
+name: COLIBRI-S
+alternative_names:
+  - RS67S
+norad: 61746
+data:
+   &tlm Telemetry:
+     unknown
+transmitters:
+   9k6 FSK downlink:
+     frequency: 436.835e+6
+     modulation: FSK
+     baudrate: 9600
+     framing: GEOSCAN
+     deviation: 4800
+     frame size: 74
+     data:
+     - *tlm
