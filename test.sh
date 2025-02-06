@@ -2,6 +2,9 @@
 
 export GR_SATELLITES_SUBMIT_TLM=0
 
+
+echo Nila
+gr_satellites nila --wavfile satellite-recordings/Nila.wav
 echo 1KUNS-PF
 gr_satellites 1KUNS-PF --wavfile satellite-recordings/1kuns_pf.wav
 echo 3CAT-1

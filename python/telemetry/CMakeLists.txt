@@ -80,6 +80,7 @@ GR_PYTHON_INSTALL(
     trisat.py
     upmsat_2.py
     vzlusat_2.py
+    nila.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/telemetry
 )
 
