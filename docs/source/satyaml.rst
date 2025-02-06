@@ -270,7 +270,10 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``QUBIK``, the custom framing used by QUBIK.
 
-* ``Hades``, the custom framing used by HADES-D.
+* ``HADES-D``, the custom framing used by HADES-D.
+
+* ``HADES-R``, the custom framing used by HADES-R, MARIA-G, UNNE-1, HADES-ICM
+  and HYDRA-T.
 
 * ``OpenLST``, OpenLST protocol framing, with FEC (convolutional coding) and PN9
   whitening.

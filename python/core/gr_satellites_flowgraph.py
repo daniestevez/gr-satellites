@@ -476,8 +476,9 @@ class gr_satellites_flowgraph(gr.hier_block2):
             syncword='light-1'),
         'SPINO': deframers.spino_deframer,
         'QUBIK': deframers.qubik_deframer,
-        'Hades': deframers.hades_deframer,
         'OpenLST': deframers.openlst_deframer,
+        'HADES-D': set_options(deframers.hades_deframer, satellite='HADES-D'),
+        'HADES-R': set_options(deframers.hades_deframer, satellite='HADES-R'),
         }
     _transport_hooks = {
         'KISS': transports.kiss_transport,

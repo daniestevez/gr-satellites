@@ -1,0 +1,14 @@
+name: HADES-R
+norad: 98710
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  200baud FSK downlink:
+    frequency: 436.888e+6
+    modulation: FSK
+    baudrate: 200
+    deviation: 562.5
+    framing: HADES-R
+    data:
+    - *tlm
