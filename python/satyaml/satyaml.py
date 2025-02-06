@@ -39,10 +39,10 @@ class SatYAML:
         'MRC-100 RA',
         'OPS-SAT', 'U482C', 'UA01', 'SALSAT', 'Mobitex', 'Mobitex-NX',
         'FOSSASAT', 'AISTECHSAT-2', 'AALTO-1', 'Grizu-263A', 'IDEASSat',
-        'YUSAT', 'AX5043', 'USP', 'AO-40 FEC CRC-16-ARC', 'Hades',
+        'YUSAT', 'AX5043', 'USP', 'AO-40 FEC CRC-16-ARC',
         'AO-40 FEC CRC-16-ARC short', 'DIY-1', 'BINAR-1', 'Endurosat',
         'SanoSat', 'FORESAIL-1', 'HSU-SAT1', 'GEOSCAN', 'Light-1',
-        'SPINO', 'QUBIK', 'BINAR-2', 'OpenLST',
+        'SPINO', 'QUBIK', 'BINAR-2', 'OpenLST', 'HADES-D', 'HADES-R',
         ]
     transports = [
         'KISS', 'KISS no control byte', 'KISS KS-1Q', 'TM KISS',
