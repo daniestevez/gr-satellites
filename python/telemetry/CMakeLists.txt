@@ -68,6 +68,7 @@ GR_PYTHON_INSTALL(
     lume.py
     mirsat1.py
     mysat1.py
+    nila.py
     picsat.py
     qo100.py
     quetzal1.py
