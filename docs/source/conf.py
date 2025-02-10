@@ -20,14 +20,13 @@
 # -- Project information -----------------------------------------------------
 
 project = 'gr-satellites'
-copyright = '2016-2023, Daniel Estévez'
+copyright = '2016-2024, Daniel Estévez'
 author = 'Daniel Estévez'
 
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '5.6.0'
-
+release = '5.7.0'
 
 # -- General configuration ---------------------------------------------------
 
@@ -58,7 +57,7 @@ master_doc = 'index'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.

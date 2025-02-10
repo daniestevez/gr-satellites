@@ -42,6 +42,7 @@ GR_PYTHON_INSTALL(
     ax25_deframer.py
     ax5043_deframer.py
     binar1_deframer.py
+    binar2_deframer.py
     ccsds_concatenated_deframer.py
     ccsds_rs_deframer.py
     diy1_deframer.py
@@ -59,6 +60,7 @@ GR_PYTHON_INSTALL(
     mobitex_deframer.py
     ngham_deframer.py
     nusat_deframer.py
+    openlst_deframer.py
     ops_sat_deframer.py
     qubik_deframer.py
     reaktor_hello_world_deframer.py

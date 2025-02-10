@@ -1,0 +1,49 @@
+id: satellites_encode_rs_vector
+label: Reed-Solomon Encoder (vector)
+category: '[Satellites]/FEC'
+
+parameters:
+-   id: frame_size
+    label: Frame size
+    default: 223
+    dtype: int
+-   id: nsym
+    label: Bits per symbol
+    default: 8
+    dtype: int
+-   id: gfpoly
+    label: Generator polynomial
+    default: 0x11d
+    dtype: int
+-   id: fcr
+    label: First consecutive root
+    default: 1
+    dtype: int
+-   id: prim
+    label: Primitive element
+    default: 1
+    dtype: int
+-   id: nroots
+    label: Number of roots
+    default: 1
+    dtype: int
+-   id: interleave
+    label: Interleave depth
+    default: 1
+    dtype: int
+
+inputs:
+-   domain: stream
+    dtype: byte
+    vlen: ${ frame_size }
+
+outputs:
+-   domain: stream
+    dtype: byte
+    vlen: ${ (2**nsym - 1) * interleave }
+
+templates:
+    imports: import satellites
+    make: satellites.encode_rs(${frame_size}, ${nsym}, ${gfpoly}, ${fcr}, ${prim}, ${nroots}, ${interleave})
+
+file_format: 1

@@ -1,0 +1,32 @@
+name: ARCTICSAT-1
+alternative_names:
+  - RS74S
+norad: 61762
+data:
+  &tlm AX25 telemetry:
+    telemetry: ax25
+transmitters:
+  2k4 USP FSK downlink:
+    frequency: 435.890e+6
+    modulation: FSK
+    baudrate: 2400
+    deviation: 600
+    framing: USP
+    data:
+    - *tlm
+  4k8 USP FSK downlink:
+    frequency: 435.890e+6
+    modulation: FSK
+    baudrate: 4800
+    deviation: 1200
+    framing: USP
+    data:
+    - *tlm
+  9k6 USP FSK downlink:
+    frequency: 435.890e+6
+    modulation: FSK
+    baudrate: 9600
+    deviation: 2400
+    framing: USP
+    data:
+    - *tlm

@@ -36,6 +36,7 @@ install(FILES
     satellites_check_crc16_ccitt_false.block.yml
     satellites_check_crc.block.yml
     satellites_check_eseo_crc.block.yml
+    satellites_check_hex_string.block.yml
     satellites_check_swiatowid_crc.block.yml
     satellites_check_tt64_crc.block.yml
     satellites_convolutional_encoder.block.yml
@@ -50,6 +51,8 @@ install(FILES
     satellites_doppler_correction.block.yml
     satellites_encode_rs.block.yml
     satellites_encode_rs_ccsds.block.yml
+    satellites_encode_rs_ccsds_vector.block.yml
+    satellites_encode_rs_vector.block.yml
     satellites_eseo_line_decoder.block.yml
     satellites_eseo_packet_crop.block.yml
     satellites_fixedlen_tagger.block.yml

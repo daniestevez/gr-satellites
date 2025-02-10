@@ -1,0 +1,14 @@
+name: Bluebird 03
+norad: 61045
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  2k4 FSK downlink:
+    frequency: 434.100e+6
+    modulation: FSK
+    baudrate: 2400
+    deviation: 600
+    framing: Light-1
+    data:
+    - *tlm

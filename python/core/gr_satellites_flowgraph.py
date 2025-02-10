@@ -226,7 +226,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
             self._additional_datasinks.append(datasinks.hexdump_sink())
 
     def _init_transport(self, key, info):
-        """Initialize a datasink
+        """Initialize a transport
 
         Initializes a transport according to a SatYAML entry and connects
         it to the appropriate datasink
@@ -235,7 +235,11 @@ class gr_satellites_flowgraph(gr.hier_block2):
             key: the name of the transport entry in SatYAML
             info: the body of the transport entry in SatYAML
         """
-        transport = self.get_transport(info['protocol'])()
+        if 'virtual_channels' in info:
+            args = {'virtual_channels': info['virtual_channels']}
+        else:
+            args = {}
+        transport = self.get_transport(info['protocol'])(**args)
         self._transports[key] = transport
         if not self.options.hexdump:
             for data in info['data']:
@@ -458,6 +462,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'USP': deframers.usp_deframer,
         'DIY-1': deframers.diy1_deframer,
         'BINAR-1': deframers.binar1_deframer,
+        'BINAR-2': deframers.binar2_deframer,
         'Endurosat': deframers.endurosat_deframer,
         'SanoSat': deframers.sanosat_deframer,
         'FORESAIL-1': set_options(
@@ -471,7 +476,9 @@ class gr_satellites_flowgraph(gr.hier_block2):
             syncword='light-1'),
         'SPINO': deframers.spino_deframer,
         'QUBIK': deframers.qubik_deframer,
-        'Hades': deframers.hades_deframer,
+        'OpenLST': deframers.openlst_deframer,
+        'HADES-D': set_options(deframers.hades_deframer, satellite='HADES-D'),
+        'HADES-R': set_options(deframers.hades_deframer, satellite='HADES-R'),
         }
     _transport_hooks = {
         'KISS': transports.kiss_transport,
@@ -479,4 +486,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
                                             control_byte=False),
         'KISS KS-1Q': set_options(transports.kiss_transport,
                                   control_byte=False, header_remove_bytes=3),
+        'TM KISS': transports.tm_kiss_transport,
+        'TM short KISS': set_options(transports.tm_kiss_transport,
+                                     short_tm=True),
         }

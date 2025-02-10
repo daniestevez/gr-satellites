@@ -1,0 +1,17 @@
+name: TUSUR-GO
+alternative_names:
+  - RS51S
+norad: 61782
+data:
+   &tlm AX25 Telemetry:
+     telemetry: ax25
+transmitters:
+   9k6 FSK downlink:
+     frequency: 437.730e+6
+     modulation: FSK
+     baudrate: 9600
+     framing: GEOSCAN
+     deviation: 4800
+     frame size: 74
+     data:
+     - *tlm

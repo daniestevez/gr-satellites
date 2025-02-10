@@ -29,6 +29,7 @@ install(FILES
     satellites_ax25_deframer.block.yml
     satellites_ax5043_deframer.block.yml
     satellites_binar1_deframer.block.yml
+    satellites_binar2_deframer.block.yml
     satellites_ccsds_concatenated_deframer.block.yml
     satellites_ccsds_uncoded_deframer.block.yml
     satellites_ccsds_rs_deframer.block.yml
@@ -48,6 +49,7 @@ install(FILES
     satellites_mobitex_deframer.block.yml
     satellites_ngham_deframer.block.yml
     satellites_nusat_deframer.block.yml
+    satellites_openlst_deframer.block.yml
     satellites_ops_sat_deframer.block.yml
     satellites_qubik_deframer.block.yml
     satellites_reaktor_hello_world_deframer.block.yml

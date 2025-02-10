@@ -1,0 +1,24 @@
+name: ASRTU-1
+norad: 61781
+data:
+  &tlm Telemetry:
+    telemetry: asrtu
+transports:
+  &tm_kiss TM KISS:
+    protocol: TM short KISS
+    virtual_channels:
+    - 0
+    - 2
+    data:
+    - *tlm
+transmitters:
+  9k6 BPSK downlink:
+    frequency: 435.400e+6
+    modulation: BPSK
+    baudrate: 9600
+    framing: CCSDS Concatenated
+    precoding: differential
+    RS basis: conventional
+    frame size: 223
+    transports:
+    - *tm_kiss

@@ -22,7 +22,7 @@ templates:
     make: satellites.components.deframers.binar1_deframer(options=${options})
 
 documentation: |-
-    Deframes Binary-1 custom packets
+    Deframes BINAR-1 custom packets
 
     Input:
         A stream of soft symbols containing BINAR-1 packets

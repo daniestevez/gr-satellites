@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2020-2023 Daniel Estevez <daniel@destevez.net>
+# Copyright 2020-2024 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -19,9 +19,9 @@ stack, the AO-40 protocol used in the FUNcube satellites, and several
 ad-hoc protocols used in other satellites.
 """
 
-__version__ = 'v5.6.0'
+__version__ = 'v5.7.0'
 __author__ = 'Daniel Estevez'
-__copyright__ = 'Copyright 2016-2023 Daniel Estevez'
+__copyright__ = 'Copyright 2016-2025 Daniel Estevez'
 __email__ = 'daniel@destevez.net'
 __license__ = 'GPL-3.0'
 __all__ = [
@@ -66,6 +66,7 @@ from .check_crc16_ccitt import check_crc16_ccitt
 from .check_crc16_ccitt_false import check_crc16_ccitt_false
 from .check_crc import check_crc
 from .check_eseo_crc import check_eseo_crc
+from .check_hex_string import check_hex_string
 from .check_swiatowid_crc import check_swiatowid_crc
 from .check_tt64_crc import check_tt64_crc
 from .eseo_line_decoder import eseo_line_decoder

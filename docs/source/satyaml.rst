@@ -253,6 +253,8 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``BINAR-1``, the custom framing used by the BINAR-1 satellite.
 
+* ``BINAR-2``, the custom framing used by the BINAR-2, 3 and 4 satellites.
+
 * ``Endurosat``, the custom framing used by the Endurosat modem.
 
 * ``SanoSat``, the custom framing used by SanoSat-1.
@@ -268,7 +270,13 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``QUBIK``, the custom framing used by QUBIK.
 
-* ``Hades``, the custom framing used by HADES-D.
+* ``HADES-D``, the custom framing used by HADES-D.
+
+* ``HADES-R``, the custom framing used by HADES-R, MARIA-G, UNNE-1, HADES-ICM
+  and HYDRA-T.
+
+* ``OpenLST``, OpenLST protocol framing, with FEC (convolutional coding) and PN9
+  whitening.
 
 Some framings, such as the CCSDS protocols need the additional field
 ``frame size`` to indicate the frame size.
@@ -337,6 +345,11 @@ The allowable transport protocols are the following:
 
 * ``KISS KS-1Q``, KISS variant used by KS-1Q, which includes a header before the
   KISS bytes
+
+* ``TM KISS``, TM frames containing a KISS stream in some virtual channels
+
+* ``TM short KISS``, short (5 byte) TM frames containing a KISS stream in some
+  virtual channels
 
 .. _YAML: https://yaml.org/
 .. _AX.25: http://www.ax25.net/

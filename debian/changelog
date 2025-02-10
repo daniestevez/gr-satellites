@@ -1,3 +1,15 @@
+gr-satellites (5.7.0-1) oracular; urgency=medium
+
+  * Mainstream release v5.7.0
+
+ --  <daniel@destevez.net>  Mon, 10 Feb 2025 09:10:00 +0000
+
+gr-satellites (5.7.0-0) noble; urgency=medium
+
+  * Mainstream release v5.7.0
+
+ --  <daniel@destevez.net>  Mon, 10 Feb 2025 09:10:00 +0000
+
 gr-satellites (5.6.0-0) noble; urgency=medium
 
   * Mainstream release v5.6.0

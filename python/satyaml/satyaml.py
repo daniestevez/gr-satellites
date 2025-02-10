@@ -39,13 +39,14 @@ class SatYAML:
         'MRC-100 RA',
         'OPS-SAT', 'U482C', 'UA01', 'SALSAT', 'Mobitex', 'Mobitex-NX',
         'FOSSASAT', 'AISTECHSAT-2', 'AALTO-1', 'Grizu-263A', 'IDEASSat',
-        'YUSAT', 'AX5043', 'USP', 'AO-40 FEC CRC-16-ARC', 'Hades',
+        'YUSAT', 'AX5043', 'USP', 'AO-40 FEC CRC-16-ARC',
         'AO-40 FEC CRC-16-ARC short', 'DIY-1', 'BINAR-1', 'Endurosat',
         'SanoSat', 'FORESAIL-1', 'HSU-SAT1', 'GEOSCAN', 'Light-1',
-        'SPINO', 'QUBIK',
+        'SPINO', 'QUBIK', 'BINAR-2', 'OpenLST', 'HADES-D', 'HADES-R',
         ]
     transports = [
-        'KISS', 'KISS no control byte', 'KISS KS-1Q',
+        'KISS', 'KISS no control byte', 'KISS KS-1Q', 'TM KISS',
+        'TM short KISS',
         ]
     top_level_words = [
         'name', 'alternative_names', 'norad', 'telemetry_servers',
@@ -80,6 +81,17 @@ class SatYAML:
                 if transport['protocol'] not in self.transports:
                     raise YAMLError(
                         f'Unknown protocol field in transport {key}')
+                if transport['protocol'] in ['TM KISS', 'TM short KISS']:
+                    if 'virtual_channels' not in transport:
+                        raise YAMLError(
+                            f'virtual_channels field missing in '
+                            f'transport {key}')
+                    if not isinstance(transport['virtual_channels'], list):
+                        raise YAMLError('virtual_channels is not a list')
+                    for vc in transport['virtual_channels']:
+                        if not isinstance(vc, int):
+                            raise YAMLError(
+                                'virtual_channel value is not an int')
         if 'transmitters' not in d:
             raise YAMLError(f'Missing transmitters field in {yml}')
         for key, transmitter in d['transmitters'].items():
