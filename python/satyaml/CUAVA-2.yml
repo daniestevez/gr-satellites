@@ -1,5 +1,5 @@
 name: CUAVA-2
-norad: 98858
+norad: 60527
 data:
   &tlm Telemetry:
     telemetry: ax25
