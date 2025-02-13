@@ -9,6 +9,7 @@
 #
 
 import argparse
+import json
 import signal
 import sys
 
@@ -89,6 +90,7 @@ def argument_parser():
     p_sources.add_argument(
         '--udp', action='store_true', help='Use UDP input')
     p_sources.add_argument('--kiss_in', help='KISS input file')
+    p_sources.add_argument('--sigmf', help='SigMF input file')
 
     p_input.add_argument('--samp_rate', type=float, help='Sample rate (Hz)')
     p_input.add_argument(
@@ -137,9 +139,10 @@ def argument_parser():
 def check_options(options, parser):
     if (options.kiss_in is None
             and options.wavfile is None
-            and options.samp_rate is None):
+            and options.samp_rate is None
+            and options.sigmf is None):
         print('Need to specify --samp_rate unless --wavfile '
-              'or --kiss_in is used',
+              'or --kiss_in or --sigmf is used',
               file=sys.stderr)
         parser.print_usage(file=sys.stderr)
         sys.exit(1)
@@ -231,6 +234,8 @@ class gr_satellites_top_block(gr.top_block):
             return self.setup_udp_input()
         elif self.options.kiss_in is not None:
             return self.setup_kiss_input()
+        elif self.options.sigmf is not None:
+            return self.setup_sigmf_input()
         else:
             raise Exception('No input source set for flowgraph')
 
@@ -299,6 +304,85 @@ class gr_satellites_top_block(gr.top_block):
 
     def setup_kiss_input(self):
         self.input = datasources.kiss_file_source(self.options.kiss_in)
+
+    def setup_sigmf_input(self):
+        if (self.options.sigmf.endswith('sigmf-meta') or
+            self.options.sigmf.endswith('sigmf-data')):
+            base_filename = self.options.sigmf[:-len('.sigmf-data')]
+            dataset_filename = base_filename + '.sigmf-data'
+            metadata_filename = base_filename + '.sigmf-meta'
+        elif self.options.sigmf.endswith('sigmf'):
+            print(
+                'Failed to load SigMF archive (archives are not yet supported). '
+                'Consider extracting a recording and pass the corresponding SigMF metadata file.',
+                file=sys.stderr)
+            sys.exit(1)
+        else:
+            print('Invalid value passed to --sigmf, '
+                'expected file extension .sigmf-meta or .sigmf-data, '
+                f'got:\n{self.options.sigmf}', file=sys.stderr)
+            sys.exit(1)
+
+        try:
+            with open(metadata_filename, encoding='utf-8') as f:
+                try:
+                    meta = json.load(f)
+                except json.decoder.JSONDecodeError as json_err:
+                    print(f'Failed to parse SigMF Metadata in \'{metadata_filename}\', '
+                        'JSON decoder error:', file=sys.stderr)
+                    print(json_err, file=sys.stderr)
+                    sys.exit(1)
+        except FileNotFoundError as fno_err:
+            print(f'Could not open SigMF Metadata in \'{metadata_filename}\':', file=sys.stderr)
+            print(fno_err, file=sys.stderr)
+            exit(1)
+
+        # Enforce valid SigMF metadata structure
+        for key in ['global', 'captures', 'annotations']:
+            if key not in meta:
+                print(f'ERROR: Missing top-level object \'{key}\' in SigMF metadata.', file=sys.stderr)
+                sys.exit(1)
+
+        fields_required = ['core:datatype', 'core:sample_rate']
+        for field in fields_required:
+            if field not in meta['global']:
+                print('SigMF metadata file is malformed: '
+                    f'Missing field \'{field}\'', file=sys.stderr)
+                sys.exit(1)
+
+        datatype = meta['global']['core:datatype']
+        sample_rate = meta['global']['core:sample_rate']
+
+        datatypes_supported = ['ci16_le']
+
+        if datatype == 'ci16_le':
+            self.options.iq = True
+            self.options.rawint16 = dataset_filename
+            self.options.samp_rate = sample_rate
+            self.setup_rawint16_input()
+        else:
+            datatype_list = ', '.join(datatypes_supported)
+            print(f'Unsupported SigMF Dataset format (\'{datatype}\'). '
+                'Supported datatypes are: ' + datatype_list, file=sys.stderr)
+            sys.exit(1)
+
+        # Enforce valid capture segment object (if one or more exist)
+        if len(meta['captures']) >= 1:
+            for idx, capture_segment in enumerate(meta['captures']):
+                if 'core:sample_start' not in capture_segment:
+                    print('SigMF metadata file is malformed: '
+                        f'Field \'core:sample_start\' is missing in Capture segment {idx}.', file=sys.stderr)
+                    sys.exit(1)
+
+        # Set start_time if available & unambiguous
+        if len(meta['captures']) == 1:
+            capture_segment = meta['captures'][0]
+            if 'core:datetime' in capture_segment:
+                if capture_segment['core:sample_start'] == 0:
+                    self.options.start_time = capture_segment['core:datetime']
+                else:
+                    print('WARNING: \'datetime\' field in capture segment is ignored, because '
+                        'Capture segment field \'sample_start\' is not equal to zero.')
 
 
 def main():
