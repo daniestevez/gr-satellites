@@ -1,22 +1,19 @@
-##################################################################
-#     This Decoder File Belongs to HEX20 Labs India Pvt Ltd      #
-#     Decoder for NILA 3U Satellite                              #
-##################################################################
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# Copyright 2025 Daniel Estevez <daniel@destevez.net>
+#
+# This file is part of gr-satellites
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
 
 from .ax25 import Header
 from ..adapters import PolynomialAdapter
+from ..adapters import LinearAdapter
 from construct import Adapter, BitStruct, BitsInteger, Enum, Flag, Float32l, \
     If, Int16sl, Int16ul, Int32sl, Int32ul, Int8sl, \
     Int8ub, Int8ul, Padding, Struct, Switch
-
-pannel_volt_poly = [0.000000, 0.001]
-pannel_current_poly = [0.000000, 0.0005]
-
-subsystem_current_poly = [0.000000, 0.0005]
-subsystem_volt_poly = [0.000000, 0.001]
-
-aux_current_poly = [0.000000, 0.0005]
-aux_volt_poly = [0.000000, 0.001]
 
 solar_panel_temp_poly = [91.394, -0.08949, 3.55e-05, -6.26e-09, 1.89e-13]
 batt_thermistor_temp_poly = [
@@ -39,8 +36,8 @@ nila_beacon = Struct(
     'sat_curr_mode' / Enum(Int8ul, SAFE=0, NOMINAL=1),
     'safe_exit_thresh' / Int16ul,
     'safe_enter_thresh' / Int16ul,
-    'battchg_volt' / PolynomialAdapter([0.000000, 0.00125], Int16ul),
-    'battchg_curr' / PolynomialAdapter([0.000000, 0.00125], Int16ul),
+    'battchg_volt' / LinearAdapter(1/0.00125, Int16ul),
+    'battchg_curr' / LinearAdapter(1/0.00125, Int16ul),
     'dep_retry_flag' / Int8ul,
     'pl_on_flag' / Int8ul,
     'oot_counter' / Int32ul,
@@ -56,28 +53,26 @@ nila_beacon = Struct(
     'uhf_flash_write_ptr' / Int32ul,
     'uhf_flash_read_ptr' / Int32ul,
 
-    'panel_0_curr' / PolynomialAdapter(pannel_current_poly, Int16ul),
-    'panel_1_curr' / PolynomialAdapter(pannel_current_poly, Int16ul),
-    'panel_2_curr' / PolynomialAdapter(pannel_current_poly, Int16ul),
-    'panel_0_volt' / PolynomialAdapter(pannel_volt_poly, Int16ul),
-    'panel_1_volt' / PolynomialAdapter(pannel_volt_poly, Int16ul),
-    'panel_2_volt' / PolynomialAdapter(pannel_volt_poly, Int16ul),
+    'panel_0_curr' / LinearAdapter(1/0.0005, Int16ul),
+    'panel_1_curr' / LinearAdapter(1/0.0005, Int16ul),
+    'panel_2_curr' / LinearAdapter(1/0.0005, Int16ul),
+    'panel_0_volt' / LinearAdapter(1/0.001, Int16ul),
+    'panel_1_volt' / LinearAdapter(1/0.001, Int16ul),
+    'panel_2_volt' / LinearAdapter(1/0.001, Int16ul),
 
-    'cdh_3v3_current' / PolynomialAdapter(subsystem_current_poly, Int16ul),
-    'uhf_6v_current' / PolynomialAdapter(subsystem_current_poly, Int16ul),
-    'ads_12v_current' /
-    PolynomialAdapter(subsystem_current_poly, Int16ul),
-    'cdh_3v3_volt' / PolynomialAdapter(subsystem_volt_poly, Int16ul),
-    'uhf_6v_volt' / PolynomialAdapter(subsystem_volt_poly, Int16ul),
-    'ads_12v_volt' / PolynomialAdapter(subsystem_volt_poly, Int16ul),
+    'cdh_3v3_current' / LinearAdapter(1/0.0005, Int16ul),
+    'uhf_6v_current' / LinearAdapter(1/0.0005, Int16ul),
+    'ads_12v_current' / LinearAdapter(1/0.0005, Int16ul),
+    'cdh_3v3_volt' / LinearAdapter(1/0.001, Int16ul),
+    'uhf_6v_volt' / LinearAdapter(1/0.001, Int16ul),
+    'ads_12v_volt' / LinearAdapter(1/0.001, Int16ul),
 
-    'pl_12v_current' / PolynomialAdapter(aux_current_poly, Int16ul),
-    'battery_heater_current' /
-    PolynomialAdapter(aux_current_poly, Int16ul),
-    'main_battery_current' / PolynomialAdapter(aux_current_poly, Int16ul),
-    'pl_12v_volt' / PolynomialAdapter(aux_volt_poly, Int16ul),
-    'battery_heater_volt' / PolynomialAdapter(aux_volt_poly, Int16ul),
-    'main_battery_volt' / PolynomialAdapter(aux_volt_poly, Int16ul),
+    'pl_12v_current' / LinearAdapter(1/0.0005, Int16ul),
+    'battery_heater_current' / LinearAdapter(1/0.0005, Int16ul),
+    'main_battery_current' / LinearAdapter(1/0.0005, Int16ul),
+    'pl_12v_volt' / LinearAdapter(1/0.001, Int16ul),
+    'battery_heater_volt' / LinearAdapter(1/0.001, Int16ul),
+    'main_battery_volt' / LinearAdapter(1/0.001, Int16ul),
     'temp_solarpanel0' / PolynomialAdapter(solar_panel_temp_poly, Int16ul),
     'temp_solarpanel1' / PolynomialAdapter(solar_panel_temp_poly, Int16ul),
     'temp_solarpanel2' / PolynomialAdapter(solar_panel_temp_poly, Int16ul),

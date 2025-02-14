@@ -48,6 +48,7 @@ from .kr01 import kr01
 from .lume import lume
 from .mirsat1 import mirsat1
 from .mysat1 import mysat1
+from .nila import nila
 from .picsat import picsat
 from .qo100 import qo100
 from .quetzal1 import quetzal1
@@ -63,6 +64,5 @@ from .by70_1 import taurus1
 from .trisat import trisat
 from .upmsat_2 import upmsat_2
 from .vzlusat_2 import vzlusat_2
-from .nila import nila
 
 construct.setGlobalPrintFullStrings(True)
