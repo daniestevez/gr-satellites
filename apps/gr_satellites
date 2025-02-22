@@ -21,8 +21,11 @@ from satellites.satyaml import yamlfiles
 
 
 version = f"""gr_satellites {satellites.__version__}
-Copyright (C) 2020 Daniel Estevez
-License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
+
+{satellites.__copyright__}
+
+License GPL-3.0-or-later: GNU GPL version 3 or later
+<https://gnu.org/licenses/gpl.html>.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law."""
 
