@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2020-2024 Daniel Estevez <daniel@destevez.net>
+# Copyright 2020-2025 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -23,7 +23,7 @@ __version__ = 'v5.8.0-git'
 __author__ = 'Daniel Estevez'
 __copyright__ = 'Copyright 2016-2025 Daniel Estevez'
 __email__ = 'daniel@destevez.net'
-__license__ = 'GPL-3.0'
+__license__ = 'GPL-3.0-or-later'
 __all__ = [
     'ccsds',
     'components',
