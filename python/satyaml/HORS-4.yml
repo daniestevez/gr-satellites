@@ -1,0 +1,16 @@
+name: HORS-4
+alternative_names:
+   - RS82S
+   - HORS
+norad: 61754
+data:
+   &tlm Telemetry:
+     unknown
+transmitters:
+   9k6 FSK downlink:
+     frequency: 435.700e+6
+     modulation: FSK
+     baudrate: 9600
+     framing: HORS
+     data:
+     - *tlm

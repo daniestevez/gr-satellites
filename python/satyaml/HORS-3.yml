@@ -1,0 +1,23 @@
+name: HORS-3
+alternative_names:
+   - RS81S
+   - HORS
+norad: 61753
+data:
+   &tlm Telemetry:
+     unknown
+transmitters:
+   9k6 FSK downlink:
+     frequency: 435.650e+6
+     modulation: FSK
+     baudrate: 9600
+     framing: HORS
+     data:
+     - *tlm
+   9k6 FSK downlink:
+     frequency: 435.200e+6
+     modulation: FSK
+     baudrate: 9600
+     framing: HORS
+     data:
+     - *tlm

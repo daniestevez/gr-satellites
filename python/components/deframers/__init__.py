@@ -62,3 +62,4 @@ from .u482c_deframer import u482c_deframer
 from .ua01_deframer import ua01_deframer
 from .usp_deframer import usp_deframer
 from .yusat_deframer import yusat_deframer
+from .hors_deframer import hors_deframer

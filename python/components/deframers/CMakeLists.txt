@@ -76,6 +76,7 @@ GR_PYTHON_INSTALL(
     ua01_deframer.py
     usp_deframer.py
     yusat_deframer.py
+    hors_deframer.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/components/deframers
 )
 

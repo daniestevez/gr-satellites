@@ -1,0 +1,16 @@
+name: HORS-1
+alternative_names:
+   - RS55S
+   - HORS
+norad: 57188
+data:
+   &tlm Telemetry:
+     unknown
+transmitters:
+   9k6 FSK downlink:
+     frequency: 435.300e+6
+     modulation: FSK
+     baudrate: 9600
+     framing: HORS
+     data:
+     - *tlm
