@@ -266,6 +266,8 @@ The framings allowed in the ``framing`` field are the following:
 
 * ``GEOSCAN``, the custom framing used by GEOSCAN-EDELVEIS.
 
+* ``HORS``, the custom framing used by HORS-1/-2/-3/-4.
+
 * ``SPINO``, the custom framing used by the SPINO payload on INSPIRE-Sat7.
 
 * ``QUBIK``, the custom framing used by QUBIK.

@@ -65,5 +65,6 @@ install(FILES
     satellites_ua01_deframer.block.yml
     satellites_usp_deframer.block.yml
     satellites_yusat_deframer.block.yml
+    satellites_hors_deframer.block.yml
     DESTINATION share/gnuradio/grc/blocks
 )
