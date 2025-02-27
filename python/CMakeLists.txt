@@ -71,6 +71,11 @@ GR_PYTHON_INSTALL(
     hdlc_deframer.py
     hdlc_framer.py
     k2sat_deframer.py
+    mobitex_deframer.py
+    mobitex_fec.py
+    mobitex_fec_block.py
+    mobitex_scrambler.py
+    tubix20_reframer.py
     kiss.py
     kiss_to_pdu.py
     ks1q_header_remover.py

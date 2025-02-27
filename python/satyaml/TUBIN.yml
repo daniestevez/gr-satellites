@@ -4,13 +4,13 @@ telemetry_servers:
   - SIDS http://fachgebiet.rft.tu-berlin.de/ham/telemetry/send
 data:
   &tlm Telemetry:
-    unknown
+    telemetry: tubix20
 transmitters:
   4k8 FSK downlink:
     frequency: 435.950e+6
     modulation: FSK
     baudrate: 4800
     deviation: 1200
-    framing: Mobitex-NX
+    framing: TUBIN
     data:
     - *tlm
