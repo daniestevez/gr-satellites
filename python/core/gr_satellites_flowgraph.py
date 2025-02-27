@@ -452,6 +452,15 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'UA01': deframers.ua01_deframer,
         'Mobitex': deframers.mobitex_deframer,
         'Mobitex-NX': set_options(deframers.mobitex_deframer, nx=True),
+        'TUBIN': set_options(
+            deframers.mobitex_deframer, nx=True, callsign='DP0TBN',
+            callsign_threshold=12),
+        'BEESAT-1': set_options(
+            deframers.mobitex_deframer, nx=True, variant='BEESAT-1',
+            callsign='DP0BEE', callsign_threshold=12),
+        'BEESAT-9': set_options(
+            deframers.mobitex_deframer, nx=True, variant='BEESAT-9',
+            callsign='DP0BEM', callsign_threshold=12),
         'FOSSASAT': deframers.fossasat_deframer,
         'AISTECHSAT-2': deframers.aistechsat_2_deframer,
         'AALTO-1': deframers.aalto1_deframer,
