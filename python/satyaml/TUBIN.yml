@@ -4,7 +4,7 @@ telemetry_servers:
   - SIDS http://fachgebiet.rft.tu-berlin.de/ham/telemetry/send
 data:
   &tlm Telemetry:
-    unknown
+    telemetry: tubix20
 transmitters:
   4k8 FSK downlink:
     frequency: 435.950e+6
