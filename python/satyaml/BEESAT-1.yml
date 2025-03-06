@@ -8,13 +8,13 @@ transmitters:
     frequency: 435.950e+6
     modulation: FSK
     baudrate: 4800
-    framing: Mobitex-NX
+    framing: BEESAT-1
     data:
     - *tlm
   9k6 FSK downlink:
     frequency: 435.950e+6
     modulation: FSK
     baudrate: 9600
-    framing: Mobitex-NX
+    framing: BEESAT-1
     data:
     - *tlm
