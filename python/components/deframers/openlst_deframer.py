@@ -11,7 +11,8 @@
 from gnuradio import gr, digital
 import pmt
 
-from ... import crc_check, pdu_head_tail
+from ... import pdu_head_tail
+from ...crcs import crc_check
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
 
