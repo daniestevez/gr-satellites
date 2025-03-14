@@ -74,15 +74,10 @@ class mobitex_deframer(gr.hier_block2, options_block):
         self.message_port_register_hier_out('out')
 
         default_syncword = 0x5765
-        default_nx_syncword = 0x0EF0
+        nx_syncword = 0x0EF0
 
         self.nx = nx
-
-        if self.nx:
-            self.syncword = default_nx_syncword
-        else:
-            self.syncword = default_syncword
-
+        self.syncword = nx_syncword if nx else default_syncword
         self.variant = variant
         self.callsign = callsign
 
