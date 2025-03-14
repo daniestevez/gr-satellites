@@ -11,7 +11,6 @@
 import itertools
 
 from gnuradio import gr
-from construct import Struct, BitsInteger, Bit
 
 import pmt
 import numpy as np
@@ -48,19 +47,6 @@ def encode_control(control0: int, control1: int) -> int:
     fec = fec0 << 4 | fec1
 
     return fec
-
-
-def parse_control(control: list[int]) -> dict:
-    control_struct = Struct(
-        "num_data_blocks" / BitsInteger(5) + 1,
-        "message_type" / BitsInteger(3),
-        "baud_bit" / Bit,
-        "ack_bit" / Bit,
-        "sub_address" / BitsInteger(2),
-        "address" / BitsInteger(4)
-    )
-
-    return control_struct.parse(bytes([control[0], control[1]]))
 
 
 def check_callsign_crc(callsign: bytes, crc: bytes):
@@ -274,8 +260,7 @@ class mobitex_to_datablocks(gr.basic_block):
         if self.num_blocks_hardcoded:
             num_blocks = self.num_blocks
         else:
-            control_dict = parse_control(control)
-            num_blocks = control_dict['num_data_blocks']
+            num_blocks = (control[0] & 0b0001_1111) + 1
 
         if self.parse_callsign:
             if self.callsign_ref:
