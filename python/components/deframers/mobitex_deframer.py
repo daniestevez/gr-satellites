@@ -41,8 +41,18 @@ class mobitex_deframer(gr.hier_block2, options_block):
     by flipping bits until CRC matches or a maximum number of bit-flips
     specified by `callsign_threshold` is exceeded.
 
+    Variants:
+    - BEESAT-1: different header (no callsign, no callsign crc)
+    - BEESAT-9: Number of datablocks is hard-coded to 32
+    - default: no special cases.
+
+    The arguments 'variant', 'callsign' and 'callsign_threshold' have no
+    effect when the external deframer is used (option `--use_tnc_nx`).
+
     Args:
     nx: use NX mode (boolean)
+    variant: variant of the protocol to use ('BEESAT-1', 'BEESAT-9'
+      or 'default') (str)
     callsign: expected callsign (optional, str)
     callsign_threshold: number of bit errors allowed in callsign+crc (int)
     syncword_threshold: number of bit errors allowed in syncword (int)
