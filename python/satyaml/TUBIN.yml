@@ -11,6 +11,7 @@ transmitters:
     modulation: FSK
     baudrate: 4800
     deviation: 1200
-    framing: TUBIN
+    framing: Mobitex-NX
+    callsign: DP0TBN
     data:
     - *tlm
