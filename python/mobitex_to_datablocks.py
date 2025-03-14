@@ -194,18 +194,6 @@ class mobitex_to_datablocks(gr.basic_block):
     # References
     [1]: https://destevez.net/2016/09/some-notes-on-beesat-and-mobitex-nx/
     """
-
-    header_length = 2 + 1 + 6 + 2
-    bytemap = {
-        'control': slice(0, 2),
-        'control_fec': slice(2, 3),
-        'callsign': slice(3, 9),
-        'callsign_crc': slice(9, 11),
-    }
-
-    # (18 message bytes + 2 CRC bytes), encoded with r=12/8 FEC
-    block_size = 30
-
     def __init__(
         self,
         variant: str,
@@ -232,12 +220,22 @@ class mobitex_to_datablocks(gr.basic_block):
             }
         else:
             self.parse_callsign = True
+            self.header_length = 2 + 1 + 6 + 2
+            self.bytemap = {
+                'control': slice(0, 2),
+                'control_fec': slice(2, 3),
+                'callsign': slice(3, 9),
+                'callsign_crc': slice(9, 11),
+            }
 
         if variant == 'BEESAT-9':
             self.num_blocks_hardcoded = True
             self.num_blocks = 32
         else:
             self.num_blocks_hardcoded = False
+
+        # (18 message bytes + 2 CRC bytes), encoded with r=12/8 FEC
+        self.block_size = 30
 
         self.message_port_register_in(pmt.intern("in"))
         self.set_msg_handler(pmt.intern("in"), self.handle_msg)
