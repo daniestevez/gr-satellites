@@ -4,7 +4,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from itertools import batched
+import sys
 
 from gnuradio import gr
 import pmt
@@ -54,7 +54,9 @@ class mobitex_fec(gr.basic_block):
             )
             return
 
-        codewords = [b for item in batched(block, n=3) for b in unpack_2b(bytes(item))]
+        triplets = (block[a:a + 3] for a in range(0, len(block), 3))
+        codewords = [codeword for triplet in triplets
+                     for codeword in unpack_2b(bytes(triplet))]
 
         packet_out = []
         errors_corrected = 0
