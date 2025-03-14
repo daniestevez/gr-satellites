@@ -74,7 +74,7 @@ else:
         return value & 1
 
 
-def _init_syndrome_table() -> dict:
+def init_syndrome_table() -> dict:
     """Initialize the syndrome lookup table.
 
     Returns:
@@ -98,10 +98,7 @@ def _init_syndrome_table() -> dict:
     return table
 
 
-# SYNDROME_TABLE = {
-#     1: 0, 2: 1, 4: 2, 8: 3, 5: 4, 6: 5,
-#     9: 6, 10: 7, 7: 8, 11: 9, 13: 10, 14: 11}
-SYNDROME_TABLE = _init_syndrome_table()
+SYNDROME_TABLE = init_syndrome_table()
 
 
 def encode(message: int) -> tuple[int, int]:
