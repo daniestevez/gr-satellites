@@ -272,6 +272,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
             'RS interleaving': 'rs_interleaving',
             'convolutional': 'convolutional',
             'scrambler': 'scrambler',
+            'callsign': 'callsign',
             }
         deframer_additional_options = filter_translate_dict(transmitter,
                                                             deframe_options)
