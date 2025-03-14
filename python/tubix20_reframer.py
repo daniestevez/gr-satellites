@@ -37,9 +37,9 @@ class tubix20_reframer(gr.basic_block):
         - master frame body
             - N x 18 bytes
         - master frame appendix
-            - 1 byte "ground station quality byte"
+            - 1 byte "ground station quality byte", placeholder value: 0xAA
             - 4 bytes "error marker"
-            - 1 byte "ground station TNC temperature"
+            - 1 byte "ground station TNC temperature", placeholder value: 0xBB
     """
     bytemap = {
         'control_bytes': slice(0, 2),
