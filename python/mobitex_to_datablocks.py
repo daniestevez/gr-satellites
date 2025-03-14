@@ -148,17 +148,32 @@ class mobitex_to_datablocks(gr.basic_block):
     """
     Block to deframe the Mobitex NX protocol.
 
-    # Input
-    The input is PDUs with encoded Mobitex-NX frames, _after_ the frame sync
-    and potentially with trailing noise bytes.
-        - Control. 2 bytes
-        - FEC of control (2x 4 parity bits)
-        - Callsign. 6 bytes in ASCII
-        - CRC-16CCITT of Callsign. 2 bytes
-        - Multiple Mobitex data blocks. Each block is 30 bytes
+    ## Input
+    Input is PDUs with one encoded Mobitex-NX frame per PDU.
 
-    # Output
-    The output is PDUs with Mobitex blocks.
+    The block usually comes as the first block after the frame sync was done.
+    This block decodes the control bytes to receive the number of data blocks,
+    then uses this number to crop trailing noise bytes.
+
+    Expected framing (default):
+        - Header
+          - Control         (2 bytes)
+          - FEC of control  (1 byte)
+          - Callsign        (6 bytes)
+          - CRC of Callsign (2 bytes)
+        - 1..32 data blocks (num_blocks * 30 bytes)
+
+    ## Variants
+    - BEESAT-1: different header (no callsign, no callsign crc)
+    - BEESAT-9: Number of datablocks is hard-coded to 32
+    - default: no special cases.
+
+
+    ## Output
+    The output is PDUs with one Mobitex block per PDU. The header is stripped
+    from the PDU content, but provided in a special tag attached to the first
+    Mobitex data block.
+
     Each block has the following tags:
         - block_id
     The first block (`block_id`=0) additionally has the following tags:
@@ -167,13 +182,14 @@ class mobitex_to_datablocks(gr.basic_block):
         - callsign_bit_errors
         - num_blocks
 
-    # Callsign
-    If the callsign is known, the deframer will use the hamming-distance
-    between the expected and received callsign & CRC to calculte the number
-    of bit errors in the callsign + callsign_crc. This allows correct decoding
-    for frames with many bit errors, that otherwise would either have wrongly
-    decoded callsign or dropped would have been dropped due to uncorrectable
-    errors.
+    ## Callsign
+    If callsign is provided, the received callsign+crc is checked
+    against this reference. The callsign check passes if the number of
+    detected bit errors does not exceed `callsign_threshold`.
+
+    If no callsign is provided, we try to error-correct callsign+crc
+    by flipping bits until CRC matches or a maximum number of bit-flips
+    specified by `callsign_threshold` is exceeded.
 
     # References
     [1]: https://destevez.net/2016/09/some-notes-on-beesat-and-mobitex-nx/
