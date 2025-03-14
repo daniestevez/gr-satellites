@@ -60,75 +60,51 @@ def decode_control_bytes(control_bytes: list[int], control_byte_crc: int):
     return result, bit_errors, control_bytes, control_byte_crc
 
 
-def decode_unknown_callsign(
-    callsign_bytes: bytes,
-    crc_bytes: bytes,
-    max_bit_flips: int,
-    callsign_ref: bytes = None,
-) -> tuple[bytes, int]:
-    """
-    Attempt to error-correct a callsign by flipping bits until CRC matches.
+def check_callsign_crc(callsign: bytes, crc: bytes):
+    computed_crc = crc16_ccitt_zero(
+        callsign).to_bytes(length=2, byteorder='big')
 
-    Args:
-        callsign_bytes: The callsign bytes to decode
-        crc_bytes: The CRC bytes to verify against
-        max_bit_flips: Maximum number of bits to flip during error correction
-        callsign_ref: Unused argument
+    return computed_crc == crc
+
+
+def decode_unknown_callsign(
+    callsign: bytes,
+    crc: bytes,
+    max_bit_flips: int,
+) -> tuple[bytes, bytes, int] | None:
+    """Error-corrects callsign+crc by flipping bits until CRC matches or
+    maximum number of bit-flips is exceeded.
 
     Returns:
-        tuple containing:
-            - corrected callsign bytes
-            - number of bit errors corrected
-
-    Raises:
-        ValueError: If no valid callsign could be found
-                    within max_bit_flips bit flips
+        (corrected_callsign, corrected_crc, num_bit_errors)
+        or
+        None, if number of bit-flips is exceeded.
     """
-    if max_bit_flips <= 0:
-        # Do not attempt error correction
-        computed_crc = crc16_ccitt_zero(bytes(callsign_bytes))
-        computed_crc_bytes = computed_crc.to_bytes(length=2)
+    for num_flips in range(max_bit_flips + 1):
+        flip_positions = range(len(callsign + crc) * 8)
+        for flips in itertools.combinations(flip_positions, num_flips):
+            # Perform flips indicated by the pattern
+            mod_bytes = bytearray(callsign + crc)
+            for i in flips:
+                # Flip a single bit
+                i_byte = i // 8
+                i_bit = i % 8
+                mod_bytes[i_byte] = mod_bytes[i_byte] ^ (1 << i_bit)
 
-        if computed_crc_bytes == crc_bytes:
-            return callsign_bytes, 0
-        else:
-            if max_bit_flips == 0:
-                raise ValueError('Callsign CRC check failed.')
-            else:
-                # If max_bit_flips is negative, just accept invalid CRC
-                return callsign_bytes, -1
+            # Split back into callsign and CRC
+            mod_callsign = bytes(mod_bytes[: len(callsign)])
+            mod_crc = bytes(mod_bytes[len(callsign):])
 
-    # Bit position 0... (N*8); -1 indicates "no flip"
-    all_bytes = callsign_bytes + crc_bytes
-    flip_positions = range(-1, len(all_bytes) * 8)
-
-    for flips in itertools.combinations(flip_positions, max_bit_flips):
-        # Create a modified copy with some bits flipped
-        mod_bytes = bytearray(all_bytes)
-        for i in flips:
-            if i == -1:
-                # No flip
+            # Check CRC
+            if not check_callsign_crc(mod_callsign, mod_crc):
                 continue
-            i_byte = i // 8
-            i_bit = i % 8
 
-            # Flip one bit
-            mod_bytes[i_byte] = mod_bytes[i_byte] ^ (1 << i_bit)
-
-        # Split back into callsign and CRC
-        mod_callsign = mod_bytes[: len(callsign_bytes)]
-        mod_crc = mod_bytes[len(callsign_bytes):]
-
-        # Check if modified callsign matches its CRC
-        computed_crc_bytes = crc16_ccitt_zero(mod_callsign).to_bytes(length=2)
-
-        if computed_crc_bytes == bytes(mod_crc):
+            # Valid solution found, exit early.
             bit_errors = sum([1 for x in flips if x != -1])
-            return bytes(mod_callsign), bytes(mod_crc), bit_errors
+            return mod_callsign, mod_crc, bit_errors
 
-    raise ValueError(
-        f"No valid callsign found after flipping up to {max_bit_flips} bits"
-    )
+    # No valid callsign found, within given maximum number of bit flips
+    return None
 
 
 def hamming_distance(a: bytes, b: bytes) -> int:
@@ -142,25 +118,27 @@ def hamming_distance(a: bytes, b: bytes) -> int:
     return bit_errors
 
 
-def decode_known_callsign(
-    callsign_bytes: bytes,
-    crc_bytes: bytes,
-    max_bit_flips: int,
+def compare_expected_callsign(
+    callsign: bytes,
+    crc: bytes,
     callsign_ref: bytes,
 ) -> tuple[bytes, int]:
+    """
+    Calculates bit errors between received callsign+CRC and expected
+    reference callsign+CRC.
 
-    # Decode known callsign
-    callsign_crc_ref = crc16_ccitt_zero(callsign_ref).to_bytes(length=2)
+    Returns:
+        reference callsign CRC along with number of bit errors.
+    """
+    crc_ref = crc16_ccitt_zero(
+        callsign_ref).to_bytes(length=2, byteorder='big')
 
     bit_errors = hamming_distance(
-        callsign_bytes + crc_bytes,
-        callsign_ref + callsign_crc_ref,
+        callsign + crc,
+        callsign_ref + crc_ref,
     )
-    if bit_errors > max_bit_flips:
-        # Drop frame with too many bit errors in callsign
-        raise ValueError('Callsign invalid, too many bit errors.')
 
-    return callsign_ref, callsign_crc_ref, bit_errors
+    return crc_ref, bit_errors
 
 
 class mobitex_to_datablocks(gr.basic_block):
@@ -282,23 +260,29 @@ class mobitex_to_datablocks(gr.basic_block):
 
         if self.parse_callsign:
             if self.callsign_ref:
-                decode_fn = decode_known_callsign
-            else:
-                decode_fn = decode_unknown_callsign
-
-            # Decode callsign
-            try:
-                callsign, callsign_crc, callsign_bit_errors = decode_fn(
+                callsign = self.callsign_ref
+                callsign_crc, callsign_bit_errors = compare_expected_callsign(
                     bytes(packet[self.bytemap['callsign']]),
                     bytes(packet[self.bytemap['callsign_crc']]),
-                    max_bit_flips=self.callsign_threshold,
-                    callsign_ref=self.callsign_ref,
+                    self.callsign_ref,
                 )
-            except ValueError:
-                # Drop frame with either
-                # too many uncorrectable bit errors in callsign OR
-                # too many detected bit errors compared to expected callsign
-                return
+
+                if callsign_bit_errors > self.callsign_threshold:
+                    # Number of detected bit errors exceeds threshold
+                    return
+            else:
+                result = decode_unknown_callsign(
+                    bytes(packet[self.bytemap['callsign']]),
+                    bytes(packet[self.bytemap['callsign_crc']]),
+                    self.callsign_threshold,
+                )
+
+                if result is None:
+                    # No valid callsign+crc found within maximum number of
+                    # tested bit flips (self.callsign_threshold)
+                    return
+
+                callsign, callsign_crc, callsign_bit_errors = result
 
             try:
                 _ = callsign.decode("ascii")
