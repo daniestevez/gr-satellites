@@ -71,7 +71,7 @@ GR_PYTHON_INSTALL(
     hdlc_deframer.py
     hdlc_framer.py
     k2sat_deframer.py
-    mobitex_deframer.py
+    mobitex_to_datablocks.py
     mobitex_fec.py
     mobitex_fec_block.py
     mobitex_scrambler.py

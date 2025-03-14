@@ -15,7 +15,7 @@ import pmt
 from gnuradio import gr, blocks, digital
 from gnuradio.pdu import pdu_set
 
-from ... import mobitex_deframer as deframer
+from ...mobitex_to_datablocks import mobitex_to_datablocks
 from ...mobitex_fec_block import mobitex_fec
 from ...mobitex_scrambler import mobitex_scrambler_bb
 from ...tubix20_reframer import tubix20_reframer
@@ -139,7 +139,7 @@ class mobitex_deframer(gr.hier_block2, options_block):
             threshold=self.syncword_threshold
         )
 
-        self.crop = deframer(
+        self.to_blocks = mobitex_to_datablocks(
             variant=self.variant,
             callsign=self.callsign,
             callsign_threshold=self.callsign_threshold
@@ -164,8 +164,8 @@ class mobitex_deframer(gr.hier_block2, options_block):
         # Setup connections
         self.connect(self, self.invert, self.slicer, self.sync2pdu)
 
-        self.msg_connect((self.sync2pdu, 'out'), (self.crop, 'in'))
-        self.msg_connect((self.crop, 'out'), (self.pdu2stream, 'pdus'))
+        self.msg_connect((self.sync2pdu, 'out'), (self.to_blocks, 'in'))
+        self.msg_connect((self.to_blocks, 'out'), (self.pdu2stream, 'pdus'))
 
         self.connect(
             self.pdu2stream,

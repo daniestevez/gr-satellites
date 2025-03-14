@@ -163,7 +163,7 @@ def decode_known_callsign(
     return callsign_ref, callsign_crc_ref, bit_errors
 
 
-class mobitex_deframer(gr.basic_block):
+class mobitex_to_datablocks(gr.basic_block):
     """
     Block to deframe the Mobitex NX protocol.
 
@@ -218,7 +218,7 @@ class mobitex_deframer(gr.basic_block):
         verbose=False,
     ):
         gr.basic_block.__init__(self,
-                                name="mobitex_deframer",
+                                name="mobitex_to_datablocks",
                                 in_sig=[],
                                 out_sig=[])
         self.verbose = verbose
