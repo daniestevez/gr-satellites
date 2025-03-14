@@ -60,7 +60,7 @@ TransferFrameHeader = BitStruct(
 
 MasterFrame = Struct(
     'control' / Control,
-    'callsign' / Bytes(6),
+    'callsign' / PaddedString(6, 'ascii'),
     'callsign_crc' / Hex(Int16ub),
     'transfer_frame' / Bytes(lambda ctx: 18 * (ctx.control.num_blocks + 1)),
     'reserved0' / Bytes(1),
