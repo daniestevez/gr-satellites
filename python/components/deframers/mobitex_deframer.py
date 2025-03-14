@@ -106,6 +106,8 @@ class mobitex_deframer(gr.hier_block2, options_block):
             self.setup_builtin_deframer()
 
     def setup_external_deframer(self):
+        if self.variant == 'BEESAT-1':
+            raise ValueError('gr-tnc_nx does not support BEESAT-1')
         try:
             tnc_nx = importlib.import_module('tnc_nx')
         except ImportError as e:
