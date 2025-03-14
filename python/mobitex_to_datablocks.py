@@ -304,7 +304,7 @@ class mobitex_to_datablocks(gr.basic_block):
                 callsign, callsign_crc, callsign_bit_errors = result
 
             try:
-                _ = callsign.decode("ascii")
+                callsign.decode("ascii")
             except UnicodeDecodeError:
                 # Drop frame with non-ASCII callsign
                 # (empirically this is always a false-positive syncword match)
