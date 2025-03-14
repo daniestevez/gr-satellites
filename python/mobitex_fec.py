@@ -148,9 +148,9 @@ def decode(codeword: int):
         return message, fec, Status.NO_ERROR
 
     # Look up error position in syndrome table
-    error_position = SYNDROME_TABLE.get(syndrome, -1)
-
-    if error_position == -1:
+    try:
+        error_position = SYNDROME_TABLE[syndrome]
+    except KeyError:
         message = codeword >> 4
         fec = codeword & 0x0F
         return message, fec, Status.ERROR_UNCORRECTABLE
