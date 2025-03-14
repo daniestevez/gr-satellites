@@ -48,29 +48,6 @@ class mobitex_deframer(gr.hier_block2, options_block):
     syncword_threshold: number of bit errors allowed in syncword (int)
     options: Options from argparse
     """
-    default_syncword = 0x5765
-    default_nx_syncword = 0x0EF0
-
-    # accept <= 3 bit errors in 2 bytes payload, 2x 4-bit FEC)
-    _default_sync_threshold = 3
-
-    # accept <= 2 bit errors in 6 bytes payload, 1x16-bit CRC)
-    _default_callsign_threshold = 2
-
-    # 2 bytes - control bytes
-    # 1 byte - FEC of control
-    # 6 bytes - callsign
-    # 2 bytes - CRC-16CCITT of Callsign
-    header_len = 2 + 1 + 6 + 2
-
-    # (18 bytes + 2 bytes CRC) * r=12/8 (FEC) = 30 bytes
-    blk_len = 30
-
-    # Maximum number of Mobitex blocks per frame
-    max_blocks = 32
-
-    use_timestamp_tagger = True
-
     def __init__(self,
                  nx=False,
                  variant=None,
@@ -86,12 +63,15 @@ class mobitex_deframer(gr.hier_block2, options_block):
         options_block.__init__(self, options)
         self.message_port_register_hier_out('out')
 
+        default_syncword = 0x5765
+        default_nx_syncword = 0x0EF0
+
         self.nx = nx
 
         if self.nx:
-            self.syncword = self.default_nx_syncword
+            self.syncword = default_nx_syncword
         else:
-            self.syncword = self.default_syncword
+            self.syncword = default_syncword
 
         self.variant = variant
         self.callsign = callsign
@@ -124,8 +104,20 @@ class mobitex_deframer(gr.hier_block2, options_block):
         self.msg_connect((self.mobitex, 'out'), (self, 'out'))
 
     def setup_builtin_deframer(self):
+        # 2 bytes - control bytes
+        # 1 byte - FEC of control
+        # 6 bytes - callsign
+        # 2 bytes - CRC-16CCITT of Callsign
+        header_len = 2 + 1 + 6 + 2
+
+        # (18 bytes + 2 bytes CRC) * r=12/8 (FEC) = 30 bytes
+        blk_len = 30
+
+        # Maximum number of Mobitex blocks per frame
+        max_blocks = 32
+
         # Setup blocks
-        packlen = self.header_len + self.blk_len * self.max_blocks
+        packlen = header_len + blk_len * max_blocks
         self.sync2pdu = sync_to_pdu_packed(
             packlen=packlen,
             sync=f'{self.syncword:016b}',
@@ -184,13 +176,19 @@ class mobitex_deframer(gr.hier_block2, options_block):
         """
         Adds Mobitex deframer specific options to the argparse parser
         """
+        # accept <= 3 bit errors in 2 bytes payload, 2x 4-bit FEC)
+        default_sync_threshold = 3
+
+        # accept <= 2 bit errors in 6 bytes payload, 1x16-bit CRC)
+        default_callsign_threshold = 2
+
         parser.add_argument(
             '--syncword_threshold', type=int,
-            default=cls._default_sync_threshold,
+            default=default_sync_threshold,
             help='Syncword bit errors [default=%(default)r]')
         parser.add_argument(
             '--callsign_threshold', type=int,
-            default=cls._default_callsign_threshold,
+            default=default_callsign_threshold,
             help='Callsign & callsign CRC bit errors [default=%(default)r]')
         parser.add_argument(
             '--use_tnc_nx', type=bool,
