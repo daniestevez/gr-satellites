@@ -53,3 +53,7 @@ class qa_mobitex_scrambler(gr_unittest.TestCase):
         actual_output = [scrambler.scramble(bit) for bit in self.bits_in]
 
         np.testing.assert_array_equal(actual_output, self.desired_output)
+
+
+if __name__ == '__main__':
+    gr_unittest.run(qa_mobitex_scrambler)
