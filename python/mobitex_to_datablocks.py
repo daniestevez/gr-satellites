@@ -170,13 +170,13 @@ class mobitex_to_datablocks(gr.basic_block):
 
 
     ## Output
-    The output is PDUs with one Mobitex block per PDU. The header is stripped
-    from the PDU content, but provided in a special tag attached to the first
-    Mobitex data block.
+    The output is PDUs with one decoded Mobitex block per PDU. The header is
+    stripped from the PDU content, but provided in the metadata attached to
+    the first Mobitex data block.
 
-    Each block has the following tags:
+    Each block has the following metadata:
         - block_id
-    The first block (`block_id`=0) additionally has the following tags:
+    The first block (`block_id`=0) additionally has the following metadata:
         - frame_header - the error-corrected frame header
         - control_errors_corrected
         - callsign_bit_errors
