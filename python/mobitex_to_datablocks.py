@@ -308,9 +308,10 @@ class mobitex_to_datablocks(gr.basic_block):
         blocks_end = self.header_length + self.block_size * num_blocks
         data_blocks = packet[blocks_start:blocks_end]
 
-        for block_idx, block in enumerate(
-            itertools.batched(data_blocks, n=self.block_size)
-        ):
+        blocks = (data_blocks[a:a + self.block_size]
+                  for a in range(0, len(data_blocks), self.block_size))
+
+        for block_idx, block in enumerate(blocks):
             if block_idx == 0:
                 meta = pmt.make_dict()
                 meta = pmt.dict_add(
