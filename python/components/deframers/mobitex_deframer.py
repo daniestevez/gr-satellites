@@ -30,29 +30,22 @@ class mobitex_deframer(gr.hier_block2, options_block):
     """
     Hierarchical block to deframe Mobitex and Mobitex-NX
 
-    The input is a stream of symbols.
-    The output are PDUs with Mobitex-NX frames, packed following
-    the TUBiX20 convention.
+    The input is a float stream of soft symbols. The output are PDUs
+    with frames.
 
-    This uses either
-    - the gr-tnc_nx OOT module (only attempts to import it when __init__()
-      is called)
-    - the builitin mobitex deframer
+    If callsign is provided, the received callsign+crc is checked
+    against this reference. The callsign check passes if the number of
+    detected bit errors does not exceed `callsign_threshold`.
 
-    # builtin mobitex deframer specific comments
-    If the callsign is provided, the deframer can detect otherwise
-    uncorrectable bit errors sometimes.
-
-    unknown callsign - recommended callsign_threshold is 8
-    known callsign -   recommended callsign_threshold is 12
+    If no callsign is provided, we try to error-correct callsign+crc
+    by flipping bits until CRC matches or a maximum number of bit-flips
+    specified by `callsign_threshold` is exceeded.
 
     Args:
     nx: use NX mode (boolean)
-    callsign: Expected callsign (optional, str)
-    callsign_threshold: number of bit errors allowed in
-                        callsign + callsign crc (int)
-    syncword_threshold: number of bit errors allowed in
-                        syncword (int)
+    callsign: expected callsign (optional, str)
+    callsign_threshold: number of bit errors allowed in callsign+crc (int)
+    syncword_threshold: number of bit errors allowed in syncword (int)
     options: Options from argparse
     """
     default_syncword = 0x5765
