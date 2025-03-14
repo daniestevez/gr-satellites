@@ -101,9 +101,9 @@ def init_syndrome_table() -> dict:
 SYNDROME_TABLE = init_syndrome_table()
 
 
-def encode(message: int) -> tuple[int, int]:
+def encode(message: int) -> int:
     """
-    Takes 8-bit byte, returns tuple of (12-bit codeword, 4-bit fec)
+    Takes 8-bit byte, returns 12-bit codeword.
     """
     fec = 0
     # Generate each FEC bit and place in correct position
@@ -117,7 +117,7 @@ def encode(message: int) -> tuple[int, int]:
     # Combine data byte and FEC into 12-bit codeword
     codeword = (message << 4) | fec
 
-    return codeword, fec
+    return codeword
 
 
 def decode(codeword: int):
@@ -187,7 +187,8 @@ def test_roundtrip():
     message = 0x2C
     print('Example with zero bit errors:')
     print(f'message:  0x{message:02X}')
-    codeword, fec = encode(message)
+    codeword = encode(message)
+    fec = codeword & 0xf
     print(f'codeword: 0x{codeword:03X}')
     print(f'fec:      0x  {fec:01X}')
     assert fec == 0x08
@@ -216,8 +217,8 @@ def test_roundtrip():
     print('\nExample of encoding 2 bytes:')
     message0 = 0x01
     message1 = 0x02
-    codeword0, fec0 = encode(message0)
-    codeword1, fec1 = encode(message1)
+    codeword0 = encode(message0)
+    codeword1 = encode(message1)
     code = pack_2b(codeword0, codeword1)
 
     unpacked_codeword0, unpacked_codeword1 = unpack_2b(code)
@@ -239,7 +240,9 @@ def test_edge_cases():
 
     # Test all possible 8-bit values
     for i in range(256):
-        codeword, fec = encode(i)
+        codeword = encode(i)
+        fec = codeword & 0xf
+
         assert 0 <= fec <= 0xF
         decoded, _, status = decode(codeword)
         assert status == status.NO_ERROR
@@ -248,7 +251,7 @@ def test_edge_cases():
     # For one example message,
     # test all possible single-bit errors.
     message = 0x2C
-    codeword, fec = encode(message)
+    codeword = encode(message)
 
     for bit in range(12):
         corrupted = codeword ^ (1 << bit)
