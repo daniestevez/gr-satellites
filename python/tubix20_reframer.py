@@ -86,11 +86,12 @@ class tubix20_reframer(gr.basic_block):
             self.num_blocks_expected = tags['num_blocks']
             self.frame_header = tags['frame_header']
 
-            meta = pmt.dict_delete(meta, pmt.intern('block_id'))
-            meta = pmt.dict_delete(meta, pmt.intern('frame_header'))
-            meta = pmt.dict_delete(meta, pmt.intern('crc_valid'))
-            meta = pmt.dict_delete(meta, pmt.intern('corrected_errors'))
-            meta = pmt.dict_delete(meta, pmt.intern('uncorrected_errors'))
+            tags_to_consume = ['block_id', 'frame_header', 'crc_valid',
+                               'corrected_errors', 'uncorrected_errors']
+
+            for key in tags_to_consume:
+                meta = pmt.dict_delete(meta, pmt.intern(key))
+
             self.block0_meta = meta
 
         # Store in buffer
