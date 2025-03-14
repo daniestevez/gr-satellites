@@ -251,8 +251,8 @@ class mobitex_to_datablocks(gr.basic_block):
             (control[0], control[1], control_fec[0]) = corrected
 
             # Apply error-correction
-            packet[self.bytemap['control']] = control[:]
-            packet[self.bytemap['control_fec']] = control_fec[:]
+            packet[self.bytemap['control']] = control
+            packet[self.bytemap['control_fec']] = control_fec
 
         if self.drop_invalid_control and not control_fec_valid:
             return
@@ -296,8 +296,8 @@ class mobitex_to_datablocks(gr.basic_block):
                 return
 
             # Apply error-correction
-            packet[self.bytemap['callsign']] = callsign[:]
-            packet[self.bytemap['callsign_crc']] = callsign_crc[:]
+            packet[self.bytemap['callsign']] = callsign
+            packet[self.bytemap['callsign_crc']] = callsign_crc
         else:
             # Skip callsign decoding
             pass
