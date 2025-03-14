@@ -13,28 +13,25 @@ import pmt
 # Based on the Mobitex Coding library
 # https://git.tu-berlin.de/rft/com/mobitub-2/-/blob/master/gr-tnc_nx/lib/mobitex_coding.cc
 class Scrambler:
-    seed = 0x01FF
+    seed = 0b1_1111_1111
 
     def __init__(self):
         self.reset_scrambler()
 
     def reset_scrambler(self):
-        self.scramble_shift_reg = self.seed
+        self.register = self.seed
         self.bytes_idx = 0
 
     def scramble(self, bit):
-        # register-bit 9th stage is "1"
-        if self.scramble_shift_reg & 0x0001:
-            bit ^= 1
+        # XOR input with LFSR output
+        bit ^= self.register & 1
 
-        # Check 5th and 9th Stage of
-        if (
-            ((self.scramble_shift_reg & 0x0011) == 0x0010) or
-            ((self.scramble_shift_reg & 0x0011) == 0x0001)
-        ):
-            self.scramble_shift_reg |= 0x0200
+        # Calculate feedback using parity of bits 0 and 4
+        if ((self.register & 1) ^ ((self.register >> 4) & 1)):
+            self.register |= 0b10_0000_0000
 
-        self.scramble_shift_reg = (self.scramble_shift_reg >> 1) & 0x01FF
+        # Shift register and insert feedback at MSB
+        self.register = ((self.register >> 1) & 0b1_1111_1111)
 
         return bit
 
