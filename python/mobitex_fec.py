@@ -28,6 +28,8 @@ References:
      https://ocw.mit.edu/courses/
 [3]: https://destevez.net/2016/09/some-notes-on-beesat-and-mobitex-nx/
 """
+import sys
+
 from enum import IntEnum
 
 # Matrix H, in 8 and 12 column variant
@@ -51,21 +53,25 @@ class Status(IntEnum):
     ERROR_UNCORRECTABLE = 2
 
 
-def calculate_even_parity(value: int) -> int:
-    """Calculate even parity of a value, using XOR folding.
+if sys.version_info >= (3, 10):
+    def calculate_even_parity(value: int) -> int:
+        return value.bit_count() & 1
+else:
+    def calculate_even_parity(value: int) -> int:
+        """Calculate even parity of a value, using XOR folding.
 
-    value must be 16-bit or smaller.
+        value must be 16-bit or smaller.
 
-    Returns:
-        Integer (0 or 1) representing (even or odd) parity
-    """
-    value ^= (value >> 16)
-    value ^= (value >> 8)
-    value ^= (value >> 4)
-    value ^= (value >> 2)
-    value ^= (value >> 1)
+        Returns:
+            Integer (0 or 1) representing (even or odd) parity
+        """
+        value ^= (value >> 16)
+        value ^= (value >> 8)
+        value ^= (value >> 4)
+        value ^= (value >> 2)
+        value ^= (value >> 1)
 
-    return value & 1
+        return value & 1
 
 
 def _init_syndrome_table() -> dict:
