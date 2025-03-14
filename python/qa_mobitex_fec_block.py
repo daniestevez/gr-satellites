@@ -57,7 +57,7 @@ def pdu_from_str(input_str: str):
     return pdu
 
 
-class qa_mobitex_fec(gr_unittest.TestCase):
+class qa_mobitex_fec_block(gr_unittest.TestCase):
     def setUp(self):
         self.tb = gr.top_block()
         self.dbg = blocks.message_debug()
@@ -150,4 +150,4 @@ class qa_mobitex_fec(gr_unittest.TestCase):
 
 
 if __name__ == '__main__':
-    gr_unittest.run(qa_mobitex_fec)
+    gr_unittest.run(qa_mobitex_fec_block)
