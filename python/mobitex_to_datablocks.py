@@ -11,53 +11,56 @@
 import itertools
 
 from gnuradio import gr
+from construct import Struct, BitsInteger, Bit
+
 import pmt
 import numpy as np
 
 from .check_eseo_crc import crc16_ccitt_zero as crc16_ccitt_zero
-from .mobitex_fec import decode, Status
+from .mobitex_fec import decode, encode, Status
 
 
-def decode_control_bytes(control_bytes: list[int], control_byte_crc: int):
+def decode_control(control0: int, control1: int, fec: int) -> \
+        tuple[list[int], int] | None:
     # Error Correction of the control bytes
-    control_bytes[0], fec0, status0 = decode(
-        (control_bytes[0] << 4) | (control_byte_crc >> 4)
+    control0, fec0, status0 = decode(
+        (control0 << 4) | (fec >> 4)
     )
-    control_bytes[1], fec1, status1 = decode(
-        (control_bytes[1] << 4) | (control_byte_crc & 0x0F)
+    control1, fec1, status1 = decode(
+        (control1 << 4) | (fec & 0x0F)
     )
-    control_byte_crc = fec0 << 4 | fec1
+    fec = fec0 << 4 | fec1
 
-    # Decode control bytes
-    result = {
-        # 1st byte, bits 0-4 (+ 1)
-        "num_data_blocks": (control_bytes[0] & 0x1F) + 1,
-        # 1st byte, bits 5-7
-        "message_type": (control_bytes[0] >> 5) & 0x07,
-        # 2nd byte, bit 0
-        "baud_bit": control_bytes[1] & 0x01,
-        # 2nd byte,bit 1
-        "ack_bit": (control_bytes[1] >> 1) & 0x01,
-        # 2nd byte,bits 2-3
-        "sub_address": (control_bytes[1] >> 2) & 0x03,
-        # 2nd byte,bits 4-7
-        "address": (control_bytes[1] >> 4) & 0x0F,
-    }
-
-    if (
-        status0 == Status.ERROR_UNCORRECTABLE or
-        status1 == Status.ERROR_UNCORRECTABLE
-    ):
-        raise ValueError("Control bytes FEC failed.")
+    if status0 == Status.ERROR_UNCORRECTABLE or \
+            status1 == Status.ERROR_UNCORRECTABLE:
+        # Check of control bytes FEC failed
+        return None
 
     # Count bit errors
-    bit_errors = 0
-    if status0 == Status.ERROR_CORRECTED:
-        bit_errors += 1
-    if status1 == Status.ERROR_CORRECTED:
-        bit_errors += 1
+    bit_errors = sum(s == Status.ERROR_CORRECTED for s in (status0, status1))
 
-    return result, bit_errors, control_bytes, control_byte_crc
+    return [control0, control1, fec], bit_errors
+
+
+def encode_control(control0: int, control1: int) -> int:
+    fec0 = encode(control0) & 0xf
+    fec1 = encode(control1) & 0xf
+    fec = fec0 << 4 | fec1
+
+    return fec
+
+
+def parse_control(control: list[int]) -> dict:
+    control_struct = Struct(
+        "num_data_blocks" / BitsInteger(5) + 1,
+        "message_type" / BitsInteger(3),
+        "baud_bit" / Bit,
+        "ack_bit" / Bit,
+        "sub_address" / BitsInteger(2),
+        "address" / BitsInteger(4)
+    )
+
+    return control_struct.parse(bytes([control[0], control[1]]))
 
 
 def check_callsign_crc(callsign: bytes, crc: bytes):
@@ -178,8 +181,8 @@ class mobitex_to_datablocks(gr.basic_block):
 
     header_length = 2 + 1 + 6 + 2
     bytemap = {
-        'control_bytes': slice(0, 2),
-        'control_bytes_crc': slice(2, 3),
+        'control': slice(0, 2),
+        'control_fec': slice(2, 3),
         'callsign': slice(3, 9),
         'callsign_crc': slice(9, 11),
     }
@@ -190,7 +193,7 @@ class mobitex_to_datablocks(gr.basic_block):
     def __init__(
         self,
         variant: str,
-        callsign: str = None,
+        callsign: str | None = None,
         drop_invalid_control: bool = False,
         callsign_threshold: int = 2,
         verbose=False,
@@ -208,8 +211,8 @@ class mobitex_to_datablocks(gr.basic_block):
             self.parse_callsign = False
             self.header_length = 2 + 1
             self.bytemap = {
-                'control_bytes': slice(0, 2),
-                'control_bytes_crc': slice(2, 3),
+                'control': slice(0, 2),
+                'control_fec': slice(2, 3),
             }
         else:
             self.parse_callsign = True
@@ -232,23 +235,24 @@ class mobitex_to_datablocks(gr.basic_block):
 
         packet = pmt.u8vector_elements(msg)
 
-        control_bytes = packet[self.bytemap['control_bytes']]
-        control_byte_crc = packet[self.bytemap['control_bytes_crc']][0]
+        control = packet[self.bytemap['control']]
+        control_fec = packet[self.bytemap['control_fec']]
 
-        try:
-            control, control_errors_corr, control_corr, control_crc_corr = (
-                decode_control_bytes(control_bytes, control_byte_crc)
-            )
-
-            # Apply error-correction to the frame header
-            for i in range(2):
-                packet[i] = control_corr[i]
-            packet[2] = control_crc_corr
-
-            control_fec_valid = True
-        except ValueError:
-            control_errors_corr = 0
+        result = decode_control(control[0], control[1], control_fec[0])
+        if result is None:
+            # Decoding of control bytes failed, bit errors uncorrectable
             control_fec_valid = False
+            control_bit_errors = -1
+        else:
+            # Decoding of control bytes succeded.
+            control_fec_valid = True
+            corrected, control_bit_errors = result
+
+            (control[0], control[1], control_fec[0]) = corrected
+
+            # Apply error-correction
+            packet[self.bytemap['control']] = control[:]
+            packet[self.bytemap['control_fec']] = control_fec[:]
 
         if self.drop_invalid_control and not control_fec_valid:
             return
@@ -256,7 +260,8 @@ class mobitex_to_datablocks(gr.basic_block):
         if self.num_blocks_hardcoded:
             num_blocks = self.num_blocks
         else:
-            num_blocks = control['num_data_blocks']
+            control_dict = parse_control(control)
+            num_blocks = control_dict['num_data_blocks']
 
         if self.parse_callsign:
             if self.callsign_ref:
@@ -312,7 +317,7 @@ class mobitex_to_datablocks(gr.basic_block):
                 meta = pmt.dict_add(
                     meta,
                     pmt.intern("control_errors_corrected"),
-                    pmt.from_long(control_errors_corr),
+                    pmt.from_long(control_bit_errors),
                 )
                 meta = pmt.dict_add(
                     meta,
