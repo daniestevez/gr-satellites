@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2020 - 2025 Daniel Estevez <daniel@destevez.net>
-#                       Fabian P. Schmidt <kerel@mailbox.org>
+# Copyright 2020 Daniel Estevez <daniel@destevez.net>
+# Copyright 2025 Fabian P. Schmidt <kerel@mailbox.org>
 #
 # This file is part of gr-satellites
 #
