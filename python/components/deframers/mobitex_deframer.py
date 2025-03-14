@@ -26,6 +26,10 @@ from ...grpdu import pdu_to_tagged_stream, tagged_stream_to_pdu
 from ...crcs import crc16_ccitt_x25
 
 
+# accept <= 2 bit errors in 6 bytes payload, 1x16-bit CRC)
+DEFAULT_CALLSIGN_THRESHOLD = 2
+
+
 class mobitex_deframer(gr.hier_block2, options_block):
     """
     Hierarchical block to deframe Mobitex and Mobitex-NX
@@ -86,7 +90,11 @@ class mobitex_deframer(gr.hier_block2, options_block):
         self.syncword_threshold = syncword_threshold
 
         if callsign_threshold is None:
-            callsign_threshold = self.options.callsign_threshold
+            if callsign is not None and self.options.callsign_threshold == \
+                    DEFAULT_CALLSIGN_THRESHOLD:
+                callsign_threshold = 12
+            else:
+                callsign_threshold = self.options.callsign_threshold
         self.callsign_threshold = callsign_threshold
 
         self.invert = blocks.multiply_const_ff(-1, 1)
@@ -185,7 +193,7 @@ class mobitex_deframer(gr.hier_block2, options_block):
         default_sync_threshold = 3
 
         # accept <= 2 bit errors in 6 bytes payload, 1x16-bit CRC)
-        default_callsign_threshold = 2
+        default_callsign_threshold = DEFAULT_CALLSIGN_THRESHOLD
 
         parser.add_argument(
             '--syncword_threshold', type=int,
@@ -194,7 +202,8 @@ class mobitex_deframer(gr.hier_block2, options_block):
         parser.add_argument(
             '--callsign_threshold', type=int,
             default=default_callsign_threshold,
-            help='Callsign & callsign CRC bit errors [default=%(default)r]')
+            help='Callsign & callsign CRC bit errors [default=%(default)r if '
+                 'callsign is unknown, 12 if callsign is known]')
         parser.add_argument(
             '--use_tnc_nx', type=bool,
             default=False,
