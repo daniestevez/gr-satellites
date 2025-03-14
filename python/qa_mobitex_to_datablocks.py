@@ -22,7 +22,8 @@ else:
     sys.modules['satellites'] = satellites
 
 from satellites.mobitex_to_datablocks import (
-    check_callsign_crc, compare_expected_callsign, decode_unknown_callsign
+    check_callsign_crc, compare_expected_callsign, decode_unknown_callsign,
+    decode_control, encode_control,
 )
 
 
@@ -89,6 +90,42 @@ class qa_mobitex_to_datablocks(gr_unittest.TestCase):
             actual_callsign, actual_crc, actual_bit_errors = actual_output
             self.assertEqual(actual_bit_errors, desired_bit_errors)
 
+    def test_decode_control(self):
+        fixture = [
+            # No bit error
+            ((0x3f, 0x02, 0xc6), ((0x3f, 0x02, 0xc6), 0)),
+            # One bit errors
+            ((0b0011_1011, 0x02, 0xc6), ((0x3f, 0x02, 0xc6), 1)),
+            # Two bit errors
+            ((0b0011_1010, 0x02, 0xc6), None),
+        ]
+
+        for control_and_fec, desired_result in fixture:
+            actual_result = decode_control(*control_and_fec)
+            if desired_result is None:
+                self.assertIsNone(actual_result)
+                continue
+
+            actual_bytes = bytes(actual_result[0])
+            actual_bit_errors = actual_result[1]
+
+            desired_bytes = bytes(desired_result[0])
+            desired_bit_errors = desired_result[1]
+
+            self.assertEqual(actual_bytes, desired_bytes)
+            self.assertEqual(actual_bit_errors, desired_bit_errors)
+
+    def test_encode_control(self):
+        fixture = [
+            ((0x00, 0x00), 0x00),
+            ((0x3f, 0x01), 0xc5),
+            ((0x3f, 0x02), 0xc6),
+            ((0xff, 0xff), 0xff),
+        ]
+
+        for control, desired_fec in fixture:
+            actual_fec = encode_control(*control)
+            self.assertEqual(actual_fec, desired_fec)
 
 
 if __name__ == '__main__':
