@@ -24,7 +24,7 @@ class check_address(gr.basic_block):
             in_sig=[],
             out_sig=[])
 
-        a = address.split('-')
+        a = address.rsplit('-', 1)
         self.callsign = a[0]
         self.ssid = int(a[1]) if len(a) > 1 else None
         self.direction = direction
