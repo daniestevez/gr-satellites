@@ -21,7 +21,7 @@
 ########################################################################
 # Project setup
 ########################################################################
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.8)
 project(gr-satellites CXX C)
 enable_testing()
 
