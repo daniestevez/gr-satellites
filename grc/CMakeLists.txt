@@ -57,6 +57,7 @@ install(FILES
     satellites_eseo_packet_crop.block.yml
     satellites_fixedlen_tagger.block.yml
     satellites_fixedlen_to_pdu.block.yml
+    satellites_frame_counter.block.yml
     satellites_funcube_submit.block.yml
     satellites_hdlc_deframer.block.yml
     satellites_hdlc_framer.block.yml

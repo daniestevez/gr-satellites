@@ -34,6 +34,7 @@ void bind_distributed_syncframe_soft(py::module& m);
 void bind_doppler_correction(py::module& m);
 void bind_encode_rs(py::module& m);
 void bind_fixedlen_to_pdu(py::module& m);
+void bind_frame_counter(py::module& m);
 void bind_lilacsat1_demux(py::module& m);
 void bind_manchester_sync(py::module& m);
 void bind_matrix_deinterleaver_soft(py::module& m);
@@ -91,6 +92,7 @@ PYBIND11_MODULE(satellites_python, m)
     bind_doppler_correction(m);
     bind_encode_rs(m);
     bind_fixedlen_to_pdu(m);
+    bind_frame_counter(m);
     bind_lilacsat1_demux(m);
     bind_manchester_sync(m);
     bind_matrix_deinterleaver_soft(m);
