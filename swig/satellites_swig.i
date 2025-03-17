@@ -23,6 +23,7 @@
 #include "satellites/doppler_correction.h"
 #include "satellites/encode_rs.h"
 #include "satellites/fixedlen_to_pdu.h"
+#include "satellites/frame_counter.h"
 #include "satellites/lilacsat1_demux.h"
 #include "satellites/manchester_sync.h"
 #include "satellites/matrix_deinterleaver_soft.h"
@@ -66,6 +67,8 @@ GR_SWIG_BLOCK_MAGIC2(satellites, doppler_correction);
 GR_SWIG_BLOCK_MAGIC2(satellites, encode_rs);
 %include "satellites/fixedlen_to_pdu.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, fixedlen_to_pdu);
+%include "satellites/frame_counter.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, frame_counter);
 %include "satellites/lilacsat1_demux.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, lilacsat1_demux);
 %include "satellites/manchester_sync.h"
