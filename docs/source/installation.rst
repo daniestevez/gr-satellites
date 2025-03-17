@@ -95,11 +95,11 @@ inside the directory containing the gr-satellites sources:
 
 .. code-block:: console
 
-   $ mkdir build
-   $ cd build
-   $ cmake ..
-   $ make
-   $ sudo make install
+   $ git clone https://github.com/daniestevez/gr-satellites
+   $ cd gr-satellites/
+   $ cmake -S . -B build
+   $ cmake --build build --parallel
+   $ cmake --install build
    $ sudo ldconfig
 
 After running ``make``, you can run the tests by doing ``make test`` in the
