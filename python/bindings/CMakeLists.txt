@@ -42,6 +42,7 @@ list(APPEND satellites_python_files
     doppler_correction_python.cc
     encode_rs_python.cc
     fixedlen_to_pdu_python.cc
+    frame_counter_python.cc
     lilacsat1_demux_python.cc
     manchester_sync_python.cc
     matrix_deinterleaver_soft_python.cc
