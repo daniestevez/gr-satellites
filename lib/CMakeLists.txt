@@ -56,6 +56,7 @@ list(APPEND satellites_sources
     doppler_correction_impl.cc
     encode_rs_impl.cc
     fixedlen_to_pdu_impl.cc
+    frame_counter_impl.cc
     golay24.c
     lilacsat1_demux_impl.cc
     manchester_sync_impl.cc
