@@ -79,6 +79,7 @@ GR_PYTHON_INSTALL(
     snet.py
     suomi100.py
     trisat.py
+    tubix20.py
     upmsat_2.py
     vzlusat_2.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/telemetry
