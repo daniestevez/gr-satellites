@@ -97,6 +97,7 @@ install(FILES
     satellites_sx12xx_packet_crop.block.yml
     satellites_time_dependent_delay.block.yml
     satellites_u482c_decode.block.yml
+    satellites_u482c_encode.block.yml
     satellites_varlen_packet_framer.block.yml
     satellites_varlen_packet_tagger.block.yml
     satellites_viterbi_decoder.block.yml
