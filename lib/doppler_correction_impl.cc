@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2022-2023 Daniel Estevez <daniel@destevez.net>.
+ * Copyright 2022-2023,2025 Daniel Estevez <daniel@destevez.net>.
  *
  * This file is part of gr-satellites
  *
@@ -10,22 +10,27 @@
 #include "doppler_correction_impl.h"
 #include <gnuradio/expj.h>
 #include <gnuradio/io_signature.h>
+#include <inttypes.h>
 #include <fstream>
 #include <stdexcept>
 
 namespace gr {
 namespace satellites {
 
-doppler_correction::sptr
-doppler_correction::make(std::string& filename, double samp_rate, double t0)
+doppler_correction::sptr doppler_correction::make(const std::string& filename,
+                                                  double samp_rate,
+                                                  double t0,
+                                                  const std::string& timesync_tag)
 {
-    return gnuradio::make_block_sptr<doppler_correction_impl>(filename, samp_rate, t0);
+    return gnuradio::make_block_sptr<doppler_correction_impl>(
+        filename, samp_rate, t0, timesync_tag);
 }
 
 
-doppler_correction_impl::doppler_correction_impl(std::string& filename,
+doppler_correction_impl::doppler_correction_impl(const std::string& filename,
                                                  double samp_rate,
-                                                 double t0)
+                                                 double t0,
+                                                 const std::string& timesync_tag)
     : gr::sync_block("doppler_correction",
                      gr::io_signature::make(1, 1, sizeof(gr_complex)),
                      gr::io_signature::make(1, 1, sizeof(gr_complex))),
@@ -38,6 +43,8 @@ doppler_correction_impl::doppler_correction_impl(std::string& filename,
       d_pck_n_key(pmt::mp("pck_n")),
       d_full_key(pmt::mp("full")),
       d_frac_key(pmt::mp("frac")),
+      d_timesync_enabled(!timesync_tag.empty()),
+      d_timesync_key(pmt::mp(timesync_tag)),
       d_current_time(t0),
       d_current_freq(0.0)
 {
@@ -46,7 +53,7 @@ doppler_correction_impl::doppler_correction_impl(std::string& filename,
 
 doppler_correction_impl::~doppler_correction_impl() {}
 
-void doppler_correction_impl::read_doppler_file(std::string& filename)
+void doppler_correction_impl::read_doppler_file(const std::string& filename)
 {
     std::ifstream input_file(filename);
     if (!input_file.good()) {
@@ -90,6 +97,7 @@ int doppler_correction_impl::work(int noutput_items,
     for (const auto& tag : tags) {
         double t0;
         bool set = false;
+        bool log_debug = false;
         if (pmt::eqv(tag.key, d_rx_time_key)) {
             if (pmt::is_tuple(tag.value)) {
                 t0 = static_cast<double>(pmt::to_uint64(pmt::tuple_ref(tag.value, 0))) +
@@ -108,12 +116,24 @@ int doppler_correction_impl::work(int noutput_items,
                     set = true;
                 }
             }
+        } else if (d_timesync_enabled && pmt::eqv(tag.key, d_timesync_key)) {
+            const auto now = std::chrono::high_resolution_clock::now();
+            const std::chrono::duration<double> t_unix = now.time_since_epoch();
+            t0 = t_unix.count();
+            set = true;
+            log_debug = true;
         }
 
         if (set) {
             d_sample_t0 = tag.offset;
             d_t0 = t0;
-            printf("[doppler_correction] set time %f at sample %d\n", d_t0, d_sample_t0);
+            if (!log_debug) {
+                // do not print a message for timesync tag, since logging once per
+                // packet can be too expensive
+                printf("[doppler_correction] set time %f at sample %" PRIu64 "\n",
+                       d_t0,
+                       d_sample_t0);
+            }
             adjust_current_index();
         }
     }

@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2022-2023 Daniel Estevez <daniel@destevez.net>.
+ * Copyright 2022-2023,2025 Daniel Estevez <daniel@destevez.net>.
  *
  * This file is part of gr-satellites
  *
@@ -12,6 +12,7 @@
 
 #include <gnuradio/sync_block.h>
 #include <satellites/api.h>
+#include <string>
 
 namespace gr {
 namespace satellites {
@@ -41,6 +42,12 @@ namespace satellites {
  * The Doppler correction block interpolates the frequency linearly between each
  * pair of entries in the text file, and generates a correction with continuous
  * phase.
+ *
+ * An optional time synchronization tag functionality is provided, mainly
+ * intended for uplink Doppler correction of burst transmissions. When this tag
+ * is received, the Doppler correction block sets its internal time to the
+ * current UNIX time of the PC. Usually, the "packet_len" tag at the beginning
+ * of the burst is used as time synchronization tag.
  */
 class SATELLITES_API doppler_correction : virtual public gr::sync_block
 {
@@ -53,8 +60,13 @@ public:
      * \param filename Path of the text file describing the Doppler data
      * \param samp_rate Sample rate
      * \param t0 Timestamp corresponding to the first sample
+     * \param timesync_tag Tag used to trigger time synchronization to the current PC
+     * clock
      */
-    static sptr make(std::string& filename, double samp_rate, double t0);
+    static sptr make(const std::string& filename,
+                     double samp_rate,
+                     double t0,
+                     const std::string& timesync_tag = "");
 
     /*!
      * \brief Sets the current time.
