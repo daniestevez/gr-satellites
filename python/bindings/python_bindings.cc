@@ -49,6 +49,7 @@ void bind_phase_unwrap(py::module& m);
 void bind_selector(py::module& m);
 void bind_time_dependent_delay(py::module& m);
 void bind_u482c_decode(py::module& m);
+void bind_u482c_encode(py::module& m);
 void bind_varlen_packet_framer(py::module& m);
 void bind_varlen_packet_tagger(py::module& m);
 void bind_viterbi_decoder(py::module& m);
@@ -108,6 +109,7 @@ PYBIND11_MODULE(satellites_python, m)
     bind_selector(m);
     bind_time_dependent_delay(m);
     bind_u482c_decode(m);
+    bind_u482c_encode(m);
     bind_varlen_packet_framer(m);
     bind_varlen_packet_tagger(m);
     bind_viterbi_decoder(m);
