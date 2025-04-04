@@ -4,7 +4,7 @@ category: '[Satellites]/Doppler'
 
 templates:
   imports: import satellites
-  make: satellites.doppler_correction(${file}, ${samp_rate}, ${t0})
+  make: satellites.doppler_correction(${file}, ${samp_rate}, ${t0}, ${timesync_tag})
 
 parameters:
 - id: file
@@ -18,6 +18,11 @@ parameters:
   label: Start time
   dtype: float
   default: 0
+- id: timesync_tag
+  label: Time synchronization tag
+  dtype: string
+  default: '""'
+  hide: ${ 'none' if len(timesync_tag) else 'part' }
 
 inputs:
 - label: in

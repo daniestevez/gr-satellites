@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Free Software Foundation, Inc.
+ * Copyright 2025 Free Software Foundation, Inc.
  *
  * This file is part of GNU Radio
  *
@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(doppler_correction.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(56444490a7f522137e132976be778b10)                     */
+/* BINDTOOL_HEADER_FILE_HASH(1cdebd975d689eea27e9f2adb2c59ab2)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -44,6 +44,7 @@ void bind_doppler_correction(py::module& m)
              py::arg("filename"),
              py::arg("samp_rate"),
              py::arg("t0"),
+             py::arg("timesync_tag") = "",
              D(doppler_correction, make))
 
 
