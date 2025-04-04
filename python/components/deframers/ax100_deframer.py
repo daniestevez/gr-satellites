@@ -57,7 +57,7 @@ class ax100_deframer(gr.hier_block2, options_block):
         if mode == 'RS':
             self.descrambler = digital.descrambler_bb(0x21, 0, 16)
         self.deframer = sync_to_pdu_packed(
-            packlen=256 if mode == 'RS' else 255,
+            packlen=256 if mode == 'RS' else 258,
             sync=syncword, threshold=syncword_threshold)
         self.fec = (ax100_decode(self.options.verbose_fec) if mode == 'RS'
                     else u482c_decode(
