@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2022-2023 Daniel Estevez <daniel@destevez.net>.
+ * Copyright 2022-2023,2025 Daniel Estevez <daniel@destevez.net>.
  *
  * This file is part of gr-satellites
  *
@@ -38,6 +38,10 @@ private:
     const pmt::pmt_t d_full_key;
     const pmt::pmt_t d_frac_key;
 
+    // timesync tag
+    const bool d_timesync_enabled;
+    const pmt::pmt_t d_timesync_key;
+
     double d_current_time;
     double d_current_freq;
 
@@ -62,7 +66,10 @@ private:
     void read_doppler_file(const char* filename);
 
 public:
-    doppler_correction_impl(const char* filename, double samp_rate, double t0);
+    doppler_correction_impl(const char* filename,
+                            double samp_rate,
+                            double t0,
+                            const char* timesync_tag);
     ~doppler_correction_impl();
 
     void set_time(double) override;
