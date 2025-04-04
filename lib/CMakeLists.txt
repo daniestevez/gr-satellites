@@ -73,6 +73,7 @@ list(APPEND satellites_sources
     selector_impl.cc
     time_dependent_delay_impl.cc
     u482c_decode_impl.cc
+    u482c_encode_impl.cc
     varlen_packet_framer_impl.cc
     varlen_packet_tagger_impl.cc
     viterbi.c
