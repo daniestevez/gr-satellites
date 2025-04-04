@@ -38,6 +38,7 @@
 #include "satellites/selector.h"
 #include "satellites/time_dependent_delay.h"
 #include "satellites/u482c_decode.h"
+#include "satellites/u482c_encode.h"
 #include "satellites/varlen_packet_framer.h"
 #include "satellites/varlen_packet_tagger.h"
 #include "satellites/viterbi_decoder.h"
@@ -99,6 +100,8 @@ GR_SWIG_BLOCK_MAGIC2(satellites, selector);
 GR_SWIG_BLOCK_MAGIC2(satellites, time_dependent_delay);
 %include "satellites/u482c_decode.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, u482c_decode);
+%include "satellites/u482c_encode.h"
+GR_SWIG_BLOCK_MAGIC2(satellites, u482c_encode);
 %include "satellites/varlen_packet_framer.h"
 GR_SWIG_BLOCK_MAGIC2(satellites, varlen_packet_framer);
 %include "satellites/varlen_packet_tagger.h"
