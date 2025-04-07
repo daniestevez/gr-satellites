@@ -1,0 +1,19 @@
+id: satellites_csp_zmq_pub
+label: CSP ZMQ PUB
+category: '[Satellites]/CSP'
+
+parameters:
+- id: address
+  label: Address
+  dtype: string
+  default: '"tcp://localhost:6000"'
+
+inputs:
+- domain: message
+  id: in
+
+templates:
+    imports: import satellites
+    make: satellites.csp_zmq_pub(${address})
+
+file_format: 1
