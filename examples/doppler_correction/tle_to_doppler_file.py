@@ -44,6 +44,10 @@ def parse_args():
         '--f-carrier', required=True, type=float,
         help='Carrier frequency (Hz)')
     parser.add_argument(
+        '--uplink', action='store_true',
+        help=('Generate Doppler file for uplink correction '
+              '(inverts sign of Doppler)'))
+    parser.add_argument(
         '--lat', required=True, type=float,
         help='Groundstation latitude (degrees)')
     parser.add_argument(
@@ -77,6 +81,8 @@ def main():
     range_rate = topocentric.frame_latlon_and_rates(
         groundstation)[5].km_per_s * 1e3
     doppler = - range_rate / scipy.constants.c * args.f_carrier
+    if args.uplink:
+        doppler = -doppler
     with open(args.output_file, 'w') as output_file:
         for s, f in zip(t, doppler):
             s = (s.utc_datetime() - unix_epoch).total_seconds()
