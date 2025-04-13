@@ -1,13 +1,16 @@
-name: NUSHSat1
-norad: 98628
+name: NUSHSAT-1
+norad: 63211
+telemetry_servers:
+  - SIDS https://sat.nushigh.school/telemetry
 data:
-  &tlm Unknown telemetry:
-    unknown
+  &tlm CSP telemetry:
+    telemetry: csp
 transmitters:
   1k2 FSK AX100 ASM+Golay downlink:
     frequency: 436.200e+6
     modulation: FSK
     baudrate: 1200
+    deviation: 575
     framing: AX100 ASM+Golay
     data:
     - *tlm
@@ -22,13 +25,6 @@ transmitters:
     frequency: 436.200e+6
     modulation: FSK
     baudrate: 4800
-    framing: AX100 ASM+Golay
-    data:
-    - *tlm
-  9k6 FSK AX100 ASM+Golay downlink:
-    frequency: 436.200e+6
-    modulation: FSK
-    baudrate: 9600
     framing: AX100 ASM+Golay
     data:
     - *tlm
