@@ -479,6 +479,7 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'OpenLST': deframers.openlst_deframer,
         'HADES-D': set_options(deframers.hades_deframer, satellite='HADES-D'),
         'HADES-R': set_options(deframers.hades_deframer, satellite='HADES-R'),
+        'HORS': deframers.hors_deframer
         }
     _transport_hooks = {
         'KISS': transports.kiss_transport,
