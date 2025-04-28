@@ -455,6 +455,8 @@ class gr_satellites_flowgraph(gr.hier_block2):
         'Mobitex-NX': set_options(deframers.mobitex_deframer, nx=True),
         'BEESAT-1': set_options(deframers.mobitex_deframer, nx=True,
                                 variant='BEESAT-1'),
+        'BEESAT-9': set_options(deframers.mobitex_deframer, nx=True,
+                                variant='BEESAT-9'),
         'FOSSASAT': deframers.fossasat_deframer,
         'AISTECHSAT-2': deframers.aistechsat_2_deframer,
         'AALTO-1': deframers.aalto1_deframer,
