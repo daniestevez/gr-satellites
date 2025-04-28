@@ -9,6 +9,7 @@ transmitters:
     modulation: FSK
     baudrate: 4800
     framing: Mobitex-NX
+    callsign: DP0BEE
     data:
     - *tlm
   9k6 FSK downlink:
@@ -16,5 +17,6 @@ transmitters:
     modulation: FSK
     baudrate: 9600
     framing: Mobitex-NX
+    callsign: DP0BEE
     data:
     - *tlm
