@@ -9,7 +9,7 @@ transmitters:
     modulation: FSK
     baudrate: 4800
     deviation: 1800
-    framing: Mobitex-NX
+    framing: BEESAT-9
     callsign: DP0BEM
     data:
     - *tlm
