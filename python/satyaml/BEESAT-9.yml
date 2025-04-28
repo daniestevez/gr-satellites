@@ -10,5 +10,6 @@ transmitters:
     baudrate: 4800
     deviation: 1800
     framing: Mobitex-NX
+    callsign: DP0BEM
     data:
     - *tlm
