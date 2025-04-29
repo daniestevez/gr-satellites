@@ -13,7 +13,7 @@ import importlib
 import pmt
 
 from gnuradio import gr, blocks, digital
-from gnuradio.pdu import pdu_set
+from gnuradio.blocks import pdu_set
 
 from ...mobitex_to_datablocks import mobitex_to_datablocks
 from ...mobitex_fec_block import mobitex_fec

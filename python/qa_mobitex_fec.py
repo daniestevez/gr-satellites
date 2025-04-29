@@ -11,7 +11,7 @@
 import copy
 
 from gnuradio import gr, blocks, gr_unittest
-from gnuradio.pdu import pdu_lambda, pdu_set
+from gnuradio.blocks import pdu_set
 import numpy as np
 import pmt
 
