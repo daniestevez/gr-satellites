@@ -14,14 +14,14 @@ import pmt
 
 from gnuradio import gr, blocks, digital
 from gnuradio.blocks import pdu_set
+from gnuradio.blocks import byte_t
+from gnuradio.blocks import pdu_to_tagged_stream, tagged_stream_to_pdu
 
 from ...mobitex_to_datablocks import mobitex_to_datablocks
 from ...mobitex_fec_block import mobitex_fec
 from ...tubix20_reframer import tubix20_reframer
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block
-from ...grtypes import byte_t
-from ...grpdu import pdu_to_tagged_stream, tagged_stream_to_pdu
 from ...crcs import crc16_ccitt_x25
 
 
