@@ -11,7 +11,7 @@
 import copy
 
 from gnuradio import gr, blocks, gr_unittest
-from gnuradio.pdu import pdu_lambda, pdu_set
+from gnuradio.blocks import pdu_set
 import numpy as np
 import pmt
 
@@ -72,7 +72,7 @@ class qa_mobitex_fec_block(gr_unittest.TestCase):
 
         dut = mobitex_fec()
         self.input = (dut, 'in')
-        self.output = (dut, 'out')
+        self.output = [(dut, 'out')]
 
         self.run_test()
 
@@ -88,18 +88,14 @@ class qa_mobitex_fec_block(gr_unittest.TestCase):
         crc = crc16_ccitt_x25(swap_endianness=False)
         crc_ok = pdu_set(k=pmt.intern('crc_valid'), v=pmt.from_bool(True))
         crc_fail = pdu_set(k=pmt.intern('crc_valid'), v=pmt.from_bool(False))
-        demux = pdu_lambda(lambda x: x, 'RAW')
 
         self.tb.msg_connect((fec, 'out'), (crc, 'in'))
 
         self.tb.msg_connect((crc, 'ok'), (crc_ok, 'pdus'))
         self.tb.msg_connect((crc, 'fail'), (crc_fail, 'pdus'))
 
-        self.tb.msg_connect((crc_ok, 'pdus'), (demux, 'pdu'))
-        self.tb.msg_connect((crc_fail, 'pdus'), (demux, 'pdu'))
-
         self.input = (fec, 'in')
-        self.output = (demux, 'pdu')
+        self.output = [(crc_ok, 'pdus'), (crc_fail, 'pdus')]
 
         self.run_test()
 
@@ -113,7 +109,8 @@ class qa_mobitex_fec_block(gr_unittest.TestCase):
         The output block and port is specified by the self.output tuple.
         """
         # Prepare flowgraph
-        self.tb.msg_connect(self.output, (self.dbg, 'store'))
+        for out in self.output:
+            self.tb.msg_connect(out, (self.dbg, 'store'))
 
         # Send PDUs
         for pdu in self.pdus_in:
