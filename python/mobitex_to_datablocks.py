@@ -8,7 +8,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-from typing import Optional
+from typing import List, Optional, Tuple
 
 import itertools
 
@@ -22,7 +22,7 @@ from .mobitex_fec import decode, encode, Status
 
 
 def decode_control(control0: int, control1: int, fec: int) -> \
-        Optional[tuple[list[int], int]]:
+        Optional[Tuple[List[int], int]]:
     """
     Process control bytes and FEC byte, correcting errors if possible.
     Returns error-corrected bytes and error count, or None if uncorrectable.
@@ -70,7 +70,7 @@ def decode_unknown_callsign(
     callsign: bytes,
     crc: bytes,
     max_bit_flips: int,
-) -> Optional[tuple[bytes, bytes, int]]:
+) -> Optional[Tuple[bytes, bytes, int]]:
     """Error-corrects callsign+crc by flipping bits until CRC matches or
     maximum number of bit-flips is exceeded.
 
@@ -121,7 +121,7 @@ def compare_expected_callsign(
     callsign: bytes,
     crc: bytes,
     callsign_ref: bytes,
-) -> tuple[bytes, int]:
+) -> Tuple[bytes, int]:
     """
     Calculates bit errors between received callsign+CRC and expected
     reference callsign+CRC.
