@@ -31,6 +31,8 @@ References:
 import sys
 
 from enum import IntEnum
+from typing import Tuple
+
 
 # Matrix H, in 8 and 12 column variant
 FEC_MATRIX_8b = [
@@ -163,7 +165,7 @@ def decode(codeword: int):
     return message, fec, Status.ERROR_CORRECTED
 
 
-def split(word: int) -> tuple[int, int]:
+def split(word: int) -> Tuple[int, int]:
     """Split 12-bit codeword into data byte and FEC."""
     return (word >> 4), (word & 0xF)
 
@@ -176,7 +178,7 @@ def pack_2b(byte0: int, byte1: int) -> bytes:
     return bytes([encoded_byte1, encoded_byte2, encoded_byte3])
 
 
-def unpack_2b(code: bytes) -> tuple[int, int]:
+def unpack_2b(code: bytes) -> Tuple[int, int]:
     """From three bytes unpack two 12-bit codewords."""
     codeword0 = (code[0] << 4) | (code[1] >> 4)
     codeword1 = ((code[1] & 0x0F) << 8) | code[2]
