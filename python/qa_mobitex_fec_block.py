@@ -53,7 +53,7 @@ def msg_from_str(input_str: str):
 
 def pdu_from_str(input_str: str):
     msg = msg_from_str(input_str)
-    pdu = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(msg), msg))
+    pdu = pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(msg), bytes(msg)))
     return pdu
 
 
