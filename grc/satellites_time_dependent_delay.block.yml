@@ -1,0 +1,64 @@
+id: satellites_time_dependent_delay
+label: Time-dependent Delay
+category: '[Satellites]/Delay'
+
+templates:
+  imports: import satellites
+  make: satellites.time_dependent_delay(${file}, ${samp_rate}, ${t0}, ${taps}, ${num_filters})
+
+parameters:
+- id: file
+  label: File
+  dtype: file_open
+- id: samp_rate
+  label: Sample rate
+  dtype: float
+  default: samp_rate
+- id: t0
+  label: Start time
+  dtype: float
+  default: 0
+- id: taps
+  label: Taps
+  dtype: float_vector
+- id: num_filters
+  label: Number of filters
+  dtype: int
+
+inputs:
+- label: in
+  domain: stream
+  dtype: complex
+
+outputs:
+- label: out
+  domain: stream
+  dtype: complex
+
+documentation: |-
+    This block is similar to the Doppler Correction block, in the sense that
+    it uses a text file that lists a time series of delay vs. time. The format
+    of this text file is very similar to the one used by Doppler Correction.
+    Each line of the file contains a timestamp and a delay. The format of the
+    timestamp is the same as for Doppler correction. The delay is given in
+    seconds.
+
+    Like the Doppler Correction block, this block can use time tags to update
+    its internal timestamp.
+
+    The block interpolates the delay linearly for each sample, and uses a
+    polyphase filterbank to apply the appropriate delay.
+
+    Input:
+        A stream of IQ samples
+    Output:
+        The input delayed by the time specified in the file
+
+    Parameters:
+        File: Frequency vs. time text file.
+        Sample rate: Input and output sample rate.
+        Start time: Timestamp correponding to the first sample processed by the block.
+        Taps: Taps for the fractional delay polyphase filterbank
+        Number of filters: Number of filters in the polyphase filterbank
+
+file_format: 1
