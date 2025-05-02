@@ -49,6 +49,7 @@ install(FILES
     pdu_scrambler.h
     phase_unwrap.h
     selector.h
+    time_dependent_delay.h
     u482c_decode.h
     varlen_packet_framer.h
     varlen_packet_tagger.h
