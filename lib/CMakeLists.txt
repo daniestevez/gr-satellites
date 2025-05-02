@@ -71,6 +71,7 @@ list(APPEND satellites_sources
     phase_unwrap_impl.cc
     randomizer.c
     selector_impl.cc
+    time_dependent_delay_impl.cc
     u482c_decode_impl.cc
     varlen_packet_framer_impl.cc
     varlen_packet_tagger_impl.cc
