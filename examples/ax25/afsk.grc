@@ -86,7 +86,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [512, 220]
+    coordinate: [504, 228.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0
@@ -102,13 +102,14 @@ blocks:
     offset: '0'
     phase: '0'
     samp_rate: samp_rate
+    showports: 'False'
     type: complex
     waveform: analog.GR_COS_WAVE
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [48, 152.0]
+    coordinate: [32, 172.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_1
@@ -124,13 +125,14 @@ blocks:
     offset: '0'
     phase: '0'
     samp_rate: samp_rate
+    showports: 'False'
     type: complex
     waveform: analog.GR_SIN_WAVE
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [496, 856]
+    coordinate: [456, 844.0]
     rotation: 0
     state: enabled
 - name: audio_sink_0
@@ -147,7 +149,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1360, 804.0]
+    coordinate: [1128, 796.0]
     rotation: 0
     state: enabled
 - name: audio_source_0
@@ -166,7 +168,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 332.0]
+    coordinate: [32, 316.0]
     rotation: 0
     state: enabled
 - name: blocks_char_to_float_0
@@ -199,7 +201,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1088, 808.0]
+    coordinate: [944, 800.0]
     rotation: 0
     state: enabled
 - name: blocks_message_debug_0
@@ -209,11 +211,12 @@ blocks:
     alias: ''
     comment: ''
     en_uvec: 'True'
+    log_level: info
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1008, 372.0]
+    coordinate: [688, 312.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0
@@ -231,7 +234,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [392, 209]
+    coordinate: [384, 216.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_1
@@ -249,7 +252,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [856, 788.0]
+    coordinate: [752, 784.0]
     rotation: 0
     state: enabled
 - name: blocks_repeat_0
@@ -282,28 +285,53 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1240, 272.0]
+    coordinate: [1240, 184.0]
     rotation: 0
     state: enabled
-- name: digital_clock_recovery_mm_xx_0
-  id: digital_clock_recovery_mm_xx
+- name: digital_symbol_sync_xx_0
+  id: digital_symbol_sync_xx
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    gain_mu: '0.175'
-    gain_omega: 0.25*0.175*0.175
+    constellation: digital.constellation_bpsk().base()
+    damping: '1.0'
+    loop_bw: '0.03'
+    max_dev: '0.1'
     maxoutbuf: '0'
     minoutbuf: '0'
-    mu: '0.5'
-    omega: samp_per_sym*(1+0.0)
-    omega_relative_limit: '0.005'
-    type: float
+    nfilters: '128'
+    osps: '1'
+    pfb_mf_taps: '[]'
+    resamp_type: digital.IR_MMSE_8TAP
+    sps: samp_per_sym
+    ted_gain: '1.0'
+    ted_type: digital.TED_GARDNER
+    type: ff
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [824, 180.0]
+    coordinate: [928, 172.0]
+    rotation: 0
+    state: enabled
+- name: fir_filter_xxx_0
+  id: fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_delay: '0'
+    taps: '[1/samp_per_sym] * samp_per_sym'
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [712, 220.0]
     rotation: 0
     state: enabled
 - name: hilbert_fc_0
@@ -321,7 +349,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [304, 316.0]
+    coordinate: [216, 316.0]
     rotation: 0
     state: enabled
 - name: network_socket_pdu_0
@@ -341,7 +369,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [456, 484.0]
+    coordinate: [392, 492.0]
     rotation: 0
     state: true
 - name: pdu_pdu_to_tagged_stream_0
@@ -358,7 +386,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [488, 636.0]
+    coordinate: [352, 636.0]
     rotation: 0
     state: true
 - name: pdu_pdu_to_tagged_stream_1
@@ -375,7 +403,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [776, 508.0]
+    coordinate: [632, 524.0]
     rotation: 0
     state: true
 - name: qtgui_time_sink_x_0
@@ -472,7 +500,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [728, 78]
+    coordinate: [712, 108.0]
     rotation: 0
     state: enabled
 - name: qtgui_waterfall_sink_x_0
@@ -533,7 +561,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1072, 664.0]
+    coordinate: [904, 656.0]
     rotation: 0
     state: enabled
 - name: satellites_hdlc_deframer_0
@@ -550,7 +578,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [352, 380.0]
+    coordinate: [328, 396.0]
     rotation: 0
     state: enabled
 - name: satellites_hdlc_framer_0
@@ -567,7 +595,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [160, 628.0]
+    coordinate: [136, 628.0]
     rotation: 0
     state: enabled
 - name: satellites_kiss_to_pdu_0
@@ -583,7 +611,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1152, 516.0]
+    coordinate: [904, 524.0]
     rotation: 0
     state: enabled
 - name: satellites_nrzi_decode_0
@@ -613,7 +641,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [904, 624.0]
+    coordinate: [592, 640.0]
     rotation: 0
     state: enabled
 - name: satellites_pdu_to_kiss_0
@@ -630,13 +658,13 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [128, 500.0]
+    coordinate: [128, 516.0]
     rotation: 0
     state: enabled
 
 connections:
 - [analog_frequency_modulator_fc_0, '0', blocks_multiply_xx_1, '0']
-- [analog_quadrature_demod_cf_0, '0', digital_clock_recovery_mm_xx_0, '0']
+- [analog_quadrature_demod_cf_0, '0', fir_filter_xxx_0, '0']
 - [analog_quadrature_demod_cf_0, '0', qtgui_time_sink_x_0, '0']
 - [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '0']
 - [analog_sig_source_x_1, '0', blocks_multiply_xx_1, '1']
@@ -648,7 +676,8 @@ connections:
 - [blocks_multiply_xx_1, '0', qtgui_waterfall_sink_x_0, '0']
 - [blocks_repeat_0, '0', blocks_char_to_float_0, '0']
 - [digital_binary_slicer_fb_0, '0', satellites_nrzi_decode_0, '0']
-- [digital_clock_recovery_mm_xx_0, '0', digital_binary_slicer_fb_0, '0']
+- [digital_symbol_sync_xx_0, '0', digital_binary_slicer_fb_0, '0']
+- [fir_filter_xxx_0, '0', digital_symbol_sync_xx_0, '0']
 - [hilbert_fc_0, '0', blocks_multiply_xx_0, '1']
 - [network_socket_pdu_0, pdus, pdu_pdu_to_tagged_stream_1, pdus]
 - [pdu_pdu_to_tagged_stream_0, '0', satellites_nrzi_encode_0, '0']
@@ -663,4 +692,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-75-g67e88516
+  grc_version: 3.10.12.0
