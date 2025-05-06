@@ -71,7 +71,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1104, 628]
+    coordinate: [1192, 572.0]
     rotation: 0
     state: enabled
 - name: audio_source_0
@@ -90,7 +90,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [40, 244]
+    coordinate: [16, 244.0]
     rotation: 0
     state: enabled
 - name: blocks_add_const_vxx_0
@@ -108,7 +108,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [632, 628]
+    coordinate: [848, 572.0]
     rotation: 0
     state: enabled
 - name: blocks_char_to_float_0
@@ -125,7 +125,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [464, 628]
+    coordinate: [704, 572.0]
     rotation: 0
     state: enabled
 - name: blocks_message_debug_0
@@ -135,11 +135,12 @@ blocks:
     alias: ''
     comment: ''
     en_uvec: 'True'
+    log_level: info
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1088, 97]
+    coordinate: [1200, 32.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_const_vxx_0
@@ -157,7 +158,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [816, 628]
+    coordinate: [1000, 572.0]
     rotation: 0
     state: enabled
 - name: blocks_repeat_0
@@ -175,7 +176,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 628]
+    coordinate: [552, 572.0]
     rotation: 0
     state: enabled
 - name: digital_binary_slicer_fb_0
@@ -190,28 +191,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [504, 249]
-    rotation: 0
-    state: enabled
-- name: digital_clock_recovery_mm_xx_0
-  id: digital_clock_recovery_mm_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    gain_mu: '0.175'
-    gain_omega: 0.25*0.175*0.175
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    mu: '0.5'
-    omega: samp_per_sym*(1+0.0)
-    omega_relative_limit: '0.005'
-    type: float
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [264, 220.0]
+    coordinate: [728, 200.0]
     rotation: 0
     state: enabled
 - name: digital_descrambler_bb_0
@@ -229,7 +209,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [832, 230]
+    coordinate: [1000, 180.0]
     rotation: 0
     state: enabled
 - name: digital_scrambler_bb_0
@@ -247,7 +227,53 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [776, 488.0]
+    coordinate: [288, 556.0]
+    rotation: 0
+    state: enabled
+- name: digital_symbol_sync_xx_0
+  id: digital_symbol_sync_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    constellation: digital.constellation_bpsk().base()
+    damping: '1.0'
+    loop_bw: '0.03'
+    max_dev: '0.1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nfilters: '128'
+    osps: '1'
+    pfb_mf_taps: '[]'
+    resamp_type: digital.IR_MMSE_8TAP
+    sps: samp_per_sym
+    ted_gain: '1.0'
+    ted_type: digital.TED_GARDNER
+    type: ff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 188.0]
+    rotation: 0
+    state: enabled
+- name: fir_filter_xxx_0
+  id: fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_delay: '0'
+    taps: '[1/samp_per_sym] * samp_per_sym'
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 236.0]
     rotation: 0
     state: enabled
 - name: network_socket_pdu_0
@@ -267,7 +293,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1808, 548.0]
+    coordinate: [280, 412.0]
     rotation: 0
     state: true
 - name: pdu_pdu_to_tagged_stream_0
@@ -284,8 +310,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1728, 716.0]
-    rotation: 180
+    coordinate: [480, 444.0]
+    rotation: 0
     state: true
 - name: pdu_pdu_to_tagged_stream_1
   id: pdu_pdu_to_tagged_stream
@@ -301,7 +327,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 548.0]
+    coordinate: [56, 572.0]
     rotation: 0
     state: true
 - name: qtgui_time_sink_x_0
@@ -398,7 +424,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [320, 104.0]
+    coordinate: [208, 140.0]
     rotation: 0
     state: enabled
 - name: qtgui_time_sink_x_0_0
@@ -495,7 +521,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1288, 472.0]
+    coordinate: [1168, 444.0]
     rotation: 0
     state: enabled
 - name: satellites_hdlc_deframer_0
@@ -512,7 +538,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [984, 236]
+    coordinate: [1144, 188.0]
     rotation: 0
     state: enabled
 - name: satellites_hdlc_framer_0
@@ -529,8 +555,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [28.0, 448]
-    rotation: 270
+    coordinate: [912, 436.0]
+    rotation: 0
     state: enabled
 - name: satellites_kiss_to_pdu_0
   id: satellites_kiss_to_pdu
@@ -545,8 +571,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1472, 356.0]
-    rotation: 180
+    coordinate: [704, 444.0]
+    rotation: 0
     state: enabled
 - name: satellites_nrzi_decode_0
   id: satellites_nrzi_decode
@@ -560,7 +586,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [680, 248]
+    coordinate: [864, 200.0]
     rotation: 0
     state: enabled
 - name: satellites_nrzi_encode_0
@@ -575,7 +601,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1000, 520.0]
+    coordinate: [416, 576.0]
     rotation: 0
     state: enabled
 - name: satellites_pdu_to_kiss_0
@@ -592,12 +618,12 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1764.0, 256]
-    rotation: 270
+    coordinate: [56, 436.0]
+    rotation: 0
     state: enabled
 
 connections:
-- [audio_source_0, '0', digital_clock_recovery_mm_xx_0, '0']
+- [audio_source_0, '0', fir_filter_xxx_0, '0']
 - [audio_source_0, '0', qtgui_time_sink_x_0, '0']
 - [blocks_add_const_vxx_0, '0', blocks_multiply_const_vxx_0, '0']
 - [blocks_char_to_float_0, '0', blocks_add_const_vxx_0, '0']
@@ -605,9 +631,10 @@ connections:
 - [blocks_multiply_const_vxx_0, '0', qtgui_time_sink_x_0_0, '0']
 - [blocks_repeat_0, '0', blocks_char_to_float_0, '0']
 - [digital_binary_slicer_fb_0, '0', satellites_nrzi_decode_0, '0']
-- [digital_clock_recovery_mm_xx_0, '0', digital_binary_slicer_fb_0, '0']
 - [digital_descrambler_bb_0, '0', satellites_hdlc_deframer_0, '0']
 - [digital_scrambler_bb_0, '0', satellites_nrzi_encode_0, '0']
+- [digital_symbol_sync_xx_0, '0', digital_binary_slicer_fb_0, '0']
+- [fir_filter_xxx_0, '0', digital_symbol_sync_xx_0, '0']
 - [network_socket_pdu_0, pdus, pdu_pdu_to_tagged_stream_0, pdus]
 - [pdu_pdu_to_tagged_stream_0, '0', satellites_kiss_to_pdu_0, '0']
 - [pdu_pdu_to_tagged_stream_1, '0', digital_scrambler_bb_0, '0']
@@ -621,4 +648,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-75-g67e88516
+  grc_version: 3.10.12.0
