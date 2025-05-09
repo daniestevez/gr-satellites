@@ -10,6 +10,7 @@ transmitters:
     baudrate: 4800
     deviation: 1200
     framing: Mobitex-NX
+    callsign: DP0NFA
     data:
     - *tlm
   9k6 FSK downlink:
@@ -18,5 +19,6 @@ transmitters:
     baudrate: 9600
     deviation: 1200
     framing: Mobitex-NX
+    callsign: DP0NFA
     data:
     - *tlm
