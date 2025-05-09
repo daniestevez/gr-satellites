@@ -9,5 +9,6 @@ transmitters:
     modulation: FSK
     baudrate: 4800
     framing: Mobitex-NX
+    callsign: DP0TBA
     data:
     - *tlm
