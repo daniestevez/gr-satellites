@@ -59,6 +59,7 @@ GR_PYTHON_INSTALL(
     crc32c.py
     crcs.py
     csp_header.py
+    csp_address_filter.py
     csp_zmq_pub.py
     csp_zmq_sub.py
     ecss_pus.py
