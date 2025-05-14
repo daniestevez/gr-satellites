@@ -1,0 +1,29 @@
+id: satellites_csp_address_filter
+label: CSP Address Filter
+category: '[Satellites]/CSP'
+
+parameters:
+- id: allowed_sources
+  label: Allowed sources
+  dtype: int_vector
+- id: allowed_destinations
+  label: Allowed destinations
+  dtype: int_vector
+
+inputs:
+- domain: message
+  id: in
+
+outputs:
+- domain: message
+  id: out
+
+templates:
+  imports: import satellites
+  make: satellites.csp_address_filter(${allowed_sources}, ${allowed_destinations})
+
+documentation: |-
+    Drops CSP packets whose source or destination address do not belong to the
+    lists of allowed source and destination addresses.
+
+file_format: 1
