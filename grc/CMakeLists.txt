@@ -43,6 +43,7 @@ install(FILES
     satellites_costas_loop_8apsk_cc.block.yml
     satellites_crc_append.block.yml
     satellites_crc_check.block.yml
+    satellites_csp_address_filter.block.yml
     satellites_csp_zmq_pub.block.yml
     satellites_csp_zmq_sub.block.yml
     satellites_decode_ra_code.block.yml

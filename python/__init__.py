@@ -64,6 +64,7 @@ from .check_eseo_crc import check_eseo_crc
 from .check_hex_string import check_hex_string
 from .check_swiatowid_crc import check_swiatowid_crc
 from .check_tt64_crc import check_tt64_crc
+from .csp_address_filter import csp_address_filter
 from .csp_zmq_pub import csp_zmq_pub
 from .csp_zmq_sub import csp_zmq_sub
 from .eseo_line_decoder import eseo_line_decoder
