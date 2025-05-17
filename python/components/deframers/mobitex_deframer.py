@@ -11,6 +11,7 @@
 
 import importlib
 import pmt
+import numpy as np
 
 from gnuradio import gr, blocks, digital
 from gnuradio.pdu import pdu_set
@@ -150,10 +151,9 @@ class mobitex_deframer(gr.hier_block2, options_block):
         )
         self.pdu2stream = pdu_to_tagged_stream(byte_t, 'packet_len')
         self.unpack = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
-        self.interleaver = blocks.matrix_interleaver(
-            itemsize=1, rows=12,
-            cols=20, deint=False,
-        )
+        self.block_interleaver = blocks.blockinterleaver_bb(
+            interleaver_indices=np.arange(12 * 20).reshape(12, 20).T.ravel(),
+            interleaver_mode=True, is_packed=False)
         self.scrambler = digital.additive_scrambler_bb(
             0x22, 0x1ff, 9, count=0, bits_per_byte=1,
             reset_tag_key='frame_header')
@@ -177,7 +177,7 @@ class mobitex_deframer(gr.hier_block2, options_block):
             self.pdu2stream,
             self.unpack,
             self.scrambler,
-            self.interleaver,
+            self.block_interleaver,
             self.pack,
             self.stream2pdu,
         )
