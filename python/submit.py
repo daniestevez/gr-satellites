@@ -20,7 +20,14 @@ import numpy
 
 def parse_time(time):
     try:
-        return datetime.datetime.fromisoformat(time)
+        time = datetime.datetime.fromisoformat(time)
+
+        if time.tzinfo:
+            # Ensure time is converted to UTC, then drop tzinfo
+            time = time.astimezone(datetime.timezone.utc)
+            time = time.replace(tzinfo=None)
+
+        return time
     except AttributeError:
         # Workaround for Python version <3.7, which doesn't have
         # fromisoformat()
