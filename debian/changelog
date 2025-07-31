@@ -1,3 +1,15 @@
+gr-satellites (5.8.0-1) plucky; urgency=medium
+
+  * Mainstream release v5.8.0
+
+ --  <daniel@destevez.net>  Thu, 31 Jul 2025 23:30:00 +0000
+
+gr-satellites (5.8.0-0) noble; urgency=medium
+
+  * Mainstream release v5.8.0
+
+ --  <daniel@destevez.net>  Thu, 31 Jul 2025 23:30:00 +0000
+
 gr-satellites (5.7.0-1) oracular; urgency=medium
 
   * Mainstream release v5.7.0
