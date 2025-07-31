@@ -15,7 +15,7 @@ import pmt
 from ... import pdu_head_tail
 from ... import sx12xx_packet_crop
 from ... import reflect_bytes
-from ... import crc_check
+from ...crcs import crc_check
 from ...hier.pn9_scrambler import pn9_scrambler
 from ...hier.sync_to_pdu_packed import sync_to_pdu_packed
 from ...utils.options_block import options_block

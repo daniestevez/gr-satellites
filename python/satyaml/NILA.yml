@@ -1,0 +1,14 @@
+name: NILA
+norad: 98737
+data:
+  &tlm Telemetry:
+    telemetry: nila
+transmitters:
+  9k6 FSK downlink:
+    frequency: 435.400e+6
+    modulation: FSK
+    baudrate: 9600
+    deviation: 4800
+    framing: AX.25 G3RUH
+    data:
+    - *tlm

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2020-2024 Daniel Estevez <daniel@destevez.net>
+# Copyright 2020-2025 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -19,11 +19,11 @@ stack, the AO-40 protocol used in the FUNcube satellites, and several
 ad-hoc protocols used in other satellites.
 """
 
-__version__ = 'v5.7.0'
+__version__ = 'v5.8.0'
 __author__ = 'Daniel Estevez'
 __copyright__ = 'Copyright 2016-2025 Daniel Estevez'
 __email__ = 'daniel@destevez.net'
-__license__ = 'GPL-3.0'
+__license__ = 'GPL-3.0-or-later'
 __all__ = [
     'ccsds',
     'components',
@@ -69,6 +69,9 @@ from .check_eseo_crc import check_eseo_crc
 from .check_hex_string import check_hex_string
 from .check_swiatowid_crc import check_swiatowid_crc
 from .check_tt64_crc import check_tt64_crc
+from .csp_address_filter import csp_address_filter
+from .csp_zmq_pub import csp_zmq_pub
+from .csp_zmq_sub import csp_zmq_sub
 from .eseo_line_decoder import eseo_line_decoder
 from .eseo_packet_crop import eseo_packet_crop
 from .fixedlen_tagger import fixedlen_tagger
@@ -97,3 +100,4 @@ from .swiatowid_packet_crop import swiatowid_packet_crop
 from .swiatowid_packet_split import swiatowid_packet_split
 from .sx12xx_check_crc import sx12xx_check_crc
 from .sx12xx_packet_crop import sx12xx_packet_crop
+from .mobitex_to_datablocks import mobitex_to_datablocks

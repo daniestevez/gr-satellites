@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2017 Daniel Estevez <daniel@destevez.net>
+# Copyright 2017,2025 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -35,5 +35,5 @@ class swap_header(gr.basic_block):
         header = packet[:4]
         packet = header[::-1] + packet[4:]
         msg_pmt = pmt.cons(pmt.PMT_NIL,
-                           pmt.init_u8vector(len(packet), packet))
+                           pmt.init_u8vector(len(packet), list(packet)))
         self.message_port_pub(pmt.intern('out'), msg_pmt)

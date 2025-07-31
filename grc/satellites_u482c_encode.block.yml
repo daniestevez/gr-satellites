@@ -1,0 +1,39 @@
+id: satellites_u482c_encode
+label: NanoCom U482C FEC encode
+category: '[Satellites]/GOMspace'
+
+parameters:
+- id: convolutional
+  label: Convolutional coding
+  dtype: bool
+  default: 'False'
+- id: scrambler
+  label: Scrambler
+  dtype: bool
+  default: 'True'
+- id: rs
+  label: Reed-Solomon
+  dtype: bool
+  default: 'True'
+- id: preamble_len
+  label: Preamble length
+  dtype: int
+  default: '50'
+- id: flags_in_golay
+  label: Include flags in Golay field
+  dtype: bool
+  default: 'False'
+
+inputs:
+- domain: message
+  id: in
+
+outputs:
+- domain: message
+  id: out
+
+templates:
+  imports: import satellites
+  make: satellites.u482c_encode(${convolutional}, ${scrambler}, ${rs}, ${preamble_len}, ${flags_in_golay})
+
+file_format: 1

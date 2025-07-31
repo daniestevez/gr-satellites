@@ -56,6 +56,7 @@ list(APPEND satellites_sources
     doppler_correction_impl.cc
     encode_rs_impl.cc
     fixedlen_to_pdu_impl.cc
+    frame_counter_impl.cc
     golay24.c
     lilacsat1_demux_impl.cc
     manchester_sync_impl.cc
@@ -70,7 +71,9 @@ list(APPEND satellites_sources
     phase_unwrap_impl.cc
     randomizer.c
     selector_impl.cc
+    time_dependent_delay_impl.cc
     u482c_decode_impl.cc
+    u482c_encode_impl.cc
     varlen_packet_framer_impl.cc
     varlen_packet_tagger_impl.cc
     viterbi.c

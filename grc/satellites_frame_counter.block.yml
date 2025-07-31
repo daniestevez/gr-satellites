@@ -1,0 +1,49 @@
+id: satellites_frame_counter
+label: Frame Counter
+category: '[Satellites]/Packet'
+
+templates:
+  imports: import satellites
+  make: satellites.frame_counter(${type.size}*${vlen}, ${frame_size})
+
+parameters:
+- id: type
+  label: IO Type
+  dtype: enum
+  options: [complex, float, int, short, byte]
+  option_attributes:
+      size: [gr.sizeof_gr_complex, gr.sizeof_float, gr.sizeof_int,
+          gr.sizeof_short, gr.sizeof_char]
+  hide: part
+- id: frame_size
+  label: Frame size
+  dtype: int
+- id: vlen
+  label: Vector Length
+  dtype: int
+  default: '1'
+  hide: ${ 'part' if vlen == 1 else 'none' }
+
+inputs:
+- domain: stream
+  dtype: ${ type }
+  vlen: ${ vlen }
+
+outputs:
+- domain: stream
+  dtype: ${ type }
+  vlen: ${ vlen }
+- id: count
+  domain: message
+
+documentation: |-
+    The Frame Counter block counts frames of a fixed size that cross the block
+    and outputs a message every time that new frames have crossed the block. The
+    message contains the count.
+
+    Input:
+        A stream of items.
+    Output:
+        A copy of the input stream. Messages containing frame count.
+
+file_format: 1

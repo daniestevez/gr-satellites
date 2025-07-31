@@ -1,0 +1,23 @@
+id: satellites_csp_zmq_sub
+label: CSP ZMQ SUB
+category: '[Satellites]/CSP'
+
+parameters:
+- id: address
+  label: Address
+  dtype: string
+  default: '"tcp://localhost:7000"'
+- id: destinations
+  label: Destinations
+  dtype: int_vector
+  default: []
+
+outputs:
+- domain: message
+  id: out
+
+templates:
+    imports: import satellites
+    make: satellites.csp_zmq_sub(${address}, ${destinations})
+
+file_format: 1

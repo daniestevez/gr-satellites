@@ -43,6 +43,9 @@ install(FILES
     satellites_costas_loop_8apsk_cc.block.yml
     satellites_crc_append.block.yml
     satellites_crc_check.block.yml
+    satellites_csp_address_filter.block.yml
+    satellites_csp_zmq_pub.block.yml
+    satellites_csp_zmq_sub.block.yml
     satellites_decode_ra_code.block.yml
     satellites_decode_rs.block.yml
     satellites_decode_rs_ccsds.block.yml
@@ -57,6 +60,7 @@ install(FILES
     satellites_eseo_packet_crop.block.yml
     satellites_fixedlen_tagger.block.yml
     satellites_fixedlen_to_pdu.block.yml
+    satellites_frame_counter.block.yml
     satellites_funcube_submit.block.yml
     satellites_hdlc_deframer.block.yml
     satellites_hdlc_framer.block.yml
@@ -94,7 +98,9 @@ install(FILES
     satellites_swiatowid_packet_split.block.yml
     satellites_sx12xx_check_crc.block.yml
     satellites_sx12xx_packet_crop.block.yml
+    satellites_time_dependent_delay.block.yml
     satellites_u482c_decode.block.yml
+    satellites_u482c_encode.block.yml
     satellites_varlen_packet_framer.block.yml
     satellites_varlen_packet_tagger.block.yml
     satellites_viterbi_decoder.block.yml

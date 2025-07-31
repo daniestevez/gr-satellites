@@ -36,6 +36,7 @@ install(FILES
     doppler_correction.h
     encode_rs.h
     fixedlen_to_pdu.h
+    frame_counter.h
     lilacsat1_demux.h
     manchester_sync.h
     matrix_deinterleaver_soft.h
@@ -48,7 +49,9 @@ install(FILES
     pdu_scrambler.h
     phase_unwrap.h
     selector.h
+    time_dependent_delay.h
     u482c_decode.h
+    u482c_encode.h
     varlen_packet_framer.h
     varlen_packet_tagger.h
     viterbi_decoder.h

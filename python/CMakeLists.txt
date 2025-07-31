@@ -59,6 +59,9 @@ GR_PYTHON_INSTALL(
     crc32c.py
     crcs.py
     csp_header.py
+    csp_address_filter.py
+    csp_zmq_pub.py
+    csp_zmq_sub.py
     ecss_pus.py
     eseo_line_decoder.py
     eseo_packet_crop.py
@@ -71,6 +74,10 @@ GR_PYTHON_INSTALL(
     hdlc_deframer.py
     hdlc_framer.py
     k2sat_deframer.py
+    mobitex_to_datablocks.py
+    mobitex_fec.py
+    mobitex_fec_block.py
+    tubix20_reframer.py
     kiss.py
     kiss_to_pdu.py
     ks1q_header_remover.py
@@ -120,6 +127,9 @@ GR_ADD_TEST(qa_fixedlen_to_pdu ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/
 GR_ADD_TEST(qa_hdlc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_hdlc.py)
 GR_ADD_TEST(qa_kiss ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_kiss.py)
 GR_ADD_TEST(qa_manchester_sync ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_manchester_sync.py)
+GR_ADD_TEST(qa_mobitex_fec ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_mobitex_fec.py)
+GR_ADD_TEST(qa_mobitex_fec_block ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_mobitex_fec_block.py)
+GR_ADD_TEST(qa_mobitex_to_datablocks ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_mobitex_to_datablocks.py)
 GR_ADD_TEST(qa_nrzi ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_nrzi.py)
 GR_ADD_TEST(qa_pdu_add_meta ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_pdu_add_meta.py)
 GR_ADD_TEST(qa_pdu_head_tail ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_pdu_head_tail.py)
