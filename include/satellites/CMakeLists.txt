@@ -40,6 +40,7 @@ install(FILES
     lilacsat1_demux.h
     manchester_sync.h
     matrix_deinterleaver_soft.h
+    nanocom_golay_decode_length.h
     nrzi_decode.h
     nrzi_encode.h
     nusat_decoder.h

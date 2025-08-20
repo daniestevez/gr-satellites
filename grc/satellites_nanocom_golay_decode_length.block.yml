@@ -1,0 +1,49 @@
+id: satellites_nanocom_golay_decode_length
+label: NanoCom Golay Decode Length
+category: '[Satellites]/GOMspace'
+
+templates:
+  imports: import satellites
+  make: satellites.nanocom_golay_decode_length(${golay_start_tag_key}, ${length_tag_key})
+
+parameters:
+- id: golay_start_tag_key
+  label: Golay start tag key
+  dtype: string
+  default: '"golay"'
+- id: length_tag_key
+  label: Length tag key
+  dtype: string
+  default: '"packet_len"'
+
+inputs:
+- label: in
+  domain: stream
+  dtype: byte
+
+outputs:
+- label: out
+  domain: stream
+  dtype: byte
+
+documentation: |-
+    Decodes Golay field in NanoCom packets and adds a length tag
+
+    This block acts as a sync block on a stream of unpacked bits. Whenever a tag
+    marking the start of a Golay field is found, the block reads the 24 bits
+    following the tag, attempts to perform Golay decoding, and if successful
+    extracts the length field, computes the length in bits of the packet
+    including the Golay field, and adds a tag with this length to the beginning
+    of the Golay field so that the whole packet can be extracted as a PDU using
+    this length tag.
+
+    Input:
+        A stream of bits containing Golay tags
+    Output:
+        The same stream of bits with packet length tags added
+
+    Parameters:
+        Golay start tag key: key of the tag marking the start of Golay fields
+        Length tag key: Key of the tag indicating the packet length
+
+file_format: 1

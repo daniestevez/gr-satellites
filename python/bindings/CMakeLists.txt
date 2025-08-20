@@ -46,6 +46,7 @@ list(APPEND satellites_python_files
     lilacsat1_demux_python.cc
     manchester_sync_python.cc
     matrix_deinterleaver_soft_python.cc
+    nanocom_golay_decode_length_python.cc
     nrzi_decode_python.cc
     nrzi_encode_python.cc
     nusat_decoder_python.cc
