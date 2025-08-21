@@ -15,13 +15,18 @@ parameters:
     dtype: string
     default: syncword
 -   id: packet_len
-    label: Packet length
+    label: Max packet length
     dtype: int
 -   id: pack
     label: Pack bits
     dtype: bool
     default: 'False'
     hide: ${ 'none' if type == 'byte' else 'all' }
+-   id: packet_len_tag_key
+    label: Packet length tag key
+    dtype: string
+    default: '""'
+    hide: ${ 'none' if packet_len_tag_key else 'part' }
 
 inputs:
 -   domain: stream
@@ -35,25 +40,29 @@ templates:
     imports: |-
         import satellites
         import satellites.grtypes
-    make: satellites.fixedlen_to_pdu(${type.vector_type}, ${syncword_tag}, ${packet_len}, ${pack if type == 'byte' else False})
+    make: satellites.fixedlen_to_pdu(${type.vector_type}, ${syncword_tag}, ${packet_len}, ${pack if type == 'byte' else False}, ${packet_len_tag_key})
 
 documentation: |-
-    Extracts PDUs of fixed length according to syncword tags
+    Extracts PDUs of fixed maximum length according to syncword tags
 
-    Given an input stream containing tags that mark the location of frames,
-    this block extracts PDUs of a fixed length starting at the location of
-    those tags. The data in the PDUs may overlap if tags are spaced less than
-    the PDU length.
+    Given an input stream containing tags that mark the location of frames, this
+    block extracts PDUs starting at the location of those tags. The length of
+    the PDUs is determined by either the presence of a packet length tag, if a
+    key for this tag has been specified and such tag is present in the first
+    item of the frame, or by the maximum packet length otherwise.  The data in
+    the PDUs may overlap if tags are spaced less than the PDU length.
 
     Output:
        PDUs containting the frames that start at the location marked by the tags.
 
     Parameters:
         Type: input stream type.
-        Syncword tags: name of the syncword tags to use.
-        Packet length: PDU length, in items of the input stream.
+        Syncword tag: name of the syncword tags to use.
+        Max packet length: maximum PDU length, in items of the input stream.
         Pack bits: when the input type is bytes and this option is enabled,
-        8 bits per byte are packed in the output PDU. The packet length should
-        correspond to the number of bits, and be a multiple of 8.
+          8 bits per byte are packed in the output PDU. The packet length should
+          correspond to the number of bits, and be a multiple of 8.
+        Packet length tag key: key of the syncword tag to use for packet length.
+          If this key is empty, the max packet length is used for all the packets.
 
 file_format: 1

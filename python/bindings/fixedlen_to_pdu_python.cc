@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(fixedlen_to_pdu.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(ee51137386e71610d87ab3bd1c5ccbf2)                     */
+/* BINDTOOL_HEADER_FILE_HASH(7daae300dd102a1633098968082ba941)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -44,6 +44,7 @@ void bind_fixedlen_to_pdu(py::module& m)
              py::arg("syncword_tag"),
              py::arg("packet_len"),
              py::arg("pack") = false,
+             py::arg("packet_length_tag") = "",
              D(fixedlen_to_pdu, make))
 
 
