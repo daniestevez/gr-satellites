@@ -95,14 +95,12 @@ inside the directory containing the gr-satellites sources:
 
 .. code-block:: console
 
-   $ mkdir build
-   $ cd build
-   $ cmake ..
-   $ make
-   $ sudo make install
+   $ cmake -S . -B build
+   $ cmake --build build --parallel
+   $ sudo cmake --install build
    $ sudo ldconfig
 
-After running ``make``, you can run the tests by doing ``make test`` in the
+After build stage, you can run the tests by doing ``make test`` in the
 ``build/`` directory.
 
 .. note::
