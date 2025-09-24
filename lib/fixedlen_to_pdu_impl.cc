@@ -73,17 +73,20 @@ int fixedlen_to_pdu_impl::work(int noutput_items,
             get_tags_in_range(tags, 0, tag.offset, tag.offset + 1, *d_packet_length_tag);
             if (!tags.empty()) {
                 const auto& value = tags[0].value;
+                uint64_t length;
                 if (pmt::is_uint64(value)) {
-                    info.length = pmt::to_uint64(value);
+                    length = pmt::to_uint64(value);
                 } else {
-                    info.length = pmt::to_long(value);
+                    length = pmt::to_long(value);
                 }
-                if (info.length > static_cast<ssize_t>(d_packetlen)) {
+                if (length > d_packetlen) {
                     d_logger->warn("length tag value {} larger than max length {}; "
                                    "clamping to max length",
-                                   info.length,
+                                   length,
                                    d_packetlen);
                     info.length = d_packetlen;
+                } else {
+                    info.length = length;
                 }
             }
         }
