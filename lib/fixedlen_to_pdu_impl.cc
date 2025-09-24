@@ -93,19 +93,20 @@ int fixedlen_to_pdu_impl::work(int noutput_items,
         d_packet_infos.push_back(info);
     }
 
+    const auto nitems = nitems_read(0);
     d_new_packet_infos.clear();
     for (const auto& info : d_packet_infos) {
-        if (info.offset + info.length <= nitems_read(0) + noutput_items) {
+        if (info.offset + info.length <= nitems + noutput_items) {
             // Packet ends in current input_items buffer
-            if (info.offset >= nitems_read(0)) {
+            if (info.offset >= nitems) {
                 // Packet doesn't use history
                 std::memcpy(d_packet.data(),
-                            &in[(info.offset - nitems_read(0)) * d_itemsize],
+                            &in[(info.offset - nitems) * d_itemsize],
                             info.length * d_itemsize);
-            } else if (d_write_ptr_item + info.offset >= nitems_read(0)) {
+            } else if (d_write_ptr_item + info.offset >= nitems) {
                 // Packet starts before the write pointer
                 const size_t start =
-                    (d_write_ptr_item + info.offset - nitems_read(0)) * d_itemsize;
+                    (d_write_ptr_item + info.offset - nitems) * d_itemsize;
                 const size_t len =
                     std::min(d_write_ptr_byte - start, info.length * d_itemsize);
                 std::memcpy(d_packet.data(), &d_history[start], len);
@@ -116,7 +117,7 @@ int fixedlen_to_pdu_impl::work(int noutput_items,
             } else {
                 // Packet starts after the write pointer
                 const size_t start =
-                    (d_write_ptr_item + info.offset + info.length - 1 - nitems_read(0)) *
+                    (d_write_ptr_item + info.offset + d_packetlen - 1 - nitems) *
                     d_itemsize;
                 const size_t len =
                     std::min(d_history.size() - start, info.length * d_itemsize);
