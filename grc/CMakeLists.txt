@@ -71,6 +71,7 @@ install(FILES
     satellites_lilacsat1_gps_kml.block.yml
     satellites_manchester_sync.block.yml
     satellites_matrix_deinterleaver_soft.block.yml
+    satellites_message_counter.block.yml
     satellites_nanocom_golay_decode_length.block.yml
     satellites_ngham_check_crc.block.yml
     satellites_ngham_packet_crop.block.yml

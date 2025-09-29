@@ -61,6 +61,7 @@ list(APPEND satellites_sources
     lilacsat1_demux_impl.cc
     manchester_sync_impl.cc
     matrix_deinterleaver_soft_impl.cc
+    message_counter_impl.cc
     nanocom_golay_decode_length_impl.cc
     nrzi_decode_impl.cc
     nrzi_encode_impl.cc
