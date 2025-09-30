@@ -4,11 +4,24 @@ data:
   &tlm Telemetry:
     telemetry: erminaz
 transmitters:
+  # Old framing:
   9k6 FSK downlink:
     frequency: 435.775e+6
     modulation: FSK
     baudrate: 9600
     deviation: 3000
     framing: QUBIK
+    data:
+    - *tlm
+  # New framing:
+  9k6 FSK CCSDS TMTC SPP downlink:
+    frequency: 435.775e+6
+    modulation: FSK
+    baudrate: 9600
+    deviation: 4800
+    framing: CCSDS Reed-Solomon
+    frame size: 128
+    RS basis: conventional
+    scrambler: CCSDS
     data:
     - *tlm
