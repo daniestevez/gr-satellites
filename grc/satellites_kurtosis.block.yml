@@ -1,0 +1,45 @@
+id: satellites_kurtosis
+label: Kurtosis
+category: '[Satellites]/Detectors'
+
+templates:
+  imports: import satellites
+  make: satellites.kurtosis(${block_size}, ${vlen})
+
+parameters:
+- id: block_size
+  label: Block Size
+  dtype: int
+- id: vlen
+  label: Vector Length
+  dtype: int
+  default: '1'
+  hide: ${ 'part' if vlen == 1 else 'none' }
+
+inputs:
+- domain: stream
+  dtype: complex
+  vlen: ${vlen}
+
+outputs:
+- domain: stream
+  dtype: float
+  vlen: ${vlen}
+
+documentation: |-
+    This block computes an unbiased estimate of the Kurtosis of a complex signal
+    for each block of M input samples. The block supports vectors, in which case
+    the Kurtosis is computed component-wise. This can be used to compute
+    spectral Kurtosis, for instance.
+
+    Input:
+        A stream of IQ samples (or vectors of IQ samples)
+    Output:
+        The stream decimated by the Block Size, with each output sample containing
+        the estimated Kurtosis of each block of input samples.
+
+    Parameters:
+        Block Size: Size of the block for the Kurtosis estimate
+        Vector Length: Vector length
+
+file_format: 1
