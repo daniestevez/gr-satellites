@@ -38,6 +38,7 @@ install(FILES
     fixedlen_to_pdu.h
     frame_counter.h
     kurtosis.h
+    level_to_message.h
     lilacsat1_demux.h
     manchester_sync.h
     matrix_deinterleaver_soft.h

@@ -59,6 +59,7 @@ list(APPEND satellites_sources
     frame_counter_impl.cc
     golay24.c
     kurtosis_impl.cc
+    level_to_message_impl.cc
     lilacsat1_demux_impl.cc
     manchester_sync_impl.cc
     matrix_deinterleaver_soft_impl.cc

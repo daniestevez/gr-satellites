@@ -1,0 +1,41 @@
+id: satellites_level_to_message
+label: Level to Message
+category: '[Satellites]/Detectors'
+
+templates:
+  imports: import satellites
+  make: satellites.level_to_message(${threshold})
+
+parameters:
+- id: threshold
+  label: Threshold
+  dtype: float
+  default: '0.5'
+
+inputs:
+- domain: stream
+  dtype: float
+
+outputs:
+- label: out
+  domain: message
+
+documentation: |-
+    This block is mainly intended to be used with the output of the Threshold
+    block. It compares its input with a given threshold. Whenever the input
+    crosses the threshold, a message is output saying if the signal is now over
+    the threshold or below the threshold. If there are multiple threshold
+    crossings inside a work() call, only the last one is considered, so at most
+    there is an output message per work() call (i.e., the block only ever looks
+    at the last input sample in each work() call).
+
+    Input:
+        A stream of floating point samples
+    Output:
+        A message every time that the last sample in a work() call changes
+        from being below the threshold to above the threshold or vice versa.
+
+    Parameters:
+        Threshold: Threshold for the level change
+
+file_format: 1
