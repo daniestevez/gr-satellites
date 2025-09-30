@@ -58,6 +58,7 @@ list(APPEND satellites_sources
     fixedlen_to_pdu_impl.cc
     frame_counter_impl.cc
     golay24.c
+    kurtosis_impl.cc
     lilacsat1_demux_impl.cc
     manchester_sync_impl.cc
     matrix_deinterleaver_soft_impl.cc

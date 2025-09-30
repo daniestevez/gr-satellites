@@ -67,6 +67,7 @@ install(FILES
     satellites_k2sat_deframer.block.yml
     satellites_kiss_to_pdu.block.yml
     satellites_ks1q_header_remover.block.yml
+    satellites_kurtosis.block.yml
     satellites_lilacsat1_demux.block.yml
     satellites_lilacsat1_gps_kml.block.yml
     satellites_manchester_sync.block.yml
