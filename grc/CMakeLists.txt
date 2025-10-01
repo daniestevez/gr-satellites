@@ -81,6 +81,7 @@ install(FILES
     satellites_nrzi_decode.block.yml
     satellites_nrzi_encode.block.yml
     satellites_nusat_decoder.block.yml
+    satellites_packet_csma.block.yml
     satellites_pdu_add_meta.block.yml
     satellites_pdu_head_tail.block.yml
     satellites_pdu_length_filter.block.yml
