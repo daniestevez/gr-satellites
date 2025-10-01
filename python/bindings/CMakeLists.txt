@@ -53,6 +53,7 @@ list(APPEND satellites_python_files
     nrzi_decode_python.cc
     nrzi_encode_python.cc
     nusat_decoder_python.cc
+    packet_csma_python.cc
     pdu_add_meta_python.cc
     pdu_head_tail_python.cc
     pdu_length_filter_python.cc
