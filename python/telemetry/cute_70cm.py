@@ -10,7 +10,6 @@
 #
 
 import copy
-from datetime import datetime
 from construct import Adapter, BitsInteger, BitStruct, Container, Enum, \
                       Flag, GreedyBytes, If, Int8ub, Int16ub, Int32ub, \
                       Padding, RawCopy, Struct, Switch
@@ -18,6 +17,8 @@ from .ax25 import Header
 from .cute_bct_fsw import cute_bct_fsw
 from .cute_bct_soh import cute_bct_soh
 from .cute_pld import cute_pld_sw_stat
+from .cirbe_70cm import SecondaryHeader
+
 
 PrimaryHeader = BitStruct(
     'ccsds_version' / BitsInteger(3),
@@ -31,25 +32,6 @@ PrimaryHeader = BitStruct(
     'packet_length' / BitsInteger(16)
     )
 
-
-class TimeAdapter(Adapter):
-    def _encode(self, obj, context, path=None):
-        return Container()
-
-    def _decode(self, obj, context, path=None):
-        offset = datetime(2000, 1, 1, 12) - datetime(1970, 1, 1)
-        return (datetime.utcfromtimestamp(obj.time_stamp_seconds) + offset)
-
-
-SecondaryHeaderRaw = Struct(
-    'time_stamp_seconds' / Int32ub,
-    'sub_seconds' / Int8ub,
-    Padding(1)
-)
-
-SecondaryHeader = TimeAdapter(
-    SecondaryHeaderRaw
-)
 
 cute_ax25_packet_header = RawCopy(Struct(
     'ax25_header' / Header,
