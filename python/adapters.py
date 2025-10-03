@@ -49,7 +49,8 @@ class UNIXTimestampAdapter(Adapter):
         return round(obj.timestamp())
 
     def _decode(self, obj, context, path=None):
-        return datetime.datetime.utcfromtimestamp(obj)
+        t = datetime.datetime.fromtimestamp(obj, datetime.timezone.utc)
+        return t.replace(tzinfo=None)
 
 
 class TableAdapter(Adapter):
