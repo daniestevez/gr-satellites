@@ -18,7 +18,7 @@ import numpy
 import pmt
 
 from .kiss import *
-from .submit import parse_time
+from .submit import parse_timestamp
 
 
 class pdu_to_kiss(gr.basic_block):
@@ -32,9 +32,9 @@ class pdu_to_kiss(gr.basic_block):
             out_sig=None)
         self.control_byte = control_byte
         self.include_timestamp = include_timestamp
-        self.initial_timestamp = parse_time(initial_timestamp) \
+        self.initial_timestamp = parse_timestamp(initial_timestamp) \
             if initial_timestamp != '' else None
-        self.start_timestamp = datetime.datetime.utcnow()
+        self.start_timestamp = datetime.datetime.now(tz=datetime.timezone.utc)
 
         if not control_byte and include_timestamp:
             warnings.warn(
@@ -52,17 +52,12 @@ class pdu_to_kiss(gr.basic_block):
         epoch according to UTC and not counting leap seconds, stored as a
         big-endian 64 bit unsigned integer
         """
-        # It's tempting to use time.time() to get the timestamp.  The docs
-        # say that its epoch is often 1970-01-01, but they don't promise
-        # that it's always the case.  We use datetime.datetime() instead.
-        epoch = datetime.datetime(1970, 1, 1)
-        now = datetime.datetime.utcnow()
+        t_now = datetime.datetime.now(tz=datetime.timezone.utc)
         if self.initial_timestamp:
-            now = now - self.start_timestamp + self.initial_timestamp
-        timestamp = (now - epoch).total_seconds()
-        timestamp_int = round(timestamp * 1e3)
+            t_now = t_now - self.start_timestamp + self.initial_timestamp
+        t_now_kiss = round(t_now.timestamp() * 1e3)
         control = b'\x09'
-        return control + struct.pack('>Q', timestamp_int)
+        return control + struct.pack('>Q', t_now_kiss)
 
     def handle_msg(self, msg_pmt):
         msg = pmt.cdr(msg_pmt)
