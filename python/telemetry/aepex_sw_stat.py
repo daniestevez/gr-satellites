@@ -7,9 +7,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-from construct import Adapter, BitsInteger, BitStruct, Container, Enum, \
-    Flag, GreedyBytes, If, Int8ub, Int16ub, Int32ub, \
-    Padding, RawCopy, Struct, Switch
+from construct import BitsInteger, BitStruct, Enum, Padding, Struct
 from ..adapters import PolynomialAdapter, LinearAdapter
 
 ArmedFlag = Enum(BitsInteger(1), OFF=0, ARMED=1)
