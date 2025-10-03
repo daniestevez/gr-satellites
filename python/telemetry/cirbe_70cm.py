@@ -9,7 +9,8 @@
 #
 
 
-from datetime import datetime
+import datetime
+
 from construct import Adapter, BitsInteger, BitStruct, Container, Enum, \
                       Flag, GreedyBytes, If, Int8ub, Int16ub, Int32ub, \
                       Padding, RawCopy, Struct, Switch
@@ -42,8 +43,16 @@ class TimeAdapter(Adapter):
         return Container()
 
     def _decode(self, obj, context, path=None):
-        offset = datetime(2000, 1, 1, 12) - datetime(1970, 1, 1)
-        return (datetime.utcfromtimestamp(obj.time_stamp_seconds) + offset)
+        t = datetime.datetime.fromtimestamp(
+            obj.time_stamp_seconds,
+            tz=datetime.timezone.utc
+        )
+        t = t.replace(tzinfo=None)
+        offset = (
+            datetime.datetime(2000, 1, 1, 12)
+            - datetime.datetime(1970, 1, 1)
+        )
+        return (t + offset)
 
 
 SecondaryHeader = TimeAdapter(
