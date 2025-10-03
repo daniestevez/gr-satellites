@@ -8,12 +8,8 @@
 #
 
 
-from datetime import datetime
-from construct import Adapter, BitsInteger, BitStruct, Container, Enum, \
-    Flag, GreedyBytes, If, Int8ub, Int16ub, Int32ub, \
-    Padding, RawCopy, Struct, Switch
+from construct import BitsInteger, BitStruct, GreedyBytes, If, Struct, Switch
 from .ax25 import Header
-from ..ccsds import space_packet as ccsds_space_packet
 
 from .aepex_sw_stat import aepex_sw_stat
 
