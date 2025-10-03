@@ -11,9 +11,9 @@
 #
 
 import numpy
+import datetime
+
 from gnuradio import gr
-from datetime import datetime
-from datetime import timedelta
 import construct
 import pmt
 import array
@@ -82,14 +82,17 @@ class space_packet_time_stamp_adder(gr.basic_block):
         self.picosecond = picosecond
         self.id_time = id_time
         if self.time_code_identification_cuc == 1:
-            self.epoch_cuc = datetime(1958, 1, 1)
+            self.epoch_cuc = datetime.datetime(1958, 1, 1, tzinfo=datetime.timezone.utc)
         else:
-            self.epoch_cuc = datetime(self.epoch_year_cuc, self.epoch_month_cuc, self.epoch_day_cuc)
+            self.epoch_cuc = datetime.datetime(
+                self.epoch_year_cuc, self.epoch_month_cuc, self.epoch_day_cuc,
+                tzinfo=datetime.timezone.utc)
 
         if self.epoch_identification_cds == 0:
-            self.epoch_cds = datetime(1958, 1, 1)
+            self.epoch_cds = datetime.datetime(1958, 1, 1, tzinfo=datetime.timezone.utc)
         else:
-            self.epoch_cds = datetime(self.epoch_year_cds, self.epoch_month_cds, self.epoch_day_cds)
+            self.epoch_cds = datetime.datetime(self.epoch_year_cds, self.epoch_month_cds,
+                self.epoch_day_cds, tzinfo=datetime.timezone.utc)
 
         ##################################################
         # Blocks
@@ -106,13 +109,14 @@ class space_packet_time_stamp_adder(gr.basic_block):
             return
         packet = pmt.u8vector_elements(msg)
         if self.input_manual_automatic == 1:
-            self.now = datetime.utcnow()
+            self.now = datetime.datetime.now(tz=datetime.timezone.utc)
             if self.length_of_submillisecond_cds >= 2:
                 self.length_of_submillisecond_cds = 1
             if self.number_of_subsecond_ccs >= 4:
                 self.length_of_susecond_ccs = 3
         else:
-            self.now = datetime(self.year, self.month, self.day, self.hour, self.minute, self.second, self.microsecond)
+            self.now = datetime.datetime(self.year, self.month, self.day, self.hour,
+                self.minute, self.second, self.microsecond, tzinfo=datetime.timezone.utc)
 
         finalHeader = []
 
@@ -197,7 +201,7 @@ class space_packet_time_stamp_adder(gr.basic_block):
                 self.ascii_dec_num = 1
 
             if self.time_format == 3: # ASCII A
-                arr = self.now.isoformat()
+                arr = self.now.replace(tzinfo=None).isoformat()
             else: #ASCII B
                 arr = self.now.strftime("%Y-%jT%H:%M:%S.%f")
 
