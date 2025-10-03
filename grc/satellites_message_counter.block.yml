@@ -6,8 +6,6 @@ templates:
   imports: import satellites
   make: satellites.message_counter()
 
-parameters:
-
 inputs:
 - id: in
   domain: message
