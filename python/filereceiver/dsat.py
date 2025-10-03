@@ -68,14 +68,16 @@ class ImageReceiverDSAT(ImageReceiver):
         if header.destination_port != 12:
             return
 
-        timestamp = datetime.datetime.utcfromtimestamp(
-            struct.unpack('<i', chunk[4:8])[0])
+        timestamp = datetime.datetime.fromtimestamp(
+            struct.unpack('<i', chunk[4:8])[0],
+            datetime.timezone.utc,
+        )
         fid = struct.unpack('<I', chunk[8:12])[0]
         # next 12 bytes are for GPS position
         length = struct.unpack('<I', chunk[21:25])[0]
 
         self.log(f'image {fid} announced. Length {length}. '
-                 f'Timestamp {timestamp}')
+                 f'Timestamp {timestamp.replace(tzinfo=None)}')
 
         # hook lambda functions for file id and size
         self.file_id = types.MethodType(lambda self, chunk: fid, self)
