@@ -77,7 +77,7 @@ class ImageReceiverDSAT(ImageReceiver):
         length = struct.unpack('<I', chunk[21:25])[0]
 
         self.log(f'image {fid} announced. Length {length}. '
-                 f'Timestamp {timestamp.replace(tzinfo=None)}')
+                 f'Timestamp {timestamp}')
 
         # hook lambda functions for file id and size
         self.file_id = types.MethodType(lambda self, chunk: fid, self)
