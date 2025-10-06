@@ -16,9 +16,14 @@ import sys
 
 import numpy as np
 
+from gnuradio import gr
+
 from satellites.kiss import read_kiss_file
 from satellites.telemetry.by02 import TMPrimaryHeader as TMPrimaryHeaderShort
 from satellites.telemetry.erminaz import TMPrimaryHeader
+from satellites.ccsds.telemetry_packet_reconstruction import telemetry_packet_reconstruction
+from satellites.utils.use_message_block import use_message_block
+from satellites.ccsds.space_packet import PrimaryHeader as SPPrimaryHeader
 
 
 class Satellite(Enum):
@@ -67,11 +72,21 @@ def main():
         # Filter SSDV packets
         x = x[(x[:, 0] == 0x55) & (x[:, 1] == 0x68), :]
     elif args.satellite == Satellite.ERMINAZ:
-        vcid = 4
-        headers = [TMPrimaryHeader.parse(y) for y in x]
-        x = np.array([y for h, y in zip(headers, x)
+        # Filter by VCID
+        vcid = 1
+        tf_headers = [TMPrimaryHeader.parse(y) for y in x]
+        x = np.array([y for h, y in zip(tf_headers, x)
                       if h.virtual_channel_id == vcid])
-        x = x[:, TMPrimaryHeader.sizeof() + 2:]
+
+        # Extract packets
+        x = [np.array(y, 'uint8') for y in
+            use_message_block(telemetry_packet_reconstruction(), x)]
+
+        # Filter by APID
+        apid = 500
+        sp_headers = [SPPrimaryHeader.parse(y) for y in x]
+        x = np.array([y for h, y in zip(sp_headers, x)
+                      if h.AP_ID == apid])
     elif args.satellite == Satellite.DSLWP:
         vcid = 1
         headers = [TMPrimaryHeaderShort.parse(y) for y in x]
@@ -93,7 +108,7 @@ def main():
 
     decoder_args = {
         Satellite.JY1SAT: ['-J'],
-        Satellite.ERMINAZ: ['-l', str(x.shape[1])],
+        Satellite.ERMINAZ: [],
         Satellite.DSLWP: ['-D'],
     }[args.satellite]
     for i in ids:
