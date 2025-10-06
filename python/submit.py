@@ -20,11 +20,11 @@ import numpy
 
 
 def parse_timestamp(s):
-    t = None
     if sys.version_info < (3, 11):
         # in Python 3.10, fromisoformat() does not accept a trailing Z, and it
-        # can only parse millisecond resolution. If there is fractional part, we
-        # remove any trailing Z, and parse the fractional seconds separately
+        # can only parse millisecond resolution. If there is fractional part,
+        # we remove any trailing Z, and parse the fractional seconds separately
+        t = None
         s = s.rstrip('Z')
         if '.' in s:
             s_int, s_frac = s.split('.')
@@ -34,9 +34,12 @@ def parse_timestamp(s):
             # fromisoformat() in newer Python version
             t = t_int + datetime.timedelta(
                 microseconds=int(t_frac * 1_000_000))
-    if t is None:
+        if t is None:
+            t = datetime.datetime.fromisoformat(s)
+        t = t.replace(tzinfo=datetime.timezone.utc)
+    else:
         t = datetime.datetime.fromisoformat(s)
-    t = t.replace(tzinfo=datetime.timezone.utc)
+        t = t.astimezone(datetime.timezone.utc)
     return t
 
 
