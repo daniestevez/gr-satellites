@@ -8,13 +8,13 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-import numpy
+import numpy as np
 
 
-FEND = numpy.uint8(0xc0)
-FESC = numpy.uint8(0xdb)
-TFEND = numpy.uint8(0xdc)
-TFESC = numpy.uint8(0xdd)
+FEND = np.uint8(0xc0)
+FESC = np.uint8(0xdb)
+TFEND = np.uint8(0xdc)
+TFESC = np.uint8(0xdd)
 
 
 def kiss_escape(a):
@@ -31,5 +31,5 @@ def kiss_escape(a):
             buff.append(FESC)
             buff.append(TFEND)
         else:
-            buff.append(numpy.uint8(x))
+            buff.append(np.uint8(x))
     return buff
