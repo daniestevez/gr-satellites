@@ -43,16 +43,11 @@ class TimeAdapter(Adapter):
         return Container()
 
     def _decode(self, obj, context, path=None):
-        t = datetime.datetime.fromtimestamp(
-            obj.time_stamp_seconds,
-            tz=datetime.timezone.utc
+        j2000_epoch = datetime.datetime(2000, 1, 1, 12,
+                                        tzinfo=datetime.timezone.utc)
+        return j2000_epoch + datetime.timedelta(
+            seconds=obj.time_stamp_seconds
         )
-        t = t.replace(tzinfo=None)
-        offset = (
-            datetime.datetime(2000, 1, 1, 12)
-            - datetime.datetime(1970, 1, 1)
-        )
-        return (t + offset)
 
 
 SecondaryHeader = TimeAdapter(
