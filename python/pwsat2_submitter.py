@@ -43,6 +43,7 @@ import numpy
 import pmt
 
 from . import crc, hdlc
+from .submit import parse_timestamp
 
 
 class pwsat2_submitter(gr.basic_block):
@@ -59,10 +60,8 @@ class pwsat2_submitter(gr.basic_block):
         self.baseUrl = 'http://radio.pw-sat.pl'
         self.headers = {'content-type': 'application/json'}
 
-        dtformat = '%Y-%m-%d %H:%M:%S'
         self.initialTimestamp = (
-            datetime.datetime.strptime(initialTimestamp, dtformat)
-            .replace(tzinfo=datetime.timezone.utc)
+            parse_timestamp(initialTimestamp)
             if initialTimestamp != '' else None)
         self.startTimestamp = datetime.datetime.now(datetime.timezone.utc)
 
