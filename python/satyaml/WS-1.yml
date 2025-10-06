@@ -1,7 +1,7 @@
 name: WS-1
 alternative_names: 
   - Waratah Seed-1
-norad: 98849
+norad: 60469
 data:
   &tlm Telemetry:
     telemetry: ax25
