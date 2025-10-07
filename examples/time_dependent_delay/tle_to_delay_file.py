@@ -68,10 +68,10 @@ def main():
         lines = lines[1:]
     if len(lines) != 2:
         raise RuntimeError('TLE file must have either 2 or 3 lines')
-    unix_epoch = datetime.datetime(1970, 1, 1, tzinfo=skyfield.api.utc)
     satellite = EarthSatellite(lines[0], lines[1], 'satellite', ts)
-    t0 = unix_epoch + datetime.timedelta(seconds=args.unix_timestamp)
-    t0 = ts.from_datetime(t0.replace(tzinfo=skyfield.api.utc))
+    t0 = ts.from_datetime(
+        datetime.datetime.fromtimestamp(args.unix_timestamp, datetime.timezone.utc)
+    )
     t = t0 + np.arange(0, (args.duration + args.time_step) / DAY_S,
                        args.time_step / DAY_S)
     t = ts.tai_jd([s.tai for s in t])
@@ -82,7 +82,7 @@ def main():
     delay = range_m / scipy.constants.c
     with open(args.output_file, 'w') as output_file:
         for s, f in zip(t, delay):
-            s = (s.utc_datetime() - unix_epoch).total_seconds()
+            s = s.utc_datetime().timestamp()
             print(f'{s}\t{f}', file=output_file)
 
 

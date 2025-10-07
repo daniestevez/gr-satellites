@@ -43,6 +43,7 @@ import numpy
 import pmt
 
 from . import crc, hdlc
+from .submit import parse_timestamp
 
 
 class pwsat2_submitter(gr.basic_block):
@@ -59,11 +60,10 @@ class pwsat2_submitter(gr.basic_block):
         self.baseUrl = 'http://radio.pw-sat.pl'
         self.headers = {'content-type': 'application/json'}
 
-        dtformat = '%Y-%m-%d %H:%M:%S'
         self.initialTimestamp = (
-            datetime.datetime.strptime(initialTimestamp, dtformat)
+            parse_timestamp(initialTimestamp)
             if initialTimestamp != '' else None)
-        self.startTimestamp = datetime.datetime.utcnow()
+        self.startTimestamp = datetime.datetime.now(datetime.timezone.utc)
 
         self.authenticate(credentials_file)
 
@@ -104,8 +104,7 @@ class pwsat2_submitter(gr.basic_block):
             return
         url = self.baseUrl+'/communication/frame'
 
-        timestamp = (timestamp - datetime.datetime(1970, 1, 1)).total_seconds()
-        timestamp = int(timestamp * 1000)
+        timestamp = int(timestamp.timestamp() * 1e3)
         payload = {'frame': str(base64.b64encode(frame), encoding='ascii'),
                    'timestamp': timestamp,
                    'traffic': 'Rx'}
@@ -129,7 +128,7 @@ class pwsat2_submitter(gr.basic_block):
 
         frame = bytes(data)
 
-        now = datetime.datetime.utcnow()
+        now = datetime.datetime.now(datetime.timezone.utc)
         timestamp = (now - self.startTimestamp + self.initialTimestamp
                      if self.initialTimestamp else now)
 

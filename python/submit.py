@@ -9,6 +9,7 @@
 #
 
 import datetime
+import sys
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -18,20 +19,28 @@ import pmt
 import numpy
 
 
-def parse_time(time):
-    try:
-        time = datetime.datetime.fromisoformat(time)
-
-        if time.tzinfo:
-            # Ensure time is converted to UTC, then drop tzinfo
-            time = time.astimezone(datetime.timezone.utc)
-            time = time.replace(tzinfo=None)
-
-        return time
-    except AttributeError:
-        # Workaround for Python version <3.7, which doesn't have
-        # fromisoformat()
-        return datetime.datetime.strptime(time, '%Y-%m-%dT%H:%M:%S')
+def parse_timestamp(s):
+    if sys.version_info < (3, 11):
+        # in Python 3.10, fromisoformat() does not accept a trailing Z, and it
+        # can only parse millisecond resolution. If there is fractional part,
+        # we remove any trailing Z, and parse the fractional seconds separately
+        t = None
+        s = s.rstrip('Z')
+        if '.' in s:
+            s_int, s_frac = s.split('.')
+            t_int = datetime.datetime.fromisoformat(s_int)
+            t_frac = float(f'0.{s_frac}')
+            # Truncate t_frac to integer microseconds to match behaviour of
+            # fromisoformat() in newer Python version
+            t = t_int + datetime.timedelta(
+                microseconds=int(t_frac * 1_000_000))
+        if t is None:
+            t = datetime.datetime.fromisoformat(s)
+        t = t.replace(tzinfo=datetime.timezone.utc)
+    else:
+        t = datetime.datetime.fromisoformat(s)
+        t = t.astimezone(datetime.timezone.utc)
+    return t
 
 
 class submit(gr.basic_block):
@@ -56,9 +65,9 @@ class submit(gr.basic_block):
             'version': '1.6.6',
             }
         self.initialTimestamp = (
-            parse_time(initialTimestamp)
+            parse_timestamp(initialTimestamp)
             if initialTimestamp != '' else None)
-        self.startTimestamp = datetime.datetime.utcnow()
+        self.startTimestamp = datetime.datetime.now(tz=datetime.timezone.utc)
 
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
@@ -78,11 +87,12 @@ class submit(gr.basic_block):
 
         self.request['frame'] = bytes(pmt.u8vector_elements(msg)).hex().upper()
 
-        now = datetime.datetime.utcnow()
-        timestamp = (
-            now - self.startTimestamp + self.initialTimestamp
-            if self.initialTimestamp else now)
-        self.request['timestamp'] = timestamp.isoformat()[:-3] + 'Z'
+        t_now = datetime.datetime.now(tz=datetime.timezone.utc)
+        t_prop = (
+            t_now - self.startTimestamp + self.initialTimestamp
+            if self.initialTimestamp else t_now)
+        t_prop_fmt = t_prop.replace(tzinfo=None).isoformat()[:-3] + 'Z'
+        self.request['timestamp'] = t_prop_fmt
 
         params = urllib.parse.urlencode(self.request)
         try:
