@@ -13,11 +13,18 @@
 import numpy
 from gnuradio import gr
 import pmt
-from . import telemetry
+from .telemetry import PrimaryHeader, FullPacket
+
 
 class telemetry_parser(gr.basic_block):
     """
-    docstring for block CCSDS telemetry_parser
+    Print the content of CCSDS TM/TC transfer frames to stdout.
+
+    Input PDUs that are valid frames are forwarded to the output,
+    other PDUs are discarded.
+
+    Input: PDUs with CCSDS TM/TC Transfer Frames
+    Output: PDUs
     """
     def __init__(self):
         gr.basic_block.__init__(self,
@@ -37,13 +44,12 @@ class telemetry_parser(gr.basic_block):
         packet = bytearray(pmt.u8vector_elements(msg))
         size = len(packet) - 6
         try:
-            header = telemetry.PrimaryHeader.parse(packet[:])
+            header = PrimaryHeader.parse(packet[:])
             if header.ocf_flag == 1:
                 size -= 4
-            data = telemetry.FullPacket.parse(packet[:], size=size)
+            data = FullPacket.parse(packet[:], size=size)
         except:
             print("Could not decode telemetry packet")
             return
         print(data)
         self.message_port_pub(pmt.intern('out'), msg_pmt)
-
