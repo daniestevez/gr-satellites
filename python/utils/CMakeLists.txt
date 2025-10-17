@@ -35,6 +35,7 @@ GR_PYTHON_INSTALL(
     config.py
     satcfg.py
     options_block.py
+    use_message_block.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/utils
 )
 
