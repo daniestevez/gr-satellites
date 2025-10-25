@@ -148,14 +148,18 @@ class tubix20_reframer(gr.basic_block):
         return packet_out
 
     def publish_frame(self):
-        packet_out = self.prepare_frame()
-
         num_blocks_correct = sum(
             [1 for tags in self.tags.values() if tags['crc_valid']])
         num_corrected_errors = sum(
             [tags['corrected_errors'] for tags in self.tags.values()])
         num_uncorrected_errors = sum(
             [tags['uncorrected_errors'] for tags in self.tags.values()])
+
+        # Only forward frames with at least one correct datablock
+        if num_blocks_correct < 1:
+            return
+
+        packet_out = self.prepare_frame()
 
         meta = pmt.dict_add(
             self.block0_meta,
