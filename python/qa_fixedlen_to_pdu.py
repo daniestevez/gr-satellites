@@ -25,7 +25,7 @@ from satellites import fixedlen_to_pdu
 from satellites.grtypes import byte_t
 
 
-class qa_fixedlen_tagger(gr_unittest.TestCase):
+class qa_fixedlen_to_pdu(gr_unittest.TestCase):
     def setUp(self):
         self.syncword_tag = 'syncword'
         self.packetlen_tag = None
@@ -104,4 +104,4 @@ class qa_fixedlen_tagger(gr_unittest.TestCase):
 
 
 if __name__ == '__main__':
-    gr_unittest.run(qa_fixedlen_tagger)
+    gr_unittest.run(qa_fixedlen_to_pdu)
