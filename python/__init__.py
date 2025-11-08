@@ -74,7 +74,6 @@ from .csp_zmq_pub import csp_zmq_pub
 from .csp_zmq_sub import csp_zmq_sub
 from .eseo_line_decoder import eseo_line_decoder
 from .eseo_packet_crop import eseo_packet_crop
-from .fixedlen_tagger import fixedlen_tagger
 from .funcube_submit import funcube_submit
 from .hdlc_deframer import hdlc_deframer
 from .hdlc_framer import hdlc_framer
