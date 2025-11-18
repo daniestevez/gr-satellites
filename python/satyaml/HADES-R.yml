@@ -1,5 +1,5 @@
 name: HADES-R
-norad: 98710
+norad: 62690
 data:
   &tlm Telemetry:
     unknown
