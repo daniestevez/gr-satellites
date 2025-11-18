@@ -58,7 +58,6 @@ install(FILES
     satellites_encode_rs_vector.block.yml
     satellites_eseo_line_decoder.block.yml
     satellites_eseo_packet_crop.block.yml
-    satellites_fixedlen_tagger.block.yml
     satellites_fixedlen_to_pdu.block.yml
     satellites_frame_counter.block.yml
     satellites_funcube_submit.block.yml
