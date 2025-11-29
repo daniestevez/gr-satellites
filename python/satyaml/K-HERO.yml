@@ -1,0 +1,13 @@
+name: K-HERO
+norad: 98489
+data:
+  &tlm Telemetry:
+    telemetry: csp
+transmitters:
+  4k8 FSK downlink:
+    frequency: 437.180e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
