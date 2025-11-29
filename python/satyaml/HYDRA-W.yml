@@ -1,0 +1,14 @@
+name: HYDRA-W
+norad: 63490
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  200baud FSK downlink:
+    frequency: 437.780e+6
+    modulation: FSK
+    baudrate: 200
+    deviation: 560
+    framing: HADES-R
+    data:
+    - *tlm
