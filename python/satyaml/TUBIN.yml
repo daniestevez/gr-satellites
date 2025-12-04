@@ -1,7 +1,7 @@
 name: TUBIN
 norad: 48900
 telemetry_servers:
-  - SIDS http://fachgebiet.rft.tu-berlin.de/ham/telemetry/send
+  - SIDS http://radio.space.tu-berlin.de/telemetry/send
 data:
   &tlm Telemetry:
     telemetry: tubix20
