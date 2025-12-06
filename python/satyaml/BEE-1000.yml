@@ -1,0 +1,13 @@
+name: BEE-1000
+norad: 66650
+data:
+  &tlm Telemetry:
+    telemetry: csp
+transmitters:
+  4k8 FSK downlink:
+    frequency: 436.500e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
