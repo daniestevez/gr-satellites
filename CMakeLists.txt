@@ -43,7 +43,7 @@ list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
 # Set the version information here
 set(VERSION_MAJOR 5)
-set(VERSION_API 8)
+set(VERSION_API 9)
 set(VERSION_ABI 0)
 set(VERSION_PATCH 0)
 
@@ -71,25 +71,8 @@ if((CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
     add_definitions(-fvisibility=hidden)
 endif()
 
-IF(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    SET(CMAKE_CXX_STANDARD 14)
-ELSEIF(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    SET(CMAKE_CXX_STANDARD 14)
-ELSEIF(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    SET(CMAKE_CXX_STANDARD 14)
-ELSE()
-    message(WARNING "C++ standard could not be set because compiler is not GNU, Clang or MSVC.")
-ENDIF()
-
-IF(CMAKE_C_COMPILER_ID STREQUAL "GNU")
-    SET(CMAKE_C_STANDARD 11)
-ELSEIF(CMAKE_C_COMPILER_ID MATCHES "Clang")
-    SET(CMAKE_C_STANDARD 11)
-ELSEIF(CMAKE_C_COMPILER_ID STREQUAL "MSVC")
-    SET(CMAKE_C_STANDARD 11)
-ELSE()
-    message(WARNING "C standard could not be set because compiler is not GNU, Clang or MSVC.")
-ENDIF()
+SET(CMAKE_CXX_STANDARD 17)
+SET(CMAKE_C_STANDARD 11)
 
 ########################################################################
 # Install directories

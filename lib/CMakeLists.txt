@@ -58,12 +58,17 @@ list(APPEND satellites_sources
     fixedlen_to_pdu_impl.cc
     frame_counter_impl.cc
     golay24.c
+    kurtosis_impl.cc
+    level_to_message_impl.cc
     lilacsat1_demux_impl.cc
     manchester_sync_impl.cc
     matrix_deinterleaver_soft_impl.cc
+    message_counter_impl.cc
+    nanocom_golay_decode_length_impl.cc
     nrzi_decode_impl.cc
     nrzi_encode_impl.cc
     nusat_decoder_impl.cc
+    packet_csma_impl.cc
     pdu_add_meta_impl.cc
     pdu_head_tail_impl.cc
     pdu_length_filter_impl.cc

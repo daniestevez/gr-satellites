@@ -37,12 +37,17 @@ install(FILES
     encode_rs.h
     fixedlen_to_pdu.h
     frame_counter.h
+    kurtosis.h
+    level_to_message.h
     lilacsat1_demux.h
     manchester_sync.h
     matrix_deinterleaver_soft.h
+    message_counter.h
+    nanocom_golay_decode_length.h
     nrzi_decode.h
     nrzi_encode.h
     nusat_decoder.h
+    packet_csma.h
     pdu_add_meta.h
     pdu_head_tail.h
     pdu_length_filter.h

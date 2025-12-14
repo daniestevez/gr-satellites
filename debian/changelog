@@ -1,3 +1,15 @@
+gr-satellites (5.9.0-1) questing; urgency=medium
+
+  * Mainstream release v5.9.0
+
+ --  <daniel@destevez.net>  Sun, 14 Dec 2025 09:00:00 +0000
+
+gr-satellites (5.9.0-0) noble; urgency=medium
+
+  * Mainstream release v5.9.0
+
+ --  <daniel@destevez.net>  Sun, 14 Jul 2025 09:00:00 +0000
+
 gr-satellites (5.8.0-1) plucky; urgency=medium
 
   * Mainstream release v5.8.0

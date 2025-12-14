@@ -1,0 +1,20 @@
+name: UND ROADS 2
+norad: 64549
+data:
+  &tlm Telemetry:
+    telemetry: csp
+transmitters:
+  4k8 FSK downlink:
+    frequency: 435.400e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm
+  9k6 FSK downlink:
+    frequency: 435.400e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: AX100 ASM+Golay
+    data:
+    - *tlm

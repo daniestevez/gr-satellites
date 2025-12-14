@@ -1,0 +1,29 @@
+id: satellites_message_counter
+label: Message Counter
+category: '[Satellites]/Packet'
+
+templates:
+  imports: import satellites
+  make: satellites.message_counter()
+
+inputs:
+- id: in
+  domain: message
+
+outputs:
+- id: out
+  domain: message
+- id: count
+  domain: message
+
+documentation: |-
+    The Message Counter block counts messages that cross the block and outputs a
+    message every time that a new message has crossed the block. The message
+    contains the count.
+
+    Input:
+        Messages.
+    Output:
+        A copy of the input messages. Messages containing frame count.
+
+file_format: 1

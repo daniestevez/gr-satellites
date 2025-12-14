@@ -34,7 +34,7 @@ class print_timestamp(gr.basic_block):
 
     def handle_msg(self, msg_pmt):
         if self.tstamp_format:
-            timestamp = datetime.datetime.utcnow()
+            timestamp = datetime.datetime.now(datetime.timezone.utc)
             print((timestamp.strftime(self.tstamp_format)))
         if self.count_packets:
             print('Packet number', self.packet_counter)

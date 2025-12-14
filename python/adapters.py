@@ -46,10 +46,11 @@ class PolynomialAdapter(Adapter):
 
 class UNIXTimestampAdapter(Adapter):
     def _encode(self, obj, context, path=None):
-        return round(obj.timestamp())
+        return round(obj.astimezone(datetime.timezone.utc).timestamp())
 
     def _decode(self, obj, context, path=None):
-        return datetime.datetime.utcfromtimestamp(obj)
+        t = datetime.datetime.fromtimestamp(obj, datetime.timezone.utc)
+        return t
 
 
 class TableAdapter(Adapter):

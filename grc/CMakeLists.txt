@@ -58,7 +58,6 @@ install(FILES
     satellites_encode_rs_vector.block.yml
     satellites_eseo_line_decoder.block.yml
     satellites_eseo_packet_crop.block.yml
-    satellites_fixedlen_tagger.block.yml
     satellites_fixedlen_to_pdu.block.yml
     satellites_frame_counter.block.yml
     satellites_funcube_submit.block.yml
@@ -67,16 +66,21 @@ install(FILES
     satellites_k2sat_deframer.block.yml
     satellites_kiss_to_pdu.block.yml
     satellites_ks1q_header_remover.block.yml
+    satellites_kurtosis.block.yml
+    satellites_level_to_message.block.yml
     satellites_lilacsat1_demux.block.yml
     satellites_lilacsat1_gps_kml.block.yml
     satellites_manchester_sync.block.yml
     satellites_matrix_deinterleaver_soft.block.yml
+    satellites_message_counter.block.yml
+    satellites_nanocom_golay_decode_length.block.yml
     satellites_ngham_check_crc.block.yml
     satellites_ngham_packet_crop.block.yml
     satellites_ngham_remove_padding.block.yml
     satellites_nrzi_decode.block.yml
     satellites_nrzi_encode.block.yml
     satellites_nusat_decoder.block.yml
+    satellites_packet_csma.block.yml
     satellites_pdu_add_meta.block.yml
     satellites_pdu_head_tail.block.yml
     satellites_pdu_length_filter.block.yml

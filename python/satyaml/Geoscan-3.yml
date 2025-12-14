@@ -1,0 +1,14 @@
+name: Geoscan-3
+norad: 64893
+data:
+   &tlm Telemetry:
+     unknown
+transmitters:
+   9k6 FSK downlink:
+     frequency: 435.740e+6
+     modulation: FSK
+     baudrate: 9600
+     framing: GEOSCAN
+     frame size: 74
+     data:
+     - *tlm

@@ -19,7 +19,7 @@ stack, the AO-40 protocol used in the FUNcube satellites, and several
 ad-hoc protocols used in other satellites.
 """
 
-__version__ = 'v5.8.0'
+__version__ = 'v5.9.0'
 __author__ = 'Daniel Estevez'
 __copyright__ = 'Copyright 2016-2025 Daniel Estevez'
 __email__ = 'daniel@destevez.net'
@@ -74,7 +74,6 @@ from .csp_zmq_pub import csp_zmq_pub
 from .csp_zmq_sub import csp_zmq_sub
 from .eseo_line_decoder import eseo_line_decoder
 from .eseo_packet_crop import eseo_packet_crop
-from .fixedlen_tagger import fixedlen_tagger
 from .funcube_submit import funcube_submit
 from .hdlc_deframer import hdlc_deframer
 from .hdlc_framer import hdlc_framer
