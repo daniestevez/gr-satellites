@@ -9,6 +9,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
+import time
+
 from gnuradio import gr, blocks, gr_unittest
 import numpy as np
 import pmt
@@ -58,6 +60,13 @@ class qa_mobitex_deframer(gr_unittest.TestCase):
         self.tb.msg_connect((deframer, 'out'), (dbg_frame, 'store'))
         self.tb.start()
         self.tb.wait()
+
+        # Wait some time. In principle tb.wait() should be enough, but I am
+        # seeing Ubuntu PPA build servers failing this test often because 0
+        # frames have been received by the message debug. I assume that might
+        # happen if the sever CPU is very constrained, because I cannot
+        # reproduce the flakiness locally.
+        time.sleep(0.5)
 
         num_msgs_desired = len(self.frames_desired)
         num_msgs_actual = dbg_frame.num_messages()
