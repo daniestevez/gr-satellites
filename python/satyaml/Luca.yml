@@ -1,0 +1,16 @@
+name: Luca
+alternative_names:
+  - Luca-01
+  - RS90S
+norad: 67287
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  2k4 FSK USP downlink:
+    frequency: 437.180e+6
+    modulation: FSK
+    baudrate: 2400
+    framing: USP
+    data:
+    - *tlm
