@@ -1,0 +1,31 @@
+name: SAKHACUBE-CHOLBON
+alternative_names:
+  - RS18S
+  - Чолбон
+norad: 67290
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  2k4 FSK downlink:
+    frequency: 437.350e+6
+    modulation: FSK
+    baudrate: 2400
+    framing: USP
+    data:
+    - *tlm
+  4k8 FSK downlink:
+    frequency: 437.350e+6
+    modulation: FSK
+    baudrate: 4800
+    framing: USP
+    data:
+    - *tlm
+  9k6 FSK downlink:
+    frequency: 437.350e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: USP
+    data:
+    - *tlm
+
