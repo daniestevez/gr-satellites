@@ -23,7 +23,6 @@ def crc16_ccitt_zero(data):
     return _crc_fn.compute(list(data))
 
 
-
 class check_eseo_crc(gr.basic_block):
     """docstring for block check_eseo_crc"""
     def __init__(self, verbose):
