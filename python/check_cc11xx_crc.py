@@ -9,25 +9,54 @@
 #
 
 from gnuradio import gr
+import numpy
+import pmt
 
-from .crcs import crc16_cc11xx
+from . import crc as _crc_module
+
+# CRC-16/IBM: poly=0x8005, init=0xffff, final_xor=0x0, input_reflected=False,
+# result_reflected=False
+_crc_fn = _crc_module(16, 0x8005, 0xffff, 0x0, False, False)
 
 
-class check_cc11xx_crc(gr.hier_block2):
-    """Deprecated. Use satellites.crc16_cc11xx() from crcs.py instead."""
-    def __init__(self, verbose=False):
-        gr.hier_block2.__init__(
+def crc16(data):
+    return _crc_fn.compute(list(data))
+
+
+class check_cc11xx_crc(gr.basic_block):
+    """docstring for block check_cc11xx_crc"""
+    def __init__(self, verbose):
+        gr.basic_block.__init__(
             self,
             name='check_cc11xx_crc',
-            input_signature=gr.io_signature(0, 0, 0),
-            output_signature=gr.io_signature(0, 0, 0))
+            in_sig=[],
+            out_sig=[])
 
-        self._crc = crc16_cc11xx(discard_crc=True)
+        self.verbose = verbose
 
-        self.message_port_register_hier_in('in')
-        self.message_port_register_hier_out('ok')
-        self.message_port_register_hier_out('fail')
+        self.message_port_register_in(pmt.intern('in'))
+        self.set_msg_handler(pmt.intern('in'), self.handle_msg)
+        self.message_port_register_out(pmt.intern('ok'))
+        self.message_port_register_out(pmt.intern('fail'))
 
-        self.msg_connect(self, 'in', self._crc, 'in')
-        self.msg_connect(self._crc, 'ok', self, 'ok')
-        self.msg_connect(self._crc, 'fail', self, 'fail')
+    def handle_msg(self, msg_pmt):
+        msg = pmt.cdr(msg_pmt)
+        if not pmt.is_u8vector(msg):
+            print('[ERROR] Received invalid message type. Expected u8vector')
+            return
+        packet = pmt.u8vector_elements(msg)
+
+        if len(packet) < 3:
+            return
+
+        packet_out = packet[:-2]
+        msg_out = pmt.cons(pmt.car(msg_pmt),
+                           pmt.init_u8vector(len(packet_out), packet_out))
+        if crc16(packet) == 0:
+            if self.verbose:
+                print('CRC OK')
+            self.message_port_pub(pmt.intern('ok'), msg_out)
+        else:
+            if self.verbose:
+                print('CRC failed')
+            self.message_port_pub(pmt.intern('fail'), msg_out)

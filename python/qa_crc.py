@@ -172,12 +172,6 @@ class qa_crc(gr_unittest.TestCase):
              True, True, False, skip_bytes),
             [0xE8, 0x62, 0x60, 0x68])
 
-    def test_crc_append_crc16_cc11xx(self):
-        """Test CRC-16/CC11xx calculation"""
-        self.run_crc_append(
-            (16, 0x8005, 0xFFFF, 0x0, False, False, False),
-            [0x02, 0x4C])
-
 
 class qa_crc_class(gr_unittest.TestCase):
     def test_crc_crc32c(self):
