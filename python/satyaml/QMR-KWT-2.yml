@@ -1,0 +1,22 @@
+name: QMR-KWT-2
+alternative_names:
+  - RS95S
+norad: 98448
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  2k4 FSK USP downlink:
+    frequency: 436.9500e+6
+    modulation: FSK
+    baudrate: 2400
+    framing: USP
+    data:
+    - *tlm
+  9k6 FSK USP downlink:
+    frequency: 436.9500e+6
+    modulation: FSK
+    baudrate: 9600
+    framing: USP
+    data:
+    - *tlm
