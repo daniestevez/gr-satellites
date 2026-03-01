@@ -9,7 +9,6 @@
 #
 
 from gnuradio import gr
-import numpy
 import pmt
 
 from . import crc as _crc_module
@@ -17,10 +16,6 @@ from . import crc as _crc_module
 # CRC-16/CCITT-ZERO: poly=0x1021, init=0x0000, final_xor=0x0000,
 # input_reflected=False, result_reflected=False
 _crc_fn = _crc_module(16, 0x1021, 0x0000, 0x0000, False, False)
-
-
-def crc16_ccitt_zero(data):
-    return _crc_fn.compute(list(data))
 
 
 class check_eseo_crc(gr.basic_block):
@@ -52,7 +47,7 @@ class check_eseo_crc(gr.basic_block):
         packet_out = packet[:-2]
         msg_out = pmt.cons(pmt.car(msg_pmt),
                            pmt.init_u8vector(len(packet_out), packet_out))
-        if crc16_ccitt_zero(packet) == 0:
+        if _crc_fn.compute(list(packet)) == 0:
             if self.verbose:
                 print('CRC OK')
             self.message_port_pub(pmt.intern('ok'), msg_out)
