@@ -39,7 +39,8 @@ class append_crc32c(gr.basic_block):
             print('[ERROR] Received invalid message type. Expected u8vector')
             return
         packet = bytes(pmt.u8vector_elements(msg))
-        crc = _crc_fn.compute(list(packet if self.include_header else packet[4:]))
+        data = packet if self.include_header else packet[4:]
+        crc = _crc_fn.compute(list(data))
         packet += struct.pack('>I', crc)
         self.message_port_pub(
             pmt.intern('out'),
