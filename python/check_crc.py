@@ -11,11 +11,12 @@
 import struct
 
 from gnuradio import gr
-import numpy
 import pmt
 
-from . import crc32c
+from . import crc as _crc_module
 from . import csp_header
+
+_crc_fn = _crc_module(32, 0x1EDC6F41, 0xFFFFFFFF, 0xFFFFFFFF, True, True)
 
 
 class check_crc(gr.basic_block):
@@ -57,9 +58,8 @@ class check_crc(gr.basic_block):
                 if self.verbose:
                     print('Malformed CSP packet (too short)')
                 return
-            crc = crc32c.crc(packet[:-4]
-                             if self.include_header
-                             else packet[4:-4])
+            crc = _crc_fn.compute(
+                list(packet[:-4] if self.include_header else packet[4:-4]))
             packet_crc = struct.unpack('>I', bytes(packet[-4:]))[0]
             if crc == packet_crc:
                 if self.verbose:

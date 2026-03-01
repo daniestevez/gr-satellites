@@ -9,10 +9,11 @@
 #
 
 from gnuradio import gr
-import numpy
 import pmt
 
-from .check_eseo_crc import crc16_ccitt_zero as crc16_ccitt_zero
+from . import crc as _crc_module
+
+_crc_fn = _crc_module(16, 0x1021, 0x0000, 0x0000, False, False)
 
 
 class check_swiatowid_crc(gr.basic_block):
@@ -44,7 +45,7 @@ class check_swiatowid_crc(gr.basic_block):
         packet_out = packet[:-2]
         msg_out = pmt.cons(pmt.car(msg_pmt),
                            pmt.init_u8vector(len(packet_out), packet_out))
-        crc = crc16_ccitt_zero(packet_out)
+        crc = _crc_fn.compute(list(packet_out))
         if packet[-2] == crc & 0xff and packet[-1] == crc >> 8:
             if self.verbose:
                 print('CRC OK')

@@ -17,8 +17,10 @@ from gnuradio import gr
 import pmt
 import numpy as np
 
-from .check_eseo_crc import crc16_ccitt_zero as crc16_ccitt_zero
+from . import crc as _crc_module
 from .mobitex_fec import decode, encode, Status
+
+_crc_fn = _crc_module(16, 0x1021, 0x0000, 0x0000, False, False)
 
 
 def decode_control(control0: int, control1: int, fec: int) -> \
@@ -60,8 +62,8 @@ def encode_control(control0: int, control1: int) -> int:
 
 
 def check_callsign_crc(callsign: bytes, crc: bytes):
-    computed_crc = crc16_ccitt_zero(
-        callsign).to_bytes(length=2, byteorder='big')
+    computed_crc = _crc_fn.compute(
+        list(callsign)).to_bytes(length=2, byteorder='big')
 
     return computed_crc == crc
 
@@ -129,8 +131,8 @@ def compare_expected_callsign(
     Returns:
         reference callsign CRC along with number of bit errors.
     """
-    crc_ref = crc16_ccitt_zero(
-        callsign_ref).to_bytes(length=2, byteorder='big')
+    crc_ref = _crc_fn.compute(
+        list(callsign_ref)).to_bytes(length=2, byteorder='big')
 
     bit_errors = hamming_distance(
         callsign + crc,
