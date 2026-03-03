@@ -18,6 +18,10 @@ from . import crc as _crc_module
 _crc_fn = _crc_module(16, 0x1021, 0x0000, 0x0000, False, False)
 
 
+def crc16_ccitt_zero(data):
+    return _crc_fn.compute(list(data))
+
+
 class check_eseo_crc(gr.basic_block):
     """docstring for block check_eseo_crc"""
     def __init__(self, verbose):
