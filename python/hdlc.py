@@ -10,17 +10,12 @@
 
 import numpy
 
+from . import crc as _crc_module
+
+_crc_fn = _crc_module(16, 0x1021, 0xffff, 0xffff, True, True)
 
 flag = bytes([0] + 6*[1] + [0])
 
 
 def crc_ccitt(data):
-    # Implementation taken from
-    # hdlc_framer_pb_impl.cc in gr-digital
-    poly = 0x8408  # reflected 0x1021
-    crc = 0xffff
-    for byte in data:
-        crc ^= byte
-        for _ in range(8):
-            crc = (crc >> 1) ^ poly if crc & 1 else crc >> 1
-    return crc ^ 0xffff
+    return _crc_fn.compute(list(data))

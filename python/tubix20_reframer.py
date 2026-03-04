@@ -13,8 +13,6 @@ References:
 from gnuradio import gr
 import pmt
 
-from .check_eseo_crc import crc16_ccitt_zero as crc16_ccitt_zero
-
 
 class tubix20_reframer(gr.basic_block):
     """
