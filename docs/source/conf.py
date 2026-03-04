@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'gr-satellites'
-copyright = '2016-2025, Daniel Estévez'
+copyright = '2016-2026, Daniel Estévez'
 author = 'Daniel Estévez'
 
 # The short X.Y version
