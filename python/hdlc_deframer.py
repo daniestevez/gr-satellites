@@ -14,7 +14,7 @@ from gnuradio import gr
 import numpy
 import pmt
 
-from . import crc, hdlc
+from . import crc
 
 
 def pack(s):

@@ -13,7 +13,6 @@ import numpy
 import pmt
 
 from . import hdlc_deframer
-from . import hdlc
 
 
 class k2sat_deframer(gr.basic_block):
