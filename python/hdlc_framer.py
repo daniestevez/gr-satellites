@@ -18,6 +18,7 @@ from . import crc
 
 _flag = bytes([0, 1, 1, 1, 1, 1, 1, 0])
 
+
 class hdlc_framer(gr.basic_block):
     """docstring for block hdlc_framer"""
     def __init__(self, preamble_bytes, postamble_bytes):
