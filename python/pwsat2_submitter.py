@@ -42,7 +42,7 @@ from gnuradio import gr
 import numpy
 import pmt
 
-from . import crc, hdlc
+from . import crc
 from .submit import parse_timestamp
 
 
