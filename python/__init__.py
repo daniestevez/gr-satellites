@@ -52,23 +52,14 @@ except ModuleNotFoundError:
 
 from .aausat4_remove_fsm import aausat4_remove_fsm
 from .adsb_kml import adsb_kml
-from .append_crc32c import append_crc32c
 from .autopolarization import autopolarization
 from .beesat_classifier import beesat_classifier
 from .bme_submitter import bme_submitter
 from .bme_ws_submitter import bme_ws_submitter
 from .cc11xx_packet_crop import cc11xx_packet_crop
 from .check_address import check_address
-from .check_ao40_uncoded_crc import check_ao40_uncoded_crc
 from .check_astrocast_crc import check_astrocast_crc
-from .check_cc11xx_crc import check_cc11xx_crc
-from .check_crc16_ccitt import check_crc16_ccitt
-from .check_crc16_ccitt_false import check_crc16_ccitt_false
-from .check_crc import check_crc
-from .check_eseo_crc import check_eseo_crc
 from .check_hex_string import check_hex_string
-from .check_swiatowid_crc import check_swiatowid_crc
-from .check_tt64_crc import check_tt64_crc
 from .csp_address_filter import csp_address_filter
 from .csp_zmq_pub import csp_zmq_pub
 from .csp_zmq_sub import csp_zmq_sub
@@ -81,7 +72,6 @@ from .k2sat_deframer import k2sat_deframer
 from .kiss_to_pdu import kiss_to_pdu
 from .ks1q_header_remover import ks1q_header_remover
 from .lilacsat1_gps_kml import lilacsat1_gps_kml
-from .ngham_check_crc import ngham_check_crc
 from .ngham_packet_crop import ngham_packet_crop
 from .ngham_remove_padding import ngham_remove_padding
 from .pdu_to_kiss import pdu_to_kiss
@@ -97,6 +87,5 @@ from .swap_crc import swap_crc
 from .swap_header import swap_header
 from .swiatowid_packet_crop import swiatowid_packet_crop
 from .swiatowid_packet_split import swiatowid_packet_split
-from .sx12xx_check_crc import sx12xx_check_crc
 from .sx12xx_packet_crop import sx12xx_packet_crop
 from .mobitex_to_datablocks import mobitex_to_datablocks

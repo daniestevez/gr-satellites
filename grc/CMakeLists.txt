@@ -21,7 +21,6 @@
 install(FILES
     satellites_aausat4_remove_fsm.block.yml
     satellites_adsb_kml.block.yml
-    satellites_append_crc32c.block.yml
     satellites_autopolarization.block.yml
     satellites_ax100_decode.block.yml
     satellites_beesat_classifier.block.yml
@@ -29,16 +28,8 @@ install(FILES
     satellites_bme_ws_submitter.block.yml
     satellites_cc11xx_packet_crop.block.yml
     satellites_check_address.block.yml
-    satellites_check_ao40_uncoded_crc.block.yml
     satellites_check_astrocast_crc.block.yml
-    satellites_check_cc11xx_crc.block.yml
-    satellites_check_crc16_ccitt.block.yml
-    satellites_check_crc16_ccitt_false.block.yml
-    satellites_check_crc.block.yml
-    satellites_check_eseo_crc.block.yml
     satellites_check_hex_string.block.yml
-    satellites_check_swiatowid_crc.block.yml
-    satellites_check_tt64_crc.block.yml
     satellites_convolutional_encoder.block.yml
     satellites_costas_loop_8apsk_cc.block.yml
     satellites_crc_append.block.yml
@@ -74,7 +65,6 @@ install(FILES
     satellites_matrix_deinterleaver_soft.block.yml
     satellites_message_counter.block.yml
     satellites_nanocom_golay_decode_length.block.yml
-    satellites_ngham_check_crc.block.yml
     satellites_ngham_packet_crop.block.yml
     satellites_ngham_remove_padding.block.yml
     satellites_nrzi_decode.block.yml
@@ -100,7 +90,6 @@ install(FILES
     satellites_swap_header.block.yml
     satellites_swiatowid_packet_crop.block.yml
     satellites_swiatowid_packet_split.block.yml
-    satellites_sx12xx_check_crc.block.yml
     satellites_sx12xx_packet_crop.block.yml
     satellites_time_dependent_delay.block.yml
     satellites_u482c_decode.block.yml
