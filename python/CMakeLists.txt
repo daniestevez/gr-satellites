@@ -37,8 +37,6 @@ GR_PYTHON_INSTALL(
     aausat4_remove_fsm.py
     adapters.py
     adsb_kml.py
-    ao40_uncoded_crc.py
-    append_crc32c.py
     autopolarization.py
     bch15.py
     beesat_classifier.py
@@ -46,17 +44,8 @@ GR_PYTHON_INSTALL(
     bme_ws_submitter.py
     cc11xx_packet_crop.py
     check_address.py
-    check_ao40_uncoded_crc.py
     check_astrocast_crc.py
-    check_cc11xx_crc.py
-    check_crc16_ccitt.py
-    check_crc16_ccitt_false.py
-    check_crc.py
-    check_eseo_crc.py
     check_hex_string.py
-    check_swiatowid_crc.py
-    check_tt64_crc.py
-    crc32c.py
     crcs.py
     csp_header.py
     csp_address_filter.py
@@ -69,7 +58,6 @@ GR_PYTHON_INSTALL(
     funcube_submit.py
     grpdu.py
     grtypes.py
-    hdlc.py
     hdlc_deframer.py
     hdlc_framer.py
     k2sat_deframer.py
@@ -81,7 +69,6 @@ GR_PYTHON_INSTALL(
     kiss_to_pdu.py
     ks1q_header_remover.py
     lilacsat1_gps_kml.py
-    ngham_check_crc.py
     ngham_packet_crop.py
     ngham_remove_padding.py
     pdu_to_kiss.py
@@ -97,7 +84,6 @@ GR_PYTHON_INSTALL(
     swap_header.py
     swiatowid_packet_crop.py
     swiatowid_packet_split.py
-    sx12xx_check_crc.py
     sx12xx_packet_crop.py
     DESTINATION ${GR_PYTHON_DIR}/satellites
 )
