@@ -9,6 +9,7 @@
 #
 
 import pathlib
+import uuid
 
 
 class File:
@@ -212,7 +213,16 @@ class FileReceiver:
         Returns:
             the new file
         """
-        f = File(self._path / self.filename(fid))
+        # Check that the filename is an actual filename rather than a relative
+        # path that potentially causes a file outside of self._path to be
+        # accessed.
+        filename = pathlib.Path(self.filename(fid))
+        if filename.dirname != pathlib.Path('.'):
+            new_filename = pathlib.Path(str(uuid.uuid4()))
+            self.log(f'filename {filename} contains path components; '
+                     f'replacing by {new_filename}')
+            filename = new_filename
+        f = File(self._path / filename)
         self._files[fid] = f
         return f
 
