@@ -53,7 +53,9 @@ class qa_sigmf_datatypes(gr_unittest.TestCase):
                        is_real=False):
         n = 16
         if already_complex:
-            original = (np.arange(n) + 1j * np.arange(n, 2 * n)).astype(numpy_dtype)
+            original = (
+                np.arange(n) + 1j * np.arange(n, 2 * n)
+            ).astype(numpy_dtype)
         elif is_real:
             original = np.arange(n, dtype=numpy_dtype)
         else:
@@ -64,7 +66,9 @@ class qa_sigmf_datatypes(gr_unittest.TestCase):
         file_size = os.path.getsize(data_path)
         self.assertEqual(
             file_size % sizeof_bytes, 0,
-            f'{name}: file size {file_size} not a multiple of sizeof={sizeof_bytes}')
+            f'{name}: file size {file_size} not a multiple of '
+            f'sizeof={sizeof_bytes}'
+        )
 
         recovered = np.fromfile(data_path, dtype=numpy_dtype)
         np.testing.assert_array_equal(
@@ -85,16 +89,19 @@ class qa_sigmf_datatypes(gr_unittest.TestCase):
                                     is_real)
 
     def test_datatypes_supported_list_is_complete(self):
-        """Every DATATYPES entry must appear in datatypes_supported in apps/gr_satellites."""
+        """Every DATATYPES entry must appear in datatypes_supported in
+        apps/gr_satellites."""
         with open(APPS_GR_SATELLITES, encoding='utf-8') as f:
             source = f.read()
         for (name, *_) in DATATYPES:
             self.assertIn(
                 f"'{name}'", source,
-                f"'{name}' missing from datatypes_supported in apps/gr_satellites")
+                f"'{name}' missing from datatypes_supported in "
+                f"apps/gr_satellites")
 
     def test_elif_branch_exists_for_each_datatype(self):
-        """Every DATATYPES entry must have a dispatch branch in setup_sigmf_input()."""
+        """Every DATATYPES entry must have a dispatch branch in
+        setup_sigmf_input()."""
         with open(APPS_GR_SATELLITES, encoding='utf-8') as f:
             source = f.read()
         for (name, *_) in DATATYPES:
