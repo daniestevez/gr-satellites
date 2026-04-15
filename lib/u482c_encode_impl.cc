@@ -116,11 +116,11 @@ void u482c_encode_impl::msg_handler(const pmt::pmt_t& pmt_msg)
     }
 
     // Send via GNU Radio message
-    message_port_pub(
-        pmt::mp("out"),
-        pmt::cons(
-            pmt::PMT_NIL,
-            pmt::init_u8vector(d_preamble_len + k_header_len + payload_len, &d_data[0])));
+    message_port_pub(pmt::mp("out"),
+                     pmt::cons(pmt::PMT_NIL,
+                               pmt::init_u8vector(d_preamble_len + k_syncword_len +
+                                                      k_header_len + payload_len,
+                                                  &d_data[0])));
 }
 } /* namespace satellites */
 } /* namespace gr */
