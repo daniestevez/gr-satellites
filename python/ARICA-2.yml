@@ -1,0 +1,14 @@
+name: ARICA-2
+norad: 98329
+data:
+  &tlm Telemetry:
+    unknown
+transmitters:
+  4k8 FSK USP downlink:
+    frequency: 436.8300e+6
+    modulation: FSK
+    baudrate: 4800
+    deviation: 1200
+    framing: AX.25 G3RUH
+    data:
+    - *tlm
