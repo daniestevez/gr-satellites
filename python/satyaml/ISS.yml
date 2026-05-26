@@ -1,0 +1,19 @@
+name: ISS
+alternative_names:
+  - ZARYA
+  - RS0ISS
+  - NA1SS
+norad: 25544
+data:
+  &tlm Telemetry:
+    telemetry: ax25
+transmitters:
+  1k2 AFSK downlink:
+    frequency:  437.825e+6
+    modulation: AFSK
+    baudrate: 1200
+    af_carrier: 1700
+    deviation: 600
+    framing: AX.25
+    data:
+    - *tlm
