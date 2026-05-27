@@ -41,6 +41,11 @@ class spino_crop(gr.basic_block):
         length = struct.unpack('<H', bytes(msg[16:18]))[0]
         # account for AX.25 headers (14 bytes) and CRC (2 bytes)
         length += 16
+        if length > len(msg):
+            print(f'packet length {length} greater than PDU size {len(msg)};'
+                  ' dropping')
+            return
+
         self.message_port_pub(
             pmt.intern('out'),
             pmt.cons(pmt.car(msg_pmt), pmt.init_u8vector(length, msg)))
