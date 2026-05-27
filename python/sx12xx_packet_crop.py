@@ -40,6 +40,11 @@ class sx12xx_packet_crop(gr.basic_block):
         packet = bytes(pmt.u8vector_elements(msg))
 
         packet_length = packet[0] + 1 + self.crc_len
+        if packet_length > len(packet):
+            print(
+                f'packet length {packet_length} greater than '
+                f'PDU size {len(packet)}; dropping)')
+            return
 
         self.message_port_pub(
             pmt.intern('out'),

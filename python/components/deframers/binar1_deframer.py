@@ -53,7 +53,7 @@ class binar1_deframer(gr.hier_block2, options_block):
 
         self.slicer = digital.binary_slicer_fb()
         self.deframer = sync_to_pdu_packed(
-            packlen=255+3, sync=_syncword, threshold=syncword_threshold)
+            packlen=258, sync=_syncword, threshold=syncword_threshold)
         self.crop = cc11xx_packet_crop(use_crc16=True)
         self.crc = crc16_ccitt_false()
 

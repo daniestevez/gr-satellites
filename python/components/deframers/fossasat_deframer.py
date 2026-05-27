@@ -53,7 +53,7 @@ class fossasat_deframer(gr.hier_block2, options_block):
 
         self.slicer = digital.binary_slicer_fb()
         self.sync = sync_to_pdu_packed(
-            packlen=255, sync=_syncword, threshold=syncword_threshold)
+            packlen=258, sync=_syncword, threshold=syncword_threshold)
         self.reflect_1 = reflect_bytes()
         self.scrambler = pn9_scrambler()
         self.reflect_2 = reflect_bytes()

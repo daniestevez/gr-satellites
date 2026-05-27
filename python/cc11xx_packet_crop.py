@@ -37,6 +37,11 @@ class cc11xx_packet_crop(gr.basic_block):
 
         crc_len = 2 if self.crc16 else 0
         packet_length = packet[0] + 1 + crc_len
+        if packet_length > len(packet):
+            print(
+                f'packet length {packet_length} greater than '
+                f'PDU size {len(packet)}; dropping')
+            return
 
         self.message_port_pub(
             pmt.intern('out'),
