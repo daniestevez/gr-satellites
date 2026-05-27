@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2016,2020 Daniel Estevez <daniel@destevez.net>
+ * Copyright 2016,2020,2026 Daniel Estevez <daniel@destevez.net>
  *
  * This file is part of gr-satellites
  *
@@ -56,8 +56,7 @@ u482c_decode_impl::u482c_decode_impl(bool verbose, int viterbi, int scrambler, i
     // init FEC
     if (d_viterbi != OFF) {
         int16_t polys[2] = { V27POLYA, V27POLYB };
-        set_viterbi_polynomial_packed(polys);
-        d_vp = create_viterbi_packed(d_rs_len * 8);
+        d_vp = create_viterbi_packed(d_rs_len * 8, polys);
         if (!d_vp)
             throw std::bad_alloc();
     }

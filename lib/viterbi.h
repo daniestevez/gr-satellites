@@ -20,15 +20,17 @@
 #define V27POLYA 0x6d
 #define V27POLYB 0x4f
 
-void* create_viterbi_packed(int16_t len);
+void* create_viterbi_packed(int16_t len, const int16_t polys[2]);
 int init_viterbi_packed(void* vp, int starting_state);
-int update_viterbi_packed(void* vp, unsigned char sym[], uint16_t npairs);
+int update_viterbi_packed(void* vp, const unsigned char sym[], uint16_t npairs);
 int chainback_viterbi_packed(void* vp,
                              unsigned char* data,
                              unsigned int nbits,
                              unsigned int endstate);
 void delete_viterbi_packed(void* vp);
-void encode_viterbi_packed(unsigned char* channel, unsigned char* data, int framebits);
-void set_viterbi_polynomial_packed(int16_t polys[2]);
+void encode_viterbi_packed(unsigned char* channel,
+                           const unsigned char* data,
+                           int framebits,
+                           const int16_t polys[2]);
 
 #endif // VITERBI_H_
