@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Copyright 2020 Daniel Estevez <daniel@destevez.net>
+# Copyright 2020,2026 Daniel Estevez <daniel@destevez.net>
 #
 # This file is part of gr-satellites
 #
@@ -217,7 +217,7 @@ class FileReceiver:
         # path that potentially causes a file outside of self._path to be
         # accessed.
         filename = pathlib.Path(self.filename(fid))
-        if filename.dirname != pathlib.Path('.'):
+        if filename.parent != pathlib.Path('.'):
             new_filename = pathlib.Path(str(uuid.uuid4()))
             self.log(f'filename {filename} contains path components; '
                      f'replacing by {new_filename}')
