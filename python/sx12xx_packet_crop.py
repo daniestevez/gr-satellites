@@ -43,7 +43,7 @@ class sx12xx_packet_crop(gr.basic_block):
         if packet_length > len(packet):
             print(
                 f'packet length {packet_length} greater than '
-                f'PDU size {len(packet)}; dropping)')
+                f'PDU size {len(packet)}; dropping')
             return
 
         self.message_port_pub(
