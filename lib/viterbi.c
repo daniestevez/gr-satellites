@@ -127,8 +127,10 @@ void* create_viterbi_packed(int16_t len, const int16_t polys[2])
     set_viterbi_polynomial_packed(polys, vp->branchtab, vp->partab);
 
     vp->dlen = (len + 6) * sizeof(decision_t);
-    if ((vp->decisions = malloc(vp->dlen)) == NULL)
+    if ((vp->decisions = malloc(vp->dlen)) == NULL) {
+        free(vp);
         return NULL;
+    }
 
     init_viterbi_packed(vp, 0);
 
