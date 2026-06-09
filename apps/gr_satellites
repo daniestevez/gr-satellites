@@ -348,10 +348,40 @@ class gr_satellites_top_block(gr.top_block):
         datatype = meta['global']['core:datatype']
         sample_rate = meta['global']['core:sample_rate']
 
-        datatypes_supported = ['ci16_le']
+        datatypes_supported = ['ci16_le', 'cf32_le', 'ci8', 'rf32_le', 'ri16_le']
 
         if datatype == 'ci16_le':
             self.options.iq = True
+            self.options.rawint16 = dataset_filename
+            self.options.samp_rate = sample_rate
+            self.setup_rawint16_input()
+        elif datatype == 'cf32_le':
+            self.options.iq = True
+            self.options.rawfile = dataset_filename
+            self.options.samp_rate = sample_rate
+            self.setup_rawfile_input()
+        elif datatype == 'ci8':
+            self.options.iq = True
+            self.options.samp_rate = sample_rate
+            self.input_int8 = blocks.file_source(
+                gr.sizeof_char, dataset_filename, False, 0, 0)
+            self.char_to_float_ci8 = blocks.char_to_float(1, 127.0)
+            self.deinterleave_ci8 = blocks.deinterleave(gr.sizeof_float, 1)
+            self.float_to_complex_ci8 = blocks.float_to_complex(1)
+            self.connect(self.input_int8, self.char_to_float_ci8)
+            self.connect(self.char_to_float_ci8, self.deinterleave_ci8)
+            self.connect((self.deinterleave_ci8, 0),
+                         (self.float_to_complex_ci8, 0))
+            self.connect((self.deinterleave_ci8, 1),
+                         (self.float_to_complex_ci8, 1))
+            self.input = self.float_to_complex_ci8
+        elif datatype == 'rf32_le':
+            self.options.iq = False
+            self.options.rawfile = dataset_filename
+            self.options.samp_rate = sample_rate
+            self.setup_rawfile_input()
+        elif datatype == 'ri16_le':
+            self.options.iq = False
             self.options.rawint16 = dataset_filename
             self.options.samp_rate = sample_rate
             self.setup_rawint16_input()
