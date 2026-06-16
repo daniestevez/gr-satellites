@@ -45,7 +45,7 @@ def write_default_config(file):
         'callsign': '',
         'latitude': 0,
         'longitude': 0,
-        'submit_tlm': 'yes',
+        'submit_tlm': 'no',
     }
 
     config['FUNcube'] = {

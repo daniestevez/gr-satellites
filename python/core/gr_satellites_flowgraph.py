@@ -9,6 +9,7 @@
 #
 
 import argparse
+import configparser
 import functools
 import itertools
 import os
@@ -214,7 +215,9 @@ class gr_satellites_flowgraph(gr.hier_block2):
         # submission
         tlm_env = os.environ.get('GR_SATELLITES_SUBMIT_TLM')
         if tlm_env is not None:
-            tlm_submit = bool(int(tlm_env))
+            # BOOLEAN_STATES can convert a few common strings, such as '0',
+            # '1', 'true', 'on', 'false', 'off', to bool.
+            tlm_submit = configparser.ConfigParser.BOOLEAN_STATES[tlm_env]
         else:
             tlm_submit = self.config.getboolean('Groundstation', 'submit_tlm')
         if tlm_submit:
