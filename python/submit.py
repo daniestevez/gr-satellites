@@ -16,7 +16,6 @@ import urllib.request
 
 from gnuradio import gr
 import pmt
-import numpy
 
 
 def parse_timestamp(s):
@@ -78,31 +77,33 @@ class submit(gr.basic_block):
             in_sig=[],
             out_sig=[])
 
-        self.url = url
-        self.request = {
-            'noradID': noradID,
-            'source': source,
-            'locator': 'longLat',
-            'longitude': str(
-                abs(longitude)) + ('E' if longitude >= 0 else 'W'),
-            'latitude': str(
-                abs(latitude)) + ('N' if latitude >= 0 else 'S'),
-            'version': '1.6.6',
+        # Do not do anything if source is not entered or if the location is (0,
+        # 0).
+        self.disabled = not source or (longitude == 0 and latitude == 0)
+
+        if not self.disabled:
+            self.url = url
+            self.request = {
+                'noradID': noradID,
+                'source': source,
+                'locator': 'longLat',
+                'longitude': str(
+                    abs(longitude)) + ('E' if longitude >= 0 else 'W'),
+                'latitude': str(
+                    abs(latitude)) + ('N' if latitude >= 0 else 'S'),
+                'version': '1.6.6',
             }
-        self.initialTimestamp = (
-            parse_timestamp(initialTimestamp)
-            if initialTimestamp != '' else None)
-        self.startTimestamp = datetime.datetime.now(tz=datetime.timezone.utc)
+            self.initialTimestamp = (
+                parse_timestamp(initialTimestamp)
+                if initialTimestamp != '' else None)
+            self.startTimestamp = datetime.datetime.now(
+                tz=datetime.timezone.utc)
 
         self.message_port_register_in(pmt.intern('in'))
         self.set_msg_handler(pmt.intern('in'), self.handle_msg)
 
     def handle_msg(self, msg_pmt):
-        # Check that callsign and QTH have been entered
-        if self.request['source'] == '':
-            return
-        if (self.request['longitude'] == 0.0
-                and self.request['latitude'] == 0.0):
+        if self.disabled:
             return
 
         msg = pmt.cdr(msg_pmt)
