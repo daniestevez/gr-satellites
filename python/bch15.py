@@ -112,7 +112,7 @@ Expects an np.array() as bits and modifies it in place
 returns True if decode is successful
 """
     b = np.packbits(bits)
-    p = (b[0] << 7) | (b[1] >> 1)
+    p = (int(b[0]) << 7) | (int(b[1]) >> 1)
     syndromes = [compute_syndrome(p, j) for j in range(d - 1)]
     if not any(syndromes):
         # If all syndromes are zero, there are no errors
