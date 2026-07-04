@@ -82,6 +82,7 @@ GR_PYTHON_INSTALL(
     tubix20.py
     upmsat_2.py
     vzlusat_2.py
+    koyo.py
     DESTINATION ${GR_PYTHON_DIR}/satellites/telemetry
 )
 

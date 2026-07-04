@@ -65,5 +65,6 @@ from .trisat import trisat
 from .tubix20 import tubix20
 from .upmsat_2 import upmsat_2
 from .vzlusat_2 import vzlusat_2
+from .koyo import koyo
 
 construct.setGlobalPrintFullStrings(True)
