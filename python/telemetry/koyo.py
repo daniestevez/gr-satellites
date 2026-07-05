@@ -1,33 +1,33 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
- 
+
 # Copyright 2026 Hex20 Labs India Pvt Ltd
 #
 # This file is part of gr-satellites
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
+
 from .ax25 import Header
 from ..adapters import PolynomialAdapter
 from ..adapters import LinearAdapter
+from ..adapters import UNIXTimestampAdapter
 from ..ccsds import space_packet as ccsds_space_packet
-from construct import Adapter, BitStruct, BitsInteger, Enum, Flag, Float32l, \
-    GreedyBytes, If, Int16sl, Int16ul, Int32sl, Int32ul, Int8sl, \
-    Int8ub, Int8ul, Padding, Struct, Switch
- 
+from construct import GreedyBytes, If, Int16ul, \
+    Int32ul, Int8ul, Struct, Switch
+
 solar_panel_temp_poly = [91.394, -0.08949, 3.55e-05, -6.26e-09, 1.89e-13]
 batt_thermistor_temp_poly = [
     87.1751343, -0.0786252941, 0.0000272861362, -0.00000000402689014]
 subsystem_temp_poly = [91.394, -0.08949, 3.55e-05, -6.26e-09, 1.89e-13]
 
-
 SecondaryHeader = Struct(
-    'sh_coarse' / Int32ul,
-    'sh_fine' / Int16ul,
+    'sysclk_ms' / Int32ul,
+    'sysclk_day' / Int16ul,
 )
- 
+
 koyo_beacon = Struct(
-    'obctime' / Int32ul,
+    'obctime' / UNIXTimestampAdapter(Int32ul),
     'panel_0_curr' / LinearAdapter(1/0.001221001, Int16ul),
     'panel_1_curr' / LinearAdapter(1/0.001221001, Int16ul),
     'panel_2_curr' / LinearAdapter(1/0.001221001, Int16ul),
@@ -52,11 +52,12 @@ koyo_beacon = Struct(
     'solar_panel_temp_1' / PolynomialAdapter(solar_panel_temp_poly, Int16ul),
     'solar_panel_temp_2' / PolynomialAdapter(solar_panel_temp_poly, Int16ul),
     'solar_panel_temp_3' / PolynomialAdapter(solar_panel_temp_poly, Int16ul),
-    'battery_thermistor_temp_1' / PolynomialAdapter(batt_thermistor_temp_poly, Int16ul),
-    'battery_thermistor_temp_2' / PolynomialAdapter(batt_thermistor_temp_poly, Int16ul),
+    'battery_thermistor_temp_1' / PolynomialAdapter(
+        batt_thermistor_temp_poly, Int16ul),
+    'battery_thermistor_temp_2' / PolynomialAdapter(
+        batt_thermistor_temp_poly, Int16ul),
     'cdh_temp' / PolynomialAdapter(subsystem_temp_poly, Int16ul),
     'eps_temp' / PolynomialAdapter(subsystem_temp_poly, Int16ul),
- 
     'aprs_pl_current' / LinearAdapter(1/0.001221001, Int16ul),
     'aprs_pl_volt' / LinearAdapter(1/0.004880429, Int16ul),
     'mcb_current' / LinearAdapter(1/0.001221001, Int16ul),
@@ -126,9 +127,8 @@ koyo_beacon = Struct(
     'sd_card_failure_count' / Int8ul,
     'static_table_crc_status' / Int8ul,
     'dynamic_table_crc_status' / Int8ul,
-    
 )
- 
+
 koyo = Struct(
     'ax25_header' / Header,
     'primary_header' / ccsds_space_packet.PrimaryHeader,
