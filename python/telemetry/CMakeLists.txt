@@ -64,6 +64,7 @@ GR_PYTHON_INSTALL(
     gomx_1.py
     gomx_3.py
     inspiresat_1.py
+    koyo.py
     kr01.py
     lume.py
     mirsat1.py
