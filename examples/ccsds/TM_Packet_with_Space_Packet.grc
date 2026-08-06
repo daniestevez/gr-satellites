@@ -47,7 +47,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [80, 132]
+    coordinate: [64, 128.0]
     rotation: 0
     state: enabled
 - name: pdu_random_pdu_0
@@ -66,7 +66,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [472, 36.0]
+    coordinate: [352, 112.0]
     rotation: 0
     state: true
 - name: satellites_ccsds_telemetry_parser_0
@@ -81,7 +81,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [632, 424]
+    coordinate: [200, 360.0]
     rotation: 0
     state: enabled
 - name: satellites_space_packet_parser_0
@@ -98,7 +98,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [880, 412]
+    coordinate: [680, 352.0]
     rotation: 0
     state: enabled
 - name: satellites_space_packet_primaryheader_adder_0
@@ -122,7 +122,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [376, 192]
+    coordinate: [568, 120.0]
     rotation: 0
     state: enabled
 - name: satellites_telemetry_packet_reconstruction_0
@@ -137,7 +137,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [712, 360]
+    coordinate: [416, 360.0]
     rotation: 0
     state: enabled
 - name: satellites_telemetry_primaryheader_adder_0
@@ -172,7 +172,33 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [80, 308]
+    coordinate: [856, 52.0]
+    rotation: 0
+    state: enabled
+- name: tm_frames_sink
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: tm_frames
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1144, 136.0]
+    rotation: 0
+    state: enabled
+- name: tm_frames_source
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: tm_frames
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 352.0]
     rotation: 0
     state: enabled
 
@@ -185,9 +211,9 @@ connections:
   in]
 - [satellites_telemetry_packet_reconstruction_0, out, satellites_space_packet_parser_0,
   in]
-- [satellites_telemetry_primaryheader_adder_0, out, satellites_ccsds_telemetry_parser_0,
-  in]
+- [satellites_telemetry_primaryheader_adder_0, out, tm_frames_sink, '0']
+- [tm_frames_source, '0', satellites_ccsds_telemetry_parser_0, in]
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-75-g67e88516
+  grc_version: 3.10.12.0
