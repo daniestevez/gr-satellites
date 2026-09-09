@@ -126,7 +126,15 @@ endif(APPLE)
 # Install built library files
 ########################################################################
 include(GrMiscUtils)
-GR_LIBRARY_FOO(gnuradio-satellites)
+if(COMMAND GR_INSTALL_LIBRARY)
+    # GNU Radio 3.11+: GR_LIBRARY_FOO only registers the target; the install
+    # rules have to be requested explicitly.
+    GR_REGISTER_LIBRARY(gnuradio-satellites)
+    GR_INSTALL_LIBRARY(TARGET gnuradio-satellites COMPONENT ${CMAKE_PROJECT_NAME})
+else()
+    # GNU Radio <3.11 compatibility path.
+    GR_LIBRARY_FOO(gnuradio-satellites)
+endif()
 
 ########################################################################
 # Print summary
