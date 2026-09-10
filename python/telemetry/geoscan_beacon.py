@@ -2,7 +2,8 @@
 Decodeur de telemetrie "geoscan2" pour la flotte Geoscan.
 
 Definition de trame fournie par Alex Shovkoplyas (VE3NEA), auteur de
-SkyRoof/SatsDecoder : %APPDATA%\\Afreet\\Products\\SkyRoof\\TelemetryRegistry\\geoscan2.json
+SkyRoof/SatsDecoder :
+%APPDATA%\\Afreet\\Products\\SkyRoof\\TelemetryRegistry\\geoscan2.json
 
 IMPORTANT : le deframeur GEOSCAN de gr-satellites transmet la trame COMPLETE
 (adresse AX.25 sur 14 octets incluse), sans la retirer - contrairement a ce
@@ -99,7 +100,8 @@ class geoscan_beacon:
         data = bytes(packet)
         off = geoscan_beacon.GATE_OFFSET
 
-        if len(data) < off + 3 or data[off:off+3] != geoscan_beacon.BEACON_GATE:
+        if (len(data) < off + 3
+                or data[off:off+3] != geoscan_beacon.BEACON_GATE):
             return (f'Geoscan: trame native ou non reconnue, '
                     f'{len(data)} octets: {data.hex()}')
 
