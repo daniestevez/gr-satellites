@@ -41,8 +41,10 @@ from .floripasat import floripasat
 from .fossasat_1b import fossasat_1b
 from .fossasat_2 import fossasat_2
 from .funcube import funcube
+from .geoscan_beacon import geoscan_beacon
 from .gomx_1 import gomx_1
 from .gomx_3 import gomx_3
+from .grbbeta import grbbeta
 from .inspiresat_1 import inspiresat_1
 from .koyo import koyo
 from .kr01 import kr01

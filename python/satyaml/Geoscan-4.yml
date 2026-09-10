@@ -2,7 +2,7 @@ name: Geoscan-4
 norad: 64892
 data:
    &tlm Telemetry:
-     unknown
+     telemetry: geoscan_beacon
 transmitters:
    9k6 FSK downlink:
      frequency: 435.335e+6
