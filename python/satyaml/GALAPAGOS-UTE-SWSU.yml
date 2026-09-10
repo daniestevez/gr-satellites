@@ -1,0 +1,18 @@
+name: GALAPAGOS-UTE-SWSU
+alternative_names:
+  - HC1PX
+norad: 67279
+data:
+  &tlm AX25 telemetry:
+    telemetry: ax25
+transmitters:
+  1k143 AFSK downlink:
+    frequency: 437.050e+6
+    modulation: AFSK
+    baudrate: 1143
+    af_carrier: 1714
+    deviation: 571
+    framing: AX.25
+    data:
+    - *tlm
+
