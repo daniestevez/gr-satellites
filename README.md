@@ -103,6 +103,10 @@ channels such as email. Please understand this when asking for support.
 Take a look [here](https://github.com/daniestevez/gr-satellites/discussions/304) to
 check whether a new topic fits better in the issues page or in the discussions page.
 
+## LLM Usage policy
+
+See [LLM Usage Policy](./LLM_POLICY.md).
+
 ## Satellite teams
 
 Satellite teams interested in using gr-satellites for your groundstation
