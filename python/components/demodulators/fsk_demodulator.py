@@ -59,8 +59,10 @@ class fsk_demodulator(gr.hier_block2, options_block):
 
         if deviation is not None:
             _deviation = deviation
-        else:
+        elif self.options.deviation is not None:
             _deviation = self.options.deviation
+        else:
+            _deviation = max(3000, baudrate / 4)
 
         # Prevent problems due to baudrate too high
         if baudrate >= samp_rate:
@@ -178,7 +180,6 @@ class fsk_demodulator(gr.hier_block2, options_block):
 
     _default_clk_rel_bw = 0.06
     _default_clk_limit = 0.004
-    _default_deviation_hz = 5000
 
     @classmethod
     def add_options(cls, parser):
@@ -194,8 +195,8 @@ class fsk_demodulator(gr.hier_block2, options_block):
             help=('Clock recovery limit (relative to baudrate) '
                   '[default=%(default)r]'))
         parser.add_argument(
-            '--deviation', type=float, default=cls._default_deviation_hz,
-            help='Deviation (Hz) [default=%(default)r]')
+            '--deviation', type=float, default=None,
+            help='Deviation (Hz) [default=max(3000, baudrate/4)]')
         parser.add_argument(
             '--use_agc', action='store_true',
             help='Use AGC (for IQ input. AGC always on for real input)')
