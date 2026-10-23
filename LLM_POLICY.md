@@ -185,7 +185,7 @@ You are not required to "actively look" for whether an LLM was involved.
 Style is not evidence, and English-as-a-second-language speakers, neurodivergent people, and over-explainers are the most likely to be accused of writing like an LLM.
 
 If it's clear someone's broken the rules, point them to this policy;
-otherwise, strongly prefer [reporting to mods](https://rust-lang.org/policies/code-of-conduct/) over public accusations.
+otherwise, strongly prefer [reporting to mods](https://github.com/daniestevez/gr-satellites/blob/main/CODE_OF_CONDUCT.md) over public accusations.
 Reporting to moderation is not intended to be a penalty;
 the mod team is interested in seeing non-violations as well as violations.
 As always, the mod team is free to exercise their own judgement and discretion.
