@@ -57,8 +57,6 @@ install(FILES
     time_dependent_delay.h
     u482c_decode.h
     u482c_encode.h
-    varlen_packet_framer.h
-    varlen_packet_tagger.h
     viterbi_decoder.h
     DESTINATION include/satellites
 )

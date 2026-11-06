@@ -27,11 +27,6 @@ Copyright: 2015-2019 Miklos Maroti
  Copyright 2019 Daniel Estevez <daniel@destevez.net>
 License: GPL-3+
 
-Files: include/satellites/varlen_packet_framer.h include/satellites/varlen_packet_tagger.h
- lib/varlen_packet_framer_impl.* lib/varlen_packet_tagger_impl.*
-Copyright: 2017 Glenn Richardson <glenn@spacequest.com>
-License: GPL-3+
-
 Files: lib/randomizer.*
 Copyright: (c) 2008 Johan Christiansen
  Copyright (c) 2012 Jeppe Ledet-Pedersen <jlp@satlab.org>
