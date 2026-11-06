@@ -103,6 +103,9 @@ channels such as email. Please understand this when asking for support.
 Take a look [here](https://github.com/daniestevez/gr-satellites/discussions/304) to
 check whether a new topic fits better in the issues page or in the discussions page.
 
+For security vulnerabilities, see the
+[security policy](https://github.com/daniestevez/gr-satellites/SECURITY.md).
+
 ## LLM Usage policy
 
 See [LLM Usage Policy](./LLM_POLICY.md).
