@@ -79,8 +79,6 @@ list(APPEND satellites_sources
     time_dependent_delay_impl.cc
     u482c_decode_impl.cc
     u482c_encode_impl.cc
-    varlen_packet_framer_impl.cc
-    varlen_packet_tagger_impl.cc
     viterbi.c
     viterbi_decoder_impl.cc
     libfec/decode_rs_8.c

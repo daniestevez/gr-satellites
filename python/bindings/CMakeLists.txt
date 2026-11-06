@@ -64,8 +64,6 @@ list(APPEND satellites_python_files
     time_dependent_delay_python.cc
     u482c_decode_python.cc
     u482c_encode_python.cc
-    varlen_packet_framer_python.cc
-    varlen_packet_tagger_python.cc
     viterbi_decoder_python.cc
 )
 
