@@ -1,0 +1,19 @@
+name: ERMINAZ-2X
+norad: 101094
+data:
+  &tlm Telemetry:
+    telemetry: erminaz
+transmitters:
+  9k6 FSK FEC(RS8) CCSDS TM SPP downlink:
+    frequency: 145.960e+6
+    modulation: FSK
+    baudrate: 9600
+    deviation: 4800
+    framing: CCSDS Reed-Solomon
+    frame size: 223
+    RS basis: conventional
+    RS interleave depth: 1
+    scrambler: CCSDS
+    syncword threshold: 4
+    data:
+    - *tlm
